@@ -239,10 +239,12 @@
       if (d.crypto === 'wave') {
         const montant = Number(d.price_exact).toLocaleString('fr-FR');
         document.getElementById('pay-amount').textContent = montant + ' FCFA';
-        document.getElementById('pay-address').textContent = d.address;
-        document.querySelector('.addr-label').textContent = 'Numéro Wave à créditer';
+        // On NE montre PAS le numéro : on affiche le bénéficiaire à la place
+        document.getElementById('pay-address').textContent = 'EGSCI SARL';
+        document.querySelector('.addr-label').textContent = 'Bénéficiaire';
+        document.querySelector('.addr-box .addr-copy').style.display = 'none';
         document.getElementById('pay-sub').textContent =
-          `Envoyez exactement ${montant} FCFA via Wave au numéro ci-dessous`;
+          `Payez exactement ${montant} FCFA via Wave en scannant le QR code ci-dessous`;
 
         // QR Wave : utilise le vrai lien marchand si fourni, sinon le numéro brut
         document.getElementById('qrcode').innerHTML = '';
@@ -267,8 +269,8 @@
         }
 
         document.querySelector('.warning').innerHTML =
-          '🌊 Ouvrez l\'app <strong>Wave</strong> et envoyez <strong>exactement ' + montant + ' FCFA</strong> au numéro ' +
-          '<strong>' + d.address + '</strong>. Ce montant unique identifie votre commande. ' +
+          '🌊 Scannez le QR code ou cliquez sur <strong>« Payer avec Wave »</strong> pour payer <strong>exactement ' + montant + ' FCFA</strong> à <strong>EGSCI SARL</strong>. ' +
+          'Ce montant unique identifie votre commande. ' +
           'Votre licence sera activée dès réception du paiement (généralement sous quelques minutes).';
 
         document.getElementById('status-text').textContent = 'En attente de confirmation du paiement Wave…';
