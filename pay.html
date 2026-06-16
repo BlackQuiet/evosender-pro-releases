@@ -101,7 +101,7 @@
         <div><div class="crypto-name">Bitcoin</div><div class="crypto-sub">BTC Network</div></div>
       </div>
       <div class="crypto-btn" data-crypto="wave" id="btn-wave" onclick="selectCrypto(this)" style="display:none">
-        <div class="crypto-icon">🌊</div>
+        <img src="https://pay.wave.com/static/payez-avec-wave-stacked.svg" alt="Wave" style="height:30px;width:auto" onerror="this.outerHTML='<div class=&quot;crypto-icon&quot;>🌊</div>'" />
         <div><div class="crypto-name">Wave</div><div class="crypto-sub">Mobile Money · FCFA</div></div>
       </div>
     </div>
@@ -263,8 +263,8 @@
         if (link) {
           const a = document.createElement('a');
           a.href = waveUrl; a.target = '_blank';
-          a.textContent = '🌊 Payer avec Wave';
-          a.style.cssText = 'display:block;text-align:center;margin:-8px 0 16px;color:#06b6d4;font-weight:700;font-size:14px';
+          a.style.cssText = 'display:flex;justify-content:center;margin:-4px 0 18px';
+          a.innerHTML = '<img src="https://pay.wave.com/static/payez-avec-wave-stacked.svg" alt="Payez avec Wave" style="height:90px;width:auto" onerror="this.outerHTML=\'🌊 Payer avec Wave\'" />';
           document.getElementById('qrcode').after(a);
         }
 
