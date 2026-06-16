@@ -34,6 +34,13 @@
     .crypto-name{font-size:13px;font-weight:700}
     .crypto-sub{font-size:11px;color:var(--slate)}
 
+    .qty-row{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+    .qty-btn{width:42px;height:42px;border-radius:11px;border:1.5px solid var(--line);background:#f8fafc;color:var(--blue);font-size:22px;font-weight:700;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center}
+    .qty-btn:hover{border-color:var(--blue);background:var(--blue-50)}
+    .qty-val{min-width:54px;text-align:center;font-size:24px;font-weight:800}
+    .qty-hint{font-size:12px;color:var(--slate);margin-left:4px}
+    .total-row{display:flex;align-items:center;justify-content:space-between;background:var(--blue-50);border:1px solid var(--blue-100);border-radius:12px;padding:14px 18px;margin-bottom:18px;font-size:14px;color:var(--slate)}
+    .total-row strong{font-size:22px;color:var(--blue);font-weight:900}
     .btn{width:100%;background:var(--blue);color:#fff;border:none;border-radius:11px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;font-family:inherit;box-shadow:0 6px 18px rgba(37,99,235,.26)}
     .btn:hover{background:var(--blue-dark)}
     .btn:disabled{opacity:.4;cursor:not-allowed;box-shadow:none}
@@ -67,7 +74,7 @@
   <div class="box" id="step-choose">
     <div class="step-label">Étape 1 / 2 — Choisir votre produit</div>
     <h1>Acheter une licence</h1>
-    <p class="sub">Paiement 100% crypto · Licence générée automatiquement</p>
+    <p class="sub">Crypto, Wave ou Orange Money · Licence générée automatiquement</p>
 
     <div class="product-grid" id="product-grid">
       <div class="prod-btn" data-product="extractor" onclick="selectProduct(this)">
@@ -88,20 +95,37 @@
       </div>
     </div>
 
+    <div class="step-label" style="margin-top:8px">Nombre d'ordinateurs (PC)</div>
+    <div class="qty-row">
+      <button type="button" class="qty-btn" onclick="changeQty(-1)">−</button>
+      <div class="qty-val" id="qty-val">1</div>
+      <button type="button" class="qty-btn" onclick="changeQty(1)">+</button>
+      <div class="qty-hint" id="qty-hint">1 licence — 1 PC</div>
+    </div>
+
     <div class="step-label" style="margin-top:8px">Choisir le moyen de paiement</div>
     <div class="crypto-grid" id="crypto-grid">
-      <div class="crypto-btn active" data-crypto="usdt" onclick="selectCrypto(this)">
+      <div class="crypto-btn active" data-crypto="usdt" id="btn-usdt" onclick="selectCrypto(this)">
         <div class="crypto-icon">💵</div>
         <div><div class="crypto-name">USDT TRC20</div><div class="crypto-sub">Tron Network</div></div>
       </div>
-      <div class="crypto-btn" data-crypto="btc" onclick="selectCrypto(this)">
+      <div class="crypto-btn" data-crypto="btc" id="btn-btc" onclick="selectCrypto(this)">
         <div class="crypto-icon">₿</div>
         <div><div class="crypto-name">Bitcoin</div><div class="crypto-sub">BTC Network</div></div>
       </div>
       <div class="crypto-btn" data-crypto="wave" id="btn-wave" onclick="selectCrypto(this)" style="display:none">
-        <img src="https://pay.wave.com/static/payez-avec-wave-stacked.svg" alt="Wave" style="height:30px;width:auto" onerror="this.outerHTML='<div class=&quot;crypto-icon&quot;>🌊</div>'" />
+        <div class="crypto-icon">🌊</div>
         <div><div class="crypto-name">Wave</div><div class="crypto-sub">Mobile Money · FCFA</div></div>
       </div>
+      <div class="crypto-btn" data-crypto="om" id="btn-om" onclick="selectCrypto(this)" style="display:none">
+        <div class="crypto-icon">🟠</div>
+        <div><div class="crypto-name">Orange Money</div><div class="crypto-sub">Mobile Money · FCFA</div></div>
+      </div>
+    </div>
+
+    <div class="total-row" id="total-row" style="display:none">
+      <span>Total à payer</span>
+      <strong id="total-val">—</strong>
     </div>
 
     <button class="btn" id="btn-proceed" onclick="proceed()" disabled>Continuer →</button>
@@ -143,12 +167,40 @@
 
   <script>
     const API = 'https://admin.evostudio.fr';
+    const FIAT = ['wave', 'om'];
     let selectedProduct = null;
     let selectedCrypto  = 'usdt';
+    let quantity = 1;
     let orderId = null;
     let pollInterval = null;
-    let settings = {};
     let products = [];
+
+    function curProduct(){ return products.find(p => p.id === selectedProduct); }
+    function unitPrice(p){
+      if(selectedCrypto === 'wave') return Number(p.price_wave) || 0;
+      if(selectedCrypto === 'om')   return Number(p.price_om) || 0;
+      if(selectedCrypto === 'btc')  return Number(p.price_btc) || 0;
+      return Number(p.price_usdt) || 0;
+    }
+    function fmtAmount(v){
+      if(selectedCrypto === 'btc') return v + ' BTC';
+      if(FIAT.includes(selectedCrypto)) return Number(v).toLocaleString('fr-FR') + ' FCFA';
+      return v + ' USDT';
+    }
+    function changeQty(d){
+      quantity = Math.min(10, Math.max(1, quantity + d));
+      document.getElementById('qty-val').textContent = quantity;
+      document.getElementById('qty-hint').textContent = quantity === 1 ? '1 licence — 1 PC' : `${quantity} PC sur une licence`;
+      updateTotal();
+    }
+    function updateTotal(){
+      const p = curProduct();
+      const row = document.getElementById('total-row');
+      if(!p){ row.style.display='none'; return; }
+      row.style.display='flex';
+      const total = (selectedCrypto === 'btc') ? +(unitPrice(p) * quantity).toFixed(8) : Math.round(unitPrice(p) * quantity * 100)/100;
+      document.getElementById('total-val').textContent = fmtAmount(total);
+    }
 
     function authHeaders() {
       const token = localStorage.getItem('evo_token');
@@ -163,22 +215,46 @@
         if (!r.ok) { location.href = '/login.html?redirect=' + encodeURIComponent(location.href); return; }
       } catch { return; }
 
-      // Charger les produits depuis l'API
+      // Charger les produits + appliquer la région
       try {
         const r = await fetch(API + '/api/shop/products');
         if (r.ok) {
           const data = await r.json();
           products = data.products;
-          if (data.wave_enabled) document.getElementById('btn-wave').style.display = 'flex';
+          await applyRegion(data);
           renderProducts();
         }
       } catch {}
     }
 
+    // Géo-détection : en Afrique → Wave + Orange Money ; ailleurs → USDT + BTC par défaut
+    async function detectAfrica(){
+      try{
+        const r = await fetch('https://ipapi.co/json/');
+        if(r.ok){ const j = await r.json(); return (j.continent_code||'').toUpperCase() === 'AF'; }
+      }catch{}
+      return false;
+    }
+    async function applyRegion(data){
+      const isAfrica = await detectAfrica();
+      const waveOn = data.wave_enabled, omOn = data.om_enabled;
+      const setShow = (id,on)=>{ const e=document.getElementById(id); if(e) e.style.display = on ? 'flex' : 'none'; };
+      if (isAfrica && (waveOn || omOn)) {
+        // Afrique : mobile money en avant, crypto masquée
+        setShow('btn-usdt', false); setShow('btn-btc', false);
+        setShow('btn-wave', waveOn); setShow('btn-om', omOn);
+        selectedCrypto = waveOn ? 'wave' : 'om';
+      } else {
+        // Par défaut : crypto
+        setShow('btn-usdt', true); setShow('btn-btc', true);
+        setShow('btn-wave', false); setShow('btn-om', false);
+        selectedCrypto = 'usdt';
+      }
+      document.querySelectorAll('.crypto-btn').forEach(b => b.classList.toggle('active', b.dataset.crypto === selectedCrypto));
+    }
+
     function priceLabel(p) {
-      if (selectedCrypto === 'wave') return Number(p.price_wave).toLocaleString('fr-FR') + ' FCFA';
-      if (selectedCrypto === 'btc')  return p.price_btc + ' BTC';
-      return p.price_usdt + ' USDT';
+      return fmtAmount(unitPrice(p)) + ' <span style="opacity:.6">/ PC</span>';
     }
 
     function renderProducts() {
@@ -195,13 +271,15 @@
       el.classList.add('active');
       selectedProduct = el.dataset.product;
       document.getElementById('btn-proceed').disabled = false;
+      updateTotal();
     }
 
     function selectCrypto(el) {
       document.querySelectorAll('.crypto-btn').forEach(b => b.classList.remove('active'));
       el.classList.add('active');
       selectedCrypto = el.dataset.crypto;
-      renderProducts(); // met à jour les prix affichés selon le moyen choisi
+      renderProducts();
+      updateTotal();
     }
 
     async function proceed() {
@@ -213,7 +291,7 @@
         const r = await fetch(API + '/api/shop/order', {
           method: 'POST',
           headers: authHeaders(),
-          body: JSON.stringify({ product: selectedProduct, crypto: selectedCrypto })
+          body: JSON.stringify({ product: selectedProduct, crypto: selectedCrypto, quantity })
         });
         const d = await r.json();
         if (!r.ok) {
@@ -234,46 +312,42 @@
       document.getElementById('step-choose').style.display = 'none';
       document.getElementById('step-pay').style.display = 'block';
 
-      if (d.crypto === 'wave') {
+      if (FIAT.includes(d.crypto)) {
+        const isWave = d.crypto === 'wave';
+        const moyen = isWave ? 'Wave' : 'Orange Money';
         const montant = Number(d.price_exact).toLocaleString('fr-FR');
         document.getElementById('pay-amount').textContent = montant + ' FCFA';
-        // On NE montre PAS le numéro : on affiche le bénéficiaire à la place
         document.getElementById('pay-address').textContent = 'EGSCI SARL';
         document.querySelector('.addr-label').textContent = 'Bénéficiaire';
         document.querySelector('.addr-box .addr-copy').style.display = 'none';
         document.getElementById('pay-sub').textContent =
-          `Payez exactement ${montant} FCFA via Wave en scannant le QR code ci-dessous`;
+          `Payez exactement ${montant} FCFA via ${moyen} en scannant le QR code ci-dessous`;
 
-        // QR Wave : utilise le vrai lien marchand si fourni, sinon le numéro brut
+        // QR : lien marchand si fourni, sinon le numéro brut
         document.getElementById('qrcode').innerHTML = '';
-        let waveUrl = d.address;
-        const link = (d.wave_link || '').trim();
+        let url = d.address;
+        const link = (d.pay_link || '').trim();
         if (link) {
-          // Lien marchand (/m/) → on ajoute le montant exact pour pré-remplir
-          if (link.includes('/m/')) {
-            const base = link.replace(/\/+$/, '/'); // garde le / final
-            waveUrl = base + (base.includes('?') ? '&' : '?') + 'amount=' + Math.round(d.price_exact);
-          } else {
-            waveUrl = link;
-          }
+          if (isWave && link.includes('/m/')) {
+            const base = link.replace(/\/+$/, '/');
+            url = base + (base.includes('?') ? '&' : '?') + 'amount=' + Math.round(d.price_exact);
+          } else { url = link; }
         }
-        new QRCode(document.getElementById('qrcode'), { text: waveUrl, width: 160, height: 160 });
+        new QRCode(document.getElementById('qrcode'), { text: url, width: 160, height: 160 });
         if (link) {
           const a = document.createElement('a');
-          a.href = waveUrl; a.target = '_blank';
-          a.style.cssText = 'display:flex;justify-content:center;margin:-4px 0 18px';
-          a.innerHTML = '<img src="https://pay.wave.com/static/payez-avec-wave-stacked.svg" alt="Payez avec Wave" style="height:90px;width:auto" onerror="this.outerHTML=\'🌊 Payer avec Wave\'" />';
+          a.href = url; a.target = '_blank';
+          a.className = 'btn'; a.style.cssText = 'display:block;text-align:center;text-decoration:none;margin:-4px 0 18px;background:' + (isWave ? '#1dc3ff' : '#ff7900');
+          a.textContent = (isWave ? '🌊 Payer avec Wave' : '🟠 Payer avec Orange Money');
           document.getElementById('qrcode').after(a);
         }
 
         document.querySelector('.warning').innerHTML =
-          '🌊 Scannez le QR code ou cliquez sur <strong>« Payer avec Wave »</strong> pour payer <strong>exactement ' + montant + ' FCFA</strong> à <strong>EGSCI SARL</strong>. ' +
-          'Ce montant unique identifie votre commande. ' +
-          'Votre licence sera activée dès réception du paiement (généralement sous quelques minutes).';
+          `${isWave ? '🌊' : '🟠'} Scannez le QR code ou cliquez sur <strong>« Payer avec ${moyen} »</strong> pour payer <strong>exactement ${montant} FCFA</strong> à <strong>EGSCI SARL</strong>. ` +
+          'Ce montant unique identifie votre commande. Votre licence sera activée dès validation du paiement.';
 
-        document.getElementById('status-text').textContent = 'En attente de confirmation du paiement Wave…';
+        document.getElementById('status-text').textContent = `En attente de confirmation du paiement ${moyen}…`;
         document.querySelector('#status-box div').textContent = 'Vérification toutes les 10 secondes';
-
         pollInterval = setInterval(pollStatus, 10000);
         return;
       }
