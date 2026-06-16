@@ -90,8 +90,8 @@
       </div>
     </div>
 
-    <div class="step-label" style="margin-top:8px">Choisir la cryptomonnaie</div>
-    <div class="crypto-grid">
+    <div class="step-label" style="margin-top:8px">Choisir le moyen de paiement</div>
+    <div class="crypto-grid" id="crypto-grid">
       <div class="crypto-btn active" data-crypto="usdt" onclick="selectCrypto(this)">
         <div class="crypto-icon">💵</div>
         <div><div class="crypto-name">USDT TRC20</div><div class="crypto-sub">Tron Network</div></div>
@@ -99,6 +99,10 @@
       <div class="crypto-btn" data-crypto="btc" onclick="selectCrypto(this)">
         <div class="crypto-icon">₿</div>
         <div><div class="crypto-name">Bitcoin</div><div class="crypto-sub">BTC Network</div></div>
+      </div>
+      <div class="crypto-btn" data-crypto="wave" id="btn-wave" onclick="selectCrypto(this)" style="display:none">
+        <div class="crypto-icon">🌊</div>
+        <div><div class="crypto-name">Wave</div><div class="crypto-sub">Mobile Money · FCFA</div></div>
       </div>
     </div>
 
@@ -146,6 +150,7 @@
     let orderId = null;
     let pollInterval = null;
     let settings = {};
+    let products = [];
 
     function authHeaders() {
       const token = localStorage.getItem('evo_token');
@@ -164,15 +169,27 @@
       try {
         const r = await fetch(API + '/api/shop/products');
         if (r.ok) {
-          const { products } = await r.json();
-          const grid = document.getElementById('product-grid');
-          grid.innerHTML = products.map(p => `
-            <div class="prod-btn" data-product="${p.id}" onclick="selectProduct(this)">
-              <div class="prod-name">${p.name}</div>
-              <div class="prod-price" id="pp-${p.id}">${p.price_usdt} USDT · ${p.price_btc} BTC</div>
-            </div>`).join('');
+          const data = await r.json();
+          products = data.products;
+          if (data.wave_enabled) document.getElementById('btn-wave').style.display = 'flex';
+          renderProducts();
         }
       } catch {}
+    }
+
+    function priceLabel(p) {
+      if (selectedCrypto === 'wave') return Number(p.price_wave).toLocaleString('fr-FR') + ' FCFA';
+      if (selectedCrypto === 'btc')  return p.price_btc + ' BTC';
+      return p.price_usdt + ' USDT';
+    }
+
+    function renderProducts() {
+      const grid = document.getElementById('product-grid');
+      grid.innerHTML = products.map(p => `
+        <div class="prod-btn${selectedProduct===p.id?' active':''}" data-product="${p.id}" onclick="selectProduct(this)">
+          <div class="prod-name">${p.name}</div>
+          <div class="prod-price" id="pp-${p.id}">${priceLabel(p)}</div>
+        </div>`).join('');
     }
 
     function selectProduct(el) {
@@ -186,6 +203,7 @@
       document.querySelectorAll('.crypto-btn').forEach(b => b.classList.remove('active'));
       el.classList.add('active');
       selectedCrypto = el.dataset.crypto;
+      renderProducts(); // met à jour les prix affichés selon le moyen choisi
     }
 
     async function proceed() {
@@ -217,6 +235,31 @@
     function showPayStep(d) {
       document.getElementById('step-choose').style.display = 'none';
       document.getElementById('step-pay').style.display = 'block';
+
+      if (d.crypto === 'wave') {
+        const montant = Number(d.price_exact).toLocaleString('fr-FR');
+        document.getElementById('pay-amount').textContent = montant + ' FCFA';
+        document.getElementById('pay-address').textContent = d.address;
+        document.querySelector('.addr-label').textContent = 'Numéro Wave à créditer';
+        document.getElementById('pay-sub').textContent =
+          `Envoyez exactement ${montant} FCFA via Wave au numéro ci-dessous`;
+
+        // QR Wave (lien de paiement officiel)
+        document.getElementById('qrcode').innerHTML = '';
+        const waveUrl = 'https://pay.wave.com/m/' + encodeURIComponent(d.address) + '/c/ci/?amount=' + Math.round(d.price_exact);
+        new QRCode(document.getElementById('qrcode'), { text: waveUrl, width: 160, height: 160 });
+
+        document.querySelector('.warning').innerHTML =
+          '🌊 Ouvrez l\'app <strong>Wave</strong> et envoyez <strong>exactement ' + montant + ' FCFA</strong> au numéro ' +
+          '<strong>' + d.address + '</strong>. Ce montant unique identifie votre commande. ' +
+          'Votre licence sera activée dès réception du paiement (généralement sous quelques minutes).';
+
+        document.getElementById('status-text').textContent = 'En attente de confirmation du paiement Wave…';
+        document.querySelector('#status-box div').textContent = 'Vérification toutes les 10 secondes';
+
+        pollInterval = setInterval(pollStatus, 10000);
+        return;
+      }
 
       const symbol = d.crypto === 'usdt' ? 'USDT' : 'BTC';
       document.getElementById('pay-amount').textContent = d.price_exact + ' ' + symbol;

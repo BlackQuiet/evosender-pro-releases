@@ -763,7 +763,7 @@ async function loadProducts() {
           <div class="price-name" style="color:${color}">${p.name}</div>
           <p class="price-desc">${p.description.substring(0,55)}…</p>
           <div class="price-amount">${p.price_usdt} <span style="font-size:14px">USDT</span></div>
-          <p class="price-period">ou ${p.price_btc} BTC · Paiement unique · Licence à vie</p>
+          <p class="price-period">${p.price_wave ? Number(p.price_wave).toLocaleString('fr-FR') + ' FCFA (Wave) · ' : ''}ou ${p.price_btc} BTC · Paiement unique · Licence à vie</p>
           <div class="price-includes">Inclus :</div>
           <ul class="price-features">
             ${p.features.map(f => `<li><span class="check">✓</span> ${f}</li>`).join('')}
