@@ -185,7 +185,12 @@
       if(!p){ row.style.display='none'; return; }
       row.style.display='flex';
       const total = (selectedCrypto === 'btc') ? +(unitPrice(p) * quantity).toFixed(8) : Math.round(unitPrice(p) * quantity * 100)/100;
-      document.getElementById('total-val').textContent = fmtAmount(total);
+      let html = fmtAmount(total);
+      if (selectedCrypto === 'btc') {
+        const usd = (Number(p.price_usdt) || 0) * quantity;
+        html += ` <span style="font-size:13px;color:var(--slate);font-weight:600;white-space:nowrap">≈ $${usd}</span>`;
+      }
+      document.getElementById('total-val').innerHTML = html;
     }
 
     function authHeaders() {
@@ -351,7 +356,14 @@
       }
 
       const symbol = d.crypto === 'usdt' ? 'USDT' : 'BTC';
-      document.getElementById('pay-amount').textContent = d.price_exact + ' ' + symbol;
+      // Équivalent en dollars (prix de base USDT ≈ USD) — affiché pour le BTC
+      let usdNote = '';
+      if (d.crypto === 'btc') {
+        const p = curProduct();
+        const usd = (p ? Number(p.price_usdt) : 0) * (d.quantity || 1);
+        if (usd > 0) usdNote = ` <span style="font-size:14px;color:var(--slate);font-weight:600">≈ $${usd}</span>`;
+      }
+      document.getElementById('pay-amount').innerHTML = d.price_exact + ' ' + symbol + usdNote;
       document.getElementById('pay-address').textContent = d.address;
       document.getElementById('pay-sub').textContent =
         `Envoyez exactement ${d.price_exact} ${symbol} · Réseau ${d.crypto === 'usdt' ? 'TRC20 (Tron)' : 'Bitcoin'}`;
