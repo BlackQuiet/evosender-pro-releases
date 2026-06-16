@@ -117,6 +117,11 @@ section{padding:80px 0}
 .price-card{position:relative;background:var(--white);border:1.5px solid var(--line);border-radius:var(--radius);padding:34px 28px;display:flex;flex-direction:column}
 .price-card.featured{border-color:var(--blue);box-shadow:var(--shadow-lg);transform:scale(1.02)}
 .price-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-size:12px;font-weight:700;padding:5px 16px;border-radius:30px}
+.price-head{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.price-ic{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--blue-50)}
+.price-ic svg{width:20px;height:20px;stroke:var(--blue);fill:none;stroke-width:2}
+.price-ic.green{background:#dcfce7}.price-ic.green svg{stroke:#16a34a}
+.price-ic.purple{background:#f3e8ff}.price-ic.purple svg{stroke:#9333ea}
 .price-name{font-size:20px;font-weight:800;color:var(--blue)}
 .price-desc{color:var(--slate-2);font-size:14px;margin:6px 0 18px;min-height:38px}
 .price-amount{font-size:42px;font-weight:900;letter-spacing:-1.5px}
@@ -397,10 +402,11 @@ async function loadProducts(){
       pgrid.innerHTML = main.map(p => {
         const featured = p.id === 'sender';
         const wave = p.price_wave ? `${Number(p.price_wave).toLocaleString('fr-FR')} FCFA · ` : '';
+        const ic = ICONS[p.id] || ICONS.sender;
         return `
         <div class="price-card${featured ? ' featured' : ''}">
           ${featured ? '<div class="price-badge">⭐ Le plus populaire</div>' : ''}
-          <div class="price-name">${p.name}</div>
+          <div class="price-head"><div class="price-ic ${ic.cls}">${ic.svg}</div><div class="price-name">${p.name}</div></div>
           <p class="price-desc">${(p.description||'').substring(0,60)}…</p>
           <div class="price-amount">${p.price_usdt} <span>USDT</span></div>
           <p class="price-period">${wave}ou ${p.price_btc} BTC · Paiement unique · Licence à vie</p>

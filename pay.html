@@ -24,6 +24,12 @@
     .prod-btn{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:13px 16px;cursor:pointer;transition:all .15s}
     .prod-btn:hover{border-color:var(--blue-100)}
     .prod-btn.active{border-color:var(--blue);background:var(--blue-50)}
+    .prod-left{display:flex;align-items:center;gap:11px}
+    .prod-ic{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--blue-50)}
+    .prod-ic svg{width:18px;height:18px;stroke:var(--blue);fill:none;stroke-width:2}
+    .prod-ic.green{background:#dcfce7}.prod-ic.green svg{stroke:#16a34a}
+    .prod-ic.purple{background:#f3e8ff}.prod-ic.purple svg{stroke:#9333ea}
+    .prod-ic.amber{background:#fef3c7}.prod-ic.amber svg{stroke:#d97706}
     .prod-name{font-size:14.5px;font-weight:700}
     .prod-price{font-size:13px;color:var(--blue);font-weight:700;white-space:nowrap}
     .mini-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:4px}
@@ -231,13 +237,25 @@
       return fmtAmount(unitPrice(p)) + ' <span style="opacity:.6">/ PC</span>';
     }
 
+    const PROD_ICONS = {
+      extractor:{cls:'green', svg:'<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>'},
+      sender:{cls:'', svg:'<svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg>'},
+      verifier:{cls:'purple', svg:'<svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>'},
+      suite:{cls:'amber', svg:'<svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>'},
+    };
     function renderProducts() {
       const grid = document.getElementById('product-grid');
-      grid.innerHTML = products.map(p => `
+      grid.innerHTML = products.map(p => {
+        const ic = PROD_ICONS[p.id] || PROD_ICONS.sender;
+        return `
         <div class="prod-btn${selectedProduct===p.id?' active':''}" data-product="${p.id}" onclick="selectProduct(this)">
-          <div class="prod-name">${p.name}</div>
+          <div class="prod-left">
+            <div class="prod-ic ${ic.cls}">${ic.svg}</div>
+            <div class="prod-name">${p.name}</div>
+          </div>
           <div class="prod-price" id="pp-${p.id}">${priceLabel(p)}</div>
-        </div>`).join('');
+        </div>`;
+      }).join('');
     }
 
     function selectProduct(el) {
