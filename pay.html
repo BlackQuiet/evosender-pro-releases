@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EvoStudio — Paiement Crypto</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Inter',sans-serif;background:#06080f;color:#f0f4ff;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:24px}
+    .logo{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:800;margin:24px 0 32px;text-decoration:none;color:#f0f4ff}
+    .logo-icon{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#1a3a8f,#3b68d8);display:flex;align-items:center;justify-content:center}
+    .logo-icon svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2.2}
+    .logo span{color:#3b82f6}
+    .box{background:#0d111e;border:1px solid rgba(255,255,255,.07);border-radius:18px;padding:36px;width:100%;max-width:520px;box-shadow:0 24px 80px rgba(0,0,0,.5)}
+    h1{font-size:20px;font-weight:800;margin-bottom:4px}
+    .sub{font-size:13px;color:#64748b;margin-bottom:28px}
+    .step-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#3b82f6;margin-bottom:20px}
+
+    /* Choix produit */
+    .product-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px}
+    .prod-btn{background:#131929;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:14px;cursor:pointer;transition:all .2s;text-align:left}
+    .prod-btn:hover,.prod-btn.active{border-color:#3b82f6;background:#0f1d3a}
+    .prod-btn.active{box-shadow:0 0 0 2px rgba(59,130,246,.3)}
+    .prod-name{font-size:14px;font-weight:700;margin-bottom:2px}
+    .prod-price{font-size:12px;color:#64748b}
+
+    /* Choix crypto */
+    .crypto-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
+    .crypto-btn{background:#131929;border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:14px 16px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:10px}
+    .crypto-btn:hover,.crypto-btn.active{border-color:#f59e0b;background:#1a1505}
+    .crypto-btn.active{box-shadow:0 0 0 2px rgba(245,158,11,.25)}
+    .crypto-icon{font-size:22px}
+    .crypto-name{font-size:13px;font-weight:700}
+    .crypto-sub{font-size:11px;color:#64748b}
+
+    .btn{width:100%;background:#3b82f6;color:#fff;border:none;border-radius:10px;padding:13px;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;font-family:inherit}
+    .btn:hover{background:#1d4ed8}
+    .btn:disabled{opacity:.4;cursor:not-allowed}
+
+    /* Page paiement */
+    .pay-box{display:none}
+    .amount-row{background:#0a1020;border:1px solid rgba(59,130,246,.2);border-radius:12px;padding:16px 20px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between}
+    .amount-val{font-size:26px;font-weight:900;letter-spacing:-.02em}
+    .amount-copy{background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.3);border-radius:7px;padding:6px 12px;font-size:12px;font-weight:700;color:#93c5fd;cursor:pointer;border:none}
+    .addr-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#475569;margin-bottom:8px}
+    .addr-box{background:#070b14;border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:12px 14px;font-family:monospace;font-size:12px;word-break:break-all;display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:20px}
+    .addr-copy{background:none;border:1px solid rgba(255,255,255,.1);color:#94a3b8;border-radius:6px;padding:5px 10px;font-size:11px;cursor:pointer;flex-shrink:0}
+    #qrcode{margin:0 auto 20px;width:fit-content;background:#fff;padding:12px;border-radius:12px}
+    .warning{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:14px 16px;font-size:12px;color:#fbbf24;line-height:1.6;margin-bottom:20px}
+    .status-box{text-align:center;padding:20px;border-radius:12px;margin-top:16px;border:1px solid rgba(255,255,255,.06)}
+    .status-pending{background:rgba(245,158,11,.06)}
+    .status-paid{background:rgba(16,185,129,.06);border-color:rgba(16,185,129,.2)}
+    .spinner{display:inline-block;width:18px;height:18px;border:2px solid rgba(255,255,255,.15);border-top-color:#f59e0b;border-radius:50%;animation:spin .8s linear infinite;margin-right:8px;vertical-align:middle}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .lic-key{font-family:monospace;font-size:15px;font-weight:700;color:#10b981;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);border-radius:8px;padding:10px 14px;margin-top:10px;word-break:break-all}
+    .msg{font-size:13px;margin-top:10px;text-align:center}
+    .msg.err{color:#ef4444}
+  </style>
+</head>
+<body>
+  <a href="/" class="logo">
+    <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg></div>
+    Evo<span>Studio</span>
+  </a>
+
+  <!-- Étape 1 : Choix produit + crypto -->
+  <div class="box" id="step-choose">
+    <div class="step-label">Étape 1 / 2 — Choisir votre produit</div>
+    <h1>Acheter une licence</h1>
+    <p class="sub">Paiement 100% crypto · Licence générée automatiquement</p>
+
+    <div class="product-grid" id="product-grid">
+      <div class="prod-btn" data-product="extractor" onclick="selectProduct(this)">
+        <div class="prod-name">🔍 EvoExtractor</div>
+        <div class="prod-price" id="pp-extractor">49 USDT</div>
+      </div>
+      <div class="prod-btn" data-product="sender" onclick="selectProduct(this)">
+        <div class="prod-name">📤 EvoSender</div>
+        <div class="prod-price" id="pp-sender">69 USDT</div>
+      </div>
+      <div class="prod-btn" data-product="verifier" onclick="selectProduct(this)">
+        <div class="prod-name">✅ EvoVérificateur</div>
+        <div class="prod-price" id="pp-verifier">39 USDT</div>
+      </div>
+      <div class="prod-btn" data-product="suite" onclick="selectProduct(this)">
+        <div class="prod-name">🌐 Suite complète</div>
+        <div class="prod-price" id="pp-suite">129 USDT</div>
+      </div>
+    </div>
+
+    <div class="step-label" style="margin-top:8px">Choisir la cryptomonnaie</div>
+    <div class="crypto-grid">
+      <div class="crypto-btn active" data-crypto="usdt" onclick="selectCrypto(this)">
+        <div class="crypto-icon">💵</div>
+        <div><div class="crypto-name">USDT TRC20</div><div class="crypto-sub">Tron Network</div></div>
+      </div>
+      <div class="crypto-btn" data-crypto="btc" onclick="selectCrypto(this)">
+        <div class="crypto-icon">₿</div>
+        <div><div class="crypto-name">Bitcoin</div><div class="crypto-sub">BTC Network</div></div>
+      </div>
+    </div>
+
+    <button class="btn" id="btn-proceed" onclick="proceed()" disabled>Continuer →</button>
+    <div class="msg err" id="msg-choose"></div>
+  </div>
+
+  <!-- Étape 2 : Paiement -->
+  <div class="box pay-box" id="step-pay">
+    <div class="step-label">Étape 2 / 2 — Envoyer le paiement</div>
+    <h1>Paiement en cours</h1>
+    <p class="sub" id="pay-sub">Envoyez exactement ce montant à l'adresse ci-dessous.</p>
+
+    <div class="amount-row">
+      <div>
+        <div style="font-size:11px;color:#64748b;margin-bottom:2px">Montant EXACT à envoyer</div>
+        <div class="amount-val" id="pay-amount">—</div>
+      </div>
+      <button class="amount-copy" onclick="copyAmount()">Copier</button>
+    </div>
+
+    <div class="addr-label">Adresse de réception</div>
+    <div class="addr-box">
+      <span id="pay-address">—</span>
+      <button class="addr-copy" onclick="copyAddress()">Copier</button>
+    </div>
+
+    <div id="qrcode"></div>
+
+    <div class="warning">
+      ⚠️ Envoyez <strong>exactement</strong> le montant indiqué (avec les décimales). Ce montant unique identifie votre paiement. Le réseau confirme automatiquement votre paiement — aucune action manuelle requise.
+    </div>
+
+    <div class="status-box status-pending" id="status-box">
+      <span class="spinner"></span>
+      <span id="status-text">En attente du paiement…</span>
+      <div style="font-size:11px;color:#64748b;margin-top:6px">Vérification automatique toutes les 90 secondes</div>
+    </div>
+  </div>
+
+  <script>
+    const API = 'https://admin.evostudio.fr';
+    let selectedProduct = null;
+    let selectedCrypto  = 'usdt';
+    let orderId = null;
+    let pollInterval = null;
+    let settings = {};
+
+    async function loadSettings() {
+      try {
+        const r = await fetch(API + '/api/auth/me', { credentials: 'include' });
+        if (!r.ok) { location.href = '/login.html?redirect=' + encodeURIComponent(location.href); return; }
+      } catch { return; }
+      // Load prices from public endpoint (no auth needed)
+      // Prices are shown from hardcoded defaults; actual unique amount comes from server
+    }
+
+    function selectProduct(el) {
+      document.querySelectorAll('.prod-btn').forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
+      selectedProduct = el.dataset.product;
+      document.getElementById('btn-proceed').disabled = false;
+    }
+
+    function selectCrypto(el) {
+      document.querySelectorAll('.crypto-btn').forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
+      selectedCrypto = el.dataset.crypto;
+    }
+
+    async function proceed() {
+      const btn = document.getElementById('btn-proceed');
+      const msg = document.getElementById('msg-choose');
+      btn.disabled = true; btn.textContent = 'Chargement...';
+
+      try {
+        const r = await fetch(API + '/api/shop/order', {
+          method: 'POST', credentials: 'include',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ product: selectedProduct, crypto: selectedCrypto })
+        });
+        const d = await r.json();
+        if (!r.ok) {
+          if (r.status === 401) { location.href = '/login.html?redirect=' + encodeURIComponent(location.href); return; }
+          msg.textContent = d.error || 'Erreur.';
+          btn.disabled = false; btn.textContent = 'Continuer →';
+          return;
+        }
+        orderId = d.order_id;
+        showPayStep(d);
+      } catch(e) {
+        msg.textContent = 'Erreur réseau.';
+        btn.disabled = false; btn.textContent = 'Continuer →';
+      }
+    }
+
+    function showPayStep(d) {
+      document.getElementById('step-choose').style.display = 'none';
+      document.getElementById('step-pay').style.display = 'block';
+
+      const symbol = d.crypto === 'usdt' ? 'USDT' : 'BTC';
+      document.getElementById('pay-amount').textContent = d.price_exact + ' ' + symbol;
+      document.getElementById('pay-address').textContent = d.address;
+      document.getElementById('pay-sub').textContent =
+        `Envoyez exactement ${d.price_exact} ${symbol} · Réseau ${d.crypto === 'usdt' ? 'TRC20 (Tron)' : 'Bitcoin'}`;
+
+      // QR code
+      document.getElementById('qrcode').innerHTML = '';
+      const qrVal = d.crypto === 'usdt'
+        ? `tron:${d.address}?amount=${d.price_exact}`
+        : `bitcoin:${d.address}?amount=${d.price_exact}`;
+      new QRCode(document.getElementById('qrcode'), { text: qrVal, width: 160, height: 160 });
+
+      // Démarrer polling
+      pollInterval = setInterval(pollStatus, 10000);
+    }
+
+    async function pollStatus() {
+      if (!orderId) return;
+      try {
+        const r = await fetch(API + '/api/shop/order/' + orderId, { credentials: 'include' });
+        const d = await r.json();
+        if (d.status === 'paid') {
+          clearInterval(pollInterval);
+          const box = document.getElementById('status-box');
+          box.className = 'status-box status-paid';
+          box.innerHTML = `
+            <div style="font-size:22px;margin-bottom:8px">🎉</div>
+            <div style="font-size:15px;font-weight:700;color:#10b981">Paiement confirmé !</div>
+            <div style="font-size:13px;color:#64748b;margin:6px 0 10px">Votre licence est prête :</div>
+            <div class="lic-key">${d.license_key}</div>
+            <div style="margin-top:14px">
+              <button onclick="navigator.clipboard.writeText('${d.license_key}')" style="background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);color:#10b981;border-radius:7px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer">Copier la licence</button>
+              <a href="/dashboard.html" style="display:inline-block;margin-left:8px;background:#3b82f6;color:#fff;border-radius:7px;padding:8px 16px;font-size:12px;font-weight:700;text-decoration:none">Mon espace client →</a>
+            </div>
+          `;
+        } else if (d.status === 'expired') {
+          clearInterval(pollInterval);
+          document.getElementById('status-text').textContent = '⏱ Commande expirée. Actualisez pour recommencer.';
+        }
+      } catch {}
+    }
+
+    function copyAmount() {
+      const t = document.getElementById('pay-amount').textContent.split(' ')[0];
+      navigator.clipboard.writeText(t);
+      showToast('Montant copié !');
+    }
+    function copyAddress() {
+      navigator.clipboard.writeText(document.getElementById('pay-address').textContent);
+      showToast('Adresse copiée !');
+    }
+    function showToast(msg) {
+      const t = document.createElement('div');
+      t.textContent = msg;
+      t.style.cssText='position:fixed;bottom:20px;right:20px;background:#1e293b;border:1px solid #334155;border-radius:8px;padding:10px 16px;font-size:13px;z-index:999';
+      document.body.appendChild(t);
+      setTimeout(() => t.remove(), 2000);
+    }
+
+    loadSettings();
+  </script>
+</body>
+</html>
