@@ -98,6 +98,19 @@ section{padding:80px 0}
 .feat h4{font-size:16px;font-weight:700;margin-bottom:6px}
 .feat p{color:var(--slate);font-size:14px}
 
+/* CAPABILITIES */
+.cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media(max-width:900px){.cap-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.cap-grid{grid-template-columns:1fr}}
+.cap{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px;transition:all .2s}
+.cap:hover{border-color:var(--blue-100);box-shadow:var(--shadow-lg);transform:translateY(-3px)}
+.cap-ic{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--blue),#3b82f6);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.cap-ic svg{width:24px;height:24px;stroke:#fff;fill:none;stroke-width:2}
+.cap h4{font-size:17px;font-weight:800;margin-bottom:12px}
+.cap ul{list-style:none}
+.cap ul li{display:flex;gap:9px;align-items:flex-start;color:var(--slate);font-size:14px;padding:5px 0}
+.cap ul li:before{content:"✓";color:var(--blue);font-weight:800;flex-shrink:0}
+
 /* PRICING */
 .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch}
 @media(max-width:900px){.price-grid{grid-template-columns:1fr}}
@@ -141,6 +154,8 @@ footer{background:var(--ink);color:#cbd5e1;padding:54px 0 28px}
 </head>
 <body>
 
+<div id="announce-bar" style="display:none;background:var(--blue);color:#fff;text-align:center;font-size:14px;font-weight:600;padding:9px 16px"></div>
+
 <nav class="nav">
   <div class="wrap nav-in">
     <a href="/" class="logo">
@@ -149,7 +164,7 @@ footer{background:var(--ink);color:#cbd5e1;padding:54px 0 28px}
     </a>
     <div class="nav-links">
       <a href="#produits">Produits</a>
-      <a href="#comment">Comment ça marche</a>
+      <a href="#plateforme">Plateforme</a>
       <a href="#fonctionnalites">Fonctionnalités</a>
       <a href="#tarifs">Tarifs</a>
       <a href="#faq">FAQ</a>
@@ -164,8 +179,8 @@ footer{background:var(--ink);color:#cbd5e1;padding:54px 0 28px}
 <header class="hero">
   <div class="wrap hero-in">
     <span class="pill"><span class="dot"></span> Suite professionnelle d'emailing</span>
-    <h1>Extrayez, vérifiez et envoyez<br><span class="grad">vos emails en masse</span></h1>
-    <p class="hero-sub">EvoStudio réunit 3 outils puissants dans une seule suite : collecte d'adresses, nettoyage de listes et campagnes haute délivrabilité. Licence à vie, 100% local.</p>
+    <h1 id="hero-title">Extrayez, vérifiez et envoyez<br><span class="grad">vos emails en masse</span></h1>
+    <p class="hero-sub" id="hero-sub">EvoStudio réunit 3 outils puissants dans une seule suite : collecte d'adresses, nettoyage de listes et campagnes haute délivrabilité. Licence à vie, 100% local.</p>
     <div class="hero-btns">
       <a href="/pay.html" class="btn btn-primary">Acheter maintenant →</a>
       <a href="#produits" class="btn btn-ghost">Découvrir les outils</a>
@@ -220,6 +235,48 @@ footer{background:var(--ink);color:#cbd5e1;padding:54px 0 28px}
       <div class="feat"><div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h4>Personnalisation avancée</h4><p>Variables, templates HTML, sujets et expéditeurs dynamiques.</p></div>
       <div class="feat"><div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><h4>Licence à vie</h4><p>Un seul paiement. Mises à jour incluses. Pas d'abonnement.</p></div>
       <div class="feat"><div class="feat-ic"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><h4>Espace client</h4><p>Retrouvez vos licences et commandes dans votre espace personnel.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="plateforme">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-tag">Plateforme complète</div>
+      <h2>Tout pour gérer vos campagnes de A à Z</h2>
+      <p>Une suite professionnelle qui couvre l'ensemble de votre flux d'emailing.</p>
+    </div>
+    <div class="cap-grid">
+      <div class="cap">
+        <div class="cap-ic"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h4>Gestion des contacts & listes</h4>
+        <ul><li>Import / export CSV</li><li>Segmentation & tags</li><li>Gestion des désabonnements</li><li>Nettoyage des bounces</li></ul>
+      </div>
+      <div class="cap">
+        <div class="cap-ic"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <h4>Éditeur de templates</h4>
+        <ul><li>Éditeur HTML & visuel</li><li>Bibliothèque de modèles</li><li>Prévisualisation desktop / mobile</li><li>Variables : {{prénom}}, {{email}}…</li></ul>
+      </div>
+      <div class="cap">
+        <div class="cap-ic"><svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg></div>
+        <h4>Gestion des campagnes</h4>
+        <ul><li>Création & planification</li><li>Envoi immédiat ou programmé</li><li>Rotation SMTP & proxy</li><li>Reprise après interruption</li></ul>
+      </div>
+      <div class="cap">
+        <div class="cap-ic"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+        <h4>Tracking & analytics</h4>
+        <ul><li>Taux d'ouverture & de clic</li><li>Bounces (soft / hard)</li><li>Suivi des désabonnements</li><li>Tableau de bord & graphiques</li></ul>
+      </div>
+      <div class="cap">
+        <div class="cap-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+        <h4>Automatisations (flows)</h4>
+        <ul><li>Séquences automatiques</li><li>Relances & welcome series</li><li>Triggers comportementaux</li><li>Délais entre emails</li></ul>
+      </div>
+      <div class="cap">
+        <div class="cap-ic"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h4>Conformité légale</h4>
+        <ul><li>RGPD / CAN-SPAM</li><li>Lien de désabonnement</li><li>Double opt-in</li><li>100% local & privé</li></ul>
+      </div>
     </div>
   </div>
 </section>
@@ -306,8 +363,16 @@ async function loadProducts(){
   try{
     const r = await fetch(API + '/api/shop/products');
     if(!r.ok) return;
-    const { products } = await r.json();
+    const data = await r.json();
+    const products = data.products;
     const main = products.filter(p => p.id !== 'suite');
+
+    // ── Contenu de site dynamique (éditable depuis l'admin) ──────
+    const site = data.site || {};
+    if(site.hero_title){ const el=document.getElementById('hero-title'); if(el) el.textContent = site.hero_title; }
+    if(site.hero_subtitle){ const el=document.getElementById('hero-sub'); if(el) el.textContent = site.hero_subtitle; }
+    if(site.announce){ const b=document.getElementById('announce-bar'); if(b){ b.textContent = site.announce; b.style.display='block'; } }
+    if(site.support_email){ document.querySelectorAll('a[href^="mailto:"]').forEach(a => { a.href='mailto:'+site.support_email; if(a.textContent.includes('@')) a.textContent=site.support_email; }); }
 
     const grid = document.getElementById('products-grid');
     if(grid){
