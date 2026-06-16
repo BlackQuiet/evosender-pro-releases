@@ -244,15 +244,25 @@
         document.getElementById('pay-sub').textContent =
           `Envoyez exactement ${montant} FCFA via Wave au numéro ci-dessous`;
 
-        // QR Wave : utilise le vrai lien Wave si fourni, sinon le numéro brut
+        // QR Wave : utilise le vrai lien marchand si fourni, sinon le numéro brut
         document.getElementById('qrcode').innerHTML = '';
-        const waveUrl = (d.wave_link && d.wave_link.trim()) ? d.wave_link.trim() : d.address;
+        let waveUrl = d.address;
+        const link = (d.wave_link || '').trim();
+        if (link) {
+          // Lien marchand (/m/) → on ajoute le montant exact pour pré-remplir
+          if (link.includes('/m/')) {
+            const base = link.replace(/\/+$/, '/'); // garde le / final
+            waveUrl = base + (base.includes('?') ? '&' : '?') + 'amount=' + Math.round(d.price_exact);
+          } else {
+            waveUrl = link;
+          }
+        }
         new QRCode(document.getElementById('qrcode'), { text: waveUrl, width: 160, height: 160 });
-        if (d.wave_link && d.wave_link.trim()) {
+        if (link) {
           const a = document.createElement('a');
-          a.href = d.wave_link.trim(); a.target = '_blank';
-          a.textContent = '🌊 Ouvrir Wave';
-          a.style.cssText = 'display:block;text-align:center;margin:-8px 0 16px;color:#06b6d4;font-weight:700;font-size:13px';
+          a.href = waveUrl; a.target = '_blank';
+          a.textContent = '🌊 Payer avec Wave';
+          a.style.cssText = 'display:block;text-align:center;margin:-8px 0 16px;color:#06b6d4;font-weight:700;font-size:14px';
           document.getElementById('qrcode').after(a);
         }
 
