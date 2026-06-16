@@ -19,20 +19,19 @@
     .sub{font-size:14px;color:var(--slate);margin-bottom:26px}
     .step-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);margin-bottom:18px}
 
-    .product-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px}
-    .prod-btn{background:#f8fafc;border:1.5px solid var(--line);border-radius:11px;padding:14px;cursor:pointer;transition:all .2s;text-align:left}
-    .prod-btn:hover,.prod-btn.active{border-color:var(--blue);background:var(--blue-50)}
-    .prod-btn.active{box-shadow:0 0 0 3px rgba(37,99,235,.15)}
-    .prod-name{font-size:14px;font-weight:700;margin-bottom:2px}
-    .prod-price{font-size:12px;color:var(--slate)}
-
-    .crypto-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
-    .crypto-btn{background:#f8fafc;border:1.5px solid var(--line);border-radius:11px;padding:14px 16px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:10px}
-    .crypto-btn:hover,.crypto-btn.active{border-color:var(--blue);background:var(--blue-50)}
-    .crypto-btn.active{box-shadow:0 0 0 3px rgba(37,99,235,.15)}
-    .crypto-icon{font-size:22px}
-    .crypto-name{font-size:13px;font-weight:700}
-    .crypto-sub{font-size:11px;color:var(--slate)}
+    .mini-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--slate);margin:18px 0 10px}
+    .product-list{display:flex;flex-direction:column;gap:8px}
+    .prod-btn{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:13px 16px;cursor:pointer;transition:all .15s}
+    .prod-btn:hover{border-color:var(--blue-100)}
+    .prod-btn.active{border-color:var(--blue);background:var(--blue-50)}
+    .prod-name{font-size:14.5px;font-weight:700}
+    .prod-price{font-size:13px;color:var(--blue);font-weight:700;white-space:nowrap}
+    .mini-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:4px}
+    .qty-stepper{display:flex;align-items:center;gap:6px}
+    .pay-pills{display:flex;flex-wrap:wrap;gap:8px}
+    .pill-btn{flex:1;min-width:120px;text-align:center;background:#fff;border:1.5px solid var(--line);border-radius:11px;padding:12px;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s}
+    .pill-btn:hover{border-color:var(--blue-100)}
+    .pill-btn.active{border-color:var(--blue);background:var(--blue-50);color:var(--blue)}
 
     .qty-row{display:flex;align-items:center;gap:12px;margin-bottom:22px}
     .qty-btn{width:42px;height:42px;border-radius:11px;border:1.5px solid var(--line);background:#f8fafc;color:var(--blue);font-size:22px;font-weight:700;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center}
@@ -70,61 +69,36 @@
     Evo<span>Studio</span>
   </a>
 
-  <!-- Étape 1 : Choix produit + crypto -->
+  <!-- Étape 1 : Choix produit + paiement (minimaliste) -->
   <div class="box" id="step-choose">
-    <div class="step-label">Étape 1 / 2 — Choisir votre produit</div>
     <h1>Acheter une licence</h1>
-    <p class="sub">Crypto, Wave ou Orange Money · Licence générée automatiquement</p>
+    <p class="sub">Sélectionnez votre produit · licence générée automatiquement</p>
 
-    <div class="product-grid" id="product-grid">
-      <div class="prod-btn" data-product="extractor" onclick="selectProduct(this)">
-        <div class="prod-name">🔍 EvoExtractor</div>
-        <div class="prod-price" id="pp-extractor">49 USDT</div>
+    <div class="mini-label">Produit</div>
+    <div class="product-list" id="product-grid"></div>
+
+    <div class="mini-row">
+      <div>
+        <div class="mini-label" style="margin:0">Ordinateurs (PC)</div>
+        <div class="qty-hint" id="qty-hint">1 licence — 1 PC</div>
       </div>
-      <div class="prod-btn" data-product="sender" onclick="selectProduct(this)">
-        <div class="prod-name">📤 EvoSender</div>
-        <div class="prod-price" id="pp-sender">69 USDT</div>
-      </div>
-      <div class="prod-btn" data-product="verifier" onclick="selectProduct(this)">
-        <div class="prod-name">✅ EvoVérificateur</div>
-        <div class="prod-price" id="pp-verifier">39 USDT</div>
-      </div>
-      <div class="prod-btn" data-product="suite" onclick="selectProduct(this)">
-        <div class="prod-name">🌐 Suite complète</div>
-        <div class="prod-price" id="pp-suite">129 USDT</div>
+      <div class="qty-stepper">
+        <button type="button" class="qty-btn" onclick="changeQty(-1)">−</button>
+        <div class="qty-val" id="qty-val">1</div>
+        <button type="button" class="qty-btn" onclick="changeQty(1)">+</button>
       </div>
     </div>
 
-    <div class="step-label" style="margin-top:8px">Nombre d'ordinateurs (PC)</div>
-    <div class="qty-row">
-      <button type="button" class="qty-btn" onclick="changeQty(-1)">−</button>
-      <div class="qty-val" id="qty-val">1</div>
-      <button type="button" class="qty-btn" onclick="changeQty(1)">+</button>
-      <div class="qty-hint" id="qty-hint">1 licence — 1 PC</div>
-    </div>
-
-    <div class="step-label" style="margin-top:8px">Choisir le moyen de paiement</div>
-    <div class="crypto-grid" id="crypto-grid">
-      <div class="crypto-btn active" data-crypto="usdt" id="btn-usdt" onclick="selectCrypto(this)">
-        <div class="crypto-icon">💵</div>
-        <div><div class="crypto-name">USDT TRC20</div><div class="crypto-sub">Tron Network</div></div>
-      </div>
-      <div class="crypto-btn" data-crypto="btc" id="btn-btc" onclick="selectCrypto(this)">
-        <div class="crypto-icon">₿</div>
-        <div><div class="crypto-name">Bitcoin</div><div class="crypto-sub">BTC Network</div></div>
-      </div>
-      <div class="crypto-btn" data-crypto="wave" id="btn-wave" onclick="selectCrypto(this)" style="display:none">
-        <div class="crypto-icon">🌊</div>
-        <div><div class="crypto-name">Wave</div><div class="crypto-sub">Mobile Money · FCFA</div></div>
-      </div>
-      <div class="crypto-btn" data-crypto="om" id="btn-om" onclick="selectCrypto(this)" style="display:none">
-        <div class="crypto-icon">🟠</div>
-        <div><div class="crypto-name">Orange Money</div><div class="crypto-sub">Mobile Money · FCFA</div></div>
-      </div>
+    <div class="mini-label">Paiement</div>
+    <div class="pay-pills" id="crypto-grid">
+      <div class="pill-btn active" data-crypto="usdt" id="btn-usdt" onclick="selectCrypto(this)">💵 USDT</div>
+      <div class="pill-btn" data-crypto="btc" id="btn-btc" onclick="selectCrypto(this)">₿ Bitcoin</div>
+      <div class="pill-btn" data-crypto="wave" id="btn-wave" onclick="selectCrypto(this)" style="display:none">🌊 Wave</div>
+      <div class="pill-btn" data-crypto="om" id="btn-om" onclick="selectCrypto(this)" style="display:none">🟠 Orange Money</div>
     </div>
 
     <div class="total-row" id="total-row" style="display:none">
-      <span>Total à payer</span>
+      <span>Total</span>
       <strong id="total-val">—</strong>
     </div>
 
@@ -250,7 +224,7 @@
         setShow('btn-wave', false); setShow('btn-om', false);
         selectedCrypto = 'usdt';
       }
-      document.querySelectorAll('.crypto-btn').forEach(b => b.classList.toggle('active', b.dataset.crypto === selectedCrypto));
+      document.querySelectorAll(".pill-btn").forEach(b => b.classList.toggle('active', b.dataset.crypto === selectedCrypto));
     }
 
     function priceLabel(p) {
@@ -275,7 +249,7 @@
     }
 
     function selectCrypto(el) {
-      document.querySelectorAll('.crypto-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll(".pill-btn").forEach(b => b.classList.remove('active'));
       el.classList.add('active');
       selectedCrypto = el.dataset.crypto;
       renderProducts();
