@@ -35,9 +35,11 @@
     .mini-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:4px}
     .qty-stepper{display:flex;align-items:center;gap:6px}
     .pay-pills{display:flex;flex-wrap:wrap;gap:8px}
-    .pill-btn{flex:1;min-width:120px;text-align:center;background:#fff;border:1.5px solid var(--line);border-radius:11px;padding:12px;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s}
+    .pill-btn{flex:1;min-width:120px;display:flex;align-items:center;justify-content:center;gap:7px;background:#fff;border:1.5px solid var(--line);border-radius:11px;padding:12px;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s}
     .pill-btn:hover{border-color:var(--blue-100)}
     .pill-btn.active{border-color:var(--blue);background:var(--blue-50);color:var(--blue)}
+    .pay-logo{width:20px;height:20px;display:inline-block;flex-shrink:0}
+    .pill-net{font-size:10px;font-weight:700;background:#fee2e2;color:#b91c1c;padding:1px 6px;border-radius:20px}
 
     .qty-row{display:flex;align-items:center;gap:12px;margin-bottom:22px}
     .qty-btn{width:42px;height:42px;border-radius:11px;border:1.5px solid var(--line);background:#f8fafc;color:var(--blue);font-size:22px;font-weight:700;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center}
@@ -97,8 +99,12 @@
 
     <div class="mini-label">Paiement</div>
     <div class="pay-pills" id="crypto-grid">
-      <div class="pill-btn active" data-crypto="usdt" id="btn-usdt" onclick="selectCrypto(this)">💵 USDT</div>
-      <div class="pill-btn" data-crypto="btc" id="btn-btc" onclick="selectCrypto(this)">₿ Bitcoin</div>
+      <div class="pill-btn active" data-crypto="usdt" id="btn-usdt" onclick="selectCrypto(this)">
+        <img src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons/svg/color/usdt.svg" alt="" class="pay-logo" onerror="this.outerHTML='💵 '" />USDT <span class="pill-net">TRC20</span>
+      </div>
+      <div class="pill-btn" data-crypto="btc" id="btn-btc" onclick="selectCrypto(this)">
+        <img src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons/svg/color/btc.svg" alt="" class="pay-logo" onerror="this.outerHTML='₿ '" />Bitcoin
+      </div>
       <div class="pill-btn" data-crypto="wave" id="btn-wave" onclick="selectCrypto(this)" style="display:none">🌊 Wave</div>
       <div class="pill-btn" data-crypto="om" id="btn-om" onclick="selectCrypto(this)" style="display:none">🟠 Orange Money</div>
     </div>
