@@ -438,65 +438,9 @@
       <h2 class="section-title">Tout ce qu'il vous faut<br/>pour l'email marketing</h2>
       <p class="section-sub">De la collecte à l'envoi, EvoStudio couvre chaque étape de votre stratégie email avec des outils dédiés et performants.</p>
     </div>
-    <div class="products-grid">
-
-      <!-- EvoExtractor -->
-      <div class="product-card green">
-        <div class="product-icon icon-green">
-          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        </div>
-        <div class="product-name">EvoExtractor</div>
-        <p class="product-desc">Collectez des milliers d'adresses email depuis le web, vos fichiers locaux ou vos comptes IMAP en quelques clics.</p>
-        <ul class="product-features">
-          <li class="feature-green">Extraction web par mots-clés</li>
-          <li class="feature-green">Recherche dans fichiers locaux (PDF, DOCX, TXT…)</li>
-          <li class="feature-green">Import depuis comptes IMAP / Outlook</li>
-          <li class="feature-green">Déduplication automatique</li>
-        </ul>
-        <div class="product-btns">
-          <a href="#tarifs" class="btn-product btn-dl-green">Télécharger</a>
-          <a href="#tarifs" class="btn-product btn-ghost-sm">Acheter</a>
-        </div>
-      </div>
-
-      <!-- EvoSender -->
-      <div class="product-card blue">
-        <div class="product-icon icon-blue">
-          <svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg>
-        </div>
-        <div class="product-name">EvoSender</div>
-        <p class="product-desc">Envoyez des campagnes email en masse avec rotation SMTP et proxy, personnalisation avancée et suivi en temps réel.</p>
-        <ul class="product-features">
-          <li class="feature-blue">Rotation multi-SMTP automatique</li>
-          <li class="feature-blue">Personnalisation par variables</li>
-          <li class="feature-blue">Suivi des ouvertures et clics</li>
-          <li class="feature-blue">Éditeur HTML intégré</li>
-        </ul>
-        <div class="product-btns">
-          <a href="#tarifs" class="btn-product btn-dl-blue">Télécharger</a>
-          <a href="#tarifs" class="btn-product btn-ghost-sm">Acheter</a>
-        </div>
-      </div>
-
-      <!-- EvoVérificateur -->
-      <div class="product-card purple">
-        <div class="product-icon icon-purple">
-          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        </div>
-        <div class="product-name">EvoVérificateur</div>
-        <p class="product-desc">Nettoyez vos listes email et éliminez les adresses invalides avant l'envoi pour améliorer votre délivrabilité.</p>
-        <ul class="product-features">
-          <li class="feature-purple">Vérification MX & SMTP</li>
-          <li class="feature-purple">Détection des boîtes pleines</li>
-          <li class="feature-purple">Score de validité par email</li>
-          <li class="feature-purple">Export filtré par statut</li>
-        </ul>
-        <div class="product-btns">
-          <a href="#tarifs" class="btn-product btn-dl-purple">Télécharger</a>
-          <a href="#tarifs" class="btn-product btn-ghost-sm">Acheter</a>
-        </div>
-      </div>
-
+    <div class="products-grid" id="products-grid">
+      <!-- Chargé dynamiquement depuis l'API -->
+      <div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--text3)">Chargement…</div>
     </div>
   </div>
 </section>
@@ -588,64 +532,11 @@
       <h2 class="section-title">Un prix, toutes les fonctionnalités</h2>
       <p class="section-sub">Pas d'abonnement caché. Achetez une fois, utilisez pour toujours. Essai gratuit disponible sur chaque outil.</p>
     </div>
-    <div class="pricing-grid">
-
-      <div class="price-card">
-        <div class="price-name" style="color:#10b981">EvoExtractor</div>
-        <p class="price-desc">Collecte d'emails illimitée</p>
-        <div class="price-amount">49€ <span style="font-size:14px">/ licence</span></div>
-        <p class="price-period">Paiement unique · 1 PC · Mises à jour incluses</p>
-        <div class="price-includes">Inclus :</div>
-        <ul class="price-features">
-          <li><span class="check">✓</span> Extraction web illimitée</li>
-          <li><span class="check">✓</span> Sources : Google, Bing, fichiers, IMAP</li>
-          <li><span class="check">✓</span> Export CSV / TXT / JSON</li>
-          <li><span class="check">✓</span> Mises à jour 12 mois</li>
-          <li><span class="check">✓</span> Support email prioritaire</li>
-        </ul>
-        <button class="btn-price btn-price-ghost" onclick="window.location.href='mailto:support@evostudio.fr?subject=Achat EvoExtractor'">Acheter EvoExtractor</button>
-      </div>
-
-      <div class="price-card featured">
-        <div class="price-badge">⭐ Le plus populaire</div>
-        <div class="price-name" style="color:#60a5fa">EvoSender</div>
-        <p class="price-desc">Envoi en masse professionnel</p>
-        <div class="price-amount">69€ <span style="font-size:14px">/ licence</span></div>
-        <p class="price-period">Paiement unique · 1 PC · Mises à jour incluses</p>
-        <div class="price-includes">Inclus :</div>
-        <ul class="price-features">
-          <li><span class="check">✓</span> Envois illimités / jour</li>
-          <li><span class="check">✓</span> Rotation multi-SMTP</li>
-          <li><span class="check">✓</span> Éditeur HTML + templates</li>
-          <li><span class="check">✓</span> Tracking ouvertures & clics</li>
-          <li><span class="check">✓</span> Support proxy SOCKS5/HTTP</li>
-          <li><span class="check">✓</span> Mises à jour 12 mois</li>
-        </ul>
-        <button class="btn-price btn-price-blue" onclick="window.location.href='mailto:support@evostudio.fr?subject=Achat EvoSender'">Acheter EvoSender</button>
-      </div>
-
-      <div class="price-card">
-        <div class="price-name" style="color:#c084fc">EvoVérificateur</div>
-        <p class="price-desc">Nettoyage de listes emails</p>
-        <div class="price-amount">39€ <span style="font-size:14px">/ licence</span></div>
-        <p class="price-period">Paiement unique · 1 PC · Mises à jour incluses</p>
-        <div class="price-includes">Inclus :</div>
-        <ul class="price-features">
-          <li><span class="check">✓</span> Vérification illimitée</li>
-          <li><span class="check">✓</span> Tests MX + SMTP + syntaxe</li>
-          <li><span class="check">✓</span> Score de validité détaillé</li>
-          <li><span class="check">✓</span> Export par statut</li>
-          <li><span class="check">✓</span> Mises à jour 12 mois</li>
-        </ul>
-        <button class="btn-price btn-price-ghost" onclick="window.location.href='mailto:support@evostudio.fr?subject=Achat EvoVérificateur'">Acheter EvoVérificateur</button>
-      </div>
-
+    <div class="pricing-grid" id="pricing-grid">
+      <!-- Chargé dynamiquement depuis l'API -->
+      <div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--text3)">Chargement…</div>
     </div>
-
-    <p style="text-align:center;margin-top:28px;font-size:13px;color:var(--text3)">
-      🎁 Suite complète (3 licences) — <strong style="color:var(--text)">129€</strong> au lieu de 157€ ·
-      <a href="mailto:support@evostudio.fr?subject=Suite complète EvoStudio" style="color:var(--blue)">Contacter pour commander</a>
-    </p>
+    <p style="text-align:center;margin-top:28px;font-size:13px;color:var(--text3)" id="suite-cta" style="display:none"></p>
   </div>
 </section>
 
@@ -809,6 +700,92 @@
       a.style.color = a.getAttribute('href') === '#' + cur ? '#f0f4ff' : '';
     });
   });
+</script>
+
+<script>
+// ── Chargement dynamique produits depuis le backend ─────────────
+const API = 'https://admin.evostudio.fr';
+
+const PROD_STYLE = {
+  extractor: { card:'green', icon:'icon-green', feat:'feature-green', dl:'btn-dl-green',
+    svg:'<svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>' },
+  sender:    { card:'blue',  icon:'icon-blue',  feat:'feature-blue',  dl:'btn-dl-blue',
+    svg:'<svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg>' },
+  verifier:  { card:'purple',icon:'icon-purple',feat:'feature-purple',dl:'btn-dl-purple',
+    svg:'<svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>' },
+  suite:     { card:'blue',  icon:'icon-blue',  feat:'feature-blue',  dl:'btn-dl-blue',
+    svg:'<svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>' },
+};
+
+const PRICE_COLOR = { extractor:'#10b981', sender:'#60a5fa', verifier:'#c084fc', suite:'#f59e0b' };
+const PRICE_BTN   = { extractor:'btn-price-ghost', sender:'btn-price-blue', verifier:'btn-price-ghost', suite:'btn-price-ghost' };
+
+async function loadProducts() {
+  try {
+    const r = await fetch(API + '/api/shop/products');
+    if (!r.ok) return;
+    const { products } = await r.json();
+
+    // ── Grille produits ───────────────────────────────────────
+    const grid = document.getElementById('products-grid');
+    if (grid) {
+      // Afficher seulement les 3 premiers (pas suite) dans la grille produits
+      const main = products.filter(p => p.id !== 'suite');
+      grid.innerHTML = main.map(p => {
+        const st = PROD_STYLE[p.id] || PROD_STYLE.sender;
+        return `
+        <div class="product-card ${st.card}">
+          <div class="product-icon ${st.icon}">${st.svg}</div>
+          <div class="product-name">${p.name}</div>
+          <p class="product-desc">${p.description}</p>
+          <ul class="product-features">
+            ${p.features.map(f => `<li class="${st.feat}">${f}</li>`).join('')}
+          </ul>
+          <div class="product-btns">
+            <a href="/pay.html" class="btn-product ${st.dl}">Acheter →</a>
+            <a href="#tarifs" class="btn-product btn-ghost-sm">Voir prix</a>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    // ── Grille tarifs ─────────────────────────────────────────
+    const pgrid = document.getElementById('pricing-grid');
+    if (pgrid) {
+      const main3 = products.filter(p => p.id !== 'suite');
+      pgrid.innerHTML = main3.map((p, i) => {
+        const featured = p.id === 'sender';
+        const color = PRICE_COLOR[p.id] || '#3b82f6';
+        const btnCls = PRICE_BTN[p.id] || 'btn-price-ghost';
+        return `
+        <div class="price-card${featured ? ' featured' : ''}">
+          ${featured ? '<div class="price-badge">⭐ Le plus populaire</div>' : ''}
+          <div class="price-name" style="color:${color}">${p.name}</div>
+          <p class="price-desc">${p.description.substring(0,55)}…</p>
+          <div class="price-amount">${p.price_usdt} <span style="font-size:14px">USDT</span></div>
+          <p class="price-period">ou ${p.price_btc} BTC · Paiement unique · Licence à vie</p>
+          <div class="price-includes">Inclus :</div>
+          <ul class="price-features">
+            ${p.features.map(f => `<li><span class="check">✓</span> ${f}</li>`).join('')}
+          </ul>
+          <button class="btn-price ${btnCls}" onclick="location.href='/pay.html'">Acheter ${p.name}</button>
+        </div>`;
+      }).join('');
+
+      // Suite CTA
+      const suite = products.find(p => p.id === 'suite');
+      const ctaEl = document.getElementById('suite-cta');
+      if (suite && ctaEl) {
+        ctaEl.style.display = 'block';
+        ctaEl.innerHTML = `🎁 ${suite.name} — <strong style="color:var(--text)">${suite.price_usdt} USDT</strong> (les 3 outils) · <a href="/pay.html" style="color:var(--blue)">Acheter la suite →</a>`;
+      }
+    }
+  } catch(e) {
+    console.warn('Produits non chargés depuis API, affichage statique maintenu.', e);
+  }
+}
+
+loadProducts();
 </script>
 </body>
 </html>

@@ -159,6 +159,20 @@
         const r = await fetch(API + '/api/auth/me', { headers: authHeaders() });
         if (!r.ok) { location.href = '/login.html?redirect=' + encodeURIComponent(location.href); return; }
       } catch { return; }
+
+      // Charger les produits depuis l'API
+      try {
+        const r = await fetch(API + '/api/shop/products');
+        if (r.ok) {
+          const { products } = await r.json();
+          const grid = document.getElementById('product-grid');
+          grid.innerHTML = products.map(p => `
+            <div class="prod-btn" data-product="${p.id}" onclick="selectProduct(this)">
+              <div class="prod-name">${p.name}</div>
+              <div class="prod-price" id="pp-${p.id}">${p.price_usdt} USDT · ${p.price_btc} BTC</div>
+            </div>`).join('');
+        }
+      } catch {}
     }
 
     function selectProduct(el) {
