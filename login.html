@@ -53,6 +53,8 @@
 
   <script>
     const API = 'https://admin.evostudio.fr';
+    if (localStorage.getItem('evo_token')) location.href = '/dashboard.html';
+
     document.getElementById('form').addEventListener('submit', async e => {
       e.preventDefault();
       const email    = document.getElementById('email').value.trim();
@@ -63,12 +65,14 @@
       btn.disabled = true; btn.textContent = 'Connexion...';
       try {
         const r = await fetch(API + '/api/auth/login', {
-          method: 'POST', credentials: 'include',
+          method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, password })
         });
         const d = await r.json();
         if (d.ok) {
+          localStorage.setItem('evo_token', d.token);
+          localStorage.setItem('evo_email', d.email);
           msg.className='msg ok'; msg.textContent='✓ Connecté ! Redirection...';
           const redir = new URLSearchParams(location.search).get('redirect') || '/dashboard.html';
           setTimeout(() => location.href = redir, 800);

@@ -109,26 +109,33 @@
     showToast('✓ Clé copiée : ' + key);
   }
 
-  async function logout() {
-    await fetch(API + '/api/auth/logout', { method:'POST', credentials:'include' });
+  function authHeaders() {
+    const token = localStorage.getItem('evo_token');
+    return token ? { 'Authorization': 'Bearer ' + token } : {};
+  }
+
+  function logout() {
+    localStorage.removeItem('evo_token');
+    localStorage.removeItem('evo_email');
     location.href = '/login.html';
   }
 
   async function load() {
-    // Vérifier session
+    const token = localStorage.getItem('evo_token');
+    if (!token) { location.href = '/login.html?redirect=/dashboard.html'; return; }
+
     try {
-      const r = await fetch(API + '/api/auth/me', { credentials:'include' });
-      if (!r.ok) { location.href = '/login.html?redirect=/dashboard.html'; return; }
+      const r = await fetch(API + '/api/auth/me', { headers: authHeaders() });
+      if (!r.ok) { logout(); return; }
       const user = await r.json();
       document.getElementById('nav-email').textContent = user.email;
-    } catch { location.href = '/login.html?redirect=/dashboard.html'; return; }
+    } catch { logout(); return; }
 
     document.getElementById('loading-screen').style.display = 'none';
     document.getElementById('main').style.display = 'block';
 
-    // Charger commandes
     const [ordersR] = await Promise.all([
-      fetch(API + '/api/shop/orders', { credentials:'include' })
+      fetch(API + '/api/shop/orders', { headers: authHeaders() })
     ]);
 
     const orders = ordersR.ok ? await ordersR.json() : [];

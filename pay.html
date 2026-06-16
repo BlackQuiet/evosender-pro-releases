@@ -147,13 +147,18 @@
     let pollInterval = null;
     let settings = {};
 
+    function authHeaders() {
+      const token = localStorage.getItem('evo_token');
+      return token ? { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' } : { 'Content-Type': 'application/json' };
+    }
+
     async function loadSettings() {
+      const token = localStorage.getItem('evo_token');
+      if (!token) { location.href = '/login.html?redirect=' + encodeURIComponent(location.href); return; }
       try {
-        const r = await fetch(API + '/api/auth/me', { credentials: 'include' });
+        const r = await fetch(API + '/api/auth/me', { headers: authHeaders() });
         if (!r.ok) { location.href = '/login.html?redirect=' + encodeURIComponent(location.href); return; }
       } catch { return; }
-      // Load prices from public endpoint (no auth needed)
-      // Prices are shown from hardcoded defaults; actual unique amount comes from server
     }
 
     function selectProduct(el) {
@@ -176,8 +181,8 @@
 
       try {
         const r = await fetch(API + '/api/shop/order', {
-          method: 'POST', credentials: 'include',
-          headers: { 'Content-Type': 'application/json' },
+          method: 'POST',
+          headers: authHeaders(),
           body: JSON.stringify({ product: selectedProduct, crypto: selectedCrypto })
         });
         const d = await r.json();
@@ -219,7 +224,7 @@
     async function pollStatus() {
       if (!orderId) return;
       try {
-        const r = await fetch(API + '/api/shop/order/' + orderId, { credentials: 'include' });
+        const r = await fetch(API + '/api/shop/order/' + orderId, { headers: authHeaders() });
         const d = await r.json();
         if (d.status === 'paid') {
           clearInterval(pollInterval);
