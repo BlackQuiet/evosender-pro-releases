@@ -4,58 +4,48 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EvoStudio — Mon espace client</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
+    :root{--blue:#2563eb;--blue-dark:#1d4ed8;--blue-50:#eff6ff;--blue-100:#dbeafe;--ink:#0f172a;--slate:#64748b;--slate-2:#94a3b8;--line:#e2e8f0;--bg:#f8fafc}
     *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'Inter',sans-serif;background:#06080f;color:#f0f4ff;min-height:100vh}
-    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:60px;background:rgba(6,8,15,.9);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.06)}
-    .logo{display:flex;align-items:center;gap:9px;font-size:18px;font-weight:800;text-decoration:none;color:#f0f4ff}
-    .logo-icon{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#1a3a8f,#3b68d8);display:flex;align-items:center;justify-content:center}
-    .logo-icon svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2.2}
-    .logo span{color:#3b82f6}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:62px;background:rgba(255,255,255,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+    .logo{display:flex;align-items:center;gap:9px;font-size:19px;font-weight:800;text-decoration:none;color:var(--ink)}
+    .logo-icon{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--blue),#3b82f6);display:flex;align-items:center;justify-content:center}
+    .logo-icon svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2.2}
+    .logo span{color:var(--blue)}
     .nav-right{display:flex;align-items:center;gap:16px}
-    .nav-email{font-size:13px;color:#475569}
-    .btn-logout{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:#94a3b8;border-radius:7px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s}
-    .btn-logout:hover{background:rgba(255,255,255,.09);color:#f0f4ff}
-    .main{max-width:900px;margin:0 auto;padding:88px 24px 48px}
-    .page-title{font-size:26px;font-weight:800;letter-spacing:-.02em;margin-bottom:6px}
-    .page-sub{font-size:14px;color:#64748b;margin-bottom:36px}
-    .btn-buy{display:inline-flex;align-items:center;gap:8px;background:#3b82f6;color:#fff;border:none;border-radius:10px;padding:12px 22px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:all .2s;margin-bottom:36px}
-    .btn-buy:hover{background:#1d4ed8;transform:translateY(-1px)}
-
-    /* Licences */
-    .section-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#475569;margin-bottom:14px}
-    .empty-state{background:#0d111e;border:1px dashed rgba(255,255,255,.08);border-radius:14px;padding:48px 24px;text-align:center}
-    .empty-state .icon{font-size:36px;margin-bottom:12px}
-    .empty-state p{font-size:14px;color:#64748b;margin-bottom:18px}
-
+    .nav-email{font-size:13px;color:var(--slate);font-weight:500}
+    .btn-logout{background:#fff;border:1px solid var(--line);color:var(--slate);border-radius:8px;padding:8px 15px;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s}
+    .btn-logout:hover{background:#fef2f2;color:#dc2626;border-color:#fecaca}
+    .main{max-width:920px;margin:0 auto;padding:92px 24px 48px}
+    .page-title{font-size:28px;font-weight:800;letter-spacing:-.5px;margin-bottom:6px}
+    .page-sub{font-size:15px;color:var(--slate);margin-bottom:30px}
+    .btn-buy{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;border:none;border-radius:11px;padding:12px 22px;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;transition:all .2s;margin-bottom:36px;box-shadow:0 6px 18px rgba(37,99,235,.26)}
+    .btn-buy:hover{background:var(--blue-dark);transform:translateY(-1px)}
+    .section-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--slate);margin-bottom:14px}
+    .empty-state{background:#fff;border:1px dashed var(--blue-100);border-radius:16px;padding:48px 24px;text-align:center}
+    .empty-state .icon{font-size:38px;margin-bottom:12px}
+    .empty-state p{font-size:14px;color:var(--slate);margin-bottom:18px}
     .licenses-grid{display:grid;gap:14px;margin-bottom:40px}
-    .lic-card{background:#0d111e;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:22px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
-    .lic-info{}
-    .lic-product{font-size:15px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:8px}
-    .lic-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px}
-    .badge-sender{background:rgba(59,130,246,.15);color:#60a5fa}
-    .badge-extractor{background:rgba(16,185,129,.15);color:#34d399}
-    .badge-verifier{background:rgba(168,85,247,.15);color:#c084fc}
-    .badge-suite{background:rgba(245,158,11,.15);color:#fbbf24}
+    .lic-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;box-shadow:0 1px 3px rgba(15,23,42,.05)}
+    .lic-product{font-size:16px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+    .lic-badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:5px;background:var(--blue-50);color:var(--blue)}
     .lic-key-wrap{display:flex;align-items:center;gap:8px;margin-top:6px}
-    .lic-key{font-family:monospace;font-size:13px;color:#94a3b8;background:#070b14;border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:5px 10px;letter-spacing:.04em}
-    .lic-copy{background:none;border:1px solid rgba(255,255,255,.08);color:#64748b;border-radius:5px;padding:4px 9px;font-size:11px;cursor:pointer;transition:all .15s}
-    .lic-copy:hover{background:rgba(255,255,255,.06);color:#f0f4ff}
-    .lic-date{font-size:12px;color:#475569;margin-top:4px}
-
-    /* Commandes */
-    .orders-table{width:100%;border-collapse:collapse;font-size:13px;background:#0d111e;border:1px solid rgba(255,255,255,.07);border-radius:14px;overflow:hidden}
-    .orders-table th{padding:11px 16px;font-size:11px;font-weight:600;color:#475569;text-transform:uppercase;letter-spacing:.05em;text-align:left;background:#0a0e1a;border-bottom:1px solid rgba(255,255,255,.06)}
-    .orders-table td{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle}
+    .lic-key{font-family:monospace;font-size:13px;color:var(--ink);background:var(--blue-50);border:1px solid var(--blue-100);border-radius:7px;padding:6px 12px;letter-spacing:.04em;font-weight:600}
+    .lic-copy{background:#fff;border:1px solid var(--line);color:var(--slate);border-radius:6px;padding:5px 11px;font-size:11px;cursor:pointer;font-weight:600;transition:all .15s}
+    .lic-copy:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+    .lic-date{font-size:12px;color:var(--slate-2);margin-top:6px}
+    .orders-table{width:100%;border-collapse:collapse;font-size:13px;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+    .orders-table th{padding:12px 16px;font-size:11px;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.04em;text-align:left;background:#f8fafc;border-bottom:1px solid var(--line)}
+    .orders-table td{padding:13px 16px;border-bottom:1px solid #f1f5f9;vertical-align:middle}
     .orders-table tr:last-child td{border-bottom:none}
-    .sts{padding:3px 9px;border-radius:4px;font-size:11px;font-weight:700}
-    .sts-pending{background:rgba(245,158,11,.12);color:#f59e0b}
-    .sts-paid{background:rgba(16,185,129,.12);color:#10b981}
-    .sts-expired{background:rgba(100,116,139,.1);color:#64748b}
-
-    .toast{position:fixed;bottom:20px;right:20px;background:#1e293b;border:1px solid #334155;border-radius:8px;padding:10px 16px;font-size:13px;display:none;z-index:999}
-    .loading{text-align:center;padding:48px;color:#475569;font-size:14px}
+    .sts{padding:3px 10px;border-radius:6px;font-size:11px;font-weight:700}
+    .sts-pending{background:#fef3c7;color:#b45309}
+    .sts-paid{background:#dcfce7;color:#15803d}
+    .sts-expired{background:#f1f5f9;color:#64748b}
+    .toast{position:fixed;bottom:20px;right:20px;background:var(--ink);color:#fff;border-radius:10px;padding:11px 18px;font-size:13px;display:none;z-index:999;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+    .loading{text-align:center;padding:48px;color:var(--slate-2);font-size:14px}
   </style>
 </head>
 <body>
@@ -72,21 +62,14 @@
 
 <div class="main" id="main" style="display:none">
   <div class="page-title">Mon espace client</div>
-  <p class="page-sub">Retrouvez toutes vos licences EvoStudio.</p>
-
+  <p class="page-sub">Retrouvez toutes vos licences et commandes EvoStudio.</p>
   <a href="/pay.html" class="btn-buy">🛒 Acheter une nouvelle licence</a>
 
-  <!-- Licences -->
   <div class="section-title">Mes licences</div>
-  <div id="licenses-wrap">
-    <div class="loading">Chargement…</div>
-  </div>
+  <div id="licenses-wrap"><div class="loading">Chargement…</div></div>
 
-  <!-- Commandes -->
   <div class="section-title" style="margin-top:36px">Historique des commandes</div>
-  <div id="orders-wrap">
-    <div class="loading">Chargement…</div>
-  </div>
+  <div id="orders-wrap"><div class="loading">Chargement…</div></div>
 </div>
 
 <div class="loading" id="loading-screen">Chargement de votre espace client…</div>
@@ -94,101 +77,61 @@
 
 <script>
   const API = 'https://admin.evostudio.fr';
-
   const PROD_LABELS = { sender:'📤 EvoSender', extractor:'🔍 EvoExtractor', verifier:'✅ EvoVérificateur', suite:'🌐 Suite complète' };
   const STS_LABELS  = { pending:'En attente', paid:'Payée', expired:'Expirée', cancelled:'Annulée' };
+  const CRYPTO_LABEL = { usdt:'USDT', btc:'BTC', wave:'FCFA' };
 
-  function showToast(msg) {
-    const t = document.getElementById('toast');
-    t.textContent = msg; t.style.display = 'block';
-    setTimeout(() => t.style.display = 'none', 2200);
-  }
+  function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.style.display='block'; setTimeout(()=>t.style.display='none',2200); }
+  function copyKey(key){ navigator.clipboard.writeText(key); showToast('✓ Clé copiée : '+key); }
+  function authHeaders(){ const token=localStorage.getItem('evo_token'); return token?{'Authorization':'Bearer '+token}:{}; }
+  function logout(){ localStorage.removeItem('evo_token'); localStorage.removeItem('evo_email'); location.href='/login.html'; }
 
-  function copyKey(key) {
-    navigator.clipboard.writeText(key);
-    showToast('✓ Clé copiée : ' + key);
-  }
-
-  function authHeaders() {
+  async function load(){
     const token = localStorage.getItem('evo_token');
-    return token ? { 'Authorization': 'Bearer ' + token } : {};
-  }
-
-  function logout() {
-    localStorage.removeItem('evo_token');
-    localStorage.removeItem('evo_email');
-    location.href = '/login.html';
-  }
-
-  async function load() {
-    const token = localStorage.getItem('evo_token');
-    if (!token) { location.href = '/login.html?redirect=/dashboard.html'; return; }
-
-    try {
+    if(!token){ location.href='/login.html?redirect=/dashboard.html'; return; }
+    try{
       const r = await fetch(API + '/api/auth/me', { headers: authHeaders() });
-      if (!r.ok) { logout(); return; }
+      if(!r.ok){ logout(); return; }
       const user = await r.json();
       document.getElementById('nav-email').textContent = user.email;
-    } catch { logout(); return; }
+    }catch{ logout(); return; }
 
-    document.getElementById('loading-screen').style.display = 'none';
-    document.getElementById('main').style.display = 'block';
+    document.getElementById('loading-screen').style.display='none';
+    document.getElementById('main').style.display='block';
 
-    const [ordersR] = await Promise.all([
-      fetch(API + '/api/shop/orders', { headers: authHeaders() })
-    ]);
-
+    const ordersR = await fetch(API + '/api/shop/orders', { headers: authHeaders() });
     const orders = ordersR.ok ? await ordersR.json() : [];
-
-    // Licences = commandes payées avec license_key
     const paidOrders = orders.filter(o => o.status === 'paid' && o.license_key);
 
-    // Afficher licences
     const licWrap = document.getElementById('licenses-wrap');
-    if (paidOrders.length === 0) {
-      licWrap.innerHTML = `<div class="empty-state">
-        <div class="icon">🔑</div>
-        <p>Vous n'avez pas encore de licence.<br/>Achetez un produit pour obtenir votre clé.</p>
-        <a href="/pay.html" class="btn-buy" style="display:inline-flex;margin:0">Acheter maintenant →</a>
-      </div>`;
+    if(paidOrders.length === 0){
+      licWrap.innerHTML = `<div class="empty-state"><div class="icon">🔑</div><p>Vous n'avez pas encore de licence.<br/>Achetez un produit pour obtenir votre clé.</p><a href="/pay.html" class="btn-buy" style="margin:0">Acheter maintenant →</a></div>`;
     } else {
       licWrap.innerHTML = `<div class="licenses-grid">${paidOrders.map(o => `
-        <div class="lic-card">
-          <div class="lic-info">
-            <div class="lic-product">
-              ${PROD_LABELS[o.product] || o.product}
-              <span class="lic-badge badge-${o.product}">Lifetime</span>
-            </div>
-            <div class="lic-key-wrap">
-              <div class="lic-key">${o.license_key}</div>
-              <button class="lic-copy" onclick="copyKey('${o.license_key}')">Copier</button>
-            </div>
-            <div class="lic-date">Achetée le ${new Date(o.paid_at).toLocaleDateString('fr-FR')}</div>
-          </div>
-        </div>
-      `).join('')}</div>`;
+        <div class="lic-card"><div>
+          <div class="lic-product">${PROD_LABELS[o.product] || o.product} <span class="lic-badge">Lifetime</span></div>
+          <div class="lic-key-wrap"><div class="lic-key">${o.license_key}</div><button class="lic-copy" onclick="copyKey('${o.license_key}')">Copier</button></div>
+          <div class="lic-date">Achetée le ${new Date(o.paid_at).toLocaleDateString('fr-FR')}</div>
+        </div></div>`).join('')}</div>`;
     }
 
-    // Afficher commandes
     const ordWrap = document.getElementById('orders-wrap');
-    if (orders.length === 0) {
+    if(orders.length === 0){
       ordWrap.innerHTML = `<div class="empty-state"><div class="icon">📦</div><p>Aucune commande.</p></div>`;
     } else {
       ordWrap.innerHTML = `<table class="orders-table">
         <thead><tr><th>#</th><th>Produit</th><th>Montant</th><th>Statut</th><th>Date</th></tr></thead>
         <tbody>${orders.map(o => `
           <tr>
-            <td style="color:#475569">#${o.id}</td>
+            <td style="color:var(--slate-2)">#${o.id}</td>
             <td>${PROD_LABELS[o.product] || o.product}</td>
-            <td style="font-family:monospace">${o.price_exact} ${o.crypto === 'usdt' ? 'USDT' : 'BTC'}</td>
+            <td style="font-family:monospace">${o.price_exact} ${CRYPTO_LABEL[o.crypto] || ''}</td>
             <td><span class="sts sts-${o.status}">${STS_LABELS[o.status] || o.status}</span></td>
-            <td style="color:#475569">${new Date(o.created_at).toLocaleDateString('fr-FR')}</td>
-          </tr>
-        `).join('')}</tbody>
+            <td style="color:var(--slate-2)">${new Date(o.created_at).toLocaleDateString('fr-FR')}</td>
+          </tr>`).join('')}</tbody>
       </table>`;
     }
   }
-
   load();
 </script>
 </body>
