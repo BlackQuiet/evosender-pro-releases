@@ -244,10 +244,17 @@
         document.getElementById('pay-sub').textContent =
           `Envoyez exactement ${montant} FCFA via Wave au numéro ci-dessous`;
 
-        // QR Wave (lien de paiement officiel)
+        // QR Wave : utilise le vrai lien Wave si fourni, sinon le numéro brut
         document.getElementById('qrcode').innerHTML = '';
-        const waveUrl = 'https://pay.wave.com/m/' + encodeURIComponent(d.address) + '/c/ci/?amount=' + Math.round(d.price_exact);
+        const waveUrl = (d.wave_link && d.wave_link.trim()) ? d.wave_link.trim() : d.address;
         new QRCode(document.getElementById('qrcode'), { text: waveUrl, width: 160, height: 160 });
+        if (d.wave_link && d.wave_link.trim()) {
+          const a = document.createElement('a');
+          a.href = d.wave_link.trim(); a.target = '_blank';
+          a.textContent = '🌊 Ouvrir Wave';
+          a.style.cssText = 'display:block;text-align:center;margin:-8px 0 16px;color:#06b6d4;font-weight:700;font-size:13px';
+          document.getElementById('qrcode').after(a);
+        }
 
         document.querySelector('.warning').innerHTML =
           '🌊 Ouvrez l\'app <strong>Wave</strong> et envoyez <strong>exactement ' + montant + ' FCFA</strong> au numéro ' +
