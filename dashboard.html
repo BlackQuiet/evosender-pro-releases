@@ -29,6 +29,11 @@
     .empty-state p{font-size:14px;color:var(--slate);margin-bottom:18px}
     .licenses-grid{display:grid;gap:14px;margin-bottom:40px}
     .lic-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;box-shadow:0 1px 3px rgba(15,23,42,.05)}
+    .lic-card-full{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 24px;box-shadow:0 1px 3px rgba(15,23,42,.05)}
+    .lic-top{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #f1f5f9}
+    .dl-btn{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#fff;text-decoration:none;border-radius:10px;padding:11px 20px;font-size:14px;font-weight:700;transition:all .2s;box-shadow:0 6px 16px rgba(37,99,235,.26)}
+    .dl-btn:hover{background:var(--blue-dark);transform:translateY(-1px)}
+    .lic-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--slate);margin-bottom:8px}
     .lic-product{font-size:16px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px}
     .lic-badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:5px;background:var(--blue-50);color:var(--blue)}
     .lic-key-wrap{display:flex;align-items:center;gap:8px;margin-top:6px}
@@ -99,6 +104,10 @@
     document.getElementById('loading-screen').style.display='none';
     document.getElementById('main').style.display='block';
 
+    // Lien de téléchargement (configurable dans l'admin)
+    let downloadUrl = 'https://github.com/BlackQuiet/evosender-pro-releases/releases/latest';
+    try { const pr = await fetch(API + '/api/shop/products'); if(pr.ok){ const pd = await pr.json(); if(pd.site && pd.site.download_url) downloadUrl = pd.site.download_url; } } catch {}
+
     const ordersR = await fetch(API + '/api/shop/orders', { headers: authHeaders() });
     const orders = ordersR.ok ? await ordersR.json() : [];
     const paidOrders = orders.filter(o => o.status === 'paid' && o.license_key);
@@ -108,11 +117,15 @@
       licWrap.innerHTML = `<div class="empty-state"><div class="icon">🔑</div><p>Vous n'avez pas encore de licence.<br/>Achetez un produit pour obtenir votre clé.</p><a href="/pay.html" class="btn-buy" style="margin:0">Acheter maintenant →</a></div>`;
     } else {
       licWrap.innerHTML = `<div class="licenses-grid">${paidOrders.map(o => `
-        <div class="lic-card"><div>
-          <div class="lic-product">${PROD_LABELS[o.product] || o.product} <span class="lic-badge">Lifetime</span></div>
+        <div class="lic-card-full">
+          <div class="lic-top">
+            <div class="lic-product">${PROD_LABELS[o.product] || o.product}${(o.quantity>1)?` <span class="lic-badge">${o.quantity} PC</span>`:' <span class="lic-badge">Lifetime</span>'}</div>
+            <a href="${downloadUrl}" target="_blank" rel="noopener" class="dl-btn">⬇ Télécharger EvoStudio</a>
+          </div>
+          <div class="lic-label">Votre clé de licence</div>
           <div class="lic-key-wrap"><div class="lic-key">${o.license_key}</div><button class="lic-copy" onclick="copyKey('${o.license_key}')">Copier</button></div>
           <div class="lic-date">Achetée le ${new Date(o.paid_at).toLocaleDateString('fr-FR')}</div>
-        </div></div>`).join('')}</div>`;
+        </div>`).join('')}</div>`;
     }
 
     const ordWrap = document.getElementById('orders-wrap');
