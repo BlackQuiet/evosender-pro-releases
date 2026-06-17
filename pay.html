@@ -131,6 +131,9 @@
           </div>
           <div class="pill-btn" data-crypto="wave" id="btn-wave" onclick="selectCrypto(this)" style="display:none">🌊 Wave</div>
           <div class="pill-btn" data-crypto="om" id="btn-om" onclick="selectCrypto(this)" style="display:none">🟠 Orange Money</div>
+          <div id="btn-card" style="display:none;flex:1;min-width:120px;align-items:center;justify-content:center;gap:7px;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:12px;padding:12px;font-size:13px;font-weight:600;color:#94a3b8;cursor:not-allowed;opacity:.7" title="Visa/Mastercard — non disponible actuellement">
+            💳 Visa / Mastercard<br><span style="font-size:10px;font-weight:500;background:#fef2f2;color:#ef4444;border-radius:6px;padding:1px 6px;margin-top:2px;display:inline-block">Non disponible</span>
+          </div>
         </div>
 
         <div class="mini-label">Email de facturation</div>
@@ -292,14 +295,24 @@
     async function applyRegion(data){
       const isAfrica = await detectAfrica();
       const waveOn = data.wave_enabled, omOn = data.om_enabled;
-      const setShow = (id,on)=>{ const e=document.getElementById(id); if(e) e.style.display = on ? 'flex' : 'none'; };
-      if (isAfrica && (waveOn || omOn)) {
-        setShow('btn-usdt', false); setShow('btn-btc', false);
-        setShow('btn-wave', waveOn); setShow('btn-om', omOn);
-        selectedCrypto = waveOn ? 'wave' : 'om';
+      const show = (id, flex) => { const e = document.getElementById(id); if (e) e.style.display = flex ? 'flex' : 'none'; };
+
+      // USDT + BTC toujours visibles
+      show('btn-usdt', true);
+      show('btn-btc', true);
+      // Visa/Mastercard "non dispo" toujours affiché (dans les deux zones)
+      show('btn-card', true);
+
+      if (isAfrica) {
+        // Afrique : ajouter Wave et Orange Money si configurés
+        show('btn-wave', waveOn);
+        show('btn-om', omOn);
+        // Par défaut : Wave si dispo, sinon OM, sinon USDT
+        selectedCrypto = waveOn ? 'wave' : (omOn ? 'om' : 'usdt');
       } else {
-        setShow('btn-usdt', true); setShow('btn-btc', true);
-        setShow('btn-wave', false); setShow('btn-om', false);
+        // Hors Afrique : masquer Wave/OM
+        show('btn-wave', false);
+        show('btn-om', false);
         selectedCrypto = 'usdt';
       }
       document.querySelectorAll(".pill-btn").forEach(b => b.classList.toggle('active', b.dataset.crypto === selectedCrypto));
