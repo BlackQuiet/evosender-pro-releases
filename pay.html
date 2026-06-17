@@ -106,7 +106,10 @@
         <p class="sub">Choisissez le produit et le moyen de paiement.</p>
 
         <div class="mini-label" id="product-label">Produit</div>
-        <div class="product-list" id="product-grid"></div>
+        <div id="product-grid"></div>
+        <select id="product-select" onchange="selectProductFromDropdown(this)" style="display:none;width:100%;background:#f8fafc;border:1.5px solid var(--line);color:var(--ink);border-radius:12px;padding:12px 14px;font-size:14px;font-weight:600;outline:none;font-family:inherit;cursor:pointer;transition:.2s">
+          <option value="">— Choisir un produit —</option>
+        </select>
 
         <div class="mini-label" id="qty-label">Ordinateurs (PC)</div>
         <div class="mini-row" id="qty-section">
@@ -331,41 +334,50 @@
         return;
       }
 
-      // Pas de pré-sélection : grille 2×2 compacte
+      // Pas de pré-sélection : dropdown compact
       if (label) label.style.display = '';
+      grid.style.display = 'none';
+      const sel = document.getElementById('product-select');
+      sel.style.display = '';
       const softProds = products.filter(p => !isSmtp(p.id));
       const smtpProds = products.filter(p => isSmtp(p.id));
-      let html = softProds.map(p => {
-        const ic = PROD_ICONS[p.id] || PROD_ICONS.sender;
-        return '<div class="prod-btn" data-product="' + p.id + '" onclick="selectProduct(this)">' +
-          '<div class="prod-left"><div class="prod-ic ' + ic.cls + '">' + ic.svg + '</div>' +
-          '<div class="prod-name">' + p.name + '</div></div>' +
-          '<div class="prod-price" id="pp-' + p.id + '">' + priceLabel(p) + '</div>' +
-          '</div>';
-      }).join('');
+      let opts = '<option value="">— Choisir un produit —</option>';
+      opts += '<optgroup label="Logiciels">';
+      opts += softProds.map(p => '<option value="' + p.id + '">' + p.name + ' — ' + unitPrice(p) + (selectedCrypto==='btc'?' BTC':selectedCrypto==='wave'?' FCFA':' USDT') + ' / PC</option>').join('');
+      opts += '</optgroup>';
       if (smtpProds.length) {
-        html += '<div style="grid-column:1/-1;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#7c3aed;margin-top:6px">🖥 Serveurs SMTP</div>';
-        html += smtpProds.map(p => {
+        opts += '<optgroup label="Serveurs SMTP Relay">';
+        opts += smtpProds.map(p => {
           const vol = VOL_LABELS[p.id] || (p.volume||'').toLocaleString('fr-FR');
-          return '<div class="prod-btn" data-product="' + p.id + '" onclick="selectProduct(this)">' +
-            '<div class="prod-left"><div class="prod-ic purple">' + PROD_ICONS.smtp.svg + '</div>' +
-            '<div class="prod-name">' + p.name + '</div></div>' +
-            '<div class="prod-price" id="pp-' + p.id + '">' + priceLabel(p) + '</div>' +
-            '<div style="font-size:10px;color:#7c3aed;padding-left:36px;margin-top:-2px">' + vol + ' e/mois</div>' +
-            '</div>';
+          return '<option value="' + p.id + '">' + p.name + ' (' + vol + ' e/mois) — ' + unitPrice(p) + ' USDT / mois</option>';
         }).join('');
+        opts += '</optgroup>';
       }
-      grid.innerHTML = html;
+      sel.innerHTML = opts;
+      sel.value = '';
     }
 
     function selectProduct(el) {
       document.querySelectorAll('.prod-btn').forEach(b => b.classList.remove('active'));
       el.classList.add('active');
       selectedProduct = el.dataset.product;
-      // Masquer le sélecteur de quantité pour les plans SMTP (toujours 1 serveur)
       const qtySection = document.getElementById('qty-section');
-      if (qtySection) qtySection.style.display = isSmtp(selectedProduct) ? 'none' : '';
+      const qtyLabel   = document.getElementById('qty-label');
+      const smtp = isSmtp(selectedProduct);
+      if (qtySection) qtySection.style.display = smtp ? 'none' : '';
+      if (qtyLabel)   qtyLabel.style.display   = smtp ? 'none' : '';
       document.getElementById('btn-proceed').disabled = false;
+      updateTotal();
+    }
+
+    function selectProductFromDropdown(sel) {
+      selectedProduct = sel.value;
+      const smtp = isSmtp(selectedProduct);
+      const qtySection = document.getElementById('qty-section');
+      const qtyLabel   = document.getElementById('qty-label');
+      if (qtySection) qtySection.style.display = (!selectedProduct || smtp) ? 'none' : '';
+      if (qtyLabel)   qtyLabel.style.display   = (!selectedProduct || smtp) ? 'none' : '';
+      document.getElementById('btn-proceed').disabled = !selectedProduct;
       updateTotal();
     }
 
@@ -373,7 +385,15 @@
       document.querySelectorAll(".pill-btn").forEach(b => b.classList.remove('active'));
       el.classList.add('active');
       selectedCrypto = el.dataset.crypto;
-      renderProducts();
+      // Rafraîchir les prix dans le dropdown si visible
+      const sel = document.getElementById('product-select');
+      if (sel && sel.style.display !== 'none') {
+        const saved = selectedProduct;
+        renderProducts();
+        if (saved) { sel.value = saved; selectedProduct = saved; }
+      } else {
+        renderProducts();
+      }
       updateTotal();
     }
 
