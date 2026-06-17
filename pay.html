@@ -56,6 +56,8 @@
     .pay-logo{width:20px;height:20px}
     .pill-net{font-size:10px;font-weight:700;background:#fee2e2;color:#b91c1c;padding:1px 6px;border-radius:20px}
 
+    #invoice-email{width:100%;background:#f8fafc;border:1.5px solid var(--line);color:var(--ink);border-radius:12px;padding:12px 14px;font-size:14px;outline:none;font-family:inherit;transition:.2s}
+    #invoice-email:focus{border-color:var(--blue);background:#fff;box-shadow:0 0 0 4px rgba(37,99,235,.08)}
     .total-row{display:flex;align-items:center;justify-content:space-between;border-top:1.5px dashed var(--line);margin-top:24px;padding-top:18px;font-size:14px;color:var(--slate)}
     .total-row strong{font-size:25px;color:var(--ink);font-weight:900;letter-spacing:-.5px}
 
@@ -126,6 +128,10 @@
           <div class="pill-btn" data-crypto="wave" id="btn-wave" onclick="selectCrypto(this)" style="display:none">🌊 Wave</div>
           <div class="pill-btn" data-crypto="om" id="btn-om" onclick="selectCrypto(this)" style="display:none">🟠 Orange Money</div>
         </div>
+
+        <div class="mini-label">Email de facturation</div>
+        <input type="email" id="invoice-email" placeholder="vous@exemple.com" />
+        <div style="font-size:12px;color:var(--slate);margin-top:6px">Vous recevrez votre facture et votre licence à cette adresse après validation.</div>
 
         <div class="total-row" id="total-row" style="display:none">
           <span>Total à payer</span>
@@ -224,6 +230,9 @@
       try {
         const r = await fetch(API + '/api/auth/me', { headers: authHeaders() });
         if (!r.ok) { location.href = '/login.html?redirect=' + encodeURIComponent(location.href); return; }
+        const u = await r.json();
+        const ie = document.getElementById('invoice-email');
+        if (ie && u.email) ie.value = u.email; // pré-rempli avec l'email du compte
       } catch { return; }
 
       try {
@@ -309,7 +318,7 @@
         const r = await fetch(API + '/api/shop/order', {
           method: 'POST',
           headers: authHeaders(),
-          body: JSON.stringify({ product: selectedProduct, crypto: selectedCrypto, quantity })
+          body: JSON.stringify({ product: selectedProduct, crypto: selectedCrypto, quantity, invoice_email: (document.getElementById('invoice-email')?.value || '').trim() })
         });
         const d = await r.json();
         if (!r.ok) {
