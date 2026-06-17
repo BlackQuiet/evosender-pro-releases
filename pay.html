@@ -288,7 +288,8 @@
     const VOL_LABELS = {smtp_10k:'10 000',smtp_50k:'50 000',smtp_100k:'100 000',smtp_500k:'500 000'};
     function priceLabel(p) {
       const suffix = isSmtp(p.id) ? ' <span style="opacity:.6">/ mois</span>' : ' <span style="opacity:.6">/ PC</span>';
-      return fmtAmount(unitPrice(p)) + suffix;
+      const unit = selectedCrypto === 'btc' ? ' BTC' : ' USD';
+      return unitPrice(p) + unit + suffix;
     }
 
     const PROD_ICONS = {
@@ -343,7 +344,7 @@
       const smtpProds = products.filter(p => isSmtp(p.id));
       let opts = '<option value="">— Choisir un produit —</option>';
       opts += '<optgroup label="Logiciels">';
-      opts += softProds.map(p => '<option value="' + p.id + '">' + p.name + ' — ' + unitPrice(p) + (selectedCrypto==='btc'?' BTC':selectedCrypto==='wave'?' FCFA':' USDT') + ' / PC</option>').join('');
+      opts += softProds.map(p => '<option value="' + p.id + '">' + p.name + ' — ' + unitPrice(p) + (selectedCrypto==='btc'?' BTC':' USD') + ' / PC</option>').join('');
       opts += '</optgroup>';
       if (smtpProds.length) {
         opts += '<optgroup label="Serveurs SMTP Relay">';
