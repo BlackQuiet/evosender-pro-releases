@@ -470,16 +470,24 @@
           clearInterval(pollInterval);
           const box = document.getElementById('status-box');
           box.className = 'status-box status-paid';
-          box.innerHTML = `
-            <div style="font-size:22px;margin-bottom:8px">🎉</div>
-            <div style="font-size:15px;font-weight:700;color:#16a34a">Paiement confirmé !</div>
-            <div style="font-size:13px;color:#64748b;margin:6px 0 10px">Votre licence est prête :</div>
-            <div class="lic-key">${d.license_key}</div>
-            <div style="margin-top:14px">
-              <button onclick="navigator.clipboard.writeText('${d.license_key}')" style="background:#dcfce7;border:1px solid #bbf7d0;color:#15803d;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer">Copier la licence</button>
-              <a href="/dashboard.html" style="display:inline-block;margin-left:8px;background:#2563eb;color:#fff;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;text-decoration:none">Mon espace client →</a>
-            </div>
-          `;
+          const isSmtpOrder = isSmtp(d.product || selectedProduct || '');
+          if (isSmtpOrder) {
+            box.innerHTML =
+              '<div style="font-size:22px;margin-bottom:8px">🎉</div>' +
+              '<div style="font-size:15px;font-weight:700;color:#16a34a">Paiement confirmé !</div>' +
+              '<div style="font-size:13px;color:#64748b;margin:10px 0 14px;line-height:1.6">Votre serveur SMTP est en cours de provisioning.<br>Vous recevrez vos identifiants relay par <strong>email dans les 24h</strong>.</div>' +
+              '<a href="/dashboard.html" style="display:inline-block;background:#2563eb;color:#fff;border-radius:8px;padding:10px 18px;font-size:13px;font-weight:700;text-decoration:none">Voir mes serveurs SMTP →</a>';
+          } else {
+            box.innerHTML =
+              '<div style="font-size:22px;margin-bottom:8px">🎉</div>' +
+              '<div style="font-size:15px;font-weight:700;color:#16a34a">Paiement confirmé !</div>' +
+              '<div style="font-size:13px;color:#64748b;margin:6px 0 10px">Votre licence est prête :</div>' +
+              '<div class="lic-key">' + d.license_key + '</div>' +
+              '<div style="margin-top:14px">' +
+              '<button onclick="navigator.clipboard.writeText(\'' + d.license_key + '\')" style="background:#dcfce7;border:1px solid #bbf7d0;color:#15803d;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer">Copier la licence</button>' +
+              '<a href="/dashboard.html" style="display:inline-block;margin-left:8px;background:#2563eb;color:#fff;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;text-decoration:none">Mon espace client →</a>' +
+              '</div>';
+          }
         } else if (d.status === 'expired') {
           clearInterval(pollInterval);
           document.getElementById('status-text').textContent = '⏱ Commande expirée. Actualisez pour recommencer.';
