@@ -190,14 +190,22 @@
     let orderId = null;
     let pollInterval = null;
     let products = [];
+    let usdXofRate = 600;  // mis à jour depuis l'API
+    let discountPct = 0;   // % de remise globale
 
     function isSmtp(id){ return (id||'').startsWith('smtp_'); }
     function curProduct(){ return products.find(p => p.id === selectedProduct); }
     function unitPrice(p){
-      if(selectedCrypto === 'wave') return Number(p.price_wave) || 0;
-      if(selectedCrypto === 'om')   return Number(p.price_om) || 0;
+      // Les prix FCFA sont calculés ici dynamiquement depuis le taux actuel
+      if(selectedCrypto === 'wave' || selectedCrypto === 'om') return Math.round(Number(p.price_usdt) * usdXofRate);
       if(selectedCrypto === 'btc')  return Number(p.price_btc) || 0;
       return Number(p.price_usdt) || 0;
+    }
+    function unitPriceOriginal(p){
+      // Prix sans remise (pour affichage barré)
+      if(selectedCrypto === 'wave' || selectedCrypto === 'om') return Math.round(Number(p.price_usdt) * usdXofRate / (1 - discountPct/100));
+      if(selectedCrypto === 'btc') return Number(p.price_btc) || 0;
+      return Number(p.price_usdt_original || p.price_usdt) || 0;
     }
     function fmtAmount(v){
       if(selectedCrypto === 'btc') return v + ' BTC';
@@ -217,7 +225,16 @@
       row.style.display='flex';
       const qty = isSmtp(p.id) ? 1 : quantity;
       const total = (selectedCrypto === 'btc') ? +(unitPrice(p) * qty).toFixed(8) : Math.round(unitPrice(p) * qty * 100)/100;
-      let html = fmtAmount(total);
+      let html = '';
+      // Afficher l'ancien prix barré si remise
+      if (discountPct > 0 && selectedCrypto !== 'btc') {
+        const orig = FIAT.includes(selectedCrypto)
+          ? Math.round(unitPriceOriginal(p) * qty)
+          : Math.round(unitPriceOriginal(p) * qty * 100) / 100;
+        html += '<span style="text-decoration:line-through;color:var(--slate);font-size:14px;font-weight:500;margin-right:6px">' + fmtAmount(orig) + '</span>';
+      }
+      html += fmtAmount(total);
+      if (discountPct > 0) html += ' <span style="background:#dc2626;color:#fff;font-size:10px;font-weight:800;padding:2px 6px;border-radius:10px;margin-left:6px">-' + discountPct + '%</span>';
       if (selectedCrypto === 'btc') {
         const usd = (Number(p.price_usdt) || 0) * qty;
         html += ' <span style="font-size:13px;color:var(--slate);font-weight:600;white-space:nowrap">≈ $' + usd + '</span>';
@@ -245,6 +262,9 @@
         const r = await fetch(API + '/api/shop/products');
         if (r.ok) {
           const data = await r.json();
+          // Stocker le taux et la remise globaux
+          usdXofRate = Number(data.usd_xof_rate) || 600;
+          discountPct = Number(data.discount_pct) || 0;
           // Fusionner produits logiciels + plans SMTP
           products = [...data.products, ...(data.smtp_plans || [])];
           // Pré-sélection depuis l'URL (?product=sender / ?product=smtp_50k etc.)
@@ -288,8 +308,15 @@
     const VOL_LABELS = {smtp_10k:'10 000',smtp_50k:'50 000',smtp_100k:'100 000',smtp_500k:'500 000'};
     function priceLabel(p) {
       const suffix = isSmtp(p.id) ? ' <span style="opacity:.6">/ mois</span>' : ' <span style="opacity:.6">/ PC</span>';
-      const unit = selectedCrypto === 'btc' ? ' BTC' : ' USD';
-      return unitPrice(p) + unit + suffix;
+      const unit = selectedCrypto === 'btc' ? ' BTC' : (FIAT.includes(selectedCrypto) ? ' FCFA' : ' USD');
+      let html = '';
+      if (discountPct > 0 && selectedCrypto !== 'btc') {
+        const orig = FIAT.includes(selectedCrypto) ? Math.round(unitPriceOriginal(p)) : unitPriceOriginal(p);
+        html += '<span style="text-decoration:line-through;opacity:.5;font-size:.8em;font-weight:500;margin-right:4px">' + orig + unit + '</span>';
+      }
+      html += unitPrice(p) + unit + suffix;
+      if (discountPct > 0) html += ' <span style="background:#dc2626;color:#fff;font-size:9px;font-weight:800;padding:1px 5px;border-radius:8px;margin-left:3px">-' + discountPct + '%</span>';
+      return html;
     }
 
     const PROD_ICONS = {

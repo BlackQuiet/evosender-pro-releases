@@ -441,6 +441,19 @@ async function loadProducts(){
       }).join('');
     }
 
+    const discount = Number(data.discount_pct) || 0;
+    function discountedPrice(orig) { return discount > 0 ? Math.round(orig * (1 - discount/100) * 100)/100 : orig; }
+    function priceHtml(orig, suffix) {
+      if(discount > 0) {
+        const newP = discountedPrice(orig);
+        return `<span style="text-decoration:line-through;color:#94a3b8;font-size:0.65em;font-weight:600">${orig}</span> ${newP} <span>${suffix}</span>`;
+      }
+      return `${orig} <span>${suffix}</span>`;
+    }
+    function discountBadge() {
+      return discount > 0 ? `<div style="display:inline-block;background:#dc2626;color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:20px;margin-bottom:6px">-${discount}%</div>` : '';
+    }
+
     const pgrid = document.getElementById('pricing-grid');
     if(pgrid){
       pgrid.innerHTML = main.map(p => {
@@ -451,7 +464,8 @@ async function loadProducts(){
           ${featured ? '<div class="price-badge">⭐ Le plus populaire</div>' : ''}
           <div class="price-head"><div class="price-ic ${ic.cls}">${ic.svg}</div><div class="price-name">${p.name}</div></div>
           <p class="price-desc">${(p.description||'').substring(0,60)}…</p>
-          <div class="price-amount">${p.price_usdt} <span>USD</span></div>
+          ${discountBadge()}
+          <div class="price-amount">${priceHtml(p.price_usdt, 'USD')}</div>
           <p class="price-period">ou ${p.price_btc} BTC · Paiement unique · Licence à vie</p>
           <ul class="price-feats">${p.features.map(f => `<li><span class="ck">✓</span> ${f}</li>`).join('')}</ul>
           <a href="/pay.html?product=${p.id}" class="btn ${featured ? 'btn-primary' : 'btn-ghost'}" style="justify-content:center">Acheter ${p.name}</a>
@@ -462,7 +476,9 @@ async function loadProducts(){
       const ctaEl = document.getElementById('suite-cta');
       if(suite && ctaEl){
         ctaEl.style.display = 'block';
-        ctaEl.innerHTML = `🎁 <strong>${suite.name}</strong> — les 3 outils à <strong style="color:var(--blue)">${suite.price_usdt} USDT</strong> · <a href="/pay.html?product=suite" style="color:var(--blue);font-weight:700">Acheter la suite →</a>`;
+        const suitePrice = discountedPrice(suite.price_usdt);
+        const suiteOld = discount > 0 ? `<span style="text-decoration:line-through;color:#94a3b8;font-size:13px">${suite.price_usdt}</span> ` : '';
+        ctaEl.innerHTML = `🎁 <strong>${suite.name}</strong> — les 3 outils à ${suiteOld}<strong style="color:var(--blue)">${suitePrice} USD</strong>${discount > 0 ? ' <span style="background:#dc2626;color:#fff;font-size:10px;font-weight:800;padding:2px 6px;border-radius:10px;margin-left:4px">-'+discount+'%</span>' : ''} · <a href="/pay.html?product=suite" style="color:var(--blue);font-weight:700">Acheter la suite →</a>`;
       }
     }
     // ── Section SMTP (si activée par l'admin) ─────────────────
@@ -476,11 +492,14 @@ async function loadProducts(){
       smtpGrid.innerHTML = smtpPlans.map(p => {
         const vol = VOLUME_LABELS[p.id] || p.volume.toLocaleString('fr-FR');
         const isPopular = p.id === POPULAR;
+        const smtpNew = discountedPrice(p.price_usdt);
+        const smtpOldHtml = discount > 0 ? `<span style="text-decoration:line-through;color:#94a3b8;font-size:14px;font-weight:600">${p.price_usdt}</span> ` : '';
         return `
         <div style="background:#fff;border-radius:18px;padding:28px 20px;border:${isPopular?'2px solid #7c3aed':'1px solid #e2e8f0'};position:relative;text-align:center">
           ${isPopular ? '<div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,#7c3aed,#2563eb);color:#fff;font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px">⭐ Populaire</div>' : ''}
+          ${discount > 0 ? '<div style="display:inline-block;background:#dc2626;color:#fff;font-size:10px;font-weight:800;padding:2px 8px;border-radius:20px;margin-bottom:6px">-'+discount+'%</div>' : ''}
           <div style="font-size:13px;font-weight:700;color:#7c3aed;margin-bottom:8px">📧 ${vol} emails/mois</div>
-          <div style="font-size:32px;font-weight:800;color:#0f172a">${p.price_usdt} <span style="font-size:16px;font-weight:400;color:#64748b">USD/mois</span></div>
+          <div style="font-size:32px;font-weight:800;color:#0f172a">${smtpOldHtml}${smtpNew} <span style="font-size:16px;font-weight:400;color:#64748b">USD/mois</span></div>
           <div style="font-size:11px;color:#94a3b8;margin:6px 0 16px">≈ ${p.price_btc} BTC</div>
           <ul style="list-style:none;padding:0;margin:0 0 18px;text-align:left">
             <li style="font-size:13px;color:#334155;padding:4px 0">✓ Relay SMTP ${data.smtp_relay_host||'smtp.exabytes.com'}</li>
