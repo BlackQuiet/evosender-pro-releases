@@ -29,18 +29,19 @@
     .sub{font-size:14px;color:var(--slate);margin-bottom:22px}
     .mini-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--slate);margin:20px 0 10px}
 
-    .product-list{display:flex;flex-direction:column;gap:8px}
-    .prod-btn{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:13px 15px;cursor:pointer;transition:.15s}
+    /* Grille produits compacte */
+    .product-list{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .prod-btn{display:flex;flex-direction:column;align-items:flex-start;gap:6px;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:11px 13px;cursor:pointer;transition:.15s;min-width:0}
     .prod-btn:hover{border-color:var(--blue-100);background:#fafcff}
     .prod-btn.active{border-color:var(--blue);background:var(--blue-50);box-shadow:0 0 0 3px rgba(37,99,235,.10)}
-    .prod-left{display:flex;align-items:center;gap:12px}
-    .prod-ic{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--blue-50)}
-    .prod-ic svg{width:18px;height:18px;stroke:var(--blue);fill:none;stroke-width:1.6}
+    .prod-left{display:flex;align-items:center;gap:8px;width:100%}
+    .prod-ic{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--blue-50)}
+    .prod-ic svg{width:14px;height:14px;stroke:var(--blue);fill:none;stroke-width:1.8}
     .prod-ic.green{background:#dcfce7}.prod-ic.green svg{stroke:#16a34a}
     .prod-ic.purple{background:#f3e8ff}.prod-ic.purple svg{stroke:#9333ea}
     .prod-ic.amber{background:#fef3c7}.prod-ic.amber svg{stroke:#d97706}
-    .prod-name{font-size:14.5px;font-weight:700}
-    .prod-price{font-size:13px;color:var(--blue);font-weight:700;white-space:nowrap}
+    .prod-name{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .prod-price{font-size:12px;color:var(--blue);font-weight:700;padding-left:36px}
 
     .mini-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
     .qty-hint{font-size:12px;color:var(--slate)}
@@ -330,24 +331,28 @@
         return;
       }
 
-      // Pas de pré-sélection : afficher tous les produits sous forme de liste cliquable
+      // Pas de pré-sélection : grille 2×2 compacte
       if (label) label.style.display = '';
       const softProds = products.filter(p => !isSmtp(p.id));
       const smtpProds = products.filter(p => isSmtp(p.id));
       let html = softProds.map(p => {
         const ic = PROD_ICONS[p.id] || PROD_ICONS.sender;
         return '<div class="prod-btn" data-product="' + p.id + '" onclick="selectProduct(this)">' +
-          '<div class="prod-left"><div class="prod-ic ' + ic.cls + '">' + ic.svg + '</div><div class="prod-name">' + p.name + '</div></div>' +
-          '<div class="prod-price" id="pp-' + p.id + '">' + priceLabel(p) + '</div></div>';
+          '<div class="prod-left"><div class="prod-ic ' + ic.cls + '">' + ic.svg + '</div>' +
+          '<div class="prod-name">' + p.name + '</div></div>' +
+          '<div class="prod-price" id="pp-' + p.id + '">' + priceLabel(p) + '</div>' +
+          '</div>';
       }).join('');
       if (smtpProds.length) {
-        html += '<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#7c3aed;margin:14px 0 6px">🖥 Serveurs SMTP relay</div>';
+        html += '<div style="grid-column:1/-1;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#7c3aed;margin-top:6px">🖥 Serveurs SMTP</div>';
         html += smtpProds.map(p => {
           const vol = VOL_LABELS[p.id] || (p.volume||'').toLocaleString('fr-FR');
           return '<div class="prod-btn" data-product="' + p.id + '" onclick="selectProduct(this)">' +
             '<div class="prod-left"><div class="prod-ic purple">' + PROD_ICONS.smtp.svg + '</div>' +
-            '<div><div class="prod-name">' + p.name + '</div><div style="font-size:11px;color:#7c3aed">' + vol + ' emails/mois</div></div></div>' +
-            '<div class="prod-price" id="pp-' + p.id + '">' + priceLabel(p) + '</div></div>';
+            '<div class="prod-name">' + p.name + '</div></div>' +
+            '<div class="prod-price" id="pp-' + p.id + '">' + priceLabel(p) + '</div>' +
+            '<div style="font-size:10px;color:#7c3aed;padding-left:36px;margin-top:-2px">' + vol + ' e/mois</div>' +
+            '</div>';
         }).join('');
       }
       grid.innerHTML = html;
