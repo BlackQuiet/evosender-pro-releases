@@ -104,7 +104,7 @@
         <h1>Votre commande</h1>
         <p class="sub">Choisissez le produit et le moyen de paiement.</p>
 
-        <div class="mini-label">Produit</div>
+        <div class="mini-label" id="product-label">Produit</div>
         <div class="product-list" id="product-grid"></div>
 
         <div class="mini-label" id="qty-label">Ordinateurs (PC)</div>
@@ -296,12 +296,47 @@
     };
     function renderProducts() {
       const grid = document.getElementById('product-grid');
-      // Séparer produits logiciels et plans SMTP
+      const label = document.getElementById('product-label');
+
+      // Si un produit est pré-sélectionné via URL : afficher uniquement ce produit en carte récap
+      if (selectedProduct) {
+        const p = curProduct();
+        if (!p) return;
+        const smtp = isSmtp(p.id);
+        const ic = smtp ? PROD_ICONS.smtp : (PROD_ICONS[p.id] || PROD_ICONS.sender);
+        const vol = smtp ? (VOL_LABELS[p.id] || (p.volume||'').toLocaleString('fr-FR')) : '';
+        if (label) label.style.display = 'none';
+        grid.innerHTML =
+          '<div style="display:flex;align-items:center;gap:14px;background:var(--blue-50);border:2px solid var(--blue);border-radius:16px;padding:16px 18px;margin-bottom:4px">' +
+            '<div class="prod-ic ' + ic.cls + '" style="flex-shrink:0">' + ic.svg + '</div>' +
+            '<div style="flex:1">' +
+              '<div style="font-size:15px;font-weight:800;color:var(--ink)">' + p.name + '</div>' +
+              (smtp ? '<div style="font-size:12px;color:#7c3aed;margin-top:2px">🖥 ' + vol + ' emails/mois</div>' : '') +
+            '</div>' +
+            '<div style="text-align:right">' +
+              '<div id="pp-' + p.id + '" style="font-size:16px;font-weight:800;color:var(--blue)">' + priceLabel(p) + '</div>' +
+              (!smtp ? '<div style="font-size:11px;color:var(--slate);margin-top:2px">Licence à vie</div>' : '<div style="font-size:11px;color:var(--slate);margin-top:2px">Abonnement mensuel</div>') +
+            '</div>' +
+          '</div>' +
+          '<a href="javascript:history.back()" style="font-size:12px;color:var(--slate);display:inline-block;margin-top:6px;text-decoration:none">← Changer de produit</a>';
+
+        // Masquer qty pour SMTP
+        const qtySection = document.getElementById('qty-section');
+        const qtyLabel = document.getElementById('qty-label');
+        if (smtp) {
+          if (qtySection) qtySection.style.display = 'none';
+          if (qtyLabel) qtyLabel.style.display = 'none';
+        }
+        return;
+      }
+
+      // Pas de pré-sélection : afficher tous les produits sous forme de liste cliquable
+      if (label) label.style.display = '';
       const softProds = products.filter(p => !isSmtp(p.id));
       const smtpProds = products.filter(p => isSmtp(p.id));
       let html = softProds.map(p => {
         const ic = PROD_ICONS[p.id] || PROD_ICONS.sender;
-        return '<div class="prod-btn' + (selectedProduct===p.id?' active':'') + '" data-product="' + p.id + '" onclick="selectProduct(this)">' +
+        return '<div class="prod-btn" data-product="' + p.id + '" onclick="selectProduct(this)">' +
           '<div class="prod-left"><div class="prod-ic ' + ic.cls + '">' + ic.svg + '</div><div class="prod-name">' + p.name + '</div></div>' +
           '<div class="prod-price" id="pp-' + p.id + '">' + priceLabel(p) + '</div></div>';
       }).join('');
@@ -309,7 +344,7 @@
         html += '<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#7c3aed;margin:14px 0 6px">🖥 Serveurs SMTP relay</div>';
         html += smtpProds.map(p => {
           const vol = VOL_LABELS[p.id] || (p.volume||'').toLocaleString('fr-FR');
-          return '<div class="prod-btn' + (selectedProduct===p.id?' active':'') + '" data-product="' + p.id + '" onclick="selectProduct(this)">' +
+          return '<div class="prod-btn" data-product="' + p.id + '" onclick="selectProduct(this)">' +
             '<div class="prod-left"><div class="prod-ic purple">' + PROD_ICONS.smtp.svg + '</div>' +
             '<div><div class="prod-name">' + p.name + '</div><div style="font-size:11px;color:#7c3aed">' + vol + ' emails/mois</div></div></div>' +
             '<div class="prod-price" id="pp-' + p.id + '">' + priceLabel(p) + '</div></div>';
