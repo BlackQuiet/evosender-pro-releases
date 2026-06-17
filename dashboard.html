@@ -126,32 +126,71 @@
 <!-- Modal CGU -->
 <div class="overlay" id="cgu-overlay">
   <div class="cgu-box">
-    <div class="cgu-head">
-      <h2>⚖️ Conditions générales d'utilisation</h2>
-      <p>Veuillez lire et accepter pour utiliser EvoStudio.</p>
+    <div class="cgu-head" style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
+      <div>
+        <h2>⚖️ Conditions générales d'utilisation</h2>
+        <p>Veuillez lire et accepter pour utiliser EvoStudio.</p>
+      </div>
+      <button id="cgu-close" onclick="closeCgu()" style="display:none;background:none;border:none;font-size:24px;line-height:1;color:var(--slate);cursor:pointer;flex-shrink:0">×</button>
     </div>
     <div class="cgu-body">
-      <p>En utilisant EvoStudio (édité par <b>EGSCI SARL</b>), vous acceptez les conditions suivantes.</p>
+      <p>Les présentes Conditions Générales d'Utilisation (« CGU ») régissent l'utilisation du logiciel <b>EvoStudio</b> (comprenant EvoExtractor, EvoSender et EvoVérificateur), édité par <b>EGSCI SARL</b>, société de droit ivoirien (Côte d'Ivoire). En créant un compte, en achetant ou en utilisant le logiciel, l'utilisateur reconnaît avoir lu, compris et accepté l'intégralité des présentes CGU.</p>
 
-      <h4>1. Licence d'utilisation</h4>
-      <p>EvoStudio est un logiciel commercial vendu sous licence individuelle non-transférable. Toute revente, redistribution, décompilation ou ingénierie inverse est strictement interdite. La licence est valable pour le nombre de postes (PC) acheté.</p>
+      <h4>Article 1 — Objet</h4>
+      <p>Les présentes CGU ont pour objet de définir les modalités et conditions d'utilisation du logiciel EvoStudio, ainsi que les droits et obligations des parties. EvoStudio est une suite logicielle d'emailing permettant l'extraction, la vérification et l'envoi d'e-mails.</p>
 
-      <h4>2. Décharge de responsabilité</h4>
-      <p><b>EGSCI SARL décline toute responsabilité</b> quant à l'utilisation faite de ce logiciel par l'utilisateur. L'utilisateur est <b>seul responsable</b> de :</p>
+      <h4>Article 2 — Licence d'utilisation</h4>
+      <p>EvoStudio est un logiciel commercial concédé sous licence d'utilisation <b>individuelle, personnelle, non-exclusive et non-transférable</b>. La licence est valable pour le nombre de postes (PC) effectivement acheté. Sont strictement interdits :</p>
       <ul>
-        <li>La conformité de ses envois avec les lois anti-spam applicables (RGPD, CAN-SPAM, CASL, etc.) ;</li>
-        <li>Le contenu des emails envoyés et l'obtention du consentement des destinataires ;</li>
-        <li>La qualité et la légitimité des listes de contacts utilisées ;</li>
-        <li>Toute conséquence légale, commerciale, financière ou technique résultant de l'utilisation du logiciel ;</li>
-        <li>Tout blocage, blacklistage, pénalité, sanction ou poursuite découlant d'un usage non conforme.</li>
+        <li>La revente, la location, le prêt, la sous-licence ou la redistribution du logiciel ou de la clé de licence ;</li>
+        <li>Le partage de la clé de licence avec des tiers ;</li>
+        <li>La décompilation, le désassemblage, l'ingénierie inverse ou toute tentative d'accès au code source ;</li>
+        <li>La modification, l'altération ou la création d'œuvres dérivées du logiciel.</li>
       </ul>
-      <p>L'éditeur ne saurait être tenu responsable de dommages directs ou indirects liés à l'usage du logiciel. Le logiciel est fourni « en l'état », sans garantie d'aucune sorte.</p>
 
-      <h4>3. Usages interdits</h4>
-      <p>Sont strictement interdits : le spam, le phishing, l'usurpation d'identité, le harcèlement, la violation du RGPD ou de toute loi applicable, et le contournement de systèmes anti-spam. Tout usage illicite entraîne la révocation immédiate de la licence sans remboursement.</p>
+      <h4>Article 3 — Compte client</h4>
+      <p>L'utilisateur est responsable de la confidentialité de ses identifiants de connexion et de toutes les activités effectuées depuis son compte. Il s'engage à fournir des informations exactes lors de la création de son compte. EGSCI SARL ne pourra être tenue responsable en cas d'utilisation frauduleuse du compte résultant d'une négligence de l'utilisateur.</p>
 
-      <h4>4. Confidentialité</h4>
-      <p>EvoStudio est un logiciel 100% local. Aucune donnée personnelle, liste de contacts ou contenu d'email n'est transmis à EGSCI SARL. Seule la vérification de licence contacte nos serveurs.</p>
+      <h4>Article 4 — Prix, paiement et remboursement</h4>
+      <p>Les prix sont indiqués sur le site au moment de la commande. Le paiement s'effectue par crypto-monnaie (USDT TRC20, Bitcoin) ou mobile money (Wave, Orange Money). La licence est générée après confirmation du paiement. <b>S'agissant d'un produit numérique délivré immédiatement, aucun remboursement n'est dû après génération de la licence</b>, sauf disposition légale impérative contraire.</p>
+
+      <h4>Article 5 — Décharge de responsabilité</h4>
+      <p>Le logiciel est fourni <b>« EN L'ÉTAT » (« as is »), sans garantie d'aucune sorte</b>, expresse ou implicite, notamment quant à son adéquation à un usage particulier, sa disponibilité, sa délivrabilité ou son absence d'erreurs.</p>
+      <p><b>EGSCI SARL décline expressément toute responsabilité</b> quant à l'utilisation faite du logiciel par l'utilisateur. L'utilisateur est <b>seul et entièrement responsable</b> de :</p>
+      <ul>
+        <li>La conformité de ses envois avec l'ensemble des lois et réglementations applicables (RGPD, CAN-SPAM, CASL, LCEN, et toute loi anti-spam ou de protection des données en vigueur dans sa juridiction et celle des destinataires) ;</li>
+        <li>L'obtention préalable du consentement des destinataires lorsque la loi l'exige ;</li>
+        <li>Le contenu, la nature et la finalité des e-mails envoyés ;</li>
+        <li>La provenance, la qualité, l'exactitude et la légitimité des listes de contacts utilisées ;</li>
+        <li>La configuration de ses serveurs SMTP, proxies et de ses propres outils ;</li>
+        <li>Toute conséquence légale, judiciaire, commerciale, financière, fiscale ou technique résultant de l'utilisation du logiciel ;</li>
+        <li>Tout blocage, blacklistage, suspension de compte, pénalité, amende, sanction, plainte ou poursuite découlant de son usage.</li>
+      </ul>
+      <p>En aucun cas EGSCI SARL ne pourra être tenue responsable de dommages directs ou indirects, accessoires, spéciaux ou consécutifs (perte de données, perte de revenus, perte d'exploitation, atteinte à la réputation, etc.) liés à l'utilisation ou à l'impossibilité d'utiliser le logiciel. La responsabilité éventuelle de l'éditeur, si elle était retenue, serait en tout état de cause limitée au montant effectivement payé par l'utilisateur pour sa licence.</p>
+
+      <h4>Article 6 — Usages autorisés et interdits</h4>
+      <p>L'utilisateur s'engage à n'utiliser EvoStudio que pour des finalités licites et conformes aux lois applicables (newsletters opt-in, communications consenties, prospection conforme, tests internes). Sont <b>strictement interdits</b> : l'envoi de spam ou de courriers non sollicités, le phishing, l'escroquerie, l'usurpation d'identité, le harcèlement, la diffusion de contenus illicites, la violation du RGPD ou de toute loi applicable, et le contournement de systèmes anti-spam. <b>Tout usage illicite entraîne la révocation immédiate de la licence, sans remboursement, et sans préjudice de poursuites.</b></p>
+
+      <h4>Article 7 — Propriété intellectuelle</h4>
+      <p>Le logiciel, sa marque, ses logos, son code et tous les éléments le composant demeurent la propriété exclusive d'EGSCI SARL. La licence confère un simple droit d'usage et n'emporte aucun transfert de propriété intellectuelle.</p>
+
+      <h4>Article 8 — Confidentialité et données</h4>
+      <p>EvoStudio est un logiciel <b>100% local</b> : aucune donnée personnelle, liste de contacts ou contenu d'e-mail n'est transmis à EGSCI SARL ou à des tiers. Seule la vérification de la validité de la licence contacte les serveurs de l'éditeur. Aucune télémétrie ni suivi d'utilisation n'est effectué.</p>
+
+      <h4>Article 9 — Mises à jour et disponibilité</h4>
+      <p>EGSCI SARL peut proposer des mises à jour du logiciel, incluses selon la durée de la licence. L'éditeur ne garantit pas une disponibilité ininterrompue des services en ligne (vérification de licence, boutique) et peut les suspendre pour maintenance sans préavis.</p>
+
+      <h4>Article 10 — Force majeure</h4>
+      <p>EGSCI SARL ne saurait être tenue responsable d'un manquement à ses obligations résultant d'un cas de force majeure ou d'événements indépendants de sa volonté (panne réseau, défaillance d'un prestataire tiers, etc.).</p>
+
+      <h4>Article 11 — Modification des CGU</h4>
+      <p>EGSCI SARL se réserve le droit de modifier les présentes CGU à tout moment. Les CGU applicables sont celles en vigueur au moment de l'utilisation. La poursuite de l'utilisation du logiciel vaut acceptation des CGU modifiées.</p>
+
+      <h4>Article 12 — Droit applicable et juridiction</h4>
+      <p>Les présentes CGU sont régies par le droit ivoirien. Tout litige relatif à leur interprétation ou à leur exécution sera soumis aux tribunaux compétents de Côte d'Ivoire, à défaut de résolution amiable.</p>
+
+      <h4>Article 13 — Contact</h4>
+      <p>Pour toute question relative aux présentes CGU : <a href="mailto:support@evostudio.fr" style="color:var(--blue)">support@evostudio.fr</a>.</p>
 
       <p style="margin-top:14px;font-size:12px;color:var(--slate-2)">© 2025–2026 EGSCI SARL — Côte d'Ivoire · support@evostudio.fr</p>
     </div>
@@ -182,9 +221,11 @@
   function openCgu(viewOnly){
     _viewOnlyCgu = !!viewOnly;
     document.getElementById('cgu-overlay').classList.add('show');
-    const foot = document.querySelector('.cgu-foot');
-    foot.style.display = viewOnly ? 'none' : '';
+    document.querySelector('.cgu-foot').style.display = viewOnly ? 'none' : '';
+    document.getElementById('cgu-close').style.display = viewOnly ? 'block' : 'none';
+    document.querySelector('.cgu-body').scrollTop = 0;
   }
+  function closeCgu(){ document.getElementById('cgu-overlay').classList.remove('show'); }
   document.getElementById('cgu-check').addEventListener('change', e => {
     document.getElementById('cgu-accept').disabled = !e.target.checked;
   });
