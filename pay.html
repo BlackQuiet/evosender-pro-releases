@@ -107,8 +107,8 @@
         <div class="mini-label">Produit</div>
         <div class="product-list" id="product-grid"></div>
 
-        <div class="mini-label">Ordinateurs (PC)</div>
-        <div class="mini-row">
+        <div class="mini-label" id="qty-label">Ordinateurs (PC)</div>
+        <div class="mini-row" id="qty-section">
           <div class="qty-hint" id="qty-hint">1 licence — 1 PC</div>
           <div class="qty-stepper">
             <button type="button" class="qty-btn" onclick="changeQty(-1)">−</button>
@@ -187,6 +187,7 @@
     let pollInterval = null;
     let products = [];
 
+    function isSmtp(id){ return (id||'').startsWith('smtp_'); }
     function curProduct(){ return products.find(p => p.id === selectedProduct); }
     function unitPrice(p){
       if(selectedCrypto === 'wave') return Number(p.price_wave) || 0;
@@ -202,7 +203,7 @@
     function changeQty(d){
       quantity = Math.min(10, Math.max(1, quantity + d));
       document.getElementById('qty-val').textContent = quantity;
-      document.getElementById('qty-hint').textContent = quantity === 1 ? '1 licence — 1 PC' : `${quantity} PC sur une licence`;
+      document.getElementById('qty-hint').textContent = quantity === 1 ? '1 licence — 1 PC' : quantity + ' PC sur une licence';
       updateTotal();
     }
     function updateTotal(){
@@ -210,11 +211,12 @@
       const row = document.getElementById('total-row');
       if(!p){ row.style.display='none'; return; }
       row.style.display='flex';
-      const total = (selectedCrypto === 'btc') ? +(unitPrice(p) * quantity).toFixed(8) : Math.round(unitPrice(p) * quantity * 100)/100;
+      const qty = isSmtp(p.id) ? 1 : quantity;
+      const total = (selectedCrypto === 'btc') ? +(unitPrice(p) * qty).toFixed(8) : Math.round(unitPrice(p) * qty * 100)/100;
       let html = fmtAmount(total);
       if (selectedCrypto === 'btc') {
-        const usd = (Number(p.price_usdt) || 0) * quantity;
-        html += ` <span style="font-size:13px;color:var(--slate);font-weight:600;white-space:nowrap">≈ $${usd}</span>`;
+        const usd = (Number(p.price_usdt) || 0) * qty;
+        html += ' <span style="font-size:13px;color:var(--slate);font-weight:600;white-space:nowrap">≈ $' + usd + '</span>';
       }
       document.getElementById('total-val').innerHTML = html;
     }
@@ -239,8 +241,9 @@
         const r = await fetch(API + '/api/shop/products');
         if (r.ok) {
           const data = await r.json();
-          products = data.products;
-          // Pré-sélection depuis l'URL (?product=sender etc.)
+          // Fusionner produits logiciels + plans SMTP
+          products = [...data.products, ...(data.smtp_plans || [])];
+          // Pré-sélection depuis l'URL (?product=sender / ?product=smtp_50k etc.)
           const urlProduct = new URLSearchParams(location.search).get('product');
           if (urlProduct && products.find(p => p.id === urlProduct)) {
             selectedProduct = urlProduct;
@@ -278,8 +281,10 @@
       document.querySelectorAll(".pill-btn").forEach(b => b.classList.toggle('active', b.dataset.crypto === selectedCrypto));
     }
 
+    const VOL_LABELS = {smtp_10k:'10 000',smtp_50k:'50 000',smtp_100k:'100 000',smtp_500k:'500 000'};
     function priceLabel(p) {
-      return fmtAmount(unitPrice(p)) + ' <span style="opacity:.6">/ PC</span>';
+      const suffix = isSmtp(p.id) ? ' <span style="opacity:.6">/ mois</span>' : ' <span style="opacity:.6">/ PC</span>';
+      return fmtAmount(unitPrice(p)) + suffix;
     }
 
     const PROD_ICONS = {
@@ -287,26 +292,39 @@
       sender:{cls:'', svg:'<svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg>'},
       verifier:{cls:'purple', svg:'<svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>'},
       suite:{cls:'amber', svg:'<svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>'},
+      smtp:{cls:'purple', svg:'<svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>'},
     };
     function renderProducts() {
       const grid = document.getElementById('product-grid');
-      grid.innerHTML = products.map(p => {
+      // Séparer produits logiciels et plans SMTP
+      const softProds = products.filter(p => !isSmtp(p.id));
+      const smtpProds = products.filter(p => isSmtp(p.id));
+      let html = softProds.map(p => {
         const ic = PROD_ICONS[p.id] || PROD_ICONS.sender;
-        return `
-        <div class="prod-btn${selectedProduct===p.id?' active':''}" data-product="${p.id}" onclick="selectProduct(this)">
-          <div class="prod-left">
-            <div class="prod-ic ${ic.cls}">${ic.svg}</div>
-            <div class="prod-name">${p.name}</div>
-          </div>
-          <div class="prod-price" id="pp-${p.id}">${priceLabel(p)}</div>
-        </div>`;
+        return '<div class="prod-btn' + (selectedProduct===p.id?' active':'') + '" data-product="' + p.id + '" onclick="selectProduct(this)">' +
+          '<div class="prod-left"><div class="prod-ic ' + ic.cls + '">' + ic.svg + '</div><div class="prod-name">' + p.name + '</div></div>' +
+          '<div class="prod-price" id="pp-' + p.id + '">' + priceLabel(p) + '</div></div>';
       }).join('');
+      if (smtpProds.length) {
+        html += '<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#7c3aed;margin:14px 0 6px">🖥 Serveurs SMTP relay</div>';
+        html += smtpProds.map(p => {
+          const vol = VOL_LABELS[p.id] || (p.volume||'').toLocaleString('fr-FR');
+          return '<div class="prod-btn' + (selectedProduct===p.id?' active':'') + '" data-product="' + p.id + '" onclick="selectProduct(this)">' +
+            '<div class="prod-left"><div class="prod-ic purple">' + PROD_ICONS.smtp.svg + '</div>' +
+            '<div><div class="prod-name">' + p.name + '</div><div style="font-size:11px;color:#7c3aed">' + vol + ' emails/mois</div></div></div>' +
+            '<div class="prod-price" id="pp-' + p.id + '">' + priceLabel(p) + '</div></div>';
+        }).join('');
+      }
+      grid.innerHTML = html;
     }
 
     function selectProduct(el) {
       document.querySelectorAll('.prod-btn').forEach(b => b.classList.remove('active'));
       el.classList.add('active');
       selectedProduct = el.dataset.product;
+      // Masquer le sélecteur de quantité pour les plans SMTP (toujours 1 serveur)
+      const qtySection = document.getElementById('qty-section');
+      if (qtySection) qtySection.style.display = isSmtp(selectedProduct) ? 'none' : '';
       document.getElementById('btn-proceed').disabled = false;
       updateTotal();
     }
@@ -327,7 +345,7 @@
         const r = await fetch(API + '/api/shop/order', {
           method: 'POST',
           headers: authHeaders(),
-          body: JSON.stringify({ product: selectedProduct, crypto: selectedCrypto, quantity, invoice_email: (document.getElementById('invoice-email')?.value || '').trim() })
+          body: JSON.stringify({ product: selectedProduct, crypto: selectedCrypto, quantity: isSmtp(selectedProduct) ? 1 : quantity, invoice_email: (document.getElementById('invoice-email')?.value || '').trim() })
         });
         const d = await r.json();
         if (!r.ok) {
