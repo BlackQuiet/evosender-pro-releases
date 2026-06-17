@@ -312,67 +312,93 @@
 
     // ── Serveurs SMTP ────────────────────────────────────────
     try {
-      const smtpR = await fetch(API + '/api/auth/smtp-servers', { headers: authHeaders() });
+      var smtpR = await fetch(API + '/api/auth/smtp-servers', { headers: authHeaders() });
       if(smtpR.ok) {
-        const smtpList = await smtpR.json();
-        if(smtpList.length > 0) {
-          const sec = document.getElementById('smtp-section');
-          const wrap = document.getElementById('smtp-wrap');
-          if(sec) sec.style.display = '';
-          if(wrap) wrap.innerHTML = smtpList.map(s => {
-            const STATUS = { active:'✅ Actif', pending:'⏳ En attente de configuration', suspended:'🚫 Suspendu' };
-            const volLabels = { smtp_10k:'10 000', smtp_50k:'50 000', smtp_100k:'100 000', smtp_500k:'500 000' };
-            const vol = volLabels[s.plan] || (s.volume||'').toLocaleString('fr-FR');
-            const hasCreds = !!s.username;
-            return `
-            <div style="background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:24px;margin-bottom:16px">
-              <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px">
-                <div>
-                  <div style="font-size:15px;font-weight:700;color:#0f172a">🖥 Serveur SMTP — ${vol} emails/mois</div>
-                  <div style="font-size:13px;color:#64748b;margin-top:3px">${STATUS[s.status] || s.status}</div>
-                </div>
-                <span style="background:${s.status==='active'?'#dcfce7':s.status==='suspended'?'#fee2e2':'#fef9c3'};color:${s.status==='active'?'#166534':s.status==='suspended'?'#991b1b':'#854d0e'};border-radius:8px;padding:4px 12px;font-size:12px;font-weight:700">${s.status}</span>
-              </div>
-              ${hasCreds ? `
-              <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px">
-                <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#64748b;margin-bottom:12px">📋 Identifiants SMTP Relay</div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-                  <div><div style="font-size:11px;color:#94a3b8">Serveur (host)</div><div style="font-family:monospace;font-size:13px;font-weight:600;color:#0f172a">${s.relay_host||'smtp.exabytes.com'}</div></div>
-                  <div><div style="font-size:11px;color:#94a3b8">Port</div><div style="font-family:monospace;font-size:13px;font-weight:600;color:#0f172a">${s.relay_port||587} (TLS)</div></div>
-                  <div><div style="font-size:11px;color:#94a3b8">Nom d'utilisateur</div><div style="font-family:monospace;font-size:13px;font-weight:600;color:#2563eb">${s.username}</div></div>
-                  <div><div style="font-size:11px;color:#94a3b8">Mot de passe</div>
-                    <div style="display:flex;align-items:center;gap:8px">
-                      <span id="smtp-pass-${s.id}" style="font-family:monospace;font-size:13px;font-weight:600;color:#0f172a;letter-spacing:.1em">••••••••</span>
-                      <button onclick="toggleSmtpPass(${s.id},'${s.password}')" style="background:none;border:1px solid #e2e8f0;border-radius:6px;padding:2px 8px;font-size:11px;cursor:pointer;color:#64748b">Voir</button>
-                    </div>
-                  </div>
-                </div>
-                <button onclick="copySmtp(${s.id},'${s.relay_host||'smtp.exabytes.com'}','${s.relay_port||587}','${s.username}','${s.password}')"
-                  style="margin-top:14px;background:#2563eb;color:#fff;border:none;border-radius:10px;padding:10px 18px;font-size:13px;font-weight:600;cursor:pointer">
-                  📋 Copier les identifiants
-                </button>
-              </div>` : `
-              <div style="background:#fef9c3;border:1px solid #fde047;border-radius:12px;padding:14px;font-size:13px;color:#713f12">
-                ⏳ Vos identifiants SMTP sont en cours de configuration. Vous recevrez un email dès qu'ils seront prêts (généralement sous 24h).
-              </div>`}
-            </div>`;
+        var smtpList = await smtpR.json();
+        var sec = document.getElementById('smtp-section');
+        var wrap = document.getElementById('smtp-wrap');
+        if(smtpList.length > 0 && sec && wrap) {
+          sec.style.display = '';
+          var VOL = { smtp_10k:'10 000', smtp_50k:'50 000', smtp_100k:'100 000', smtp_500k:'500 000' };
+          var STS_BG = { active:'#dcfce7', suspended:'#fee2e2', pending:'#fef9c3' };
+          var STS_FG = { active:'#166534', suspended:'#991b1b', pending:'#854d0e' };
+          var STS_LBL = { active:'Actif', suspended:'Suspendu', pending:'En attente' };
+          wrap.innerHTML = smtpList.map(function(s) {
+            var vol = VOL[s.plan] || String(s.volume||0);
+            var bg = STS_BG[s.status] || '#f1f5f9';
+            var fg = STS_FG[s.status] || '#334155';
+            var lbl = STS_LBL[s.status] || s.status;
+            var host = s.relay_host || 'smtp.exabytes.com';
+            var port = s.relay_port || 587;
+
+            var credsHtml = '';
+            if(s.username) {
+              credsHtml =
+                '<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:18px;margin-top:16px">' +
+                  '<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#64748b;margin-bottom:14px">📋 Identifiants SMTP Relay</div>' +
+                  '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">' +
+                    '<div>' +
+                      '<div style="font-size:11px;color:#94a3b8;margin-bottom:3px">Serveur (host)</div>' +
+                      '<div style="font-family:monospace;font-size:13px;font-weight:700;color:#0f172a">' + host + '</div>' +
+                    '</div>' +
+                    '<div>' +
+                      '<div style="font-size:11px;color:#94a3b8;margin-bottom:3px">Port</div>' +
+                      '<div style="font-family:monospace;font-size:13px;font-weight:700;color:#0f172a">' + port + ' (TLS)</div>' +
+                    '</div>' +
+                    '<div>' +
+                      '<div style="font-size:11px;color:#94a3b8;margin-bottom:3px">Nom d\'utilisateur</div>' +
+                      '<div style="font-family:monospace;font-size:13px;font-weight:700;color:#2563eb">' + s.username + '</div>' +
+                    '</div>' +
+                    '<div>' +
+                      '<div style="font-size:11px;color:#94a3b8;margin-bottom:3px">Mot de passe</div>' +
+                      '<div style="display:flex;align-items:center;gap:8px">' +
+                        '<span id="smtp-pass-' + s.id + '" data-pass="' + s.password + '" data-shown="0" style="font-family:monospace;font-size:13px;font-weight:700;color:#0f172a;letter-spacing:.12em">••••••••</span>' +
+                        '<button onclick="toggleSmtpPass(' + s.id + ')" style="background:none;border:1px solid #e2e8f0;border-radius:6px;padding:2px 9px;font-size:11px;cursor:pointer;color:#64748b">Voir</button>' +
+                      '</div>' +
+                    '</div>' +
+                  '</div>' +
+                  '<button onclick="copySmtp(' + s.id + ',\'' + host + '\',' + port + ',\'' + s.username + '\')" ' +
+                    'style="background:#2563eb;color:#fff;border:none;border-radius:10px;padding:10px 18px;font-size:13px;font-weight:600;cursor:pointer;width:100%">' +
+                    '📋 Copier tous les identifiants' +
+                  '</button>' +
+                '</div>';
+            } else {
+              credsHtml =
+                '<div style="background:#fef9c3;border:1px solid #fde047;border-radius:12px;padding:14px;font-size:13px;color:#713f12;margin-top:16px;line-height:1.6">' +
+                  '⏳ Votre serveur SMTP est en cours de provisioning.<br>' +
+                  'Vos identifiants vous seront envoyés par email <strong>sous 24h</strong>.' +
+                '</div>';
+            }
+
+            return '<div style="background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:22px;margin-bottom:16px">' +
+              '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">' +
+                '<div>' +
+                  '<div style="font-size:15px;font-weight:700;color:#0f172a">🖥 SMTP Relay — ' + vol + ' emails/mois</div>' +
+                  '<div style="font-size:12px;color:#64748b;margin-top:3px">Plan : ' + s.plan + '</div>' +
+                '</div>' +
+                '<span style="background:' + bg + ';color:' + fg + ';border-radius:8px;padding:4px 12px;font-size:12px;font-weight:700">' + lbl + '</span>' +
+              '</div>' +
+              credsHtml +
+            '</div>';
           }).join('');
         }
       }
     } catch(e) { console.warn('SMTP servers:', e); }
   }
 
-  function toggleSmtpPass(id, pass) {
-    const el = document.getElementById('smtp-pass-'+id);
+  function toggleSmtpPass(id) {
+    var el = document.getElementById('smtp-pass-' + id);
     if(!el) return;
-    const shown = el.dataset.shown === '1';
-    el.textContent = shown ? '••••••••' : pass;
+    var shown = el.dataset.shown === '1';
+    el.textContent = shown ? '••••••••' : el.dataset.pass;
     el.dataset.shown = shown ? '0' : '1';
     el.nextElementSibling.textContent = shown ? 'Voir' : 'Masquer';
   }
-  function copySmtp(id, host, port, user, pass) {
-    const txt = `Hôte SMTP : ${host}\nPort : ${port}\nUtilisateur : ${user}\nMot de passe : ${pass}\nChiffrement : TLS/STARTTLS`;
-    navigator.clipboard.writeText(txt).then(() => alert('✅ Identifiants copiés dans le presse-papier !'));
+  function copySmtp(id, host, port, user) {
+    var passEl = document.getElementById('smtp-pass-' + id);
+    var pass = passEl ? passEl.dataset.pass : '';
+    var txt = 'Hôte SMTP : ' + host + '\nPort : ' + port + '\nUtilisateur : ' + user + '\nMot de passe : ' + pass + '\nChiffrement : TLS/STARTTLS';
+    navigator.clipboard.writeText(txt).then(function(){ alert('✅ Identifiants copiés !'); });
   }
 
   load();
