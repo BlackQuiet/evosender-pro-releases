@@ -11,7 +11,7 @@
   --blue:#2563eb; --blue-dark:#1d4ed8; --blue-700:#1e40af; --blue-50:#eff6ff; --blue-100:#dbeafe;
   --ink:#0f172a; --slate:#475569; --slate-2:#64748b; --line:#e2e8f0; --bg:#f8fafc; --white:#fff;
   --green:#16a34a; --radius:16px; --shadow:0 1px 3px rgba(15,23,42,.06),0 8px 24px rgba(15,23,42,.05);
-  --shadow-lg:0 12px 40px rgba(37,99,235,.12);
+  --shadow-lg:0 10px 30px rgba(37,99,235,.08);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -67,7 +67,7 @@ section{padding:80px 0}
 .card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:32px 28px;transition:all .2s}
 .card:hover{border-color:var(--blue-100);box-shadow:var(--shadow-lg);transform:translateY(-3px)}
 .p-icon{width:54px;height:54px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;background:var(--blue-50)}
-.p-icon svg{width:26px;height:26px;stroke:var(--blue);fill:none;stroke-width:2}
+.p-icon svg{width:24px;height:24px;stroke:var(--blue);fill:none;stroke-width:1.6}
 .p-icon.green{background:#dcfce7}.p-icon.green svg{stroke:#16a34a}
 .p-icon.purple{background:#f3e8ff}.p-icon.purple svg{stroke:#9333ea}
 .p-name{font-size:21px;font-weight:800;margin-bottom:8px}
@@ -94,7 +94,7 @@ section{padding:80px 0}
 @media(max-width:560px){.feat-grid{grid-template-columns:1fr}}
 .feat{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:24px}
 .feat-ic{width:44px;height:44px;border-radius:11px;background:var(--blue-50);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
-.feat-ic svg{width:22px;height:22px;stroke:var(--blue);fill:none;stroke-width:2}
+.feat-ic svg{width:21px;height:21px;stroke:var(--blue);fill:none;stroke-width:1.6}
 .feat h4{font-size:16px;font-weight:700;margin-bottom:6px}
 .feat p{color:var(--slate);font-size:14px}
 
@@ -104,8 +104,8 @@ section{padding:80px 0}
 @media(max-width:560px){.cap-grid{grid-template-columns:1fr}}
 .cap{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px;transition:all .2s}
 .cap:hover{border-color:var(--blue-100);box-shadow:var(--shadow-lg);transform:translateY(-3px)}
-.cap-ic{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--blue),#3b82f6);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
-.cap-ic svg{width:24px;height:24px;stroke:#fff;fill:none;stroke-width:2}
+.cap-ic{width:42px;height:42px;border-radius:12px;background:var(--blue-50);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.cap-ic svg{width:22px;height:22px;stroke:var(--blue);fill:none;stroke-width:1.6}
 .cap h4{font-size:17px;font-weight:800;margin-bottom:12px}
 .cap ul{list-style:none}
 .cap ul li{display:flex;gap:9px;align-items:flex-start;color:var(--slate);font-size:14px;padding:5px 0}
@@ -119,7 +119,7 @@ section{padding:80px 0}
 .price-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-size:12px;font-weight:700;padding:5px 16px;border-radius:30px}
 .price-head{display:flex;align-items:center;gap:10px;margin-bottom:4px}
 .price-ic{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--blue-50)}
-.price-ic svg{width:20px;height:20px;stroke:var(--blue);fill:none;stroke-width:2}
+.price-ic svg{width:19px;height:19px;stroke:var(--blue);fill:none;stroke-width:1.6}
 .price-ic.green{background:#dcfce7}.price-ic.green svg{stroke:#16a34a}
 .price-ic.purple{background:#f3e8ff}.price-ic.purple svg{stroke:#9333ea}
 .price-name{font-size:20px;font-weight:800;color:var(--blue)}
@@ -175,7 +175,8 @@ footer{background:var(--ink);color:#cbd5e1;padding:54px 0 28px}
       <a href="#faq">FAQ</a>
     </div>
     <div class="nav-cta">
-      <a href="/login.html" class="btn btn-ghost">Connexion</a>
+      <a href="/login.html" class="btn btn-ghost" id="nav-login">Connexion</a>
+      <a href="/dashboard.html" class="btn btn-ghost" id="nav-account" style="display:none">Espace client</a>
       <a href="/pay.html" class="btn btn-primary">Acheter</a>
     </div>
   </div>
@@ -353,6 +354,11 @@ footer{background:var(--ink);color:#cbd5e1;padding:54px 0 28px}
 document.querySelectorAll('.faq-q').forEach(q => q.addEventListener('click', () => {
   q.parentElement.classList.toggle('open');
 }));
+// Nav : si connecté → « Espace client », masquer « Connexion »
+if (localStorage.getItem('evo_token')) {
+  const l = document.getElementById('nav-login'); if (l) l.style.display = 'none';
+  const a = document.getElementById('nav-account'); if (a) a.style.display = '';
+}
 </script>
 
 <script>
