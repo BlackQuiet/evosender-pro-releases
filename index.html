@@ -434,7 +434,7 @@ async function loadProducts(){
           <p class="p-desc">${p.description}</p>
           <ul class="p-feats">${p.features.map(f => `<li>${f}</li>`).join('')}</ul>
           <div class="p-btns">
-            <a href="/pay.html" class="btn btn-primary">Acheter</a>
+            <a href="/pay.html?product=${p.id}" class="btn btn-primary">Acheter</a>
             <a href="#tarifs" class="btn btn-ghost">Voir prix</a>
           </div>
         </div>`;
@@ -455,7 +455,7 @@ async function loadProducts(){
           <div class="price-amount">${p.price_usdt} <span>USDT</span></div>
           <p class="price-period">${wave}ou ${p.price_btc} BTC · Paiement unique · Licence à vie</p>
           <ul class="price-feats">${p.features.map(f => `<li><span class="ck">✓</span> ${f}</li>`).join('')}</ul>
-          <a href="/pay.html" class="btn ${featured ? 'btn-primary' : 'btn-ghost'}" style="justify-content:center">Acheter ${p.name}</a>
+          <a href="/pay.html?product=${p.id}" class="btn ${featured ? 'btn-primary' : 'btn-ghost'}" style="justify-content:center">Acheter ${p.name}</a>
         </div>`;
       }).join('');
 
@@ -463,7 +463,7 @@ async function loadProducts(){
       const ctaEl = document.getElementById('suite-cta');
       if(suite && ctaEl){
         ctaEl.style.display = 'block';
-        ctaEl.innerHTML = `🎁 <strong>${suite.name}</strong> — les 3 outils à <strong style="color:var(--blue)">${suite.price_usdt} USDT</strong> · <a href="/pay.html" style="color:var(--blue);font-weight:700">Acheter la suite →</a>`;
+        ctaEl.innerHTML = `🎁 <strong>${suite.name}</strong> — les 3 outils à <strong style="color:var(--blue)">${suite.price_usdt} USDT</strong> · <a href="/pay.html?product=suite" style="color:var(--blue);font-weight:700">Acheter la suite →</a>`;
       }
     }
     // ── Section SMTP (si activée par l'admin) ─────────────────

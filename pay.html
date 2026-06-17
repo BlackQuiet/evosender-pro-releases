@@ -232,7 +232,7 @@
         if (!r.ok) { location.href = '/login.html?redirect=' + encodeURIComponent(location.href); return; }
         const u = await r.json();
         const ie = document.getElementById('invoice-email');
-        if (ie && u.email) ie.value = u.email; // pré-rempli avec l'email du compte
+        if (ie && u.email) ie.value = u.email;
       } catch { return; }
 
       try {
@@ -240,8 +240,17 @@
         if (r.ok) {
           const data = await r.json();
           products = data.products;
+          // Pré-sélection depuis l'URL (?product=sender etc.)
+          const urlProduct = new URLSearchParams(location.search).get('product');
+          if (urlProduct && products.find(p => p.id === urlProduct)) {
+            selectedProduct = urlProduct;
+          }
           await applyRegion(data);
           renderProducts();
+          if (selectedProduct) {
+            updateTotal();
+            document.getElementById('btn-proceed').disabled = false;
+          }
         }
       } catch {}
     }
