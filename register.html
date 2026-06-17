@@ -6,23 +6,37 @@
   <title>EvoStudio — Créer un compte</title><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='5' fill='%232563eb'/><path d='M20 4 10.5 13.5M20 4l-6 16-3.5-7-7-3.5z' fill='none' stroke='%23ffffff' stroke-width='1.5' stroke-linejoin='round' stroke-linecap='round'/></svg>" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
-    :root{--blue:#2563eb;--blue-dark:#1d4ed8;--blue-50:#eff6ff;--ink:#0f172a;--slate:#64748b;--line:#e2e8f0}
+    :root{--blue:#2563eb;--blue-dark:#1d4ed8;--blue-50:#eff6ff;--blue-100:#dbeafe;--ink:#0f172a;--slate:#64748b;--line:#eef2f7}
     *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'Inter',sans-serif;background:linear-gradient(180deg,var(--blue-50),#fff);color:var(--ink);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
-    .logo{display:flex;align-items:center;gap:10px;font-size:21px;font-weight:800;margin-bottom:28px;text-decoration:none;color:var(--ink)}
-    .logo-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--blue),#3b82f6);display:flex;align-items:center;justify-content:center}
-    .logo-icon svg{width:19px;height:19px;stroke:#fff;fill:none;stroke-width:2.2}
-    .logo span{color:var(--blue)}
-    .box{background:#fff;border:1px solid var(--line);border-radius:18px;padding:40px;width:100%;max-width:420px;box-shadow:0 12px 40px rgba(37,99,235,.10)}
-    h1{font-size:24px;font-weight:800;margin-bottom:6px}
-    .sub{font-size:14px;color:var(--slate);margin-bottom:26px}
-    label{display:block;font-size:12px;font-weight:700;color:#334155;margin-bottom:7px;margin-top:16px}
-    input{width:100%;background:#f8fafc;border:1.5px solid var(--line);color:var(--ink);border-radius:10px;padding:12px 14px;font-size:14px;outline:none;transition:border-color .2s;font-family:inherit}
-    input:focus{border-color:var(--blue);background:#fff}
-    .btn{width:100%;margin-top:24px;background:var(--blue);color:#fff;border:none;border-radius:11px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;font-family:inherit;box-shadow:0 6px 18px rgba(37,99,235,.28)}
+    body{font-family:'Inter',sans-serif;background:#eef2f7;color:var(--ink);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+    .auth{width:100%;max-width:880px;background:#fff;border-radius:26px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;box-shadow:0 30px 80px rgba(15,23,42,.14)}
+    @media(max-width:720px){.auth{grid-template-columns:1fr;max-width:420px}.side{display:none}}
+    .side{background:linear-gradient(160deg,#1e3a8a,#2563eb);color:#fff;padding:44px 36px;display:flex;flex-direction:column}
+    .side .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;color:#fff;text-decoration:none}
+    .side .brand .m{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center}
+    .side .brand .m svg{width:19px;height:19px;stroke:#fff;fill:none;stroke-width:2.2}
+    .side h2{font-size:25px;font-weight:800;margin:auto 0 12px;line-height:1.25;letter-spacing:-.4px}
+    .side p{font-size:14px;color:rgba(255,255,255,.82);line-height:1.65}
+    .side .feat{margin-top:26px;display:flex;flex-direction:column;gap:12px}
+    .side .feat div{display:flex;align-items:center;gap:11px;font-size:13.5px;color:rgba(255,255,255,.92)}
+    .side .feat svg{width:17px;height:17px;stroke:#fff;fill:none;stroke-width:1.9;flex-shrink:0}
+    .form{padding:44px 42px;display:flex;flex-direction:column;justify-content:center}
+    @media(max-width:720px){.form{padding:36px 28px}}
+    .form .mobile-logo{display:none;align-items:center;gap:9px;font-weight:800;font-size:19px;margin-bottom:22px;color:var(--ink)}
+    .form .mobile-logo .m{width:32px;height:32px;border-radius:9px;background:var(--blue);display:flex;align-items:center;justify-content:center}
+    .form .mobile-logo .m svg{width:17px;height:17px;stroke:#fff;fill:none;stroke-width:2.2}
+    @media(max-width:720px){.form .mobile-logo{display:flex}}
+    h1{font-size:25px;font-weight:800;margin-bottom:6px;letter-spacing:-.3px}
+    .sub{font-size:14px;color:var(--slate);margin-bottom:24px}
+    label{display:block;font-size:12px;font-weight:600;color:#334155;margin-bottom:7px;margin-top:16px}
+    .inp{position:relative}
+    .inp svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;stroke:#94a3b8;fill:none;stroke-width:1.8}
+    input{width:100%;background:#f8fafc;border:1.5px solid var(--line);color:var(--ink);border-radius:12px;padding:13px 14px 13px 42px;font-size:14.5px;outline:none;transition:.2s;font-family:inherit}
+    input:focus{border-color:var(--blue);background:#fff;box-shadow:0 0 0 4px rgba(37,99,235,.08)}
+    .btn{width:100%;margin-top:24px;background:var(--blue);color:#fff;border:none;border-radius:13px;padding:14px;font-size:15px;font-weight:700;cursor:pointer;transition:.2s;font-family:inherit;box-shadow:0 8px 22px rgba(37,99,235,.26)}
     .btn:hover{background:var(--blue-dark)}
-    .btn:disabled{opacity:.5;cursor:not-allowed}
-    .msg{font-size:13px;margin-top:12px;min-height:18px;text-align:center}
+    .btn:disabled{opacity:.55;cursor:not-allowed}
+    .msg{font-size:13px;margin-top:14px;min-height:18px;text-align:center}
     .msg.err{color:#dc2626}.msg.ok{color:#16a34a}
     .footer-link{text-align:center;margin-top:22px;font-size:14px;color:var(--slate)}
     .footer-link a{color:var(--blue);text-decoration:none;font-weight:600}
@@ -30,24 +44,42 @@
   </style>
 </head>
 <body>
-  <a href="/" class="logo">
-    <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg></div>
-    Evo<span>Studio</span>
-  </a>
-  <div class="box">
-    <h1>Créer un compte</h1>
-    <p class="sub">Accédez à vos licences EvoStudio après achat.</p>
-    <form id="form">
-      <label>Adresse email</label>
-      <input type="email" id="email" placeholder="vous@exemple.com" required />
-      <label>Mot de passe</label>
-      <input type="password" id="password" placeholder="Minimum 6 caractères" required />
-      <label>Confirmer le mot de passe</label>
-      <input type="password" id="password2" placeholder="Répéter le mot de passe" required />
-      <button class="btn" type="submit" id="btn">Créer mon compte</button>
-    </form>
-    <div class="msg" id="msg"></div>
-    <div class="footer-link">Déjà un compte ? <a href="/login.html">Se connecter</a></div>
+  <div class="auth">
+    <aside class="side">
+      <a href="/" class="brand"><span class="m"><svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg></span> EvoStudio</a>
+      <h2>Créez votre compte<br>en 30 secondes.</h2>
+      <p>Un compte vous permet d'acheter, de retrouver vos licences et de télécharger vos applications à tout moment.</p>
+      <div class="feat">
+        <div><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Licence à vie, paiement unique</div>
+        <div><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> 100% local & privé</div>
+        <div><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Crypto, Wave & Orange Money</div>
+      </div>
+    </aside>
+    <main class="form">
+      <div class="mobile-logo"><span class="m"><svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg></span> EvoStudio</div>
+      <h1>Créer un compte</h1>
+      <p class="sub">Accédez à vos licences après achat.</p>
+      <form id="form">
+        <label>Adresse email</label>
+        <div class="inp">
+          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+          <input type="email" id="email" placeholder="vous@exemple.com" required autofocus />
+        </div>
+        <label>Mot de passe</label>
+        <div class="inp">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <input type="password" id="password" placeholder="Minimum 6 caractères" required />
+        </div>
+        <label>Confirmer le mot de passe</label>
+        <div class="inp">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <input type="password" id="password2" placeholder="Répéter le mot de passe" required />
+        </div>
+        <button class="btn" type="submit" id="btn">Créer mon compte</button>
+      </form>
+      <div class="msg" id="msg"></div>
+      <div class="footer-link">Déjà un compte ? <a href="/login.html">Se connecter</a></div>
+    </main>
   </div>
   <script>
     const API = 'https://admin.evostudio.fr';

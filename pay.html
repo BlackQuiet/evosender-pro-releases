@@ -3,152 +3,172 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EvoStudio — Paiement Crypto</title><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='5' fill='%232563eb'/><path d='M20 4 10.5 13.5M20 4l-6 16-3.5-7-7-3.5z' fill='none' stroke='%23ffffff' stroke-width='1.5' stroke-linejoin='round' stroke-linecap='round'/></svg>" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <title>EvoStudio — Paiement</title><link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='5' fill='%232563eb'/><path d='M20 4 10.5 13.5M20 4l-6 16-3.5-7-7-3.5z' fill='none' stroke='%23ffffff' stroke-width='1.5' stroke-linejoin='round' stroke-linecap='round'/></svg>" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <style>
-    :root{--blue:#2563eb;--blue-dark:#1d4ed8;--blue-50:#eff6ff;--blue-100:#dbeafe;--ink:#0f172a;--slate:#64748b;--slate-2:#94a3b8;--line:#e2e8f0;--green:#16a34a;--amber:#b45309}
+    :root{--blue:#2563eb;--blue-dark:#1d4ed8;--blue-50:#eff6ff;--blue-100:#dbeafe;--ink:#0f172a;--slate:#64748b;--slate-2:#94a3b8;--line:#eef2f7;--green:#16a34a;--amber:#b45309}
     *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'Inter',sans-serif;background:#f8fafc;color:var(--ink);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:24px}
-    .logo{display:flex;align-items:center;gap:10px;font-size:21px;font-weight:800;margin:18px 0 28px;text-decoration:none;color:var(--ink)}
-    .logo-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--blue),#3b82f6);display:flex;align-items:center;justify-content:center}
-    .logo-icon svg{width:19px;height:19px;stroke:#fff;fill:none;stroke-width:2.2}
-    .logo span{color:var(--blue)}
-    .box{background:#fff;border:1px solid var(--line);border-radius:18px;padding:36px;width:100%;max-width:520px;box-shadow:0 8px 30px rgba(15,23,42,.06)}
-    h1{font-size:21px;font-weight:800;margin-bottom:4px}
-    .sub{font-size:14px;color:var(--slate);margin-bottom:26px}
-    .step-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);margin-bottom:18px}
+    body{font-family:'Inter',sans-serif;background:#eef2f7;color:var(--ink);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+    .checkout{width:100%;max-width:920px;background:#fff;border-radius:26px;overflow:hidden;display:grid;grid-template-columns:330px 1fr;box-shadow:0 30px 80px rgba(15,23,42,.14)}
+    @media(max-width:760px){.checkout{grid-template-columns:1fr}.side{display:none}}
 
-    .mini-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--slate);margin:18px 0 10px}
+    .side{background:linear-gradient(160deg,#1e3a8a,#2563eb);color:#fff;padding:40px 32px;display:flex;flex-direction:column}
+    .side .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;color:#fff;text-decoration:none}
+    .side .brand .m{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center}
+    .side .brand .m svg{width:19px;height:19px;stroke:#fff;fill:none;stroke-width:2.2}
+    .side h2{font-size:23px;font-weight:800;margin:36px 0 12px;line-height:1.25;letter-spacing:-.3px}
+    .side .lead{font-size:14px;color:rgba(255,255,255,.82);line-height:1.65}
+    .trust{margin-top:auto;display:flex;flex-direction:column;gap:14px;padding-top:32px}
+    .trust div{display:flex;align-items:center;gap:11px;font-size:13.5px;color:rgba(255,255,255,.92)}
+    .trust svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:1.8;flex-shrink:0}
+
+    .panel{padding:40px 38px}
+    @media(max-width:760px){.panel{padding:30px 22px}}
+    h1{font-size:23px;font-weight:800;margin-bottom:4px;letter-spacing:-.3px}
+    .sub{font-size:14px;color:var(--slate);margin-bottom:22px}
+    .mini-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--slate);margin:20px 0 10px}
+
     .product-list{display:flex;flex-direction:column;gap:8px}
-    .prod-btn{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px 16px;cursor:pointer;transition:all .15s}
-    .prod-btn:hover{border-color:var(--blue-100)}
-    .prod-btn.active{border-color:var(--blue);background:var(--blue-50)}
-    .prod-left{display:flex;align-items:center;gap:11px}
-    .prod-ic{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--blue-50)}
+    .prod-btn{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:13px 15px;cursor:pointer;transition:.15s}
+    .prod-btn:hover{border-color:var(--blue-100);background:#fafcff}
+    .prod-btn.active{border-color:var(--blue);background:var(--blue-50);box-shadow:0 0 0 3px rgba(37,99,235,.10)}
+    .prod-left{display:flex;align-items:center;gap:12px}
+    .prod-ic{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--blue-50)}
     .prod-ic svg{width:18px;height:18px;stroke:var(--blue);fill:none;stroke-width:1.6}
     .prod-ic.green{background:#dcfce7}.prod-ic.green svg{stroke:#16a34a}
     .prod-ic.purple{background:#f3e8ff}.prod-ic.purple svg{stroke:#9333ea}
     .prod-ic.amber{background:#fef3c7}.prod-ic.amber svg{stroke:#d97706}
     .prod-name{font-size:14.5px;font-weight:700}
     .prod-price{font-size:13px;color:var(--blue);font-weight:700;white-space:nowrap}
-    .mini-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:4px}
-    .qty-stepper{display:flex;align-items:center;gap:6px}
+
+    .mini-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .qty-hint{font-size:12px;color:var(--slate)}
+    .qty-stepper{display:flex;align-items:center;gap:4px;border:1.5px solid var(--line);border-radius:12px;padding:4px}
+    .qty-btn{width:34px;height:34px;border-radius:9px;border:none;background:var(--blue-50);color:var(--blue);font-size:20px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+    .qty-btn:hover{background:var(--blue-100)}
+    .qty-val{min-width:42px;text-align:center;font-size:18px;font-weight:800}
+
     .pay-pills{display:flex;flex-wrap:wrap;gap:8px}
-    .pill-btn{flex:1;min-width:120px;display:flex;align-items:center;justify-content:center;gap:7px;background:#fff;border:1px solid var(--line);border-radius:11px;padding:12px;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s}
+    .pill-btn{flex:1;min-width:120px;display:flex;align-items:center;justify-content:center;gap:7px;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:12px;font-size:14px;font-weight:700;cursor:pointer;transition:.15s}
     .pill-btn:hover{border-color:var(--blue-100)}
     .pill-btn.active{border-color:var(--blue);background:var(--blue-50);color:var(--blue)}
-    .pay-logo{width:20px;height:20px;display:inline-block;flex-shrink:0}
+    .pay-logo{width:20px;height:20px}
     .pill-net{font-size:10px;font-weight:700;background:#fee2e2;color:#b91c1c;padding:1px 6px;border-radius:20px}
 
-    .qty-row{display:flex;align-items:center;gap:12px;margin-bottom:22px}
-    .qty-btn{width:42px;height:42px;border-radius:11px;border:1.5px solid var(--line);background:#f8fafc;color:var(--blue);font-size:22px;font-weight:700;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center}
-    .qty-btn:hover{border-color:var(--blue);background:var(--blue-50)}
-    .qty-val{min-width:54px;text-align:center;font-size:24px;font-weight:800}
-    .qty-hint{font-size:12px;color:var(--slate);margin-left:4px}
-    .total-row{display:flex;align-items:center;justify-content:space-between;background:var(--blue-50);border:1px solid var(--blue-100);border-radius:12px;padding:14px 18px;margin-bottom:18px;font-size:14px;color:var(--slate)}
-    .total-row strong{font-size:22px;color:var(--blue);font-weight:900}
-    .btn{width:100%;background:var(--blue);color:#fff;border:none;border-radius:11px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;font-family:inherit;box-shadow:0 6px 18px rgba(37,99,235,.26)}
+    .total-row{display:flex;align-items:center;justify-content:space-between;border-top:1.5px dashed var(--line);margin-top:24px;padding-top:18px;font-size:14px;color:var(--slate)}
+    .total-row strong{font-size:25px;color:var(--ink);font-weight:900;letter-spacing:-.5px}
+
+    .btn{width:100%;margin-top:20px;background:var(--blue);color:#fff;border:none;border-radius:14px;padding:14px;font-size:15px;font-weight:700;cursor:pointer;transition:.2s;font-family:inherit;box-shadow:0 8px 22px rgba(37,99,235,.26)}
     .btn:hover{background:var(--blue-dark)}
     .btn:disabled{opacity:.4;cursor:not-allowed;box-shadow:none}
+    .msg{font-size:13px;margin-top:10px;text-align:center}.msg.err{color:#dc2626}
 
+    /* Étape paiement */
     .pay-box{display:none}
-    .amount-row{background:var(--blue-50);border:1px solid var(--blue-100);border-radius:12px;padding:16px 20px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between}
-    .amount-val{font-size:26px;font-weight:900;letter-spacing:-.02em;color:var(--blue)}
-    .amount-copy{background:var(--blue);border:none;border-radius:8px;padding:7px 13px;font-size:12px;font-weight:700;color:#fff;cursor:pointer}
+    .step-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);margin-bottom:14px;display:inline-block;background:var(--blue-50);padding:5px 12px;border-radius:20px}
+    .amount-row{background:var(--blue-50);border:1px solid var(--blue-100);border-radius:14px;padding:16px 20px;margin:18px 0;display:flex;align-items:center;justify-content:space-between}
+    .amount-val{font-size:25px;font-weight:900;letter-spacing:-.4px;color:var(--blue)}
+    .amount-copy{background:var(--blue);border:none;border-radius:9px;padding:8px 14px;font-size:12px;font-weight:700;color:#fff;cursor:pointer}
     .addr-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--slate);margin-bottom:8px}
-    .addr-box{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:12px 14px;font-family:monospace;font-size:13px;word-break:break-all;display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:20px;font-weight:600}
-    .addr-copy{background:#fff;border:1px solid var(--line);color:var(--slate);border-radius:7px;padding:5px 11px;font-size:11px;cursor:pointer;flex-shrink:0;font-weight:600}
-    #qrcode{margin:0 auto 20px;width:fit-content;background:#fff;padding:12px;border-radius:12px;border:1px solid var(--line)}
-    .warning{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:14px 16px;font-size:13px;color:var(--amber);line-height:1.6;margin-bottom:20px}
-    .status-box{text-align:center;padding:20px;border-radius:12px;margin-top:16px;border:1px solid var(--line);background:#f8fafc}
+    .addr-box{background:#f8fafc;border:1px solid var(--line);border-radius:11px;padding:12px 14px;font-family:monospace;font-size:13px;word-break:break-all;display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:18px;font-weight:600}
+    .addr-copy{background:#fff;border:1px solid var(--line);color:var(--slate);border-radius:8px;padding:6px 11px;font-size:11px;cursor:pointer;flex-shrink:0;font-weight:600}
+    #qrcode{margin:0 auto 18px;width:fit-content;background:#fff;padding:14px;border-radius:16px;border:1px solid var(--line)}
+    .warning{background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:14px 16px;font-size:13px;color:var(--amber);line-height:1.6;margin-bottom:18px}
+    .status-box{text-align:center;padding:20px;border-radius:14px;border:1px solid var(--line);background:#f8fafc}
     .status-pending{background:#fffbeb;border-color:#fde68a}
     .status-paid{background:#f0fdf4;border-color:#bbf7d0}
     .spinner{display:inline-block;width:18px;height:18px;border:2px solid var(--blue-100);border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite;margin-right:8px;vertical-align:middle}
     @keyframes spin{to{transform:rotate(360deg)}}
-    .lic-key{font-family:monospace;font-size:15px;font-weight:700;color:var(--green);background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:10px 14px;margin-top:10px;word-break:break-all}
-    .msg{font-size:13px;margin-top:10px;text-align:center}
-    .msg.err{color:#dc2626}
+    .lic-key{font-family:monospace;font-size:15px;font-weight:700;color:var(--green);background:#f0fdf4;border:1px solid #bbf7d0;border-radius:9px;padding:10px 14px;margin-top:10px;word-break:break-all}
   </style>
 </head>
 <body>
-  <a href="/" class="logo">
-    <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg></div>
-    Evo<span>Studio</span>
-  </a>
-
-  <!-- Étape 1 : Choix produit + paiement (minimaliste) -->
-  <div class="box" id="step-choose">
-    <h1>Acheter une licence</h1>
-    <p class="sub">Sélectionnez votre produit · licence générée automatiquement</p>
-
-    <div class="mini-label">Produit</div>
-    <div class="product-list" id="product-grid"></div>
-
-    <div class="mini-row">
-      <div>
-        <div class="mini-label" style="margin:0">Ordinateurs (PC)</div>
-        <div class="qty-hint" id="qty-hint">1 licence — 1 PC</div>
+  <div class="checkout">
+    <aside class="side">
+      <a href="/" class="brand"><span class="m"><svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg></span> EvoStudio</a>
+      <h2>Paiement sécurisé,<br>licence instantanée.</h2>
+      <p class="lead">Réglez votre commande et recevez votre clé de licence automatiquement dans votre espace client.</p>
+      <div class="trust">
+        <div><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Paiement chiffré & sécurisé</div>
+        <div><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Licence générée automatiquement</div>
+        <div><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Licence à vie · support inclus</div>
       </div>
-      <div class="qty-stepper">
-        <button type="button" class="qty-btn" onclick="changeQty(-1)">−</button>
-        <div class="qty-val" id="qty-val">1</div>
-        <button type="button" class="qty-btn" onclick="changeQty(1)">+</button>
+    </aside>
+
+    <main class="panel">
+      <!-- Étape 1 -->
+      <div id="step-choose">
+        <h1>Votre commande</h1>
+        <p class="sub">Choisissez le produit et le moyen de paiement.</p>
+
+        <div class="mini-label">Produit</div>
+        <div class="product-list" id="product-grid"></div>
+
+        <div class="mini-label">Ordinateurs (PC)</div>
+        <div class="mini-row">
+          <div class="qty-hint" id="qty-hint">1 licence — 1 PC</div>
+          <div class="qty-stepper">
+            <button type="button" class="qty-btn" onclick="changeQty(-1)">−</button>
+            <div class="qty-val" id="qty-val">1</div>
+            <button type="button" class="qty-btn" onclick="changeQty(1)">+</button>
+          </div>
+        </div>
+
+        <div class="mini-label">Paiement</div>
+        <div class="pay-pills" id="crypto-grid">
+          <div class="pill-btn active" data-crypto="usdt" id="btn-usdt" onclick="selectCrypto(this)">
+            <img src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons/svg/color/usdt.svg" alt="" class="pay-logo" onerror="this.outerHTML='💵 '" />USDT <span class="pill-net">TRC20</span>
+          </div>
+          <div class="pill-btn" data-crypto="btc" id="btn-btc" onclick="selectCrypto(this)">
+            <img src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons/svg/color/btc.svg" alt="" class="pay-logo" onerror="this.outerHTML='₿ '" />Bitcoin
+          </div>
+          <div class="pill-btn" data-crypto="wave" id="btn-wave" onclick="selectCrypto(this)" style="display:none">🌊 Wave</div>
+          <div class="pill-btn" data-crypto="om" id="btn-om" onclick="selectCrypto(this)" style="display:none">🟠 Orange Money</div>
+        </div>
+
+        <div class="total-row" id="total-row" style="display:none">
+          <span>Total à payer</span>
+          <strong id="total-val">—</strong>
+        </div>
+
+        <button class="btn" id="btn-proceed" onclick="proceed()" disabled>Continuer vers le paiement</button>
+        <div class="msg err" id="msg-choose"></div>
       </div>
-    </div>
 
-    <div class="mini-label">Paiement</div>
-    <div class="pay-pills" id="crypto-grid">
-      <div class="pill-btn active" data-crypto="usdt" id="btn-usdt" onclick="selectCrypto(this)">
-        <img src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons/svg/color/usdt.svg" alt="" class="pay-logo" onerror="this.outerHTML='💵 '" />USDT <span class="pill-net">TRC20</span>
+      <!-- Étape 2 -->
+      <div class="pay-box" id="step-pay">
+        <span class="step-label">Dernière étape — paiement</span>
+        <h1>Finalisez votre paiement</h1>
+        <p class="sub" id="pay-sub">Envoyez exactement ce montant à l'adresse ci-dessous.</p>
+
+        <div class="amount-row">
+          <div>
+            <div style="font-size:11px;color:var(--slate);margin-bottom:2px">Montant EXACT à envoyer</div>
+            <div class="amount-val" id="pay-amount">—</div>
+          </div>
+          <button class="amount-copy" onclick="copyAmount()">Copier</button>
+        </div>
+
+        <div class="addr-label">Adresse de réception</div>
+        <div class="addr-box">
+          <span id="pay-address">—</span>
+          <button class="addr-copy" onclick="copyAddress()">Copier</button>
+        </div>
+
+        <div id="qrcode"></div>
+
+        <div class="warning">
+          ⚠️ Envoyez <strong>exactement</strong> le montant indiqué (avec les décimales). Ce montant unique identifie votre paiement et la licence est générée automatiquement à la réception.
+        </div>
+
+        <div class="status-box status-pending" id="status-box">
+          <span class="spinner"></span>
+          <span id="status-text">En attente du paiement…</span>
+          <div style="font-size:11px;color:var(--slate);margin-top:6px">Vérification automatique toutes les 90 secondes</div>
+        </div>
       </div>
-      <div class="pill-btn" data-crypto="btc" id="btn-btc" onclick="selectCrypto(this)">
-        <img src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons/svg/color/btc.svg" alt="" class="pay-logo" onerror="this.outerHTML='₿ '" />Bitcoin
-      </div>
-      <div class="pill-btn" data-crypto="wave" id="btn-wave" onclick="selectCrypto(this)" style="display:none">🌊 Wave</div>
-      <div class="pill-btn" data-crypto="om" id="btn-om" onclick="selectCrypto(this)" style="display:none">🟠 Orange Money</div>
-    </div>
-
-    <div class="total-row" id="total-row" style="display:none">
-      <span>Total</span>
-      <strong id="total-val">—</strong>
-    </div>
-
-    <button class="btn" id="btn-proceed" onclick="proceed()" disabled>Continuer →</button>
-    <div class="msg err" id="msg-choose"></div>
-  </div>
-
-  <!-- Étape 2 : Paiement -->
-  <div class="box pay-box" id="step-pay">
-    <div class="step-label">Étape 2 / 2 — Envoyer le paiement</div>
-    <h1>Paiement en cours</h1>
-    <p class="sub" id="pay-sub">Envoyez exactement ce montant à l'adresse ci-dessous.</p>
-
-    <div class="amount-row">
-      <div>
-        <div style="font-size:11px;color:#64748b;margin-bottom:2px">Montant EXACT à envoyer</div>
-        <div class="amount-val" id="pay-amount">—</div>
-      </div>
-      <button class="amount-copy" onclick="copyAmount()">Copier</button>
-    </div>
-
-    <div class="addr-label">Adresse de réception</div>
-    <div class="addr-box">
-      <span id="pay-address">—</span>
-      <button class="addr-copy" onclick="copyAddress()">Copier</button>
-    </div>
-
-    <div id="qrcode"></div>
-
-    <div class="warning">
-      ⚠️ Envoyez <strong>exactement</strong> le montant indiqué (avec les décimales). Ce montant unique identifie votre paiement. Le réseau confirme automatiquement votre paiement — aucune action manuelle requise.
-    </div>
-
-    <div class="status-box status-pending" id="status-box">
-      <span class="spinner"></span>
-      <span id="status-text">En attente du paiement…</span>
-      <div style="font-size:11px;color:#64748b;margin-top:6px">Vérification automatique toutes les 90 secondes</div>
-    </div>
+    </main>
   </div>
 
   <script>
@@ -206,7 +226,6 @@
         if (!r.ok) { location.href = '/login.html?redirect=' + encodeURIComponent(location.href); return; }
       } catch { return; }
 
-      // Charger les produits + appliquer la région
       try {
         const r = await fetch(API + '/api/shop/products');
         if (r.ok) {
@@ -218,7 +237,6 @@
       } catch {}
     }
 
-    // Géo-détection : en Afrique → Wave + Orange Money ; ailleurs → USDT + BTC par défaut
     async function detectAfrica(){
       try{
         const r = await fetch('https://ipapi.co/json/');
@@ -231,12 +249,10 @@
       const waveOn = data.wave_enabled, omOn = data.om_enabled;
       const setShow = (id,on)=>{ const e=document.getElementById(id); if(e) e.style.display = on ? 'flex' : 'none'; };
       if (isAfrica && (waveOn || omOn)) {
-        // Afrique : mobile money en avant, crypto masquée
         setShow('btn-usdt', false); setShow('btn-btc', false);
         setShow('btn-wave', waveOn); setShow('btn-om', omOn);
         selectedCrypto = waveOn ? 'wave' : 'om';
       } else {
-        // Par défaut : crypto
         setShow('btn-usdt', true); setShow('btn-btc', true);
         setShow('btn-wave', false); setShow('btn-om', false);
         selectedCrypto = 'usdt';
@@ -289,7 +305,6 @@
       const btn = document.getElementById('btn-proceed');
       const msg = document.getElementById('msg-choose');
       btn.disabled = true; btn.textContent = 'Chargement...';
-
       try {
         const r = await fetch(API + '/api/shop/order', {
           method: 'POST',
@@ -300,14 +315,14 @@
         if (!r.ok) {
           if (r.status === 401) { location.href = '/login.html?redirect=' + encodeURIComponent(location.href); return; }
           msg.textContent = d.error || 'Erreur.';
-          btn.disabled = false; btn.textContent = 'Continuer →';
+          btn.disabled = false; btn.textContent = 'Continuer vers le paiement';
           return;
         }
         orderId = d.order_id;
         showPayStep(d);
       } catch(e) {
         msg.textContent = 'Erreur réseau.';
-        btn.disabled = false; btn.textContent = 'Continuer →';
+        btn.disabled = false; btn.textContent = 'Continuer vers le paiement';
       }
     }
 
@@ -326,7 +341,6 @@
         document.getElementById('pay-sub').textContent =
           `Payez exactement ${montant} FCFA via ${moyen} en scannant le QR code ci-dessous`;
 
-        // QR : lien marchand si fourni, sinon le numéro brut
         document.getElementById('qrcode').innerHTML = '';
         let url = d.address;
         const link = (d.pay_link || '').trim();
@@ -356,7 +370,6 @@
       }
 
       const symbol = d.crypto === 'usdt' ? 'USDT' : 'BTC';
-      // Équivalent en dollars (prix de base USDT ≈ USD) — affiché pour le BTC
       let usdNote = '';
       if (d.crypto === 'btc') {
         const p = curProduct();
@@ -368,14 +381,12 @@
       document.getElementById('pay-sub').textContent =
         `Envoyez exactement ${d.price_exact} ${symbol} · Réseau ${d.crypto === 'usdt' ? 'TRC20 (Tron)' : 'Bitcoin'}`;
 
-      // QR code
       document.getElementById('qrcode').innerHTML = '';
       const qrVal = d.crypto === 'usdt'
         ? `tron:${d.address}?amount=${d.price_exact}`
         : `bitcoin:${d.address}?amount=${d.price_exact}`;
       new QRCode(document.getElementById('qrcode'), { text: qrVal, width: 160, height: 160 });
 
-      // Démarrer polling
       pollInterval = setInterval(pollStatus, 10000);
     }
 
@@ -390,12 +401,12 @@
           box.className = 'status-box status-paid';
           box.innerHTML = `
             <div style="font-size:22px;margin-bottom:8px">🎉</div>
-            <div style="font-size:15px;font-weight:700;color:#10b981">Paiement confirmé !</div>
+            <div style="font-size:15px;font-weight:700;color:#16a34a">Paiement confirmé !</div>
             <div style="font-size:13px;color:#64748b;margin:6px 0 10px">Votre licence est prête :</div>
             <div class="lic-key">${d.license_key}</div>
             <div style="margin-top:14px">
-              <button onclick="navigator.clipboard.writeText('${d.license_key}')" style="background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);color:#10b981;border-radius:7px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer">Copier la licence</button>
-              <a href="/dashboard.html" style="display:inline-block;margin-left:8px;background:#3b82f6;color:#fff;border-radius:7px;padding:8px 16px;font-size:12px;font-weight:700;text-decoration:none">Mon espace client →</a>
+              <button onclick="navigator.clipboard.writeText('${d.license_key}')" style="background:#dcfce7;border:1px solid #bbf7d0;color:#15803d;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer">Copier la licence</button>
+              <a href="/dashboard.html" style="display:inline-block;margin-left:8px;background:#2563eb;color:#fff;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;text-decoration:none">Mon espace client →</a>
             </div>
           `;
         } else if (d.status === 'expired') {
@@ -417,7 +428,7 @@
     function showToast(msg) {
       const t = document.createElement('div');
       t.textContent = msg;
-      t.style.cssText='position:fixed;bottom:20px;right:20px;background:#1e293b;border:1px solid #334155;border-radius:8px;padding:10px 16px;font-size:13px;z-index:999';
+      t.style.cssText='position:fixed;bottom:20px;right:20px;background:#0f172a;color:#fff;border-radius:10px;padding:11px 18px;font-size:13px;z-index:999';
       document.body.appendChild(t);
       setTimeout(() => t.remove(), 2000);
     }
