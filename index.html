@@ -593,7 +593,7 @@ async function loadProducts(){
     const smtpSection=document.getElementById('smtp');
     const smtpGrid=document.getElementById('smtp-plans-grid');
     if(smtpPlans.length>0&&smtpSection&&smtpGrid){
-      smtpSection.style.display='';
+      smtpSection.style.display='block';
       const VLABELS={smtp_10k:'10 000',smtp_50k:'50 000',smtp_100k:'100 000',smtp_500k:'500 000'};
       const POPULAR='smtp_50k';
       const relayHost=esc(data.smtp_relay_host||'smtp.exabytes.com');
