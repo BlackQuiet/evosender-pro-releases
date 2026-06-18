@@ -10,12 +10,12 @@
     :root{--blue:#2563eb;--blue-dark:#1d4ed8;--blue-50:#eff6ff;--blue-100:#dbeafe;--ink:#0f172a;--slate:#64748b;--slate-2:#94a3b8;--line:#eef2f7;--green:#16a34a;--amber:#b45309}
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:'Inter',sans-serif;background:#eef2f7;color:var(--ink);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-    .checkout{width:100%;max-width:920px;background:#fff;border-radius:26px;overflow:hidden;display:grid;grid-template-columns:330px 1fr;box-shadow:0 30px 80px rgba(15,23,42,.14)}
+    .checkout{width:100%;max-width:920px;background:#fff;border-radius:0;overflow:hidden;display:grid;grid-template-columns:330px 1fr;box-shadow:0 30px 80px rgba(15,23,42,.14)}
     @media(max-width:760px){.checkout{grid-template-columns:1fr}.side{display:none}}
 
     .side{background:linear-gradient(160deg,#1e3a8a,#2563eb);color:#fff;padding:40px 32px;display:flex;flex-direction:column}
     .side .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;color:#fff;text-decoration:none}
-    .side .brand .m{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center}
+    .side .brand .m{width:36px;height:36px;border-radius:0;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center}
     .side .brand .m svg{width:19px;height:19px;stroke:#fff;fill:none;stroke-width:2.2}
     .side h2{font-size:23px;font-weight:800;margin:36px 0 12px;line-height:1.25;letter-spacing:-.3px}
     .side .lead{font-size:14px;color:rgba(255,255,255,.82);line-height:1.65}
@@ -31,11 +31,11 @@
 
     /* Grille produits compacte */
     .product-list{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-    .prod-btn{display:flex;flex-direction:column;align-items:flex-start;gap:6px;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:11px 13px;cursor:pointer;transition:.15s;min-width:0}
+    .prod-btn{display:flex;flex-direction:column;align-items:flex-start;gap:6px;background:#fff;border:1.5px solid var(--line);border-radius:0;padding:11px 13px;cursor:pointer;transition:.15s;min-width:0}
     .prod-btn:hover{border-color:var(--blue-100);background:#fafcff}
     .prod-btn.active{border-color:var(--blue);background:var(--blue-50);box-shadow:0 0 0 3px rgba(37,99,235,.10)}
     .prod-left{display:flex;align-items:center;gap:8px;width:100%}
-    .prod-ic{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--blue-50)}
+    .prod-ic{width:28px;height:28px;border-radius:0;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--blue-50)}
     .prod-ic svg{width:14px;height:14px;stroke:var(--blue);fill:none;stroke-width:1.8}
     .prod-ic.green{background:#dcfce7}.prod-ic.green svg{stroke:#16a34a}
     .prod-ic.purple{background:#f3e8ff}.prod-ic.purple svg{stroke:#9333ea}
@@ -45,45 +45,45 @@
 
     .mini-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
     .qty-hint{font-size:12px;color:var(--slate)}
-    .qty-stepper{display:flex;align-items:center;gap:4px;border:1.5px solid var(--line);border-radius:12px;padding:4px}
-    .qty-btn{width:34px;height:34px;border-radius:9px;border:none;background:var(--blue-50);color:var(--blue);font-size:20px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+    .qty-stepper{display:flex;align-items:center;gap:4px;border:1.5px solid var(--line);border-radius:0;padding:4px}
+    .qty-btn{width:34px;height:34px;border-radius:0;border:none;background:var(--blue-50);color:var(--blue);font-size:20px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
     .qty-btn:hover{background:var(--blue-100)}
     .qty-val{min-width:42px;text-align:center;font-size:18px;font-weight:800}
 
     .pay-pills{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:6px}
-    .pill-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:8px 6px;font-size:11px;font-weight:700;cursor:pointer;transition:.15s;line-height:1.2}
+    .pill-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:#fff;border:1.5px solid var(--line);border-radius:0;padding:8px 6px;font-size:11px;font-weight:700;cursor:pointer;transition:.15s;line-height:1.2}
     .pill-btn:hover{border-color:var(--blue-100)}
     .pill-btn.active{border-color:var(--blue);background:var(--blue-50);color:var(--blue)}
     .pay-logo{width:22px;height:22px;object-fit:contain}
-    .pill-net{font-size:9px;font-weight:700;background:#fee2e2;color:#b91c1c;padding:1px 4px;border-radius:20px}
+    .pill-net{font-size:9px;font-weight:700;background:#fee2e2;color:#b91c1c;padding:1px 4px;border-radius:0}
 
-    #invoice-email{width:100%;background:#f8fafc;border:1.5px solid var(--line);color:var(--ink);border-radius:12px;padding:12px 14px;font-size:14px;outline:none;font-family:inherit;transition:.2s}
+    #invoice-email{width:100%;background:#f8fafc;border:1.5px solid var(--line);color:var(--ink);border-radius:0;padding:12px 14px;font-size:14px;outline:none;font-family:inherit;transition:.2s}
     #invoice-email:focus{border-color:var(--blue);background:#fff;box-shadow:0 0 0 4px rgba(37,99,235,.08)}
     .total-row{display:flex;align-items:center;justify-content:space-between;border-top:1.5px dashed var(--line);margin-top:24px;padding-top:18px;font-size:14px;color:var(--slate)}
     .total-row strong{font-size:25px;color:var(--ink);font-weight:900;letter-spacing:-.5px}
 
-    .btn{width:100%;margin-top:20px;background:var(--blue);color:#fff;border:none;border-radius:14px;padding:14px;font-size:15px;font-weight:700;cursor:pointer;transition:.2s;font-family:inherit;box-shadow:0 8px 22px rgba(37,99,235,.26)}
+    .btn{width:100%;margin-top:20px;background:var(--blue);color:#fff;border:none;border-radius:0;padding:14px;font-size:15px;font-weight:700;cursor:pointer;transition:.2s;font-family:inherit;box-shadow:0 8px 22px rgba(37,99,235,.26)}
     .btn:hover{background:var(--blue-dark)}
     .btn:disabled{opacity:.4;cursor:not-allowed;box-shadow:none}
     .msg{font-size:13px;margin-top:10px;text-align:center}.msg.err{color:#dc2626}
 
     /* Étape paiement */
     .pay-box{display:none}
-    .step-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);margin-bottom:14px;display:inline-block;background:var(--blue-50);padding:5px 12px;border-radius:20px}
-    .amount-row{background:var(--blue-50);border:1px solid var(--blue-100);border-radius:14px;padding:16px 20px;margin:18px 0;display:flex;align-items:center;justify-content:space-between}
+    .step-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);margin-bottom:14px;display:inline-block;background:var(--blue-50);padding:5px 12px;border-radius:0}
+    .amount-row{background:var(--blue-50);border:1px solid var(--blue-100);border-radius:0;padding:16px 20px;margin:18px 0;display:flex;align-items:center;justify-content:space-between}
     .amount-val{font-size:25px;font-weight:900;letter-spacing:-.4px;color:var(--blue)}
-    .amount-copy{background:var(--blue);border:none;border-radius:9px;padding:8px 14px;font-size:12px;font-weight:700;color:#fff;cursor:pointer}
+    .amount-copy{background:var(--blue);border:none;border-radius:0;padding:8px 14px;font-size:12px;font-weight:700;color:#fff;cursor:pointer}
     .addr-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--slate);margin-bottom:8px}
-    .addr-box{background:#f8fafc;border:1px solid var(--line);border-radius:11px;padding:12px 14px;font-family:monospace;font-size:13px;word-break:break-all;display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:18px;font-weight:600}
-    .addr-copy{background:#fff;border:1px solid var(--line);color:var(--slate);border-radius:8px;padding:6px 11px;font-size:11px;cursor:pointer;flex-shrink:0;font-weight:600}
+    .addr-box{background:#f8fafc;border:1px solid var(--line);border-radius:0;padding:12px 14px;font-family:monospace;font-size:13px;word-break:break-all;display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:18px;font-weight:600}
+    .addr-copy{background:#fff;border:1px solid var(--line);color:var(--slate);border-radius:0;padding:6px 11px;font-size:11px;cursor:pointer;flex-shrink:0;font-weight:600}
     #qrcode{margin:0 auto 18px;width:fit-content;background:#fff;padding:14px;border-radius:16px;border:1px solid var(--line)}
-    .warning{background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:14px 16px;font-size:13px;color:var(--amber);line-height:1.6;margin-bottom:18px}
-    .status-box{text-align:center;padding:20px;border-radius:14px;border:1px solid var(--line);background:#f8fafc}
+    .warning{background:#fffbeb;border:1px solid #fde68a;border-radius:0;padding:14px 16px;font-size:13px;color:var(--amber);line-height:1.6;margin-bottom:18px}
+    .status-box{text-align:center;padding:20px;border-radius:0;border:1px solid var(--line);background:#f8fafc}
     .status-pending{background:#fffbeb;border-color:#fde68a}
     .status-paid{background:#f0fdf4;border-color:#bbf7d0}
     .spinner{display:inline-block;width:18px;height:18px;border:2px solid var(--blue-100);border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite;margin-right:8px;vertical-align:middle}
     @keyframes spin{to{transform:rotate(360deg)}}
-    .lic-key{font-family:monospace;font-size:15px;font-weight:700;color:var(--green);background:#f0fdf4;border:1px solid #bbf7d0;border-radius:9px;padding:10px 14px;margin-top:10px;word-break:break-all}
+    .lic-key{font-family:monospace;font-size:15px;font-weight:700;color:var(--green);background:#f0fdf4;border:1px solid #bbf7d0;border-radius:0;padding:10px 14px;margin-top:10px;word-break:break-all}
   </style>
 </head>
 <body>
@@ -107,7 +107,7 @@
 
         <div class="mini-label" id="product-label">Produit</div>
         <div id="product-grid"></div>
-        <select id="product-select" onchange="selectProductFromDropdown(this)" style="display:none;width:100%;background:#f8fafc;border:1.5px solid var(--line);color:var(--ink);border-radius:12px;padding:12px 14px;font-size:14px;font-weight:600;outline:none;font-family:inherit;cursor:pointer;transition:.2s">
+        <select id="product-select" onchange="selectProductFromDropdown(this)" style="display:none;width:100%;background:#f8fafc;border:1.5px solid var(--line);color:var(--ink);border-radius:0;padding:12px 14px;font-size:14px;font-weight:600;outline:none;font-family:inherit;cursor:pointer;transition:.2s">
           <option value="">— Choisir un produit —</option>
         </select>
 
@@ -138,7 +138,7 @@
           <div class="pill-btn" data-crypto="om" id="btn-om" onclick="selectCrypto(this)" style="display:none">
             <span style="font-size:18px;line-height:1">🟠</span>Orange Money
           </div>
-          <div id="btn-card" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:10px;padding:8px 6px;font-size:11px;font-weight:600;color:#94a3b8;cursor:not-allowed;opacity:.65" title="Visa/Mastercard — non disponible">
+          <div id="btn-card" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:0;padding:8px 6px;font-size:11px;font-weight:600;color:#94a3b8;cursor:not-allowed;opacity:.65" title="Visa/Mastercard — non disponible">
             <span style="font-size:18px;line-height:1">💳</span>
             Visa/MC<span style="font-size:9px;background:#fef2f2;color:#ef4444;border-radius:6px;padding:1px 5px">Indispo</span>
           </div>
@@ -245,7 +245,7 @@
         html += '<span style="text-decoration:line-through;color:var(--slate);font-size:14px;font-weight:500;margin-right:6px">' + fmtAmount(orig) + '</span>';
       }
       html += fmtAmount(total);
-      if (discountPct > 0) html += ' <span style="background:#dc2626;color:#fff;font-size:10px;font-weight:800;padding:2px 6px;border-radius:10px;margin-left:6px">-' + discountPct + '%</span>';
+      if (discountPct > 0) html += ' <span style="background:#dc2626;color:#fff;font-size:10px;font-weight:800;padding:2px 6px;border-radius:0;margin-left:6px">-' + discountPct + '%</span>';
       if (selectedCrypto === 'btc') {
         const usd = (Number(p.price_usdt) || 0) * qty;
         html += ' <span style="font-size:13px;color:var(--slate);font-weight:600;white-space:nowrap">≈ $' + usd + '</span>';
@@ -336,7 +336,7 @@
         html += '<span style="text-decoration:line-through;opacity:.5;font-size:.8em;font-weight:500;margin-right:4px">' + orig + unit + '</span>';
       }
       html += unitPrice(p) + unit + suffix;
-      if (discountPct > 0) html += ' <span style="background:#dc2626;color:#fff;font-size:9px;font-weight:800;padding:1px 5px;border-radius:8px;margin-left:3px">-' + discountPct + '%</span>';
+      if (discountPct > 0) html += ' <span style="background:#dc2626;color:#fff;font-size:9px;font-weight:800;padding:1px 5px;border-radius:0;margin-left:3px">-' + discountPct + '%</span>';
       return html;
     }
 
@@ -550,7 +550,7 @@
               '<div style="font-size:22px;margin-bottom:8px">🎉</div>' +
               '<div style="font-size:15px;font-weight:700;color:#16a34a">Paiement confirmé !</div>' +
               '<div style="font-size:13px;color:#64748b;margin:10px 0 14px;line-height:1.6">Votre serveur SMTP est en cours de provisioning.<br>Vous recevrez vos identifiants relay par <strong>email dans les 24h</strong>.</div>' +
-              '<a href="/dashboard.html" style="display:inline-block;background:#2563eb;color:#fff;border-radius:8px;padding:10px 18px;font-size:13px;font-weight:700;text-decoration:none">Voir mes serveurs SMTP →</a>';
+              '<a href="/dashboard.html" style="display:inline-block;background:#2563eb;color:#fff;border-radius:0;padding:10px 18px;font-size:13px;font-weight:700;text-decoration:none">Voir mes serveurs SMTP →</a>';
           } else {
             box.innerHTML =
               '<div style="font-size:22px;margin-bottom:8px">🎉</div>' +
@@ -558,8 +558,8 @@
               '<div style="font-size:13px;color:#64748b;margin:6px 0 10px">Votre licence est prête :</div>' +
               '<div class="lic-key">' + d.license_key + '</div>' +
               '<div style="margin-top:14px">' +
-              '<button onclick="navigator.clipboard.writeText(\'' + d.license_key + '\')" style="background:#dcfce7;border:1px solid #bbf7d0;color:#15803d;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer">Copier la licence</button>' +
-              '<a href="/dashboard.html" style="display:inline-block;margin-left:8px;background:#2563eb;color:#fff;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;text-decoration:none">Mon espace client →</a>' +
+              '<button onclick="navigator.clipboard.writeText(\'' + d.license_key + '\')" style="background:#dcfce7;border:1px solid #bbf7d0;color:#15803d;border-radius:0;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer">Copier la licence</button>' +
+              '<a href="/dashboard.html" style="display:inline-block;margin-left:8px;background:#2563eb;color:#fff;border-radius:0;padding:8px 16px;font-size:12px;font-weight:700;text-decoration:none">Mon espace client →</a>' +
               '</div>';
           }
         } else if (d.status === 'expired') {
@@ -581,7 +581,7 @@
     function showToast(msg) {
       const t = document.createElement('div');
       t.textContent = msg;
-      t.style.cssText='position:fixed;bottom:20px;right:20px;background:#0f172a;color:#fff;border-radius:10px;padding:11px 18px;font-size:13px;z-index:999';
+      t.style.cssText='position:fixed;bottom:20px;right:20px;background:#0f172a;color:#fff;border-radius:0;padding:11px 18px;font-size:13px;z-index:999';
       document.body.appendChild(t);
       setTimeout(() => t.remove(), 2000);
     }
