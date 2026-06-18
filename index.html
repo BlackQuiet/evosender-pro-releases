@@ -147,14 +147,33 @@ section{padding:80px 0}
 .cta-band p{font-size:17px;opacity:.92;margin-bottom:26px;max-width:520px;margin-left:auto;margin-right:auto}
 
 /* FOOTER */
-footer{background:var(--ink);color:#cbd5e1;padding:54px 0 28px}
-.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:36px}
-@media(max-width:760px){.foot-grid{grid-template-columns:1fr}}
-.foot-logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;color:#fff;margin-bottom:14px}
-.foot-col h5{color:#fff;font-size:14px;font-weight:700;margin-bottom:14px}
-.foot-col a{display:block;color:#94a3b8;font-size:14px;padding:5px 0;transition:color .15s}
-.foot-col a:hover{color:var(--blue-100)}
-.foot-bottom{border-top:1px solid #1e293b;padding-top:22px;text-align:center;color:#64748b;font-size:13px}
+footer{background:#0a0f1e;color:#94a3b8;padding:0}
+.foot-top{padding:60px 0 48px;border-bottom:1px solid #1e293b}
+.foot-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1.2fr;gap:48px}
+@media(max-width:900px){.foot-grid{grid-template-columns:1fr 1fr;gap:32px}}
+@media(max-width:540px){.foot-grid{grid-template-columns:1fr}}
+.foot-brand{}
+.foot-logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:20px;color:#fff;margin-bottom:6px;letter-spacing:-.3px}
+.foot-logo .logo-mark{width:32px;height:32px;background:var(--blue);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.foot-logo .logo-mark svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.foot-tagline{font-size:13px;color:#64748b;line-height:1.6;max-width:240px;margin-bottom:18px}
+.foot-badge{display:inline-flex;align-items:center;gap:6px;background:#0f172a;border:1px solid #1e293b;border-radius:20px;padding:5px 12px;font-size:11px;color:#64748b}
+.foot-badge img{height:16px;width:auto;border-radius:3px;opacity:.8}
+.foot-col{}
+.foot-col h5{color:#e2e8f0;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px}
+.foot-col a{display:block;color:#64748b;font-size:13.5px;padding:4px 0;transition:color .15s;text-decoration:none}
+.foot-col a:hover{color:#e2e8f0}
+.foot-contact-block{background:#0f172a;border:1px solid #1e293b;border-radius:12px;padding:16px 18px}
+.foot-contact-block p{font-size:13px;color:#64748b;margin-bottom:12px}
+.foot-contact-email{display:flex;align-items:center;gap:8px;color:#93c5fd;font-size:13px;font-weight:600;text-decoration:none;margin-bottom:10px}
+.foot-contact-email:hover{color:#bfdbfe}
+.foot-contact-email svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0}
+.foot-response{font-size:11px;color:#475569}
+.foot-bottom{padding:20px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.foot-copy{font-size:12px;color:#334155}
+.foot-links{display:flex;gap:20px}
+.foot-links a{font-size:12px;color:#334155;text-decoration:none;transition:color .15s}
+.foot-links a:hover{color:#94a3b8}
 </style>
 </head>
 <body>
@@ -362,36 +381,66 @@ footer{background:var(--ink);color:#cbd5e1;padding:54px 0 28px}
 </section>
 
 <footer>
-  <div class="wrap">
-    <div class="foot-grid">
-      <div>
-        <div class="foot-logo"><span class="logo-mark"><svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg></span> EvoStudio</div>
-        <p style="color:#94a3b8;font-size:14px;max-width:300px">La suite professionnelle d'emailing : extraction, vérification et envoi en masse. Éditée par EGSCI SARL.</p>
-      </div>
-      <div class="foot-col">
-        <h5>Produit</h5>
-        <a href="#produits">Outils</a>
-        <a href="#tarifs">Tarifs</a>
-        <a href="#faq">FAQ</a>
-        <a href="/pay.html">Acheter</a>
-      </div>
-      <div class="foot-col">
-        <h5>Compte & support</h5>
-        <a href="/login.html">Connexion</a>
-        <a href="/register.html">Inscription</a>
-        <a href="/dashboard.html">Espace client</a>
-        <a href="mailto:support@evostudio.fr">support@evostudio.fr</a>
-      </div>
-      <div class="foot-col">
-        <h5>Légal</h5>
-        <a href="/privacy.html">Politique de confidentialité</a>
-        <a href="/privacy.html#s6">Vos droits</a>
-        <a href="/privacy.html#s13">Nous contacter</a>
+  <div class="foot-top">
+    <div class="wrap">
+      <div class="foot-grid">
+
+        <!-- Brand -->
+        <div class="foot-brand">
+          <div class="foot-logo">
+            <span class="logo-mark"><svg viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg></span>
+            EvoStudio
+          </div>
+          <p class="foot-tagline">La suite professionnelle d'emailing : extraction, vérification et envoi en masse.</p>
+          <div class="foot-badge">
+            <img src="/logo-egsci.png" alt="EGSCI">
+            Une marque <strong style="color:#94a3b8">EGSCI SARL</strong>
+          </div>
+        </div>
+
+        <!-- Produit -->
+        <div class="foot-col">
+          <h5>Produit</h5>
+          <a href="#produits">Nos outils</a>
+          <a href="#tarifs">Tarifs</a>
+          <a href="#faq">FAQ</a>
+          <a href="/pay.html">Acheter une licence</a>
+        </div>
+
+        <!-- Compte -->
+        <div class="foot-col">
+          <h5>Compte</h5>
+          <a href="/login.html">Connexion</a>
+          <a href="/register.html">Inscription</a>
+          <a href="/dashboard.html">Espace client</a>
+          <a href="/privacy.html">Confidentialité</a>
+        </div>
+
+        <!-- Contact -->
+        <div class="foot-col">
+          <h5>Support</h5>
+          <div class="foot-contact-block">
+            <p>Une question ? Notre équipe vous répond rapidement.</p>
+            <a href="mailto:support@evostudio.fr" class="foot-contact-email">
+              <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+              support@evostudio.fr
+            </a>
+            <div class="foot-response">⏱ Réponse sous 24h (jours ouvrés)</div>
+          </div>
+        </div>
+
       </div>
     </div>
+  </div>
+
+  <div class="wrap">
     <div class="foot-bottom">
-      © 2018–2025 EGSCI SARL · N° RCCM CI-ABJ-2018-B-10429 · Anyama, Abidjan, Côte d'Ivoire &nbsp;·&nbsp;
-      <a href="/privacy.html" style="color:#94a3b8;text-decoration:underline">Politique de confidentialité</a>
+      <span class="foot-copy">© 2018–2025 EGSCI SARL · RCCM CI-ABJ-2018-B-10429 · Anyama, Abidjan, Côte d'Ivoire</span>
+      <div class="foot-links">
+        <a href="/privacy.html">Politique de confidentialité</a>
+        <a href="/privacy.html#s6">Vos droits</a>
+        <a href="/privacy.html#s19">Nous contacter</a>
+      </div>
     </div>
   </div>
 </footer>
