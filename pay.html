@@ -50,12 +50,12 @@
     .qty-btn:hover{background:var(--blue-100)}
     .qty-val{min-width:42px;text-align:center;font-size:18px;font-weight:800}
 
-    .pay-pills{display:flex;flex-wrap:wrap;gap:8px}
-    .pill-btn{flex:1;min-width:120px;display:flex;align-items:center;justify-content:center;gap:7px;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:12px;font-size:14px;font-weight:700;cursor:pointer;transition:.15s}
+    .pay-pills{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:6px}
+    .pill-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:8px 6px;font-size:11px;font-weight:700;cursor:pointer;transition:.15s;line-height:1.2}
     .pill-btn:hover{border-color:var(--blue-100)}
     .pill-btn.active{border-color:var(--blue);background:var(--blue-50);color:var(--blue)}
-    .pay-logo{width:20px;height:20px}
-    .pill-net{font-size:10px;font-weight:700;background:#fee2e2;color:#b91c1c;padding:1px 6px;border-radius:20px}
+    .pay-logo{width:22px;height:22px;object-fit:contain}
+    .pill-net{font-size:9px;font-weight:700;background:#fee2e2;color:#b91c1c;padding:1px 4px;border-radius:20px}
 
     #invoice-email{width:100%;background:#f8fafc;border:1.5px solid var(--line);color:var(--ink);border-radius:12px;padding:12px 14px;font-size:14px;outline:none;font-family:inherit;transition:.2s}
     #invoice-email:focus{border-color:var(--blue);background:#fff;box-shadow:0 0 0 4px rgba(37,99,235,.08)}
@@ -124,15 +124,23 @@
         <div class="mini-label">Paiement</div>
         <div class="pay-pills" id="crypto-grid">
           <div class="pill-btn active" data-crypto="usdt" id="btn-usdt" onclick="selectCrypto(this)">
-            <img src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons/svg/color/usdt.svg" alt="" class="pay-logo" onerror="this.outerHTML='💵 '" />USDT <span class="pill-net">TRC20</span>
+            <img src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons/svg/color/usdt.svg" alt="" class="pay-logo" onerror="this.style.display='none'" />
+            USDT<span class="pill-net">TRC20</span>
           </div>
           <div class="pill-btn" data-crypto="btc" id="btn-btc" onclick="selectCrypto(this)">
-            <img src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons/svg/color/btc.svg" alt="" class="pay-logo" onerror="this.outerHTML='₿ '" />Bitcoin
+            <img src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons/svg/color/btc.svg" alt="" class="pay-logo" onerror="this.style.display='none'" />
+            Bitcoin
           </div>
-          <div class="pill-btn" data-crypto="wave" id="btn-wave" onclick="selectCrypto(this)" style="display:none"><img src="https://paywall.senaffiche.com/assets/images/logo_wave_circle_818.png" alt="Wave" style="width:18px;height:18px;border-radius:50%;flex-shrink:0;object-fit:cover" /> Wave</div>
-          <div class="pill-btn" data-crypto="om" id="btn-om" onclick="selectCrypto(this)" style="display:none">🟠 Orange Money</div>
-          <div id="btn-card" style="display:none;flex:1;min-width:120px;align-items:center;justify-content:center;gap:7px;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:12px;padding:12px;font-size:13px;font-weight:600;color:#94a3b8;cursor:not-allowed;opacity:.7" title="Visa/Mastercard — non disponible actuellement">
-            💳 Visa / Mastercard<br><span style="font-size:10px;font-weight:500;background:#fef2f2;color:#ef4444;border-radius:6px;padding:1px 6px;margin-top:2px;display:inline-block">Non disponible</span>
+          <div class="pill-btn" data-crypto="wave" id="btn-wave" onclick="selectCrypto(this)" style="display:none">
+            <img src="https://paywall.senaffiche.com/assets/images/logo_wave_circle_818.png" alt="Wave" class="pay-logo" style="border-radius:50%" />
+            Wave
+          </div>
+          <div class="pill-btn" data-crypto="om" id="btn-om" onclick="selectCrypto(this)" style="display:none">
+            <span style="font-size:18px;line-height:1">🟠</span>Orange Money
+          </div>
+          <div id="btn-card" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:10px;padding:8px 6px;font-size:11px;font-weight:600;color:#94a3b8;cursor:not-allowed;opacity:.65" title="Visa/Mastercard — non disponible">
+            <span style="font-size:18px;line-height:1">💳</span>
+            Visa/MC<span style="font-size:9px;background:#fef2f2;color:#ef4444;border-radius:6px;padding:1px 5px">Indispo</span>
           </div>
         </div>
 
