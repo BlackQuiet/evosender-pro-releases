@@ -34,8 +34,8 @@ img{max-width:100%;height:auto}
 .btn-outline:hover{border-color:#2563eb;color:#2563eb;background:#eff6ff}
 .btn-white{background:#fff;color:var(--ink);font-weight:700}
 .btn-white:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,.3)}
-.btn-dark{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.12)}
-.btn-dark:hover{background:rgba(255,255,255,.14)}
+.btn-dark{background:#f1f5f9;color:var(--ink);border:1px solid #cbd5e1}
+.btn-dark:hover{background:#e2e8f0;border-color:#94a3b8}
 
 /* ═══════════════════════════════════════════════
    NAVBAR — pill flottante centree
@@ -324,19 +324,63 @@ footer{background:#0f172a;border-top:1px solid #1e293b;color:#94a3b8}
 </section>
 
 <!-- ═══════════ SMTP (si activé admin) ═══════════ -->
-<section id="smtp">
+<section id="smtp" style="background:linear-gradient(180deg,#f0f7ff 0%,#f8fafc 100%)">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-tag">Infrastructure</div>
-      <h2>Serveur SMTP dédié <span style="background:linear-gradient(90deg,#a78bfa,#60a5fa);-webkit-background-clip:text;-webkit-text-fill-color:transparent">haute délivrabilité</span></h2>
-      <p>Relay SMTP professionnel. Credentials dans votre espace client dès validation.</p>
+      <div class="sec-tag">Infrastructure pro</div>
+      <h2>Serveur SMTP dédié <span style="background:linear-gradient(90deg,#2563eb,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent">haute délivrabilité</span></h2>
+      <p>Relay SMTP professionnel avec IP dédiées, authentification SPF/DKIM/DMARC et monitoring en temps réel. Credentials disponibles dans votre espace client dès validation.</p>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:2px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:32px" id="smtp-plans-grid"></div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden">
-      <div style="background:var(--bg2);padding:22px 20px"><div style="font-size:20px;margin-bottom:8px">⚡</div><h4 style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px">Accès immédiat</h4><p style="font-size:12.5px;color:var(--slate)">Identifiants SMTP disponibles dès validation du paiement.</p></div>
-      <div style="background:var(--bg2);padding:22px 20px"><div style="font-size:20px;margin-bottom:8px">🔒</div><h4 style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px">TLS/STARTTLS</h4><p style="font-size:12.5px;color:var(--slate)">Compatible EvoSender, PHPMailer, Postfix et tous les clients email.</p></div>
-      <div style="background:var(--bg2);padding:22px 20px"><div style="font-size:20px;margin-bottom:8px">📊</div><h4 style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px">Logs & webhooks</h4><p style="font-size:12.5px;color:var(--slate)">Suivi des livraisons et bounces en temps réel.</p></div>
-      <div style="background:var(--bg2);padding:22px 20px"><div style="font-size:20px;margin-bottom:8px">🌍</div><h4 style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px">Infrastructure Exabytes</h4><p style="font-size:12.5px;color:var(--slate)">IP dédiées, haute réputation. <a href="https://www.exabytes.com/transactional-email" target="_blank" rel="noopener noreferrer" style="color:#60a5fa">En savoir plus</a></p></div>
+
+    <!-- Barre de confiance -->
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-bottom:36px">
+      <div style="display:flex;align-items:center;gap:7px;background:#fff;border:1px solid #e2e8f0;padding:8px 16px;font-size:12px;font-weight:600;color:#1e40af;box-shadow:0 1px 3px rgba(0,0,0,.05)">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> 99,9% uptime garanti
+      </div>
+      <div style="display:flex;align-items:center;gap:7px;background:#fff;border:1px solid #e2e8f0;padding:8px 16px;font-size:12px;font-weight:600;color:#1e40af;box-shadow:0 1px 3px rgba(0,0,0,.05)">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> SPF · DKIM · DMARC configurés
+      </div>
+      <div style="display:flex;align-items:center;gap:7px;background:#fff;border:1px solid #e2e8f0;padding:8px 16px;font-size:12px;font-weight:600;color:#1e40af;box-shadow:0 1px 3px rgba(0,0,0,.05)">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> TLS/STARTTLS port 587
+      </div>
+      <div style="display:flex;align-items:center;gap:7px;background:#fff;border:1px solid #e2e8f0;padding:8px 16px;font-size:12px;font-weight:600;color:#1e40af;box-shadow:0 1px 3px rgba(0,0,0,.05)">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 0 20"/></svg> IP dédiées haute réputation
+      </div>
+    </div>
+
+    <!-- Grille de plans -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;margin-bottom:36px" id="smtp-plans-grid"></div>
+
+    <!-- Features bas de section -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2px;background:#e2e8f0;border:1px solid #e2e8f0;overflow:hidden">
+      <div style="background:#fff;padding:22px 20px">
+        <div style="width:36px;height:36px;background:#eff6ff;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:12px">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#2563eb" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <h4 style="font-size:14px;font-weight:700;color:#0f172a;margin-bottom:4px">Accès immédiat</h4>
+        <p style="font-size:12.5px;color:#64748b;line-height:1.5">Identifiants SMTP livrés automatiquement dans votre espace client dès validation du paiement.</p>
+      </div>
+      <div style="background:#fff;padding:22px 20px">
+        <div style="width:36px;height:36px;background:#f0fdf4;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:12px">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#16a34a" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <h4 style="font-size:14px;font-weight:700;color:#0f172a;margin-bottom:4px">Chiffrement TLS</h4>
+        <p style="font-size:12.5px;color:#64748b;line-height:1.5">Compatible EvoSender, PHPMailer, Postfix, Nodemailer et tous les clients SMTP standard.</p>
+      </div>
+      <div style="background:#fff;padding:22px 20px">
+        <div style="width:36px;height:36px;background:#faf5ff;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:12px">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#7c3aed" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h4 style="font-size:14px;font-weight:700;color:#0f172a;margin-bottom:4px">Logs en temps réel</h4>
+        <p style="font-size:12.5px;color:#64748b;line-height:1.5">Suivi des livraisons, bounces et plaintes. Webhooks disponibles pour vos intégrations.</p>
+      </div>
+      <div style="background:#fff;padding:22px 20px">
+        <div style="width:36px;height:36px;background:#fff7ed;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:12px">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#ea580c" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 0 20"/></svg>
+        </div>
+        <h4 style="font-size:14px;font-weight:700;color:#0f172a;margin-bottom:4px">Infrastructure Exabytes</h4>
+        <p style="font-size:12.5px;color:#64748b;line-height:1.5">Serveurs professionnels, IP avec haute réputation anti-spam, infrastructure redondante.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -600,19 +644,23 @@ async function loadProducts(){
         const vol=VLABELS[p.id]||esc(String(p.volume||''));
         const isP=p.id===POPULAR;
         const sn=discounted(p.price_usdt);
-        const soHtml=discount>0?`<span style="text-decoration:line-through;color:var(--slate);font-size:13px">${esc(String(p.price_usdt))}</span> `:'';
-        return `<div style="background:var(--bg2);padding:26px 18px;text-align:center;position:relative;${isP?'border:2px solid rgba(139,92,246,.4)':''}">
-          ${isP?`<div style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--purple);color:#fff;font-size:10px;font-weight:700;padding:3px 12px;border-radius:0">⭐ Populaire</div>`:''}
-          <div style="font-size:12px;font-weight:700;color:#a78bfa;margin-bottom:8px">📧 ${vol} emails/mois</div>
-          <div style="font-size:26px;font-weight:800;color:#fff">${soHtml}${esc(String(sn))} <span style="font-size:13px;font-weight:400;color:var(--slate)">USD/mois</span></div>
-          <div style="font-size:11px;color:var(--slate);margin:5px 0 14px">≈ ${esc(String(p.price_btc||''))} BTC</div>
-          <ul style="list-style:none;text-align:left;margin:0 0 16px">
-            <li style="font-size:12px;color:rgba(255,255,255,.5);padding:3px 0">✓ Relay SMTP ${relayHost}</li>
-            <li style="font-size:12px;color:rgba(255,255,255,.5);padding:3px 0">✓ Credentials dans votre dashboard</li>
-            <li style="font-size:12px;color:rgba(255,255,255,.5);padding:3px 0">✓ TLS/STARTTLS — port 587</li>
-            <li style="font-size:12px;color:rgba(255,255,255,.5);padding:3px 0">✓ Logs & webhooks inclus</li>
+        const soHtml=discount>0?`<span style="text-decoration:line-through;color:#94a3b8;font-size:13px;font-weight:400">${esc(String(p.price_usdt))}</span> `:'';
+        const border=isP?'border:2px solid #2563eb;box-shadow:0 4px 20px rgba(37,99,235,.12)':'border:1px solid #e2e8f0';
+        return `<div style="background:#fff;padding:28px 20px;text-align:center;position:relative;${border}">
+          ${isP?`<div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#2563eb;color:#fff;font-size:10px;font-weight:700;padding:3px 14px;white-space:nowrap">⭐ Le plus populaire</div>`:''}
+          <div style="display:inline-flex;align-items:center;gap:6px;background:#eff6ff;color:#1d4ed8;font-size:11px;font-weight:700;padding:4px 10px;margin-bottom:14px">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+            ${vol} emails / mois
+          </div>
+          <div style="font-size:32px;font-weight:900;color:#0f172a;letter-spacing:-1px;line-height:1">${soHtml}${esc(String(sn))}<span style="font-size:14px;font-weight:500;color:#64748b"> USD</span></div>
+          <div style="font-size:12px;color:#94a3b8;margin:4px 0 18px">par mois · renouvelable</div>
+          <ul style="list-style:none;text-align:left;margin:0 0 20px;display:flex;flex-direction:column;gap:6px">
+            <li style="font-size:12.5px;color:#475569;display:flex;align-items:center;gap:7px"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#16a34a" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Relay ${relayHost}</li>
+            <li style="font-size:12.5px;color:#475569;display:flex;align-items:center;gap:7px"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#16a34a" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> SPF · DKIM · DMARC inclus</li>
+            <li style="font-size:12.5px;color:#475569;display:flex;align-items:center;gap:7px"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#16a34a" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> TLS/STARTTLS port 587</li>
+            <li style="font-size:12.5px;color:#475569;display:flex;align-items:center;gap:7px"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#16a34a" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Credentials dans votre dashboard</li>
           </ul>
-          <a href="/pay.html?product=${esc(p.id)}" class="btn ${isP?'btn-primary':'btn-dark'}" style="justify-content:center;display:flex;font-size:13px">Acheter</a>
+          <a href="/pay.html?product=${esc(p.id)}" class="btn ${isP?'btn-primary':'btn-dark'}" style="justify-content:center;display:flex;font-size:13px;width:100%">${isP?'Commencer →':'Choisir ce plan'}</a>
         </div>`;
       }).join('');
 
