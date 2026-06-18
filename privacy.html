@@ -146,9 +146,15 @@ footer strong{color:#f1f5f9}
       <li><a href="#s8">Transferts internationaux</a></li>
       <li><a href="#s9">Sécurité des données</a></li>
       <li><a href="#s10">Cookies et traceurs</a></li>
-      <li><a href="#s11">Données des mineurs</a></li>
-      <li><a href="#s12">Modifications</a></li>
-      <li><a href="#s13">Contact & réclamations</a></li>
+      <li><a href="#s11">Service SMTP Relay — Politique anti-spam</a></li>
+      <li><a href="#s12">Gestion des listes email & consentement</a></li>
+      <li><a href="#s13">Bounces, plaintes & délivrabilité</a></li>
+      <li><a href="#s14">Contenu interdit & responsabilité expéditeur</a></li>
+      <li><a href="#s15">Accord de traitement des données (DPA)</a></li>
+      <li><a href="#s16">Conformité légale internationale (email)</a></li>
+      <li><a href="#s17">Données des mineurs</a></li>
+      <li><a href="#s18">Modifications</a></li>
+      <li><a href="#s19">Contact & réclamations</a></li>
     </ol>
   </div>
 
@@ -404,16 +410,260 @@ footer strong{color:#f1f5f9}
     <p>Vous pouvez à tout moment supprimer les données stockées dans votre navigateur via les paramètres de votre navigateur (Paramètres → Confidentialité → Supprimer les données de navigation).</p>
   </div>
 
-  <!-- 11. Mineurs -->
+  <!-- 11. SMTP Anti-spam -->
   <div class="section" id="s11">
-    <h2><span class="num">11</span> Protection des mineurs</h2>
+    <h2><span class="num">11</span> Service SMTP Relay — Politique anti-spam</h2>
+    <p>EGSCI commercialise, via EvoStudio, un accès à un service de <strong>relais SMTP (SMTP Relay)</strong> fourni par <strong>Exabytes Network</strong> (ou tout fournisseur équivalent désigné). Cette section décrit nos engagements stricts en matière d'utilisation du relais SMTP, conformément aux exigences de nos fournisseurs d'infrastructure email (dont les standards de SendGrid, Exabytes, Mailgun et similaires).</p>
+
+    <div class="box box-red">
+      <strong>⛔ Politique zéro tolérance anti-spam.</strong> EGSCI et ses clients s'engagent à n'utiliser le service SMTP Relay qu'à des fins légitimes et conformes aux lois anti-spam en vigueur. Tout usage abusif entraîne la résiliation immédiate du service, sans remboursement, et peut faire l'objet d'un signalement aux autorités compétentes.
+    </div>
+
+    <h3>11.1 Engagements d'EGSCI en tant qu'opérateur</h3>
+    <ul>
+      <li>Nous <strong>surveillons activement</strong> les taux de rebond, de plaintes spam et les listes noires (blacklists) sur nos IPs relay</li>
+      <li>Nous maintenons les configurations <strong>SPF, DKIM et DMARC</strong> correctement configurées sur nos domaines d'envoi</li>
+      <li>Nous appliquons des <strong>limites de volume</strong> par compte conformément au plan souscrit (10K / 50K / 100K / 500K emails/mois)</li>
+      <li>Nous nous réservons le droit de <strong>suspendre immédiatement</strong> tout compte dont le taux de plainte dépasse 0,1 % ou le taux de rebond 2 %</li>
+      <li>Nous coopérons pleinement avec nos fournisseurs upstream (Exabytes, SendGrid) pour le traitement des plaintes</li>
+      <li>Nous conservons les <strong>journaux d'envoi pendant 90 jours</strong> à des fins d'audit et de traitement des plaintes</li>
+    </ul>
+
+    <h3>11.2 Engagements du client (expéditeur)</h3>
+    <p>En souscrivant à un plan SMTP Relay EvoStudio, le client s'engage irrévocablement à :</p>
+    <ul>
+      <li>N'envoyer des emails qu'à des destinataires ayant donné un <strong>consentement préalable explicite (opt-in)</strong></li>
+      <li>Inclure obligatoirement dans chaque email un <strong>lien de désinscription fonctionnel</strong> et honoré dans un délai de 10 jours ouvrés</li>
+      <li>Identifier clairement <strong>l'expéditeur</strong> (nom, adresse physique valide) dans chaque message</li>
+      <li>Ne pas masquer l'origine des emails, falsifier les en-têtes ou usurper une identité</li>
+      <li>Maintenir ses listes à jour en supprimant les <strong>hard bounces</strong> immédiatement après réception</li>
+      <li>Ne jamais envoyer vers des listes achetées, louées ou récoltées sans consentement</li>
+      <li>Respecter le volume mensuel contractuel sans tentative de contournement</li>
+    </ul>
+
+    <table class="data-table">
+      <thead><tr><th>Indicateur</th><th>Seuil d'alerte</th><th>Seuil de suspension</th></tr></thead>
+      <tbody>
+        <tr><td>Taux de plainte spam (Spam Complaint Rate)</td><td>0,05 %</td><td>0,1 %</td></tr>
+        <tr><td>Taux de rebond dur (Hard Bounce Rate)</td><td>1 %</td><td>2 %</td></tr>
+        <tr><td>Taux de désinscription (Unsubscribe Rate)</td><td>0,3 %</td><td>0,5 %</td></tr>
+        <tr><td>Présence sur liste noire majeure (Spamhaus, SORBS…)</td><td>—</td><td>Immédiate</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 12. Gestion des listes email -->
+  <div class="section" id="s12">
+    <h2><span class="num">12</span> Gestion des listes email & consentement</h2>
+    <p>La qualité des listes de diffusion est un élément fondamental de la délivrabilité et du respect de la vie privée des destinataires. EvoStudio et ses clients s'engagent sur les principes suivants :</p>
+
+    <h3>12.1 Exigence de consentement</h3>
+    <table class="data-table">
+      <thead><tr><th>Type de consentement</th><th>Description</th><th>Accepté ?</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Double opt-in</strong></td><td>L'abonné confirme son inscription via un email de validation</td><td>✅ Recommandé</td></tr>
+        <tr><td><strong>Single opt-in</strong></td><td>Inscription directe avec case cochée explicitement</td><td>✅ Accepté</td></tr>
+        <tr><td><strong>Opt-in implicite documenté</strong></td><td>Relation commerciale préexistante avec mention d'envoi d'emails</td><td>⚠️ Limité</td></tr>
+        <tr><td><strong>Liste achetée / louée</strong></td><td>Contacts sans consentement direct envers l'expéditeur</td><td>⛔ Interdit</td></tr>
+        <tr><td><strong>Scraping / extraction non autorisée</strong></td><td>Adresses collectées sans consentement</td><td>⛔ Interdit</td></tr>
+      </tbody>
+    </table>
+
+    <h3>12.2 Conservation et traitement des listes par le client</h3>
+    <p>Les listes de destinataires utilisées avec EvoStudio sont <strong>stockées localement sur l'appareil du client</strong>. EGSCI n'a pas accès au contenu de ces listes et n'en est pas responsable. Le client est seul responsable de la conformité de ses listes au regard des lois applicables (RGPD, CAN-SPAM, loi ivoirienne).</p>
+
+    <h3>12.3 Mécanismes de désinscription obligatoires</h3>
+    <ul>
+      <li>Chaque email commercial doit contenir un <strong>lien de désinscription (unsubscribe) clairement visible</strong></li>
+      <li>Le traitement de la désinscription doit être effectué dans un délai <strong>maximum de 10 jours ouvrés</strong></li>
+      <li>Aucun email supplémentaire ne doit être envoyé à un désabonné après traitement de sa demande</li>
+      <li>Les listes de désinscription doivent être conservées indéfiniment pour éviter les réenvois</li>
+    </ul>
+
+    <div class="box box-blue">
+      <strong>Traçabilité du consentement :</strong> EGSCI recommande fortement à ses clients de conserver une preuve du consentement de chaque destinataire (date, source, méthode de collecte) pendant au moins 3 ans, conformément aux exigences de la plupart des régulateurs et fournisseurs SMTP.
+    </div>
+  </div>
+
+  <!-- 13. Bounces et plaintes -->
+  <div class="section" id="s13">
+    <h2><span class="num">13</span> Gestion des bounces, plaintes & délivrabilité</h2>
+
+    <h3>13.1 Types de rebonds (bounces)</h3>
+    <table class="data-table">
+      <thead><tr><th>Type</th><th>Définition</th><th>Action requise</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Hard Bounce</strong></td><td>Adresse email inexistante ou domaine invalide (erreur permanente 5xx)</td><td>Suppression immédiate et définitive de la liste</td></tr>
+        <tr><td><strong>Soft Bounce</strong></td><td>Boîte pleine, serveur temporairement indisponible (erreur temporaire 4xx)</td><td>Réessai automatique ; suppression après 3 échecs consécutifs</td></tr>
+        <tr><td><strong>Block Bounce</strong></td><td>IP ou domaine d'envoi bloqué par le serveur destinataire</td><td>Signalement immédiat à EGSCI ; revue de la liste</td></tr>
+      </tbody>
+    </table>
+
+    <h3>13.2 Traitement des plaintes spam (Feedback Loop)</h3>
+    <p>EGSCI est inscrit aux programmes <strong>Feedback Loop (FBL)</strong> des principaux fournisseurs email (Gmail Postmaster Tools, Microsoft SNDS, Yahoo). En cas de signalement d'un email comme spam :</p>
+    <ul>
+      <li>L'adresse plaignante est automatiquement ajoutée à la liste de suppression globale</li>
+      <li>Le client expéditeur est notifié si le taux dépasse le seuil d'alerte</li>
+      <li>En cas de dépassement du seuil de suspension, le compte est suspendu préventivement dans l'attente d'une revue</li>
+    </ul>
+
+    <h3>13.3 Surveillance des listes noires (Blacklists)</h3>
+    <p>EGSCI surveille en temps réel la réputation de ses IPs relay sur les principales listes noires :</p>
+    <ul>
+      <li><strong>Spamhaus</strong> (SBL, XBL, PBL, DBL)</li>
+      <li><strong>SORBS</strong> (Spam and Open Relay Blocking System)</li>
+      <li><strong>Barracuda Reputation Block List</strong></li>
+      <li><strong>MXToolbox Blacklist Monitor</strong></li>
+      <li><strong>Invaluement</strong></li>
+    </ul>
+    <p>En cas d'inscription sur une liste noire due au comportement d'un client, EGSCI suspendra immédiatement le compte concerné et entamera les démarches de délisting auprès de l'organisme concerné.</p>
+
+    <div class="box box-amber">
+      <strong>Responsabilité du client :</strong> Tout coût de délisting ou de réparation de réputation IP consécutif à un abus avéré du client sera facturé à ce dernier en sus du tarif de l'abonnement.
+    </div>
+  </div>
+
+  <!-- 14. Contenu interdit -->
+  <div class="section" id="s14">
+    <h2><span class="num">14</span> Contenu interdit & responsabilité de l'expéditeur</h2>
+    <p>L'utilisation du service SMTP Relay EvoStudio est strictement interdite pour les types de contenus et d'activités suivants. Cette liste est non exhaustive et s'aligne sur les politiques d'utilisation acceptable (AUP) de nos fournisseurs upstream :</p>
+
+    <h3>14.1 Contenu absolument interdit</h3>
+    <ul>
+      <li>🚫 <strong>Spam et emails non sollicités</strong> (Unsolicited Bulk Email — UBE)</li>
+      <li>🚫 <strong>Phishing et hameçonnage</strong> — usurpation d'identité de marques, institutions financières, administrations</li>
+      <li>🚫 <strong>Malware, virus, ransomware</strong> — distribution de logiciels malveillants</li>
+      <li>🚫 <strong>Escroqueries financières</strong> — fraude 419, pyramides, Ponzi, faux investissements</li>
+      <li>🚫 <strong>Contenu pédopornographique</strong> ou toute représentation sexuelle impliquant des mineurs</li>
+      <li>🚫 <strong>Incitation à la haine, à la discrimination</strong> sur la base de la race, religion, sexe, orientation sexuelle, origine</li>
+      <li>🚫 <strong>Contenus illégaux</strong> selon la loi ivoirienne ou les lois du pays du destinataire</li>
+      <li>🚫 <strong>Vente de substances contrôlées</strong> sans licence réglementaire</li>
+      <li>🚫 <strong>Terrorisme, extrémisme violent</strong> ou tout contenu faisant l'apologie de ces actes</li>
+      <li>🚫 <strong>Manipulation boursière</strong> ou diffusion de fausses informations financières</li>
+    </ul>
+
+    <h3>14.2 Usages soumis à autorisation préalable</h3>
+    <ul>
+      <li>⚠️ Secteur financier et crypto-actifs (vérification AML/KYC requise)</li>
+      <li>⚠️ Industrie pharmaceutique et produits de santé</li>
+      <li>⚠️ Jeux d'argent et paris (nécessite licence locale)</li>
+      <li>⚠️ Contenu pour adultes légal (restreint à des listes opt-in vérifiées)</li>
+    </ul>
+
+    <h3>14.3 Clause de responsabilité</h3>
+    <p>Le client est <strong>seul et entièrement responsable</strong> du contenu des emails envoyés via le relay SMTP EvoStudio. EGSCI ne saurait être tenue responsable des dommages causés à des tiers par l'usage abusif de son infrastructure. En cas d'infraction constatée, EGSCI se réserve le droit de :</p>
+    <ul>
+      <li>Suspendre ou résilier le compte sans préavis ni remboursement</li>
+      <li>Signaler les activités illicites aux autorités compétentes (ARTCI, Police Judiciaire, Interpol si nécessaire)</li>
+      <li>Transmettre les journaux d'activité aux autorités sur réquisition judiciaire</li>
+      <li>Engager une action en responsabilité civile et pénale à l'encontre du client fautif</li>
+    </ul>
+  </div>
+
+  <!-- 15. DPA -->
+  <div class="section" id="s15">
+    <h2><span class="num">15</span> Accord de traitement des données (DPA — Data Processing Agreement)</h2>
+    <p>Conformément aux exigences du RGPD (article 28) et aux standards des fournisseurs SMTP, EGSCI agit en qualité de <strong>sous-traitant (Processor)</strong> pour le traitement des données des destinataires emails de ses clients, et ses fournisseurs upstream (Exabytes, etc.) agissent en tant que <strong>sous-traitants ultérieurs (Sub-processors)</strong>.</p>
+
+    <h3>15.1 Rôles et responsabilités</h3>
+    <table class="data-table">
+      <thead><tr><th>Partie</th><th>Rôle RGPD</th><th>Responsabilités</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Client EvoStudio</strong></td><td>Responsable de traitement (Controller)</td><td>Collecte le consentement, gère les listes, définit les finalités d'envoi</td></tr>
+        <tr><td><strong>EGSCI (EvoStudio)</strong></td><td>Sous-traitant (Processor)</td><td>Fournit l'infrastructure SMTP relay ; traite les données d'envoi sur instruction du client</td></tr>
+        <tr><td><strong>Exabytes Network</strong></td><td>Sous-traitant ultérieur (Sub-processor)</td><td>Infrastructure physique d'envoi, IPs relay, gestion des serveurs SMTP</td></tr>
+      </tbody>
+    </table>
+
+    <h3>15.2 Engagements d'EGSCI en tant que sous-traitant</h3>
+    <ul>
+      <li>Traiter les données d'envoi <strong>uniquement sur instruction documentée</strong> du client</li>
+      <li>Assurer la <strong>confidentialité</strong> des données de destinataires transitant par nos serveurs</li>
+      <li>Ne pas réutiliser les adresses email des destinataires à d'autres fins</li>
+      <li>Informer le client sans délai de toute <strong>violation de données</strong> le concernant</li>
+      <li>Permettre et faciliter les <strong>audits</strong> du client relatifs au traitement de ses données</li>
+      <li>Supprimer ou restituer toutes les données d'envoi à la résiliation du contrat</li>
+      <li>Ne faire appel à des sous-traitants ultérieurs qu'avec <strong>accord préalable</strong> du client</li>
+    </ul>
+
+    <h3>15.3 Données transitant via le relay SMTP</h3>
+    <table class="data-table">
+      <thead><tr><th>Donnée</th><th>Traitement</th><th>Conservation</th></tr></thead>
+      <tbody>
+        <tr><td>Adresses email des destinataires</td><td>Transit uniquement (routing SMTP)</td><td>90 jours (logs techniques)</td></tr>
+        <tr><td>En-têtes email (From, To, Subject)</td><td>Journalisation pour audit</td><td>90 jours</td></tr>
+        <tr><td>Corps du message</td><td>Non stocké par EGSCI</td><td>—</td></tr>
+        <tr><td>Événements (envoi, rebond, ouverture, clic)</td><td>Statistiques de délivrabilité</td><td>90 jours</td></tr>
+        <tr><td>IP source de l'expéditeur</td><td>Sécurité et audit</td><td>90 jours</td></tr>
+      </tbody>
+    </table>
+
+    <div class="box box-blue">
+      <strong>Demande de DPA formalisé :</strong> Les clients soumis au RGPD ou à d'autres réglementations exigeant un accord de traitement de données formalisé peuvent en faire la demande à <strong>support@evostudio.fr</strong>. EGSCI s'engage à fournir un DPA signé dans un délai de 10 jours ouvrés.
+    </div>
+  </div>
+
+  <!-- 16. Conformité légale internationale -->
+  <div class="section" id="s16">
+    <h2><span class="num">16</span> Conformité légale internationale — Email marketing</h2>
+    <p>EvoStudio est utilisé par des clients dans de nombreux pays. Chaque client est responsable du respect des lois anti-spam applicables dans son territoire et dans le territoire de ses destinataires. Voici un résumé des principales réglementations :</p>
+
+    <table class="data-table">
+      <thead><tr><th>Réglementation</th><th>Territoire</th><th>Exigences clés</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Loi n° 2013-450</strong><br><small>Côte d'Ivoire</small></td>
+          <td>🇨🇮 Côte d'Ivoire</td>
+          <td>Consentement préalable, droit d'accès et de suppression, obligation d'information, signalement ARTCI</td>
+        </tr>
+        <tr>
+          <td><strong>RGPD</strong><br><small>Règl. UE 2016/679</small></td>
+          <td>🇪🇺 Union Européenne</td>
+          <td>Consentement explicite, base légale documentée, droits ARCO+, DPO si nécessaire, notification violation 72h</td>
+        </tr>
+        <tr>
+          <td><strong>CAN-SPAM Act</strong><br><small>15 U.S.C. § 7701</small></td>
+          <td>🇺🇸 États-Unis</td>
+          <td>Identité expéditeur visible, adresse physique obligatoire, désinscription en 10 jours, pas de faux en-têtes</td>
+        </tr>
+        <tr>
+          <td><strong>CASL</strong><br><small>Canada's Anti-Spam Legislation</small></td>
+          <td>🇨🇦 Canada</td>
+          <td>Consentement exprès ou implicite documenté, identification complète, désinscription honorée immédiatement</td>
+        </tr>
+        <tr>
+          <td><strong>PECR</strong><br><small>Privacy and Electronic Communications Regulations</small></td>
+          <td>🇬🇧 Royaume-Uni</td>
+          <td>Opt-in obligatoire pour marketing, identification de l'expéditeur, mécanisme de désinscription</td>
+        </tr>
+        <tr>
+          <td><strong>Loi Informatique et Libertés</strong><br><small>Loi n° 78-17 modifiée</small></td>
+          <td>🇫🇷 France</td>
+          <td>Consentement (RGPD + L.34-5 CPCE), droit d'opposition, déclaration CNIL si nécessaire</td>
+        </tr>
+        <tr>
+          <td><strong>Loi sur la protection des données</strong><br><small>UEMOA / CEDEAO</small></td>
+          <td>🌍 Afrique de l'Ouest</td>
+          <td>Principes de finalité, proportionnalité, consentement, sécurité — harmonisés entre États membres</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="box box-amber">
+      <strong>⚠️ Avertissement légal :</strong> Ce tableau est fourni à titre informatif uniquement et ne constitue pas un conseil juridique. EGSCI recommande à ses clients de consulter un juriste qualifié dans leur territoire pour s'assurer de leur conformité totale avant tout envoi de campagne email.
+    </div>
+  </div>
+
+  <!-- 17. Mineurs (anciennement 11) -->
+  <div class="section" id="s17">
+    <h2><span class="num">17</span> Protection des mineurs</h2>
     <p>Nos services sont destinés à des <strong>professionnels et adultes (18 ans et plus)</strong>. Nous ne collectons pas sciemment de données personnelles relatives à des personnes mineures.</p>
     <p>Si vous êtes le parent ou tuteur d'un mineur et pensez qu'il nous a fourni des informations personnelles, veuillez nous contacter à <strong>support@evostudio.fr</strong> afin que nous puissions procéder à leur suppression dans les meilleurs délais.</p>
   </div>
 
-  <!-- 12. Modifications -->
-  <div class="section" id="s12">
-    <h2><span class="num">12</span> Modifications de la présente politique</h2>
+  <!-- 18. Modifications -->
+  <div class="section" id="s18">
+    <h2><span class="num">18</span> Modifications de la présente politique</h2>
     <p>EGSCI se réserve le droit de modifier la présente Politique de Confidentialité à tout moment. En cas de modification substantielle, nous vous en informerons :</p>
     <ul>
       <li>Par email à l'adresse associée à votre compte</li>
@@ -429,9 +679,9 @@ footer strong{color:#f1f5f9}
     </div>
   </div>
 
-  <!-- 13. Contact -->
-  <div class="section" id="s13">
-    <h2><span class="num">13</span> Contact & réclamations</h2>
+  <!-- 19. Contact -->
+  <div class="section" id="s19">
+    <h2><span class="num">19</span> Contact & réclamations</h2>
     <p>Pour toute question relative à la présente politique ou pour exercer vos droits, contactez le <strong>Délégué à la Protection des Données</strong> d'EGSCI :</p>
     <div class="company-card" style="margin-top:16px;margin-bottom:0">
       <h3>📬 Coordonnées de contact — Protection des données</h3>
