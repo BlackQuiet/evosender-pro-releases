@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Politique de Confidentialité — EvoStudio</title>
+<meta name="description" content="Politique de confidentialité et protection des données personnelles — EvoStudio by EGSCI SARL">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><rect width='24' height='24' rx='5' fill='%232563eb'/><path d='M20 4 10.5 13.5M20 4l-6 16-3.5-7-7-3.5z' fill='none' stroke='%23ffffff' stroke-width='1.5' stroke-linejoin='round' stroke-linecap='round'/></svg>" />
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --blue:#2563eb;--blue-dark:#1d4ed8;--ink:#0f172a;--slate:#64748b;
+  --line:#e2e8f0;--bg:#f8fafc;--surface:#fff;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px}
+
+/* NAV */
+nav{background:var(--surface);border-bottom:1px solid var(--line);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 1px 8px rgba(0,0,0,.05)}
+.nav-logo{font-size:17px;font-weight:800;color:var(--blue);text-decoration:none;display:flex;align-items:center;gap:8px}
+.nav-logo svg{width:26px;height:26px}
+.nav-back{font-size:13px;color:var(--slate);text-decoration:none;display:flex;align-items:center;gap:5px}
+.nav-back:hover{color:var(--blue)}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#3b82f6 100%);color:#fff;padding:56px 24px 48px;text-align:center}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);padding:5px 14px;border-radius:20px;font-size:12px;font-weight:600;margin-bottom:18px}
+.hero h1{font-size:clamp(24px,4vw,38px);font-weight:900;margin-bottom:12px;letter-spacing:-.5px}
+.hero p{font-size:15px;opacity:.85;max-width:560px;margin:0 auto 20px}
+.hero-meta{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;font-size:12px;opacity:.75}
+.hero-meta span{display:flex;align-items:center;gap:5px}
+
+/* LAYOUT */
+.container{max-width:860px;margin:0 auto;padding:48px 24px}
+
+/* TOC */
+.toc{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px 28px;margin-bottom:40px}
+.toc-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--slate);margin-bottom:14px}
+.toc ol{padding-left:18px;display:grid;grid-template-columns:1fr 1fr;gap:4px 24px}
+@media(max-width:580px){.toc ol{grid-template-columns:1fr}}
+.toc li{font-size:13px}
+.toc a{color:var(--blue);text-decoration:none}
+.toc a:hover{text-decoration:underline}
+
+/* COMPANY CARD */
+.company-card{background:linear-gradient(135deg,#eff6ff,#dbeafe);border:1px solid #bfdbfe;border-radius:14px;padding:24px 28px;margin-bottom:36px}
+.company-card h3{font-size:14px;font-weight:700;color:#1e40af;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.company-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px}
+@media(max-width:580px){.company-grid{grid-template-columns:1fr}}
+.company-row{font-size:13px}
+.company-row dt{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#3b82f6;margin-bottom:2px}
+.company-row dd{color:var(--ink);font-weight:600}
+
+/* SECTIONS */
+.section{margin-bottom:44px;scroll-margin-top:80px}
+.section h2{font-size:20px;font-weight:800;color:var(--ink);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--line);display:flex;align-items:center;gap:10px}
+.section h2 .num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:var(--blue);color:#fff;border-radius:8px;font-size:13px;font-weight:800;flex-shrink:0}
+.section h3{font-size:15px;font-weight:700;color:var(--ink);margin:20px 0 8px}
+.section p{color:#334155;margin-bottom:12px}
+.section ul,.section ol{padding-left:20px;margin-bottom:12px}
+.section li{color:#334155;margin-bottom:6px}
+.section strong{color:var(--ink)}
+
+/* DATA TABLE */
+.data-table{width:100%;border-collapse:collapse;font-size:13px;margin:16px 0}
+.data-table th{background:#f1f5f9;text-align:left;padding:10px 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--slate);border:1px solid var(--line)}
+.data-table td{padding:10px 14px;border:1px solid var(--line);vertical-align:top;color:#334155}
+.data-table tr:nth-child(even) td{background:#f8fafc}
+
+/* HIGHLIGHT BOXES */
+.box{border-radius:12px;padding:16px 20px;margin:16px 0;font-size:13px}
+.box-blue{background:#eff6ff;border-left:4px solid var(--blue);color:#1e3a8a}
+.box-green{background:#f0fdf4;border-left:4px solid #22c55e;color:#14532d}
+.box-amber{background:#fffbeb;border-left:4px solid #f59e0b;color:#78350f}
+.box-red{background:#fef2f2;border-left:4px solid #ef4444;color:#7f1d1d}
+.box strong{font-weight:700}
+
+/* RIGHTS GRID */
+.rights-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+@media(max-width:580px){.rights-grid{grid-template-columns:1fr}}
+.right-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px}
+.right-card .icon{font-size:22px;margin-bottom:8px}
+.right-card h4{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.right-card p{font-size:12px;color:var(--slate);margin:0}
+
+/* FOOTER */
+footer{background:var(--ink);color:#94a3b8;padding:36px 24px;text-align:center;font-size:12px}
+footer a{color:#60a5fa;text-decoration:none}
+footer strong{color:#f1f5f9}
+.footer-divider{border:none;border-top:1px solid #1e293b;margin:20px 0}
+
+/* PRINT */
+@media print{nav,footer{display:none}.container{padding:0}body{font-size:12px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/index.html" class="nav-logo">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 4 10.5 13.5M20 4l-6 16-3.5-7-7-3.5z"/></svg>
+    EvoStudio
+  </a>
+  <a href="/index.html" class="nav-back">← Retour au site</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">🔒 Protection des données personnelles</div>
+  <h1>Politique de Confidentialité</h1>
+  <p>Nous nous engageons à protéger vos données personnelles conformément aux lois en vigueur en République de Côte d'Ivoire et aux standards internationaux.</p>
+  <div class="hero-meta">
+    <span>📅 En vigueur depuis le 1er janvier 2024</span>
+    <span>🔄 Dernière mise à jour : juin 2025</span>
+    <span>🌍 Langue : Français</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Identité -->
+  <div class="company-card">
+    <h3>🏢 Identité du Responsable de traitement</h3>
+    <div class="company-grid">
+      <dl class="company-row"><dt>Dénomination sociale</dt><dd>EXPERT GLOBAL SEVEN COTE D'IVOIRE</dd></dl>
+      <dl class="company-row"><dt>Sigle</dt><dd>EGSCI</dd></dl>
+      <dl class="company-row"><dt>Forme juridique</dt><dd>SARL Uni-personnelle</dd></dl>
+      <dl class="company-row"><dt>N° RCCM</dt><dd>CI-ABJ-2018-B-10429</dd></dl>
+      <dl class="company-row"><dt>Capital social</dt><dd>1 000 000 FCFA</dd></dl>
+      <dl class="company-row"><dt>Date de création</dt><dd>17 avril 2018</dd></dl>
+      <dl class="company-row"><dt>Siège social</dt><dd>Anyama, Blankro 1 Extension — Abidjan, Côte d'Ivoire</dd></dl>
+      <dl class="company-row"><dt>Gérant</dt><dd>KOUAME KONAN ELVIS</dd></dl>
+      <dl class="company-row"><dt>Email de contact</dt><dd>support@evostudio.fr</dd></dl>
+      <dl class="company-row"><dt>Site web</dt><dd>https://evostudio.fr</dd></dl>
+    </div>
+  </div>
+
+  <!-- Table des matières -->
+  <div class="toc">
+    <div class="toc-title">📋 Table des matières</div>
+    <ol>
+      <li><a href="#s1">Objet et champ d'application</a></li>
+      <li><a href="#s2">Données collectées</a></li>
+      <li><a href="#s3">Finalités du traitement</a></li>
+      <li><a href="#s4">Base légale</a></li>
+      <li><a href="#s5">Durée de conservation</a></li>
+      <li><a href="#s6">Droits des personnes concernées</a></li>
+      <li><a href="#s7">Partage et destinataires</a></li>
+      <li><a href="#s8">Transferts internationaux</a></li>
+      <li><a href="#s9">Sécurité des données</a></li>
+      <li><a href="#s10">Cookies et traceurs</a></li>
+      <li><a href="#s11">Données des mineurs</a></li>
+      <li><a href="#s12">Modifications</a></li>
+      <li><a href="#s13">Contact & réclamations</a></li>
+    </ol>
+  </div>
+
+  <!-- 1. Objet -->
+  <div class="section" id="s1">
+    <h2><span class="num">1</span> Objet et champ d'application</h2>
+    <p>La présente Politique de Confidentialité décrit la manière dont <strong>EXPERT GLOBAL SEVEN COTE D'IVOIRE (EGSCI)</strong>, éditeur de la suite logicielle <strong>EvoStudio</strong> (comprenant EvoSender, EvoExtractor et EvoVérificateur), collecte, utilise, conserve et protège les informations personnelles que vous nous communiquez lors de l'utilisation de nos services.</p>
+    <p>Elle s'applique à :</p>
+    <ul>
+      <li>Le site web <strong>evostudio.fr</strong> et ses sous-domaines</li>
+      <li>L'espace client (dashboard, inscription, connexion)</li>
+      <li>Le processus d'achat et de paiement en ligne</li>
+      <li>Les logiciels EvoStudio installés sur vos appareils (télémétrie optionnelle)</li>
+      <li>Toute communication avec notre service support</li>
+    </ul>
+    <div class="box box-blue">
+      <strong>Note :</strong> En utilisant nos services, vous acceptez les termes de la présente politique. Si vous n'acceptez pas cette politique, nous vous invitons à ne pas utiliser nos services.
+    </div>
+  </div>
+
+  <!-- 2. Données collectées -->
+  <div class="section" id="s2">
+    <h2><span class="num">2</span> Données collectées</h2>
+    <p>Nous collectons uniquement les données strictement nécessaires à la fourniture de nos services.</p>
+
+    <h3>2.1 Données que vous nous fournissez directement</h3>
+    <table class="data-table">
+      <thead><tr><th>Catégorie</th><th>Données</th><th>Contexte de collecte</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Identité</strong></td><td>Adresse email</td><td>Inscription au compte client</td></tr>
+        <tr><td><strong>Authentification</strong></td><td>Mot de passe (haché bcrypt)</td><td>Création de compte</td></tr>
+        <tr><td><strong>Facturation</strong></td><td>Email de facturation</td><td>Achat de licence ou abonnement SMTP</td></tr>
+        <tr><td><strong>Paiement</strong></td><td>Référence de transaction (hash), moyen de paiement choisi</td><td>Paiement USDT / BTC / Wave / Orange Money</td></tr>
+        <tr><td><strong>Communication</strong></td><td>Contenu des messages</td><td>Contact support</td></tr>
+      </tbody>
+    </table>
+    <div class="box box-green">
+      <strong>Important :</strong> Nous ne collectons <strong>aucune donnée bancaire, aucun numéro de carte</strong>. Les paiements par cryptomonnaie (USDT, BTC) sont traités directement sur la blockchain. Les paiements Wave et Orange Money sont traités par ces opérateurs tiers ; nous ne recevons que la confirmation de paiement.
+    </div>
+
+    <h3>2.2 Données collectées automatiquement</h3>
+    <table class="data-table">
+      <thead><tr><th>Données</th><th>Finalité</th></tr></thead>
+      <tbody>
+        <tr><td>Adresse IP</td><td>Sécurité, anti-fraude, journalisation des connexions</td></tr>
+        <tr><td>Identifiant de machine (machine_id)</td><td>Gestion des activations de licence (nombre d'appareils autorisés)</td></tr>
+        <tr><td>Système d'exploitation, version de l'application</td><td>Support technique, compatibilité des mises à jour</td></tr>
+        <tr><td>Horodatage des connexions</td><td>Sécurité du compte, détection d'anomalies</td></tr>
+        <tr><td>Logs d'utilisation de licence (action validate/check)</td><td>Lutte contre le piratage, respect des conditions de licence</td></tr>
+      </tbody>
+    </table>
+
+    <h3>2.3 Données que nous ne collectons pas</h3>
+    <ul>
+      <li>Contenu de vos campagnes email, listes de contacts ou fichiers traités par les logiciels</li>
+      <li>Données de navigation sur des sites tiers</li>
+      <li>Informations sur votre réseau local, vos autres logiciels ou votre activité hors EvoStudio</li>
+      <li>Données biométriques, données de santé ou opinions politiques</li>
+    </ul>
+  </div>
+
+  <!-- 3. Finalités -->
+  <div class="section" id="s3">
+    <h2><span class="num">3</span> Finalités du traitement</h2>
+    <table class="data-table">
+      <thead><tr><th>Finalité</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Gestion du compte client</strong></td><td>Créer et administrer votre espace client, gérer votre authentification et votre historique de commandes</td></tr>
+        <tr><td><strong>Fourniture du service</strong></td><td>Générer, activer et valider vos licences logicielles ; gérer vos abonnements SMTP relay</td></tr>
+        <tr><td><strong>Traitement des paiements</strong></td><td>Émettre les factures, confirmer les paiements, lutter contre la fraude</td></tr>
+        <tr><td><strong>Communication transactionnelle</strong></td><td>Envoyer les confirmations de commande, les licences, les factures et les informations essentielles au service</td></tr>
+        <tr><td><strong>Support technique</strong></td><td>Traiter vos demandes d'assistance et résoudre les incidents</td></tr>
+        <tr><td><strong>Sécurité & anti-piratage</strong></td><td>Détecter les activations frauduleuses, bloquer les machines en violation des CGU, protéger l'infrastructure</td></tr>
+        <tr><td><strong>Obligations légales</strong></td><td>Conserver les données comptables et fiscales conformément aux obligations légales ivoiriennes</td></tr>
+        <tr><td><strong>Amélioration du service</strong></td><td>Analyser les statistiques d'utilisation anonymisées pour améliorer nos produits</td></tr>
+      </tbody>
+    </table>
+    <div class="box box-amber">
+      <strong>Pas de marketing non sollicité :</strong> Nous n'utilisons pas vos données pour vous envoyer des publicités tierces. Les seuls emails que vous recevez sont liés à vos commandes, votre compte ou des mises à jour importantes de sécurité.
+    </div>
+  </div>
+
+  <!-- 4. Base légale -->
+  <div class="section" id="s4">
+    <h2><span class="num">4</span> Base légale du traitement</h2>
+    <p>Nos traitements sont fondés sur les bases légales suivantes, conformément à la loi n° 2013-450 du 19 juin 2013 relative à la protection des données à caractère personnel en Côte d'Ivoire, ainsi qu'aux standards RGPD applicables à nos clients européens :</p>
+    <table class="data-table">
+      <thead><tr><th>Base légale</th><th>Traitements concernés</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Exécution du contrat</strong></td><td>Gestion du compte, activation des licences, fourniture du service SMTP, traitement des commandes</td></tr>
+        <tr><td><strong>Obligation légale</strong></td><td>Conservation des factures (10 ans), déclarations fiscales, obligations OHADA</td></tr>
+        <tr><td><strong>Intérêt légitime</strong></td><td>Sécurité de l'infrastructure, anti-fraude, journaux de connexion, protection contre le piratage</td></tr>
+        <tr><td><strong>Consentement</strong></td><td>Envoi de communications commerciales optionnelles (si activées)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 5. Durée de conservation -->
+  <div class="section" id="s5">
+    <h2><span class="num">5</span> Durée de conservation</h2>
+    <table class="data-table">
+      <thead><tr><th>Catégorie de données</th><th>Durée de conservation</th><th>Justification</th></tr></thead>
+      <tbody>
+        <tr><td>Données de compte (email, mot de passe)</td><td>Durée de vie du compte + 2 ans</td><td>Relation contractuelle</td></tr>
+        <tr><td>Licences et activations</td><td>Durée de la licence + 5 ans</td><td>Preuve de droit d'utilisation</td></tr>
+        <tr><td>Données de commande / factures</td><td>10 ans</td><td>Obligation comptable et fiscale OHADA</td></tr>
+        <tr><td>Logs de connexion et sécurité</td><td>12 mois glissants</td><td>Détection de fraude et sécurité</td></tr>
+        <tr><td>Journaux d'activité applicative</td><td>3 mois</td><td>Débogage et support technique</td></tr>
+        <tr><td>Données de contact support</td><td>3 ans</td><td>Suivi de la relation client</td></tr>
+        <tr><td>Identifiants de machine (anti-piratage)</td><td>Indéfini (liste noire en cas de fraude)</td><td>Protection des droits de propriété intellectuelle</td></tr>
+      </tbody>
+    </table>
+    <p>Au-delà de ces durées, vos données sont <strong>supprimées ou anonymisées</strong> de manière irréversible.</p>
+  </div>
+
+  <!-- 6. Droits -->
+  <div class="section" id="s6">
+    <h2><span class="num">6</span> Vos droits</h2>
+    <p>Conformément à la loi ivoirienne n° 2013-450 et au RGPD (pour les résidents européens), vous disposez des droits suivants :</p>
+    <div class="rights-grid">
+      <div class="right-card">
+        <div class="icon">👁️</div>
+        <h4>Droit d'accès</h4>
+        <p>Obtenir une copie de toutes les données personnelles que nous détenons sur vous.</p>
+      </div>
+      <div class="right-card">
+        <div class="icon">✏️</div>
+        <h4>Droit de rectification</h4>
+        <p>Corriger des données inexactes ou incomplètes vous concernant.</p>
+      </div>
+      <div class="right-card">
+        <div class="icon">🗑️</div>
+        <h4>Droit à l'effacement</h4>
+        <p>Demander la suppression de vos données, sous réserve des obligations légales de conservation.</p>
+      </div>
+      <div class="right-card">
+        <div class="icon">⏸️</div>
+        <h4>Droit à la limitation</h4>
+        <p>Suspendre le traitement de vos données dans certaines circonstances prévues par la loi.</p>
+      </div>
+      <div class="right-card">
+        <div class="icon">📦</div>
+        <h4>Droit à la portabilité</h4>
+        <p>Recevoir vos données dans un format structuré et lisible par machine (JSON/CSV).</p>
+      </div>
+      <div class="right-card">
+        <div class="icon">🚫</div>
+        <h4>Droit d'opposition</h4>
+        <p>S'opposer au traitement fondé sur notre intérêt légitime ou à des fins de prospection.</p>
+      </div>
+      <div class="right-card">
+        <div class="icon">🔙</div>
+        <h4>Retrait du consentement</h4>
+        <p>Retirer à tout moment un consentement préalablement donné, sans préjudice de la licéité des traitements antérieurs.</p>
+      </div>
+      <div class="right-card">
+        <div class="icon">⚖️</div>
+        <h4>Droit de réclamation</h4>
+        <p>Déposer une plainte auprès de l'ARTCI (Autorité de Régulation des Télécommunications de Côte d'Ivoire).</p>
+      </div>
+    </div>
+    <div class="box box-blue">
+      <strong>Comment exercer vos droits ?</strong><br>
+      Envoyez votre demande à <strong>support@evostudio.fr</strong> en précisant votre identité (email de compte) et le droit que vous souhaitez exercer. Nous répondrons dans un délai maximum de <strong>30 jours</strong>. Une preuve d'identité peut être demandée pour protéger votre compte.
+    </div>
+  </div>
+
+  <!-- 7. Partage -->
+  <div class="section" id="s7">
+    <h2><span class="num">7</span> Partage et destinataires des données</h2>
+    <p>Nous ne vendons, ne louons et ne cédons jamais vos données personnelles à des tiers à des fins commerciales. Vos données peuvent être partagées uniquement dans les cas suivants :</p>
+
+    <h3>7.1 Sous-traitants techniques</h3>
+    <table class="data-table">
+      <thead><tr><th>Prestataire</th><th>Rôle</th><th>Données transmises</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Render.com</strong> (USA)</td><td>Hébergement du serveur backend</td><td>Toutes les données techniques du serveur</td></tr>
+        <tr><td><strong>GitHub, Inc.</strong> (USA)</td><td>Hébergement du site statique (GitHub Pages)</td><td>Fichiers du site uniquement (pas de données utilisateur)</td></tr>
+        <tr><td><strong>Hostinger</strong> (LT)</td><td>Service email transactionnel (SMTP)</td><td>Adresse email destinataire, contenu de l'email</td></tr>
+        <tr><td><strong>Wave Mobile Money</strong> (CI)</td><td>Traitement des paiements Wave</td><td>Montant de la transaction (aucune donnée personnelle EvoStudio transmise)</td></tr>
+        <tr><td><strong>Orange Money</strong> (CI)</td><td>Traitement des paiements Orange Money</td><td>Montant de la transaction</td></tr>
+      </tbody>
+    </table>
+    <p>Chaque sous-traitant est lié par des obligations contractuelles de confidentialité et ne peut utiliser vos données qu'aux fins pour lesquelles elles lui ont été transmises.</p>
+
+    <h3>7.2 Obligations légales</h3>
+    <p>Nous pouvons divulguer vos données si nous y sommes légalement contraints (décision judiciaire, réquisition d'autorité compétente ivoirienne ou internationale en application de conventions bilatérales).</p>
+
+    <h3>7.3 Ce que nous ne faisons jamais</h3>
+    <ul>
+      <li>Vendre vos données à des tiers</li>
+      <li>Partager vos données avec des régies publicitaires</li>
+      <li>Transmettre vos données à d'autres entreprises pour leur propre marketing</li>
+    </ul>
+  </div>
+
+  <!-- 8. Transferts internationaux -->
+  <div class="section" id="s8">
+    <h2><span class="num">8</span> Transferts internationaux de données</h2>
+    <p>Dans le cadre de l'utilisation de nos sous-traitants techniques (Render.com, GitHub), vos données peuvent être hébergées ou traitées aux <strong>États-Unis</strong>. Ces transferts sont encadrés par :</p>
+    <ul>
+      <li>Les <strong>clauses contractuelles types</strong> de la Commission européenne (pour les résidents de l'UE)</li>
+      <li>Les <strong>conditions générales</strong> de nos sous-traitants intégrant des garanties de sécurité appropriées</li>
+      <li>Les dispositions de la loi ivoirienne n° 2013-450 concernant les transferts transfrontaliers</li>
+    </ul>
+    <div class="box box-amber">
+      <strong>Pour les utilisateurs africains :</strong> Les paiements Wave et Orange Money sont traités localement en Côte d'Ivoire et ne font l'objet d'aucun transfert international de données de paiement.
+    </div>
+  </div>
+
+  <!-- 9. Sécurité -->
+  <div class="section" id="s9">
+    <h2><span class="num">9</span> Sécurité des données</h2>
+    <p>EGSCI met en œuvre des mesures techniques et organisationnelles appropriées pour protéger vos données contre tout accès non autorisé, altération, divulgation ou destruction :</p>
+
+    <h3>Mesures techniques</h3>
+    <ul>
+      <li><strong>Chiffrement en transit :</strong> Toutes les communications utilisent HTTPS/TLS 1.2+</li>
+      <li><strong>Mots de passe hachés :</strong> Stockés via bcrypt avec salt (jamais en clair)</li>
+      <li><strong>Tokens JWT :</strong> Sessions authentifiées avec expiration automatique</li>
+      <li><strong>Base de données :</strong> Accès restreint, chiffrée au repos sur l'infrastructure Render</li>
+      <li><strong>Rate limiting :</strong> Protection contre les attaques par force brute sur les endpoints sensibles</li>
+      <li><strong>Clés API :</strong> Stockées chiffrées, jamais exposées côté client</li>
+    </ul>
+
+    <h3>Mesures organisationnelles</h3>
+    <ul>
+      <li>Accès aux données limité aux seuls administrateurs autorisés d'EGSCI</li>
+      <li>Panel d'administration protégé par authentification forte</li>
+      <li>Surveillance continue des journaux d'accès</li>
+      <li>Sauvegardes régulières des données critiques</li>
+    </ul>
+
+    <div class="box box-red">
+      <strong>En cas de violation de données :</strong> Si nous détectons une violation susceptible d'affecter vos droits et libertés, nous nous engageons à vous en informer dans les <strong>72 heures</strong> par email, conformément aux exigences légales applicables.
+    </div>
+  </div>
+
+  <!-- 10. Cookies -->
+  <div class="section" id="s10">
+    <h2><span class="num">10</span> Cookies et traceurs</h2>
+    <p>Notre site utilise un nombre minimal de cookies, strictement nécessaires au fonctionnement du service :</p>
+    <table class="data-table">
+      <thead><tr><th>Cookie</th><th>Type</th><th>Finalité</th><th>Durée</th></tr></thead>
+      <tbody>
+        <tr><td><code>evo_token</code></td><td>Fonctionnel (localStorage)</td><td>Maintien de la session client authentifiée (JWT)</td><td>7 jours</td></tr>
+        <tr><td>Cookie de session admin</td><td>Strictement nécessaire</td><td>Authentification de l'administrateur</td><td>8 heures</td></tr>
+      </tbody>
+    </table>
+    <div class="box box-green">
+      <strong>Aucun cookie publicitaire ou de tracking tiers.</strong> Nous n'intégrons pas Google Analytics, Facebook Pixel, ni aucun traceur de régie publicitaire. Votre navigation sur evostudio.fr n'est pas suivie par des tiers.
+    </div>
+    <p>Vous pouvez à tout moment supprimer les données stockées dans votre navigateur via les paramètres de votre navigateur (Paramètres → Confidentialité → Supprimer les données de navigation).</p>
+  </div>
+
+  <!-- 11. Mineurs -->
+  <div class="section" id="s11">
+    <h2><span class="num">11</span> Protection des mineurs</h2>
+    <p>Nos services sont destinés à des <strong>professionnels et adultes (18 ans et plus)</strong>. Nous ne collectons pas sciemment de données personnelles relatives à des personnes mineures.</p>
+    <p>Si vous êtes le parent ou tuteur d'un mineur et pensez qu'il nous a fourni des informations personnelles, veuillez nous contacter à <strong>support@evostudio.fr</strong> afin que nous puissions procéder à leur suppression dans les meilleurs délais.</p>
+  </div>
+
+  <!-- 12. Modifications -->
+  <div class="section" id="s12">
+    <h2><span class="num">12</span> Modifications de la présente politique</h2>
+    <p>EGSCI se réserve le droit de modifier la présente Politique de Confidentialité à tout moment. En cas de modification substantielle, nous vous en informerons :</p>
+    <ul>
+      <li>Par email à l'adresse associée à votre compte</li>
+      <li>Par un avis visible sur le site evostudio.fr</li>
+      <li>En mettant à jour la date de « dernière mise à jour » en haut de ce document</li>
+    </ul>
+    <p>La poursuite de l'utilisation de nos services après notification vaut acceptation des modifications. Nous vous encourageons à consulter régulièrement cette page.</p>
+    <div class="box box-blue">
+      <strong>Historique des versions :</strong><br>
+      • Version 1.0 — 1er janvier 2024 : Publication initiale<br>
+      • Version 1.1 — Janvier 2025 : Ajout section SMTP relay et paiements mobile money<br>
+      • Version 1.2 — Juin 2025 : Mise à jour transferts internationaux et droits ARTCI
+    </div>
+  </div>
+
+  <!-- 13. Contact -->
+  <div class="section" id="s13">
+    <h2><span class="num">13</span> Contact & réclamations</h2>
+    <p>Pour toute question relative à la présente politique ou pour exercer vos droits, contactez le <strong>Délégué à la Protection des Données</strong> d'EGSCI :</p>
+    <div class="company-card" style="margin-top:16px;margin-bottom:0">
+      <h3>📬 Coordonnées de contact — Protection des données</h3>
+      <div class="company-grid">
+        <dl class="company-row"><dt>Société</dt><dd>EXPERT GLOBAL SEVEN COTE D'IVOIRE (EGSCI)</dd></dl>
+        <dl class="company-row"><dt>Email</dt><dd><a href="mailto:support@evostudio.fr" style="color:var(--blue)">support@evostudio.fr</a></dd></dl>
+        <dl class="company-row"><dt>Adresse postale</dt><dd>Anyama, Blankro 1 Extension — Abidjan, Côte d'Ivoire</dd></dl>
+        <dl class="company-row"><dt>N° RCCM</dt><dd>CI-ABJ-2018-B-10429</dd></dl>
+      </div>
+    </div>
+
+    <h3 style="margin-top:24px">Autorité de contrôle — ARTCI</h3>
+    <p>Si vous estimez que vos droits n'ont pas été respectés après nous avoir contactés, vous pouvez déposer une réclamation auprès de l'<strong>Autorité de Régulation des Télécommunications / TIC de Côte d'Ivoire (ARTCI)</strong> :</p>
+    <ul>
+      <li><strong>Site web :</strong> www.artci.ci</li>
+      <li><strong>Adresse :</strong> Immeuble POSTEL 2001, rue Lecoeur — Abidjan Plateau, Côte d'Ivoire</li>
+      <li><strong>Téléphone :</strong> +225 27 20 25 88 00</li>
+    </ul>
+    <p>Pour les résidents de l'Union Européenne, vous pouvez également vous adresser à l'autorité de protection des données de votre pays de résidence (ex : CNIL pour la France).</p>
+  </div>
+
+  <div class="box box-green" style="margin-top:8px">
+    <strong>✅ Récapitulatif de nos engagements :</strong><br>
+    Nous ne vendons jamais vos données · Pas de publicité ciblée · Chiffrement de bout en bout · Suppression sur demande · Transparence totale sur les sous-traitants · Conformité loi ivoirienne n° 2013-450 & standards RGPD
+  </div>
+
+</div>
+
+<footer>
+  <strong>EXPERT GLOBAL SEVEN COTE D'IVOIRE (EGSCI)</strong><br>
+  SARL Uni-personnelle · N° RCCM CI-ABJ-2018-B-10429 · Capital social : 1 000 000 FCFA<br>
+  Anyama, Blankro 1 Extension — Abidjan, Côte d'Ivoire
+  <hr class="footer-divider">
+  <a href="/index.html">Accueil</a> &nbsp;·&nbsp;
+  <a href="/privacy.html">Politique de confidentialité</a> &nbsp;·&nbsp;
+  <a href="mailto:support@evostudio.fr">support@evostudio.fr</a>
+  <div style="margin-top:12px;color:#475569">© 2018–2025 EGSCI — EvoStudio. Tous droits réservés.</div>
+</footer>
+
+</body>
+</html>
