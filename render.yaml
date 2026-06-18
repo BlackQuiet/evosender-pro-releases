@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: evostudio-site
+    runtime: static
+    buildCommand: ""
+    staticPublishPath: .
+    branch: site
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
