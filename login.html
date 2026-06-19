@@ -24,10 +24,9 @@
 
     .form{padding:48px 42px;display:flex;flex-direction:column;justify-content:center}
     @media(max-width:720px){.form{padding:38px 28px}}
-    .form .mobile-logo{display:none;align-items:center;gap:9px;font-weight:800;font-size:19px;margin-bottom:24px;color:var(--ink)}
-    .form .mobile-logo .m{width:32px;height:32px;border-radius:9px;background:var(--blue);display:flex;align-items:center;justify-content:center}
-    .form .mobile-logo .m svg{width:17px;height:17px;stroke:#fff;fill:none;stroke-width:2.2}
-    @media(max-width:720px){.form .mobile-logo{display:flex}}
+    .logo-banner{display:flex;justify-content:center;align-items:flex-start;padding:36px 20px 34px;margin:-48px -42px 30px;background:linear-gradient(180deg,#ffffff 0%,#ffffff 30%,#eff6ff 58%,#bfdbfe 82%,#2563eb 125%)}
+    .logo-banner img{height:62px;max-width:240px;object-fit:contain;filter:drop-shadow(0 6px 14px rgba(37,99,235,.30))}
+    @media(max-width:720px){.logo-banner{margin:-38px -28px 26px;padding:32px 16px 30px}.logo-banner img{height:54px}}
     h1{font-size:25px;font-weight:800;margin-bottom:6px;letter-spacing:-.3px}
     .sub{font-size:14px;color:var(--slate);margin-bottom:28px}
     label{display:block;font-size:12px;font-weight:600;color:#334155;margin-bottom:7px;margin-top:18px}
@@ -62,7 +61,7 @@
     </aside>
 
     <main class="form">
-      <div class="mobile-logo"><img src="/logoevostudio2.png" alt="EvoStudio" height="30" style="display:block;max-width:140px;object-fit:contain" /></div>
+      <div class="logo-banner"><img src="/logoevostudio2.png" alt="EvoStudio" /></div>
 
       <!-- Étape 1 : email + mot de passe -->
       <div id="step-login">
