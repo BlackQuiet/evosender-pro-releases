@@ -480,7 +480,7 @@
     var passEl = document.getElementById('smtp-pass-' + id);
     var pass = passEl ? passEl.dataset.pass : '';
     var txt = 'Hôte SMTP : ' + host + '\nPort : ' + port + '\nUtilisateur : ' + user + '\nMot de passe : ' + pass + '\nChiffrement : TLS/STARTTLS';
-    navigator.clipboard.writeText(txt).then(function(){ alert('✅ Identifiants copiés !'); });
+    navigator.clipboard.writeText(txt).then(function(){ showToast('✅ Identifiants copiés !'); });
   }
 
   load();
