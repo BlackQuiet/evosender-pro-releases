@@ -9,23 +9,12 @@
     :root{--blue:#2563eb;--blue-dark:#1d4ed8;--blue-50:#eff6ff;--blue-100:#dbeafe;--ink:#0f172a;--slate:#64748b;--line:#eef2f7}
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:'Inter',sans-serif;background:#eef2f7;color:var(--ink);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-    .auth{width:100%;max-width:880px;background:#fff;border-radius:0;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;box-shadow:0 30px 80px rgba(15,23,42,.14)}
-    @media(max-width:720px){.auth{grid-template-columns:1fr;max-width:420px}.side{display:none}}
-    .side{background:linear-gradient(160deg,#1e3a8a,#2563eb);color:#fff;padding:44px 36px;display:flex;flex-direction:column}
-    .side .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;color:#fff;text-decoration:none}
-    .side .brand .m{width:36px;height:36px;border-radius:0;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center}
-    .side .brand .m svg{width:19px;height:19px;stroke:#fff;fill:none;stroke-width:2.2}
-    .side h2{font-size:25px;font-weight:800;margin:auto 0 12px;line-height:1.25;letter-spacing:-.4px}
-    .side p{font-size:14px;color:rgba(255,255,255,.82);line-height:1.65}
-    .side .feat{margin-top:26px;display:flex;flex-direction:column;gap:12px}
-    .side .feat div{display:flex;align-items:center;gap:11px;font-size:13.5px;color:rgba(255,255,255,.92)}
-    .side .feat svg{width:17px;height:17px;stroke:#fff;fill:none;stroke-width:1.9;flex-shrink:0}
+    .auth{width:100%;max-width:430px;background:#fff;border-radius:0;overflow:hidden;display:block;box-shadow:0 30px 80px rgba(15,23,42,.14)}
     .form{padding:44px 42px;display:flex;flex-direction:column;justify-content:center}
     @media(max-width:720px){.form{padding:36px 28px}}
-    .form .mobile-logo{display:none;align-items:center;gap:9px;font-weight:800;font-size:19px;margin-bottom:22px;color:var(--ink)}
-    .form .mobile-logo .m{width:32px;height:32px;border-radius:9px;background:var(--blue);display:flex;align-items:center;justify-content:center}
-    .form .mobile-logo .m svg{width:17px;height:17px;stroke:#fff;fill:none;stroke-width:2.2}
-    @media(max-width:720px){.form .mobile-logo{display:flex}}
+    .logo-banner{display:flex;justify-content:center;align-items:flex-start;padding:36px 20px 34px;margin:-44px -42px 28px;background:linear-gradient(180deg,#ffffff 0%,#ffffff 30%,#eff6ff 58%,#bfdbfe 82%,#2563eb 125%)}
+    .logo-banner img{height:62px;max-width:240px;object-fit:contain;filter:drop-shadow(0 6px 14px rgba(37,99,235,.30))}
+    @media(max-width:720px){.logo-banner{margin:-36px -28px 24px;padding:32px 16px 30px}.logo-banner img{height:54px}}
     h1{font-size:25px;font-weight:800;margin-bottom:6px;letter-spacing:-.3px}
     .sub{font-size:14px;color:var(--slate);margin-bottom:24px}
     label{display:block;font-size:12px;font-weight:600;color:#334155;margin-bottom:7px;margin-top:16px}
@@ -48,18 +37,8 @@
 </head>
 <body>
   <div class="auth">
-    <aside class="side">
-      <a href="/" class="brand"><img src="/logoevostudio2.png" alt="EvoStudio" height="30" style="display:block;max-width:140px;object-fit:contain;filter:drop-shadow(0 1px 3px rgba(0,0,0,.4))" /></a>
-      <h2>Créez votre compte<br>en 30 secondes.</h2>
-      <p>Un compte vous permet d'acheter, de retrouver vos licences et de télécharger vos applications à tout moment.</p>
-      <div class="feat">
-        <div><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Licence à vie, paiement unique</div>
-        <div><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> 100% local & privé</div>
-        <div><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Crypto, Wave & Orange Money</div>
-      </div>
-    </aside>
     <main class="form">
-      <div class="mobile-logo"><img src="/logoevostudio2.png" alt="EvoStudio" height="30" style="display:block;max-width:140px;object-fit:contain" /></div>
+      <div class="logo-banner"><img src="/logoevostudio2.png" alt="EvoStudio" /></div>
       <h1>Créer un compte</h1>
       <p class="sub">Accédez à vos licences après achat.</p>
       <form id="form" autocomplete="off">
