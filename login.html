@@ -60,28 +60,69 @@
 
     <main class="form">
       <div class="mobile-logo"><img src="/logoevostudio2.png" alt="EvoStudio" height="30" style="display:block;max-width:140px;object-fit:contain" /></div>
-      <h1>Connexion</h1>
-      <p class="sub">Accédez à votre espace client.</p>
-      <form id="form">
-        <label>Adresse email</label>
-        <div class="inp">
-          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
-          <input type="email" id="email" placeholder="vous@exemple.com" required autofocus />
-        </div>
-        <label>Mot de passe</label>
-        <div class="inp">
-          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          <input type="password" id="password" placeholder="••••••••" required />
-        </div>
-        <button class="btn" type="submit" id="btn">Se connecter</button>
-      </form>
-      <div class="msg" id="msg"></div>
-      <div class="footer-link">Pas encore de compte ? <a href="/register.html">Créer un compte</a></div>
+
+      <!-- Étape 1 : email + mot de passe -->
+      <div id="step-login">
+        <h1>Connexion</h1>
+        <p class="sub">Accédez à votre espace client.</p>
+        <form id="form">
+          <label>Adresse email</label>
+          <div class="inp">
+            <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+            <input type="email" id="email" placeholder="vous@exemple.com" required autofocus />
+          </div>
+          <label>Mot de passe</label>
+          <div class="inp">
+            <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <input type="password" id="password" placeholder="••••••••" required />
+          </div>
+          <button class="btn" type="submit" id="btn">Se connecter</button>
+        </form>
+        <div class="msg" id="msg"></div>
+        <div class="footer-link">Pas encore de compte ? <a href="/register.html">Créer un compte</a></div>
+      </div>
+
+      <!-- Étape 2 : code TOTP (affiché si 2FA activé) -->
+      <div id="step-2fa" style="display:none">
+        <h1>🔐 Vérification 2FA</h1>
+        <p class="sub">Entrez le code à 6 chiffres de votre application d'authentification (Google Authenticator, Authy…).</p>
+        <form id="form-2fa">
+          <label>Code TOTP</label>
+          <div class="inp">
+            <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <input type="text" id="totp" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" placeholder="000000" autocomplete="one-time-code" />
+          </div>
+          <button class="btn" type="submit" id="btn-2fa">Vérifier</button>
+        </form>
+        <div class="msg" id="msg-2fa"></div>
+        <div class="footer-link"><a href="#" onclick="resetLogin()">← Retour à la connexion</a></div>
+      </div>
     </main>
   </div>
   <script>
     const API = 'https://admin.evostudio.fr';
     if (localStorage.getItem('evo_token')) location.href = '/dashboard.html';
+    let _preToken = null;
+
+    function resetLogin() {
+      _preToken = null;
+      document.getElementById('step-login').style.display = '';
+      document.getElementById('step-2fa').style.display = 'none';
+      document.getElementById('msg').textContent = '';
+      document.getElementById('btn').disabled = false;
+      document.getElementById('btn').textContent = 'Se connecter';
+      return false;
+    }
+
+    function finishLogin(token, email) {
+      localStorage.setItem('evo_token', token);
+      localStorage.setItem('evo_email', email);
+      const msg = document.getElementById('msg') || document.getElementById('msg-2fa');
+      msg.className = 'msg ok'; msg.textContent = '✓ Connecté ! Redirection...';
+      const redir = new URLSearchParams(location.search).get('redirect') || '/dashboard.html';
+      setTimeout(() => location.href = redir, 700);
+    }
+
     document.getElementById('form').addEventListener('submit', async e => {
       e.preventDefault();
       const email = document.getElementById('email').value.trim();
@@ -91,13 +132,37 @@
       try {
         const r = await fetch(API + '/api/auth/login', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ email, password }) });
         const d = await r.json();
-        if (d.ok) {
-          localStorage.setItem('evo_token', d.token); localStorage.setItem('evo_email', d.email);
-          msg.className='msg ok'; msg.textContent='✓ Connecté ! Redirection...';
-          const redir = new URLSearchParams(location.search).get('redirect') || '/dashboard.html';
-          setTimeout(() => location.href = redir, 800);
-        } else { msg.className='msg err'; msg.textContent = d.error || 'Email ou mot de passe incorrect.'; btn.disabled=false; btn.textContent='Se connecter'; }
+        if (d.ok && d.requires2fa) {
+          _preToken = d.pre_token;
+          document.getElementById('step-login').style.display = 'none';
+          document.getElementById('step-2fa').style.display = '';
+          setTimeout(() => document.getElementById('totp').focus(), 100);
+        } else if (d.ok) {
+          finishLogin(d.token, d.email);
+        } else {
+          msg.className='msg err'; msg.textContent = d.error || 'Email ou mot de passe incorrect.';
+          btn.disabled=false; btn.textContent='Se connecter';
+        }
       } catch { msg.className='msg err'; msg.textContent='Erreur réseau. Réessayez.'; btn.disabled=false; btn.textContent='Se connecter'; }
+    });
+
+    document.getElementById('form-2fa').addEventListener('submit', async e => {
+      e.preventDefault();
+      const totp = document.getElementById('totp').value.trim();
+      const msg = document.getElementById('msg-2fa'); const btn = document.getElementById('btn-2fa');
+      btn.disabled = true; btn.textContent = 'Vérification...';
+      try {
+        const r = await fetch(API + '/api/auth/2fa/verify', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ pre_token: _preToken, totp }) });
+        const d = await r.json();
+        if (d.ok) {
+          finishLogin(d.token, d.email);
+        } else {
+          msg.className='msg err'; msg.textContent = d.error || 'Code incorrect.';
+          btn.disabled=false; btn.textContent='Vérifier';
+          document.getElementById('totp').value = '';
+          document.getElementById('totp').focus();
+        }
+      } catch { msg.className='msg err'; msg.textContent='Erreur réseau.'; btn.disabled=false; btn.textContent='Vérifier'; }
     });
   </script>
 </body>

@@ -149,6 +149,7 @@
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
         CGU acceptées
       </span>
+      <button id="p-2fa-btn" onclick="open2faModal()" style="display:none;margin-top:8px;background:none;border:1px solid var(--line);color:var(--slate);padding:4px 10px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;transition:.15s" onmouseover="this.style.borderColor='#7c3aed';this.style.color='#7c3aed'" onmouseout="this.style.borderColor='var(--line)';this.style.color='var(--slate)'"></button>
     </div>
     <div class="profile-stats">
       <div class="pstat"><div class="n" id="st-lic">0</div><div class="l">Licences</div></div>
@@ -272,6 +273,43 @@
   </div>
 </div>
 
+<!-- Modal 2FA -->
+<div class="overlay" id="tfa-overlay" onclick="if(event.target===this)close2faModal()">
+  <div class="cgu-box" style="max-width:420px">
+    <div class="cgu-head" style="display:flex;align-items:center;justify-content:space-between">
+      <div>
+        <h2 id="tfa-title">🔐 Activer la double authentification</h2>
+        <p id="tfa-sub" style="font-size:13px;color:var(--slate);margin-top:3px">Scannez le QR code avec Google Authenticator ou Authy</p>
+      </div>
+      <button onclick="close2faModal()" style="background:none;border:none;font-size:22px;color:var(--slate);cursor:pointer;line-height:1">×</button>
+    </div>
+
+    <!-- Étape setup : QR + confirmation -->
+    <div id="tfa-step-setup" class="cgu-body" style="text-align:center">
+      <div id="tfa-qr" style="margin:16px auto;display:inline-block;padding:12px;background:#fff;border:1px solid var(--line);border-radius:8px"><div style="width:180px;height:180px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;color:var(--slate-2);font-size:12px">Chargement…</div></div>
+      <p style="font-size:11px;color:var(--slate);margin-bottom:4px">Ou entrez manuellement :</p>
+      <div id="tfa-secret" style="font-family:monospace;font-size:11px;background:#f8fafc;border:1px solid var(--line);padding:6px 10px;border-radius:6px;word-break:break-all;margin-bottom:16px;color:#475569">—</div>
+      <input id="tfa-code" type="text" inputmode="numeric" maxlength="6" placeholder="Code à 6 chiffres" autocomplete="one-time-code"
+        style="width:100%;border:1.5px solid var(--line);border-radius:0;padding:11px 14px;font-size:16px;text-align:center;letter-spacing:.2em;font-family:monospace;outline:none;font-family:inherit;transition:.2s"
+        onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='var(--line)'"
+        oninput="if(this.value.length===6)document.getElementById('tfa-confirm-btn').focus()" />
+      <button id="tfa-confirm-btn" onclick="confirm2fa()" style="width:100%;margin-top:12px;background:var(--blue);color:#fff;border:none;padding:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:.15s">Activer le 2FA</button>
+      <div id="tfa-msg-setup" style="font-size:12px;margin-top:10px;min-height:16px"></div>
+      <p style="font-size:11px;color:var(--slate-2);margin-top:12px;line-height:1.5">⚠️ Notez le code secret — sans lui vous ne pourrez pas récupérer l'accès en cas de perte de téléphone.</p>
+    </div>
+
+    <!-- Étape désactivation : saisir code -->
+    <div id="tfa-step-disable" class="cgu-body" style="display:none;text-align:center">
+      <p style="font-size:14px;color:var(--ink);margin-bottom:20px">Entrez votre code TOTP actuel pour désactiver le 2FA.</p>
+      <input id="tfa-disable-code" type="text" inputmode="numeric" maxlength="6" placeholder="Code à 6 chiffres"
+        style="width:100%;border:1.5px solid var(--line);border-radius:0;padding:11px 14px;font-size:16px;text-align:center;letter-spacing:.2em;font-family:monospace;outline:none;font-family:inherit;transition:.2s"
+        onfocus="this.style.borderColor='#dc2626'" onblur="this.style.borderColor='var(--line)'" />
+      <button onclick="disable2fa()" style="width:100%;margin-top:12px;background:#dc2626;color:#fff;border:none;padding:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">Désactiver le 2FA</button>
+      <div id="tfa-msg-disable" style="font-size:12px;margin-top:10px;min-height:16px"></div>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -328,6 +366,14 @@
     if(user.created_at) document.getElementById('p-since').textContent = 'Membre depuis le ' + new Date(user.created_at).toLocaleDateString('fr-FR');
     if(user.cgu_accepted_at){ document.getElementById('p-cgu').style.display = 'inline-flex'; }
     else { openCgu(false); } // CGU non acceptées → modal bloquant
+
+    // Bouton 2FA
+    const btn2fa = document.getElementById('p-2fa-btn');
+    btn2fa.style.display = 'inline-flex';
+    btn2fa.innerHTML = user.totp_enabled
+      ? '🔐 2FA activé <span style="color:#16a34a;margin-left:4px">✓</span>'
+      : '🔓 Activer le 2FA';
+    btn2fa.title = user.totp_enabled ? 'Désactiver la double authentification' : 'Activer la double authentification';
 
     // Liens de téléchargement
     let downloadUrl    = 'https://github.com/BlackQuiet/evosender-pro-releases/releases/latest';
@@ -484,6 +530,97 @@
   }
 
   load();
+
+  // ── 2FA ──────────────────────────────────────────────────────
+  let _tfa2faSecret = null;
+  let _tfa2faEnabled = false;
+
+  function open2faModal() {
+    const btn = document.getElementById('p-2fa-btn');
+    _tfa2faEnabled = btn.innerHTML.includes('activé');
+    document.getElementById('tfa-overlay').classList.add('show');
+    if (_tfa2faEnabled) {
+      document.getElementById('tfa-title').textContent = '🔓 Désactiver le 2FA';
+      document.getElementById('tfa-sub').textContent = 'Confirmez avec votre code TOTP actuel.';
+      document.getElementById('tfa-step-setup').style.display = 'none';
+      document.getElementById('tfa-step-disable').style.display = '';
+      setTimeout(() => document.getElementById('tfa-disable-code').focus(), 100);
+    } else {
+      document.getElementById('tfa-title').textContent = '🔐 Activer le 2FA';
+      document.getElementById('tfa-sub').textContent = 'Scannez le QR code avec Google Authenticator ou Authy.';
+      document.getElementById('tfa-step-setup').style.display = '';
+      document.getElementById('tfa-step-disable').style.display = 'none';
+      init2fa();
+    }
+  }
+
+  function close2faModal() {
+    document.getElementById('tfa-overlay').classList.remove('show');
+    document.getElementById('tfa-code').value = '';
+    document.getElementById('tfa-disable-code').value = '';
+    document.getElementById('tfa-msg-setup').textContent = '';
+    document.getElementById('tfa-msg-disable').textContent = '';
+    _tfa2faSecret = null;
+  }
+
+  async function init2fa() {
+    document.getElementById('tfa-qr').innerHTML = '<div style="width:180px;height:180px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;color:var(--slate-2);font-size:12px">Chargement…</div>';
+    document.getElementById('tfa-secret').textContent = '—';
+    try {
+      const r = await fetch(API + '/api/auth/2fa/setup/init', { method:'POST', headers: authHeaders() });
+      const d = await r.json();
+      if (!d.ok) { document.getElementById('tfa-msg-setup').textContent = d.error || 'Erreur'; return; }
+      _tfa2faSecret = d.secret;
+      document.getElementById('tfa-secret').textContent = d.secret;
+      document.getElementById('tfa-qr').innerHTML = `<img src="${d.qr}" width="180" height="180" style="display:block;border-radius:4px" />`;
+      setTimeout(() => document.getElementById('tfa-code').focus(), 100);
+    } catch { document.getElementById('tfa-msg-setup').textContent = 'Erreur réseau.'; }
+  }
+
+  async function confirm2fa() {
+    const code = document.getElementById('tfa-code').value.trim();
+    const msg  = document.getElementById('tfa-msg-setup');
+    const btn  = document.getElementById('tfa-confirm-btn');
+    if (!code || code.length !== 6) { msg.style.color='#dc2626'; msg.textContent = 'Entrez le code à 6 chiffres.'; return; }
+    btn.disabled = true; btn.textContent = 'Vérification…';
+    try {
+      const r = await fetch(API + '/api/auth/2fa/setup/confirm', { method:'POST', headers:{...authHeaders(),'Content-Type':'application/json'}, body: JSON.stringify({ secret: _tfa2faSecret, totp: code }) });
+      const d = await r.json();
+      if (d.ok) {
+        showToast('✅ 2FA activé avec succès !');
+        close2faModal();
+        const b = document.getElementById('p-2fa-btn');
+        b.innerHTML = '🔐 2FA activé <span style="color:#16a34a;margin-left:4px">✓</span>';
+        b.title = 'Désactiver la double authentification';
+      } else {
+        msg.style.color='#dc2626'; msg.textContent = d.error || 'Code incorrect.';
+        document.getElementById('tfa-code').value = '';
+        document.getElementById('tfa-code').focus();
+      }
+    } catch { msg.style.color='#dc2626'; msg.textContent = 'Erreur réseau.'; }
+    btn.disabled = false; btn.textContent = 'Activer le 2FA';
+  }
+
+  async function disable2fa() {
+    const code = document.getElementById('tfa-disable-code').value.trim();
+    const msg  = document.getElementById('tfa-msg-disable');
+    if (!code || code.length !== 6) { msg.style.color='#dc2626'; msg.textContent = 'Entrez le code à 6 chiffres.'; return; }
+    try {
+      const r = await fetch(API + '/api/auth/2fa/disable', { method:'POST', headers:{...authHeaders(),'Content-Type':'application/json'}, body: JSON.stringify({ totp: code }) });
+      const d = await r.json();
+      if (d.ok) {
+        showToast('🔓 2FA désactivé.');
+        close2faModal();
+        const b = document.getElementById('p-2fa-btn');
+        b.innerHTML = '🔓 Activer le 2FA';
+        b.title = 'Activer la double authentification';
+      } else {
+        msg.style.color='#dc2626'; msg.textContent = d.error || 'Code incorrect.';
+        document.getElementById('tfa-disable-code').value = '';
+        document.getElementById('tfa-disable-code').focus();
+      }
+    } catch { msg.style.color='#dc2626'; msg.textContent = 'Erreur réseau.'; }
+  }
 </script>
 </body>
 </html>
