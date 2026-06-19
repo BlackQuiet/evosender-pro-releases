@@ -117,6 +117,16 @@
     if (localStorage.getItem('evo_token')) location.href = '/dashboard.html';
     let _preToken = null;
 
+    // Pré-remplir l'email mémorisé (même navigateur) → focus direct sur le mot de passe
+    (function prefillEmail(){
+      const saved = localStorage.getItem('evo_email');
+      if(!saved) return;
+      const emailInp = document.getElementById('email');
+      const pwInp    = document.getElementById('password');
+      if(emailInp){ emailInp.value = saved; }
+      if(pwInp){ setTimeout(() => pwInp.focus(), 50); }
+    })();
+
     function resetLogin() {
       _preToken = null;
       document.getElementById('step-login').style.display = '';

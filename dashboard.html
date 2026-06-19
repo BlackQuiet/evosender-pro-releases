@@ -322,7 +322,7 @@
   function showToast(m){ const t=document.getElementById('toast'); t.textContent=m; t.style.display='block'; setTimeout(()=>t.style.display='none',2200); }
   function copyKey(k){ navigator.clipboard.writeText(k); showToast('✓ Clé copiée : '+k); }
   function authHeaders(){ const t=localStorage.getItem('evo_token'); return t?{'Authorization':'Bearer '+t}:{}; }
-  function logout(){ localStorage.removeItem('evo_token'); localStorage.removeItem('evo_email'); location.href='/login.html'; }
+  function logout(){ localStorage.removeItem('evo_token'); /* on garde evo_email pour pré-remplir la connexion */ location.href='/login.html'; }
 
   function openCgu(viewOnly){
     _viewOnlyCgu = !!viewOnly;
