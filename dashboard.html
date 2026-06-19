@@ -359,11 +359,13 @@
     document.getElementById('main').style.display='block';
 
     // Profil
-    document.getElementById('nav-email').textContent = user.email;
-    document.getElementById('nav-avatar').textContent = (user.email[0] || '?').toUpperCase();
-    document.getElementById('p-email').textContent = user.email;
-    document.getElementById('avatar').textContent = (user.email[0] || '?').toUpperCase();
-    if(user.created_at) document.getElementById('p-since').textContent = 'Membre depuis le ' + new Date(user.created_at).toLocaleDateString('fr-FR');
+    const initial = (user.email[0] || '?').toUpperCase();
+    const setTxt = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val; };
+    setTxt('nav-email', user.email);
+    setTxt('nav-avatar', initial);
+    setTxt('p-email', user.email);
+    setTxt('avatar', initial);
+    if(user.created_at) setTxt('p-since', 'Membre depuis le ' + new Date(user.created_at).toLocaleDateString('fr-FR'));
     if(user.cgu_accepted_at){ document.getElementById('p-cgu').style.display = 'inline-flex'; }
     else { openCgu(false); } // CGU non acceptées → modal bloquant
 
