@@ -302,9 +302,18 @@
     if(user.cgu_accepted_at){ document.getElementById('p-cgu').style.display = 'inline-flex'; }
     else { openCgu(false); } // CGU non acceptées → modal bloquant
 
-    // Lien de téléchargement
-    let downloadUrl = 'https://github.com/BlackQuiet/evosender-pro-releases/releases/latest';
-    try { const pr = await fetch(API + '/api/shop/products'); if(pr.ok){ const pd = await pr.json(); if(pd.site && pd.site.download_url) downloadUrl = pd.site.download_url; } } catch {}
+    // Liens de téléchargement
+    let downloadUrl    = 'https://github.com/BlackQuiet/evosender-pro-releases/releases/latest';
+    let downloadUrlWin = 'https://github.com/BlackQuiet/evosender-pro-releases/releases/latest/download/EvoStudio-Setup-3.0.60.exe';
+    let downloadUrlMac = 'https://github.com/BlackQuiet/evosender-pro-releases/releases/latest/download/EvoStudio-3.0.60-arm64.dmg';
+    try {
+      const pr = await fetch(API + '/api/shop/products');
+      if(pr.ok){ const pd = await pr.json(); const site = pd.site || {};
+        if(site.download_url)     downloadUrl    = site.download_url;
+        if(site.download_url_win) downloadUrlWin = site.download_url_win;
+        if(site.download_url_mac) downloadUrlMac = site.download_url_mac;
+      }
+    } catch {}
 
     const ordersR = await fetch(API + '/api/shop/orders', { headers: authHeaders() });
     const orders = ordersR.ok ? await ordersR.json() : [];
@@ -324,10 +333,16 @@
               ${PROD_LABELS[o.product] || o.product}
               ${o.quantity>1 ? `<span class="lic-badge">${o.quantity} PC</span>` : '<span class="lic-badge">Licence à vie</span>'}
             </div>
-            <a href="${downloadUrl}" target="_blank" rel="noopener" class="dl-btn">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              Télécharger
-            </a>
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <a href="${downloadUrlWin}" target="_blank" rel="noopener" class="dl-btn" title="Windows 10/11 · x64 · .exe">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+                Windows
+              </a>
+              <a href="${downloadUrlMac}" target="_blank" rel="noopener" class="dl-btn" style="background:rgba(167,139,250,.12);border-color:rgba(167,139,250,.3);color:#a78bfa" title="macOS Silicon M1/M2/M3 · arm64 · .dmg">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
+                Mac Silicon
+              </a>
+            </div>
           </div>
           <div class="lic-label">Clé de licence</div>
           <div class="lic-key-wrap">
