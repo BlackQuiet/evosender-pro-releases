@@ -10,21 +10,10 @@
     :root{--blue:#2563eb;--blue-dark:#1d4ed8;--blue-50:#eff6ff;--blue-100:#dbeafe;--ink:#0f172a;--slate:#64748b;--slate-2:#94a3b8;--line:#eef2f7;--green:#16a34a;--amber:#b45309}
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:'Inter',sans-serif;background:#eef2f7;color:var(--ink);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-    .checkout{width:100%;max-width:920px;background:#fff;border-radius:0;overflow:hidden;display:grid;grid-template-columns:330px 1fr;box-shadow:0 30px 80px rgba(15,23,42,.14)}
-    @media(max-width:760px){.checkout{grid-template-columns:1fr}.side{display:none}}
+    .checkout{width:100%;max-width:580px;background:#fff;border-radius:0;overflow:hidden;box-shadow:0 30px 80px rgba(15,23,42,.14)}
 
-    .side{background:linear-gradient(160deg,#1e3a8a,#2563eb);color:#fff;padding:40px 32px;display:flex;flex-direction:column}
-    .side .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;color:#fff;text-decoration:none}
-    .side .brand .m{width:36px;height:36px;border-radius:0;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center}
-    .side .brand .m svg{width:19px;height:19px;stroke:#fff;fill:none;stroke-width:2.2}
-    .side h2{font-size:23px;font-weight:800;margin:36px 0 12px;line-height:1.25;letter-spacing:-.3px}
-    .side .lead{font-size:14px;color:rgba(255,255,255,.82);line-height:1.65}
-    .trust{margin-top:auto;display:flex;flex-direction:column;gap:14px;padding-top:32px}
-    .trust div{display:flex;align-items:center;gap:11px;font-size:13.5px;color:rgba(255,255,255,.92)}
-    .trust svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:1.8;flex-shrink:0}
-
-    .panel{padding:40px 38px}
-    @media(max-width:760px){.panel{padding:30px 22px}.mobile-logo{display:block!important}}
+    .panel{padding:40px 44px}
+    @media(max-width:620px){.panel{padding:28px 20px}}
     h1{font-size:23px;font-weight:800;margin-bottom:4px;letter-spacing:-.3px}
     .sub{font-size:14px;color:var(--slate);margin-bottom:22px}
     .mini-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--slate);margin:20px 0 10px}
@@ -88,19 +77,8 @@
 </head>
 <body>
   <div class="checkout">
-    <aside class="side">
-      <a href="/" class="brand"><img src="/logoevostudio2.png" alt="EvoStudio" height="30" style="display:block;max-width:140px;object-fit:contain;filter:drop-shadow(0 1px 3px rgba(0,0,0,.4))" /></a>
-      <h2>Paiement sécurisé,<br>licence instantanée.</h2>
-      <p class="lead">Réglez votre commande et recevez votre clé de licence automatiquement dans votre espace client.</p>
-      <div class="trust">
-        <div><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Paiement chiffré & sécurisé</div>
-        <div><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Licence générée automatiquement</div>
-        <div><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Licence à vie · support inclus</div>
-      </div>
-    </aside>
-
     <main class="panel">
-      <div class="mobile-logo" style="display:none;margin-bottom:20px"><img src="/logoevostudio2.png" alt="EvoStudio" height="30" style="display:block;max-width:140px;object-fit:contain" /></div>
+      <div style="margin-bottom:24px"><a href="/"><img src="/logoevostudio2.png" alt="EvoStudio" height="28" style="display:block;max-width:130px;object-fit:contain" /></a></div>
       <!-- Étape 1 -->
       <div id="step-choose">
         <h1>Votre commande</h1>
