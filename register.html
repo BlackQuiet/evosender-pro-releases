@@ -12,7 +12,10 @@
     .auth{width:100%;max-width:430px;background:#fff;border-radius:0;overflow:hidden;display:block;box-shadow:0 30px 80px rgba(15,23,42,.14)}
     .form{padding:44px 42px;display:flex;flex-direction:column;justify-content:center}
     @media(max-width:720px){.form{padding:36px 28px}}
-    .logo-banner{display:flex;justify-content:center;align-items:flex-start;padding:36px 20px 34px;margin:-44px -42px 28px;background:linear-gradient(180deg,#ffffff 0%,#ffffff 30%,#eff6ff 58%,#bfdbfe 82%,#2563eb 125%)}
+    .logo-banner{position:relative;display:flex;justify-content:center;align-items:flex-start;padding:36px 20px 34px;margin:-44px -42px 28px;background:linear-gradient(180deg,#ffffff 0%,#ffffff 30%,#eff6ff 58%,#bfdbfe 82%,#2563eb 125%)}
+    .home-btn{position:absolute;top:14px;left:14px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;background:rgba(37,99,235,.10);color:var(--blue);text-decoration:none;border-radius:0;transition:.15s;z-index:2}
+    .home-btn:hover{background:var(--blue);color:#fff}
+    .home-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.9}
     .logo-banner img{height:62px;max-width:240px;object-fit:contain;filter:drop-shadow(0 6px 14px rgba(37,99,235,.30))}
     @media(max-width:720px){.logo-banner{margin:-36px -28px 24px;padding:32px 16px 30px}.logo-banner img{height:54px}}
     h1{font-size:25px;font-weight:800;margin-bottom:6px;letter-spacing:-.3px}
@@ -38,7 +41,7 @@
 <body>
   <div class="auth">
     <main class="form">
-      <div class="logo-banner"><img src="/logoevostudio2.png" alt="EvoStudio" /></div>
+      <div class="logo-banner"><a href="/" class="home-btn" title="Accueil" aria-label="Accueil"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9.5 21v-6h5v6"/></svg></a><img src="/logoevostudio2.png" alt="EvoStudio" /></div>
       <h1>Créer un compte</h1>
       <p class="sub">Accédez à vos licences après achat.</p>
       <form id="form" autocomplete="off">
