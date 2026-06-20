@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
@@ -192,7 +192,7 @@
     function isSmtp(id){ return (id||'').startsWith('smtp_'); }
     function curProduct(){ return products.find(p => p.id === selectedProduct); }
     function unitPrice(p){
-      // Les prix FCFA sont calculés ici dynamiquement depuis le taux actuel
+      // Les prix XOF sont calculés ici dynamiquement depuis le taux actuel
       if(selectedCrypto === 'wave' || selectedCrypto === 'om') return Math.round(Number(p.price_usdt) * usdXofRate);
       if(selectedCrypto === 'btc')  return Number(p.price_btc) || 0;
       return Number(p.price_usdt) || 0;
@@ -205,7 +205,7 @@
     }
     function fmtAmount(v){
       if(selectedCrypto === 'btc') return v + ' BTC';
-      if(FIAT.includes(selectedCrypto)) return Number(v).toLocaleString('fr-FR') + ' FCFA';
+      if(FIAT.includes(selectedCrypto)) return Number(v).toLocaleString('fr-FR') + ' XOF';
       return v + ' USDT';
     }
     function changeQty(d){
@@ -314,7 +314,7 @@
     const VOL_LABELS = {smtp_10k:'10 000',smtp_50k:'50 000',smtp_100k:'100 000',smtp_500k:'500 000'};
     function priceLabel(p) {
       const suffix = isSmtp(p.id) ? ' <span style="opacity:.6">/ mois</span>' : ' <span style="opacity:.6">/ PC</span>';
-      const unit = selectedCrypto === 'btc' ? ' BTC' : (FIAT.includes(selectedCrypto) ? ' FCFA' : ' USD');
+      const unit = selectedCrypto === 'btc' ? ' BTC' : (FIAT.includes(selectedCrypto) ? ' XOF' : ' USD');
       let html = '';
       if (discountPct > 0 && selectedCrypto !== 'btc') {
         const orig = FIAT.includes(selectedCrypto) ? Math.round(unitPriceOriginal(p)) : unitPriceOriginal(p);
@@ -464,12 +464,12 @@
         const isWave = d.crypto === 'wave';
         const moyen = isWave ? 'Wave' : 'Orange Money';
         const montant = Number(d.price_exact).toLocaleString('fr-FR');
-        document.getElementById('pay-amount').textContent = montant + ' FCFA';
+        document.getElementById('pay-amount').textContent = montant + ' XOF';
         document.getElementById('pay-address').textContent = 'EGSCI SARL';
         document.querySelector('.addr-label').textContent = 'Bénéficiaire';
         document.querySelector('.addr-box .addr-copy').style.display = 'none';
         document.getElementById('pay-sub').textContent =
-          `Payez exactement ${montant} FCFA via ${moyen} en scannant le QR code ci-dessous`;
+          `Payez exactement ${montant} XOF via ${moyen} en scannant le QR code ci-dessous`;
 
         document.getElementById('qrcode').innerHTML = '';
         let url = d.address;
@@ -490,7 +490,7 @@
         }
 
         document.querySelector('.warning').innerHTML =
-          `${isWave ? '🌊' : '🟠'} Scannez le QR code ou cliquez sur <strong>« Payer avec ${moyen} »</strong> pour payer <strong>exactement ${montant} FCFA</strong> à <strong>EGSCI SARL</strong>. ` +
+          `${isWave ? '🌊' : '🟠'} Scannez le QR code ou cliquez sur <strong>« Payer avec ${moyen} »</strong> pour payer <strong>exactement ${montant} XOF</strong> à <strong>EGSCI SARL</strong>. ` +
           'Ce montant unique identifie votre commande. Votre licence sera activée dès validation du paiement.';
 
         document.getElementById('status-text').textContent = `En attente de confirmation du paiement ${moyen}…`;
