@@ -596,23 +596,32 @@
     try {
       var r = await fetch(API + '/api/auth/support', { headers: authHeaders() });
       if(!r.ok) return;
-      var msgs = await r.json();
+      var data = await r.json();
+      var msgs = data.messages || [];
       var badge = document.getElementById('support-unread');
       if(badge) badge.style.display = 'none';
+      var html = '';
       if(!msgs.length){
-        thread.innerHTML = '<div style="text-align:center;color:var(--slate-2);font-size:13px;padding:20px">Aucun message. Posez votre question à notre équipe ci-dessous.</div>';
-        return;
+        html = '<div style="text-align:center;color:var(--slate-2);font-size:13px;padding:20px">Aucun message. Posez votre question à notre équipe ci-dessous.</div>';
+      } else {
+        html = msgs.map(function(m){
+          var when = new Date(m.created_at).toLocaleString('fr-FR', {day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
+          if(m.sender === 'system'){
+            return '<div style="text-align:center;margin:4px 0"><span style="display:inline-block;background:#eef2f7;color:#64748b;font-size:11px;padding:4px 12px;border-radius:999px">' + esc(m.body) + '</span></div>';
+          }
+          var mine = m.sender === 'user';
+          return '<div style="display:flex;justify-content:' + (mine?'flex-end':'flex-start') + '">' +
+            '<div style="max-width:78%;background:' + (mine?'#2563eb':'#f1f5f9') + ';color:' + (mine?'#fff':'#0f172a') + ';padding:9px 13px;font-size:13.5px;line-height:1.5;word-break:break-word">' +
+              (mine?'':'<div style="font-size:10px;font-weight:700;color:#2563eb;margin-bottom:3px">Support EvoStudio</div>') +
+              esc(m.body).replace(/\n/g,'<br>') +
+              '<div style="font-size:10px;opacity:.7;margin-top:4px;text-align:right">' + when + '</div>' +
+            '</div></div>';
+        }).join('');
       }
-      thread.innerHTML = msgs.map(function(m){
-        var mine = m.sender === 'user';
-        var when = new Date(m.created_at).toLocaleString('fr-FR', {day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
-        return '<div style="display:flex;justify-content:' + (mine?'flex-end':'flex-start') + '">' +
-          '<div style="max-width:78%;background:' + (mine?'#2563eb':'#f1f5f9') + ';color:' + (mine?'#fff':'#0f172a') + ';padding:9px 13px;font-size:13.5px;line-height:1.5;word-break:break-word">' +
-            (mine?'':'<div style="font-size:10px;font-weight:700;color:#2563eb;margin-bottom:3px">Support EvoStudio</div>') +
-            esc(m.body).replace(/\n/g,'<br>') +
-            '<div style="font-size:10px;opacity:.7;margin-top:4px;text-align:right">' + when + '</div>' +
-          '</div></div>';
-      }).join('');
+      if(data.closed){
+        html += '<div style="text-align:center;margin-top:10px;padding:10px;background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;font-size:12px">✓ Conversation résolue. Écrivez un message pour la rouvrir.</div>';
+      }
+      thread.innerHTML = html;
       thread.scrollTop = thread.scrollHeight;
     } catch(e){}
   }
