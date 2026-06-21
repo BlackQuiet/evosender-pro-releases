@@ -342,65 +342,16 @@ footer{background:#0f172a;border-top:1px solid #1e293b;color:#94a3b8}
 <!-- ═══════════ SHOWCASE (maquette app) ═══════════ -->
 <section style="background:linear-gradient(180deg,#0d1117 0%,#0d1117 55%,#0f1830 100%);padding:0 16px 64px;margin-top:-20px">
   <div style="max-width:980px;margin:0 auto">
-    <div style="position:relative;border-radius:14px;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.06);background:#0b0e14">
-      <svg viewBox="0 0 1000 580" width="100%" style="display:block" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Aperçu de l'interface EvoStudio">
-        <defs>
-          <linearGradient id="ev-acc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#a78bfa"/></linearGradient>
-          <linearGradient id="ev-bar" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3b82f6"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient>
-        </defs>
-        <rect width="1000" height="580" fill="#0b0e14"/>
-        <!-- Barre titre -->
-        <rect width="1000" height="44" fill="#11151d"/>
-        <circle cx="26" cy="22" r="6" fill="#ef4444"/><circle cx="48" cy="22" r="6" fill="#f59e0b"/><circle cx="70" cy="22" r="6" fill="#22c55e"/>
-        <text x="500" y="27" text-anchor="middle" fill="#5b6677" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="600">EvoStudio — EvoSender</text>
-        <!-- Sidebar -->
-        <rect x="0" y="44" width="210" height="536" fill="#0e1219"/>
-        <rect x="16" y="64" width="178" height="36" rx="8" fill="rgba(255,255,255,.03)"/>
-        <circle cx="38" cy="82" r="9" fill="#1f6feb"/><text x="58" y="86" fill="#9aa6b5" font-family="Inter,Arial" font-size="12.5">EvoExtractor</text>
-        <rect x="16" y="108" width="178" height="36" rx="8" fill="url(#ev-acc)" opacity="0.16"/>
-        <rect x="16" y="108" width="3" height="36" rx="2" fill="url(#ev-acc)"/>
-        <circle cx="38" cy="126" r="9" fill="#8b5cf6"/><text x="58" y="130" fill="#e6edf3" font-family="Inter,Arial" font-size="12.5" font-weight="700">EvoSender</text>
-        <rect x="16" y="152" width="178" height="36" rx="8" fill="rgba(255,255,255,.03)"/>
-        <circle cx="38" cy="170" r="9" fill="#22c55e"/><text x="58" y="174" fill="#9aa6b5" font-family="Inter,Arial" font-size="12.5">EvoVérificateur</text>
-        <text x="22" y="240" fill="#3b4351" font-family="Inter,Arial" font-size="10" font-weight="700" letter-spacing="1">SERVEURS SMTP</text>
-        <g font-family="Inter,Arial" font-size="11.5" fill="#7d8896">
-          <circle cx="30" cy="262" r="4" fill="#22c55e"/><text x="44" y="266">smtp.sendgrid.net</text>
-          <circle cx="30" cy="288" r="4" fill="#22c55e"/><text x="44" y="292">relay · port 587</text>
-          <circle cx="30" cy="314" r="4" fill="#f59e0b"/><text x="44" y="318">rotation active</text>
-        </g>
-        <!-- Main -->
-        <text x="242" y="84" fill="#e6edf3" font-family="Inter,Arial" font-size="20" font-weight="800">Campagne en cours</text>
-        <text x="242" y="106" fill="#6b7686" font-family="Inter,Arial" font-size="12.5">Newsletter Juin — 48 250 destinataires</text>
-        <rect x="820" y="66" width="150" height="34" rx="8" fill="url(#ev-bar)"/>
-        <text x="895" y="88" text-anchor="middle" fill="#fff" font-family="Inter,Arial" font-size="12.5" font-weight="700">▶ Envoi en cours</text>
-        <!-- Progress -->
-        <rect x="242" y="130" width="728" height="12" rx="6" fill="#1a1f29"/>
-        <rect x="242" y="130" width="524" height="12" rx="6" fill="url(#ev-bar)"/>
-        <text x="242" y="164" fill="#9aa6b5" font-family="Inter,Arial" font-size="11.5">34 720 / 48 250 envoyés · 72%</text>
-        <!-- Stat cards -->
-        <g font-family="Inter,Arial">
-          <rect x="242" y="186" width="232" height="92" rx="10" fill="#11151d" stroke="rgba(255,255,255,.05)"/>
-          <text x="262" y="214" fill="#6b7686" font-size="11">Envoyés</text><text x="262" y="250" fill="#e6edf3" font-size="26" font-weight="800">34 720</text>
-          <rect x="490" y="186" width="232" height="92" rx="10" fill="#11151d" stroke="rgba(255,255,255,.05)"/>
-          <text x="510" y="214" fill="#6b7686" font-size="11">Taux d'ouverture</text><text x="510" y="250" fill="#4ade80" font-size="26" font-weight="800">41,8%</text>
-          <rect x="738" y="186" width="232" height="92" rx="10" fill="#11151d" stroke="rgba(255,255,255,.05)"/>
-          <text x="758" y="214" fill="#6b7686" font-size="11">Clics</text><text x="758" y="250" fill="#60a5fa" font-size="26" font-weight="800">9 134</text>
-        </g>
-        <!-- Liste -->
-        <g font-family="Inter,Arial" font-size="12">
-          <rect x="242" y="298" width="728" height="252" rx="10" fill="#0e1219" stroke="rgba(255,255,255,.05)"/>
-          <text x="262" y="326" fill="#3b4351" font-size="10" font-weight="700" letter-spacing="1">DESTINATAIRE</text>
-          <text x="720" y="326" fill="#3b4351" font-size="10" font-weight="700" letter-spacing="1">STATUT</text>
-          <g><line x1="262" y1="346" x2="950" y2="346" stroke="rgba(255,255,255,.04)"/><circle cx="272" cy="360" r="9" fill="#1a2030"/><text x="292" y="364" fill="#c4cdd9">marie.lefevre@gmail.com</text><rect x="720" y="351" width="74" height="19" rx="9" fill="#4ade80" opacity="0.15"/><text x="757" y="364" text-anchor="middle" fill="#4ade80" font-weight="700" font-size="11">Ouvert</text></g>
-          <g><line x1="262" y1="378" x2="950" y2="378" stroke="rgba(255,255,255,.04)"/><circle cx="272" cy="392" r="9" fill="#1a2030"/><text x="292" y="396" fill="#c4cdd9">contact@startup.io</text><rect x="720" y="383" width="74" height="19" rx="9" fill="#60a5fa" opacity="0.15"/><text x="757" y="396" text-anchor="middle" fill="#60a5fa" font-weight="700" font-size="11">Cliqué</text></g>
-          <g><line x1="262" y1="410" x2="950" y2="410" stroke="rgba(255,255,255,.04)"/><circle cx="272" cy="424" r="9" fill="#1a2030"/><text x="292" y="428" fill="#c4cdd9">j.martin@outlook.fr</text><rect x="720" y="415" width="74" height="19" rx="9" fill="#9aa6b5" opacity="0.15"/><text x="757" y="428" text-anchor="middle" fill="#9aa6b5" font-weight="700" font-size="11">Délivré</text></g>
-          <g><line x1="262" y1="442" x2="950" y2="442" stroke="rgba(255,255,255,.04)"/><circle cx="272" cy="456" r="9" fill="#1a2030"/><text x="292" y="460" fill="#c4cdd9">team@agence.fr</text><rect x="720" y="447" width="74" height="19" rx="9" fill="#4ade80" opacity="0.15"/><text x="757" y="460" text-anchor="middle" fill="#4ade80" font-weight="700" font-size="11">Ouvert</text></g>
-          <g><line x1="262" y1="474" x2="950" y2="474" stroke="rgba(255,255,255,.04)"/><circle cx="272" cy="488" r="9" fill="#1a2030"/><text x="292" y="492" fill="#c4cdd9">hello@boutique.com</text><rect x="720" y="479" width="74" height="19" rx="9" fill="#7d8896" opacity="0.15"/><text x="757" y="492" text-anchor="middle" fill="#7d8896" font-weight="700" font-size="11">Envoyé</text></g>
-          <g><line x1="262" y1="506" x2="950" y2="506" stroke="rgba(255,255,255,.04)"/><circle cx="272" cy="520" r="9" fill="#1a2030"/><text x="292" y="524" fill="#c4cdd9">pro@cabinet.fr</text><rect x="720" y="511" width="74" height="19" rx="9" fill="#60a5fa" opacity="0.15"/><text x="757" y="524" text-anchor="middle" fill="#60a5fa" font-weight="700" font-size="11">Cliqué</text></g>
-        </g>
-      </svg>
+    <div style="border-radius:14px;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.06)">
+      <img src="/Hub.png" alt="EvoStudio — tableau de bord" loading="lazy" style="display:block;width:100%;height:auto" />
     </div>
-    <p style="text-align:center;color:rgba(255,255,255,.4);font-size:12.5px;margin-top:16px">Aperçu d'EvoSender — envoi en masse, rotation SMTP et suivi en temps réel.</p>
+    <div id="ev-tools" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px">
+      <div style="border-radius:12px;overflow:hidden;box-shadow:0 18px 40px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.06)"><img src="/EvoExtractor.png" alt="EvoExtractor — collecte d'emails" loading="lazy" style="display:block;width:100%;height:auto" /></div>
+      <div style="border-radius:12px;overflow:hidden;box-shadow:0 18px 40px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.06)"><img src="/EvoSender.png" alt="EvoSender — envoi en masse" loading="lazy" style="display:block;width:100%;height:auto" /></div>
+      <div style="border-radius:12px;overflow:hidden;box-shadow:0 18px 40px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.06)"><img src="/Evoverif.png" alt="EvoVérificateur — vérification d'emails" loading="lazy" style="display:block;width:100%;height:auto" /></div>
+    </div>
+    <style>@media(max-width:720px){#ev-tools{grid-template-columns:1fr!important}}</style>
+    <p style="text-align:center;color:rgba(255,255,255,.4);font-size:12.5px;margin-top:16px">EvoStudio en images — le hub et ses 3 outils : extraction, envoi haute délivrabilité et vérification.</p>
   </div>
 </section>
 
