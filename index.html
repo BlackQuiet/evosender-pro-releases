@@ -57,8 +57,15 @@ img{max-width:100%;height:auto}
 .logo-mark svg{width:17px;height:17px;stroke:#fff;fill:none;stroke-width:2.2}
 .logo b{color:var(--blue)}
 .nav-links{display:flex;gap:4px;align-items:center}
-.nav-links a{color:#64748b;font-weight:500;font-size:13px;padding:6px 12px;border-radius:8px;transition:all .15s}
-.nav-links a:hover{color:var(--ink);background:#f1f5f9}
+.nav-links > a, .nav-dd-trigger{color:#64748b;font-weight:500;font-size:13px;padding:6px 12px;border-radius:8px;transition:all .15s;cursor:pointer;display:inline-block}
+.nav-links > a:hover, .nav-dd:hover .nav-dd-trigger{color:var(--ink);background:#f1f5f9}
+.nav-dd{position:relative}
+.nav-submenu{position:absolute;top:100%;left:0;margin-top:6px;background:#fff;border:1px solid #eef2f7;border-radius:14px;box-shadow:0 18px 50px rgba(15,23,42,.12);padding:8px;min-width:260px;opacity:0;visibility:hidden;transform:translateY(6px);transition:.18s;z-index:60}
+.nav-dd:hover .nav-submenu{opacity:1;visibility:visible;transform:translateY(0)}
+.nav-submenu a{display:flex!important;flex-direction:column;gap:1px;padding:9px 12px;border-radius:10px;background:none}
+.nav-submenu a:hover{background:#f5f8ff}
+.nav-submenu a b{font-size:13.5px;color:var(--ink);font-weight:700}
+.nav-submenu a span{font-size:11.5px;color:#94a3b8}
 .nav-cta{display:flex;gap:8px;align-items:center;flex-shrink:0}
 .nav-burger{display:none;background:none;border:none;cursor:pointer;padding:4px;color:var(--ink)}
 .nav-burger svg{display:block;width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
@@ -254,7 +261,15 @@ footer{background:#0f172a;border-top:1px solid #1e293b;color:#94a3b8}
       <img src="/logoevostudio2.png" alt="EvoStudio" height="36" style="display:block;max-width:160px;object-fit:contain" />
     </a>
     <div class="nav-links">
-      <a href="#produits">Produits</a>
+      <div class="nav-dd">
+        <a href="#produits" class="nav-dd-trigger">Produits <span style="font-size:9px;opacity:.7">▼</span></a>
+        <div class="nav-submenu">
+          <a href="/produit.html?id=extractor"><b>EvoExtractor</b><span>Collecte d'adresses email</span></a>
+          <a href="/produit.html?id=sender"><b>EvoSender</b><span>Envoi en masse haute délivrabilité</span></a>
+          <a href="/produit.html?id=verifier"><b>EvoVérificateur</b><span>Nettoyage & validation de listes</span></a>
+          <a href="/produit.html?id=suite"><b>Suite EvoStudio</b><span>Les 3 outils en une licence</span></a>
+        </div>
+      </div>
       <a href="#fonctionnalites">Fonctionnalités</a>
       <a href="#tarifs">Tarifs</a>
       <a href="#faq">FAQ</a>
@@ -278,6 +293,12 @@ footer{background:#0f172a;border-top:1px solid #1e293b;color:#94a3b8}
       <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
     <a href="#produits">Produits</a>
+    <div style="padding-left:14px;border-left:2px solid #eef2f7;margin:-4px 0 4px">
+      <a href="/produit.html?id=extractor" style="font-size:13px;color:#64748b">↳ EvoExtractor</a>
+      <a href="/produit.html?id=sender" style="font-size:13px;color:#64748b">↳ EvoSender</a>
+      <a href="/produit.html?id=verifier" style="font-size:13px;color:#64748b">↳ EvoVérificateur</a>
+      <a href="/produit.html?id=suite" style="font-size:13px;color:#64748b">↳ Suite EvoStudio</a>
+    </div>
     <a href="#fonctionnalites">Fonctionnalités</a>
     <a href="#tarifs">Tarifs</a>
     <a href="#faq">FAQ</a>
@@ -342,16 +363,30 @@ footer{background:#0f172a;border-top:1px solid #1e293b;color:#94a3b8}
 <!-- ═══════════ SHOWCASE (maquette app) ═══════════ -->
 <section style="background:linear-gradient(180deg,#0d1117 0%,#0d1117 55%,#0f1830 100%);padding:0 16px 64px;margin-top:-20px">
   <div style="max-width:980px;margin:0 auto">
-    <div style="border-radius:14px;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.06)">
+    <!-- Hub en vedette -->
+    <a href="/produit.html?id=suite" style="text-decoration:none;display:block;border-radius:14px;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.06);position:relative">
       <img src="/Hub.png" alt="EvoStudio — tableau de bord" loading="lazy" style="display:block;width:100%;height:auto" />
+      <div style="position:absolute;left:0;right:0;bottom:0;background:linear-gradient(0deg,rgba(13,17,23,.9),transparent);padding:26px 22px 16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+        <div><div style="color:#fff;font-weight:800;font-size:16px">Suite EvoStudio</div><div style="color:rgba(255,255,255,.6);font-size:12.5px">Les 3 outils réunis, une seule licence</div></div>
+        <span style="color:#60a5fa;font-size:13px;font-weight:700">Découvrir la suite →</span>
+      </div>
+    </a>
+    <!-- 3 outils en rangée, cliquables -->
+    <div id="ev-tools" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px">
+      <a href="/produit.html?id=extractor" class="ev-tcard"><img src="/EvoExtractor.png" alt="EvoExtractor" loading="lazy"/><span class="ev-tlabel">EvoExtractor <em>Collecte d'adresses</em><b>→</b></span></a>
+      <a href="/produit.html?id=sender" class="ev-tcard"><img src="/EvoSender.png" alt="EvoSender" loading="lazy"/><span class="ev-tlabel">EvoSender <em>Envoi en masse</em><b>→</b></span></a>
+      <a href="/produit.html?id=verifier" class="ev-tcard"><img src="/Evoverif.png" alt="EvoVérificateur" loading="lazy"/><span class="ev-tlabel">EvoVérificateur <em>Vérification</em><b>→</b></span></a>
     </div>
-    <div id="ev-tools" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px">
-      <div style="border-radius:12px;overflow:hidden;box-shadow:0 18px 40px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.06)"><img src="/EvoExtractor.png" alt="EvoExtractor — collecte d'emails" loading="lazy" style="display:block;width:100%;height:auto" /></div>
-      <div style="border-radius:12px;overflow:hidden;box-shadow:0 18px 40px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.06)"><img src="/EvoSender.png" alt="EvoSender — envoi en masse" loading="lazy" style="display:block;width:100%;height:auto" /></div>
-      <div style="border-radius:12px;overflow:hidden;box-shadow:0 18px 40px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.06)"><img src="/Evoverif.png" alt="EvoVérificateur — vérification d'emails" loading="lazy" style="display:block;width:100%;height:auto" /></div>
-    </div>
-    <style>@media(max-width:720px){#ev-tools{grid-template-columns:1fr!important}}</style>
-    <p style="text-align:center;color:rgba(255,255,255,.4);font-size:12.5px;margin-top:16px">EvoStudio en images — le hub et ses 3 outils : extraction, envoi haute délivrabilité et vérification.</p>
+    <style>
+      .ev-tcard{text-decoration:none;border-radius:12px;overflow:hidden;box-shadow:0 18px 40px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.06);display:block;position:relative;transition:transform .15s}
+      .ev-tcard:hover{transform:translateY(-3px)}
+      .ev-tcard img{display:block;width:100%;height:auto}
+      .ev-tlabel{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(0deg,rgba(13,17,23,.93),transparent);padding:18px 14px 11px;color:#fff;font-weight:800;font-size:13px;display:flex;align-items:baseline;gap:7px}
+      .ev-tlabel em{font-style:normal;font-weight:500;font-size:11px;color:rgba(255,255,255,.6);flex:1}
+      .ev-tlabel b{color:#60a5fa;font-size:14px}
+      @media(max-width:760px){#ev-tools{grid-template-columns:1fr}}
+    </style>
+    <p style="text-align:center;color:rgba(255,255,255,.4);font-size:12.5px;margin-top:18px">Cliquez un outil pour découvrir tous ses détails.</p>
   </div>
 </section>
 
@@ -652,7 +687,7 @@ async function loadProducts(){
           <ul class="p-feats">${feats.map(f=>`<li>${esc(f)}</li>`).join('')}</ul>
           <div class="p-btns">
             <a href="/pay.html?product=${esc(p.id)}" class="btn btn-primary">Acheter</a>
-            <a href="#tarifs" class="btn btn-dark">Voir prix</a>
+            <a href="/produit.html?id=${esc(p.id)}" class="btn btn-dark">Détails →</a>
           </div>
         </div>`;
       }).join('');

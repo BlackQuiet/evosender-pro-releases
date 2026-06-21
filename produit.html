@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EvoStudio — Produit</title>
+<link rel="icon" href="/logo-EvoSender.ico" type="image/x-icon" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  :root{--blue:#2563eb;--blue-dark:#1d4ed8;--ink:#0f172a;--slate:#64748b;--line:#eef2f7;--green:#16a34a}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',-apple-system,sans-serif;background:#f5f7fb;color:var(--ink);-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:12px 22px}
+  .nav .logo img{display:block;height:34px;max-width:150px;object-fit:contain}
+  .nav .right{display:flex;gap:8px;align-items:center}
+  .btn{display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:10px 18px;font-size:13.5px;font-weight:600;text-decoration:none;cursor:pointer;border:none;font-family:inherit;transition:.15s}
+  .btn-primary{background:var(--blue);color:#fff}.btn-primary:hover{background:var(--blue-dark)}
+  .btn-ghost{background:#fff;color:var(--slate);border:1px solid var(--line)}.btn-ghost:hover{color:var(--ink)}
+  .wrap{max-width:1060px;margin:0 auto;padding:34px 20px 70px}
+  .crumb{font-size:13px;color:var(--slate);margin-bottom:20px}.crumb a{color:var(--blue);text-decoration:none}
+  .hero{display:grid;grid-template-columns:1.1fr 1fr;gap:36px;align-items:center}
+  @media(max-width:820px){.hero{grid-template-columns:1fr;gap:24px}}
+  .shot{border-radius:16px;overflow:hidden;box-shadow:0 30px 70px rgba(15,23,42,.18),0 0 0 1px rgba(15,23,42,.05)}
+  .shot img{display:block;width:100%;height:auto}
+  .badge{display:inline-flex;align-items:center;gap:7px;background:#eff6ff;border:1px solid #dbeafe;color:var(--blue);font-weight:700;font-size:11px;padding:4px 12px;border-radius:999px;margin-bottom:14px}
+  h1{font-size:34px;font-weight:900;letter-spacing:-.6px;line-height:1.1;margin-bottom:12px}
+  @media(max-width:820px){h1{font-size:27px}}
+  .desc{font-size:15px;color:#475569;line-height:1.65;margin-bottom:22px}
+  .price{display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
+  .price .amount{font-size:34px;font-weight:900;color:var(--ink)}
+  .price .old{font-size:18px;color:var(--slate);text-decoration:line-through;font-weight:600}
+  .price .cur{font-size:15px;color:var(--slate);font-weight:700}
+  .price-sub{font-size:12.5px;color:var(--slate);margin-bottom:20px}
+  .cta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+  .sec{margin-top:54px}
+  .sec h2{font-size:20px;font-weight:800;margin-bottom:18px}
+  .feats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:620px){.feats{grid-template-columns:1fr}}
+  .feat{display:flex;gap:11px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .feat svg{width:20px;height:20px;stroke:var(--green);fill:none;stroke-width:2.4;flex-shrink:0;margin-top:1px}
+  .feat span{font-size:14px;color:#334155;line-height:1.5}
+  .other{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:760px){.other{grid-template-columns:1fr}}
+  .ocard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;text-decoration:none;transition:.15s}
+  .ocard:hover{border-color:#bfdbfe;box-shadow:0 12px 30px rgba(37,99,235,.08)}
+  .ocard .on{font-weight:800;font-size:15px;margin-bottom:4px}
+  .ocard .od{font-size:12.5px;color:var(--slate);line-height:1.5}
+  .loading{text-align:center;padding:60px;color:var(--slate)}
+  .footer{text-align:center;font-size:12px;color:#94a3b8;padding:26px}
+</style>
+</head>
+<body>
+<div class="nav">
+  <a href="/" class="logo"><img src="/logoevostudio2.png" alt="EvoStudio" /></a>
+  <div class="right">
+    <a href="/#produits" class="btn btn-ghost">← Produits</a>
+    <a href="/login.html" class="btn btn-ghost" id="nav-login">Connexion</a>
+    <a href="/dashboard.html" class="btn btn-ghost" id="nav-account" style="display:none">Espace client</a>
+  </div>
+</div>
+
+<div class="wrap" id="content"><div class="loading">Chargement du produit…</div></div>
+
+<div class="footer">© 2025–2026 EGSCI SARL — EvoStudio · Côte d'Ivoire</div>
+
+<script src="/assistance.js" defer></script>
+<script>
+const API='https://admin.evostudio.fr';
+const IMG={extractor:'/EvoExtractor.png',sender:'/EvoSender.png',verifier:'/Evoverif.png',suite:'/Hub.png'};
+const LABEL={extractor:'Collecte d\'adresses email',sender:'Envoi en masse',verifier:'Vérification de listes',suite:'Suite complète'};
+function esc(t){return String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function qs(k){return new URLSearchParams(location.search).get(k);}
+if(localStorage.getItem('evo_token')){var a=document.getElementById('nav-account'),l=document.getElementById('nav-login');if(a)a.style.display='';if(l)l.style.display='none';}
+
+(async function(){
+  const id=qs('id')||'sender';
+  let data;
+  try{ const r=await fetch(API+'/api/shop/products'); data=await r.json(); }
+  catch(e){ document.getElementById('content').innerHTML='<div class="loading">Impossible de charger le produit. <a href="/" style="color:#2563eb">Retour à l\'accueil</a></div>'; return; }
+  const products=Array.isArray(data.products)?data.products:[];
+  const p=products.find(x=>x.id===id);
+  if(!p){ document.getElementById('content').innerHTML='<div class="loading">Produit introuvable. <a href="/#produits" style="color:#2563eb">Voir tous les produits</a></div>'; return; }
+
+  const disc=Number(data.discount_pct)||0;
+  const newPrice=disc>0?Math.round(p.price_usdt*(1-disc/100)*100)/100:p.price_usdt;
+  const priceHtml=disc>0
+    ? '<span class="amount">'+newPrice+'</span><span class="old">'+p.price_usdt+'</span><span class="cur">USDT</span>'
+    : '<span class="amount">'+p.price_usdt+'</span><span class="cur">USDT</span>';
+  const xof=p.price_wave?(' · '+Number(disc>0?Math.round(p.price_wave*(1-disc/100)):p.price_wave).toLocaleString('fr-FR')+' XOF'):'';
+  const btc=p.price_btc?(' · '+p.price_btc+' BTC'):'';
+  const feats=Array.isArray(p.features)?p.features:[];
+  const check='<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+
+  const others=products.filter(x=>x.id!==id);
+  const othersHtml=others.map(function(o){return '<a class="ocard" href="/produit.html?id='+esc(o.id)+'"><div class="on">'+esc(o.name)+'</div><div class="od">'+esc(o.description||LABEL[o.id]||'')+'</div></a>';}).join('');
+
+  document.title='EvoStudio — '+p.name;
+  document.getElementById('content').innerHTML=
+    '<div class="crumb"><a href="/">Accueil</a> › <a href="/#produits">Produits</a> › '+esc(p.name)+'</div>'+
+    '<div class="hero">'+
+      '<div class="shot"><img src="'+(IMG[id]||IMG.sender)+'" alt="'+esc(p.name)+'" /></div>'+
+      '<div>'+
+        '<div class="badge">● '+esc(LABEL[id]||'Outil EvoStudio')+'</div>'+
+        '<h1>'+esc(p.name)+'</h1>'+
+        '<p class="desc">'+esc(p.description||'')+'</p>'+
+        '<div class="price">'+priceHtml+(disc>0?' <span style="background:#dc2626;color:#fff;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px">-'+disc+'%</span>':'')+'</div>'+
+        '<div class="price-sub">Licence annuelle (1 an)'+btc+xof+'</div>'+
+        '<div class="cta"><a class="btn btn-primary" style="padding:13px 26px;font-size:15px" href="/pay.html?product='+esc(id)+'">Acheter maintenant →</a><a class="btn btn-ghost" style="padding:13px 22px" href="/login.html">J\'ai déjà un compte</a></div>'+
+      '</div>'+
+    '</div>'+
+    (feats.length?('<div class="sec"><h2>✨ Fonctionnalités</h2><div class="feats">'+feats.map(function(f){return '<div class="feat">'+check+'<span>'+esc(f)+'</span></div>';}).join('')+'</div></div>'):'')+
+    '<div class="sec"><h2>Les autres outils EvoStudio</h2><div class="other">'+othersHtml+'</div></div>';
+})();
+</script>
+</body>
+</html>
