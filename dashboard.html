@@ -410,6 +410,7 @@
         if(site.download_url_win) downloadUrlWin = site.download_url_win;
         if(site.download_url_mac) downloadUrlMac = site.download_url_mac;
         if(pd.smtp_sender_notice) senderNotice   = pd.smtp_sender_notice;
+        if(pd.support_name) _supportName = pd.support_name;
       }
     } catch {}
 
@@ -593,6 +594,18 @@
   }
 
   // ── Messagerie support ──
+  var _supportName = 'Support EvoStudio', _supLastAdmin = -1, _supLastUnread = 0, _supAudio = null;
+  function supBeep(){
+    try {
+      if(!_supAudio) _supAudio = new (window.AudioContext||window.webkitAudioContext)();
+      if(_supAudio.state==='suspended') _supAudio.resume();
+      var o=_supAudio.createOscillator(), g=_supAudio.createGain();
+      o.type='sine'; o.frequency.value=880; g.gain.value=0.001; o.connect(g); g.connect(_supAudio.destination);
+      var t=_supAudio.currentTime;
+      g.gain.exponentialRampToValueAtTime(0.18,t+0.02); g.gain.exponentialRampToValueAtTime(0.0001,t+0.32);
+      o.start(t); o.stop(t+0.34);
+    } catch(e){}
+  }
   async function loadSupport() {
     var thread = document.getElementById('support-thread');
     if(!thread) return;
@@ -601,6 +614,7 @@
       if(!r.ok) return;
       var data = await r.json();
       var msgs = data.messages || [];
+      var _adminCount = msgs.filter(function(m){return m.sender==='admin';}).length;
       var badge = document.getElementById('support-unread');
       if(badge) badge.style.display = 'none';
       var html = '';
@@ -615,7 +629,7 @@
           var mine = m.sender === 'user';
           return '<div style="display:flex;justify-content:' + (mine?'flex-end':'flex-start') + '">' +
             '<div style="max-width:78%;background:' + (mine?'#2563eb':'#f1f5f9') + ';color:' + (mine?'#fff':'#0f172a') + ';padding:9px 13px;font-size:13.5px;line-height:1.5;word-break:break-word">' +
-              (mine?'':'<div style="font-size:10px;font-weight:700;color:#2563eb;margin-bottom:3px">Support EvoStudio</div>') +
+              (mine?'':'<div style="font-size:10px;font-weight:700;color:#2563eb;margin-bottom:3px">' + esc(_supportName) + '</div>') +
               esc(m.body).replace(/\n/g,'<br>') +
               '<div style="font-size:10px;opacity:.7;margin-top:4px;text-align:right">' + when + '</div>' +
             '</div></div>';
@@ -626,6 +640,8 @@
       }
       thread.innerHTML = html;
       thread.scrollTop = thread.scrollHeight;
+      if(_supLastAdmin >= 0 && _adminCount > _supLastAdmin) supBeep();
+      _supLastAdmin = _adminCount;
     } catch(e){}
   }
   function esc(t){ return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
@@ -647,6 +663,7 @@
   // ── Widget assistance flottant ──
   var _supOpen = false;
   function toggleSupport() {
+    try { if(!_supAudio) _supAudio = new (window.AudioContext||window.webkitAudioContext)(); if(_supAudio.state==='suspended') _supAudio.resume(); } catch(e){}
     _supOpen = !_supOpen;
     var win = document.getElementById('sup-window');
     win.style.display = _supOpen ? 'flex' : 'none';
@@ -664,6 +681,8 @@
       var r = await fetch(API + '/api/auth/support/unread', { headers: authHeaders() });
       if(!r.ok) return;
       var d = await r.json();
+      if(d.unread > _supLastUnread) supBeep();
+      _supLastUnread = d.unread;
       var b = document.getElementById('support-unread');
       if(b){ if(d.unread>0){ b.textContent=d.unread; b.style.display='flex'; } else { b.style.display='none'; } }
     } catch(e){}

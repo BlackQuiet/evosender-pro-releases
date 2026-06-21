@@ -8,6 +8,28 @@
   function esc(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
   var loggedIn = !!token();
   var open = false, started = false;
+  var supportName = 'Support EvoStudio';
+  var _lastUnread = 0, _lastAdmin = -1, _audioCtx = null;
+
+  // Récupère le nom du support (configurable dans l'admin)
+  if (loggedIn) {
+    try { fetch(API + '/api/shop/products').then(function(r){return r.json();}).then(function(d){ if(d && d.support_name) supportName = d.support_name; }).catch(function(){}); } catch (e) {}
+  }
+
+  // Bip d'alerte (Web Audio — réveillé au 1er clic)
+  function beep() {
+    try {
+      if (!_audioCtx) _audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (_audioCtx.state === 'suspended') _audioCtx.resume();
+      var o = _audioCtx.createOscillator(), g = _audioCtx.createGain();
+      o.type = 'sine'; o.frequency.value = 880;
+      g.gain.value = 0.001; o.connect(g); g.connect(_audioCtx.destination);
+      var t = _audioCtx.currentTime;
+      g.gain.exponentialRampToValueAtTime(0.18, t + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 0.32);
+      o.start(t); o.stop(t + 0.34);
+    } catch (e) {}
+  }
 
   // ── DOM ──
   var win = document.createElement('div');
@@ -49,6 +71,8 @@
   document.body.appendChild(fab);
 
   function toggle() {
+    // Débloque l'audio au 1er geste utilisateur (politique navigateur)
+    try { if (!_audioCtx) _audioCtx = new (window.AudioContext || window.webkitAudioContext)(); if (_audioCtx.state === 'suspended') _audioCtx.resume(); } catch (e) {}
     open = !open;
     win.style.display = open ? 'flex' : 'none';
     if (open) {
@@ -68,14 +92,17 @@
       var data = await r.json();
       var msgs = data.messages || [];
       var badge = document.getElementById('ev-help-badge'); if (badge) badge.style.display = 'none';
+      var adminCount = msgs.filter(function (m) { return m.sender === 'admin'; }).length;
       var html = msgs.length ? msgs.map(function (m) {
         var when = new Date(m.created_at).toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
         if (m.sender === 'system') return '<div style="text-align:center"><span style="display:inline-block;background:#eef2f7;color:#64748b;font-size:11px;padding:4px 12px;border-radius:999px">' + esc(m.body) + '</span></div>';
         var mine = m.sender === 'user';
-        return '<div style="display:flex;justify-content:' + (mine ? 'flex-end' : 'flex-start') + '"><div style="max-width:78%;background:' + (mine ? '#2563eb' : '#f1f5f9') + ';color:' + (mine ? '#fff' : '#0f172a') + ';padding:9px 13px;font-size:13.5px;line-height:1.5;word-break:break-word;border-radius:12px">' + (mine ? '' : '<div style="font-size:10px;font-weight:700;color:#2563eb;margin-bottom:3px">Support EvoStudio</div>') + esc(m.body).replace(/\n/g, '<br>') + '<div style="font-size:10px;opacity:.7;margin-top:4px;text-align:right">' + when + '</div></div></div>';
+        return '<div style="display:flex;justify-content:' + (mine ? 'flex-end' : 'flex-start') + '"><div style="max-width:78%;background:' + (mine ? '#2563eb' : '#f1f5f9') + ';color:' + (mine ? '#fff' : '#0f172a') + ';padding:9px 13px;font-size:13.5px;line-height:1.5;word-break:break-word;border-radius:12px">' + (mine ? '' : '<div style="font-size:10px;font-weight:700;color:#2563eb;margin-bottom:3px">' + esc(supportName) + '</div>') + esc(m.body).replace(/\n/g, '<br>') + '<div style="font-size:10px;opacity:.7;margin-top:4px;text-align:right">' + when + '</div></div></div>';
       }).join('') : '<div style="text-align:center;color:#94a3b8;font-size:13px;padding:20px">Aucun message. Posez votre question ci-dessous.</div>';
       if (data.closed) html += '<div style="text-align:center;margin-top:10px;padding:10px;background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;font-size:12px;border-radius:8px">✓ Conversation résolue. Écrivez un message pour la rouvrir.</div>';
       thread.innerHTML = html; thread.scrollTop = thread.scrollHeight;
+      if (_lastAdmin >= 0 && adminCount > _lastAdmin) beep(); // nouvelle réponse admin
+      _lastAdmin = adminCount;
     } catch (e) {}
   }
   async function refreshUnread() {
@@ -84,6 +111,8 @@
       var r = await fetch(API + '/api/auth/support/unread', { headers: authHeaders() });
       if (!r.ok) return;
       var d = await r.json();
+      if (d.unread > _lastUnread) beep(); // nouveau message admin reçu
+      _lastUnread = d.unread;
       var b = document.getElementById('ev-help-badge');
       if (b) { if (d.unread > 0) { b.textContent = d.unread; b.style.display = 'flex'; } else b.style.display = 'none'; }
     } catch (e) {}
