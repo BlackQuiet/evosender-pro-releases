@@ -693,28 +693,36 @@
                         '<input id="prx-city-' + pid + '" type="text" placeholder="ex: losangeles" oninput="proxyGen(' + pid + ')" style="width:100%;border:1px solid #e2e8f0;border-radius:6px;padding:7px 10px;font-size:12px;font-family:monospace;background:#fff;color:#0f172a;outline:none" />' +
                       '</div>' +
 
-                      // Session ID
-                      '<div style="grid-column:1/-1">' +
-                        '<label style="font-size:11px;font-weight:600;color:#475569;display:block;margin-bottom:4px">Session ID (ssid) <span style="font-weight:400;color:#94a3b8">— laisser vide pour Rotation IP</span></label>' +
-                        '<div style="display:flex;gap:8px">' +
-                          '<input id="prx-ssid-' + pid + '" type="text" placeholder="Vide = Rotating · Remplir = Sticky (même IP)" oninput="proxyGen(' + pid + ')" style="flex:1;border:1px solid #e2e8f0;border-radius:6px;padding:7px 10px;font-size:12px;font-family:monospace;background:#fff;color:#0f172a;outline:none" />' +
-                          '<button onclick="genSsid(' + pid + ')" style="background:#f1f5f9;border:1px solid #e2e8f0;color:#475569;padding:7px 12px;font-size:11px;font-weight:600;cursor:pointer;border-radius:6px;font-family:inherit;white-space:nowrap">🎲 Générer</button>' +
+                      // Session ID + Quantité
+                      '<div style="grid-column:1/-1;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end">' +
+                        '<div>' +
+                          '<label style="font-size:11px;font-weight:600;color:#475569;display:block;margin-bottom:4px">Session ID (ssid) <span style="font-weight:400;color:#94a3b8">— vide = Rotating · rempli = Sticky</span></label>' +
+                          '<div style="display:flex;gap:6px">' +
+                            '<input id="prx-ssid-' + pid + '" type="text" placeholder="Vide = Rotating · Remplir = Sticky (même IP)" oninput="proxyGen(' + pid + ')" style="flex:1;border:1px solid #e2e8f0;border-radius:6px;padding:7px 10px;font-size:12px;font-family:monospace;background:#fff;color:#0f172a;outline:none" />' +
+                            '<button onclick="genSsid(' + pid + ')" title="Générer un ssid aléatoire" style="background:#f1f5f9;border:1px solid #e2e8f0;color:#475569;padding:7px 10px;font-size:11px;font-weight:600;cursor:pointer;border-radius:6px;font-family:inherit;white-space:nowrap">🎲</button>' +
+                          '</div>' +
+                        '</div>' +
+                        '<div>' +
+                          '<label style="font-size:11px;font-weight:600;color:#475569;display:block;margin-bottom:4px">Quantité</label>' +
+                          '<input id="prx-qty-' + pid + '" type="number" min="1" max="999" value="1" oninput="proxyGen(' + pid + ')" style="width:80px;border:1px solid #e2e8f0;border-radius:6px;padding:7px 10px;font-size:13px;font-weight:700;font-family:inherit;background:#fff;color:#0f172a;outline:none;text-align:center" />' +
                         '</div>' +
                       '</div>' +
 
                     '</div>' +
 
                     // Résultat généré
-                    '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;margin-bottom:6px">Chaîne de connexion générée</div>' +
-                    '<div id="prx-result-' + pid + '" data-user="' + pu + '" data-pass="' + ppw + '" data-host="' + ph + '" data-port="' + pp + '" style="background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:12px;padding:12px 14px;border-radius:8px;word-break:break-all;line-height:1.7">' +
+                    '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">' +
+                      '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8">Chaînes générées <span id="prx-count-' + pid + '" style="color:#2563eb">× 1</span></div>' +
+                      '<button onclick="copyProxyGen(' + pid + ')" style="background:#2563eb;color:#fff;border:none;padding:5px 12px;font-size:11px;font-weight:600;cursor:pointer;border-radius:6px;font-family:inherit">📋 Tout copier</button>' +
+                    '</div>' +
+                    '<textarea id="prx-result-' + pid + '" data-user="' + pu + '" data-pass="' + ppw + '" data-host="' + ph + '" data-port="' + pp + '" readonly rows="3" style="width:100%;background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11.5px;padding:12px 14px;border-radius:8px;border:none;resize:vertical;line-height:1.8;outline:none">' +
                       pu + ':' + ppw + ':' + ph + ':' + pp +
-                    '</div>' +
-                    '<div style="display:flex;gap:8px;margin-top:10px">' +
-                      '<button onclick="copyProxyGen(' + pid + ')" style="flex:1;background:#2563eb;color:#fff;border:none;padding:9px;font-size:12px;font-weight:600;cursor:pointer;border-radius:6px;font-family:inherit">📋 Copier la chaîne</button>' +
-                      '<button onclick="resetProxyGen(' + pid + ')" style="background:#f1f5f9;border:1px solid #e2e8f0;color:#475569;padding:9px 14px;font-size:12px;font-weight:600;cursor:pointer;border-radius:6px;font-family:inherit">↺ Reset</button>' +
-                    '</div>' +
-                    '<div style="background:#f0fdf4;border:1px solid #bbf7d0;padding:10px 13px;margin-top:12px;font-size:11.5px;color:#166534;line-height:1.6">' +
-                      '🔄 <b>Rotation IP</b> — chaque requête utilise une nouvelle adresse IP. Laissez Pays vide pour une IP mondiale aléatoire.' +
+                    '</textarea>' +
+                    '<div style="display:flex;gap:8px;margin-top:8px">' +
+                      '<button onclick="resetProxyGen(' + pid + ')" style="background:#f1f5f9;border:1px solid #e2e8f0;color:#475569;padding:8px 14px;font-size:12px;font-weight:600;cursor:pointer;border-radius:6px;font-family:inherit">↺ Reset</button>' +
+                      '<div style="flex:1;background:#f0fdf4;border:1px solid #bbf7d0;padding:8px 12px;font-size:11px;color:#166534;border-radius:6px;line-height:1.5">' +
+                        '🔄 <b>Rotation</b> : ssid vide · 🔒 <b>Sticky</b> : ssid rempli (même IP fixe). Quantité > 1 = ssid unique par ligne.' +
+                      '</div>' +
                     '</div>' +
                   '</div>' +
 
@@ -784,6 +792,8 @@
     navigator.clipboard.writeText(txt).then(function(){ showToast('✅ Identifiants proxy copiés !'); });
   }
 
+  function randSsid() { return Math.random().toString(36).slice(2,12); }
+
   function proxyGen(id) {
     var result = document.getElementById('prx-result-' + id);
     if(!result) return;
@@ -797,32 +807,55 @@
     var isp      = ((document.getElementById('prx-isp-'     + id)||{}).value || '').trim();
     var state    = ((document.getElementById('prx-state-'   + id)||{}).value || '').trim();
     var city     = ((document.getElementById('prx-city-'    + id)||{}).value || '').trim();
-    var ssid     = ((document.getElementById('prx-ssid-'    + id)||{}).value || '').trim();
+    var ssidBase = ((document.getElementById('prx-ssid-'    + id)||{}).value || '').trim();
+    var qty      = Math.min(999, Math.max(1, parseInt((document.getElementById('prx-qty-' + id)||{}).value, 10) || 1));
 
-    // Construire le username avec ciblage — format 9proxy
-    var u = username;
-    if(country) u += '-country-' + country;
-    if(state)   u += '-st-'      + state.toUpperCase();
-    if(city)    u += '-city-'    + city.toLowerCase().replace(/\s+/g,'');
-    if(isp)     u += '-isp-'     + isp;
-    if(ssid)    u += '-ssid-'    + ssid;
+    // Construire le préfixe de ciblage (sans ssid)
+    var prefix = username;
+    if(country) prefix += '-country-' + country;
+    if(state)   prefix += '-st-'      + state.toUpperCase();
+    if(city)    prefix += '-city-'    + city.toLowerCase().replace(/\s+/g,'');
+    if(isp)     prefix += '-isp-'     + isp;
 
-    // Format final : user+ciblage:pass:host:port
-    result.textContent = u + ':' + pass + ':' + host + ':' + port;
+    var lines = [];
+    for(var i = 0; i < qty; i++) {
+      var u = prefix;
+      if(qty === 1) {
+        // Mode simple : ssid manuel ou vide
+        if(ssidBase) u += '-ssid-' + ssidBase;
+      } else {
+        // Quantité > 1 : ssid unique par ligne (sticky différent) ou vide (rotating)
+        if(ssidBase) {
+          // Sticky : ssid de base + index pour différencier
+          u += '-ssid-' + ssidBase + (qty > 1 ? (i+1) : '');
+        } else {
+          // Rotating : pas de ssid — toutes les lignes identiques (plusieurs threads)
+        }
+      }
+      lines.push(u + ':' + pass + ':' + host + ':' + port);
+    }
+
+    result.value = lines.join('\n');
+    result.rows  = Math.min(qty, 12);
+
+    var cnt = document.getElementById('prx-count-' + id);
+    if(cnt) cnt.textContent = '× ' + qty;
   }
 
   function genSsid(id) {
     var el = document.getElementById('prx-ssid-' + id);
     if(!el) return;
-    el.value = Math.random().toString(36).slice(2, 12);
+    el.value = randSsid();
     proxyGen(id);
   }
 
   function copyProxyGen(id) {
     var result = document.getElementById('prx-result-' + id);
     if(!result) return;
-    navigator.clipboard.writeText(result.textContent).then(function(){
-      showToast('✅ Chaîne proxy copiée !');
+    var txt = result.value || result.textContent;
+    var qty = (txt.match(/\n/g)||[]).length + 1;
+    navigator.clipboard.writeText(txt).then(function(){
+      showToast('✅ ' + qty + ' chaîne' + (qty>1?'s':'') + ' copiée' + (qty>1?'s':'') + ' !');
     });
   }
 
