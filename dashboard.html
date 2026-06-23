@@ -186,6 +186,14 @@
     <div id="smtp-wrap"></div>
   </div>
 
+  <!-- Proxy résidentiel -->
+  <div id="proxy-section" style="display:none" class="section-block">
+    <div class="actions-bar" style="margin-bottom:16px">
+      <span class="section-label">🌐 Mes proxies résidentiels</span>
+    </div>
+    <div id="proxy-wrap"></div>
+  </div>
+
 
   <div style="text-align:center;margin-top:16px;padding-top:24px;border-top:1px solid var(--line)">
     <a href="#" onclick="openCgu(true);return false" style="font-size:12px;color:var(--slate-2);text-decoration:none;border-bottom:1px solid var(--line)">Conditions générales d'utilisation</a>
@@ -336,7 +344,7 @@
 
 <script>
   const API = 'https://admin.evostudio.fr';
-  const PROD_LABELS = { sender:'📤 EvoSender', extractor:'🔍 EvoExtractor', verifier:'✅ EvoVérificateur', suite:'🌐 Suite complète' };
+  const PROD_LABELS = { sender:'📤 EvoSender', extractor:'🔍 EvoExtractor', verifier:'✅ EvoVérificateur', suite:'🌐 Suite complète', proxy_5gb:'🌐 Proxy 5 Go', proxy_55gb:'🌐 Proxy 55 Go', proxy_100gb:'🌐 Proxy 100 Go', proxy_200gb:'🌐 Proxy 200 Go', proxy_1000gb:'🌐 Proxy 1 To', proxy_2000gb:'🌐 Proxy 2 To' };
   const STS_LABELS  = { pending:'En attente', paid:'Payée', expired:'Expirée', cancelled:'Annulée' };
   const CRYPTO_LABEL = { usdt:'USDT', btc:'BTC', wave:'XOF', om:'XOF' };
   let _viewOnlyCgu = false;
@@ -568,6 +576,81 @@
         }
       }
     } catch(e) { console.warn('SMTP servers:', e); }
+
+    // ── Proxy résidentiel ────────────────────────────────────
+    try {
+      var proxyR = await fetch(API + '/api/auth/proxy-accounts', { headers: authHeaders() });
+      if(proxyR.ok) {
+        var proxyList = await proxyR.json();
+        var psec = document.getElementById('proxy-section');
+        var pwrap = document.getElementById('proxy-wrap');
+        if(proxyList.length > 0 && psec && pwrap) {
+          psec.style.display = '';
+          var P_STS_BG = { active:'#dcfce7', suspended:'#fee2e2', pending:'#fef9c3' };
+          var P_STS_FG = { active:'#166534', suspended:'#991b1b', pending:'#854d0e' };
+          var P_STS_LBL = { active:'Actif', suspended:'Suspendu', pending:'En attente' };
+          pwrap.innerHTML = proxyList.map(function(p) {
+            var bg = P_STS_BG[p.status] || '#f1f5f9';
+            var fg = P_STS_FG[p.status] || '#334155';
+            var lbl = P_STS_LBL[p.status] || p.status;
+
+            var credsHtml = '';
+            if(p.username && p.status === 'active') {
+              credsHtml =
+                '<div style="background:#f8fafc;border:1px solid #e2e8f0;padding:18px;margin-top:16px">' +
+                  '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#94a3b8;margin-bottom:14px">Identifiants Proxy</div>' +
+                  '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px">' +
+                    '<div><div style="font-size:10px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Hôte</div><div style="font-family:monospace;font-size:13px;font-weight:700;color:#0f172a">' + p.host + '</div></div>' +
+                    '<div><div style="font-size:10px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Port</div><div style="font-family:monospace;font-size:13px;font-weight:700;color:#0f172a">' + p.port + '</div></div>' +
+                    '<div><div style="font-size:10px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Utilisateur</div><div style="font-family:monospace;font-size:13px;font-weight:700;color:#2563eb">' + p.username + '</div></div>' +
+                    '<div><div style="font-size:10px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Mot de passe</div>' +
+                      '<div style="display:flex;align-items:center;gap:8px">' +
+                        '<span id="proxy-pass-' + p.id + '" data-pass="' + p.password + '" data-shown="0" style="font-family:monospace;font-size:13px;font-weight:700;color:#0f172a;letter-spacing:.1em">••••••••</span>' +
+                        '<button onclick="toggleProxyPass(' + p.id + ')" style="background:#fff;border:1px solid #e2e8f0;padding:2px 8px;font-size:11px;cursor:pointer;color:#64748b;font-family:inherit">Voir</button>' +
+                      '</div>' +
+                    '</div>' +
+                  '</div>' +
+                  '<div style="background:#eff6ff;border:1px solid #bfdbfe;padding:10px 13px;margin-bottom:14px;font-size:12px;color:#1e40af;font-family:monospace;word-break:break-all">' +
+                    '<span style="font-weight:700">Format :</span> ' + p.host + ':' + p.port + ':' + p.username + ':' + p.password +
+                  '</div>' +
+                  '<button onclick="copyProxy(' + p.id + ',\'' + p.host + '\',' + p.port + ',\'' + p.username + '\')" ' +
+                    'style="background:#2563eb;color:#fff;border:none;padding:9px 18px;font-size:13px;font-weight:600;cursor:pointer;width:100%;font-family:inherit">' +
+                    'Copier tous les identifiants' +
+                  '</button>' +
+                  (p.notice ? '<div style="background:#fffbeb;border:1px solid #fde68a;padding:11px 13px;margin-top:12px;font-size:12px;color:#92400e;line-height:1.55">ℹ️ ' + esc(p.notice).replace(/\n/g,'<br>') + '</div>' : '') +
+                '</div>';
+            } else if(p.status === 'pending') {
+              credsHtml =
+                '<div style="background:#fffbeb;border:1px solid #fde68a;padding:14px;font-size:13px;color:#92400e;margin-top:16px;line-height:1.6">' +
+                  'Forfait en cours d\'activation — vos identifiants proxy seront disponibles après provisioning par l\'administrateur.' +
+                '</div>';
+            }
+
+            var expHtml = '';
+            if(p.expires_at) {
+              var days = Math.ceil((p.expires_at - Date.now()) / 86400000);
+              var expired = days <= 0;
+              var col = expired ? '#dc2626' : (days <= 5 ? '#b45309' : '#64748b');
+              var txt = expired ? 'Expiré le ' + new Date(p.expires_at).toLocaleDateString('fr-FR')
+                                : 'Valable jusqu\'au ' + new Date(p.expires_at).toLocaleDateString('fr-FR') + ' (' + days + ' j restants)';
+              expHtml = '<div style="font-size:12px;font-weight:600;color:' + col + ';margin-top:6px">⏳ ' + txt + '</div>';
+            }
+
+            return '<div style="background:#fff;border:1px solid #e2e8f0;padding:22px;margin-bottom:1px">' +
+              '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">' +
+                '<div>' +
+                  '<div style="font-size:15px;font-weight:700;color:#0f172a">🌐 Proxy résidentiel — ' + p.gb + ' Go</div>' +
+                  '<div style="font-size:12px;color:#64748b;margin-top:3px">Forfait ' + p.plan + '</div>' +
+                  expHtml +
+                '</div>' +
+                '<span style="background:' + bg + ';color:' + fg + ';border:1px solid;border-color:' + bg + ';padding:3px 10px;font-size:11px;font-weight:700">' + lbl + '</span>' +
+              '</div>' +
+              credsHtml +
+            '</div>';
+          }).join('');
+        }
+      }
+    } catch(e) { console.warn('Proxy accounts:', e); }
   }
 
   function toggleSmtpPass(id) {
@@ -583,6 +666,21 @@
     var pass = passEl ? passEl.dataset.pass : '';
     var txt = 'Hôte SMTP : ' + host + '\nPort : ' + port + '\nUtilisateur : ' + user + '\nMot de passe : ' + pass + '\nChiffrement : TLS/STARTTLS';
     navigator.clipboard.writeText(txt).then(function(){ showToast('✅ Identifiants copiés !'); });
+  }
+
+  function toggleProxyPass(id) {
+    var el = document.getElementById('proxy-pass-' + id);
+    if(!el) return;
+    var shown = el.dataset.shown === '1';
+    el.textContent = shown ? '••••••••' : el.dataset.pass;
+    el.dataset.shown = shown ? '0' : '1';
+    el.nextElementSibling.textContent = shown ? 'Voir' : 'Masquer';
+  }
+  function copyProxy(id, host, port, user) {
+    var passEl = document.getElementById('proxy-pass-' + id);
+    var pass = passEl ? passEl.dataset.pass : '';
+    var txt = 'Hôte : ' + host + '\nPort : ' + port + '\nUtilisateur : ' + user + '\nMot de passe : ' + pass + '\nFormat : ' + host + ':' + port + ':' + user + ':' + pass;
+    navigator.clipboard.writeText(txt).then(function(){ showToast('✅ Identifiants proxy copiés !'); });
   }
 
   async function deleteSmtp(id) {

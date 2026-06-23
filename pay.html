@@ -190,6 +190,8 @@
     let discountPct = 0;   // % de remise globale
 
     function isSmtp(id){ return (id||'').startsWith('smtp_'); }
+    function isProxy(id){ return (id||'').startsWith('proxy_'); }
+    function isService(id){ return isSmtp(id) || isProxy(id); }
     function curProduct(){ return products.find(p => p.id === selectedProduct); }
     function unitPrice(p){
       // Les prix XOF sont calculés ici dynamiquement depuis le taux actuel
@@ -219,7 +221,7 @@
       const row = document.getElementById('total-row');
       if(!p){ row.style.display='none'; return; }
       row.style.display='flex';
-      const qty = isSmtp(p.id) ? 1 : quantity;
+      const qty = isService(p.id) ? 1 : quantity;
       const total = (selectedCrypto === 'btc') ? +(unitPrice(p) * qty).toFixed(8) : Math.round(unitPrice(p) * qty * 100)/100;
       let html = '';
       // Afficher l'ancien prix barré si remise
@@ -262,7 +264,7 @@
           usdXofRate = Number(data.usd_xof_rate) || 600;
           discountPct = Number(data.discount_pct) || 0;
           // Fusionner produits logiciels + plans SMTP
-          products = [...data.products, ...(data.smtp_plans || [])];
+          products = [...data.products, ...(data.smtp_plans || []), ...(data.proxy_plans || [])];
           // Pré-sélection depuis l'URL (?product=sender / ?product=smtp_50k etc.)
           const urlProduct = new URLSearchParams(location.search).get('product');
           if (urlProduct && products.find(p => p.id === urlProduct)) {
@@ -312,8 +314,9 @@
     }
 
     const VOL_LABELS = {smtp_10k:'10 000',smtp_50k:'50 000',smtp_100k:'100 000',smtp_500k:'500 000'};
+    const PROXY_LABELS = {proxy_5gb:'5 Go',proxy_55gb:'55 Go',proxy_100gb:'100 Go',proxy_200gb:'200 Go',proxy_1000gb:'1 To',proxy_2000gb:'2 To'};
     function priceLabel(p) {
-      const suffix = isSmtp(p.id) ? ' <span style="opacity:.6">/ mois</span>' : ' <span style="opacity:.6">/ PC</span>';
+      const suffix = isSmtp(p.id) ? ' <span style="opacity:.6">/ mois</span>' : (isProxy(p.id) ? '' : ' <span style="opacity:.6">/ PC</span>');
       const unit = selectedCrypto === 'btc' ? ' BTC' : (FIAT.includes(selectedCrypto) ? ' XOF' : ' USD');
       let html = '';
       if (discountPct > 0 && selectedCrypto !== 'btc') {
@@ -331,6 +334,7 @@
       verifier:{cls:'purple', svg:'<svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>'},
       suite:{cls:'amber', svg:'<svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>'},
       smtp:{cls:'purple', svg:'<svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>'},
+      proxy:{cls:'amber', svg:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>'},
     };
     function renderProducts() {
       const grid = document.getElementById('product-grid');
@@ -341,27 +345,30 @@
         const p = curProduct();
         if (!p) return;
         const smtp = isSmtp(p.id);
-        const ic = smtp ? PROD_ICONS.smtp : (PROD_ICONS[p.id] || PROD_ICONS.sender);
+        const proxy = isProxy(p.id);
+        const svc = smtp || proxy;
+        const ic = proxy ? PROD_ICONS.proxy : (smtp ? PROD_ICONS.smtp : (PROD_ICONS[p.id] || PROD_ICONS.sender));
         const vol = smtp ? (VOL_LABELS[p.id] || (p.volume||'').toLocaleString('fr-FR')) : '';
+        const subLabel = proxy ? '🌐 ' + (PROXY_LABELS[p.id] || p.gb + ' Go') + ' de trafic' : (smtp ? '🖥 ' + vol + ' emails/mois' : '');
+        const typeLabel = proxy ? 'Forfait proxy' : (smtp ? 'Abonnement mensuel' : 'Licence annuelle');
         if (label) label.style.display = 'none';
         grid.innerHTML =
           '<div style="display:flex;align-items:center;gap:14px;background:var(--blue-50);border:2px solid var(--blue);border-radius:16px;padding:16px 18px;margin-bottom:4px">' +
             '<div class="prod-ic ' + ic.cls + '" style="flex-shrink:0">' + ic.svg + '</div>' +
             '<div style="flex:1">' +
-              '<div style="font-size:15px;font-weight:800;color:var(--ink)">' + p.name + '</div>' +
-              (smtp ? '<div style="font-size:12px;color:#7c3aed;margin-top:2px">🖥 ' + vol + ' emails/mois</div>' : '') +
+              '<div style="font-size:15px;font-weight:800;color:var(--ink)">' + (proxy ? 'Proxy résidentiel — ' + p.name : p.name) + '</div>' +
+              (subLabel ? '<div style="font-size:12px;color:#7c3aed;margin-top:2px">' + subLabel + '</div>' : '') +
             '</div>' +
             '<div style="text-align:right">' +
               '<div id="pp-' + p.id + '" style="font-size:16px;font-weight:800;color:var(--blue)">' + priceLabel(p) + '</div>' +
-              (!smtp ? '<div style="font-size:11px;color:var(--slate);margin-top:2px">Licence annuelle</div>' : '<div style="font-size:11px;color:var(--slate);margin-top:2px">Abonnement mensuel</div>') +
+              '<div style="font-size:11px;color:var(--slate);margin-top:2px">' + typeLabel + '</div>' +
             '</div>' +
           '</div>' +
           '<a href="javascript:history.back()" style="font-size:12px;color:var(--slate);display:inline-block;margin-top:6px;text-decoration:none">← Changer de produit</a>';
 
-        // Masquer qty pour SMTP
         const qtySection = document.getElementById('qty-section');
         const qtyLabel = document.getElementById('qty-label');
-        if (smtp) {
+        if (svc) {
           if (qtySection) qtySection.style.display = 'none';
           if (qtyLabel) qtyLabel.style.display = 'none';
         }
@@ -373,8 +380,9 @@
       grid.style.display = 'none';
       const sel = document.getElementById('product-select');
       sel.style.display = '';
-      const softProds = products.filter(p => !isSmtp(p.id));
+      const softProds = products.filter(p => !isSmtp(p.id) && !isProxy(p.id));
       const smtpProds = products.filter(p => isSmtp(p.id));
+      const proxyProds = products.filter(p => isProxy(p.id));
       let opts = '<option value="">— Choisir un produit —</option>';
       opts += '<optgroup label="Logiciels">';
       opts += softProds.map(p => '<option value="' + p.id + '">' + p.name + ' — ' + unitPrice(p) + (selectedCrypto==='btc'?' BTC':' USD') + ' / PC</option>').join('');
@@ -387,6 +395,11 @@
         }).join('');
         opts += '</optgroup>';
       }
+      if (proxyProds.length) {
+        opts += '<optgroup label="Proxy résidentiel">';
+        opts += proxyProds.map(p => '<option value="' + p.id + '">Proxy ' + p.name + ' — ' + unitPrice(p) + ' USDT</option>').join('');
+        opts += '</optgroup>';
+      }
       sel.innerHTML = opts;
       sel.value = '';
     }
@@ -397,20 +410,20 @@
       selectedProduct = el.dataset.product;
       const qtySection = document.getElementById('qty-section');
       const qtyLabel   = document.getElementById('qty-label');
-      const smtp = isSmtp(selectedProduct);
-      if (qtySection) qtySection.style.display = smtp ? 'none' : '';
-      if (qtyLabel)   qtyLabel.style.display   = smtp ? 'none' : '';
+      const svc2 = isSmtp(selectedProduct) || isProxy(selectedProduct);
+      if (qtySection) qtySection.style.display = svc2 ? 'none' : '';
+      if (qtyLabel)   qtyLabel.style.display   = svc2 ? 'none' : '';
       document.getElementById('btn-proceed').disabled = false;
       updateTotal();
     }
 
     function selectProductFromDropdown(sel) {
       selectedProduct = sel.value;
-      const smtp = isSmtp(selectedProduct);
+      const svc3 = isSmtp(selectedProduct) || isProxy(selectedProduct);
       const qtySection = document.getElementById('qty-section');
       const qtyLabel   = document.getElementById('qty-label');
-      if (qtySection) qtySection.style.display = (!selectedProduct || smtp) ? 'none' : '';
-      if (qtyLabel)   qtyLabel.style.display   = (!selectedProduct || smtp) ? 'none' : '';
+      if (qtySection) qtySection.style.display = (!selectedProduct || svc3) ? 'none' : '';
+      if (qtyLabel)   qtyLabel.style.display   = (!selectedProduct || svc3) ? 'none' : '';
       document.getElementById('btn-proceed').disabled = !selectedProduct;
       updateTotal();
     }
@@ -439,7 +452,7 @@
         const r = await fetch(API + '/api/shop/order', {
           method: 'POST',
           headers: authHeaders(),
-          body: JSON.stringify({ product: selectedProduct, crypto: selectedCrypto, quantity: isSmtp(selectedProduct) ? 1 : quantity, invoice_email: (document.getElementById('invoice-email')?.value || '').trim() })
+          body: JSON.stringify({ product: selectedProduct, crypto: selectedCrypto, quantity: isService(selectedProduct) ? 1 : quantity, invoice_email: (document.getElementById('invoice-email')?.value || '').trim() })
         });
         const d = await r.json();
         if (!r.ok) {
@@ -530,12 +543,19 @@
           const box = document.getElementById('status-box');
           box.className = 'status-box status-paid';
           const isSmtpOrder = isSmtp(d.product || selectedProduct || '');
+          const isProxyOrder = isProxy(d.product || selectedProduct || '');
           if (isSmtpOrder) {
             box.innerHTML =
               '<div style="font-size:22px;margin-bottom:8px">🎉</div>' +
               '<div style="font-size:15px;font-weight:700;color:#16a34a">Paiement confirmé !</div>' +
               '<div style="font-size:13px;color:#64748b;margin:10px 0 14px;line-height:1.6">Votre serveur SMTP est en cours de provisioning.<br>Vous recevrez vos identifiants relay par <strong>email dans les 24h</strong>.</div>' +
               '<a href="/dashboard.html" style="display:inline-block;background:#2563eb;color:#fff;border-radius:0;padding:10px 18px;font-size:13px;font-weight:700;text-decoration:none">Voir mes serveurs SMTP →</a>';
+          } else if (isProxyOrder) {
+            box.innerHTML =
+              '<div style="font-size:22px;margin-bottom:8px">🎉</div>' +
+              '<div style="font-size:15px;font-weight:700;color:#16a34a">Paiement confirmé !</div>' +
+              '<div style="font-size:13px;color:#64748b;margin:10px 0 14px;line-height:1.6">Votre forfait proxy résidentiel est en cours d\'activation.<br>Vos identifiants de connexion vous seront envoyés par <strong>email</strong> et seront visibles dans votre espace client.</div>' +
+              '<a href="/dashboard.html" style="display:inline-block;background:#2563eb;color:#fff;border-radius:0;padding:10px 18px;font-size:13px;font-weight:700;text-decoration:none">Voir mes proxies →</a>';
           } else {
             box.innerHTML =
               '<div style="font-size:22px;margin-bottom:8px">🎉</div>' +
