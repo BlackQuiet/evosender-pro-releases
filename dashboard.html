@@ -693,12 +693,21 @@
                         '<input id="prx-city-' + pid + '" type="text" placeholder="ex: losangeles" oninput="proxyGen(' + pid + ')" style="width:100%;border:1px solid #e2e8f0;border-radius:6px;padding:7px 10px;font-size:12px;font-family:monospace;background:#fff;color:#0f172a;outline:none" />' +
                       '</div>' +
 
+                      // Session ID
+                      '<div style="grid-column:1/-1">' +
+                        '<label style="font-size:11px;font-weight:600;color:#475569;display:block;margin-bottom:4px">Session ID (ssid) <span style="font-weight:400;color:#94a3b8">— laisser vide pour Rotation IP</span></label>' +
+                        '<div style="display:flex;gap:8px">' +
+                          '<input id="prx-ssid-' + pid + '" type="text" placeholder="Vide = Rotating · Remplir = Sticky (même IP)" oninput="proxyGen(' + pid + ')" style="flex:1;border:1px solid #e2e8f0;border-radius:6px;padding:7px 10px;font-size:12px;font-family:monospace;background:#fff;color:#0f172a;outline:none" />' +
+                          '<button onclick="genSsid(' + pid + ')" style="background:#f1f5f9;border:1px solid #e2e8f0;color:#475569;padding:7px 12px;font-size:11px;font-weight:600;cursor:pointer;border-radius:6px;font-family:inherit;white-space:nowrap">🎲 Générer</button>' +
+                        '</div>' +
+                      '</div>' +
+
                     '</div>' +
 
                     // Résultat généré
                     '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;margin-bottom:6px">Chaîne de connexion générée</div>' +
-                    '<div id="prx-result-' + pid + '" style="background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:12px;padding:12px 14px;border-radius:8px;word-break:break-all;line-height:1.7">' +
-                      ph + ':' + pp + ':' + pu + ':' + ppw +
+                    '<div id="prx-result-' + pid + '" data-user="' + pu + '" data-pass="' + ppw + '" data-host="' + ph + '" data-port="' + pp + '" style="background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:12px;padding:12px 14px;border-radius:8px;word-break:break-all;line-height:1.7">' +
+                      pu + ':' + ppw + ':' + ph + ':' + pp +
                     '</div>' +
                     '<div style="display:flex;gap:8px;margin-top:10px">' +
                       '<button onclick="copyProxyGen(' + pid + ')" style="flex:1;background:#2563eb;color:#fff;border:none;padding:9px;font-size:12px;font-weight:600;cursor:pointer;border-radius:6px;font-family:inherit">📋 Copier la chaîne</button>' +
@@ -776,37 +785,37 @@
   }
 
   function proxyGen(id) {
-    var passEl  = document.getElementById('proxy-pass-' + id);
-    var pass    = passEl ? passEl.dataset.pass : '';
-    var hostEl  = passEl ? passEl.closest('div[style]') : null;
-    // Récupérer host/port depuis les spans de la grille (data stockée dans le résultat initial)
-    var result  = document.getElementById('prx-result-' + id);
+    var result = document.getElementById('prx-result-' + id);
     if(!result) return;
-    // Extraire host:port depuis le texte initial (avant le username)
-    var base    = result.dataset.base || result.textContent.split(':').slice(0,2).join(':');
-    if(!result.dataset.base) result.dataset.base = base;
-    var host    = base.split(':')[0];
-    var port    = base.split(':')[1];
 
-    var country = (document.getElementById('prx-country-' + id)||{}).value || '';
-    var isp     = ((document.getElementById('prx-isp-' + id)||{}).value || '').trim();
-    var state   = ((document.getElementById('prx-state-' + id)||{}).value || '').trim();
-    var city    = ((document.getElementById('prx-city-' + id)||{}).value || '').trim();
-    var passEl2 = document.getElementById('proxy-pass-' + id);
-    var user    = passEl2 ? passEl2.closest('div').previousElementSibling : null;
+    var username = result.dataset.user;
+    var pass     = result.dataset.pass;
+    var host     = result.dataset.host;
+    var port     = result.dataset.port;
 
-    // Récupérer username depuis data-user stocké sur le résultat
-    var username = result.dataset.user || result.textContent.split(':')[2] || '';
-    if(!result.dataset.user) result.dataset.user = username;
+    var country  = (document.getElementById('prx-country-' + id)||{}).value || '';
+    var isp      = ((document.getElementById('prx-isp-'     + id)||{}).value || '').trim();
+    var state    = ((document.getElementById('prx-state-'   + id)||{}).value || '').trim();
+    var city     = ((document.getElementById('prx-city-'    + id)||{}).value || '').trim();
+    var ssid     = ((document.getElementById('prx-ssid-'    + id)||{}).value || '').trim();
 
-    // Construire le username avec ciblage
+    // Construire le username avec ciblage — format 9proxy
     var u = username;
     if(country) u += '-country-' + country;
-    if(state)   u += '-st-' + state;
-    if(city)    u += '-city-' + city.toLowerCase().replace(/\s+/g,'');
-    if(isp)     u += '-isp-' + isp.trim();
+    if(state)   u += '-st-'      + state.toUpperCase();
+    if(city)    u += '-city-'    + city.toLowerCase().replace(/\s+/g,'');
+    if(isp)     u += '-isp-'     + isp;
+    if(ssid)    u += '-ssid-'    + ssid;
 
-    result.textContent = host + ':' + port + ':' + u + ':' + pass;
+    // Format final : user+ciblage:pass:host:port
+    result.textContent = u + ':' + pass + ':' + host + ':' + port;
+  }
+
+  function genSsid(id) {
+    var el = document.getElementById('prx-ssid-' + id);
+    if(!el) return;
+    el.value = Math.random().toString(36).slice(2, 12);
+    proxyGen(id);
   }
 
   function copyProxyGen(id) {
@@ -818,14 +827,10 @@
   }
 
   function resetProxyGen(id) {
-    var sel   = document.getElementById('prx-country-' + id);
-    var isp   = document.getElementById('prx-isp-' + id);
-    var state = document.getElementById('prx-state-' + id);
-    var city  = document.getElementById('prx-city-' + id);
-    if(sel)   sel.value   = '';
-    if(isp)   isp.value   = '';
-    if(state) state.value = '';
-    if(city)  city.value  = '';
+    ['prx-country-','prx-isp-','prx-state-','prx-city-','prx-ssid-'].forEach(function(p){
+      var el = document.getElementById(p + id);
+      if(el) el.value = '';
+    });
     proxyGen(id);
   }
 
