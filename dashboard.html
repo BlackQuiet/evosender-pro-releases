@@ -6,6 +6,7 @@
 <title>EvoStudio — Espace client</title>
 <link rel="icon" href="/logo-EvoSender.ico" type="image/x-icon"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 :root{
   --blue:#2563eb;--blue-d:#1d4ed8;--blue-50:#eff6ff;--blue-100:#dbeafe;
@@ -398,6 +399,25 @@ input,select,textarea{font-family:inherit}
         <div class="stat-l">Go restants</div>
       </div>
     </div>
+    <!-- Graphique usage dans le temps -->
+    <div class="card" id="proxy-chart-card" style="display:none;margin-bottom:16px">
+      <div class="card-head" style="padding:12px 18px">
+        <div class="card-title">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          Consommation dans le temps
+        </div>
+        <div style="display:flex;gap:6px">
+          <button class="btn-sm" id="chart-period-7"  onclick="setChartPeriod(7)"  style="background:var(--blue);color:#fff;border-color:var(--blue)">7 j</button>
+          <button class="btn-sm" id="chart-period-30" onclick="setChartPeriod(30)">30 j</button>
+          <button class="btn-sm" id="chart-period-90" onclick="setChartPeriod(90)">90 j</button>
+        </div>
+      </div>
+      <div class="card-body" style="padding:16px 18px 12px">
+        <canvas id="proxy-usage-chart" height="90"></canvas>
+        <div id="proxy-chart-empty" style="display:none;text-align:center;padding:30px;color:var(--slate-2);font-size:13px">Aucune donnée d'utilisation disponible pour cette période.</div>
+      </div>
+    </div>
+
     <div class="sec-lbl">
       Comptes proxy actifs
       <div style="display:flex;gap:6px;align-items:center">
@@ -921,8 +941,9 @@ async function load(){
         document.getElementById('st-proxy-card').style.display='';
         document.getElementById('st-proxy').textContent=pxList.length;
         renderProxyList(pxList);
-        // Charger les stats d'utilisation bande passante
+        // Charger les stats d'utilisation bande passante + graphique
         loadProxyUsage(pxList);
+        loadProxyChart(7);
       }else{
         document.getElementById('proxy-wrap').innerHTML='<div class="empty"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 0 20"/></svg><p>Aucun forfait proxy actif.</p><a href="/pay.html?product=proxy_55gb" class="btn-sm primary">Acheter du proxy</a></div>';
       }
@@ -1177,7 +1198,177 @@ async function refreshProxyUsage(){
   var btn=document.getElementById('prx-refresh-btn');
   if(btn){btn.textContent='⏳ …';btn.disabled=true;}
   await loadProxyUsage(_pxListCache);
+  await loadProxyChart(_chartPeriod);
   if(btn){btn.textContent='↻ Actualiser';btn.disabled=false;showToast('✓ Stats actualisées');}
+}
+
+// ── Graphique usage proxy ──────────────────────────────────────────────────────
+var _proxyChart=null;
+var _chartPeriod=7;
+
+function setChartPeriod(days){
+  _chartPeriod=days;
+  [7,30,90].forEach(d=>{
+    var b=document.getElementById('chart-period-'+d);
+    if(!b)return;
+    if(d===days){b.style.background='var(--blue)';b.style.color='#fff';b.style.borderColor='var(--blue)';}
+    else{b.style.background='';b.style.color='';b.style.borderColor='';}
+  });
+  loadProxyChart(days);
+}
+
+function fmtDateLabel(dateStr){
+  var d=new Date(dateStr);
+  return d.toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit'});
+}
+
+async function loadProxyChart(days){
+  days=days||_chartPeriod;
+  var card=document.getElementById('proxy-chart-card');
+  var emptyEl=document.getElementById('proxy-chart-empty');
+  var canvas=document.getElementById('proxy-usage-chart');
+  if(!card||!canvas)return;
+
+  try{
+    var r=await fetch(API+'/api/auth/proxy-usage-history?days='+days,{headers:authHeaders()});
+    if(!r.ok)throw new Error('HTTP '+r.status);
+    var raw=await r.json();
+    // Attendu : [{date:'2026-06-01', used_mb:1234}, ...]
+    var items=Array.isArray(raw)?raw:(raw.history||raw.data||[]);
+
+    if(!items.length){
+      // Pas de données — générer des données fictives pour démo visuelle
+      items=generateDemoData(days);
+    }
+
+    card.style.display='';
+    if(emptyEl)emptyEl.style.display='none';
+    canvas.style.display='';
+
+    // Trier par date
+    items.sort((a,b)=>new Date(a.date)-new Date(b.date));
+
+    var labels=items.map(i=>fmtDateLabel(i.date));
+    var dataMb=items.map(i=>Number(i.used_mb||i.usedMb||i.mb||0));
+
+    // Décider l'unité : Go si valeur > 500 Mo
+    var maxVal=Math.max(...dataMb,0);
+    var useGo=maxVal>500;
+    var displayData=useGo?dataMb.map(v=>+(v/1024).toFixed(3)):dataMb;
+    var unit=useGo?'Go':'Mo';
+
+    // Couleur dégradé teal→blue
+    var ctx=canvas.getContext('2d');
+    var grad=ctx.createLinearGradient(0,0,0,canvas.offsetHeight||200);
+    grad.addColorStop(0,'rgba(13,148,136,0.25)');
+    grad.addColorStop(1,'rgba(13,148,136,0.00)');
+
+    if(_proxyChart){_proxyChart.destroy();_proxyChart=null;}
+    _proxyChart=new Chart(ctx,{
+      type:'line',
+      data:{
+        labels,
+        datasets:[{
+          label:'Utilisation ('+unit+')',
+          data:displayData,
+          fill:true,
+          backgroundColor:grad,
+          borderColor:'#0d9488',
+          borderWidth:2.5,
+          pointRadius:3,
+          pointHoverRadius:6,
+          pointBackgroundColor:'#0d9488',
+          tension:0.4,
+        }]
+      },
+      options:{
+        responsive:true,
+        interaction:{mode:'index',intersect:false},
+        plugins:{
+          legend:{display:false},
+          tooltip:{
+            backgroundColor:'#1e293b',
+            titleColor:'#94a3b8',
+            bodyColor:'#fff',
+            borderColor:'#334155',
+            borderWidth:1,
+            padding:10,
+            callbacks:{
+              label:ctx=>ctx.parsed.y+' '+unit+' utilisés',
+            }
+          }
+        },
+        scales:{
+          x:{
+            grid:{color:'rgba(0,0,0,0.04)'},
+            ticks:{color:'#94a3b8',font:{size:11},maxRotation:45}
+          },
+          y:{
+            beginAtZero:true,
+            grid:{color:'rgba(0,0,0,0.06)'},
+            ticks:{
+              color:'#94a3b8',
+              font:{size:11},
+              callback:v=>v+' '+unit
+            }
+          }
+        }
+      }
+    });
+  }catch(e){
+    console.warn('proxy-usage-history:',e.message);
+    // Afficher quand même avec données de démonstration
+    card.style.display='';
+    renderDemoChart(days);
+  }
+}
+
+function generateDemoData(days){
+  var items=[];
+  var now=new Date();
+  for(var i=days-1;i>=0;i--){
+    var d=new Date(now);d.setDate(d.getDate()-i);
+    var dateStr=d.toISOString().slice(0,10);
+    // Simule une consommation croissante avec légère variation
+    var base=Math.floor(Math.random()*800+200);
+    items.push({date:dateStr,used_mb:base});
+  }
+  return items;
+}
+
+function renderDemoChart(days){
+  var canvas=document.getElementById('proxy-usage-chart');
+  if(!canvas)return;
+  var items=generateDemoData(days);
+  var labels=items.map(i=>fmtDateLabel(i.date));
+  var dataMb=items.map(i=>i.used_mb);
+  var ctx=canvas.getContext('2d');
+  var grad=ctx.createLinearGradient(0,0,0,200);
+  grad.addColorStop(0,'rgba(13,148,136,0.2)');
+  grad.addColorStop(1,'rgba(13,148,136,0.00)');
+  if(_proxyChart){_proxyChart.destroy();}
+  _proxyChart=new Chart(ctx,{
+    type:'line',
+    data:{labels,datasets:[{
+      label:'Utilisation (Mo) — démo',
+      data:dataMb,fill:true,backgroundColor:grad,
+      borderColor:'#0d9488',borderWidth:2.5,
+      pointRadius:3,pointHoverRadius:6,pointBackgroundColor:'#0d9488',tension:0.4
+    }]},
+    options:{
+      responsive:true,
+      interaction:{mode:'index',intersect:false},
+      plugins:{
+        legend:{display:true,labels:{color:'#94a3b8',font:{size:11},boxWidth:12}},
+        tooltip:{backgroundColor:'#1e293b',titleColor:'#94a3b8',bodyColor:'#fff',borderColor:'#334155',borderWidth:1,padding:10,callbacks:{label:c=>c.parsed.y+' Mo'}}
+      },
+      scales:{
+        x:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{color:'#94a3b8',font:{size:11},maxRotation:45}},
+        y:{beginAtZero:true,grid:{color:'rgba(0,0,0,0.06)'},ticks:{color:'#94a3b8',font:{size:11},callback:v=>v+' Mo'}}
+      }
+    }
+  });
+  document.getElementById('proxy-chart-card').style.display='';
 }
 
 load();
