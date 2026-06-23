@@ -203,6 +203,14 @@ input,select,textarea{font-family:inherit}
 /* 2FA */
 .tfa-qr-wrap{text-align:center;margin:12px 0}
 
+/* ── MOBILE HAMBURGER ── */
+.mob-ham{display:none;background:none;border:1px solid var(--line);color:var(--ink);padding:6px 9px;border-radius:7px;cursor:pointer;align-items:center;justify-content:center}
+.mob-ham svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+.sb-overlay{display:none;position:fixed;inset:0;background:rgba(15,23,42,.5);z-index:49}
+
+/* ── TABLE OVERFLOW ── */
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
 /* RESPONSIVE */
 @media(max-width:760px){
   .sidebar{width:var(--sb-w-col)}
@@ -213,19 +221,63 @@ input,select,textarea{font-family:inherit}
   .creds-grid{grid-template-columns:1fr}
   .lic-grid{grid-template-columns:1fr}
 }
-@media(max-width:480px){
+@media(max-width:540px){
+  /* Sidebar devient overlay glissant */
+  .mob-ham{display:inline-flex}
+  .sidebar{
+    width:var(--sb-w);
+    transform:translateX(-100%);
+    transition:transform .25s ease, width .25s;
+    z-index:200;
+  }
+  .sidebar.mob-open{transform:translateX(0)}
+  .sb-label,.sb-brand,.sb-foot-info,.sb-badge{opacity:1!important;pointer-events:auto!important}
+  .sb-overlay.mob-open{display:block}
+  .content{margin-left:0!important;padding:14px 10px}
+
+  /* Stats : 2 colonnes */
   .stats-row{grid-template-columns:1fr 1fr}
-  .topbar-logo img{max-width:100px}
+  .proxy-stats-row{grid-template-columns:1fr 1fr}
+
+  /* Tables scrollables */
+  .tbl-wrap{margin:0 -10px}
+
+  /* Topbar */
+  .topbar{padding:0 10px}
+  .topbar-logo img{max-width:95px}
   .user-chip .user-email{display:none}
-  .content{padding:16px 12px}
+  .btn-logout .logout-txt{display:none!important}
+
+  /* svc-row actions wrappent */
+  .svc-row{flex-direction:column!important;gap:10px}
+  .svc-actions{flex-wrap:wrap;width:100%}
+
+  /* modal full-width */
+  .overlay{padding:0}
+  .modal{border-radius:0;min-height:100vh}
+  .modal-sm,.modal-md,.modal-lg{max-width:100%}
+
+  /* Proxy chart */
+  #proxy-chart-card .card-body{padding:12px 10px}
+}
+@media(max-width:380px){
+  .stats-row{grid-template-columns:1fr}
+  .proxy-stats-row{grid-template-columns:1fr}
+  .dl-row{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 
 <!-- TOPBAR -->
+<div class="sb-overlay" id="sb-overlay" onclick="closeSidebar()"></div>
 <header class="topbar">
-  <a href="/" class="topbar-logo"><img src="/logoevostudio2.png" alt="EvoStudio"/></a>
+  <div style="display:flex;align-items:center;gap:10px">
+    <button class="mob-ham" id="mob-ham" onclick="toggleSidebar()" aria-label="Menu">
+      <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <a href="/" class="topbar-logo"><img src="/logoevostudio2.png" alt="EvoStudio"/></a>
+  </div>
   <div class="topbar-right">
     <div class="user-chip">
       <div class="user-av" id="nav-av">?</div>
@@ -482,6 +534,22 @@ input,select,textarea{font-family:inherit}
       <div id="smtp-m-sender" style="display:none;background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 13px;font-size:12.5px;color:#1e40af;margin-bottom:12px"></div>
       <div id="smtp-m-notice" style="display:none;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:10px 13px;font-size:12.5px;color:#92400e;margin-bottom:12px"></div>
       <button onclick="copySmtpModal()" class="btn-sm primary" style="width:100%;justify-content:center">📋 Copier tous les identifiants</button>
+
+      <!-- ── TEST D'ENVOI ── -->
+      <div style="margin-top:18px;border-top:1px solid var(--line);padding-top:16px">
+        <div style="font-size:12px;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px">🧪 Tester l'envoi</div>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          <input id="smtp-test-email" type="email" placeholder="Email de destination (ex: vous@gmail.com)"
+            style="flex:1;min-width:180px;border:1.5px solid var(--line);border-radius:8px;padding:8px 12px;font-size:13px;font-family:inherit;outline:none;transition:border-color .15s"
+            onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='var(--line)'"
+            onkeydown="if(event.key==='Enter')sendSmtpTest()"/>
+          <button onclick="sendSmtpTest()" id="smtp-test-btn" class="btn-sm primary" style="white-space:nowrap">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Envoyer un test
+          </button>
+        </div>
+        <div id="smtp-test-result" style="display:none;margin-top:10px;border-radius:8px;padding:10px 13px;font-size:12.5px;font-weight:600"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -715,6 +783,9 @@ function openSmtpModal(s,senderNotice){
   var nEl=document.getElementById('smtp-m-notice');
   var n=s.sender_notice||senderNotice||'';
   if(n){nEl.style.display='';nEl.textContent='⚠️ '+n}else{nEl.style.display='none'}
+  // Reset zone test
+  document.getElementById('smtp-test-email').value='';
+  document.getElementById('smtp-test-result').style.display='none';
   openModal('smtp-creds-modal');
 }
 function copySmtpModal(){
@@ -723,6 +794,41 @@ function copySmtpModal(){
   var user=document.getElementById('smtp-m-user').textContent;
   var pass=document.getElementById('smtp-m-pass-real').value;
   copyText('Hôte SMTP : '+host+'\nPort : '+port+'\nUtilisateur : '+user+'\nMot de passe : '+pass+'\nChiffrement : TLS/STARTTLS');
+}
+async function sendSmtpTest(){
+  var to=document.getElementById('smtp-test-email').value.trim();
+  var res=document.getElementById('smtp-test-result');
+  var btn=document.getElementById('smtp-test-btn');
+  if(!to||!to.includes('@')){
+    res.style.display='';
+    res.style.background='#fef2f2';res.style.border='1px solid #fecaca';res.style.color='var(--red)';
+    res.textContent='⚠️ Veuillez saisir une adresse email valide.';
+    return;
+  }
+  btn.disabled=true;btn.textContent='⏳ Envoi…';
+  res.style.display='none';
+  try{
+    var r=await fetch(API+'/api/auth/smtp-test',{
+      method:'POST',
+      headers:{...authHeaders(),'Content-Type':'application/json'},
+      body:JSON.stringify({smtp_id:_smtpModalId, to:to})
+    });
+    var d=await r.json();
+    if(r.ok&&d.ok){
+      res.style.display='';
+      res.style.background='#f0fdf4';res.style.border='1px solid #bbf7d0';res.style.color='var(--green)';
+      res.innerHTML='✅ Email de test envoyé à <b>'+esc(to)+'</b> ! Vérifiez votre boîte de réception (et les spams).';
+    }else{
+      throw new Error(d.error||d.message||'Erreur inconnue');
+    }
+  }catch(e){
+    res.style.display='';
+    res.style.background='#fef2f2';res.style.border='1px solid #fecaca';res.style.color='var(--red)';
+    res.innerHTML='❌ Échec : <span style="font-family:monospace;font-size:11.5px">'+esc(e.message)+'</span>';
+  }finally{
+    btn.disabled=false;
+    btn.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Envoyer un test';
+  }
 }
 
 // PROXY modal
@@ -1117,20 +1223,17 @@ function renderProxyList(pxList, usageMap){
   var wrap=document.getElementById('proxy-wrap');
   if(!wrap)return;
 
-  // Stats globales
+  // Stats globales — toujours visibles (total cumulé de tous les abonnements)
   var totalGbAll=pxList.reduce((s,p)=>s+(Number(p.gb)||0),0);
-  var totalUsedMb=pxList.reduce((s,p)=>{var u=usageMap[p.id];return s+(u!=null?u:0);},0);
-  var hasUsage=Object.keys(usageMap).length>0;
-  if(hasUsage){
-    var statsEl=document.getElementById('proxy-global-stats');
-    if(statsEl)statsEl.style.display='';
-    var usedGb=(totalUsedMb/1024);
-    var remGb=Math.max(0,totalGbAll-usedGb);
-    var fmtGb=v=>v>=1?v.toFixed(1)+' Go':(v*1024).toFixed(0)+' Mo';
-    document.getElementById('prx-total-gb').textContent=totalGbAll+' Go';
-    document.getElementById('prx-used-gb').textContent=fmtGb(usedGb);
-    document.getElementById('prx-remain-gb').textContent=fmtGb(remGb);
-  }
+  var totalUsedMb=pxList.reduce((s,p)=>s+(Number(usageMap[p.id])||0),0);
+  var usedGb=totalUsedMb/1024;
+  var remGb=Math.max(0,totalGbAll-usedGb);
+  var fmtGb=function(v){return v>=1?v.toFixed(1)+' Go':(v*1024).toFixed(0)+' Mo';};
+  var statsEl=document.getElementById('proxy-global-stats');
+  if(statsEl)statsEl.style.display='';
+  document.getElementById('prx-total-gb').textContent=totalGbAll+' Go';
+  document.getElementById('prx-used-gb').textContent=totalUsedMb>0?fmtGb(usedGb):'0 Mo';
+  document.getElementById('prx-remain-gb').textContent=fmtGb(remGb||totalGbAll);
 
   wrap.innerHTML=pxList.map(p=>{
     var bg=PSB[p.status]||'#f1f5f9',fg=PSF[p.status]||'#334155',lbl=PSL[p.status]||p.status;
@@ -1141,8 +1244,10 @@ function renderProxyList(pxList, usageMap){
       var col=ex?'var(--red)':(dj<=10?'var(--orange)':'var(--slate)');
       expHtml='<div class="svc-exp" style="color:'+col+'">⏳ '+(ex?'Expiré le '+new Date(p.expires_at).toLocaleDateString('fr-FR'):'Jusqu\'au '+new Date(p.expires_at).toLocaleDateString('fr-FR')+' · '+dj+' j restants')+'</div>';
     }
-    var usedMb=usageMap[p.id];
-    var bwHtml=(usedMb!=null)?bwBarHtml(usedMb,p.gb):'<div id="bw-'+p.id+'" class="bw-wrap" style="margin-top:8px"><div style="font-size:11px;color:var(--slate-2)">⏳ Chargement des stats…</div></div>';
+    // Barre toujours affichée — 0 Mo si pas encore de données API
+    var usedMb=Number(usageMap[p.id])||0;
+    var bwHtml='<div id="bw-'+p.id+'">'+bwBarHtml(usedMb, p.gb)+'</div>';
+
     return '<div class="svc-row" style="flex-direction:column;align-items:stretch">'+
       '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap">'+
         '<div class="svc-info">'+
@@ -1374,6 +1479,25 @@ function renderDemoChart(days){
 load();
 refreshUnread();
 setInterval(()=>{if(_supOpen)loadSupport();else refreshUnread();},20000);
+
+function toggleSidebar(){
+  var sb=document.querySelector('.sidebar');
+  var ov=document.getElementById('sb-overlay');
+  var open=sb.classList.toggle('mob-open');
+  ov.classList.toggle('mob-open',open);
+  document.body.style.overflow=open?'hidden':'';
+}
+function closeSidebar(){
+  var sb=document.querySelector('.sidebar');
+  var ov=document.getElementById('sb-overlay');
+  sb.classList.remove('mob-open');
+  ov.classList.remove('mob-open');
+  document.body.style.overflow='';
+}
+// Ferme sidebar auto quand on clique un item nav (mobile)
+document.querySelectorAll('.sb-item').forEach(function(el){
+  el.addEventListener('click',function(){if(window.innerWidth<=540)closeSidebar();});
+});
 </script>
 <script src="/assistance.js" defer></script>
 </body>
