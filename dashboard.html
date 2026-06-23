@@ -596,27 +596,119 @@
 
             var credsHtml = '';
             if(p.username && p.status === 'active') {
+              var pid = p.id;
+              var ph = p.host, pp = p.port, pu = p.username, ppw = p.password;
               credsHtml =
                 '<div style="background:#f8fafc;border:1px solid #e2e8f0;padding:18px;margin-top:16px">' +
-                  '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#94a3b8;margin-bottom:14px">Identifiants Proxy</div>' +
-                  '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px">' +
-                    '<div><div style="font-size:10px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Hôte</div><div style="font-family:monospace;font-size:13px;font-weight:700;color:#0f172a">' + p.host + '</div></div>' +
-                    '<div><div style="font-size:10px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Port</div><div style="font-family:monospace;font-size:13px;font-weight:700;color:#0f172a">' + p.port + '</div></div>' +
-                    '<div><div style="font-size:10px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Utilisateur</div><div style="font-family:monospace;font-size:13px;font-weight:700;color:#2563eb">' + p.username + '</div></div>' +
-                    '<div><div style="font-size:10px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Mot de passe</div>' +
+
+                  // ── Identifiants bruts ──
+                  '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#94a3b8;margin-bottom:12px">Identifiants Proxy</div>' +
+                  '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">' +
+                    '<div><div style="font-size:10px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px">Hôte</div><div style="font-family:monospace;font-size:13px;font-weight:700;color:#0f172a">' + ph + '</div></div>' +
+                    '<div><div style="font-size:10px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px">Port</div><div style="font-family:monospace;font-size:13px;font-weight:700;color:#0f172a">' + pp + '</div></div>' +
+                    '<div><div style="font-size:10px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px">Utilisateur</div><div style="font-family:monospace;font-size:13px;font-weight:700;color:#2563eb">' + pu + '</div></div>' +
+                    '<div><div style="font-size:10px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px">Mot de passe</div>' +
                       '<div style="display:flex;align-items:center;gap:8px">' +
-                        '<span id="proxy-pass-' + p.id + '" data-pass="' + p.password + '" data-shown="0" style="font-family:monospace;font-size:13px;font-weight:700;color:#0f172a;letter-spacing:.1em">••••••••</span>' +
-                        '<button onclick="toggleProxyPass(' + p.id + ')" style="background:#fff;border:1px solid #e2e8f0;padding:2px 8px;font-size:11px;cursor:pointer;color:#64748b;font-family:inherit">Voir</button>' +
+                        '<span id="proxy-pass-' + pid + '" data-pass="' + ppw + '" data-shown="0" style="font-family:monospace;font-size:13px;font-weight:700;color:#0f172a;letter-spacing:.1em">••••••••</span>' +
+                        '<button onclick="toggleProxyPass(' + pid + ')" style="background:#fff;border:1px solid #e2e8f0;padding:2px 8px;font-size:11px;cursor:pointer;color:#64748b;font-family:inherit">Voir</button>' +
                       '</div>' +
                     '</div>' +
                   '</div>' +
-                  '<div style="background:#eff6ff;border:1px solid #bfdbfe;padding:10px 13px;margin-bottom:14px;font-size:12px;color:#1e40af;font-family:monospace;word-break:break-all">' +
-                    '<span style="font-weight:700">Format :</span> ' + p.host + ':' + p.port + ':' + p.username + ':' + p.password +
+
+                  // ── Générateur de connexion ──
+                  '<div style="border-top:1px solid #e2e8f0;padding-top:16px;margin-top:4px">' +
+                    '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#94a3b8;margin-bottom:12px">🔧 Générateur de connexion</div>' +
+
+                    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">' +
+
+                      // Pays
+                      '<div>' +
+                        '<label style="font-size:11px;font-weight:600;color:#475569;display:block;margin-bottom:4px">Pays</label>' +
+                        '<select id="prx-country-' + pid + '" onchange="proxyGen(' + pid + ')" style="width:100%;border:1px solid #e2e8f0;border-radius:6px;padding:7px 10px;font-size:12px;font-family:inherit;background:#fff;color:#0f172a">' +
+                          '<option value="">🌍 Aléatoire (mondial)</option>' +
+                          '<option value="us">🇺🇸 États-Unis (us)</option>' +
+                          '<option value="gb">🇬🇧 Royaume-Uni (gb)</option>' +
+                          '<option value="fr">🇫🇷 France (fr)</option>' +
+                          '<option value="de">🇩🇪 Allemagne (de)</option>' +
+                          '<option value="ca">🇨🇦 Canada (ca)</option>' +
+                          '<option value="au">🇦🇺 Australie (au)</option>' +
+                          '<option value="nl">🇳🇱 Pays-Bas (nl)</option>' +
+                          '<option value="se">🇸🇪 Suède (se)</option>' +
+                          '<option value="no">🇳🇴 Norvège (no)</option>' +
+                          '<option value="ch">🇨🇭 Suisse (ch)</option>' +
+                          '<option value="es">🇪🇸 Espagne (es)</option>' +
+                          '<option value="it">🇮🇹 Italie (it)</option>' +
+                          '<option value="br">🇧🇷 Brésil (br)</option>' +
+                          '<option value="in">🇮🇳 Inde (in)</option>' +
+                          '<option value="jp">🇯🇵 Japon (jp)</option>' +
+                          '<option value="kr">🇰🇷 Corée du Sud (kr)</option>' +
+                          '<option value="sg">🇸🇬 Singapour (sg)</option>' +
+                          '<option value="hk">🇭🇰 Hong Kong (hk)</option>' +
+                          '<option value="cn">🇨🇳 Chine (cn)</option>' +
+                          '<option value="ru">🇷🇺 Russie (ru)</option>' +
+                          '<option value="ua">🇺🇦 Ukraine (ua)</option>' +
+                          '<option value="tr">🇹🇷 Turquie (tr)</option>' +
+                          '<option value="za">🇿🇦 Afrique du Sud (za)</option>' +
+                          '<option value="ng">🇳🇬 Nigeria (ng)</option>' +
+                          '<option value="ci">🇨🇮 Côte d\'Ivoire (ci)</option>' +
+                          '<option value="gh">🇬🇭 Ghana (gh)</option>' +
+                          '<option value="sn">🇸🇳 Sénégal (sn)</option>' +
+                          '<option value="ma">🇲🇦 Maroc (ma)</option>' +
+                          '<option value="eg">🇪🇬 Égypte (eg)</option>' +
+                          '<option value="mx">🇲🇽 Mexique (mx)</option>' +
+                          '<option value="ar">🇦🇷 Argentine (ar)</option>' +
+                          '<option value="co">🇨🇴 Colombie (co)</option>' +
+                          '<option value="id">🇮🇩 Indonésie (id)</option>' +
+                          '<option value="vn">🇻🇳 Vietnam (vn)</option>' +
+                          '<option value="th">🇹🇭 Thaïlande (th)</option>' +
+                          '<option value="ph">🇵🇭 Philippines (ph)</option>' +
+                          '<option value="pk">🇵🇰 Pakistan (pk)</option>' +
+                          '<option value="bd">🇧🇩 Bangladesh (bd)</option>' +
+                          '<option value="ae">🇦🇪 Émirats arabes (ae)</option>' +
+                          '<option value="sa">🇸🇦 Arabie Saoudite (sa)</option>' +
+                          '<option value="il">🇮🇱 Israël (il)</option>' +
+                          '<option value="pl">🇵🇱 Pologne (pl)</option>' +
+                          '<option value="ro">🇷🇴 Roumanie (ro)</option>' +
+                          '<option value="cz">🇨🇿 Tchéquie (cz)</option>' +
+                          '<option value="hu">🇭🇺 Hongrie (hu)</option>' +
+                          '<option value="pt">🇵🇹 Portugal (pt)</option>' +
+                        '</select>' +
+                      '</div>' +
+
+                      // ISP
+                      '<div>' +
+                        '<label style="font-size:11px;font-weight:600;color:#475569;display:block;margin-bottom:4px">ISP <span style="font-weight:400;color:#94a3b8">(optionnel)</span></label>' +
+                        '<input id="prx-isp-' + pid + '" type="text" placeholder="ex: as7922_Comcast" oninput="proxyGen(' + pid + ')" style="width:100%;border:1px solid #e2e8f0;border-radius:6px;padding:7px 10px;font-size:12px;font-family:monospace;background:#fff;color:#0f172a;outline:none" />' +
+                      '</div>' +
+
+                      // État
+                      '<div>' +
+                        '<label style="font-size:11px;font-weight:600;color:#475569;display:block;margin-bottom:4px">État / Région <span style="font-weight:400;color:#94a3b8">(optionnel)</span></label>' +
+                        '<input id="prx-state-' + pid + '" type="text" placeholder="ex: CA, TX, NY" oninput="proxyGen(' + pid + ')" style="width:100%;border:1px solid #e2e8f0;border-radius:6px;padding:7px 10px;font-size:12px;font-family:monospace;background:#fff;color:#0f172a;outline:none" />' +
+                      '</div>' +
+
+                      // Ville
+                      '<div>' +
+                        '<label style="font-size:11px;font-weight:600;color:#475569;display:block;margin-bottom:4px">Ville <span style="font-weight:400;color:#94a3b8">(optionnel)</span></label>' +
+                        '<input id="prx-city-' + pid + '" type="text" placeholder="ex: losangeles" oninput="proxyGen(' + pid + ')" style="width:100%;border:1px solid #e2e8f0;border-radius:6px;padding:7px 10px;font-size:12px;font-family:monospace;background:#fff;color:#0f172a;outline:none" />' +
+                      '</div>' +
+
+                    '</div>' +
+
+                    // Résultat généré
+                    '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;margin-bottom:6px">Chaîne de connexion générée</div>' +
+                    '<div id="prx-result-' + pid + '" style="background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:12px;padding:12px 14px;border-radius:8px;word-break:break-all;line-height:1.7">' +
+                      ph + ':' + pp + ':' + pu + ':' + ppw +
+                    '</div>' +
+                    '<div style="display:flex;gap:8px;margin-top:10px">' +
+                      '<button onclick="copyProxyGen(' + pid + ')" style="flex:1;background:#2563eb;color:#fff;border:none;padding:9px;font-size:12px;font-weight:600;cursor:pointer;border-radius:6px;font-family:inherit">📋 Copier la chaîne</button>' +
+                      '<button onclick="resetProxyGen(' + pid + ')" style="background:#f1f5f9;border:1px solid #e2e8f0;color:#475569;padding:9px 14px;font-size:12px;font-weight:600;cursor:pointer;border-radius:6px;font-family:inherit">↺ Reset</button>' +
+                    '</div>' +
+                    '<div style="background:#f0fdf4;border:1px solid #bbf7d0;padding:10px 13px;margin-top:12px;font-size:11.5px;color:#166534;line-height:1.6">' +
+                      '🔄 <b>Rotation IP</b> — chaque requête utilise une nouvelle adresse IP. Laissez Pays vide pour une IP mondiale aléatoire.' +
+                    '</div>' +
                   '</div>' +
-                  '<button onclick="copyProxy(' + p.id + ',\'' + p.host + '\',' + p.port + ',\'' + p.username + '\')" ' +
-                    'style="background:#2563eb;color:#fff;border:none;padding:9px 18px;font-size:13px;font-weight:600;cursor:pointer;width:100%;font-family:inherit">' +
-                    'Copier tous les identifiants' +
-                  '</button>' +
+
                   (p.notice ? '<div style="background:#fffbeb;border:1px solid #fde68a;padding:11px 13px;margin-top:12px;font-size:12px;color:#92400e;line-height:1.55">ℹ️ ' + esc(p.notice).replace(/\n/g,'<br>') + '</div>' : '') +
                 '</div>';
             } else if(p.status === 'pending') {
@@ -681,6 +773,60 @@
     var pass = passEl ? passEl.dataset.pass : '';
     var txt = 'Hôte : ' + host + '\nPort : ' + port + '\nUtilisateur : ' + user + '\nMot de passe : ' + pass + '\nFormat : ' + host + ':' + port + ':' + user + ':' + pass;
     navigator.clipboard.writeText(txt).then(function(){ showToast('✅ Identifiants proxy copiés !'); });
+  }
+
+  function proxyGen(id) {
+    var passEl  = document.getElementById('proxy-pass-' + id);
+    var pass    = passEl ? passEl.dataset.pass : '';
+    var hostEl  = passEl ? passEl.closest('div[style]') : null;
+    // Récupérer host/port depuis les spans de la grille (data stockée dans le résultat initial)
+    var result  = document.getElementById('prx-result-' + id);
+    if(!result) return;
+    // Extraire host:port depuis le texte initial (avant le username)
+    var base    = result.dataset.base || result.textContent.split(':').slice(0,2).join(':');
+    if(!result.dataset.base) result.dataset.base = base;
+    var host    = base.split(':')[0];
+    var port    = base.split(':')[1];
+
+    var country = (document.getElementById('prx-country-' + id)||{}).value || '';
+    var isp     = ((document.getElementById('prx-isp-' + id)||{}).value || '').trim();
+    var state   = ((document.getElementById('prx-state-' + id)||{}).value || '').trim();
+    var city    = ((document.getElementById('prx-city-' + id)||{}).value || '').trim();
+    var passEl2 = document.getElementById('proxy-pass-' + id);
+    var user    = passEl2 ? passEl2.closest('div').previousElementSibling : null;
+
+    // Récupérer username depuis data-user stocké sur le résultat
+    var username = result.dataset.user || result.textContent.split(':')[2] || '';
+    if(!result.dataset.user) result.dataset.user = username;
+
+    // Construire le username avec ciblage
+    var u = username;
+    if(country) u += '-country-' + country;
+    if(state)   u += '-st-' + state;
+    if(city)    u += '-city-' + city.toLowerCase().replace(/\s+/g,'');
+    if(isp)     u += '-isp-' + isp.trim();
+
+    result.textContent = host + ':' + port + ':' + u + ':' + pass;
+  }
+
+  function copyProxyGen(id) {
+    var result = document.getElementById('prx-result-' + id);
+    if(!result) return;
+    navigator.clipboard.writeText(result.textContent).then(function(){
+      showToast('✅ Chaîne proxy copiée !');
+    });
+  }
+
+  function resetProxyGen(id) {
+    var sel   = document.getElementById('prx-country-' + id);
+    var isp   = document.getElementById('prx-isp-' + id);
+    var state = document.getElementById('prx-state-' + id);
+    var city  = document.getElementById('prx-city-' + id);
+    if(sel)   sel.value   = '';
+    if(isp)   isp.value   = '';
+    if(state) state.value = '';
+    if(city)  city.value  = '';
+    proxyGen(id);
   }
 
   async function deleteSmtp(id) {
