@@ -721,12 +721,14 @@
                     '<textarea id="prx-result-' + pid + '" data-user="' + pu + '" data-pass="' + ppw + '" data-host="' + ph + '" data-port="' + pp + '" readonly rows="3" style="width:100%;background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11.5px;padding:12px 14px;border-radius:8px;border:none;resize:vertical;line-height:1.8;outline:none">' +
                       pu + ':' + ppw + ':' + ph + ':' + pp +
                     '</textarea>' +
-                    '<div style="display:flex;gap:8px;margin-top:8px">' +
+                    '<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">' +
                       '<button onclick="resetProxyGen(' + pid + ')" style="background:#f1f5f9;border:1px solid #e2e8f0;color:#475569;padding:8px 14px;font-size:12px;font-weight:600;cursor:pointer;border-radius:6px;font-family:inherit">↺ Reset</button>' +
-                      '<div style="flex:1;background:#f0fdf4;border:1px solid #bbf7d0;padding:8px 12px;font-size:11px;color:#166534;border-radius:6px;line-height:1.5">' +
-                        '🔄 <b>Rotation</b> : ssid vide · 🔒 <b>Sticky</b> : ssid rempli (même IP fixe). Quantité > 1 = ssid unique par ligne.' +
+                      '<button onclick="testProxy(' + pid + ',\'' + ph + '\',' + pp + ',\'' + pu + '\',\'' + ppw + '\')" style="background:#0f172a;color:#7dd3fc;border:none;padding:8px 16px;font-size:12px;font-weight:600;cursor:pointer;border-radius:6px;font-family:inherit">⚡ Tester ce proxy</button>' +
+                      '<div style="flex:1;background:#f0fdf4;border:1px solid #bbf7d0;padding:8px 12px;font-size:11px;color:#166534;border-radius:6px;line-height:1.5;min-width:160px">' +
+                        '🔄 <b>Rotation</b> : ssid vide · 🔒 <b>Sticky</b> : ssid rempli.' +
                       '</div>' +
                     '</div>' +
+                    '<div id="prx-test-' + pid + '" style="display:none;margin-top:10px"></div>' +
                   '</div>' +
 
                   (p.notice ? '<div style="background:#fffbeb;border:1px solid #fde68a;padding:11px 13px;margin-top:12px;font-size:12px;color:#92400e;line-height:1.55">ℹ️ ' + esc(p.notice).replace(/\n/g,'<br>') + '</div>' : '') +
@@ -924,6 +926,37 @@
     navigator.clipboard.writeText(txt).then(function(){
       showToast('✅ ' + qty + ' chaîne' + (qty>1?'s':'') + ' copiée' + (qty>1?'s':'') + ' !');
     });
+  }
+
+  async function testProxy(id, host, port, username, password) {
+    var box = document.getElementById('prx-test-' + id);
+    if(!box) return;
+    box.style.display = '';
+    box.innerHTML = '<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px 14px;font-size:12.5px;color:#64748b">⏳ Test en cours…</div>';
+    try {
+      var r = await fetch(API + '/api/auth/proxy-test', {
+        method: 'POST',
+        headers: { ...authHeaders(), 'Content-Type': 'application/json' },
+        body: JSON.stringify({ host: host, port: port, username: username, password: password }),
+      });
+      var d = await r.json();
+      if(d.ok) {
+        box.innerHTML =
+          '<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:14px 16px;font-size:13px">' +
+            '<div style="font-weight:700;color:#15803d;margin-bottom:8px">✅ Proxy fonctionnel !</div>' +
+            '<div style="display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:12.5px">' +
+              '<span style="color:#94a3b8;font-weight:600">IP publique</span><span style="font-family:monospace;font-weight:700;color:#0f172a">' + (d.ip||'—') + '</span>' +
+              '<span style="color:#94a3b8;font-weight:600">Pays</span><span style="font-weight:600;color:#0f172a">' + (d.country||'—') + '</span>' +
+              '<span style="color:#94a3b8;font-weight:600">Ville</span><span style="color:#334155">' + ([d.city, d.region].filter(Boolean).join(', ')||'—') + '</span>' +
+              '<span style="color:#94a3b8;font-weight:600">Opérateur</span><span style="color:#334155;font-size:11.5px">' + (d.org||'—') + '</span>' +
+            '</div>' +
+          '</div>';
+      } else {
+        box.innerHTML = '<div style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:12px 14px;font-size:12.5px;color:#dc2626">❌ ' + (d.error||'Erreur inconnue') + '</div>';
+      }
+    } catch(e) {
+      box.innerHTML = '<div style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:12px 14px;font-size:12.5px;color:#dc2626">❌ Erreur réseau : ' + e.message + '</div>';
+    }
   }
 
   function resetProxyGen(id) {
