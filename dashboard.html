@@ -1,1173 +1,1050 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EvoStudio — Mon espace client</title><link rel="icon" href="/logo-EvoSender.ico" type="image/x-icon" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <style>
-    :root{--blue:#2563eb;--blue-dark:#1d4ed8;--blue-50:#eff6ff;--blue-100:#dbeafe;--ink:#0f172a;--slate:#64748b;--slate-2:#94a3b8;--line:#e2e8f0;--bg:#f4f6f9;--green:#16a34a}
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>EvoStudio — Espace client</title>
+<link rel="icon" href="/logo-EvoSender.ico" type="image/x-icon"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --blue:#2563eb;--blue-d:#1d4ed8;--blue-50:#eff6ff;--blue-100:#dbeafe;
+  --ink:#0f172a;--slate:#64748b;--slate-2:#94a3b8;--line:#e2e8f0;--bg:#f0f2f5;
+  --green:#16a34a;--red:#dc2626;--teal:#0d9488;--orange:#ea580c;
+  --sb-bg:#1e293b;--sb-w:220px;--sb-w-col:60px;--topbar:52px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{height:100%}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--ink);height:100%;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit}
+input,select,textarea{font-family:inherit}
 
-    /* NAV */
-    nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:56px;background:#fff;border-bottom:1px solid var(--line);gap:12px}
-    .logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0}
-    .nav-right{display:flex;align-items:center;gap:10px;min-width:0;width:160px;justify-content:flex-end}
-    .btn-logout{background:none;border:1px solid var(--line);color:var(--slate);padding:6px 12px;font-size:12px;font-weight:600;cursor:pointer;transition:.15s;font-family:inherit;white-space:nowrap;flex-shrink:0;display:flex;align-items:center;gap:6px}
-    .btn-logout:hover{border-color:#fca5a5;color:#dc2626;background:#fef2f2}
-    .btn-logout .logout-label{display:inline}
-    .nav-icon-user{display:flex;width:30px;height:30px;background:var(--blue);color:#fff;border-radius:50%;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0}
+/* ── TOPBAR ── */
+.topbar{position:fixed;top:0;left:0;right:0;height:var(--topbar);background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:100;gap:12px}
+.topbar-logo{display:flex;align-items:center;gap:0}
+.topbar-logo img{height:28px;display:block;max-width:130px;object-fit:contain}
+.topbar-right{display:flex;align-items:center;gap:10px}
+.user-chip{display:flex;align-items:center;gap:8px;background:#f8fafc;border:1px solid var(--line);padding:5px 12px 5px 6px;border-radius:20px;font-size:12.5px;font-weight:600;color:var(--ink);cursor:default}
+.user-av{width:26px;height:26px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}
+.btn-logout{background:none;border:1px solid var(--line);color:var(--slate);padding:6px 13px;font-size:12px;font-weight:600;cursor:pointer;border-radius:6px;display:flex;align-items:center;gap:6px;transition:.15s}
+.btn-logout:hover{border-color:#fca5a5;color:var(--red);background:#fef2f2}
+.btn-logout svg{flex-shrink:0}
 
-    /* LAYOUT */
-    .main{max-width:900px;margin:0 auto;padding:28px 16px 64px}
-    .page-header{margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--line)}
-    .page-title{font-size:20px;font-weight:800;letter-spacing:-.4px}
-    .page-sub{font-size:13px;color:var(--slate);margin-top:4px}
+/* ── APP SHELL ── */
+.app-shell{display:flex;margin-top:var(--topbar);min-height:calc(100vh - var(--topbar))}
 
-    /* PROFIL */
-    .profile{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;background:#fff;border:1px solid var(--line);padding:20px 22px;margin-bottom:28px}
-    .avatar{width:44px;height:44px;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;flex-shrink:0;letter-spacing:-.5px}
-    .profile-info h3{font-size:14px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-    .profile-info p{font-size:12px;color:var(--slate);margin-top:2px}
-    .cgu-ok{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;color:var(--green);background:#f0fdf4;border:1px solid #bbf7d0;padding:2px 8px;margin-top:6px}
-    .profile-stats{display:flex;gap:24px}
-    .pstat{text-align:right}
-    .pstat .n{font-size:24px;font-weight:900;color:var(--ink);letter-spacing:-.5px}
-    .pstat .l{font-size:10px;color:var(--slate-2);font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-top:1px}
+/* ── SIDEBAR ── */
+.sidebar{width:var(--sb-w);flex-shrink:0;background:var(--sb-bg);position:fixed;top:var(--topbar);bottom:0;left:0;display:flex;flex-direction:column;overflow:hidden;z-index:50;transition:width .2s}
+.sidebar.collapsed{width:var(--sb-w-col)}
+.sb-head{padding:16px 14px 8px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.07)}
+.sb-brand{font-size:11px;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.12em;white-space:nowrap;overflow:hidden;transition:opacity .15s}
+.sidebar.collapsed .sb-brand{opacity:0}
+.sb-toggle{background:none;border:none;color:rgba(255,255,255,.35);cursor:pointer;padding:4px;display:flex;flex-shrink:0}
+.sb-toggle:hover{color:#fff}
+.sb-toggle svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+.sb-nav{flex:1;overflow-y:auto;overflow-x:hidden;padding:8px 0;display:flex;flex-direction:column;gap:1px}
+.sb-item{display:flex;align-items:center;gap:12px;padding:9px 14px;color:rgba(255,255,255,.55);font-size:13px;font-weight:500;cursor:pointer;border-left:3px solid transparent;transition:all .15s;white-space:nowrap;user-select:none}
+.sb-item:hover{background:rgba(255,255,255,.06);color:#fff}
+.sb-item.active{background:rgba(37,99,235,.25);border-left-color:var(--blue);color:#fff}
+.sb-item svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.7;flex-shrink:0}
+.sb-label{transition:opacity .15s}
+.sidebar.collapsed .sb-label{opacity:0;pointer-events:none}
+.sb-badge{background:var(--red);color:#fff;font-size:10px;font-weight:700;min-width:18px;height:18px;border-radius:999px;display:flex;align-items:center;justify-content:center;padding:0 5px;margin-left:auto;flex-shrink:0;transition:opacity .15s}
+.sidebar.collapsed .sb-badge{opacity:0}
+.sb-sep{height:1px;background:rgba(255,255,255,.07);margin:6px 0}
+.sb-foot{padding:12px 14px;border-top:1px solid rgba(255,255,255,.07)}
+.sb-foot-user{display:flex;align-items:center;gap:10px;overflow:hidden}
+.sb-foot-av{width:30px;height:30px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0}
+.sb-foot-info{min-width:0;transition:opacity .15s}
+.sidebar.collapsed .sb-foot-info{opacity:0}
+.sb-foot-email{font-size:11.5px;font-weight:600;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sb-foot-since{font-size:10px;color:rgba(255,255,255,.35);margin-top:1px}
 
-    /* ACTIONS */
-    .actions-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px}
-    .section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--slate-2)}
-    .btn-buy{display:inline-flex;align-items:center;gap:7px;background:var(--blue);color:#fff;border:none;padding:9px 18px;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;transition:.15s;font-family:inherit}
-    .btn-buy:hover{background:var(--blue-dark)}
+/* ── CONTENT ── */
+.content{margin-left:var(--sb-w);flex:1;padding:24px;transition:margin-left .2s}
+.content.sb-collapsed{margin-left:var(--sb-w-col)}
+.panel{display:none}
+.panel.active{display:block}
+.panel-title{font-size:20px;font-weight:800;letter-spacing:-.5px;margin-bottom:4px}
+.panel-sub{font-size:13px;color:var(--slate);margin-bottom:24px}
 
-    /* EMPTY STATE */
-    .empty-state{background:#fff;border:1px solid var(--line);padding:40px 20px;text-align:center}
-    .empty-state svg{width:32px;height:32px;stroke:var(--slate-2);fill:none;stroke-width:1.5;margin-bottom:12px}
-    .empty-state p{font-size:13px;color:var(--slate);margin-bottom:18px}
+/* ── CARDS ── */
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:14px}
+.card-head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--line);gap:10px}
+.card-title{font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px}
+.card-title svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.7;flex-shrink:0}
+.card-body{padding:16px 18px}
 
-    /* LICENCE CARDS */
-    .licenses-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:32px}
-    .lic-card{background:#fff;padding:18px 20px}
-    .lic-top{display:flex;align-items:flex-start;flex-direction:column;gap:12px;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #f1f5f9}
-    .lic-product{font-size:14px;font-weight:800;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-    .lic-badge{font-size:10px;font-weight:700;padding:3px 8px;background:var(--blue-50);color:var(--blue);border:1px solid var(--blue-100)}
-    .lic-badge.expired{background:#f1f5f9;color:var(--slate);border-color:var(--line)}
-    .dl-btn{display:inline-flex;align-items:center;gap:7px;background:var(--blue);color:#fff;text-decoration:none;padding:9px 18px;font-size:13px;font-weight:700;transition:.15s}
-    .dl-btn:hover{background:var(--blue-dark)}
-    .lic-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--slate-2);margin-bottom:7px}
-    .lic-key-wrap{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-    .lic-key{font-family:'Courier New',monospace;font-size:11.5px;color:var(--ink);background:#f8fafc;border:1px solid var(--line);padding:7px 10px;letter-spacing:.03em;font-weight:600;word-break:break-all}
-    .lic-copy{background:#fff;border:1px solid var(--line);color:var(--slate);padding:6px 11px;font-size:11px;cursor:pointer;font-weight:600;transition:.15s;font-family:inherit;white-space:nowrap}
-    .lic-copy:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
-    .lic-date{font-size:11px;color:var(--slate-2);margin-top:10px}
+/* HOME ── stats row */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.stat-card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.stat-n{font-size:28px;font-weight:900;letter-spacing:-1px;color:var(--ink);line-height:1}
+.stat-l{font-size:11px;font-weight:600;color:var(--slate-2);text-transform:uppercase;letter-spacing:.08em;margin-top:5px}
+.stat-ic{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.stat-ic svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.7}
 
-    /* ORDERS TABLE */
-    .orders-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
-    .orders-table{width:100%;border-collapse:collapse;font-size:12px;background:#fff;border:1px solid var(--line);min-width:480px}
-    .orders-table th{padding:10px 14px;font-size:10px;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.07em;text-align:left;background:#f8fafc;border-bottom:1px solid var(--line);white-space:nowrap}
-    .orders-table td{padding:11px 14px;border-bottom:1px solid #f8fafc;vertical-align:middle}
-    .orders-table tr:last-child td{border-bottom:none}
-    .orders-table tr:hover td{background:#fafbfc}
-    .sts{padding:2px 8px;font-size:10px;font-weight:700;border:1px solid;white-space:nowrap}
-    .sts-pending{background:#fef9ec;color:#92400e;border-color:#fde68a}
-    .sts-paid{background:#f0fdf4;color:var(--green);border-color:#bbf7d0}
-    .sts-expired{background:#f8fafc;color:var(--slate);border-color:var(--line)}
+/* Downloads */
+.dl-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dl-btn2{display:flex;align-items:center;gap:12px;padding:13px 15px;border-radius:8px;border:1px solid;text-decoration:none;transition:border-color .15s}
+.dl-btn2:hover{opacity:.88}
+.dl-btn2 strong{display:block;font-size:13px;font-weight:700}
+.dl-btn2 span{font-size:10.5px;opacity:.6;margin-top:1px;display:block}
 
-    /* MISC */
-    .section-block{margin-bottom:36px}
-    .toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:11px 20px;font-size:13px;display:none;z-index:999;box-shadow:0 8px 24px rgba(0,0,0,.18);white-space:nowrap;border-radius:6px}
-    .loading{text-align:center;padding:40px;color:var(--slate-2);font-size:14px}
+/* Licence cards */
+.lic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.lic-card2{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.lic-prod{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:800}
+.lic-tag{font-size:10px;font-weight:700;background:var(--blue-50);color:var(--blue);border:1px solid var(--blue-100);padding:2px 8px;border-radius:20px}
+.lic-key2{font-family:'Courier New',monospace;font-size:11.5px;background:#f8fafc;border:1px solid var(--line);border-radius:6px;padding:8px 10px;letter-spacing:.03em;font-weight:600;word-break:break-all;flex:1}
+.lic-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.lic-date2{font-size:11px;color:var(--slate-2);margin-top:2px}
+.btn-sm{padding:6px 13px;font-size:12px;font-weight:600;border-radius:6px;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.btn-sm:hover{border-color:#93c5fd;color:var(--blue)}
+.btn-sm.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
+.btn-sm.primary:hover{background:var(--blue-d);border-color:var(--blue-d)}
+.btn-sm.danger{border-color:#fecaca;color:var(--red)}
+.btn-sm.danger:hover{background:#fef2f2}
+.btn-sm svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.2;flex-shrink:0}
 
-    /* CGU MODAL */
-    .overlay{position:fixed;inset:0;background:rgba(15,23,42,.5);z-index:200;display:none;align-items:center;justify-content:center;padding:12px}
-    .overlay.show{display:flex}
-    .cgu-box{background:#fff;max-width:600px;width:100%;max-height:92vh;display:flex;flex-direction:column;box-shadow:0 24px 64px rgba(0,0,0,.3)}
-    .cgu-head{padding:18px 20px;border-bottom:1px solid var(--line)}
-    .cgu-head h2{font-size:16px;font-weight:800}
-    .cgu-head p{font-size:12px;color:var(--slate);margin-top:3px}
-    .cgu-body{overflow-y:auto;padding:16px 20px;font-size:13px;line-height:1.65;color:#475569}
-    .cgu-body h4{font-size:13px;color:var(--ink);font-weight:700;margin:16px 0 5px;text-transform:uppercase;letter-spacing:.04em}
-    .cgu-body ul{margin:4px 0 0;padding-left:18px}
-    .cgu-foot{padding:16px 20px;border-top:1px solid var(--line)}
-    .cgu-check{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#475569;cursor:pointer;margin-bottom:14px}
-    .cgu-check input{margin-top:3px;width:15px;height:15px;flex-shrink:0}
-    .cgu-accept{width:100%;background:var(--blue);color:#fff;border:none;padding:13px;font-size:14px;font-weight:700;cursor:pointer;transition:.15s;font-family:inherit}
-    .cgu-accept:hover{background:var(--blue-dark)}
-    .cgu-accept:disabled{opacity:.4;cursor:not-allowed}
+/* Orders table */
+.tbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.tbl th{padding:9px 14px;font-size:10.5px;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.07em;text-align:left;background:#f8fafc;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl td{padding:10px 14px;border-bottom:1px solid #f8fafc;vertical-align:middle}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:#fafbfc}
+.sts{display:inline-block;padding:2px 9px;font-size:10px;font-weight:700;border-radius:20px;white-space:nowrap}
+.sts-pending{background:#fef9ec;color:#92400e}
+.sts-paid{background:#f0fdf4;color:var(--green)}
+.sts-expired{background:#f1f5f9;color:var(--slate)}
 
-    /* ── RESPONSIVE ─────────────────────────── */
-    @media(max-width:600px){
-      nav{padding:0 14px;height:52px}
-      .btn-logout .logout-label{display:none}
-      .btn-logout{padding:7px;border-radius:6px}
-      .main{padding:18px 12px 56px}
-      .page-title{font-size:18px}
-      .profile{grid-template-columns:auto 1fr;padding:16px}
-      .profile-stats{display:none}
-      .licenses-grid{grid-template-columns:1fr}
-      .lic-card{padding:16px}
-      .lic-key{font-size:10.5px}
-      .dl-downloads{flex-direction:column !important}
-      .dl-downloads a{flex:unset !important;width:100%}
-      .orders-table td:nth-child(3),.orders-table th:nth-child(3){display:none}
-    }
-    @media(max-width:400px){
-      .nav-email{display:none}
-      .lic-key{font-size:9.5px;padding:6px 8px}
-      .page-title{font-size:16px}
-    }
-  </style>
+/* SMTP / Proxy compact rows */
+.svc-row{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-bottom:10px;display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.svc-info{flex:1;min-width:0}
+.svc-name{font-size:14px;font-weight:700;margin-bottom:3px}
+.svc-meta{font-size:12px;color:var(--slate);display:flex;gap:12px;flex-wrap:wrap;margin-top:4px}
+.svc-status{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px}
+.svc-actions{display:flex;gap:7px;flex-wrap:wrap;align-items:center;flex-shrink:0}
+.svc-exp{font-size:11.5px;font-weight:600;margin-top:5px}
+
+/* Empty state */
+.empty{text-align:center;padding:40px 20px;background:#fff;border:1px solid var(--line);border-radius:10px}
+.empty svg{width:32px;height:32px;stroke:var(--slate-2);fill:none;stroke-width:1.5;margin-bottom:12px}
+.empty p{font-size:13px;color:var(--slate);margin-bottom:16px}
+
+/* Section label */
+.sec-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--slate-2);margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+
+/* ── MODALS ── */
+.overlay{position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:200;display:none;align-items:flex-start;justify-content:center;padding:48px 16px 16px;overflow-y:auto}
+.overlay.show{display:flex}
+.modal{background:#fff;border-radius:12px;width:100%;box-shadow:0 24px 64px rgba(0,0,0,.28);position:relative}
+.modal-sm{max-width:440px}
+.modal-md{max-width:620px}
+.modal-lg{max-width:780px}
+.modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:18px 20px;border-bottom:1px solid var(--line)}
+.modal-head h3{font-size:16px;font-weight:800}
+.modal-head p{font-size:12.5px;color:var(--slate);margin-top:3px}
+.modal-close{background:none;border:none;color:var(--slate);cursor:pointer;font-size:22px;line-height:1;padding:2px 6px;flex-shrink:0;border-radius:4px;transition:.15s}
+.modal-close:hover{background:#f1f5f9;color:var(--ink)}
+.modal-body{padding:20px}
+.modal-foot{padding:14px 20px;border-top:1px solid var(--line);display:flex;gap:8px;justify-content:flex-end}
+
+/* Creds grid */
+.creds-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.cred-item{}
+.cred-lbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--slate-2);margin-bottom:4px}
+.cred-val{font-family:'Courier New',monospace;font-size:13px;font-weight:700;color:var(--ink);background:#f8fafc;border:1px solid var(--line);border-radius:6px;padding:7px 10px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.cred-val span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;color:var(--blue)}
+.pass-tog{background:none;border:none;font-size:11px;color:var(--slate);cursor:pointer;white-space:nowrap;padding:2px 6px;border-radius:4px}
+.pass-tog:hover{background:#f1f5f9}
+
+/* Proxy generator */
+.gen-label{font-size:11px;font-weight:600;color:var(--slate);display:block;margin-bottom:4px}
+.gen-select,.gen-input{width:100%;border:1.5px solid var(--line);border-radius:8px;padding:8px 10px;font-size:12.5px;background:#fff;color:var(--ink);outline:none;transition:border-color .15s}
+.gen-select:focus,.gen-input:focus{border-color:var(--blue)}
+.gen-result{background:#0f172a;color:#7dd3fc;font-family:'Courier New',monospace;font-size:11.5px;border-radius:8px;padding:12px 14px;resize:vertical;width:100%;border:none;outline:none;line-height:1.8}
+
+/* Account */
+.account-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line);gap:12px;flex-wrap:wrap}
+.account-row:last-child{border-bottom:none}
+.account-row-info h4{font-size:13.5px;font-weight:700}
+.account-row-info p{font-size:12px;color:var(--slate);margin-top:2px}
+
+/* Support chat */
+#sup-window{display:none;position:fixed;right:20px;bottom:90px;z-index:300;width:360px;max-width:calc(100vw - 32px);height:520px;max-height:calc(100vh - 130px);background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 18px 50px rgba(15,23,42,.28);flex-direction:column;overflow:hidden}
+#sup-fab{position:fixed;right:20px;bottom:20px;z-index:300;width:52px;height:52px;border-radius:50%;background:var(--blue);color:#fff;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 24px rgba(37,99,235,.45);font-size:22px;transition:transform .15s}
+#sup-fab:hover{transform:scale(1.06)}
+
+/* Toast */
+.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:11px 20px;font-size:13px;display:none;z-index:999;box-shadow:0 8px 24px rgba(0,0,0,.18);white-space:nowrap;border-radius:8px}
+
+/* Loading */
+.loading-screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:var(--bg);z-index:500;font-size:14px;color:var(--slate-2)}
+
+/* 2FA */
+.tfa-qr-wrap{text-align:center;margin:12px 0}
+
+/* RESPONSIVE */
+@media(max-width:760px){
+  .sidebar{width:var(--sb-w-col)}
+  .sidebar .sb-label,.sidebar .sb-brand,.sidebar .sb-foot-info,.sidebar .sb-badge{opacity:0;pointer-events:none}
+  .content{margin-left:var(--sb-w-col)}
+  .stats-row{grid-template-columns:1fr 1fr}
+  .dl-row{grid-template-columns:1fr}
+  .creds-grid{grid-template-columns:1fr}
+  .lic-grid{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .stats-row{grid-template-columns:1fr 1fr}
+  .topbar-logo img{max-width:100px}
+  .user-chip .user-email{display:none}
+  .content{padding:16px 12px}
+}
+</style>
 </head>
 <body>
-<nav>
-  <div style="width:160px;flex-shrink:0"></div>
-  <a href="/" class="logo" style="position:absolute;left:50%;transform:translateX(-50%)"><img src="/logoevostudio2.png" alt="EvoStudio" height="30" style="display:block;max-width:140px;object-fit:contain" /></a>
-  <div class="nav-right">
-    <div class="nav-icon-user" id="nav-avatar">?</div>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <a href="/" class="topbar-logo"><img src="/logoevostudio2.png" alt="EvoStudio"/></a>
+  <div class="topbar-right">
+    <div class="user-chip">
+      <div class="user-av" id="nav-av">?</div>
+      <span class="user-email" id="nav-email" style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
+    </div>
     <button class="btn-logout" onclick="logout()" title="Déconnexion">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-      <span class="logout-label">Déconnexion</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      <span style="display:none" class="logout-txt">Déconnexion</span>
     </button>
   </div>
-</nav>
+</header>
 
-<div class="main" id="main" style="display:none">
+<div class="app-shell">
 
-  <div class="page-header">
-    <div class="page-title">Espace client</div>
-    <p class="page-sub">Licences, commandes et accès à vos outils.</p>
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sb-head">
+    <span class="sb-brand">Mon espace</span>
+    <button class="sb-toggle" id="sb-toggle" onclick="toggleSidebar()" title="Réduire">
+      <svg viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+  <nav class="sb-nav">
+    <div class="sb-item active" data-panel="home" onclick="showPanel('home')">
+      <svg viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span class="sb-label">Accueil</span>
+    </div>
+    <div class="sb-item" data-panel="licences" onclick="showPanel('licences')">
+      <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <span class="sb-label">Licences</span>
+    </div>
+    <div class="sb-item" data-panel="orders" onclick="showPanel('orders')">
+      <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span class="sb-label">Commandes</span>
+    </div>
+    <div class="sb-sep"></div>
+    <div class="sb-item" id="sb-smtp" data-panel="smtp" onclick="showPanel('smtp')" style="display:none">
+      <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+      <span class="sb-label">Serveurs SMTP</span>
+    </div>
+    <div class="sb-item" id="sb-proxy" data-panel="proxy" onclick="showPanel('proxy')" style="display:none">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 0 20"/></svg>
+      <span class="sb-label">Proxy résidentiel</span>
+    </div>
+    <div class="sb-sep"></div>
+    <div class="sb-item" data-panel="account" onclick="showPanel('account')">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span class="sb-label">Mon compte</span>
+    </div>
+  </nav>
+  <div class="sb-foot">
+    <div class="sb-foot-user">
+      <div class="sb-foot-av" id="sb-av">?</div>
+      <div class="sb-foot-info">
+        <div class="sb-foot-email" id="sb-email">—</div>
+        <div class="sb-foot-since" id="sb-since">—</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- CONTENT -->
+<main class="content" id="content">
+
+  <!-- ── ACCUEIL ── -->
+  <div class="panel active" id="panel-home">
+    <div class="panel-title">Bonjour 👋</div>
+    <p class="panel-sub">Bienvenue dans votre espace EvoStudio.</p>
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-ic" style="background:#eff6ff;color:var(--blue)"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div class="stat-n" id="st-lic">—</div>
+        <div class="stat-l">Licences</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-ic" style="background:#f0fdf4;color:var(--green)"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
+        <div class="stat-n" id="st-ord">—</div>
+        <div class="stat-l">Commandes</div>
+      </div>
+      <div class="stat-card" id="st-smtp-card" style="display:none">
+        <div class="stat-ic" style="background:#eff6ff;color:var(--blue)"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg></div>
+        <div class="stat-n" id="st-smtp">—</div>
+        <div class="stat-l">Serveurs SMTP</div>
+      </div>
+      <div class="stat-card" id="st-proxy-card" style="display:none">
+        <div class="stat-ic" style="background:#f0fdfa;color:var(--teal)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 0 20"/></svg></div>
+        <div class="stat-n" id="st-proxy">—</div>
+        <div class="stat-l">Comptes Proxy</div>
+      </div>
+    </div>
+    <!-- Downloads -->
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Télécharger EvoStudio</div>
+      </div>
+      <div class="card-body">
+        <div class="dl-row">
+          <a class="dl-btn2" id="dl-win" href="#" style="background:#eff6ff;border-color:#bfdbfe;color:#1e40af" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="#2563eb" style="flex-shrink:0"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+            <div><strong>Windows 10 / 11</strong><span>x64 · .exe · ~95 MB</span></div>
+          </a>
+          <a class="dl-btn2" id="dl-mac" href="#" style="background:#faf5ff;border-color:#ddd6fe;color:#5b21b6" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="#7c3aed" style="flex-shrink:0"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
+            <div><strong>Mac Silicon M1/M2/M3</strong><span>arm64 · .dmg · ~125 MB</span></div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- Quick actions -->
+    <div class="card">
+      <div class="card-head"><div class="card-title"><svg viewBox="0 0 24 24"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Accès rapide</div></div>
+      <div class="card-body" style="display:flex;flex-wrap:wrap;gap:8px">
+        <a href="/pay.html" class="btn-sm primary"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Nouvelle licence</a>
+        <button class="btn-sm" onclick="showPanel('licences')"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Mes licences</button>
+        <button class="btn-sm" onclick="showPanel('orders')"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> Historique</button>
+        <button class="btn-sm" onclick="toggleSupport()"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Support</button>
+      </div>
+    </div>
   </div>
 
-  <!-- Profil -->
-  <div class="profile">
-    <div class="avatar" id="avatar">—</div>
-    <div class="profile-info">
-      <h3 id="p-email">—</h3>
-      <p id="p-since">Membre depuis —</p>
-      <span class="cgu-ok" id="p-cgu" style="display:none">
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-        CGU acceptées
-      </span>
-      <button id="p-2fa-btn" onclick="open2faModal()" style="display:none;margin-top:8px;background:none;border:1px solid var(--line);color:var(--slate);padding:4px 10px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;transition:.15s" onmouseover="this.style.borderColor='#7c3aed';this.style.color='#7c3aed'" onmouseout="this.style.borderColor='var(--line)';this.style.color='var(--slate)'"></button>
+  <!-- ── LICENCES ── -->
+  <div class="panel" id="panel-licences">
+    <div class="panel-title">Licences</div>
+    <p class="panel-sub">Vos clés de licence EvoStudio actives.</p>
+    <div class="sec-lbl">
+      Licences actives
+      <a href="/pay.html" class="btn-sm primary"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Acheter</a>
     </div>
-    <div class="profile-stats">
-      <div class="pstat"><div class="n" id="st-lic">0</div><div class="l">Licences</div></div>
-      <div class="pstat"><div class="n" id="st-ord">0</div><div class="l">Commandes</div></div>
+    <div id="lic-wrap"><div style="color:var(--slate-2);font-size:13px;padding:20px 0">Chargement…</div></div>
+  </div>
+
+  <!-- ── COMMANDES ── -->
+  <div class="panel" id="panel-orders">
+    <div class="panel-title">Commandes</div>
+    <p class="panel-sub">Historique de tous vos achats.</p>
+    <div class="card">
+      <div id="ord-wrap"><div style="color:var(--slate-2);font-size:13px;padding:20px">Chargement…</div></div>
     </div>
   </div>
 
-  <!-- Licences -->
-  <div class="section-block">
-    <div class="actions-bar">
-      <span class="section-label">Mes licences</span>
-      <a href="/pay.html" class="btn-buy">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        Nouvelle licence
-      </a>
-    </div>
-    <div id="licenses-wrap"><div class="loading">Chargement…</div></div>
-  </div>
-
-  <!-- Commandes -->
-  <div class="section-block">
-    <div class="actions-bar" style="margin-bottom:16px">
-      <span class="section-label">Historique des commandes</span>
-    </div>
-    <div id="orders-wrap"><div class="loading">Chargement…</div></div>
-  </div>
-
-  <!-- Serveurs SMTP -->
-  <div id="smtp-section" style="display:none" class="section-block">
-    <div class="actions-bar" style="margin-bottom:16px">
-      <span class="section-label">Mes serveurs SMTP</span>
+  <!-- ── SMTP ── -->
+  <div class="panel" id="panel-smtp">
+    <div class="panel-title">Serveurs SMTP</div>
+    <p class="panel-sub">Vos relais d'envoi email à haute délivrabilité.</p>
+    <div class="sec-lbl">
+      Serveurs actifs
+      <a href="/pay.html?product=smtp_50k" class="btn-sm primary"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Nouveau SMTP</a>
     </div>
     <div id="smtp-wrap"></div>
   </div>
 
-  <!-- Proxy résidentiel -->
-  <div id="proxy-section" style="display:none" class="section-block">
-    <div class="actions-bar" style="margin-bottom:16px">
-      <span class="section-label">🌐 Mes proxies résidentiels</span>
+  <!-- ── PROXY ── -->
+  <div class="panel" id="panel-proxy">
+    <div class="panel-title">Proxy résidentiel</div>
+    <p class="panel-sub">Vos forfaits proxy — IPs résidentielles 30+ pays.</p>
+    <div class="sec-lbl">
+      Comptes proxy actifs
+      <a href="/pay.html?product=proxy_55gb" class="btn-sm primary" style="background:var(--teal);border-color:var(--teal)"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Acheter du proxy</a>
     </div>
     <div id="proxy-wrap"></div>
   </div>
 
-
-  <div style="text-align:center;margin-top:16px;padding-top:24px;border-top:1px solid var(--line)">
-    <a href="#" onclick="openCgu(true);return false" style="font-size:12px;color:var(--slate-2);text-decoration:none;border-bottom:1px solid var(--line)">Conditions générales d'utilisation</a>
-  </div>
-</div>
-
-<!-- Widget assistance flottant (style Messenger) -->
-<div id="sup-window" style="display:none;position:fixed;right:20px;bottom:90px;z-index:300;width:360px;max-width:calc(100vw - 32px);height:520px;max-height:calc(100vh - 130px);background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 18px 50px rgba(15,23,42,.28);flex-direction:column;overflow:hidden">
-  <div style="background:var(--blue);color:#fff;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
-    <div style="display:flex;align-items:center;gap:10px">
-      <div style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:16px">💬</div>
-      <div><div style="font-weight:700;font-size:14px">Assistance EvoStudio</div><div style="font-size:11px;opacity:.85">Nous répondons sous 24h</div></div>
-    </div>
-    <button onclick="toggleSupport()" aria-label="Fermer" style="background:none;border:none;color:#fff;font-size:24px;cursor:pointer;line-height:1;padding:0 4px">×</button>
-  </div>
-  <div id="support-thread" style="flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:#f8fafc"></div>
-  <div style="border-top:1px solid var(--line);padding:10px;display:flex;gap:8px;align-items:flex-end;flex-shrink:0">
-    <textarea id="support-input" rows="1" placeholder="Écrivez votre message…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendSupport();}" style="flex:1;resize:none;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:13.5px;font-family:inherit;outline:none;max-height:120px"></textarea>
-    <button id="support-send" onclick="sendSupport()" aria-label="Envoyer" style="background:var(--blue);color:#fff;border:none;border-radius:10px;width:42px;height:42px;font-size:16px;cursor:pointer;font-family:inherit;flex-shrink:0">➤</button>
-  </div>
-</div>
-<button id="sup-fab" onclick="toggleSupport()" aria-label="Assistance" style="position:fixed;right:20px;bottom:20px;z-index:300;width:58px;height:58px;border-radius:50%;background:var(--blue);color:#fff;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 24px rgba(37,99,235,.45);font-size:26px;transition:transform .15s" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
-  💬
-  <span id="support-unread" style="display:none;position:absolute;top:-3px;right:-3px;background:#dc2626;color:#fff;font-size:11px;font-weight:700;border-radius:999px;min-width:20px;height:20px;align-items:center;justify-content:center;padding:0 5px;border:2px solid #fff"></span>
-</button>
-
-<div class="loading" id="loading-screen">Chargement de votre espace client…</div>
-
-<!-- Modal CGU -->
-<div class="overlay" id="cgu-overlay">
-  <div class="cgu-box">
-    <div class="cgu-head" style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
-      <div>
-        <h2>⚖️ Conditions générales d'utilisation</h2>
-        <p>Veuillez lire et accepter pour utiliser EvoStudio.</p>
+  <!-- ── COMPTE ── -->
+  <div class="panel" id="panel-account">
+    <div class="panel-title">Mon compte</div>
+    <p class="panel-sub">Paramètres et sécurité de votre compte.</p>
+    <div class="card">
+      <div class="card-head"><div class="card-title"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Profil</div></div>
+      <div class="card-body">
+        <div class="account-row">
+          <div class="account-row-info"><h4>Adresse email</h4><p id="acc-email">—</p></div>
+        </div>
+        <div class="account-row">
+          <div class="account-row-info"><h4>Membre depuis</h4><p id="acc-since">—</p></div>
+        </div>
+        <div class="account-row">
+          <div class="account-row-info"><h4>CGU</h4><p id="acc-cgu" style="color:var(--green)">—</p></div>
+          <a href="#" onclick="openCgu(true);return false" class="btn-sm">Consulter</a>
+        </div>
       </div>
-      <button id="cgu-close" onclick="closeCgu()" style="display:none;background:none;border:none;font-size:24px;line-height:1;color:var(--slate);cursor:pointer;flex-shrink:0">×</button>
     </div>
-    <div class="cgu-body">
-      <p>Les présentes Conditions Générales d'Utilisation (« CGU ») régissent l'utilisation du logiciel <b>EvoStudio</b> (comprenant EvoExtractor, EvoSender et EvoVérificateur), édité par <b>EGSCI SARL</b>, société de droit ivoirien (Côte d'Ivoire). En créant un compte, en achetant ou en utilisant le logiciel, l'utilisateur reconnaît avoir lu, compris et accepté l'intégralité des présentes CGU.</p>
-
-      <h4>Article 1 — Objet</h4>
-      <p>Les présentes CGU ont pour objet de définir les modalités et conditions d'utilisation du logiciel EvoStudio, ainsi que les droits et obligations des parties. EvoStudio est une suite logicielle d'emailing permettant l'extraction, la vérification et l'envoi d'e-mails.</p>
-
-      <h4>Article 2 — Licence d'utilisation</h4>
-      <p>EvoStudio est un logiciel commercial concédé sous licence d'utilisation <b>individuelle, personnelle, non-exclusive et non-transférable</b>. La licence est valable pour le nombre de postes (PC) effectivement acheté. Sont strictement interdits :</p>
-      <ul>
-        <li>La revente, la location, le prêt, la sous-licence ou la redistribution du logiciel ou de la clé de licence ;</li>
-        <li>Le partage de la clé de licence avec des tiers ;</li>
-        <li>La décompilation, le désassemblage, l'ingénierie inverse ou toute tentative d'accès au code source ;</li>
-        <li>La modification, l'altération ou la création d'œuvres dérivées du logiciel.</li>
-      </ul>
-
-      <h4>Article 3 — Compte client</h4>
-      <p>L'utilisateur est responsable de la confidentialité de ses identifiants de connexion et de toutes les activités effectuées depuis son compte. Il s'engage à fournir des informations exactes lors de la création de son compte. EGSCI SARL ne pourra être tenue responsable en cas d'utilisation frauduleuse du compte résultant d'une négligence de l'utilisateur.</p>
-
-      <h4>Article 4 — Prix, paiement et remboursement</h4>
-      <p>Les prix sont indiqués sur le site au moment de la commande. Le paiement s'effectue par crypto-monnaie (USDT TRC20, Bitcoin) ou mobile money (Wave, Orange Money). La licence est générée après confirmation du paiement. <b>S'agissant d'un produit numérique délivré immédiatement, aucun remboursement n'est dû après génération de la licence</b>, sauf disposition légale impérative contraire.</p>
-
-      <h4>Article 5 — Décharge de responsabilité</h4>
-      <p>Le logiciel est fourni <b>« EN L'ÉTAT » (« as is »), sans garantie d'aucune sorte</b>, expresse ou implicite, notamment quant à son adéquation à un usage particulier, sa disponibilité, sa délivrabilité ou son absence d'erreurs.</p>
-      <p><b>EGSCI SARL décline expressément toute responsabilité</b> quant à l'utilisation faite du logiciel par l'utilisateur. L'utilisateur est <b>seul et entièrement responsable</b> de :</p>
-      <ul>
-        <li>La conformité de ses envois avec l'ensemble des lois et réglementations applicables (RGPD, CAN-SPAM, CASL, LCEN, et toute loi anti-spam ou de protection des données en vigueur dans sa juridiction et celle des destinataires) ;</li>
-        <li>L'obtention préalable du consentement des destinataires lorsque la loi l'exige ;</li>
-        <li>Le contenu, la nature et la finalité des e-mails envoyés ;</li>
-        <li>La provenance, la qualité, l'exactitude et la légitimité des listes de contacts utilisées ;</li>
-        <li>La configuration de ses serveurs SMTP, proxies et de ses propres outils ;</li>
-        <li>Toute conséquence légale, judiciaire, commerciale, financière, fiscale ou technique résultant de l'utilisation du logiciel ;</li>
-        <li>Tout blocage, blacklistage, suspension de compte, pénalité, amende, sanction, plainte ou poursuite découlant de son usage.</li>
-      </ul>
-      <p>En aucun cas EGSCI SARL ne pourra être tenue responsable de dommages directs ou indirects, accessoires, spéciaux ou consécutifs (perte de données, perte de revenus, perte d'exploitation, atteinte à la réputation, etc.) liés à l'utilisation ou à l'impossibilité d'utiliser le logiciel. La responsabilité éventuelle de l'éditeur, si elle était retenue, serait en tout état de cause limitée au montant effectivement payé par l'utilisateur pour sa licence.</p>
-
-      <h4>Article 6 — Usages autorisés et interdits</h4>
-      <p>L'utilisateur s'engage à n'utiliser EvoStudio que pour des finalités licites et conformes aux lois applicables (newsletters opt-in, communications consenties, prospection conforme, tests internes). Sont <b>strictement interdits</b> : l'envoi de spam ou de courriers non sollicités, le phishing, l'escroquerie, l'usurpation d'identité, le harcèlement, la diffusion de contenus illicites, la violation du RGPD ou de toute loi applicable, et le contournement de systèmes anti-spam. <b>Tout usage illicite entraîne la révocation immédiate de la licence, sans remboursement, et sans préjudice de poursuites.</b></p>
-
-      <h4>Article 7 — Propriété intellectuelle</h4>
-      <p>Le logiciel, sa marque, ses logos, son code et tous les éléments le composant demeurent la propriété exclusive d'EGSCI SARL. La licence confère un simple droit d'usage et n'emporte aucun transfert de propriété intellectuelle.</p>
-
-      <h4>Article 8 — Confidentialité et données</h4>
-      <p>EvoStudio est un logiciel <b>100% local</b> : aucune donnée personnelle, liste de contacts ou contenu d'e-mail n'est transmis à EGSCI SARL ou à des tiers. Seule la vérification de la validité de la licence contacte les serveurs de l'éditeur. Aucune télémétrie ni suivi d'utilisation n'est effectué.</p>
-
-      <h4>Article 9 — Mises à jour et disponibilité</h4>
-      <p>EGSCI SARL peut proposer des mises à jour du logiciel, incluses selon la durée de la licence. L'éditeur ne garantit pas une disponibilité ininterrompue des services en ligne (vérification de licence, boutique) et peut les suspendre pour maintenance sans préavis.</p>
-
-      <h4>Article 10 — Force majeure</h4>
-      <p>EGSCI SARL ne saurait être tenue responsable d'un manquement à ses obligations résultant d'un cas de force majeure ou d'événements indépendants de sa volonté (panne réseau, défaillance d'un prestataire tiers, etc.).</p>
-
-      <h4>Article 11 — Modification des CGU</h4>
-      <p>EGSCI SARL se réserve le droit de modifier les présentes CGU à tout moment. Les CGU applicables sont celles en vigueur au moment de l'utilisation. La poursuite de l'utilisation du logiciel vaut acceptation des CGU modifiées.</p>
-
-      <h4>Article 12 — Droit applicable et juridiction</h4>
-      <p>Les présentes CGU sont régies par le droit ivoirien. Tout litige relatif à leur interprétation ou à leur exécution sera soumis aux tribunaux compétents de Côte d'Ivoire, à défaut de résolution amiable.</p>
-
-      <h4>Article 13 — Contact</h4>
-      <p>Pour toute question relative aux présentes CGU : <a href="mailto:support@evostudio.fr" style="color:var(--blue)">support@evostudio.fr</a>.</p>
-
-      <p style="margin-top:14px;font-size:12px;color:var(--slate-2)">© 2025–2026 EGSCI SARL — Côte d'Ivoire · support@evostudio.fr</p>
+    <div class="card">
+      <div class="card-head"><div class="card-title"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Sécurité</div></div>
+      <div class="card-body">
+        <div class="account-row">
+          <div class="account-row-info">
+            <h4>Double authentification (2FA)</h4>
+            <p id="acc-2fa-status">—</p>
+          </div>
+          <button id="acc-2fa-btn" class="btn-sm" onclick="open2faModal()">Configurer</button>
+        </div>
+      </div>
     </div>
-    <div class="cgu-foot">
-      <label class="cgu-check" id="cgu-check-wrap">
-        <input type="checkbox" id="cgu-check" />
+  </div>
+
+</main>
+</div>
+
+<!-- ═══ MODAL — Identifiants SMTP ═══ -->
+<div class="overlay" id="smtp-creds-modal" onclick="if(event.target===this)closeModal('smtp-creds-modal')">
+  <div class="modal modal-md">
+    <div class="modal-head">
+      <div><h3>📧 Identifiants SMTP</h3><p id="smtp-modal-sub">Relay email</p></div>
+      <button class="modal-close" onclick="closeModal('smtp-creds-modal')">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="creds-grid">
+        <div class="cred-item"><div class="cred-lbl">Serveur (Host)</div><div class="cred-val"><span id="smtp-m-host">—</span><button class="btn-sm" onclick="copyText(document.getElementById('smtp-m-host').textContent)">Copier</button></div></div>
+        <div class="cred-item"><div class="cred-lbl">Port</div><div class="cred-val"><span id="smtp-m-port">587</span><span style="font-size:10px;color:var(--slate);margin-left:6px">TLS</span></div></div>
+        <div class="cred-item"><div class="cred-lbl">Utilisateur</div><div class="cred-val"><span id="smtp-m-user">—</span><button class="btn-sm" onclick="copyText(document.getElementById('smtp-m-user').textContent)">Copier</button></div></div>
+        <div class="cred-item"><div class="cred-lbl">Mot de passe</div><div class="cred-val"><span id="smtp-m-pass-disp">••••••••</span><button class="pass-tog" onclick="toggleModalPass('smtp-m-pass-disp','smtp-m-pass-real')">Voir</button></div></div>
+      </div>
+      <input type="hidden" id="smtp-m-pass-real"/>
+      <div id="smtp-m-sender" style="display:none;background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 13px;font-size:12.5px;color:#1e40af;margin-bottom:12px"></div>
+      <div id="smtp-m-notice" style="display:none;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:10px 13px;font-size:12.5px;color:#92400e;margin-bottom:12px"></div>
+      <button onclick="copySmtpModal()" class="btn-sm primary" style="width:100%;justify-content:center">📋 Copier tous les identifiants</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODAL — Générateur Proxy ═══ -->
+<div class="overlay" id="proxy-gen-modal" onclick="if(event.target===this)closeModal('proxy-gen-modal')">
+  <div class="modal modal-lg">
+    <div class="modal-head">
+      <div><h3>🌐 Identifiants & Générateur proxy</h3><p id="proxy-modal-sub">Proxy résidentiel</p></div>
+      <button class="modal-close" onclick="closeModal('proxy-gen-modal')">×</button>
+    </div>
+    <div class="modal-body">
+      <!-- Creds -->
+      <div class="creds-grid" style="margin-bottom:16px">
+        <div class="cred-item"><div class="cred-lbl">Hôte</div><div class="cred-val"><span id="prx-m-host">—</span></div></div>
+        <div class="cred-item"><div class="cred-lbl">Port</div><div class="cred-val"><span id="prx-m-port">—</span></div></div>
+        <div class="cred-item"><div class="cred-lbl">Utilisateur</div><div class="cred-val"><span id="prx-m-user" style="color:var(--blue)">—</span><button class="btn-sm" onclick="copyText(document.getElementById('prx-m-user').textContent)">Copier</button></div></div>
+        <div class="cred-item"><div class="cred-lbl">Mot de passe</div><div class="cred-val"><span id="prx-m-pass-disp">••••••••</span><button class="pass-tog" onclick="toggleModalPass('prx-m-pass-disp','prx-m-pass-real')">Voir</button></div></div>
+      </div>
+      <input type="hidden" id="prx-m-pass-real"/>
+      <div style="border-top:1px solid var(--line);padding-top:16px;margin-top:4px">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--slate-2);margin-bottom:12px">🔧 Générateur de connexion</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+          <div>
+            <label class="gen-label">Pays</label>
+            <select class="gen-select" id="prx-m-country" onchange="proxyModalIspChange()">
+              <option value="">Aléatoire (mondial)</option>
+              <optgroup label="Amérique"><option value="us">USA</option><option value="ca">Canada</option><option value="br">Brésil</option><option value="mx">Mexique</option><option value="ar">Argentine</option><option value="co">Colombie</option></optgroup>
+              <optgroup label="Europe"><option value="gb">Royaume-Uni</option><option value="fr">France</option><option value="de">Allemagne</option><option value="be">Belgique</option><option value="nl">Pays-Bas</option><option value="ch">Suisse</option><option value="es">Espagne</option><option value="it">Italie</option><option value="pt">Portugal</option><option value="se">Suède</option><option value="no">Norvège</option><option value="pl">Pologne</option><option value="ro">Roumanie</option><option value="ru">Russie</option><option value="ua">Ukraine</option></optgroup>
+              <optgroup label="Asie / Pacifique"><option value="jp">Japon</option><option value="kr">Corée du Sud</option><option value="cn">Chine</option><option value="hk">Hong Kong</option><option value="sg">Singapour</option><option value="au">Australie</option><option value="in">Inde</option><option value="id">Indonésie</option><option value="vn">Vietnam</option><option value="th">Thaïlande</option><option value="ph">Philippines</option></optgroup>
+              <optgroup label="Moyen-Orient"><option value="ae">Émirats arabes</option><option value="sa">Arabie Saoudite</option><option value="tr">Turquie</option><option value="il">Israël</option></optgroup>
+              <optgroup label="Afrique"><option value="za">Afrique du Sud</option><option value="ng">Nigeria</option><option value="ci">Côte d'Ivoire</option><option value="gh">Ghana</option><option value="sn">Sénégal</option><option value="ma">Maroc</option><option value="eg">Égypte</option></optgroup>
+            </select>
+          </div>
+          <div>
+            <label class="gen-label">ISP <span style="font-weight:400;color:var(--slate-2)">(optionnel)</span></label>
+            <select class="gen-select" id="prx-m-isp" onchange="proxyModalGen()"><option value="">🌐 Aléatoire</option></select>
+            <input class="gen-input" id="prx-m-isp-manual" type="text" placeholder="Code manuel: as7922_Comcast" oninput="proxyModalGen()" style="display:none;margin-top:6px"/>
+          </div>
+          <div>
+            <label class="gen-label">Session ID (ssid) — <span style="font-weight:400;color:var(--slate-2)">vide=Rotating · rempli=Sticky</span></label>
+            <div style="display:flex;gap:6px">
+              <input class="gen-input" id="prx-m-ssid" type="text" placeholder="Vide = IP tournante" oninput="proxyModalGen()"/>
+              <button class="btn-sm" onclick="genSsidModal()" title="Aléatoire">🎲</button>
+            </div>
+          </div>
+          <div>
+            <label class="gen-label">Quantité</label>
+            <input class="gen-input" id="prx-m-qty" type="number" min="1" max="999" value="1" oninput="proxyModalGen()" style="text-align:center;font-weight:700"/>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+          <div style="font-size:11px;font-weight:700;color:var(--slate-2);text-transform:uppercase;letter-spacing:.06em">Chaînes générées <span id="prx-m-count" style="color:var(--blue)">× 1</span></div>
+          <div style="display:flex;gap:6px">
+            <button class="btn-sm" onclick="resetProxyModal()">↺ Reset</button>
+            <button class="btn-sm primary" onclick="copyProxyModal()">📋 Copier</button>
+          </div>
+        </div>
+        <textarea class="gen-result" id="prx-m-result" readonly rows="3"></textarea>
+        <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+          <button class="btn-sm" onclick="testProxyModal()" style="background:#0f172a;color:#7dd3fc;border-color:#0f172a">⚡ Tester</button>
+          <div style="flex:1;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:8px 12px;font-size:11px;color:#166534;line-height:1.5;min-width:160px">🔄 <b>Rotation</b> : ssid vide · 🔒 <b>Sticky</b> : ssid rempli</div>
+        </div>
+        <div id="prx-m-test-result" style="display:none;margin-top:10px"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODAL — CGU ═══ -->
+<div class="overlay" id="cgu-overlay">
+  <div class="modal modal-md">
+    <div class="modal-head" style="display:flex;align-items:flex-start;justify-content:space-between">
+      <div><h3>⚖️ Conditions générales d'utilisation</h3><p>Veuillez lire et accepter pour utiliser EvoStudio.</p></div>
+      <button id="cgu-close" onclick="closeCgu()" style="display:none" class="modal-close">×</button>
+    </div>
+    <div class="modal-body" id="cgu-body" style="max-height:55vh;overflow-y:auto;font-size:13px;line-height:1.65;color:#475569">
+      <p>Les présentes Conditions Générales d'Utilisation (« CGU ») régissent l'utilisation du logiciel <b>EvoStudio</b> (comprenant EvoExtractor, EvoSender et EvoVérificateur), édité par <b>EGSCI SARL</b>, société de droit ivoirien. En créant un compte, en achetant ou en utilisant le logiciel, l'utilisateur reconnaît avoir lu, compris et accepté l'intégralité des présentes CGU.</p>
+      <h4 style="font-size:12px;color:var(--ink);font-weight:700;margin:14px 0 4px;text-transform:uppercase;letter-spacing:.04em">Article 1 — Objet</h4>
+      <p>Les présentes CGU ont pour objet de définir les modalités et conditions d'utilisation du logiciel EvoStudio.</p>
+      <h4 style="font-size:12px;color:var(--ink);font-weight:700;margin:14px 0 4px;text-transform:uppercase;letter-spacing:.04em">Article 2 — Licence</h4>
+      <p>EvoStudio est concédé sous licence <b>individuelle, personnelle, non-exclusive et non-transférable</b>. Strictement interdits : revente, partage, décompilation, modification.</p>
+      <h4 style="font-size:12px;color:var(--ink);font-weight:700;margin:14px 0 4px;text-transform:uppercase;letter-spacing:.04em">Article 4 — Paiement</h4>
+      <p>Paiement par crypto ou mobile money. <b>Aucun remboursement après génération de la licence</b> (produit numérique délivré immédiatement).</p>
+      <h4 style="font-size:12px;color:var(--ink);font-weight:700;margin:14px 0 4px;text-transform:uppercase;letter-spacing:.04em">Article 5 — Décharge de responsabilité</h4>
+      <p>EGSCI SARL décline toute responsabilité. L'utilisateur est <b>seul et entièrement responsable</b> de la conformité de ses envois (RGPD, CAN-SPAM, LCEN, etc.), du consentement des destinataires et de tout usage du logiciel.</p>
+      <h4 style="font-size:12px;color:var(--ink);font-weight:700;margin:14px 0 4px;text-transform:uppercase;letter-spacing:.04em">Article 6 — Usages interdits</h4>
+      <p>Interdits : spam, phishing, escroquerie, usurpation d'identité, harcèlement, contenus illicites, violation RGPD. Tout usage illicite entraîne la révocation immédiate de la licence.</p>
+      <h4 style="font-size:12px;color:var(--ink);font-weight:700;margin:14px 0 4px;text-transform:uppercase;letter-spacing:.04em">Article 8 — Données</h4>
+      <p>EvoStudio est 100% local : aucune donnée n'est transmise. Seule la vérification de licence contacte nos serveurs.</p>
+      <h4 style="font-size:12px;color:var(--ink);font-weight:700;margin:14px 0 4px;text-transform:uppercase;letter-spacing:.04em">Article 12 — Droit applicable</h4>
+      <p>CGU régies par le droit ivoirien. Litiges soumis aux tribunaux de Côte d'Ivoire. Contact : <a href="mailto:support@evostudio.fr" style="color:var(--blue)">support@evostudio.fr</a></p>
+      <p style="margin-top:14px;font-size:11px;color:var(--slate-2)">© 2025–2026 EGSCI SARL — Côte d'Ivoire</p>
+    </div>
+    <div class="modal-foot" id="cgu-foot" style="flex-direction:column;align-items:stretch">
+      <label style="display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#475569;cursor:pointer;margin-bottom:12px">
+        <input type="checkbox" id="cgu-check" style="margin-top:3px;width:15px;height:15px;flex-shrink:0"/>
         <span>J'ai lu et j'accepte les conditions générales d'utilisation, et je reconnais qu'EGSCI SARL décline toute responsabilité quant à mon utilisation du logiciel.</span>
       </label>
-      <button class="cgu-accept" id="cgu-accept" disabled onclick="acceptCgu()">Accepter et continuer</button>
+      <button class="btn-sm primary" id="cgu-accept" disabled onclick="acceptCgu()" style="padding:12px;font-size:14px;font-weight:700;border-radius:8px">Accepter et continuer</button>
     </div>
   </div>
 </div>
 
-<!-- Modal 2FA -->
+<!-- ═══ MODAL — 2FA ═══ -->
 <div class="overlay" id="tfa-overlay" onclick="if(event.target===this)close2faModal()">
-  <div class="cgu-box" style="max-width:420px">
-    <div class="cgu-head" style="display:flex;align-items:center;justify-content:space-between">
-      <div>
-        <h2 id="tfa-title">🔐 Activer la double authentification</h2>
-        <p id="tfa-sub" style="font-size:13px;color:var(--slate);margin-top:3px">Scannez le QR code avec Google Authenticator ou Authy</p>
-      </div>
-      <button onclick="close2faModal()" style="background:none;border:none;font-size:22px;color:var(--slate);cursor:pointer;line-height:1">×</button>
+  <div class="modal modal-sm">
+    <div class="modal-head">
+      <div><h3 id="tfa-title">🔐 Activer le 2FA</h3><p id="tfa-sub">Scannez le QR code avec Google Authenticator ou Authy</p></div>
+      <button class="modal-close" onclick="close2faModal()">×</button>
     </div>
-
-    <!-- Étape setup : QR + confirmation -->
-    <div id="tfa-step-setup" class="cgu-body" style="text-align:center">
-      <div id="tfa-qr" style="margin:16px auto;display:inline-block;padding:12px;background:#fff;border:1px solid var(--line);border-radius:8px"><div style="width:180px;height:180px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;color:var(--slate-2);font-size:12px">Chargement…</div></div>
+    <div id="tfa-step-setup" class="modal-body" style="text-align:center">
+      <div class="tfa-qr-wrap" id="tfa-qr"><div style="width:180px;height:180px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;color:var(--slate-2);font-size:12px;margin:0 auto">Chargement…</div></div>
       <p style="font-size:11px;color:var(--slate);margin-bottom:4px">Ou entrez manuellement :</p>
-      <div id="tfa-secret" style="font-family:monospace;font-size:11px;background:#f8fafc;border:1px solid var(--line);padding:6px 10px;border-radius:6px;word-break:break-all;margin-bottom:16px;color:#475569">—</div>
-      <input id="tfa-code" type="text" inputmode="numeric" maxlength="6" placeholder="Code à 6 chiffres" autocomplete="one-time-code"
-        style="width:100%;border:1.5px solid var(--line);border-radius:0;padding:11px 14px;font-size:16px;text-align:center;letter-spacing:.2em;font-family:monospace;outline:none;font-family:inherit;transition:.2s"
-        onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='var(--line)'"
-        oninput="if(this.value.length===6)document.getElementById('tfa-confirm-btn').focus()" />
-      <button id="tfa-confirm-btn" onclick="confirm2fa()" style="width:100%;margin-top:12px;background:var(--blue);color:#fff;border:none;padding:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:.15s">Activer le 2FA</button>
-      <div id="tfa-msg-setup" style="font-size:12px;margin-top:10px;min-height:16px"></div>
-      <p style="font-size:11px;color:var(--slate-2);margin-top:12px;line-height:1.5">⚠️ Notez le code secret — sans lui vous ne pourrez pas récupérer l'accès en cas de perte de téléphone.</p>
+      <div id="tfa-secret" style="font-family:monospace;font-size:11px;background:#f8fafc;border:1px solid var(--line);border-radius:6px;padding:6px 10px;word-break:break-all;margin-bottom:16px;color:#475569">—</div>
+      <input id="tfa-code" type="text" inputmode="numeric" maxlength="6" placeholder="Code à 6 chiffres" autocomplete="one-time-code" style="width:100%;border:1.5px solid var(--line);border-radius:8px;padding:11px 14px;font-size:16px;text-align:center;letter-spacing:.2em;font-family:monospace;outline:none;transition:.2s;font-family:inherit" onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='var(--line)'" oninput="if(this.value.length===6)document.getElementById('tfa-confirm-btn').focus()"/>
+      <button id="tfa-confirm-btn" onclick="confirm2fa()" class="btn-sm primary" style="width:100%;margin-top:10px;padding:11px;font-size:14px;border-radius:8px;justify-content:center">Activer le 2FA</button>
+      <div id="tfa-msg-setup" style="font-size:12px;margin-top:8px;min-height:16px;color:var(--red)"></div>
+      <p style="font-size:11px;color:var(--slate-2);margin-top:10px;line-height:1.5">⚠️ Notez le code secret — sans lui vous ne pourrez pas récupérer l'accès.</p>
     </div>
-
-    <!-- Étape désactivation : saisir code -->
-    <div id="tfa-step-disable" class="cgu-body" style="display:none;text-align:center">
-      <p style="font-size:14px;color:var(--ink);margin-bottom:20px">Entrez votre code TOTP actuel pour désactiver le 2FA.</p>
-      <input id="tfa-disable-code" type="text" inputmode="numeric" maxlength="6" placeholder="Code à 6 chiffres"
-        style="width:100%;border:1.5px solid var(--line);border-radius:0;padding:11px 14px;font-size:16px;text-align:center;letter-spacing:.2em;font-family:monospace;outline:none;font-family:inherit;transition:.2s"
-        onfocus="this.style.borderColor='#dc2626'" onblur="this.style.borderColor='var(--line)'" />
-      <button onclick="disable2fa()" style="width:100%;margin-top:12px;background:#dc2626;color:#fff;border:none;padding:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">Désactiver le 2FA</button>
-      <div id="tfa-msg-disable" style="font-size:12px;margin-top:10px;min-height:16px"></div>
+    <div id="tfa-step-disable" class="modal-body" style="display:none;text-align:center">
+      <p style="font-size:14px;color:var(--ink);margin-bottom:18px">Entrez votre code TOTP actuel pour désactiver le 2FA.</p>
+      <input id="tfa-disable-code" type="text" inputmode="numeric" maxlength="6" placeholder="Code à 6 chiffres" style="width:100%;border:1.5px solid var(--line);border-radius:8px;padding:11px 14px;font-size:16px;text-align:center;letter-spacing:.2em;font-family:monospace;outline:none;font-family:inherit;transition:.2s" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--line)'"/>
+      <button onclick="disable2fa()" class="btn-sm danger" style="width:100%;margin-top:10px;padding:11px;font-size:14px;border-radius:8px;justify-content:center;background:var(--red);color:#fff;border-color:var(--red)">Désactiver le 2FA</button>
+      <div id="tfa-msg-disable" style="font-size:12px;margin-top:8px;min-height:16px;color:var(--red)"></div>
     </div>
   </div>
 </div>
 
+<!-- Support chat -->
+<div id="sup-window">
+  <div style="background:var(--blue);color:#fff;padding:13px 16px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:15px">💬</div>
+      <div><div style="font-weight:700;font-size:14px">Assistance EvoStudio</div><div style="font-size:11px;opacity:.8">Nous répondons sous 24h</div></div>
+    </div>
+    <button onclick="toggleSupport()" style="background:none;border:none;color:#fff;font-size:22px;cursor:pointer;line-height:1;padding:0 4px">×</button>
+  </div>
+  <div id="support-thread" style="flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;background:#f8fafc"></div>
+  <div style="border-top:1px solid var(--line);padding:10px;display:flex;gap:8px;align-items:flex-end;flex-shrink:0">
+    <textarea id="support-input" rows="1" placeholder="Écrivez votre message…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendSupport();}" style="flex:1;resize:none;border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:13.5px;font-family:inherit;outline:none;max-height:120px;transition:border-color .15s" onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='var(--line)'"></textarea>
+    <button id="support-send" onclick="sendSupport()" style="background:var(--blue);color:#fff;border:none;border-radius:10px;width:40px;height:40px;font-size:15px;cursor:pointer;flex-shrink:0">➤</button>
+  </div>
+</div>
+<button id="sup-fab" onclick="toggleSupport()" aria-label="Assistance">
+  💬
+  <span id="support-unread" style="display:none;position:absolute;top:-3px;right:-3px;background:var(--red);color:#fff;font-size:11px;font-weight:700;border-radius:999px;min-width:20px;height:20px;align-items:center;justify-content:center;padding:0 5px;border:2px solid #fff"></span>
+</button>
+
+<div class="loading-screen" id="loading-screen">Chargement…</div>
 <div class="toast" id="toast"></div>
 
 <script>
-  const API = 'https://admin.evostudio.fr';
-  const PROD_LABELS = { sender:'📤 EvoSender', extractor:'🔍 EvoExtractor', verifier:'✅ EvoVérificateur', suite:'🌐 Suite complète', proxy_5gb:'🌐 Proxy 5 Go', proxy_55gb:'🌐 Proxy 55 Go', proxy_100gb:'🌐 Proxy 100 Go', proxy_200gb:'🌐 Proxy 200 Go', proxy_1000gb:'🌐 Proxy 1 To', proxy_2000gb:'🌐 Proxy 2 To' };
-  const STS_LABELS  = { pending:'En attente', paid:'Payée', expired:'Expirée', cancelled:'Annulée' };
-  const CRYPTO_LABEL = { usdt:'USDT', btc:'BTC', wave:'XOF', om:'XOF' };
-  let _viewOnlyCgu = false;
+const API='https://admin.evostudio.fr';
+const PROD_LABELS={sender:'📤 EvoSender',extractor:'🔍 EvoExtractor',verifier:'✅ EvoVérificateur',suite:'🌐 Suite EvoStudio',proxy_5gb:'🌐 Proxy 5 Go',proxy_55gb:'🌐 Proxy 55 Go',proxy_100gb:'🌐 Proxy 100 Go',proxy_200gb:'🌐 Proxy 200 Go',proxy_1000gb:'🌐 Proxy 1 To',proxy_2000gb:'🌐 Proxy 2 To'};
+const STS_LABELS={pending:'En attente',paid:'Payée',expired:'Expirée',cancelled:'Annulée'};
+const CRYPTO_LABEL={usdt:'USDT',btc:'BTC',wave:'XOF',om:'XOF'};
+let _senderNotice='', _supportName='Support EvoStudio', _dlWin='#', _dlMac='#';
+let _viewOnlyCgu=false;
 
-  function showToast(m){ const t=document.getElementById('toast'); t.textContent=m; t.style.display='block'; setTimeout(()=>t.style.display='none',2200); }
-  function copyKey(k){ navigator.clipboard.writeText(k); showToast('✓ Clé copiée : '+k); }
-  function authHeaders(){ const t=localStorage.getItem('evo_token'); return t?{'Authorization':'Bearer '+t}:{}; }
-  function logout(){ localStorage.removeItem('evo_token'); /* on garde evo_email pour pré-remplir la connexion */ location.href='/login.html'; }
+function esc(t){return String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',2200)}
+function copyText(t){navigator.clipboard.writeText(t).then(()=>showToast('✓ Copié !'))}
+function authHeaders(){const t=localStorage.getItem('evo_token');return t?{'Authorization':'Bearer '+t}:{}}
+function logout(){localStorage.removeItem('evo_token');location.href='/login.html'}
 
-  function openCgu(viewOnly){
-    _viewOnlyCgu = !!viewOnly;
-    document.getElementById('cgu-overlay').classList.add('show');
-    document.querySelector('.cgu-foot').style.display = viewOnly ? 'none' : '';
-    document.getElementById('cgu-close').style.display = viewOnly ? 'block' : 'none';
-    document.querySelector('.cgu-body').scrollTop = 0;
+// Sidebar toggle
+let _sbCollapsed=false;
+function toggleSidebar(){
+  _sbCollapsed=!_sbCollapsed;
+  const sb=document.getElementById('sidebar');
+  const ct=document.getElementById('content');
+  sb.classList.toggle('collapsed',_sbCollapsed);
+  ct.classList.toggle('sb-collapsed',_sbCollapsed);
+}
+
+// Panel navigation
+function showPanel(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('active'));
+  const panel=document.getElementById('panel-'+id);
+  if(panel)panel.classList.add('active');
+  document.querySelectorAll('[data-panel="'+id+'"]').forEach(i=>i.classList.add('active'));
+}
+
+// Modals
+function openModal(id){document.getElementById(id).classList.add('show')}
+function closeModal(id){document.getElementById(id).classList.remove('show')}
+
+function toggleModalPass(dispId,realId){
+  const disp=document.getElementById(dispId);
+  const real=document.getElementById(realId);
+  if(!disp||!real)return;
+  const shown=disp.dataset.shown==='1';
+  disp.textContent=shown?'••••••••':real.value;
+  disp.dataset.shown=shown?'0':'1';
+  disp.nextElementSibling.textContent=shown?'Voir':'Masquer';
+}
+
+// CGU
+function openCgu(viewOnly){
+  _viewOnlyCgu=!!viewOnly;
+  document.getElementById('cgu-overlay').classList.add('show');
+  document.getElementById('cgu-foot').style.display=viewOnly?'none':'';
+  document.getElementById('cgu-close').style.display=viewOnly?'block':'none';
+  document.getElementById('cgu-body').scrollTop=0;
+}
+function closeCgu(){document.getElementById('cgu-overlay').classList.remove('show')}
+document.getElementById('cgu-check').addEventListener('change',e=>{document.getElementById('cgu-accept').disabled=!e.target.checked});
+async function acceptCgu(){
+  const btn=document.getElementById('cgu-accept');btn.disabled=true;btn.textContent='Validation…';
+  try{await fetch(API+'/api/auth/accept-cgu',{method:'POST',headers:{...authHeaders(),'Content-Type':'application/json'}})}catch{}
+  document.getElementById('cgu-overlay').classList.remove('show');
+  document.getElementById('acc-cgu').textContent='✓ Acceptées';
+  showToast('✓ Conditions acceptées');
+}
+
+// SMTP modal
+let _smtpModalId=null;
+function openSmtpModal(s,senderNotice){
+  _smtpModalId=s.id;
+  document.getElementById('smtp-modal-sub').textContent='SMTP Relay — '+s.plan+' · '+s.relay_host;
+  document.getElementById('smtp-m-host').textContent=s.relay_host||'smtp.exabytes.com';
+  document.getElementById('smtp-m-port').textContent=(s.relay_port||587)+' (TLS)';
+  document.getElementById('smtp-m-user').textContent=s.username||'—';
+  var passEl=document.getElementById('smtp-m-pass-disp');
+  passEl.textContent='••••••••';passEl.dataset.shown='0';passEl.nextElementSibling.textContent='Voir';
+  document.getElementById('smtp-m-pass-real').value=s.password||'';
+  var sEl=document.getElementById('smtp-m-sender');
+  if(s.sender_from){sEl.style.display='';sEl.innerHTML='✉️ Adresse « De / From » : <b style="font-family:monospace">'+esc(s.sender_from)+'</b>'}else{sEl.style.display='none'}
+  var nEl=document.getElementById('smtp-m-notice');
+  var n=s.sender_notice||senderNotice||'';
+  if(n){nEl.style.display='';nEl.textContent='⚠️ '+n}else{nEl.style.display='none'}
+  openModal('smtp-creds-modal');
+}
+function copySmtpModal(){
+  var host=document.getElementById('smtp-m-host').textContent;
+  var port=document.getElementById('smtp-m-port').textContent.replace(' (TLS)','');
+  var user=document.getElementById('smtp-m-user').textContent;
+  var pass=document.getElementById('smtp-m-pass-real').value;
+  copyText('Hôte SMTP : '+host+'\nPort : '+port+'\nUtilisateur : '+user+'\nMot de passe : '+pass+'\nChiffrement : TLS/STARTTLS');
+}
+
+// PROXY modal
+var _prxData={host:'',port:'',user:'',pass:''};
+function openProxyModal(p){
+  _prxData={host:p.host,port:p.port,user:p.username,pass:p.password};
+  document.getElementById('proxy-modal-sub').textContent='Proxy résidentiel — '+p.gb+' Go · '+p.plan;
+  document.getElementById('prx-m-host').textContent=p.host||'—';
+  document.getElementById('prx-m-port').textContent=p.port||'—';
+  document.getElementById('prx-m-user').textContent=p.username||'—';
+  var pd=document.getElementById('prx-m-pass-disp');
+  pd.textContent='••••••••';pd.dataset.shown='0';pd.nextElementSibling.textContent='Voir';
+  document.getElementById('prx-m-pass-real').value=p.password||'';
+  // Reset generator
+  document.getElementById('prx-m-country').value='';
+  document.getElementById('prx-m-ssid').value='';
+  document.getElementById('prx-m-qty').value=1;
+  document.getElementById('prx-m-test-result').style.display='none';
+  proxyModalIspChange();
+  openModal('proxy-gen-modal');
+}
+var PROXY_ISPS={ca:[['as577_Bell_Canada','Bell Canada'],['as812_Rogers_Communications','Rogers'],['as852_TELUS_Communications','Telus'],['as5769_Videotron_Ltee','Vidéotron'],['as6327_Shaw_Communications','Shaw / Freedom']],fr:[['as3215_Orange_S.A.','Orange'],['as15557_SFR','SFR'],['as12322_Free_SAS','Free'],['as5410_Bouygues_Telecom','Bouygues Telecom']],be:[['as5432_Proximus','Proximus'],['as6848_Telenet','Telenet'],['as21474_VOO','VOO']],gb:[['as2856_BT_Group','BT'],['as5089_Virgin_Media','Virgin Media'],['as5607_Sky_UK','Sky'],['as13285_TalkTalk','TalkTalk']],de:[['as3320_Deutsche_Telekom','Deutsche Telekom'],['as3209_Vodafone_DE','Vodafone DE'],['as6805_Telefonica_DE','O2 / Telefónica']],us:[['as7922_Comcast','Comcast'],['as7018_AT&T','AT&T'],['as701_Verizon','Verizon'],['as21928_T-Mobile','T-Mobile'],['as22773_Cox_Communications','Cox']],nl:[['as1136_KPN','KPN'],['as33915_Ziggo','Ziggo'],['as50266_T-Mobile_NL','T-Mobile NL']],ch:[['as3303_Swisscom','Swisscom'],['as6830_UPC_Switzerland','UPC / Sunrise']],es:[['as3352_Telefonica_ES','Telefónica / Movistar'],['as12430_Vodafone_ES','Vodafone ES'],['as12479_Orange_ES','Orange ES']],it:[['as1267_TIM','TIM'],['as12874_Fastweb','Fastweb'],['as30722_Vodafone_IT','Vodafone IT']],pt:[['as2860_NOS','NOS'],['as5432_MEO','MEO / Altice']],au:[['as1221_Telstra','Telstra'],['as4804_Optus','Optus'],['as7545_TPG_Telecom','TPG Telecom']],jp:[['as2914_NTT','NTT'],['as17676_SoftBank','SoftBank'],['as2516_KDDI','KDDI']],kr:[['as4766_KT_Korea','KT Corp'],['as9644_SK_Broadband','SK Broadband']],br:[['as28573_Claro_Brasil','Claro'],['as18881_Vivo','Vivo'],['as7738_Oi','Oi']],mx:[['as8151_TELMEX','Telmex'],['as13999_Megacable','Megacable']],ar:[['as7303_Telecom_Argentina','Telecom Argentina']],sg:[['as4657_StarHub','StarHub'],['as9506_Singtel','Singtel']],hk:[['as9304_HKBN','HKBN'],['as4515_PCCW','PCCW HKT']],za:[['as7420_Telkom_SA','Telkom SA'],['as5713_MTN_SA','MTN SA']],ng:[['as36873_MTN_Nigeria','MTN Nigeria'],['as29465_Airtel_Nigeria','Airtel Nigeria']],ci:[['as36842_Orange_CI','Orange CI'],['as36863_MTN_CI','MTN CI']],sn:[['as8346_Sonatel','Sonatel / Orange SN']],ma:[['as6713_Maroc_Telecom','Maroc Telecom'],['as36903_Inwi','Inwi']],eg:[['as8452_Telecom_Egypt','Telecom Egypt'],['as36992_Vodafone_Egypt','Vodafone EG']],ae:[['as5384_Emirates_Internet','Etisalat / e&']],in:[['as24560_Airtel_India','Airtel'],['as55836_Reliance_Jio','Jio']],se:[['as1299_Telia_SE','Telia'],['as1257_Tele2_SE','Tele2']],no:[['as2119_Telenor_NO','Telenor NO']],pl:[['as5617_Orange_PL','Orange PL'],['as5588_T-Mobile_PL','T-Mobile PL']],ru:[['as8359_MTS_Russia','MTS'],['as8402_CORBINA_TELECOM','Beeline']],tr:[['as9121_TTNET','Türk Telekom'],['as15897_TurkCell','Turkcell']],id:[['as4800_Telkom_Indonesia','Telkom Indonesia']],vn:[['as7643_VNPT','VNPT'],['as38731_Viettel','Viettel']],th:[['as23969_True_Internet','True Internet']]};
+function proxyModalIspChange(){
+  var c=document.getElementById('prx-m-country').value;
+  var sel=document.getElementById('prx-m-isp');
+  var isps=PROXY_ISPS[c]||[];
+  var opts='<option value="">🌐 Aléatoire (tous ISP)</option>';
+  isps.forEach(i=>{opts+='<option value="'+i[0]+'">'+i[1]+'</option>'});
+  opts+='<option value="__manual__">✏️ Saisir manuellement…</option>';
+  sel.innerHTML=opts;sel.value='';
+  document.getElementById('prx-m-isp-manual').style.display='none';
+  proxyModalGen();
+}
+function proxyModalIspVal(){
+  var sel=document.getElementById('prx-m-isp');
+  if(sel.value==='__manual__')return document.getElementById('prx-m-isp-manual').value.trim();
+  return sel.value;
+}
+function proxyModalGen(){
+  var sel=document.getElementById('prx-m-isp');
+  var man=document.getElementById('prx-m-isp-manual');
+  if(sel&&man)man.style.display=sel.value==='__manual__'?'':'none';
+  var u=_prxData.user,pw=_prxData.pass,h=_prxData.host,p=_prxData.port;
+  if(!u)return;
+  var country=document.getElementById('prx-m-country').value;
+  var isp=proxyModalIspVal();
+  var ssidBase=(document.getElementById('prx-m-ssid').value||'').trim();
+  var qty=Math.min(999,Math.max(1,parseInt(document.getElementById('prx-m-qty').value,10)||1));
+  var prefix=u;
+  if(country)prefix+='-country-'+country;
+  if(isp)prefix+='-isp-'+isp;
+  var lines=[];
+  for(var i=0;i<qty;i++){
+    var uu=prefix;
+    if(ssidBase){uu+='-ssid-'+ssidBase+(qty>1?i+1:'');}
+    lines.push(uu+':'+pw+':'+h+':'+p);
   }
-  function closeCgu(){ document.getElementById('cgu-overlay').classList.remove('show'); }
-  document.getElementById('cgu-check').addEventListener('change', e => {
-    document.getElementById('cgu-accept').disabled = !e.target.checked;
-  });
-  async function acceptCgu(){
-    const btn = document.getElementById('cgu-accept'); btn.disabled = true; btn.textContent = 'Validation…';
-    try {
-      await fetch(API + '/api/auth/accept-cgu', { method:'POST', headers:{...authHeaders(),'Content-Type':'application/json'} });
-    } catch {}
-    document.getElementById('cgu-overlay').classList.remove('show');
-    document.getElementById('p-cgu').style.display = 'inline-flex';
-    showToast('✓ Conditions acceptées');
-  }
+  document.getElementById('prx-m-result').value=lines.join('\n');
+  document.getElementById('prx-m-result').rows=Math.min(qty,10);
+  document.getElementById('prx-m-count').textContent='× '+qty;
+}
+function genSsidModal(){
+  document.getElementById('prx-m-ssid').value=Math.random().toString(36).slice(2,12);
+  proxyModalGen();
+}
+function copyProxyModal(){
+  var txt=document.getElementById('prx-m-result').value;
+  var qty=(txt.match(/\n/g)||[]).length+1;
+  navigator.clipboard.writeText(txt).then(()=>showToast('✅ '+qty+' chaîne'+(qty>1?'s':'')+' copiée'+(qty>1?'s':'')+'!'));
+}
+function resetProxyModal(){
+  document.getElementById('prx-m-country').value='';
+  document.getElementById('prx-m-ssid').value='';
+  document.getElementById('prx-m-qty').value=1;
+  proxyModalIspChange();
+}
+async function testProxyModal(){
+  var box=document.getElementById('prx-m-test-result');
+  box.style.display='';
+  box.innerHTML='<div style="background:#f8fafc;border:1px solid var(--line);border-radius:8px;padding:11px;font-size:12.5px;color:var(--slate)">⏳ Test en cours…</div>';
+  try{
+    var r=await fetch(API+'/api/auth/proxy-test',{method:'POST',headers:{...authHeaders(),'Content-Type':'application/json'},body:JSON.stringify({host:_prxData.host,port:_prxData.port,username:_prxData.user,password:_prxData.pass})});
+    var d=await r.json();
+    if(d.ok){box.innerHTML='<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:13px"><div style="font-weight:700;color:#15803d;margin-bottom:8px">✅ Proxy fonctionnel !</div><div style="display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:12px"><span style="color:var(--slate-2);font-weight:600">IP publique</span><span style="font-family:monospace;font-weight:700">'+(d.ip||'—')+'</span><span style="color:var(--slate-2);font-weight:600">Pays</span><span style="font-weight:600">'+(d.country||'—')+'</span><span style="color:var(--slate-2);font-weight:600">Ville</span><span>'+([d.city,d.region].filter(Boolean).join(', ')||'—')+'</span><span style="color:var(--slate-2);font-weight:600">Opérateur</span><span style="font-size:11.5px">'+(d.org||'—')+'</span></div></div>';}
+    else{box.innerHTML='<div style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:11px;font-size:12.5px;color:var(--red)">❌ '+(d.error||'Erreur inconnue')+'</div>';}
+  }catch(e){box.innerHTML='<div style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:11px;font-size:12.5px;color:var(--red)">❌ Erreur réseau : '+e.message+'</div>';}
+}
 
-  async function load(){
-    const token = localStorage.getItem('evo_token');
-    if(!token){ location.href='/login.html?redirect=/dashboard.html'; return; }
-    let user;
-    try {
-      const r = await fetch(API + '/api/auth/me', { headers: authHeaders() });
-      if(!r.ok){ logout(); return; }
-      user = await r.json();
-    } catch { logout(); return; }
+// ── Main load ──
+async function load(){
+  const token=localStorage.getItem('evo_token');
+  if(!token){location.href='/login.html?redirect=/dashboard.html';return;}
+  let user;
+  try{
+    const r=await fetch(API+'/api/auth/me',{headers:authHeaders()});
+    if(!r.ok){logout();return;}
+    user=await r.json();
+  }catch{logout();return;}
 
-    document.getElementById('loading-screen').style.display='none';
-    document.getElementById('main').style.display='block';
+  document.getElementById('loading-screen').style.display='none';
 
-    // Profil
-    const initial = (user.email[0] || '?').toUpperCase();
-    const setTxt = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val; };
-    setTxt('nav-email', user.email);
-    setTxt('nav-avatar', initial);
-    setTxt('p-email', user.email);
-    setTxt('avatar', initial);
-    if(user.created_at) setTxt('p-since', 'Membre depuis le ' + new Date(user.created_at).toLocaleDateString('fr-FR'));
-    if(user.cgu_accepted_at){ document.getElementById('p-cgu').style.display = 'inline-flex'; }
-    else { openCgu(false); } // CGU non acceptées → modal bloquant
+  const ini=(user.email[0]||'?').toUpperCase();
+  document.getElementById('nav-av').textContent=ini;
+  document.getElementById('nav-email').textContent=user.email;
+  document.getElementById('sb-av').textContent=ini;
+  document.getElementById('sb-email').textContent=user.email;
+  if(user.created_at)document.getElementById('sb-since').textContent='Depuis '+new Date(user.created_at).toLocaleDateString('fr-FR');
+  document.getElementById('acc-email').textContent=user.email;
+  if(user.created_at)document.getElementById('acc-since').textContent=new Date(user.created_at).toLocaleDateString('fr-FR');
+  if(user.cgu_accepted_at){document.getElementById('acc-cgu').textContent='✓ Acceptées le '+new Date(user.cgu_accepted_at).toLocaleDateString('fr-FR');document.getElementById('acc-cgu').style.color='var(--green)';}
+  else{document.getElementById('acc-cgu').textContent='Non acceptées';document.getElementById('acc-cgu').style.color='var(--red)';openCgu(false);}
+  const btn2fa=document.getElementById('acc-2fa-btn');
+  btn2fa.textContent=user.totp_enabled?'🔐 2FA activé ✓':'🔓 Activer le 2FA';
+  document.getElementById('panel-home').querySelector('.panel-title').textContent='Bonjour '+ini+' 👋';
 
-    // Bouton 2FA
-    const btn2fa = document.getElementById('p-2fa-btn');
-    btn2fa.style.display = 'inline-flex';
-    btn2fa.innerHTML = user.totp_enabled
-      ? '🔐 2FA activé <span style="color:#16a34a;margin-left:4px">✓</span>'
-      : '🔓 Activer le 2FA';
-    btn2fa.title = user.totp_enabled ? 'Désactiver la double authentification' : 'Activer la double authentification';
-
-    // Liens de téléchargement
-    let downloadUrl    = 'https://github.com/BlackQuiet/evosender-pro-releases/releases/latest';
-    let downloadUrlWin = 'https://github.com/BlackQuiet/evosender-pro-releases/releases/latest/download/EvoStudio-Setup-3.0.60.exe';
-    let downloadUrlMac = 'https://github.com/BlackQuiet/evosender-pro-releases/releases/latest/download/EvoStudio-3.0.60-arm64.dmg';
-    let senderNotice   = '';
-    try {
-      const pr = await fetch(API + '/api/shop/products');
-      if(pr.ok){ const pd = await pr.json(); const site = pd.site || {};
-        if(site.download_url)     downloadUrl    = site.download_url;
-        if(site.download_url_win) downloadUrlWin = site.download_url_win;
-        if(site.download_url_mac) downloadUrlMac = site.download_url_mac;
-        if(pd.smtp_sender_notice) senderNotice   = pd.smtp_sender_notice;
-        if(pd.support_name) _supportName = pd.support_name;
-      }
-    } catch {}
-
-    const ordersR = await fetch(API + '/api/shop/orders', { headers: authHeaders() });
-    const orders = ordersR.ok ? await ordersR.json() : [];
-    const paidOrders = orders.filter(o => o.status === 'paid' && o.license_key);
-
-    document.getElementById('st-lic').textContent = paidOrders.length;
-    document.getElementById('st-ord').textContent = orders.length;
-
-    const licWrap = document.getElementById('licenses-wrap');
-    if(paidOrders.length === 0){
-      licWrap.innerHTML = `<div class="empty-state"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="0"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><p>Aucune licence active.<br>Achetez un produit pour recevoir votre clé.</p><a href="/pay.html" class="btn-buy" style="display:inline-flex">Acheter une licence</a></div>`;
-    } else {
-      licWrap.innerHTML = `<div class="licenses-grid">${paidOrders.map(o => `
-        <div class="lic-card">
-          <div class="lic-top">
-            <div class="lic-product">
-              ${PROD_LABELS[o.product] || o.product}
-              ${o.quantity>1 ? `<span class="lic-badge">${o.quantity} PC</span>` : '<span class="lic-badge">Licence annuelle</span>'}
-            </div>
-            <div class="dl-downloads" style="display:flex;flex-direction:row;gap:6px;width:100%;margin-top:10px">
-              <a href="${downloadUrlWin}" target="_blank" rel="noopener" style="flex:1;display:flex;align-items:center;gap:10px;background:#eff6ff;border:1px solid #bfdbfe;padding:12px 14px;text-decoration:none;transition:border-color .2s;min-width:0" onmouseover="this.style.borderColor='#2563eb'" onmouseout="this.style.borderColor='#bfdbfe'">
-                <svg viewBox="0 0 24 24" width="24" height="24" fill="#2563eb" style="flex-shrink:0"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
-                <div style="min-width:0">
-                  <div style="font-size:12px;font-weight:700;color:#1e40af;white-space:nowrap">Windows 10 / 11</div>
-                  <div style="font-size:10px;color:#3b82f6;margin-top:2px;white-space:nowrap">x64 · .exe · ~95 MB</div>
-                </div>
-              </a>
-              <a href="${downloadUrlMac}" target="_blank" rel="noopener" style="flex:1;display:flex;align-items:center;gap:10px;background:#faf5ff;border:1px solid #ddd6fe;padding:12px 14px;text-decoration:none;transition:border-color .2s;min-width:0" onmouseover="this.style.borderColor='#7c3aed'" onmouseout="this.style.borderColor='#ddd6fe'">
-                <svg viewBox="0 0 24 24" width="24" height="24" fill="#7c3aed" style="flex-shrink:0"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
-                <div style="min-width:0">
-                  <div style="font-size:12px;font-weight:700;color:#5b21b6;white-space:nowrap">Mac Silicon M1/M2/M3</div>
-                  <div style="font-size:10px;color:#7c3aed;margin-top:2px;white-space:nowrap">arm64 · .dmg · ~125 MB</div>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="lic-label">Clé de licence</div>
-          <div class="lic-key-wrap">
-            <div class="lic-key">${o.license_key}</div>
-            <button class="lic-copy" onclick="copyKey('${o.license_key}')">Copier</button>
-          </div>
-          ${(function(){
-            var exp = o.paid_at + 365*86400000;
-            var days = Math.ceil((exp - Date.now())/86400000);
-            var col = days <= 0 ? '#dc2626' : (days <= 30 ? '#b45309' : '#64748b');
-            var txt = days <= 0 ? 'Expirée le ' + new Date(exp).toLocaleDateString('fr-FR')
-                                : 'Valable jusqu\'au ' + new Date(exp).toLocaleDateString('fr-FR') + ' (' + days + ' j)';
-            return '<div class="lic-date">Achetée le ' + new Date(o.paid_at).toLocaleDateString('fr-FR') + '</div>' +
-              '<div class="lic-date" style="color:' + col + ';font-weight:600">⏳ ' + txt + '</div>' +
-              '<a href="/pay.html?product=' + o.product + '" style="display:inline-block;margin-top:10px;background:' + (days<=0?'#16a34a':'#2563eb') + ';color:#fff;text-decoration:none;padding:8px 16px;font-size:12px;font-weight:600">↻ ' + (days<=0?'Réactiver (1 an)':'Renouveler (1 an)') + '</a>';
-          })()}
-        </div>`).join('')}</div>`;
+  // Products config
+  try{
+    const pr=await fetch(API+'/api/shop/products');
+    if(pr.ok){const pd=await pr.json();const site=pd.site||{};
+      if(site.download_url_win)_dlWin=site.download_url_win;
+      if(site.download_url_mac)_dlMac=site.download_url_mac;
+      if(pd.smtp_sender_notice)_senderNotice=pd.smtp_sender_notice;
+      if(pd.support_name)_supportName=pd.support_name;
     }
+  }catch{}
+  document.getElementById('dl-win').href=_dlWin;
+  document.getElementById('dl-mac').href=_dlMac;
 
-    const ordWrap = document.getElementById('orders-wrap');
-    if(orders.length === 0){
-      ordWrap.innerHTML = `<div class="empty-state"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><p>Aucune commande pour le moment.</p></div>`;
-    } else {
-      ordWrap.innerHTML = `<div class="orders-table-wrap"><table class="orders-table">
-        <thead><tr><th>#</th><th>Produit</th><th>Montant</th><th>Statut</th><th>Date</th></tr></thead>
-        <tbody>${orders.map(o => `
-          <tr>
-            <td style="color:var(--slate-2)">#${o.id}</td>
-            <td>${PROD_LABELS[o.product] || o.product}${(o.quantity>1)?` ×${o.quantity}`:''}</td>
-            <td style="font-family:monospace">${o.price_exact} ${CRYPTO_LABEL[o.crypto] || ''}</td>
-            <td><span class="sts sts-${o.status}">${STS_LABELS[o.status] || o.status}</span></td>
-            <td style="color:var(--slate-2)">${new Date(o.created_at).toLocaleDateString('fr-FR')}</td>
-          </tr>`).join('')}</tbody>
-      </table></div>`;
-    }
+  // Orders
+  const ordR=await fetch(API+'/api/shop/orders',{headers:authHeaders()});
+  const orders=ordR.ok?await ordR.json():[];
+  const paid=orders.filter(o=>o.status==='paid'&&o.license_key);
+  document.getElementById('st-lic').textContent=paid.length;
+  document.getElementById('st-ord').textContent=orders.length;
 
-    // ── Serveurs SMTP ────────────────────────────────────────
-    try {
-      var smtpR = await fetch(API + '/api/auth/smtp-servers', { headers: authHeaders() });
-      if(smtpR.ok) {
-        var smtpList = await smtpR.json();
-        var sec = document.getElementById('smtp-section');
-        var wrap = document.getElementById('smtp-wrap');
-        if(smtpList.length > 0 && sec && wrap) {
-          sec.style.display = '';
-          var VOL = { smtp_10k:'10 000', smtp_50k:'50 000', smtp_100k:'100 000', smtp_500k:'500 000' };
-          var STS_BG = { active:'#dcfce7', suspended:'#fee2e2', pending:'#fef9c3' };
-          var STS_FG = { active:'#166534', suspended:'#991b1b', pending:'#854d0e' };
-          var STS_LBL = { active:'Actif', suspended:'Suspendu', pending:'En attente' };
-          wrap.innerHTML = smtpList.map(function(s) {
-            var vol = VOL[s.plan] || String(s.volume||0);
-            var bg = STS_BG[s.status] || '#f1f5f9';
-            var fg = STS_FG[s.status] || '#334155';
-            var lbl = STS_LBL[s.status] || s.status;
-            var host = s.relay_host || 'smtp.exabytes.com';
-            var port = s.relay_port || 587;
-
-            var credsHtml = '';
-            if(s.username) {
-              credsHtml =
-                '<div style="background:#f8fafc;border:1px solid #e2e8f0;padding:18px;margin-top:16px">' +
-                  '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#94a3b8;margin-bottom:14px">Identifiants SMTP</div>' +
-                  '<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px">' +
-                    '<div><div style="font-size:10px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Serveur</div><div style="font-family:monospace;font-size:13px;font-weight:700;color:#0f172a">' + host + '</div></div>' +
-                    '<div><div style="font-size:10px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Port</div><div style="font-family:monospace;font-size:13px;font-weight:700;color:#0f172a">' + port + ' (TLS)</div></div>' +
-                    '<div><div style="font-size:10px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Utilisateur</div><div style="font-family:monospace;font-size:13px;font-weight:700;color:#2563eb">' + s.username + '</div></div>' +
-                    '<div><div style="font-size:10px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Mot de passe</div>' +
-                      '<div style="display:flex;align-items:center;gap:8px">' +
-                        '<span id="smtp-pass-' + s.id + '" data-pass="' + s.password + '" data-shown="0" style="font-family:monospace;font-size:13px;font-weight:700;color:#0f172a;letter-spacing:.1em">••••••••</span>' +
-                        '<button onclick="toggleSmtpPass(' + s.id + ')" style="background:#fff;border:1px solid #e2e8f0;padding:2px 8px;font-size:11px;cursor:pointer;color:#64748b;font-family:inherit">Voir</button>' +
-                      '</div>' +
-                    '</div>' +
-                  '</div>' +
-                  '<button onclick="copySmtp(' + s.id + ',\'' + host + '\',' + port + ',\'' + s.username + '\')" ' +
-                    'style="background:#2563eb;color:#fff;border:none;padding:9px 18px;font-size:13px;font-weight:600;cursor:pointer;width:100%;font-family:inherit">' +
-                    'Copier tous les identifiants' +
-                  '</button>' +
-                  (s.sender_from ? '<div style="background:#eff6ff;border:1px solid #bfdbfe;padding:10px 13px;margin-top:12px;font-size:12px;color:#1e40af;line-height:1.5">✉️ Adresse « De / From » à utiliser dans vos campagnes : <b style="font-family:monospace">' + esc(s.sender_from) + '</b></div>' : '') +
-                  ((s.sender_notice || senderNotice) ? '<div style="background:#fffbeb;border:1px solid #fde68a;padding:11px 13px;margin-top:12px;font-size:12px;color:#92400e;line-height:1.55">⚠️ ' + esc(s.sender_notice || senderNotice).replace(/\n/g,'<br>') + '</div>' : '') +
-                '</div>';
-            } else {
-              credsHtml =
-                '<div style="background:#fffbeb;border:1px solid #fde68a;padding:14px;font-size:13px;color:#92400e;margin-top:16px;line-height:1.6">' +
-                  'Serveur en cours de provisioning — vos identifiants seront envoyés par email <strong>sous 24h</strong>.' +
-                '</div>';
-            }
-
-            // Échéance + renouvellement
-            var expHtml = '';
-            if(s.expires_at) {
-              var days = Math.ceil((s.expires_at - Date.now()) / 86400000);
-              var expired = days <= 0;
-              var col = expired ? '#dc2626' : (days <= 5 ? '#b45309' : '#64748b');
-              var txt = expired ? 'Expiré le ' + new Date(s.expires_at).toLocaleDateString('fr-FR')
-                                : 'Valable jusqu\'au ' + new Date(s.expires_at).toLocaleDateString('fr-FR') + ' (' + days + ' j restants)';
-              expHtml = '<div style="font-size:12px;font-weight:600;color:' + col + ';margin-top:6px">⏳ ' + txt + '</div>';
-            }
-            var renewBtn = '<a href="/pay.html?product=' + s.plan + '" ' +
-              'style="display:inline-block;background:' + (s.status==='suspended'?'#16a34a':'#2563eb') + ';color:#fff;text-decoration:none;padding:8px 16px;font-size:12px;font-weight:600;margin-top:14px;font-family:inherit">' +
-              (s.status==='suspended' ? '↻ Réactiver (+30 jours)' : '↻ Renouveler (+30 jours)') + '</a>';
-            var delBtn = '<button onclick="deleteSmtp(' + s.id + ')" title="Supprimer ce serveur" ' +
-              'style="display:inline-block;background:#fff;border:1px solid #fecaca;color:#dc2626;padding:8px 14px;font-size:12px;font-weight:600;margin-top:14px;margin-left:8px;font-family:inherit;cursor:pointer">🗑 Supprimer</button>';
-
-            return '<div style="background:#fff;border:1px solid #e2e8f0;padding:22px;margin-bottom:1px">' +
-              '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">' +
-                '<div>' +
-                  '<div style="font-size:15px;font-weight:700;color:#0f172a">SMTP Relay — ' + vol + ' emails/mois</div>' +
-                  '<div style="font-size:12px;color:#64748b;margin-top:3px">Plan ' + s.plan + '</div>' +
-                  expHtml +
-                '</div>' +
-                '<span style="background:' + bg + ';color:' + fg + ';border:1px solid;border-color:' + bg + ';padding:3px 10px;font-size:11px;font-weight:700">' + lbl + '</span>' +
-              '</div>' +
-              credsHtml +
-              '<div style="display:flex;flex-wrap:wrap;align-items:center">' + renewBtn + delBtn + '</div>' +
-            '</div>';
-          }).join('');
-        }
-      }
-    } catch(e) { console.warn('SMTP servers:', e); }
-
-    // ── Proxy résidentiel ────────────────────────────────────
-    try {
-      var proxyR = await fetch(API + '/api/auth/proxy-accounts', { headers: authHeaders() });
-      if(proxyR.ok) {
-        var proxyList = await proxyR.json();
-        var psec = document.getElementById('proxy-section');
-        var pwrap = document.getElementById('proxy-wrap');
-        if(proxyList.length > 0 && psec && pwrap) {
-          psec.style.display = '';
-          var P_STS_BG = { active:'#dcfce7', suspended:'#fee2e2', pending:'#fef9c3' };
-          var P_STS_FG = { active:'#166534', suspended:'#991b1b', pending:'#854d0e' };
-          var P_STS_LBL = { active:'Actif', suspended:'Suspendu', pending:'En attente' };
-          pwrap.innerHTML = proxyList.map(function(p) {
-            var bg = P_STS_BG[p.status] || '#f1f5f9';
-            var fg = P_STS_FG[p.status] || '#334155';
-            var lbl = P_STS_LBL[p.status] || p.status;
-
-            var credsHtml = '';
-            if(p.username && p.status === 'active') {
-              var pid = p.id;
-              var ph = p.host, pp = p.port, pu = p.username, ppw = p.password;
-              credsHtml =
-                '<div style="background:#f8fafc;border:1px solid #e2e8f0;padding:18px;margin-top:16px">' +
-
-                  // ── Identifiants bruts ──
-                  '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#94a3b8;margin-bottom:12px">Identifiants Proxy</div>' +
-                  '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">' +
-                    '<div><div style="font-size:10px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px">Hôte</div><div style="font-family:monospace;font-size:13px;font-weight:700;color:#0f172a">' + ph + '</div></div>' +
-                    '<div><div style="font-size:10px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px">Port</div><div style="font-family:monospace;font-size:13px;font-weight:700;color:#0f172a">' + pp + '</div></div>' +
-                    '<div><div style="font-size:10px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px">Utilisateur</div><div style="font-family:monospace;font-size:13px;font-weight:700;color:#2563eb">' + pu + '</div></div>' +
-                    '<div><div style="font-size:10px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px">Mot de passe</div>' +
-                      '<div style="display:flex;align-items:center;gap:8px">' +
-                        '<span id="proxy-pass-' + pid + '" data-pass="' + ppw + '" data-shown="0" style="font-family:monospace;font-size:13px;font-weight:700;color:#0f172a;letter-spacing:.1em">••••••••</span>' +
-                        '<button onclick="toggleProxyPass(' + pid + ')" style="background:#fff;border:1px solid #e2e8f0;padding:2px 8px;font-size:11px;cursor:pointer;color:#64748b;font-family:inherit">Voir</button>' +
-                      '</div>' +
-                    '</div>' +
-                  '</div>' +
-
-                  // ── Générateur de connexion ──
-                  '<div style="border-top:1px solid #e2e8f0;padding-top:16px;margin-top:4px">' +
-                    '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#94a3b8;margin-bottom:12px">🔧 Générateur de connexion</div>' +
-
-                    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">' +
-
-                      // Pays
-                      '<div>' +
-                        '<label style="font-size:11px;font-weight:600;color:#475569;display:block;margin-bottom:4px">Pays</label>' +
-                        '<select id="prx-country-' + pid + '" onchange="proxyIspChange(' + pid + ')" style="width:100%;border:1px solid #e2e8f0;border-radius:6px;padding:7px 10px;font-size:12px;font-family:inherit;background:#fff;color:#0f172a">' +
-                          '<option value="">Aléatoire (mondial)</option>' +
-                          '<optgroup label="Amérique">' +
-                          '<option value="us">Etats-Unis (US)</option>' +
-                          '<option value="ca">Canada (CA)</option>' +
-                          '<option value="br">Brésil (BR)</option>' +
-                          '<option value="mx">Mexique (MX)</option>' +
-                          '<option value="ar">Argentine (AR)</option>' +
-                          '<option value="co">Colombie (CO)</option>' +
-                          '</optgroup>' +
-                          '<optgroup label="Europe">' +
-                          '<option value="gb">Royaume-Uni (GB)</option>' +
-                          '<option value="fr">France (FR)</option>' +
-                          '<option value="de">Allemagne (DE)</option>' +
-                          '<option value="be">Belgique (BE)</option>' +
-                          '<option value="nl">Pays-Bas (NL)</option>' +
-                          '<option value="ch">Suisse (CH)</option>' +
-                          '<option value="es">Espagne (ES)</option>' +
-                          '<option value="it">Italie (IT)</option>' +
-                          '<option value="pt">Portugal (PT)</option>' +
-                          '<option value="se">Suède (SE)</option>' +
-                          '<option value="no">Norvège (NO)</option>' +
-                          '<option value="pl">Pologne (PL)</option>' +
-                          '<option value="ro">Roumanie (RO)</option>' +
-                          '<option value="cz">Tchéquie (CZ)</option>' +
-                          '<option value="hu">Hongrie (HU)</option>' +
-                          '<option value="ua">Ukraine (UA)</option>' +
-                          '<option value="ru">Russie (RU)</option>' +
-                          '</optgroup>' +
-                          '<optgroup label="Asie / Pacifique">' +
-                          '<option value="jp">Japon (JP)</option>' +
-                          '<option value="kr">Corée du Sud (KR)</option>' +
-                          '<option value="cn">Chine (CN)</option>' +
-                          '<option value="hk">Hong Kong (HK)</option>' +
-                          '<option value="sg">Singapour (SG)</option>' +
-                          '<option value="au">Australie (AU)</option>' +
-                          '<option value="in">Inde (IN)</option>' +
-                          '<option value="id">Indonésie (ID)</option>' +
-                          '<option value="vn">Vietnam (VN)</option>' +
-                          '<option value="th">Thaïlande (TH)</option>' +
-                          '<option value="ph">Philippines (PH)</option>' +
-                          '<option value="pk">Pakistan (PK)</option>' +
-                          '<option value="bd">Bangladesh (BD)</option>' +
-                          '</optgroup>' +
-                          '<optgroup label="Moyen-Orient">' +
-                          '<option value="ae">Emirats arabes (AE)</option>' +
-                          '<option value="sa">Arabie Saoudite (SA)</option>' +
-                          '<option value="tr">Turquie (TR)</option>' +
-                          '<option value="il">Israël (IL)</option>' +
-                          '</optgroup>' +
-                          '<optgroup label="Afrique">' +
-                          '<option value="za">Afrique du Sud (ZA)</option>' +
-                          '<option value="ng">Nigeria (NG)</option>' +
-                          '<option value="ci">Côte d\'Ivoire (CI)</option>' +
-                          '<option value="gh">Ghana (GH)</option>' +
-                          '<option value="sn">Sénégal (SN)</option>' +
-                          '<option value="ma">Maroc (MA)</option>' +
-                          '<option value="eg">Égypte (EG)</option>' +
-                          '</optgroup>' +
-                        '</select>' +
-                      '</div>' +
-
-                      // ISP
-                      '<div>' +
-                        '<label style="font-size:11px;font-weight:600;color:#475569;display:block;margin-bottom:4px">ISP <span style="font-weight:400;color:#94a3b8">(optionnel)</span></label>' +
-                        '<select id="prx-isp-' + pid + '" onchange="proxyGen(' + pid + ')" style="width:100%;border:1px solid #e2e8f0;border-radius:6px;padding:7px 10px;font-size:12px;font-family:inherit;background:#fff;color:#0f172a;margin-bottom:5px">' +
-                          '<option value="">🌐 Aléatoire (tous ISP)</option>' +
-                        '</select>' +
-                        '<input id="prx-isp-manual-' + pid + '" type="text" placeholder="Code manuel : as7922_Comcast" oninput="proxyGen(' + pid + ')" style="display:none;width:100%;border:1px solid #e2e8f0;border-radius:6px;padding:7px 10px;font-size:12px;font-family:monospace;background:#fff;color:#0f172a;outline:none" />' +
-                      '</div>' +
-
-
-                      // Session ID + Quantité
-                      '<div style="grid-column:1/-1;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end">' +
-                        '<div>' +
-                          '<label style="font-size:11px;font-weight:600;color:#475569;display:block;margin-bottom:4px">Session ID (ssid) <span style="font-weight:400;color:#94a3b8">— vide = Rotating · rempli = Sticky</span></label>' +
-                          '<div style="display:flex;gap:6px">' +
-                            '<input id="prx-ssid-' + pid + '" type="text" placeholder="Vide = Rotating · Remplir = Sticky (même IP)" oninput="proxyGen(' + pid + ')" style="flex:1;border:1px solid #e2e8f0;border-radius:6px;padding:7px 10px;font-size:12px;font-family:monospace;background:#fff;color:#0f172a;outline:none" />' +
-                            '<button onclick="genSsid(' + pid + ')" title="Générer un ssid aléatoire" style="background:#f1f5f9;border:1px solid #e2e8f0;color:#475569;padding:7px 10px;font-size:11px;font-weight:600;cursor:pointer;border-radius:6px;font-family:inherit;white-space:nowrap">🎲</button>' +
-                          '</div>' +
-                        '</div>' +
-                        '<div>' +
-                          '<label style="font-size:11px;font-weight:600;color:#475569;display:block;margin-bottom:4px">Quantité</label>' +
-                          '<input id="prx-qty-' + pid + '" type="number" min="1" max="999" value="1" oninput="proxyGen(' + pid + ')" style="width:80px;border:1px solid #e2e8f0;border-radius:6px;padding:7px 10px;font-size:13px;font-weight:700;font-family:inherit;background:#fff;color:#0f172a;outline:none;text-align:center" />' +
-                        '</div>' +
-                      '</div>' +
-
-                    '</div>' +
-
-                    // Résultat généré
-                    '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">' +
-                      '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8">Chaînes générées <span id="prx-count-' + pid + '" style="color:#2563eb">× 1</span></div>' +
-                      '<button onclick="copyProxyGen(' + pid + ')" style="background:#2563eb;color:#fff;border:none;padding:5px 12px;font-size:11px;font-weight:600;cursor:pointer;border-radius:6px;font-family:inherit">📋 Tout copier</button>' +
-                    '</div>' +
-                    '<textarea id="prx-result-' + pid + '" data-user="' + pu + '" data-pass="' + ppw + '" data-host="' + ph + '" data-port="' + pp + '" readonly rows="3" style="width:100%;background:#0f172a;color:#7dd3fc;font-family:monospace;font-size:11.5px;padding:12px 14px;border-radius:8px;border:none;resize:vertical;line-height:1.8;outline:none">' +
-                      pu + ':' + ppw + ':' + ph + ':' + pp +
-                    '</textarea>' +
-                    '<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">' +
-                      '<button onclick="resetProxyGen(' + pid + ')" style="background:#f1f5f9;border:1px solid #e2e8f0;color:#475569;padding:8px 14px;font-size:12px;font-weight:600;cursor:pointer;border-radius:6px;font-family:inherit">↺ Reset</button>' +
-                      '<button onclick="testProxy(' + pid + ',\'' + ph + '\',' + pp + ',\'' + pu + '\',\'' + ppw + '\')" style="background:#0f172a;color:#7dd3fc;border:none;padding:8px 16px;font-size:12px;font-weight:600;cursor:pointer;border-radius:6px;font-family:inherit">⚡ Tester ce proxy</button>' +
-                      '<div style="flex:1;background:#f0fdf4;border:1px solid #bbf7d0;padding:8px 12px;font-size:11px;color:#166534;border-radius:6px;line-height:1.5;min-width:160px">' +
-                        '🔄 <b>Rotation</b> : ssid vide · 🔒 <b>Sticky</b> : ssid rempli.' +
-                      '</div>' +
-                    '</div>' +
-                    '<div id="prx-test-' + pid + '" style="display:none;margin-top:10px"></div>' +
-                  '</div>' +
-
-                  (p.notice ? '<div style="background:#fffbeb;border:1px solid #fde68a;padding:11px 13px;margin-top:12px;font-size:12px;color:#92400e;line-height:1.55">ℹ️ ' + esc(p.notice).replace(/\n/g,'<br>') + '</div>' : '') +
-                '</div>';
-            } else if(p.status === 'pending') {
-              credsHtml =
-                '<div style="background:#fffbeb;border:1px solid #fde68a;padding:14px;font-size:13px;color:#92400e;margin-top:16px;line-height:1.6">' +
-                  'Forfait en cours d\'activation — vos identifiants proxy seront disponibles après provisioning par l\'administrateur.' +
-                '</div>';
-            }
-
-            var expHtml = '';
-            if(p.expires_at) {
-              var days = Math.ceil((p.expires_at - Date.now()) / 86400000);
-              var expired = days <= 0;
-              var col = expired ? '#dc2626' : (days <= 5 ? '#b45309' : '#64748b');
-              var txt = expired ? 'Expiré le ' + new Date(p.expires_at).toLocaleDateString('fr-FR')
-                                : 'Valable jusqu\'au ' + new Date(p.expires_at).toLocaleDateString('fr-FR') + ' (' + days + ' j restants)';
-              expHtml = '<div style="font-size:12px;font-weight:600;color:' + col + ';margin-top:6px">⏳ ' + txt + '</div>';
-            }
-
-            return '<div style="background:#fff;border:1px solid #e2e8f0;padding:22px;margin-bottom:1px">' +
-              '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">' +
-                '<div>' +
-                  '<div style="font-size:15px;font-weight:700;color:#0f172a">🌐 Proxy résidentiel — ' + p.gb + ' Go</div>' +
-                  '<div style="font-size:12px;color:#64748b;margin-top:3px">Forfait ' + p.plan + '</div>' +
-                  expHtml +
-                '</div>' +
-                '<span style="background:' + bg + ';color:' + fg + ';border:1px solid;border-color:' + bg + ';padding:3px 10px;font-size:11px;font-weight:700">' + lbl + '</span>' +
-              '</div>' +
-              credsHtml +
-            '</div>';
-          }).join('');
-        }
-      }
-    } catch(e) { console.warn('Proxy accounts:', e); }
+  // ── Licences ──
+  const licWrap=document.getElementById('lic-wrap');
+  if(paid.length===0){
+    licWrap.innerHTML='<div class="empty"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><p>Aucune licence active.</p><a href="/pay.html" class="btn-sm primary">Acheter une licence</a></div>';
+  }else{
+    licWrap.innerHTML='<div class="lic-grid">'+paid.map(o=>{
+      var exp=o.paid_at+365*86400000;
+      var days=Math.ceil((exp-Date.now())/86400000);
+      var col=days<=0?'var(--red)':(days<=30?'var(--orange)':'var(--slate-2)');
+      var txt=days<=0?'Expirée le '+new Date(exp).toLocaleDateString('fr-FR'):'Valable jusqu\'au '+new Date(exp).toLocaleDateString('fr-FR')+' ('+days+' j)';
+      return '<div class="lic-card2">'+
+        '<div class="lic-prod">'+esc(PROD_LABELS[o.product]||o.product)+(o.quantity>1?'<span class="lic-tag">'+o.quantity+' PC</span>':'<span class="lic-tag">1 an</span>')+'</div>'+
+        '<div class="dl-row" style="grid-template-columns:1fr 1fr;gap:8px">'+
+          '<a href="'+esc(_dlWin)+'" target="_blank" rel="noopener" class="dl-btn2" style="background:#eff6ff;border-color:#bfdbfe;color:#1e40af"><svg viewBox="0 0 24 24" width="20" height="20" fill="#2563eb"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg><div><strong style="font-size:11.5px">Windows</strong><span>x64 · .exe</span></div></a>'+
+          '<a href="'+esc(_dlMac)+'" target="_blank" rel="noopener" class="dl-btn2" style="background:#faf5ff;border-color:#ddd6fe;color:#5b21b6"><svg viewBox="0 0 24 24" width="20" height="20" fill="#7c3aed"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg><div><strong style="font-size:11.5px">Mac M1/M2/M3</strong><span>arm64 · .dmg</span></div></a>'+
+        '</div>'+
+        '<div class="lic-row">'+
+          '<div class="lic-key2">'+esc(o.license_key)+'</div>'+
+          '<button class="btn-sm" onclick="copyText(\''+o.license_key+'\')"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copier</button>'+
+        '</div>'+
+        '<div class="lic-date2">Acheté le '+new Date(o.paid_at).toLocaleDateString('fr-FR')+'</div>'+
+        '<div class="lic-date2" style="color:'+col+';font-weight:600">⏳ '+esc(txt)+'</div>'+
+        '<a href="/pay.html?product='+esc(o.product)+'" class="btn-sm" style="margin-top:4px">↻ '+(days<=0?'Réactiver':'Renouveler')+'</a>'+
+      '</div>';
+    }).join('')+'</div>';
   }
 
-  function toggleSmtpPass(id) {
-    var el = document.getElementById('smtp-pass-' + id);
-    if(!el) return;
-    var shown = el.dataset.shown === '1';
-    el.textContent = shown ? '••••••••' : el.dataset.pass;
-    el.dataset.shown = shown ? '0' : '1';
-    el.nextElementSibling.textContent = shown ? 'Voir' : 'Masquer';
-  }
-  function copySmtp(id, host, port, user) {
-    var passEl = document.getElementById('smtp-pass-' + id);
-    var pass = passEl ? passEl.dataset.pass : '';
-    var txt = 'Hôte SMTP : ' + host + '\nPort : ' + port + '\nUtilisateur : ' + user + '\nMot de passe : ' + pass + '\nChiffrement : TLS/STARTTLS';
-    navigator.clipboard.writeText(txt).then(function(){ showToast('✅ Identifiants copiés !'); });
+  // ── Orders table ──
+  const ordWrap=document.getElementById('ord-wrap');
+  if(orders.length===0){
+    ordWrap.innerHTML='<div class="empty"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><p>Aucune commande.</p></div>';
+  }else{
+    ordWrap.innerHTML='<div style="overflow-x:auto"><table class="tbl"><thead><tr><th>#</th><th>Produit</th><th>Montant</th><th>Statut</th><th>Date</th></tr></thead><tbody>'+
+      orders.map(o=>'<tr><td style="color:var(--slate-2)">#'+o.id+'</td><td>'+esc(PROD_LABELS[o.product]||o.product)+(o.quantity>1?' ×'+o.quantity:'')+'</td><td style="font-family:monospace;font-size:12px">'+esc(String(o.price_exact))+' '+esc(CRYPTO_LABEL[o.crypto]||'')+'</td><td><span class="sts sts-'+esc(o.status)+'">'+esc(STS_LABELS[o.status]||o.status)+'</span></td><td style="color:var(--slate-2)">'+new Date(o.created_at).toLocaleDateString('fr-FR')+'</td></tr>').join('')+
+    '</tbody></table></div>';
   }
 
-  function toggleProxyPass(id) {
-    var el = document.getElementById('proxy-pass-' + id);
-    if(!el) return;
-    var shown = el.dataset.shown === '1';
-    el.textContent = shown ? '••••••••' : el.dataset.pass;
-    el.dataset.shown = shown ? '0' : '1';
-    el.nextElementSibling.textContent = shown ? 'Voir' : 'Masquer';
-  }
-  function copyProxy(id, host, port, user) {
-    var passEl = document.getElementById('proxy-pass-' + id);
-    var pass = passEl ? passEl.dataset.pass : '';
-    var txt = 'Hôte : ' + host + '\nPort : ' + port + '\nUtilisateur : ' + user + '\nMot de passe : ' + pass + '\nFormat : ' + host + ':' + port + ':' + user + ':' + pass;
-    navigator.clipboard.writeText(txt).then(function(){ showToast('✅ Identifiants proxy copiés !'); });
-  }
-
-  function randSsid() { return Math.random().toString(36).slice(2,12); }
-
-  var PROXY_ISPS = {
-    ca: [['as577_Bell_Canada','Bell Canada'],['as812_Rogers_Communications','Rogers'],['as852_TELUS_Communications','Telus'],['as5769_Videotron_Ltee','Vidéotron'],['as11260_EastLink','EastLink'],['as6327_Shaw_Communications','Shaw / Freedom'],['as19752_Cogeco_Connexion','Cogeco']],
-    fr: [['as3215_Orange_S.A.','Orange'],['as15557_SFR','SFR'],['as12322_Free_SAS','Free'],['as5410_Bouygues_Telecom','Bouygues Telecom'],['as21502_Numericable','Numericable / SFR'],['as43100_Bretagne_Telecom','Bretagne Telecom']],
-    be: [['as5432_Proximus','Proximus'],['as6848_Telenet','Telenet'],['as21474_VOO','VOO'],['as12392_Brutele','Brutele'],['as57977_Scarlet','Scarlet (Proximus)']],
-    gb: [['as2856_BT_Group','BT'],['as5089_Virgin_Media','Virgin Media'],['as5607_Sky_UK','Sky'],['as13285_TalkTalk','TalkTalk'],['as12576_EE_Limited','EE'],['as31655_Zen_Internet','Zen Internet']],
-    de: [['as3320_Deutsche_Telekom','Deutsche Telekom'],['as3209_Vodafone_DE','Vodafone DE'],['as6805_Telefonica_DE','O2 / Telefónica'],['as8560_United_Internet','1&1 / United Internet'],['as29562_Kabeldeutschland','Kabel Deutschland']],
-    us: [['as7922_Comcast','Comcast'],['as7018_AT&T','AT&T'],['as701_Verizon','Verizon'],['as21928_T-Mobile','T-Mobile'],['as22773_Cox_Communications','Cox'],['as20115_Charter_Spectrum','Charter / Spectrum'],['as7065_CenturyLink','CenturyLink / Lumen']],
-    nl: [['as1136_KPN','KPN'],['as33915_Ziggo','Ziggo'],['as50266_T-Mobile_NL','T-Mobile NL'],['as60781_Leaseweb_NL','Leaseweb'],['as8455_ATOM86','ATOM86']],
-    ch: [['as3303_Swisscom','Swisscom'],['as6830_UPC_Switzerland','UPC / Sunrise'],['as15600_Salt_Mobile','Salt Mobile'],['as13030_Init7','Init7']],
-    es: [['as3352_Telefonica_ES','Telefónica / Movistar'],['as12430_Vodafone_ES','Vodafone ES'],['as12479_Orange_ES','Orange ES'],['as57269_MasMovil','MásMóvil'],['as12357_Euskaltel','Euskaltel']],
-    it: [['as1267_TIM','TIM (Telecom Italia)'],['as12874_Fastweb','Fastweb'],['as30722_Vodafone_IT','Vodafone IT'],['as12874_Fastweb','Fastweb'],['as16232_Telecom_Italia_Sparkle','Sparkle']],
-    pt: [['as2860_NOS','NOS'],['as5432_MEO','MEO / Altice'],['as12353_Vodafone_PT','Vodafone PT'],['as47869_Nowo','Nowo']],
-    au: [['as1221_Telstra','Telstra'],['as4804_Optus','Optus'],['as7545_TPG_Telecom','TPG Telecom'],['as4764_Aussie_Broadband','Aussie Broadband'],['as9443_iiNet','iiNet']],
-    jp: [['as2914_NTT','NTT Communications'],['as17676_SoftBank','SoftBank'],['as2516_KDDI','KDDI'],['as4713_OCN','OCN / NTT West'],['as9605_NTT_East','NTT East']],
-    kr: [['as4766_KT_Korea','KT Corp'],['as9644_SK_Broadband','SK Broadband'],['as17858_LG_Uplus','LG U+'],['as45369_Sejong_Telecom','Sejong Telecom']],
-    br: [['as28573_Claro_Brasil','Claro'],['as18881_Vivo','Vivo / Telefônica'],['as7738_Oi','Oi'],['as26615_TIM_Brasil','TIM Brasil'],['as28343_NET_Virtua','NET / Claro']],
-    mx: [['as8151_TELMEX','Telmex'],['as13999_Megacable','Megacable'],['as28403_Axtel','Axtel'],['as22884_Totalplay','Totalplay']],
-    ar: [['as7303_Telecom_Argentina','Telecom Argentina'],['as10318_Cablevision','Cablevision / Fibertel'],['as19037_AMX_Argentina','Claro AR']],
-    sg: [['as4657_StarHub','StarHub'],['as9506_Singtel','Singtel'],['as18106_Viewqwest','ViewQwest'],['as10091_M1_Limited','M1']],
-    hk: [['as9304_HKBN','HKBN'],['as4515_PCCW','PCCW HKT'],['as9269_Hong_Kong_Broadband','HKBN (alt)'],['as3462_SmarTone','SmarTone']],
-    za: [['as7420_Telkom_SA','Telkom SA'],['as5713_MTN_SA','MTN SA'],['as36874_Vodacom','Vodacom'],['as37457_Cool_Ideas','Cool Ideas']],
-    ng: [['as36873_MTN_Nigeria','MTN Nigeria'],['as29465_Airtel_Nigeria','Airtel Nigeria'],['as36911_Glo_Mobile','Glo Mobile'],['as37076_9Mobile','9Mobile']],
-    ci: [['as36842_Orange_CI','Orange CI'],['as36863_MTN_CI','MTN CI'],['as37054_Moov_Africa','Moov Africa']],
-    sn: [['as8346_Sonatel','Sonatel / Orange SN'],['as37649_Expresso_Telecom','Expresso'],['as328637_Free_SN','Free SN']],
-    ma: [['as6713_Maroc_Telecom','Maroc Telecom'],['as36903_Inwi','Inwi'],['as36925_Orange_MA','Orange MA']],
-    eg: [['as8452_Telecom_Egypt','Telecom Egypt / WE'],['as24863_Link_Egypt','Link.net'],['as36992_Vodafone_Egypt','Vodafone EG'],['as37069_Orange_Egypt','Orange EG']],
-    ae: [['as5384_Emirates_Internet','Etisalat / e&'],['as9143_du','du (EITC)']],
-    in: [['as24560_Airtel_India','Airtel'],['as55836_Reliance_Jio','Reliance Jio'],['as17813_MTNL','MTNL'],['as9829_BSNL','BSNL'],['as45609_Vodafone_IN','Vodafone IN']],
-    se: [['as1299_Telia_SE','Telia'],['as1257_Tele2_SE','Tele2'],['as2119_Telenor_SE','Telenor'],['as8473_Bahnhof','Bahnhof'],['as12552_IP-Only','IP-Only']],
-    no: [['as2119_Telenor_NO','Telenor NO'],['as5376_Get_AS','Get / Telia'],['as39787_Altibox','Altibox'],['as15659_Ice_NET','Ice.net']],
-    pl: [['as5617_Orange_PL','Orange PL'],['as5588_T-Mobile_PL','T-Mobile PL'],['as12741_Netia','Netia'],['as21021_Multimedia_PL','Multimedia']],
-    ru: [['as8359_MTS_Russia','MTS'],['as8402_CORBINA_TELECOM','Beeline / VimpelCom'],['as25513_Moscow_MegaFon','MegaFon'],['as31213_Rostelecom','Rostelecom']],
-    tr: [['as9121_TTNET','Türk Telekom / TTNET'],['as15897_TurkCell','Turkcell'],['as34984_Superonline','Superonline'],['as12978_Vodafone_TR','Vodafone TR']],
-    id: [['as4800_Telkom_Indonesia','Telkom Indonesia'],['as23693_Telkomsel','Telkomsel'],['as24203_Indosat','Indosat Ooredoo'],['as18004_XL_Axiata','XL Axiata']],
-    vn: [['as7643_VNPT','VNPT'],['as45899_VNPT_VinaPhone','VinaPhone'],['as38731_Viettel','Viettel'],['as45903_FPT_Telecom','FPT Telecom']],
-    th: [['as7470_TOT_Thailand','TOT'],['as9931_CAT_Telecom','CAT Telecom'],['as23969_True_Internet','True Internet'],['as131445_DTAC','DTAC / NT']],
-  };
-
-  function proxyIspChange(id) {
-    var country = (document.getElementById('prx-country-' + id)||{}).value || '';
-    var sel = document.getElementById('prx-isp-' + id);
-    var manual = document.getElementById('prx-isp-manual-' + id);
-    if(!sel) return;
-
-    var isps = PROXY_ISPS[country] || [];
-    var opts = '<option value="">🌐 Aléatoire (tous ISP)</option>';
-    isps.forEach(function(isp){
-      opts += '<option value="' + isp[0] + '">' + isp[1] + '</option>';
-    });
-    opts += '<option value="__manual__">✏️ Saisir manuellement…</option>';
-    sel.innerHTML = opts;
-    sel.value = '';
-    if(manual) manual.style.display = 'none';
-    proxyGen(id);
-  }
-
-  function proxyIspVal(id) {
-    var sel = document.getElementById('prx-isp-' + id);
-    var manual = document.getElementById('prx-isp-manual-' + id);
-    if(!sel) return '';
-    if(sel.value === '__manual__') return (manual ? manual.value : '').trim();
-    return sel.value;
-  }
-
-  function proxyGen(id) {
-    var result = document.getElementById('prx-result-' + id);
-    if(!result) return;
-
-    var username = result.dataset.user;
-    var pass     = result.dataset.pass;
-    var host     = result.dataset.host;
-    var port     = result.dataset.port;
-
-    var country  = (document.getElementById('prx-country-' + id)||{}).value || '';
-    var isp      = proxyIspVal(id);
-    // Afficher/masquer le champ manuel ISP
-    var ispSel = document.getElementById('prx-isp-' + id);
-    var ispMan = document.getElementById('prx-isp-manual-' + id);
-    if(ispSel && ispMan) ispMan.style.display = ispSel.value === '__manual__' ? '' : 'none';
-    var ssidBase = ((document.getElementById('prx-ssid-'    + id)||{}).value || '').trim();
-    var qty      = Math.min(999, Math.max(1, parseInt((document.getElementById('prx-qty-' + id)||{}).value, 10) || 1));
-
-    // Construire le préfixe de ciblage (sans ssid)
-    var prefix = username;
-    if(country) prefix += '-country-' + country;
-    if(isp)     prefix += '-isp-'     + isp;
-
-    var lines = [];
-    for(var i = 0; i < qty; i++) {
-      var u = prefix;
-      if(qty === 1) {
-        // Mode simple : ssid manuel ou vide
-        if(ssidBase) u += '-ssid-' + ssidBase;
-      } else {
-        // Quantité > 1 : ssid unique par ligne (sticky différent) ou vide (rotating)
-        if(ssidBase) {
-          // Sticky : ssid de base + index pour différencier
-          u += '-ssid-' + ssidBase + (qty > 1 ? (i+1) : '');
-        } else {
-          // Rotating : pas de ssid — toutes les lignes identiques (plusieurs threads)
-        }
-      }
-      lines.push(u + ':' + pass + ':' + host + ':' + port);
-    }
-
-    result.value = lines.join('\n');
-    result.rows  = Math.min(qty, 12);
-
-    var cnt = document.getElementById('prx-count-' + id);
-    if(cnt) cnt.textContent = '× ' + qty;
-  }
-
-  function genSsid(id) {
-    var el = document.getElementById('prx-ssid-' + id);
-    if(!el) return;
-    el.value = randSsid();
-    proxyGen(id);
-  }
-
-  function copyProxyGen(id) {
-    var result = document.getElementById('prx-result-' + id);
-    if(!result) return;
-    var txt = result.value || result.textContent;
-    var qty = (txt.match(/\n/g)||[]).length + 1;
-    navigator.clipboard.writeText(txt).then(function(){
-      showToast('✅ ' + qty + ' chaîne' + (qty>1?'s':'') + ' copiée' + (qty>1?'s':'') + ' !');
-    });
-  }
-
-  async function testProxy(id, host, port, username, password) {
-    var box = document.getElementById('prx-test-' + id);
-    if(!box) return;
-    box.style.display = '';
-    box.innerHTML = '<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:12px 14px;font-size:12.5px;color:#64748b">⏳ Test en cours…</div>';
-    try {
-      var r = await fetch(API + '/api/auth/proxy-test', {
-        method: 'POST',
-        headers: { ...authHeaders(), 'Content-Type': 'application/json' },
-        body: JSON.stringify({ host: host, port: port, username: username, password: password }),
-      });
-      var d = await r.json();
-      if(d.ok) {
-        box.innerHTML =
-          '<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:14px 16px;font-size:13px">' +
-            '<div style="font-weight:700;color:#15803d;margin-bottom:8px">✅ Proxy fonctionnel !</div>' +
-            '<div style="display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:12.5px">' +
-              '<span style="color:#94a3b8;font-weight:600">IP publique</span><span style="font-family:monospace;font-weight:700;color:#0f172a">' + (d.ip||'—') + '</span>' +
-              '<span style="color:#94a3b8;font-weight:600">Pays</span><span style="font-weight:600;color:#0f172a">' + (d.country||'—') + '</span>' +
-              '<span style="color:#94a3b8;font-weight:600">Ville</span><span style="color:#334155">' + ([d.city, d.region].filter(Boolean).join(', ')||'—') + '</span>' +
-              '<span style="color:#94a3b8;font-weight:600">Opérateur</span><span style="color:#334155;font-size:11.5px">' + (d.org||'—') + '</span>' +
-            '</div>' +
+  // ── SMTP ──
+  try{
+    var smR=await fetch(API+'/api/auth/smtp-servers',{headers:authHeaders()});
+    if(smR.ok){
+      var smList=await smR.json();
+      if(smList.length>0){
+        document.getElementById('sb-smtp').style.display='';
+        document.getElementById('st-smtp-card').style.display='';
+        document.getElementById('st-smtp').textContent=smList.length;
+        var VOL={smtp_10k:'10K',smtp_50k:'50K',smtp_100k:'100K',smtp_500k:'500K'};
+        var SB={active:'#dcfce7',suspended:'#fee2e2',pending:'#fef9c3'};
+        var SF={active:'#166534',suspended:'#991b1b',pending:'#854d0e'};
+        var SL={active:'Actif',suspended:'Suspendu',pending:'En attente'};
+        document.getElementById('smtp-wrap').innerHTML=smList.map(s=>{
+          var vol=VOL[s.plan]||String(s.volume||0);
+          var bg=SB[s.status]||'#f1f5f9',fg=SF[s.status]||'#334155',lbl=SL[s.status]||s.status;
+          var expHtml='';
+          if(s.expires_at){var d=Math.ceil((s.expires_at-Date.now())/86400000);var ex=d<=0;var col=ex?'var(--red)':(d<=5?'var(--orange)':'var(--slate)');expHtml='<div class="svc-exp" style="color:'+col+'">⏳ '+(ex?'Expiré le '+new Date(s.expires_at).toLocaleDateString('fr-FR'):'Jusqu\'au '+new Date(s.expires_at).toLocaleDateString('fr-FR')+' ('+d+' j)')+'</div>';}
+          return '<div class="svc-row">'+
+            '<div class="svc-info">'+
+              '<div class="svc-name">📧 SMTP Relay — '+esc(vol)+' emails/mois</div>'+
+              '<div class="svc-meta"><span>Plan '+esc(s.plan)+'</span><span>'+(s.relay_host||'smtp.exabytes.com')+'</span><span>Port '+(s.relay_port||587)+' TLS</span></div>'+
+              expHtml+
+            '</div>'+
+            '<div class="svc-actions">'+
+              '<span class="svc-status" style="background:'+bg+';color:'+fg+'">'+esc(lbl)+'</span>'+
+              (s.username?'<button class="btn-sm primary" onclick=\'openSmtpModal('+JSON.stringify(s)+','+JSON.stringify(_senderNotice)+')\'>🔑 Identifiants</button>':'<span style="font-size:12px;color:var(--orange)">⏳ En provisioning</span>')+
+              '<a href="/pay.html?product='+esc(s.plan)+'" class="btn-sm">↻ Renouveler</a>'+
+              '<button class="btn-sm danger" onclick="deleteSmtp('+s.id+')">🗑</button>'+
+            '</div>'+
           '</div>';
-      } else {
-        box.innerHTML = '<div style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:12px 14px;font-size:12.5px;color:#dc2626">❌ ' + (d.error||'Erreur inconnue') + '</div>';
-      }
-    } catch(e) {
-      box.innerHTML = '<div style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:12px 14px;font-size:12.5px;color:#dc2626">❌ Erreur réseau : ' + e.message + '</div>';
-    }
-  }
-
-  function resetProxyGen(id) {
-    ['prx-country-','prx-ssid-','prx-isp-manual-'].forEach(function(p){
-      var el = document.getElementById(p + id);
-      if(el) el.value = '';
-    });
-    var qtyEl = document.getElementById('prx-qty-' + id);
-    if(qtyEl) qtyEl.value = 1;
-    proxyIspChange(id); // remet le select ISP à vide + regénère
-  }
-
-  async function deleteSmtp(id) {
-    if(!confirm('Supprimer définitivement ce serveur SMTP ? Cette action est irréversible et la clé SMTP associée sera révoquée.')) return;
-    try {
-      var r = await fetch(API + '/api/auth/smtp-servers/' + id, { method:'DELETE', headers: authHeaders() });
-      var d = await r.json();
-      if(r.ok && d.ok){ showToast('🗑 Serveur SMTP supprimé.'); setTimeout(function(){ location.reload(); }, 800); }
-      else showToast('❌ ' + (d.error || 'Erreur'));
-    } catch(e){ showToast('❌ Erreur réseau'); }
-  }
-
-  // ── Messagerie support ──
-  var _supportName = 'Support EvoStudio', _supLastAdmin = -1, _supLastUnread = 0, _supAudio = null;
-  function supBeep(){
-    try {
-      if(!_supAudio) _supAudio = new (window.AudioContext||window.webkitAudioContext)();
-      if(_supAudio.state==='suspended') _supAudio.resume();
-      var o=_supAudio.createOscillator(), g=_supAudio.createGain();
-      o.type='sine'; o.frequency.value=880; g.gain.value=0.001; o.connect(g); g.connect(_supAudio.destination);
-      var t=_supAudio.currentTime;
-      g.gain.exponentialRampToValueAtTime(0.18,t+0.02); g.gain.exponentialRampToValueAtTime(0.0001,t+0.32);
-      o.start(t); o.stop(t+0.34);
-    } catch(e){}
-  }
-  async function loadSupport() {
-    var thread = document.getElementById('support-thread');
-    if(!thread) return;
-    try {
-      var r = await fetch(API + '/api/auth/support', { headers: authHeaders() });
-      if(!r.ok) return;
-      var data = await r.json();
-      var msgs = data.messages || [];
-      var _adminCount = msgs.filter(function(m){return m.sender==='admin';}).length;
-      var badge = document.getElementById('support-unread');
-      if(badge) badge.style.display = 'none';
-      var html = '';
-      if(!msgs.length){
-        html = '<div style="text-align:center;color:var(--slate-2);font-size:13px;padding:20px">Aucun message. Posez votre question à notre équipe ci-dessous.</div>';
-      } else {
-        html = msgs.map(function(m){
-          var when = new Date(m.created_at).toLocaleString('fr-FR', {day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
-          if(m.sender === 'system'){
-            return '<div style="text-align:center;margin:4px 0"><span style="display:inline-block;background:#eef2f7;color:#64748b;font-size:11px;padding:4px 12px;border-radius:999px">' + esc(m.body) + '</span></div>';
-          }
-          var mine = m.sender === 'user';
-          return '<div style="display:flex;justify-content:' + (mine?'flex-end':'flex-start') + '">' +
-            '<div style="max-width:78%;background:' + (mine?'#2563eb':'#f1f5f9') + ';color:' + (mine?'#fff':'#0f172a') + ';padding:9px 13px;font-size:13.5px;line-height:1.5;word-break:break-word">' +
-              (mine?'':'<div style="font-size:10px;font-weight:700;color:#2563eb;margin-bottom:3px">' + esc(_supportName) + '</div>') +
-              esc(m.body).replace(/\n/g,'<br>') +
-              '<div style="font-size:10px;opacity:.7;margin-top:4px;text-align:right">' + when + '</div>' +
-            '</div></div>';
         }).join('');
       }
-      if(data.closed){
-        html += '<div style="text-align:center;margin-top:10px;padding:10px;background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;font-size:12px">✓ Conversation résolue. Écrivez un message pour la rouvrir.</div>';
-      }
-      thread.innerHTML = html;
-      thread.scrollTop = thread.scrollHeight;
-      if(_supLastAdmin >= 0 && _adminCount > _supLastAdmin) supBeep();
-      _supLastAdmin = _adminCount;
-    } catch(e){}
-  }
-  function esc(t){ return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-  async function sendSupport() {
-    var inp = document.getElementById('support-input');
-    var btn = document.getElementById('support-send');
-    var body = inp.value.trim();
-    if(!body) return;
-    btn.disabled = true;
-    try {
-      var r = await fetch(API + '/api/auth/support', { method:'POST', headers: Object.assign({'Content-Type':'application/json'}, authHeaders()), body: JSON.stringify({ body: body }) });
-      var d = await r.json();
-      if(r.ok && d.ok){ inp.value=''; await loadSupport(); }
-      else showToast('❌ ' + (d.error || 'Erreur'));
-    } catch(e){ showToast('❌ Erreur réseau'); }
-    btn.disabled = false;
-  }
-
-  // ── Widget assistance flottant ──
-  var _supOpen = false;
-  function toggleSupport() {
-    try { if(!_supAudio) _supAudio = new (window.AudioContext||window.webkitAudioContext)(); if(_supAudio.state==='suspended') _supAudio.resume(); } catch(e){}
-    _supOpen = !_supOpen;
-    var win = document.getElementById('sup-window');
-    win.style.display = _supOpen ? 'flex' : 'none';
-    if (_supOpen) {
-      var b = document.getElementById('support-unread'); if(b) b.style.display='none';
-      loadSupport();
-      setTimeout(function(){ var i=document.getElementById('support-input'); if(i) i.focus(); }, 100);
-    } else {
-      refreshUnread();
     }
-  }
-  async function refreshUnread() {
-    if (_supOpen) return;
-    try {
-      var r = await fetch(API + '/api/auth/support/unread', { headers: authHeaders() });
-      if(!r.ok) return;
-      var d = await r.json();
-      if(d.unread > _supLastUnread) supBeep();
-      _supLastUnread = d.unread;
-      var b = document.getElementById('support-unread');
-      if(b){ if(d.unread>0){ b.textContent=d.unread; b.style.display='flex'; } else { b.style.display='none'; } }
-    } catch(e){}
-  }
+  }catch(e){console.warn('SMTP:',e)}
 
-  load();
-  refreshUnread();
-  setInterval(function(){ if(_supOpen) loadSupport(); else refreshUnread(); }, 20000);
-
-  // ── 2FA ──────────────────────────────────────────────────────
-  let _tfa2faSecret = null;
-  let _tfa2faEnabled = false;
-
-  function open2faModal() {
-    const btn = document.getElementById('p-2fa-btn');
-    _tfa2faEnabled = btn.innerHTML.includes('activé');
-    document.getElementById('tfa-overlay').classList.add('show');
-    if (_tfa2faEnabled) {
-      document.getElementById('tfa-title').textContent = '🔓 Désactiver le 2FA';
-      document.getElementById('tfa-sub').textContent = 'Confirmez avec votre code TOTP actuel.';
-      document.getElementById('tfa-step-setup').style.display = 'none';
-      document.getElementById('tfa-step-disable').style.display = '';
-      setTimeout(() => document.getElementById('tfa-disable-code').focus(), 100);
-    } else {
-      document.getElementById('tfa-title').textContent = '🔐 Activer le 2FA';
-      document.getElementById('tfa-sub').textContent = 'Scannez le QR code avec Google Authenticator ou Authy.';
-      document.getElementById('tfa-step-setup').style.display = '';
-      document.getElementById('tfa-step-disable').style.display = 'none';
-      init2fa();
+  // ── Proxy ──
+  try{
+    var pxR=await fetch(API+'/api/auth/proxy-accounts',{headers:authHeaders()});
+    if(pxR.ok){
+      var pxList=await pxR.json();
+      if(pxList.length>0){
+        document.getElementById('sb-proxy').style.display='';
+        document.getElementById('st-proxy-card').style.display='';
+        document.getElementById('st-proxy').textContent=pxList.length;
+        var PSB={active:'#dcfce7',suspended:'#fee2e2',pending:'#fef9c3'};
+        var PSF={active:'#166534',suspended:'#991b1b',pending:'#854d0e'};
+        var PSL={active:'Actif',suspended:'Suspendu',pending:'En attente'};
+        document.getElementById('proxy-wrap').innerHTML=pxList.map(p=>{
+          var bg=PSB[p.status]||'#f1f5f9',fg=PSF[p.status]||'#334155',lbl=PSL[p.status]||p.status;
+          var expHtml='';
+          if(p.expires_at){var d=Math.ceil((p.expires_at-Date.now())/86400000);var ex=d<=0;var col=ex?'var(--red)':(d<=5?'var(--orange)':'var(--slate)');expHtml='<div class="svc-exp" style="color:'+col+'">⏳ '+(ex?'Expiré le '+new Date(p.expires_at).toLocaleDateString('fr-FR'):'Jusqu\'au '+new Date(p.expires_at).toLocaleDateString('fr-FR')+' ('+d+' j)')+'</div>';}
+          return '<div class="svc-row">'+
+            '<div class="svc-info">'+
+              '<div class="svc-name">🌐 Proxy résidentiel — '+esc(String(p.gb))+' Go</div>'+
+              '<div class="svc-meta"><span>Forfait '+esc(p.plan)+'</span>'+(p.username?'<span>'+esc(p.username)+'</span>':'')+'</div>'+
+              expHtml+
+            '</div>'+
+            '<div class="svc-actions">'+
+              '<span class="svc-status" style="background:'+bg+';color:'+fg+'">'+esc(lbl)+'</span>'+
+              (p.username&&p.status==='active'?'<button class="btn-sm primary" style="background:var(--teal);border-color:var(--teal)" onclick=\'openProxyModal('+JSON.stringify(p)+')\'>🔑 Identifiants</button>':'<span style="font-size:12px;color:var(--orange)">⏳ En activation</span>')+
+              '<a href="/pay.html?product=proxy_55gb" class="btn-sm">+ Acheter</a>'+
+            '</div>'+
+          '</div>';
+        }).join('');
+      }else{
+        document.getElementById('proxy-wrap').innerHTML='<div class="empty"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 0 20"/></svg><p>Aucun forfait proxy actif.</p><a href="/pay.html?product=proxy_55gb" class="btn-sm primary">Acheter du proxy</a></div>';
+      }
     }
-  }
+  }catch(e){console.warn('Proxy:',e)}
+}
 
-  function close2faModal() {
-    document.getElementById('tfa-overlay').classList.remove('show');
-    document.getElementById('tfa-code').value = '';
-    document.getElementById('tfa-disable-code').value = '';
-    document.getElementById('tfa-msg-setup').textContent = '';
-    document.getElementById('tfa-msg-disable').textContent = '';
-    _tfa2faSecret = null;
-  }
+async function deleteSmtp(id){
+  if(!confirm('Supprimer définitivement ce serveur SMTP ? La clé SMTP sera révoquée.'))return;
+  try{
+    var r=await fetch(API+'/api/auth/smtp-servers/'+id,{method:'DELETE',headers:authHeaders()});
+    var d=await r.json();
+    if(r.ok&&d.ok){showToast('🗑 Serveur SMTP supprimé.');setTimeout(()=>location.reload(),800);}
+    else showToast('❌ '+(d.error||'Erreur'));
+  }catch{showToast('❌ Erreur réseau')}
+}
 
-  async function init2fa() {
-    document.getElementById('tfa-qr').innerHTML = '<div style="width:180px;height:180px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;color:var(--slate-2);font-size:12px">Chargement…</div>';
-    document.getElementById('tfa-secret').textContent = '—';
-    try {
-      const r = await fetch(API + '/api/auth/2fa/setup/init', { method:'POST', headers: authHeaders() });
-      const d = await r.json();
-      if (!d.ok) { document.getElementById('tfa-msg-setup').textContent = d.error || 'Erreur'; return; }
-      _tfa2faSecret = d.secret;
-      document.getElementById('tfa-secret').textContent = d.secret;
-      document.getElementById('tfa-qr').innerHTML = `<img src="${d.qr}" width="180" height="180" style="display:block;border-radius:4px" />`;
-      setTimeout(() => document.getElementById('tfa-code').focus(), 100);
-    } catch { document.getElementById('tfa-msg-setup').textContent = 'Erreur réseau.'; }
-  }
+// ── Support chat ──
+var _supportName='Support EvoStudio',_supLastAdmin=-1,_supLastUnread=0,_supOpen=false,_supAudio=null;
+function supBeep(){try{if(!_supAudio)_supAudio=new(window.AudioContext||window.webkitAudioContext)();if(_supAudio.state==='suspended')_supAudio.resume();var o=_supAudio.createOscillator(),g=_supAudio.createGain();o.type='sine';o.frequency.value=880;g.gain.value=0.001;o.connect(g);g.connect(_supAudio.destination);var t=_supAudio.currentTime;g.gain.exponentialRampToValueAtTime(0.18,t+0.02);g.gain.exponentialRampToValueAtTime(0.0001,t+0.32);o.start(t);o.stop(t+0.34);}catch(e){}}
+async function loadSupport(){
+  var thread=document.getElementById('support-thread');if(!thread)return;
+  try{
+    var r=await fetch(API+'/api/auth/support',{headers:authHeaders()});if(!r.ok)return;
+    var data=await r.json();var msgs=data.messages||[];
+    var ac=msgs.filter(m=>m.sender==='admin').length;
+    var html='';
+    if(!msgs.length){html='<div style="text-align:center;color:var(--slate-2);font-size:13px;padding:20px">Posez votre question à notre équipe.</div>';}
+    else{html=msgs.map(m=>{
+      var when=new Date(m.created_at).toLocaleString('fr-FR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
+      if(m.sender==='system')return '<div style="text-align:center;margin:4px 0"><span style="display:inline-block;background:#eef2f7;color:var(--slate);font-size:11px;padding:4px 12px;border-radius:999px">'+esc(m.body)+'</span></div>';
+      var mine=m.sender==='user';
+      return '<div style="display:flex;justify-content:'+(mine?'flex-end':'flex-start')+'"><div style="max-width:78%;background:'+(mine?'var(--blue)':'#f1f5f9')+';color:'+(mine?'#fff':'var(--ink)')+';padding:9px 13px;font-size:13.5px;line-height:1.5;word-break:break-word;border-radius:10px;'+(mine?'border-bottom-right-radius:2px':'border-bottom-left-radius:2px')+'">'+(mine?'':'<div style="font-size:10px;font-weight:700;color:var(--blue);margin-bottom:3px">'+esc(_supportName)+'</div>')+esc(m.body).replace(/\n/g,'<br>')+'<div style="font-size:10px;opacity:.6;margin-top:4px;text-align:right">'+when+'</div></div></div>';
+    }).join('');}
+    if(data.closed)html+='<div style="text-align:center;margin-top:10px;padding:10px;background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;font-size:12px;border-radius:8px">✓ Conversation résolue. Écrivez pour la rouvrir.</div>';
+    thread.innerHTML=html;thread.scrollTop=thread.scrollHeight;
+    if(_supLastAdmin>=0&&ac>_supLastAdmin)supBeep();
+    _supLastAdmin=ac;
+  }catch(e){}
+}
+function toggleSupport(){
+  try{if(!_supAudio)_supAudio=new(window.AudioContext||window.webkitAudioContext)();if(_supAudio.state==='suspended')_supAudio.resume();}catch(e){}
+  _supOpen=!_supOpen;
+  var win=document.getElementById('sup-window');
+  win.style.display=_supOpen?'flex':'none';
+  if(_supOpen){var b=document.getElementById('support-unread');if(b)b.style.display='none';loadSupport();setTimeout(()=>{var i=document.getElementById('support-input');if(i)i.focus();},100);}
+  else refreshUnread();
+}
+async function refreshUnread(){
+  if(_supOpen)return;
+  try{
+    var r=await fetch(API+'/api/auth/support/unread',{headers:authHeaders()});if(!r.ok)return;
+    var d=await r.json();
+    if(d.unread>_supLastUnread)supBeep();
+    _supLastUnread=d.unread;
+    var b=document.getElementById('support-unread');
+    if(b){if(d.unread>0){b.textContent=d.unread;b.style.display='flex';}else b.style.display='none';}
+  }catch(e){}
+}
+async function sendSupport(){
+  var inp=document.getElementById('support-input');
+  var btn=document.getElementById('support-send');
+  var body=inp.value.trim();if(!body)return;
+  btn.disabled=true;
+  try{
+    var r=await fetch(API+'/api/auth/support',{method:'POST',headers:Object.assign({'Content-Type':'application/json'},authHeaders()),body:JSON.stringify({body})});
+    var d=await r.json();
+    if(r.ok&&d.ok){inp.value='';await loadSupport();}
+    else showToast('❌ '+(d.error||'Erreur'));
+  }catch(e){showToast('❌ Erreur réseau')}
+  btn.disabled=false;
+}
 
-  async function confirm2fa() {
-    const code = document.getElementById('tfa-code').value.trim();
-    const msg  = document.getElementById('tfa-msg-setup');
-    const btn  = document.getElementById('tfa-confirm-btn');
-    if (!code || code.length !== 6) { msg.style.color='#dc2626'; msg.textContent = 'Entrez le code à 6 chiffres.'; return; }
-    btn.disabled = true; btn.textContent = 'Vérification…';
-    try {
-      const r = await fetch(API + '/api/auth/2fa/setup/confirm', { method:'POST', headers:{...authHeaders(),'Content-Type':'application/json'}, body: JSON.stringify({ secret: _tfa2faSecret, totp: code }) });
-      const d = await r.json();
-      if (d.ok) {
-        showToast('✅ 2FA activé avec succès !');
-        close2faModal();
-        const b = document.getElementById('p-2fa-btn');
-        b.innerHTML = '🔐 2FA activé <span style="color:#16a34a;margin-left:4px">✓</span>';
-        b.title = 'Désactiver la double authentification';
-      } else {
-        msg.style.color='#dc2626'; msg.textContent = d.error || 'Code incorrect.';
-        document.getElementById('tfa-code').value = '';
-        document.getElementById('tfa-code').focus();
-      }
-    } catch { msg.style.color='#dc2626'; msg.textContent = 'Erreur réseau.'; }
-    btn.disabled = false; btn.textContent = 'Activer le 2FA';
+// ── 2FA ──
+let _tfa2faSecret=null,_tfa2faEnabled=false;
+function open2faModal(){
+  _tfa2faEnabled=document.getElementById('acc-2fa-btn').textContent.includes('activé');
+  document.getElementById('tfa-overlay').classList.add('show');
+  if(_tfa2faEnabled){
+    document.getElementById('tfa-title').textContent='🔓 Désactiver le 2FA';
+    document.getElementById('tfa-sub').textContent='Confirmez avec votre code TOTP actuel.';
+    document.getElementById('tfa-step-setup').style.display='none';
+    document.getElementById('tfa-step-disable').style.display='';
+    setTimeout(()=>document.getElementById('tfa-disable-code').focus(),100);
+  }else{
+    document.getElementById('tfa-title').textContent='🔐 Activer le 2FA';
+    document.getElementById('tfa-sub').textContent='Scannez le QR code avec Google Authenticator ou Authy.';
+    document.getElementById('tfa-step-setup').style.display='';
+    document.getElementById('tfa-step-disable').style.display='none';
+    init2fa();
   }
+}
+function close2faModal(){
+  document.getElementById('tfa-overlay').classList.remove('show');
+  document.getElementById('tfa-code').value='';
+  document.getElementById('tfa-disable-code').value='';
+  document.getElementById('tfa-msg-setup').textContent='';
+  document.getElementById('tfa-msg-disable').textContent='';
+  _tfa2faSecret=null;
+}
+async function init2fa(){
+  document.getElementById('tfa-qr').innerHTML='<div style="width:180px;height:180px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;color:var(--slate-2);font-size:12px;margin:0 auto">Chargement…</div>';
+  document.getElementById('tfa-secret').textContent='—';
+  try{
+    const r=await fetch(API+'/api/auth/2fa/setup/init',{method:'POST',headers:authHeaders()});
+    const d=await r.json();
+    if(!d.ok){document.getElementById('tfa-msg-setup').textContent=d.error||'Erreur';return;}
+    _tfa2faSecret=d.secret;
+    document.getElementById('tfa-secret').textContent=d.secret;
+    document.getElementById('tfa-qr').innerHTML='<img src="'+d.qr+'" width="180" height="180" style="display:block;border-radius:8px;margin:0 auto"/>';
+    setTimeout(()=>document.getElementById('tfa-code').focus(),100);
+  }catch{document.getElementById('tfa-msg-setup').textContent='Erreur réseau.';}
+}
+async function confirm2fa(){
+  const code=document.getElementById('tfa-code').value.trim();
+  const msg=document.getElementById('tfa-msg-setup');
+  const btn=document.getElementById('tfa-confirm-btn');
+  if(!code||code.length!==6){msg.textContent='Entrez le code à 6 chiffres.';return;}
+  btn.disabled=true;btn.textContent='Vérification…';
+  try{
+    const r=await fetch(API+'/api/auth/2fa/setup/confirm',{method:'POST',headers:{...authHeaders(),'Content-Type':'application/json'},body:JSON.stringify({secret:_tfa2faSecret,totp:code})});
+    const d=await r.json();
+    if(d.ok){showToast('✅ 2FA activé !');close2faModal();document.getElementById('acc-2fa-btn').textContent='🔐 2FA activé ✓';}
+    else{msg.textContent=d.error||'Code incorrect.';document.getElementById('tfa-code').value='';document.getElementById('tfa-code').focus();}
+  }catch{msg.textContent='Erreur réseau.';}
+  btn.disabled=false;btn.textContent='Activer le 2FA';
+}
+async function disable2fa(){
+  const code=document.getElementById('tfa-disable-code').value.trim();
+  const msg=document.getElementById('tfa-msg-disable');
+  if(!code||code.length!==6){msg.textContent='Entrez le code à 6 chiffres.';return;}
+  try{
+    const r=await fetch(API+'/api/auth/2fa/disable',{method:'POST',headers:{...authHeaders(),'Content-Type':'application/json'},body:JSON.stringify({totp:code})});
+    const d=await r.json();
+    if(d.ok){showToast('🔓 2FA désactivé.');close2faModal();document.getElementById('acc-2fa-btn').textContent='🔓 Activer le 2FA';}
+    else{msg.textContent=d.error||'Code incorrect.';document.getElementById('tfa-disable-code').value='';document.getElementById('tfa-disable-code').focus();}
+  }catch{msg.textContent='Erreur réseau.';}
+}
 
-  async function disable2fa() {
-    const code = document.getElementById('tfa-disable-code').value.trim();
-    const msg  = document.getElementById('tfa-msg-disable');
-    if (!code || code.length !== 6) { msg.style.color='#dc2626'; msg.textContent = 'Entrez le code à 6 chiffres.'; return; }
-    try {
-      const r = await fetch(API + '/api/auth/2fa/disable', { method:'POST', headers:{...authHeaders(),'Content-Type':'application/json'}, body: JSON.stringify({ totp: code }) });
-      const d = await r.json();
-      if (d.ok) {
-        showToast('🔓 2FA désactivé.');
-        close2faModal();
-        const b = document.getElementById('p-2fa-btn');
-        b.innerHTML = '🔓 Activer le 2FA';
-        b.title = 'Activer la double authentification';
-      } else {
-        msg.style.color='#dc2626'; msg.textContent = d.error || 'Code incorrect.';
-        document.getElementById('tfa-disable-code').value = '';
-        document.getElementById('tfa-disable-code').focus();
-      }
-    } catch { msg.style.color='#dc2626'; msg.textContent = 'Erreur réseau.'; }
-  }
+load();
+refreshUnread();
+setInterval(()=>{if(_supOpen)loadSupport();else refreshUnread();},20000);
 </script>
+<script src="/assistance.js" defer></script>
 </body>
 </html>
