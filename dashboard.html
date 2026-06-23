@@ -684,17 +684,6 @@
                         '<input id="prx-isp-manual-' + pid + '" type="text" placeholder="Code manuel : as7922_Comcast" oninput="proxyGen(' + pid + ')" style="display:none;width:100%;border:1px solid #e2e8f0;border-radius:6px;padding:7px 10px;font-size:12px;font-family:monospace;background:#fff;color:#0f172a;outline:none" />' +
                       '</div>' +
 
-                      // État
-                      '<div>' +
-                        '<label style="font-size:11px;font-weight:600;color:#475569;display:block;margin-bottom:4px">État / Région <span style="font-weight:400;color:#94a3b8">(optionnel)</span></label>' +
-                        '<input id="prx-state-' + pid + '" type="text" placeholder="ex: CA, TX, NY" oninput="proxyGen(' + pid + ')" style="width:100%;border:1px solid #e2e8f0;border-radius:6px;padding:7px 10px;font-size:12px;font-family:monospace;background:#fff;color:#0f172a;outline:none" />' +
-                      '</div>' +
-
-                      // Ville
-                      '<div>' +
-                        '<label style="font-size:11px;font-weight:600;color:#475569;display:block;margin-bottom:4px">Ville <span style="font-weight:400;color:#94a3b8">(optionnel)</span></label>' +
-                        '<input id="prx-city-' + pid + '" type="text" placeholder="ex: losangeles" oninput="proxyGen(' + pid + ')" style="width:100%;border:1px solid #e2e8f0;border-radius:6px;padding:7px 10px;font-size:12px;font-family:monospace;background:#fff;color:#0f172a;outline:none" />' +
-                      '</div>' +
 
                       // Session ID + Quantité
                       '<div style="grid-column:1/-1;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:end">' +
@@ -876,16 +865,12 @@
     var ispSel = document.getElementById('prx-isp-' + id);
     var ispMan = document.getElementById('prx-isp-manual-' + id);
     if(ispSel && ispMan) ispMan.style.display = ispSel.value === '__manual__' ? '' : 'none';
-    var state    = ((document.getElementById('prx-state-'   + id)||{}).value || '').trim();
-    var city     = ((document.getElementById('prx-city-'    + id)||{}).value || '').trim();
     var ssidBase = ((document.getElementById('prx-ssid-'    + id)||{}).value || '').trim();
     var qty      = Math.min(999, Math.max(1, parseInt((document.getElementById('prx-qty-' + id)||{}).value, 10) || 1));
 
     // Construire le préfixe de ciblage (sans ssid)
     var prefix = username;
     if(country) prefix += '-country-' + country;
-    if(state)   prefix += '-st-'      + state.toUpperCase();
-    if(city)    prefix += '-city-'    + city.toLowerCase().replace(/\s+/g,'');
     if(isp)     prefix += '-isp-'     + isp;
 
     var lines = [];
@@ -931,7 +916,7 @@
   }
 
   function resetProxyGen(id) {
-    ['prx-country-','prx-state-','prx-city-','prx-ssid-','prx-isp-manual-'].forEach(function(p){
+    ['prx-country-','prx-ssid-','prx-isp-manual-'].forEach(function(p){
       var el = document.getElementById(p + id);
       if(el) el.value = '';
     });
