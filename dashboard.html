@@ -624,7 +624,7 @@
                       // Pays
                       '<div>' +
                         '<label style="font-size:11px;font-weight:600;color:#475569;display:block;margin-bottom:4px">Pays</label>' +
-                        '<select id="prx-country-' + pid + '" onchange="proxyGen(' + pid + ')" style="width:100%;border:1px solid #e2e8f0;border-radius:6px;padding:7px 10px;font-size:12px;font-family:inherit;background:#fff;color:#0f172a">' +
+                        '<select id="prx-country-' + pid + '" onchange="proxyIspChange(' + pid + ')" style="width:100%;border:1px solid #e2e8f0;border-radius:6px;padding:7px 10px;font-size:12px;font-family:inherit;background:#fff;color:#0f172a">' +
                           '<option value="">🌍 Aléatoire (mondial)</option>' +
                           '<option value="us">🇺🇸 États-Unis (us)</option>' +
                           '<option value="gb">🇬🇧 Royaume-Uni (gb)</option>' +
@@ -678,7 +678,10 @@
                       // ISP
                       '<div>' +
                         '<label style="font-size:11px;font-weight:600;color:#475569;display:block;margin-bottom:4px">ISP <span style="font-weight:400;color:#94a3b8">(optionnel)</span></label>' +
-                        '<input id="prx-isp-' + pid + '" type="text" placeholder="ex: as7922_Comcast" oninput="proxyGen(' + pid + ')" style="width:100%;border:1px solid #e2e8f0;border-radius:6px;padding:7px 10px;font-size:12px;font-family:monospace;background:#fff;color:#0f172a;outline:none" />' +
+                        '<select id="prx-isp-' + pid + '" onchange="proxyIspChange(' + pid + ')" style="width:100%;border:1px solid #e2e8f0;border-radius:6px;padding:7px 10px;font-size:12px;font-family:inherit;background:#fff;color:#0f172a;margin-bottom:5px">' +
+                          '<option value="">🌐 Aléatoire (tous ISP)</option>' +
+                        '</select>' +
+                        '<input id="prx-isp-manual-' + pid + '" type="text" placeholder="Code manuel : as7922_Comcast" oninput="proxyGen(' + pid + ')" style="display:none;width:100%;border:1px solid #e2e8f0;border-radius:6px;padding:7px 10px;font-size:12px;font-family:monospace;background:#fff;color:#0f172a;outline:none" />' +
                       '</div>' +
 
                       // État
@@ -794,6 +797,70 @@
 
   function randSsid() { return Math.random().toString(36).slice(2,12); }
 
+  var PROXY_ISPS = {
+    ca: [['as577_Bell_Canada','Bell Canada'],['as812_Rogers_Communications','Rogers'],['as852_TELUS_Communications','Telus'],['as5769_Videotron_Ltee','Vidéotron'],['as11260_EastLink','EastLink'],['as6327_Shaw_Communications','Shaw / Freedom'],['as19752_Cogeco_Connexion','Cogeco']],
+    fr: [['as3215_Orange_S.A.','Orange'],['as15557_SFR','SFR'],['as12322_Free_SAS','Free'],['as5410_Bouygues_Telecom','Bouygues Telecom'],['as21502_Numericable','Numericable / SFR'],['as43100_Bretagne_Telecom','Bretagne Telecom']],
+    be: [['as5432_Proximus','Proximus'],['as6848_Telenet','Telenet'],['as21474_VOO','VOO'],['as12392_Brutele','Brutele'],['as57977_Scarlet','Scarlet (Proximus)']],
+    gb: [['as2856_BT_Group','BT'],['as5089_Virgin_Media','Virgin Media'],['as5607_Sky_UK','Sky'],['as13285_TalkTalk','TalkTalk'],['as12576_EE_Limited','EE'],['as31655_Zen_Internet','Zen Internet']],
+    de: [['as3320_Deutsche_Telekom','Deutsche Telekom'],['as3209_Vodafone_DE','Vodafone DE'],['as6805_Telefonica_DE','O2 / Telefónica'],['as8560_United_Internet','1&1 / United Internet'],['as29562_Kabeldeutschland','Kabel Deutschland']],
+    us: [['as7922_Comcast','Comcast'],['as7018_AT&T','AT&T'],['as701_Verizon','Verizon'],['as21928_T-Mobile','T-Mobile'],['as22773_Cox_Communications','Cox'],['as20115_Charter_Spectrum','Charter / Spectrum'],['as7065_CenturyLink','CenturyLink / Lumen']],
+    nl: [['as1136_KPN','KPN'],['as33915_Ziggo','Ziggo'],['as50266_T-Mobile_NL','T-Mobile NL'],['as60781_Leaseweb_NL','Leaseweb'],['as8455_ATOM86','ATOM86']],
+    ch: [['as3303_Swisscom','Swisscom'],['as6830_UPC_Switzerland','UPC / Sunrise'],['as15600_Salt_Mobile','Salt Mobile'],['as13030_Init7','Init7']],
+    es: [['as3352_Telefonica_ES','Telefónica / Movistar'],['as12430_Vodafone_ES','Vodafone ES'],['as12479_Orange_ES','Orange ES'],['as57269_MasMovil','MásMóvil'],['as12357_Euskaltel','Euskaltel']],
+    it: [['as1267_TIM','TIM (Telecom Italia)'],['as12874_Fastweb','Fastweb'],['as30722_Vodafone_IT','Vodafone IT'],['as12874_Fastweb','Fastweb'],['as16232_Telecom_Italia_Sparkle','Sparkle']],
+    pt: [['as2860_NOS','NOS'],['as5432_MEO','MEO / Altice'],['as12353_Vodafone_PT','Vodafone PT'],['as47869_Nowo','Nowo']],
+    au: [['as1221_Telstra','Telstra'],['as4804_Optus','Optus'],['as7545_TPG_Telecom','TPG Telecom'],['as4764_Aussie_Broadband','Aussie Broadband'],['as9443_iiNet','iiNet']],
+    jp: [['as2914_NTT','NTT Communications'],['as17676_SoftBank','SoftBank'],['as2516_KDDI','KDDI'],['as4713_OCN','OCN / NTT West'],['as9605_NTT_East','NTT East']],
+    kr: [['as4766_KT_Korea','KT Corp'],['as9644_SK_Broadband','SK Broadband'],['as17858_LG_Uplus','LG U+'],['as45369_Sejong_Telecom','Sejong Telecom']],
+    br: [['as28573_Claro_Brasil','Claro'],['as18881_Vivo','Vivo / Telefônica'],['as7738_Oi','Oi'],['as26615_TIM_Brasil','TIM Brasil'],['as28343_NET_Virtua','NET / Claro']],
+    mx: [['as8151_TELMEX','Telmex'],['as13999_Megacable','Megacable'],['as28403_Axtel','Axtel'],['as22884_Totalplay','Totalplay']],
+    ar: [['as7303_Telecom_Argentina','Telecom Argentina'],['as10318_Cablevision','Cablevision / Fibertel'],['as19037_AMX_Argentina','Claro AR']],
+    sg: [['as4657_StarHub','StarHub'],['as9506_Singtel','Singtel'],['as18106_Viewqwest','ViewQwest'],['as10091_M1_Limited','M1']],
+    hk: [['as9304_HKBN','HKBN'],['as4515_PCCW','PCCW HKT'],['as9269_Hong_Kong_Broadband','HKBN (alt)'],['as3462_SmarTone','SmarTone']],
+    za: [['as7420_Telkom_SA','Telkom SA'],['as5713_MTN_SA','MTN SA'],['as36874_Vodacom','Vodacom'],['as37457_Cool_Ideas','Cool Ideas']],
+    ng: [['as36873_MTN_Nigeria','MTN Nigeria'],['as29465_Airtel_Nigeria','Airtel Nigeria'],['as36911_Glo_Mobile','Glo Mobile'],['as37076_9Mobile','9Mobile']],
+    ci: [['as36842_Orange_CI','Orange CI'],['as36863_MTN_CI','MTN CI'],['as37054_Moov_Africa','Moov Africa']],
+    sn: [['as8346_Sonatel','Sonatel / Orange SN'],['as37649_Expresso_Telecom','Expresso'],['as328637_Free_SN','Free SN']],
+    ma: [['as6713_Maroc_Telecom','Maroc Telecom'],['as36903_Inwi','Inwi'],['as36925_Orange_MA','Orange MA']],
+    eg: [['as8452_Telecom_Egypt','Telecom Egypt / WE'],['as24863_Link_Egypt','Link.net'],['as36992_Vodafone_Egypt','Vodafone EG'],['as37069_Orange_Egypt','Orange EG']],
+    ae: [['as5384_Emirates_Internet','Etisalat / e&'],['as9143_du','du (EITC)']],
+    in: [['as24560_Airtel_India','Airtel'],['as55836_Reliance_Jio','Reliance Jio'],['as17813_MTNL','MTNL'],['as9829_BSNL','BSNL'],['as45609_Vodafone_IN','Vodafone IN']],
+    se: [['as1299_Telia_SE','Telia'],['as1257_Tele2_SE','Tele2'],['as2119_Telenor_SE','Telenor'],['as8473_Bahnhof','Bahnhof'],['as12552_IP-Only','IP-Only']],
+    no: [['as2119_Telenor_NO','Telenor NO'],['as5376_Get_AS','Get / Telia'],['as39787_Altibox','Altibox'],['as15659_Ice_NET','Ice.net']],
+    pl: [['as5617_Orange_PL','Orange PL'],['as5588_T-Mobile_PL','T-Mobile PL'],['as12741_Netia','Netia'],['as21021_Multimedia_PL','Multimedia']],
+    ru: [['as8359_MTS_Russia','MTS'],['as8402_CORBINA_TELECOM','Beeline / VimpelCom'],['as25513_Moscow_MegaFon','MegaFon'],['as31213_Rostelecom','Rostelecom']],
+    tr: [['as9121_TTNET','Türk Telekom / TTNET'],['as15897_TurkCell','Turkcell'],['as34984_Superonline','Superonline'],['as12978_Vodafone_TR','Vodafone TR']],
+    id: [['as4800_Telkom_Indonesia','Telkom Indonesia'],['as23693_Telkomsel','Telkomsel'],['as24203_Indosat','Indosat Ooredoo'],['as18004_XL_Axiata','XL Axiata']],
+    vn: [['as7643_VNPT','VNPT'],['as45899_VNPT_VinaPhone','VinaPhone'],['as38731_Viettel','Viettel'],['as45903_FPT_Telecom','FPT Telecom']],
+    th: [['as7470_TOT_Thailand','TOT'],['as9931_CAT_Telecom','CAT Telecom'],['as23969_True_Internet','True Internet'],['as131445_DTAC','DTAC / NT']],
+  };
+
+  function proxyIspChange(id) {
+    var country = (document.getElementById('prx-country-' + id)||{}).value || '';
+    var sel = document.getElementById('prx-isp-' + id);
+    var manual = document.getElementById('prx-isp-manual-' + id);
+    if(!sel) return;
+
+    var isps = PROXY_ISPS[country] || [];
+    var opts = '<option value="">🌐 Aléatoire (tous ISP)</option>';
+    isps.forEach(function(isp){
+      opts += '<option value="' + isp[0] + '">' + isp[1] + '</option>';
+    });
+    opts += '<option value="__manual__">✏️ Saisir manuellement…</option>';
+    sel.innerHTML = opts;
+    sel.value = '';
+    if(manual) manual.style.display = 'none';
+    proxyGen(id);
+  }
+
+  function proxyIspVal(id) {
+    var sel = document.getElementById('prx-isp-' + id);
+    var manual = document.getElementById('prx-isp-manual-' + id);
+    if(!sel) return '';
+    if(sel.value === '__manual__') return (manual ? manual.value : '').trim();
+    return sel.value;
+  }
+
   function proxyGen(id) {
     var result = document.getElementById('prx-result-' + id);
     if(!result) return;
@@ -804,7 +871,11 @@
     var port     = result.dataset.port;
 
     var country  = (document.getElementById('prx-country-' + id)||{}).value || '';
-    var isp      = ((document.getElementById('prx-isp-'     + id)||{}).value || '').trim();
+    var isp      = proxyIspVal(id);
+    // Afficher/masquer le champ manuel ISP
+    var ispSel = document.getElementById('prx-isp-' + id);
+    var ispMan = document.getElementById('prx-isp-manual-' + id);
+    if(ispSel && ispMan) ispMan.style.display = ispSel.value === '__manual__' ? '' : 'none';
     var state    = ((document.getElementById('prx-state-'   + id)||{}).value || '').trim();
     var city     = ((document.getElementById('prx-city-'    + id)||{}).value || '').trim();
     var ssidBase = ((document.getElementById('prx-ssid-'    + id)||{}).value || '').trim();
@@ -860,11 +931,13 @@
   }
 
   function resetProxyGen(id) {
-    ['prx-country-','prx-isp-','prx-state-','prx-city-','prx-ssid-'].forEach(function(p){
+    ['prx-country-','prx-state-','prx-city-','prx-ssid-','prx-isp-manual-'].forEach(function(p){
       var el = document.getElementById(p + id);
       if(el) el.value = '';
     });
-    proxyGen(id);
+    var qtyEl = document.getElementById('prx-qty-' + id);
+    if(qtyEl) qtyEl.value = 1;
+    proxyIspChange(id); // remet le select ISP à vide + regénère
   }
 
   async function deleteSmtp(id) {
