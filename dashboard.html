@@ -581,8 +581,8 @@ const API='https://admin.evostudio.fr';
 const PROD_LABELS={sender:'📤 EvoSender',extractor:'🔍 EvoExtractor',verifier:'✅ EvoVérificateur',suite:'🌐 Suite EvoStudio',proxy_5gb:'🌐 Proxy 5 Go',proxy_55gb:'🌐 Proxy 55 Go',proxy_100gb:'🌐 Proxy 100 Go',proxy_200gb:'🌐 Proxy 200 Go',proxy_1000gb:'🌐 Proxy 1 To',proxy_2000gb:'🌐 Proxy 2 To'};
 const STS_LABELS={pending:'En attente',paid:'Payée',expired:'Expirée',cancelled:'Annulée'};
 const CRYPTO_LABEL={usdt:'USDT',btc:'BTC',wave:'XOF',om:'XOF'};
-let _senderNotice='', _supportName='Support EvoStudio', _dlWin='#', _dlMac='#';
-let _viewOnlyCgu=false;
+var _senderNotice='', _supportName='Support EvoStudio', _dlWin='#', _dlMac='#';
+var _viewOnlyCgu=false;
 
 function esc(t){return String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',2200)}
@@ -920,7 +920,7 @@ async function deleteSmtp(id){
 }
 
 // ── Support chat ──
-var _supportName='Support EvoStudio',_supLastAdmin=-1,_supLastUnread=0,_supOpen=false,_supAudio=null;
+var _supLastAdmin=-1,_supLastUnread=0,_supOpen=false,_supAudio=null;
 function supBeep(){try{if(!_supAudio)_supAudio=new(window.AudioContext||window.webkitAudioContext)();if(_supAudio.state==='suspended')_supAudio.resume();var o=_supAudio.createOscillator(),g=_supAudio.createGain();o.type='sine';o.frequency.value=880;g.gain.value=0.001;o.connect(g);g.connect(_supAudio.destination);var t=_supAudio.currentTime;g.gain.exponentialRampToValueAtTime(0.18,t+0.02);g.gain.exponentialRampToValueAtTime(0.0001,t+0.32);o.start(t);o.stop(t+0.34);}catch(e){}}
 async function loadSupport(){
   var thread=document.getElementById('support-thread');if(!thread)return;
