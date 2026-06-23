@@ -625,60 +625,71 @@
                       '<div>' +
                         '<label style="font-size:11px;font-weight:600;color:#475569;display:block;margin-bottom:4px">Pays</label>' +
                         '<select id="prx-country-' + pid + '" onchange="proxyIspChange(' + pid + ')" style="width:100%;border:1px solid #e2e8f0;border-radius:6px;padding:7px 10px;font-size:12px;font-family:inherit;background:#fff;color:#0f172a">' +
-                          '<option value="">🌍 Aléatoire (mondial)</option>' +
-                          '<option value="us">🇺🇸 États-Unis (us)</option>' +
-                          '<option value="gb">🇬🇧 Royaume-Uni (gb)</option>' +
-                          '<option value="fr">🇫🇷 France (fr)</option>' +
-                          '<option value="de">🇩🇪 Allemagne (de)</option>' +
-                          '<option value="ca">🇨🇦 Canada (ca)</option>' +
-                          '<option value="au">🇦🇺 Australie (au)</option>' +
-                          '<option value="nl">🇳🇱 Pays-Bas (nl)</option>' +
-                          '<option value="se">🇸🇪 Suède (se)</option>' +
-                          '<option value="no">🇳🇴 Norvège (no)</option>' +
-                          '<option value="ch">🇨🇭 Suisse (ch)</option>' +
-                          '<option value="es">🇪🇸 Espagne (es)</option>' +
-                          '<option value="it">🇮🇹 Italie (it)</option>' +
-                          '<option value="br">🇧🇷 Brésil (br)</option>' +
-                          '<option value="in">🇮🇳 Inde (in)</option>' +
-                          '<option value="jp">🇯🇵 Japon (jp)</option>' +
-                          '<option value="kr">🇰🇷 Corée du Sud (kr)</option>' +
-                          '<option value="sg">🇸🇬 Singapour (sg)</option>' +
-                          '<option value="hk">🇭🇰 Hong Kong (hk)</option>' +
-                          '<option value="cn">🇨🇳 Chine (cn)</option>' +
-                          '<option value="ru">🇷🇺 Russie (ru)</option>' +
-                          '<option value="ua">🇺🇦 Ukraine (ua)</option>' +
-                          '<option value="tr">🇹🇷 Turquie (tr)</option>' +
-                          '<option value="za">🇿🇦 Afrique du Sud (za)</option>' +
-                          '<option value="ng">🇳🇬 Nigeria (ng)</option>' +
-                          '<option value="ci">🇨🇮 Côte d\'Ivoire (ci)</option>' +
-                          '<option value="gh">🇬🇭 Ghana (gh)</option>' +
-                          '<option value="sn">🇸🇳 Sénégal (sn)</option>' +
-                          '<option value="ma">🇲🇦 Maroc (ma)</option>' +
-                          '<option value="eg">🇪🇬 Égypte (eg)</option>' +
-                          '<option value="mx">🇲🇽 Mexique (mx)</option>' +
-                          '<option value="ar">🇦🇷 Argentine (ar)</option>' +
-                          '<option value="co">🇨🇴 Colombie (co)</option>' +
-                          '<option value="id">🇮🇩 Indonésie (id)</option>' +
-                          '<option value="vn">🇻🇳 Vietnam (vn)</option>' +
-                          '<option value="th">🇹🇭 Thaïlande (th)</option>' +
-                          '<option value="ph">🇵🇭 Philippines (ph)</option>' +
-                          '<option value="pk">🇵🇰 Pakistan (pk)</option>' +
-                          '<option value="bd">🇧🇩 Bangladesh (bd)</option>' +
-                          '<option value="ae">🇦🇪 Émirats arabes (ae)</option>' +
-                          '<option value="sa">🇸🇦 Arabie Saoudite (sa)</option>' +
-                          '<option value="il">🇮🇱 Israël (il)</option>' +
-                          '<option value="pl">🇵🇱 Pologne (pl)</option>' +
-                          '<option value="ro">🇷🇴 Roumanie (ro)</option>' +
-                          '<option value="cz">🇨🇿 Tchéquie (cz)</option>' +
-                          '<option value="hu">🇭🇺 Hongrie (hu)</option>' +
-                          '<option value="pt">🇵🇹 Portugal (pt)</option>' +
+                          '<option value="">Aléatoire (mondial)</option>' +
+                          '<optgroup label="Amérique">' +
+                          '<option value="us">Etats-Unis (US)</option>' +
+                          '<option value="ca">Canada (CA)</option>' +
+                          '<option value="br">Brésil (BR)</option>' +
+                          '<option value="mx">Mexique (MX)</option>' +
+                          '<option value="ar">Argentine (AR)</option>' +
+                          '<option value="co">Colombie (CO)</option>' +
+                          '</optgroup>' +
+                          '<optgroup label="Europe">' +
+                          '<option value="gb">Royaume-Uni (GB)</option>' +
+                          '<option value="fr">France (FR)</option>' +
+                          '<option value="de">Allemagne (DE)</option>' +
+                          '<option value="be">Belgique (BE)</option>' +
+                          '<option value="nl">Pays-Bas (NL)</option>' +
+                          '<option value="ch">Suisse (CH)</option>' +
+                          '<option value="es">Espagne (ES)</option>' +
+                          '<option value="it">Italie (IT)</option>' +
+                          '<option value="pt">Portugal (PT)</option>' +
+                          '<option value="se">Suède (SE)</option>' +
+                          '<option value="no">Norvège (NO)</option>' +
+                          '<option value="pl">Pologne (PL)</option>' +
+                          '<option value="ro">Roumanie (RO)</option>' +
+                          '<option value="cz">Tchéquie (CZ)</option>' +
+                          '<option value="hu">Hongrie (HU)</option>' +
+                          '<option value="ua">Ukraine (UA)</option>' +
+                          '<option value="ru">Russie (RU)</option>' +
+                          '</optgroup>' +
+                          '<optgroup label="Asie / Pacifique">' +
+                          '<option value="jp">Japon (JP)</option>' +
+                          '<option value="kr">Corée du Sud (KR)</option>' +
+                          '<option value="cn">Chine (CN)</option>' +
+                          '<option value="hk">Hong Kong (HK)</option>' +
+                          '<option value="sg">Singapour (SG)</option>' +
+                          '<option value="au">Australie (AU)</option>' +
+                          '<option value="in">Inde (IN)</option>' +
+                          '<option value="id">Indonésie (ID)</option>' +
+                          '<option value="vn">Vietnam (VN)</option>' +
+                          '<option value="th">Thaïlande (TH)</option>' +
+                          '<option value="ph">Philippines (PH)</option>' +
+                          '<option value="pk">Pakistan (PK)</option>' +
+                          '<option value="bd">Bangladesh (BD)</option>' +
+                          '</optgroup>' +
+                          '<optgroup label="Moyen-Orient">' +
+                          '<option value="ae">Emirats arabes (AE)</option>' +
+                          '<option value="sa">Arabie Saoudite (SA)</option>' +
+                          '<option value="tr">Turquie (TR)</option>' +
+                          '<option value="il">Israël (IL)</option>' +
+                          '</optgroup>' +
+                          '<optgroup label="Afrique">' +
+                          '<option value="za">Afrique du Sud (ZA)</option>' +
+                          '<option value="ng">Nigeria (NG)</option>' +
+                          '<option value="ci">Côte d\'Ivoire (CI)</option>' +
+                          '<option value="gh">Ghana (GH)</option>' +
+                          '<option value="sn">Sénégal (SN)</option>' +
+                          '<option value="ma">Maroc (MA)</option>' +
+                          '<option value="eg">Égypte (EG)</option>' +
+                          '</optgroup>' +
                         '</select>' +
                       '</div>' +
 
                       // ISP
                       '<div>' +
                         '<label style="font-size:11px;font-weight:600;color:#475569;display:block;margin-bottom:4px">ISP <span style="font-weight:400;color:#94a3b8">(optionnel)</span></label>' +
-                        '<select id="prx-isp-' + pid + '" onchange="proxyIspChange(' + pid + ')" style="width:100%;border:1px solid #e2e8f0;border-radius:6px;padding:7px 10px;font-size:12px;font-family:inherit;background:#fff;color:#0f172a;margin-bottom:5px">' +
+                        '<select id="prx-isp-' + pid + '" onchange="proxyGen(' + pid + ')" style="width:100%;border:1px solid #e2e8f0;border-radius:6px;padding:7px 10px;font-size:12px;font-family:inherit;background:#fff;color:#0f172a;margin-bottom:5px">' +
                           '<option value="">🌐 Aléatoire (tous ISP)</option>' +
                         '</select>' +
                         '<input id="prx-isp-manual-' + pid + '" type="text" placeholder="Code manuel : as7922_Comcast" oninput="proxyGen(' + pid + ')" style="display:none;width:100%;border:1px solid #e2e8f0;border-radius:6px;padding:7px 10px;font-size:12px;font-family:monospace;background:#fff;color:#0f172a;outline:none" />' +
