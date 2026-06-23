@@ -1,36 +1,33 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://*.googleusercontent.com; connect-src https://admin.evostudio.fr; frame-ancestors 'none'" />
 <meta name="referrer" content="no-referrer-when-downgrade" />
-<title>EvoStudio — Suite professionnelle d'emailing</title>
+<title>EvoStudio — Suite professionnelle d'emailing & proxy résidentiel</title>
 <link rel="icon" href="/logo-EvoSender.ico" type="image/x-icon" />
-<meta name="description" content="EvoStudio : logiciel professionnel d'extraction, de vérification et d'envoi d'emails en masse. EvoExtractor, EvoSender et EvoVérificateur réunis. Licence annuelle, 100% local, paiement crypto, Wave & Orange Money." />
-<meta name="keywords" content="emailing, envoi email en masse, extraction email, vérificateur email, logiciel emailing, SMTP, campagne email, EvoStudio, EvoSender, EvoExtractor" />
+<meta name="description" content="EvoStudio : extraction, vérification et envoi d'emails en masse + proxy résidentiel. EvoExtractor, EvoSender, EvoVérificateur, SMTP dédié et proxy 9proxy. Paiement USDT, Wave, Orange Money." />
+<meta name="keywords" content="emailing, envoi email en masse, extraction email, vérificateur email, proxy résidentiel, SMTP dédié, EvoStudio, EvoSender" />
 <meta name="author" content="EGSCI SARL" />
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
-<meta name="theme-color" content="#2563eb" />
+<meta name="theme-color" content="#0f172a" />
 <link rel="canonical" href="https://evostudio.fr/" />
-<!-- Open Graph / réseaux sociaux -->
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="EvoStudio" />
 <meta property="og:locale" content="fr_FR" />
-<meta property="og:title" content="EvoStudio — Suite professionnelle d'emailing" />
-<meta property="og:description" content="Extraction, vérification et envoi d'emails en masse. 3 outils en une licence annuelle, 100% local." />
+<meta property="og:title" content="EvoStudio — Suite professionnelle d'emailing & proxy résidentiel" />
+<meta property="og:description" content="Extraction, vérification, envoi d'emails + proxy résidentiel. Outils pros, paiement Wave & crypto." />
 <meta property="og:url" content="https://evostudio.fr/" />
 <meta property="og:image" content="https://evostudio.fr/Hub.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="EvoStudio — Suite professionnelle d'emailing" />
-<meta name="twitter:description" content="Extraction, vérification et envoi d'emails en masse. 3 outils en une licence annuelle." />
+<meta name="twitter:description" content="Extraction, vérification et envoi d'emails en masse + proxy résidentiel." />
 <meta name="twitter:image" content="https://evostudio.fr/Hub.png" />
-<!-- Données structurées (SEO) -->
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
- {"@type":"Organization","@id":"https://evostudio.fr/#org","name":"EvoStudio","legalName":"EGSCI SARL","url":"https://evostudio.fr/","logo":"https://evostudio.fr/logoevostudio2.png","email":"support@evostudio.fr","areaServed":"FR","sameAs":[]},
+ {"@type":"Organization","@id":"https://evostudio.fr/#org","name":"EvoStudio","legalName":"EGSCI SARL","url":"https://evostudio.fr/","logo":"https://evostudio.fr/logoevostudio2.png","email":"support@evostudio.fr","areaServed":"FR"},
  {"@type":"WebSite","@id":"https://evostudio.fr/#website","url":"https://evostudio.fr/","name":"EvoStudio","inLanguage":"fr-FR","publisher":{"@id":"https://evostudio.fr/#org"}},
- {"@type":"SoftwareApplication","name":"EvoStudio","operatingSystem":"Windows, macOS","applicationCategory":"BusinessApplication","description":"Suite d'emailing : extraction, vérification et envoi d'emails en masse.","url":"https://evostudio.fr/","image":"https://evostudio.fr/Hub.png","offers":{"@type":"Offer","priceCurrency":"USD","price":"69","availability":"https://schema.org/InStock","priceValidUntil":"2026-12-31","url":"https://evostudio.fr/pay.html","hasMerchantReturnPolicy":{"@type":"MerchantReturnPolicy","applicableCountry":"FR","returnPolicyCategory":"https://schema.org/MerchantReturnNotPermitted"},"shippingDetails":{"@type":"OfferShippingDetails","shippingRate":{"@type":"MonetaryAmount","value":"0","currency":"USD"},"shippingDestination":{"@type":"DefinedRegion","addressCountry":"FR"},"deliveryTime":{"@type":"ShippingDeliveryTime","handlingTime":{"@type":"QuantitativeValue","minValue":0,"maxValue":0,"unitCode":"DAY"},"transitTime":{"@type":"QuantitativeValue","minValue":0,"maxValue":0,"unitCode":"DAY"}}}},"publisher":{"@id":"https://evostudio.fr/#org"}},
  {"@type":"FAQPage","mainEntity":[
    {"@type":"Question","name":"Combien de temps dure la licence EvoStudio ?","acceptedAnswer":{"@type":"Answer","text":"Chaque licence est valable 1 an (365 jours) à partir de l'achat, renouvelable depuis votre espace client."}},
    {"@type":"Question","name":"Quels moyens de paiement sont acceptés ?","acceptedAnswer":{"@type":"Answer","text":"USDT (TRC20), Bitcoin, Wave et Orange Money. Tous les paiements sont sécurisés."}},
@@ -42,243 +39,245 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 <style>
 :root{
-  --blue:#2563eb;--blue-dark:#1d4ed8;--blue-dim:#dbeafe;
+  --blue:#2563eb;--blue-dark:#1d4ed8;
   --ink:#0f172a;--slate:#64748b;--slate-2:#94a3b8;
-  --line:#e2e8f0;--line-dark:#2d3748;
-  --bg:#f0f4f8;--bg2:#ffffff;--bg3:#f8fafc;
-  --white:#fff;--green:#16a34a;--purple:#7c3aed;
-  --radius:0px;--radius-sm:0px;
+  --line:#e8ecf0;--bg:#f8fafc;--white:#fff;
+  --green:#16a34a;--teal:#0d9488;--purple:#7c3aed;--orange:#ea580c;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--white);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
 a{text-decoration:none;color:inherit}
 img{max-width:100%;height:auto}
 .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
 
-/* BUTTONS */
-.btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14px;padding:11px 22px;border-radius:0;cursor:pointer;border:none;transition:all .18s;font-family:inherit;white-space:nowrap}
-.btn-primary{background:var(--blue);color:#fff;box-shadow:0 0 0 0 rgba(59,130,246,0)}
-.btn-primary:hover{background:var(--blue-dark);box-shadow:0 0 20px rgba(59,130,246,.35);transform:translateY(-1px)}
-.btn-outline{background:transparent;color:var(--ink);border:1px solid #cbd5e1}
-.btn-outline:hover{border-color:#2563eb;color:#2563eb;background:#eff6ff}
-.btn-white{background:#fff;color:var(--ink);font-weight:700}
-.btn-white:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,.3)}
-.btn-dark{background:#f1f5f9;color:var(--ink);border:1px solid #cbd5e1}
-.btn-dark:hover{background:#e2e8f0;border-color:#94a3b8}
+/* ── ANNOUNCE BAR ── */
+#announce-bar{display:none;background:var(--blue);color:#fff;text-align:center;font-size:13px;font-weight:600;padding:9px 16px}
 
-/* ═══════════════════════════════════════════════
-   NAVBAR — pill flottante centree
-═══════════════════════════════════════════════ */
-#announce-bar{display:none;background:var(--blue);color:#fff;text-align:center;font-size:13px;font-weight:600;padding:8px 16px}
-
-.nav-wrap{position:sticky;top:12px;z-index:100;padding:0 24px;pointer-events:none}
-.nav{
-  max-width:1000px;margin:0 auto;
-  display:flex;align-items:center;justify-content:space-between;
-  background:rgba(255,255,255,.96);backdrop-filter:blur(16px);
-  border:1px solid #e2e8f0;
-  border-radius:0px;padding:10px 16px;
-  gap:16px;pointer-events:all;
-  box-shadow:0 2px 12px rgba(0,0,0,.08);
-}
-.logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:18px;color:var(--ink);flex-shrink:0}
-.logo-mark{width:32px;height:32px;border-radius:8px;background:var(--blue);display:flex;align-items:center;justify-content:center}
-.logo-mark svg{width:17px;height:17px;stroke:#fff;fill:none;stroke-width:2.2}
-.logo b{color:var(--blue)}
-.nav-links{display:flex;gap:4px;align-items:center}
-.nav-links > a, .nav-dd-trigger{color:#64748b;font-weight:500;font-size:13px;padding:6px 12px;border-radius:8px;transition:all .15s;cursor:pointer;display:inline-block}
-.nav-links > a:hover, .nav-dd:hover .nav-dd-trigger{color:var(--ink);background:#f1f5f9}
+/* ── NAV ── */
+.nav-wrap{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:60px;gap:16px}
+.logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:17px;color:var(--ink);flex-shrink:0}
+.nav-links{display:flex;gap:2px;align-items:center}
+.nav-links a{color:var(--slate);font-weight:500;font-size:13px;padding:6px 11px;border-radius:6px;transition:all .15s}
+.nav-links a:hover{color:var(--ink);background:#f1f5f9}
 .nav-dd{position:relative}
-.nav-submenu{position:absolute;top:100%;left:0;margin-top:6px;background:#fff;border:1px solid #eef2f7;border-radius:14px;box-shadow:0 18px 50px rgba(15,23,42,.12);padding:8px;min-width:260px;opacity:0;visibility:hidden;transform:translateY(6px);transition:.18s;z-index:60}
+.nav-dd-trigger{color:var(--slate);font-weight:500;font-size:13px;padding:6px 11px;border-radius:6px;cursor:pointer;transition:all .15s}
+.nav-dd:hover .nav-dd-trigger{color:var(--ink);background:#f1f5f9}
+.nav-submenu{position:absolute;top:calc(100% + 8px);left:0;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 40px rgba(15,23,42,.1);padding:6px;min-width:250px;opacity:0;visibility:hidden;transform:translateY(4px);transition:.15s;z-index:60}
 .nav-dd:hover .nav-submenu{opacity:1;visibility:visible;transform:translateY(0)}
-.nav-submenu a{display:flex!important;flex-direction:column;gap:1px;padding:9px 12px;border-radius:10px;background:none}
+.nav-submenu a{display:flex!important;flex-direction:column;gap:1px;padding:8px 11px;border-radius:8px}
 .nav-submenu a:hover{background:#f5f8ff}
-.nav-submenu a b{font-size:13.5px;color:var(--ink);font-weight:700}
-.nav-submenu a span{font-size:11.5px;color:#94a3b8}
+.nav-submenu a b{font-size:13px;color:var(--ink);font-weight:700}
+.nav-submenu a span{font-size:11.5px;color:var(--slate-2)}
 .nav-cta{display:flex;gap:8px;align-items:center;flex-shrink:0}
+.btn{display:inline-flex;align-items:center;gap:7px;font-weight:600;font-size:13.5px;padding:9px 18px;border-radius:8px;cursor:pointer;border:none;transition:all .15s;font-family:inherit;white-space:nowrap}
+.btn-primary{background:var(--blue);color:#fff}
+.btn-primary:hover{background:var(--blue-dark);transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn-outline:hover{border-color:#93c5fd;color:var(--blue);background:#eff6ff}
+.btn-dark{background:#f1f5f9;color:var(--ink);border:1px solid var(--line)}
+.btn-dark:hover{background:#e2e8f0}
+.btn-white{background:#fff;color:var(--ink);font-weight:700}
+.btn-white:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,.25)}
 .nav-burger{display:none;background:none;border:none;cursor:pointer;padding:4px;color:var(--ink)}
 .nav-burger svg{display:block;width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
-
-/* Mobile drawer */
 .nav-drawer{display:none;position:fixed;inset:0;z-index:200}
-.nav-drawer-bg{position:absolute;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px)}
-.nav-drawer-panel{position:absolute;top:0;right:0;bottom:0;width:260px;background:#0d1626;border-left:1px solid var(--line);padding:24px 20px;display:flex;flex-direction:column;gap:6px}
-.nav-drawer-close{align-self:flex-end;background:none;border:none;cursor:pointer;padding:4px;color:var(--slate);margin-bottom:8px}
+.nav-drawer-bg{position:absolute;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px)}
+.nav-drawer-panel{position:absolute;top:0;right:0;bottom:0;width:260px;background:#fff;border-left:1px solid var(--line);padding:20px;display:flex;flex-direction:column;gap:4px}
+.nav-drawer-close{align-self:flex-end;background:none;border:none;cursor:pointer;padding:4px;color:var(--slate);margin-bottom:12px}
 .nav-drawer-close svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
-.nav-drawer-panel a{color:rgba(255,255,255,.7);font-size:15px;font-weight:500;padding:11px 0;border-bottom:1px solid var(--line)}
+.nav-drawer-panel a{color:var(--ink);font-size:14px;font-weight:500;padding:10px 0;border-bottom:1px solid var(--line)}
 .nav-drawer-panel a:last-of-type{border-bottom:none}
-.nav-drawer-panel .btn{margin-top:14px;justify-content:center;width:100%}
+.nav-drawer-panel .btn{margin-top:12px;justify-content:center;width:100%}
 .nav-drawer.open{display:block}
-
 @media(max-width:820px){
-  .nav-links{display:none}
-  .nav-cta .btn-outline{display:none}
-  .nav-burger{display:block}
-  .nav-wrap{top:8px;padding:0 12px}
+  .nav-links{display:none}.nav-cta .btn-outline{display:none}.nav-burger{display:block}
 }
 
-/* ═══════════════════════════════════════════════
-   HERO
-═══════════════════════════════════════════════ */
-.hero{
-  padding:52px 0 48px;
-  position:relative;overflow:hidden;
-  background:linear-gradient(135deg,#0d1117 60%,#0f1f3d 100%);
-  border-bottom:1px solid rgba(255,255,255,.07);
-}
-.hero:before{
-  content:"";position:absolute;inset:0;
-  background:radial-gradient(ellipse 60% 80% at 0% 50%,rgba(59,130,246,.18) 0%,transparent 60%);
-  pointer-events:none;
-}
-.hero-in{position:relative;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;max-width:1100px;margin:0 auto}
-@media(max-width:820px){.hero-in{grid-template-columns:1fr;gap:28px}}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.3);color:#93c5fd;font-weight:600;font-size:11px;padding:4px 12px;border-radius:0;margin-bottom:14px}
-.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(34,197,94,.2)}
-h1{font-size:clamp(26px,3.8vw,46px);font-weight:900;letter-spacing:-1.5px;line-height:1.08;margin-bottom:12px;color:#fff}
-h1 .grad{background:linear-gradient(120deg,#60a5fa,#a78bfa);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.hero-sub{font-size:14px;color:rgba(255,255,255,.6);max-width:480px;margin-bottom:22px;line-height:1.65}
+/* ── HERO ── */
+.hero{background:linear-gradient(135deg,#0a0f1e 0%,#0f1f3d 100%);padding:64px 0 56px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 70% 90% at 0% 50%,rgba(37,99,235,.2) 0%,transparent 65%);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1fr 320px;gap:48px;align-items:center;position:relative}
+@media(max-width:820px){.hero-grid{grid-template-columns:1fr;gap:32px}}
+.hero-label{display:inline-flex;align-items:center;gap:7px;background:rgba(37,99,235,.15);border:1px solid rgba(37,99,235,.3);color:#93c5fd;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:18px}
+.hero-label .dot{width:5px;height:5px;border-radius:50%;background:#4ade80;box-shadow:0 0 0 3px rgba(74,222,128,.2)}
+.hero h1{font-size:clamp(28px,4vw,50px);font-weight:900;letter-spacing:-2px;line-height:1.06;color:#fff;margin-bottom:16px}
+.hero h1 em{font-style:normal;background:linear-gradient(120deg,#60a5fa,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.55);max-width:500px;line-height:1.7;margin-bottom:28px}
 .hero-btns{display:flex;gap:10px;flex-wrap:wrap}
-.hero-right{display:flex;flex-direction:column;gap:10px;min-width:220px}
-.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);overflow:hidden}
-.hero-stats > div{padding:14px 16px;text-align:center;background:#0d1117}
-.stat-n{font-size:20px;font-weight:800;color:#60a5fa;line-height:1}
-.stat-l{font-size:10px;color:rgba(255,255,255,.45);font-weight:500;margin-top:3px;text-transform:uppercase;letter-spacing:.07em}
-.hero-platforms{display:flex;flex-direction:column;gap:6px}
-.hero-plat-tag{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);padding:8px 12px;font-size:12px;font-weight:600;color:rgba(255,255,255,.8)}
-.hero-new-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);color:#4ade80;font-size:11px;font-weight:700;padding:5px 12px;align-self:flex-start}
-@media(max-width:820px){.hero-right{flex-direction:row;flex-wrap:wrap}.hero-stats{min-width:200px}}
+.hero-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:28px}
+.hero-pill{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;color:rgba(255,255,255,.45);padding:4px 10px;border:1px solid rgba(255,255,255,.1);border-radius:20px}
+.hero-pill svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0}
+.hero-right{display:flex;flex-direction:column;gap:10px}
+.dl-card{display:flex;align-items:center;gap:12px;padding:14px 16px;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#fff;transition:border-color .2s;background:rgba(255,255,255,.03)}
+.dl-card:hover{border-color:rgba(96,165,250,.4)}
+.dl-card-txt{flex:1;min-width:0}
+.dl-card-txt strong{display:block;font-size:13px;font-weight:700}
+.dl-card-txt span{font-size:11px;color:rgba(255,255,255,.35);margin-top:1px;display:block}
+.hero-lic{text-align:center;font-size:11px;color:rgba(255,255,255,.25);padding-top:4px}
+.hero-lic a{color:#60a5fa;font-weight:600}
 
-/* ═══════════════════════════════════════════════
-   SECTIONS
-═══════════════════════════════════════════════ */
-section{padding:88px 0}
-.sec-head{text-align:center;max-width:580px;margin:0 auto 52px}
-.sec-tag{display:inline-block;color:#1d4ed8;background:#dbeafe;border:1px solid #bfdbfe;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;padding:4px 12px;border-radius:0;margin-bottom:16px}
-.sec-head h2{font-size:clamp(24px,3.4vw,38px);font-weight:800;letter-spacing:-1px;margin-bottom:12px;color:var(--ink)}
-.sec-head p{font-size:16px;color:var(--slate)}
+/* ── SHOWCASE ── */
+.showcase{background:linear-gradient(180deg,#0a0f1e 0%,#0a0f1e 60%,var(--bg) 100%);padding:0 24px 64px;margin-top:-2px}
+.showcase-inner{max-width:960px;margin:0 auto}
+.app-frame{border-radius:12px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.07);display:block}
+.app-frame img{display:block;width:100%}
+.tools-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+.tool-card{position:relative;border-radius:10px;overflow:hidden;box-shadow:0 12px 32px rgba(0,0,0,.35),0 0 0 1px rgba(255,255,255,.06);display:block;transition:transform .15s}
+.tool-card:hover{transform:translateY(-3px)}
+.tool-card img{display:block;width:100%;height:auto}
+.tool-label{position:absolute;inset:auto 0 0;background:linear-gradient(0deg,rgba(10,15,30,.9),transparent);padding:14px 12px 10px;color:#fff;font-weight:700;font-size:12.5px;display:flex;align-items:baseline;gap:6px}
+.tool-label em{font-style:normal;font-size:10.5px;color:rgba(255,255,255,.5);flex:1}
+.tool-label b{color:#60a5fa;font-size:13px}
+@media(max-width:600px){.tools-row{grid-template-columns:1fr}}
 
-/* ═══════════════════════════════════════════════
-   PRODUCTS GRID
-═══════════════════════════════════════════════ */
-.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
-@media(max-width:820px){.grid-3{grid-template-columns:1fr;gap:2px}}
-.card{background:var(--bg2);padding:32px 28px;transition:background .2s}
-.card:hover{background:var(--bg3)}
-.p-icon{width:46px;height:46px;border-radius:11px;display:flex;align-items:center;justify-content:center;margin-bottom:20px}
-.p-icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.6}
-.p-icon.blue{background:rgba(59,130,246,.15);color:#60a5fa}
-.p-icon.green{background:rgba(34,197,94,.12);color:#4ade80}
-.p-icon.purple{background:rgba(139,92,246,.12);color:#a78bfa}
-.p-name{font-size:19px;font-weight:800;margin-bottom:6px;color:var(--ink)}
-.p-desc{color:var(--slate);font-size:14px;margin-bottom:18px;line-height:1.6}
-.p-feats{list-style:none;margin-bottom:24px}
-.p-feats li{display:flex;gap:10px;align-items:flex-start;color:var(--slate);font-size:13px;padding:5px 0}
-.p-feats li:before{content:"✓";color:var(--green);font-weight:800;flex-shrink:0}
-.p-btns{display:flex;gap:8px}
-.p-btns .btn{flex:1;justify-content:center;font-size:13px;padding:10px 12px}
+/* ── SECTIONS COMMON ── */
+section{padding:80px 0}
+.sec-label{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--blue);background:#eff6ff;border:1px solid #dbeafe;padding:3px 11px;border-radius:20px;margin-bottom:14px}
+.sec-title{font-size:clamp(22px,3.2vw,36px);font-weight:800;letter-spacing:-1px;color:var(--ink);margin-bottom:10px}
+.sec-sub{font-size:15px;color:var(--slate);max-width:540px}
+.sec-head{text-align:center;margin-bottom:48px}
+.sec-head .sec-sub{margin:0 auto}
 
-/* ═══════════════════════════════════════════════
-   HOW IT WORKS — ligne horizontale
-═══════════════════════════════════════════════ */
-.steps-wrap{position:relative}
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
-@media(max-width:820px){.steps{grid-template-columns:1fr 1fr}}
-@media(max-width:480px){.steps{grid-template-columns:1fr}}
-.step{background:var(--bg2);padding:32px 24px;border-right:1px solid var(--line);position:relative}
-.step:last-child{border-right:none}
-.step-n{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:rgba(59,130,246,.15);color:#60a5fa;font-weight:800;font-size:15px;margin-bottom:16px;border:1px solid rgba(59,130,246,.25)}
-.step h4{font-size:15px;font-weight:700;margin-bottom:6px;color:var(--ink)}
+/* ── PRODUCTS GRID ── */
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+@media(max-width:820px){.products-grid{grid-template-columns:1fr}}
+.prod-card{background:#fff;padding:32px 28px;transition:background .15s}
+.prod-card:hover{background:var(--bg)}
+.prod-ic{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.prod-ic svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.7}
+.prod-ic.blue{background:#eff6ff;color:#2563eb}
+.prod-ic.green{background:#f0fdf4;color:#16a34a}
+.prod-ic.purple{background:#f5f3ff;color:#7c3aed}
+.prod-ic.teal{background:#f0fdfa;color:#0d9488}
+.prod-name{font-size:18px;font-weight:800;margin-bottom:6px}
+.prod-desc{color:var(--slate);font-size:13.5px;margin-bottom:16px;line-height:1.6}
+.prod-feats{list-style:none;margin-bottom:22px}
+.prod-feats li{display:flex;gap:9px;align-items:flex-start;color:var(--slate);font-size:13px;padding:4px 0}
+.prod-feats li::before{content:"✓";color:var(--green);font-weight:800;flex-shrink:0}
+.prod-btns{display:flex;gap:8px}
+.prod-btns .btn{flex:1;justify-content:center;font-size:13px;padding:9px 12px}
+
+/* ── SMTP / PROXY SECTIONS ── */
+#smtp,#proxy-section{display:none}
+.svc-section{background:linear-gradient(180deg,var(--bg) 0%,#fff 100%)}
+.svc-trust{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:36px}
+.trust-pill{display:flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);padding:7px 16px;border-radius:20px;font-size:12px;font-weight:600;color:#1e40af;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.trust-pill svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0}
+.plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:32px}
+.plan-card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:24px 18px;text-align:center;position:relative;transition:border-color .15s;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.plan-card:hover{border-color:#93c5fd}
+.plan-card.popular{border-color:var(--blue);box-shadow:0 4px 20px rgba(37,99,235,.1)}
+.plan-badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-size:10px;font-weight:700;padding:3px 13px;border-radius:20px;white-space:nowrap}
+.plan-tag{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:20px;margin-bottom:12px}
+.plan-price{font-size:30px;font-weight:900;letter-spacing:-1px;color:var(--ink);line-height:1}
+.plan-period{font-size:11.5px;color:var(--slate-2);margin:4px 0 16px}
+.plan-feats{list-style:none;text-align:left;margin:0 0 18px;display:flex;flex-direction:column;gap:5px}
+.plan-feats li{font-size:12px;color:var(--slate);display:flex;align-items:center;gap:6px}
+.plan-feats li svg{width:12px;height:12px;stroke:var(--green);fill:none;stroke-width:2.5;flex-shrink:0}
+.svc-feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.svc-feat{background:#fff;padding:22px 20px}
+.svc-feat-ic{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:11px}
+.svc-feat-ic svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.svc-feat h4{font-size:13.5px;font-weight:700;margin-bottom:4px}
+.svc-feat p{font-size:12px;color:var(--slate);line-height:1.55}
+
+/* ── HOW IT WORKS ── */
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+@media(max-width:820px){.steps-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.steps-grid{grid-template-columns:1fr}}
+.step{background:#fff;padding:28px 22px}
+.step-n{width:34px;height:34px;border-radius:50%;background:#eff6ff;color:var(--blue);font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;border:1px solid #dbeafe}
+.step h4{font-size:14px;font-weight:700;margin-bottom:5px}
 .step p{color:var(--slate);font-size:13px}
 
-/* ═══════════════════════════════════════════════
-   FEATURES — 2 col asymetrique
-═══════════════════════════════════════════════ */
-.feat-layout{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
-@media(max-width:820px){.feat-layout{grid-template-columns:1fr}}
-.feat{background:var(--bg2);padding:28px 26px;transition:background .2s}
-.feat:hover{background:var(--bg3)}
-.feat-ic{width:40px;height:40px;border-radius:0;display:flex;align-items:center;justify-content:center;margin-bottom:14px;background:rgba(59,130,246,.12)}
-.feat-ic svg{width:20px;height:20px;stroke:#60a5fa;fill:none;stroke-width:1.6}
-.feat h4{font-size:15px;font-weight:700;margin-bottom:5px;color:var(--ink)}
-.feat p{color:var(--slate);font-size:13.5px}
+/* ── FEATURES ── */
+.feats-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+@media(max-width:820px){.feats-grid{grid-template-columns:1fr}}
+.feat-cell{background:#fff;padding:26px 24px;transition:background .15s}
+.feat-cell:hover{background:var(--bg)}
+.feat-ic{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:13px;background:#eff6ff}
+.feat-ic svg{width:18px;height:18px;stroke:#2563eb;fill:none;stroke-width:1.7}
+.feat-cell h4{font-size:14.5px;font-weight:700;margin-bottom:5px}
+.feat-cell p{color:var(--slate);font-size:13px}
+.feat-wide{background:linear-gradient(90deg,#0a0f1e,#0f1f3d)!important;border:none}
 
-/* ═══════════════════════════════════════════════
-   PRICING
-═══════════════════════════════════════════════ */
-.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:start}
-@media(max-width:820px){.price-grid{grid-template-columns:1fr;max-width:400px;margin:0 auto}}
-.price-card{position:relative;background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:28px 24px;display:flex;flex-direction:column;transition:border-color .2s;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+/* ── REVIEWS ── */
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:820px){.reviews-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.reviews-grid{grid-template-columns:1fr}}
+.rev{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px}
+.rev-h{display:flex;align-items:center;gap:9px;margin-bottom:9px;position:relative}
+.rev-av{width:36px;height:36px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex-shrink:0}
+.rev-n{font-weight:700;font-size:13px;color:var(--ink)}
+.rev-d{font-size:11px;color:var(--slate-2)}
+.rev-g{width:16px;height:16px;position:absolute;right:0;top:0}
+.rev-s{color:#fbbc04;font-size:14px;letter-spacing:1px;margin-bottom:7px}
+.rev-t{font-size:13px;color:#475569;line-height:1.6}
+
+/* ── PRICING ── */
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:start}
+@media(max-width:820px){.pricing-grid{grid-template-columns:1fr;max-width:380px;margin:0 auto}}
+.price-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:26px 22px;display:flex;flex-direction:column;position:relative;transition:border-color .15s;box-shadow:0 1px 4px rgba(0,0,0,.05)}
 .price-card:hover{border-color:#93c5fd}
-.price-card.featured{border-color:#2563eb;background:linear-gradient(145deg,#eff6ff,#fff)}
-.price-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-size:11px;font-weight:700;padding:4px 14px;border-radius:0;white-space:nowrap}
+.price-card.featured{border-color:var(--blue);box-shadow:0 4px 20px rgba(37,99,235,.12)}
+.price-badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-size:10px;font-weight:700;padding:3px 13px;border-radius:20px;white-space:nowrap}
 .price-head{display:flex;align-items:center;gap:9px;margin-bottom:6px}
-.price-ic{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.price-ic svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.6}
-.price-ic.blue{background:rgba(59,130,246,.15);color:#60a5fa}
-.price-ic.green{background:rgba(34,197,94,.12);color:#4ade80}
-.price-ic.purple{background:rgba(139,92,246,.12);color:#a78bfa}
-.price-name{font-size:17px;font-weight:800;color:var(--ink)}
-.price-desc{color:var(--slate);font-size:13px;margin:4px 0 16px;min-height:34px}
-.price-amount{font-size:36px;font-weight:900;letter-spacing:-1.5px;color:var(--ink)}
-.price-amount span{font-size:14px;color:var(--slate);font-weight:500}
-.price-period{font-size:12px;color:var(--slate);margin:5px 0 18px}
-.price-feats{list-style:none;flex:1;margin-bottom:20px}
-.price-feats li{display:flex;gap:9px;color:var(--slate);font-size:13px;padding:5px 0}
+.price-ic{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.price-ic svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.7}
+.price-ic.blue{background:#eff6ff;color:#2563eb}
+.price-ic.green{background:#f0fdf4;color:#16a34a}
+.price-ic.purple{background:#f5f3ff;color:#7c3aed}
+.price-name{font-size:16px;font-weight:800}
+.price-desc{color:var(--slate);font-size:12.5px;margin:4px 0 14px}
+.price-amt{font-size:34px;font-weight:900;letter-spacing:-1.5px;color:var(--ink)}
+.price-amt span{font-size:13px;color:var(--slate);font-weight:500}
+.price-per{font-size:11.5px;color:var(--slate-2);margin:4px 0 16px}
+.price-feats{list-style:none;flex:1;margin-bottom:18px}
+.price-feats li{display:flex;gap:8px;color:var(--slate);font-size:12.5px;padding:4px 0}
 .price-feats li .ck{color:var(--green);font-weight:800;flex-shrink:0}
-.suite-cta{display:none;text-align:center;margin-top:24px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:0;padding:16px;font-size:14px;color:#1e40af}
+.suite-note{display:none;text-align:center;margin-top:20px;background:#eff6ff;border:1px solid #dbeafe;border-radius:8px;padding:14px;font-size:13.5px;color:#1e40af}
 
-/* ═══════════════════════════════════════════════
-   FAQ
-═══════════════════════════════════════════════ */
-.faq-item{background:var(--bg2);border:1px solid var(--line);border-radius:0;margin-bottom:8px;overflow:hidden;transition:border-color .15s}
+/* ── FAQ ── */
+.faq-item{background:#fff;border:1px solid var(--line);border-radius:8px;margin-bottom:6px;overflow:hidden;transition:border-color .15s}
 .faq-item:hover{border-color:#93c5fd}
-.faq-q{padding:18px 20px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:15px;color:var(--ink);user-select:none}
-.faq-q span.ic{color:var(--blue);font-size:20px;transition:transform .2s;flex-shrink:0;margin-left:12px}
+.faq-q{padding:16px 18px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:14.5px;color:var(--ink);user-select:none;gap:12px}
+.faq-q .ic{color:var(--blue);font-size:18px;transition:transform .2s;flex-shrink:0}
 .faq-a{max-height:0;overflow:hidden;transition:max-height .28s ease}
-.faq-a div{padding:0 20px 18px;color:var(--slate);font-size:14px;line-height:1.7}
-.faq-item.open .faq-a{max-height:200px}
-.faq-item.open .faq-q span.ic{transform:rotate(45deg)}
+.faq-a div{padding:0 18px 16px;color:var(--slate);font-size:13.5px;line-height:1.7}
+.faq-item.open .faq-a{max-height:220px}
+.faq-item.open .faq-q .ic{transform:rotate(45deg)}
 
-/* ═══════════════════════════════════════════════
-   CTA BAND
-═══════════════════════════════════════════════ */
-.cta-band{background:linear-gradient(135deg,#1e3a8a,#2563eb);border:none;border-radius:0;padding:56px 40px;text-align:center;position:relative;overflow:hidden}
-.cta-band:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 80% at 50% 0%,rgba(255,255,255,.08),transparent 60%);pointer-events:none}
-.cta-band h2{font-size:clamp(22px,3vw,34px);font-weight:800;margin-bottom:10px;letter-spacing:-.5px;color:#fff;position:relative}
-.cta-band p{font-size:16px;color:rgba(255,255,255,.8);margin-bottom:28px;max-width:460px;margin-left:auto;margin-right:auto;position:relative}
+/* ── CTA BAND ── */
+.cta-band{background:linear-gradient(135deg,#1e3a8a,#2563eb);border-radius:14px;padding:56px 40px;text-align:center;position:relative;overflow:hidden}
+.cta-band::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 80% at 50% 0%,rgba(255,255,255,.09),transparent 60%);pointer-events:none}
+.cta-band h2{font-size:clamp(20px,3vw,32px);font-weight:800;letter-spacing:-.5px;color:#fff;margin-bottom:10px;position:relative}
+.cta-band p{font-size:15px;color:rgba(255,255,255,.75);margin-bottom:26px;max-width:440px;margin-left:auto;margin-right:auto;position:relative}
 
-/* ═══════════════════════════════════════════════
-   FOOTER
-═══════════════════════════════════════════════ */
-footer{background:#0f172a;border-top:1px solid #1e293b;color:#94a3b8}
-.foot-top{padding:56px 0 44px}
-.foot-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1.2fr;gap:48px}
-@media(max-width:820px){.foot-grid{grid-template-columns:1fr 1fr;gap:32px}}
+/* ── FOOTER ── */
+footer{background:#0f172a;border-top:1px solid #1e293b;color:var(--slate-2)}
+.foot-top{padding:52px 0 40px}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:40px}
+@media(max-width:820px){.foot-grid{grid-template-columns:1fr 1fr;gap:28px}}
 @media(max-width:480px){.foot-grid{grid-template-columns:1fr}}
-.foot-logo{display:flex;align-items:center;gap:9px;font-weight:900;font-size:18px;color:#fff;margin-bottom:10px}
-.foot-logo .logo-mark{width:30px;height:30px;background:var(--blue);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.foot-logo .logo-mark svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.foot-tagline{font-size:13px;color:#94a3b8;line-height:1.65;max-width:220px;margin-bottom:16px}
-.foot-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.05);border:1px solid #1e293b;border-radius:0;padding:5px 12px;font-size:11px;color:#64748b}
-.foot-badge img{height:14px;width:auto;border-radius:2px;background:#fff;padding:1px}
-.foot-col h5{color:rgba(255,255,255,.4);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;margin-bottom:14px}
-.foot-col a{display:block;color:#94a3b8;font-size:13px;padding:4px 0;transition:color .15s}
+.foot-logo{font-weight:800;font-size:16px;color:#fff;margin-bottom:9px;display:flex;align-items:center}
+.foot-tagline{font-size:12.5px;color:#64748b;line-height:1.65;max-width:220px;margin-bottom:14px}
+.foot-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.04);border:1px solid #1e293b;border-radius:20px;padding:4px 11px;font-size:11px;color:#475569;text-decoration:none}
+.foot-badge img{height:13px;width:auto;border-radius:2px;background:#fff;padding:1px}
+.foot-col h5{color:rgba(255,255,255,.35);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;margin-bottom:12px}
+.foot-col a{display:block;color:#64748b;font-size:12.5px;padding:3.5px 0;transition:color .15s}
 .foot-col a:hover{color:#fff}
-.foot-contact-block{background:rgba(255,255,255,.04);border:1px solid #1e293b;border-radius:0;padding:14px 16px}
-.foot-contact-block p{font-size:12px;color:#64748b;margin-bottom:10px}
-.foot-contact-email{display:flex;align-items:center;gap:7px;color:#60a5fa;font-size:13px;font-weight:600;margin-bottom:8px}
-.foot-contact-email svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0}
-.foot-response{font-size:11px;color:#475569}
-.foot-bottom{padding:18px 0;border-top:1px solid #1e293b;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
-.foot-copy{font-size:11px;color:#475569}
-.foot-links{display:flex;gap:18px;flex-wrap:wrap}
-.foot-links a{font-size:11px;color:#475569;transition:color .15s}
-.foot-links a:hover{color:#94a3b8}
-
-/* SMTP section hidden by default */
-#smtp{display:none;background:var(--bg2)}
+.foot-contact{background:rgba(255,255,255,.03);border:1px solid #1e293b;border-radius:8px;padding:14px}
+.foot-contact p{font-size:11.5px;color:#475569;margin-bottom:9px}
+.foot-email{display:flex;align-items:center;gap:6px;color:#60a5fa;font-size:12.5px;font-weight:600;margin-bottom:6px}
+.foot-email svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0}
+.foot-resp{font-size:11px;color:#334155}
+.foot-bottom{padding:16px 0;border-top:1px solid #1e293b;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.foot-copy{font-size:11px;color:#334155}
+.foot-links{display:flex;gap:16px;flex-wrap:wrap}
+.foot-links a{font-size:11px;color:#334155;transition:color .15s}
+.foot-links a:hover{color:#64748b}
 </style>
 </head>
 <body>
@@ -286,13 +285,13 @@ footer{background:#0f172a;border-top:1px solid #1e293b;color:#94a3b8}
 <div id="announce-bar"></div>
 
 <div class="nav-wrap">
-  <nav class="nav" role="navigation" aria-label="Navigation principale">
+  <nav class="nav">
     <a href="/" class="logo">
-      <img src="/logoevostudio2.png" alt="EvoStudio" height="36" style="display:block;max-width:160px;object-fit:contain" />
+      <img src="/logoevostudio2.png" alt="EvoStudio" height="34" style="display:block;max-width:150px;object-fit:contain" />
     </a>
     <div class="nav-links">
       <div class="nav-dd">
-        <a href="#produits" class="nav-dd-trigger">Produits <span style="font-size:9px;opacity:.7">▼</span></a>
+        <span class="nav-dd-trigger">Produits <span style="font-size:9px;opacity:.6">▾</span></span>
         <div class="nav-submenu">
           <a href="/produit.html?id=extractor"><b>EvoExtractor</b><span>Collecte d'adresses email</span></a>
           <a href="/produit.html?id=sender"><b>EvoSender</b><span>Envoi en masse haute délivrabilité</span></a>
@@ -300,7 +299,8 @@ footer{background:#0f172a;border-top:1px solid #1e293b;color:#94a3b8}
           <a href="/produit.html?id=suite"><b>Suite EvoStudio</b><span>Les 3 outils en une licence</span></a>
         </div>
       </div>
-      <a href="#fonctionnalites">Fonctionnalités</a>
+      <a href="#smtp" id="nav-smtp" style="display:none">SMTP</a>
+      <a href="#proxy-section" id="nav-proxy" style="display:none">Proxy</a>
       <a href="#tarifs">Tarifs</a>
       <a href="/blog.html">Blog</a>
       <a href="#faq">FAQ</a>
@@ -316,24 +316,22 @@ footer{background:#0f172a;border-top:1px solid #1e293b;color:#94a3b8}
   </nav>
 </div>
 
-<!-- Mobile drawer -->
-<div class="nav-drawer" id="nav-drawer" role="dialog" aria-modal="true" aria-label="Menu mobile">
+<div class="nav-drawer" id="nav-drawer">
   <div class="nav-drawer-bg" id="nav-drawer-bg"></div>
   <div class="nav-drawer-panel">
-    <button class="nav-drawer-close" id="nav-drawer-close" aria-label="Fermer le menu">
+    <button class="nav-drawer-close" id="nav-drawer-close" aria-label="Fermer">
       <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
     <a href="#produits">Produits</a>
-    <div style="padding-left:14px;border-left:2px solid #eef2f7;margin:-4px 0 4px">
-      <a href="/produit.html?id=extractor" style="font-size:13px;color:#64748b">↳ EvoExtractor</a>
-      <a href="/produit.html?id=sender" style="font-size:13px;color:#64748b">↳ EvoSender</a>
-      <a href="/produit.html?id=verifier" style="font-size:13px;color:#64748b">↳ EvoVérificateur</a>
-      <a href="/produit.html?id=suite" style="font-size:13px;color:#64748b">↳ Suite EvoStudio</a>
+    <div style="padding-left:12px;border-left:2px solid var(--line);margin:-2px 0 2px">
+      <a href="/produit.html?id=extractor" style="font-size:13px;color:var(--slate)">↳ EvoExtractor</a>
+      <a href="/produit.html?id=sender" style="font-size:13px;color:var(--slate)">↳ EvoSender</a>
+      <a href="/produit.html?id=verifier" style="font-size:13px;color:var(--slate)">↳ EvoVérificateur</a>
     </div>
-    <a href="#fonctionnalites">Fonctionnalités</a>
+    <a href="#smtp" id="drawer-smtp" style="display:none">Serveur SMTP</a>
+    <a href="#proxy-section" id="drawer-proxy" style="display:none">Proxy résidentiel</a>
     <a href="#tarifs">Tarifs</a>
     <a href="/blog.html">Blog</a>
-    <a href="/a-propos.html">À propos</a>
     <a href="#faq">FAQ</a>
     <a href="/login.html" id="drawer-login">Connexion</a>
     <a href="/dashboard.html" id="drawer-account" style="display:none">Espace client</a>
@@ -341,361 +339,344 @@ footer{background:#0f172a;border-top:1px solid #1e293b;color:#94a3b8}
   </div>
 </div>
 
-<!-- ═══════════ HERO ═══════════ -->
+<!-- ═══ HERO ═══ -->
 <header class="hero">
-  <div class="wrap hero-in">
-
-    <!-- Colonne gauche : texte -->
-    <div>
-      <div class="hero-badge"><span class="dot" aria-hidden="true"></span> Suite professionnelle d'emailing</div>
-      <h1 id="hero-title">Extrayez, vérifiez<br>et envoyez <span class="grad">vos emails</span></h1>
-      <p class="hero-sub" id="hero-sub">EvoStudio réunit 3 outils puissants : collecte d'adresses, nettoyage de listes et campagnes haute délivrabilité. Licence annuelle, 100% local.</p>
-      <div class="hero-btns">
-        <a href="/pay.html" class="btn btn-primary" style="font-size:14px;padding:11px 22px">Acheter maintenant →</a>
-        <a href="#produits" class="btn" style="font-size:14px;padding:11px 22px;color:#fff;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.06)">Découvrir les outils</a>
-      </div>
-    </div>
-
-    <!-- Colonne droite : téléchargement -->
-    <div style="min-width:280px;max-width:340px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);padding:20px;display:flex;flex-direction:column;gap:12px">
+  <div class="wrap">
+    <div class="hero-grid">
       <div>
-        <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.25);color:#4ade80;font-size:10px;font-weight:700;padding:3px 10px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px">
-          <span style="width:5px;height:5px;border-radius:50%;background:#4ade80;display:inline-block"></span> Disponible maintenant
+        <div class="hero-label"><span class="dot"></span> Suite professionnelle</div>
+        <h1 id="hero-title">Email, SMTP & Proxy<br><em>tout-en-un</em></h1>
+        <p class="hero-sub" id="hero-sub">EvoStudio réunit extraction d'emails, vérification, envoi en masse, serveur SMTP dédié et proxy résidentiel. Un seul espace client, des outils pros.</p>
+        <div class="hero-btns">
+          <a href="/pay.html" class="btn btn-primary" style="font-size:14px;padding:11px 22px">Acheter maintenant →</a>
+          <a href="#produits" class="btn" style="font-size:14px;padding:11px 22px;color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.15);background:transparent">Découvrir les outils</a>
         </div>
-        <div style="font-size:15px;font-weight:800;color:#fff;line-height:1.2;margin-bottom:6px">EvoStudio tourne sur<br><span style="background:linear-gradient(90deg,#60a5fa,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Windows & Mac Silicon</span></div>
-        <p style="font-size:11.5px;color:rgba(255,255,255,.45);line-height:1.55">Même suite, même licence, deux plateformes. Le setup prend moins de 2 minutes.</p>
+        <div class="hero-pills">
+          <span class="hero-pill"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg> SMTP dédié</span>
+          <span class="hero-pill"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 0 20"/></svg> Proxy résidentiel</span>
+          <span class="hero-pill"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> 100 % local & privé</span>
+          <span class="hero-pill"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Windows & Mac</span>
+        </div>
       </div>
-      <a href="https://github.com/BlackQuiet/evosender-pro-releases/releases/latest/download/EvoStudio-Setup-3.0.60.exe"
-         style="display:flex;align-items:center;gap:10px;background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2);padding:11px 14px;color:#fff;text-decoration:none;transition:border-color .2s"
-         onmouseover="this.style.borderColor='#60a5fa'" onmouseout="this.style.borderColor='rgba(96,165,250,.2)'">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="#60a5fa" style="flex-shrink:0"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
-        <div style="flex:1;min-width:0">
-          <div style="font-size:13px;font-weight:700">Télécharger pour Windows</div>
-          <div style="font-size:10.5px;color:rgba(255,255,255,.4);margin-top:1px">Windows 10 / 11 · x64 · .exe · ~95 MB</div>
-        </div>
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      </a>
-      <a href="https://github.com/BlackQuiet/evosender-pro-releases/releases/latest/download/EvoStudio-3.0.60-arm64.dmg"
-         style="display:flex;align-items:center;gap:10px;background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.2);padding:11px 14px;color:#fff;text-decoration:none;transition:border-color .2s"
-         onmouseover="this.style.borderColor='#a78bfa'" onmouseout="this.style.borderColor='rgba(167,139,250,.2)'">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="#a78bfa" style="flex-shrink:0"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
-        <div style="flex:1;min-width:0">
-          <div style="font-size:13px;font-weight:700">Mac Silicon <span style="background:rgba(167,139,250,.2);color:#c4b5fd;font-size:9px;font-weight:700;padding:1px 6px;vertical-align:middle">M1/M2/M3</span></div>
-          <div style="font-size:10.5px;color:rgba(255,255,255,.4);margin-top:1px">macOS 12+ · arm64 · .dmg · ~125 MB</div>
-        </div>
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      </a>
-      <div style="font-size:10.5px;color:rgba(255,255,255,.28);text-align:center;padding-top:2px">
-        Licence requise · <a href="/pay.html" style="color:#60a5fa;font-weight:600">Obtenir une licence →</a>
+      <div class="hero-right">
+        <a href="https://github.com/BlackQuiet/evosender-pro-releases/releases/latest/download/EvoStudio-Setup-3.0.60.exe" class="dl-card">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="#60a5fa" style="flex-shrink:0"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+          <div class="dl-card-txt">
+            <strong>Windows 10 / 11</strong>
+            <span>x64 · .exe · ~95 MB</span>
+          </div>
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </a>
+        <a href="https://github.com/BlackQuiet/evosender-pro-releases/releases/latest/download/EvoStudio-3.0.60-arm64.dmg" class="dl-card">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="#a78bfa" style="flex-shrink:0"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
+          <div class="dl-card-txt">
+            <strong>Mac Silicon <span style="background:rgba(167,139,250,.2);color:#c4b5fd;font-size:9px;font-weight:700;padding:1px 6px;border-radius:4px;vertical-align:middle">M1/M2/M3</span></strong>
+            <span>macOS 12+ · .dmg · ~125 MB</span>
+          </div>
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </a>
+        <p class="hero-lic">Licence requise · <a href="/pay.html">Obtenir une licence →</a></p>
       </div>
     </div>
-
   </div>
 </header>
 
-<!-- ═══════════ SHOWCASE (maquette app) ═══════════ -->
-<section style="background:linear-gradient(180deg,#0d1117 0%,#0d1117 55%,#0f1830 100%);padding:0 16px 64px;margin-top:-20px">
-  <div style="max-width:980px;margin:0 auto">
-    <!-- Hub en vedette -->
-    <a href="/produit.html?id=suite" style="text-decoration:none;display:block;border-radius:14px;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.06);position:relative">
-      <img src="/Hub.png" alt="EvoStudio — tableau de bord" loading="lazy" style="display:block;width:100%;height:auto" />
-      <div style="position:absolute;left:0;right:0;bottom:0;background:linear-gradient(0deg,rgba(13,17,23,.9),transparent);padding:26px 22px 16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
-        <div><div style="color:#fff;font-weight:800;font-size:16px">Suite EvoStudio</div><div style="color:rgba(255,255,255,.6);font-size:12.5px">Les 3 outils réunis, une seule licence</div></div>
-        <span style="color:#60a5fa;font-size:13px;font-weight:700">Découvrir la suite →</span>
-      </div>
+<!-- ═══ SHOWCASE ═══ -->
+<div class="showcase">
+  <div class="showcase-inner">
+    <a href="/produit.html?id=suite" class="app-frame">
+      <img src="/Hub.png" alt="EvoStudio — tableau de bord" loading="lazy" />
     </a>
-    <!-- 3 outils en rangée, cliquables -->
-    <div id="ev-tools" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px">
-      <a href="/produit.html?id=extractor" class="ev-tcard"><img src="/EvoExtractor.png" alt="EvoExtractor" loading="lazy"/><span class="ev-tlabel">EvoExtractor <em>Collecte d'adresses</em><b>→</b></span></a>
-      <a href="/produit.html?id=sender" class="ev-tcard"><img src="/EvoSender.png" alt="EvoSender" loading="lazy"/><span class="ev-tlabel">EvoSender <em>Envoi en masse</em><b>→</b></span></a>
-      <a href="/produit.html?id=verifier" class="ev-tcard"><img src="/Evoverif.png" alt="EvoVérificateur" loading="lazy"/><span class="ev-tlabel">EvoVérificateur <em>Vérification</em><b>→</b></span></a>
-    </div>
-    <style>
-      .ev-tcard{text-decoration:none;border-radius:12px;overflow:hidden;box-shadow:0 18px 40px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.06);display:block;position:relative;transition:transform .15s}
-      .ev-tcard:hover{transform:translateY(-3px)}
-      .ev-tcard img{display:block;width:100%;height:auto}
-      .ev-tlabel{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(0deg,rgba(13,17,23,.93),transparent);padding:18px 14px 11px;color:#fff;font-weight:800;font-size:13px;display:flex;align-items:baseline;gap:7px}
-      .ev-tlabel em{font-style:normal;font-weight:500;font-size:11px;color:rgba(255,255,255,.6);flex:1}
-      .ev-tlabel b{color:#60a5fa;font-size:14px}
-      @media(max-width:760px){#ev-tools{grid-template-columns:1fr}}
-    </style>
-    <p style="text-align:center;color:rgba(255,255,255,.4);font-size:12.5px;margin-top:18px">Cliquez un outil pour découvrir tous ses détails.</p>
-  </div>
-</section>
-
-<!-- ═══════════ PRODUCTS ═══════════ -->
-<section id="produits">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="sec-tag">Nos outils</div>
-      <h2>Une suite complète pour vos emails</h2>
-      <p>Trois logiciels professionnels pour couvrir tout votre flux d'emailing.</p>
-    </div>
-    <div class="grid-3" id="products-grid" aria-live="polite"></div>
-  </div>
-</section>
-
-<!-- ═══════════ SMTP (si activé admin) ═══════════ -->
-<section id="smtp" style="background:linear-gradient(180deg,#f0f7ff 0%,#f8fafc 100%)">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="sec-tag">Infrastructure pro</div>
-      <h2>Serveur SMTP dédié <span style="background:linear-gradient(90deg,#2563eb,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent">haute délivrabilité</span></h2>
-      <p>Relay SMTP professionnel avec IP dédiées, authentification SPF/DKIM/DMARC et monitoring en temps réel. Credentials disponibles dans votre espace client dès validation.</p>
-    </div>
-
-    <!-- Barre de confiance -->
-    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-bottom:36px">
-      <div style="display:flex;align-items:center;gap:7px;background:#fff;border:1px solid #e2e8f0;padding:8px 16px;font-size:12px;font-weight:600;color:#1e40af;box-shadow:0 1px 3px rgba(0,0,0,.05)">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> 99,9% uptime garanti
-      </div>
-      <div style="display:flex;align-items:center;gap:7px;background:#fff;border:1px solid #e2e8f0;padding:8px 16px;font-size:12px;font-weight:600;color:#1e40af;box-shadow:0 1px 3px rgba(0,0,0,.05)">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> SPF · DKIM · DMARC configurés
-      </div>
-      <div style="display:flex;align-items:center;gap:7px;background:#fff;border:1px solid #e2e8f0;padding:8px 16px;font-size:12px;font-weight:600;color:#1e40af;box-shadow:0 1px 3px rgba(0,0,0,.05)">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> TLS/STARTTLS port 587
-      </div>
-      <div style="display:flex;align-items:center;gap:7px;background:#fff;border:1px solid #e2e8f0;padding:8px 16px;font-size:12px;font-weight:600;color:#1e40af;box-shadow:0 1px 3px rgba(0,0,0,.05)">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 0 20"/></svg> IP dédiées haute réputation
-      </div>
-    </div>
-
-    <!-- Grille de plans -->
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;margin-bottom:36px" id="smtp-plans-grid"></div>
-
-    <!-- Features bas de section -->
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2px;background:#e2e8f0;border:1px solid #e2e8f0;overflow:hidden">
-      <div style="background:#fff;padding:22px 20px">
-        <div style="width:36px;height:36px;background:#eff6ff;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:12px">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#2563eb" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-        </div>
-        <h4 style="font-size:14px;font-weight:700;color:#0f172a;margin-bottom:4px">Accès immédiat</h4>
-        <p style="font-size:12.5px;color:#64748b;line-height:1.5">Identifiants SMTP livrés automatiquement dans votre espace client dès validation du paiement.</p>
-      </div>
-      <div style="background:#fff;padding:22px 20px">
-        <div style="width:36px;height:36px;background:#f0fdf4;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:12px">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#16a34a" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        </div>
-        <h4 style="font-size:14px;font-weight:700;color:#0f172a;margin-bottom:4px">Chiffrement TLS</h4>
-        <p style="font-size:12.5px;color:#64748b;line-height:1.5">Compatible EvoSender, PHPMailer, Postfix, Nodemailer et tous les clients SMTP standard.</p>
-      </div>
-      <div style="background:#fff;padding:22px 20px">
-        <div style="width:36px;height:36px;background:#faf5ff;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:12px">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#7c3aed" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        </div>
-        <h4 style="font-size:14px;font-weight:700;color:#0f172a;margin-bottom:4px">Logs en temps réel</h4>
-        <p style="font-size:12.5px;color:#64748b;line-height:1.5">Suivi des livraisons, bounces et plaintes. Webhooks disponibles pour vos intégrations.</p>
-      </div>
-      <div style="background:#fff;padding:22px 20px">
-        <div style="width:36px;height:36px;background:#fff7ed;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:12px">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#ea580c" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 0 20"/></svg>
-        </div>
-        <h4 style="font-size:14px;font-weight:700;color:#0f172a;margin-bottom:4px">Infrastructure Exabytes</h4>
-        <p style="font-size:12.5px;color:#64748b;line-height:1.5">Serveurs professionnels, IP avec haute réputation anti-spam, infrastructure redondante.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ HOW IT WORKS ═══════════ -->
-<section id="comment">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="sec-tag">Simple & rapide</div>
-      <h2>Comment ça marche</h2>
-      <p>De l'achat à votre première campagne en quelques minutes.</p>
-    </div>
-    <div class="steps">
-      <div class="step"><div class="step-n">1</div><h4>Choisissez</h4><p>Sélectionnez un outil ou la suite complète.</p></div>
-      <div class="step"><div class="step-n">2</div><h4>Payez</h4><p>Crypto (USDT, BTC) ou Wave — paiement sécurisé.</p></div>
-      <div class="step"><div class="step-n">3</div><h4>Recevez</h4><p>Votre licence est générée automatiquement.</p></div>
-      <div class="step" style="border-right:none"><div class="step-n">4</div><h4>Lancez-vous</h4><p>Téléchargez EvoStudio sur <strong>Windows</strong> ou <strong>Mac Silicon</strong> et activez votre clé.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ FONCTIONNALITES ═══════════ -->
-<section id="fonctionnalites">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="sec-tag">Pourquoi EvoStudio</div>
-      <h2>Conçu pour les professionnels</h2>
-      <p>Des fonctionnalités avancées pour des résultats fiables.</p>
-    </div>
-    <div class="feat-layout">
-      <div class="feat"><div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h4>100% local & privé</h4><p>Vos données ne quittent jamais votre poste. Aucune télémétrie.</p></div>
-      <div class="feat"><div class="feat-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg></div><h4>Rotation SMTP & proxy</h4><p>Délivrabilité maximale grâce à la rotation automatique.</p></div>
-      <div class="feat"><div class="feat-ic"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><h4>Vérification réelle</h4><p>MX, SMTP, catch-all : nettoyez vos listes avant l'envoi.</p></div>
-      <div class="feat"><div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h4>Personnalisation avancée</h4><p>Variables, templates HTML et expéditeurs dynamiques.</p></div>
-      <div class="feat"><div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><h4>Licence annuelle</h4><p>Valable 1 an, renouvelable. Mises à jour incluses pendant la durée de validité.</p></div>
-      <div class="feat"><div class="feat-ic"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><h4>Espace client</h4><p>Retrouvez vos licences et commandes dans votre espace personnel.</p></div>
-      <div class="feat" style="grid-column:1/-1;background:linear-gradient(90deg,#0d1117,#0f1f3d);border:1px solid rgba(96,165,250,.2)">
-        <div style="display:flex;align-items:center;gap:32px;flex-wrap:wrap">
-          <div>
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-              <div class="feat-ic" style="margin-bottom:0;background:rgba(96,165,250,.15)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#60a5fa" stroke-width="1.6"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-              <h4 style="color:#fff;margin-bottom:0">Multi-plateforme natif</h4>
-            </div>
-            <p style="color:rgba(255,255,255,.55);max-width:400px">Une seule suite, deux systèmes. EvoStudio tourne nativement sur <strong style="color:#60a5fa">Windows 10/11</strong> et <strong style="color:#a78bfa">macOS Silicon M1/M2/M3</strong> — sans émulateur, sans compromis sur les performances.</p>
-          </div>
-          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-left:auto">
-            <div style="display:flex;align-items:center;gap:8px;background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.25);padding:10px 18px;color:#93c5fd;font-size:13px;font-weight:600">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="#60a5fa"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
-              Windows
-            </div>
-            <div style="display:flex;align-items:center;gap:8px;background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.25);padding:10px 18px;color:#c4b5fd;font-size:13px;font-weight:600">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="#a78bfa"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
-              Mac Silicon
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ AVIS CLIENTS ═══════════ -->
-<section id="avis" style="background:#fff">
-  <div class="wrap" style="max-width:980px">
-    <div class="sec-head">
-      <div class="sec-tag">Avis clients</div>
-      <h2>Ils utilisent EvoStudio au quotidien</h2>
-      <p>Ce que disent nos clients de la suite EvoStudio.</p>
-    </div>
-
-    <!-- Note globale -->
-    <div style="display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;margin-bottom:30px">
-      <div style="text-align:center">
-        <div id="rev-overall" style="font-size:46px;font-weight:900;line-height:1;color:#0f172a">4,9</div>
-        <div id="rev-overall-stars" style="color:#fbbc04;font-size:18px;letter-spacing:2px;margin-top:4px">★★★★★</div>
-        <div id="rev-overall-count" style="font-size:12.5px;color:#64748b;margin-top:4px">basé sur 37 avis</div>
-      </div>
-      <div style="height:54px;width:1px;background:#e2e8f0"></div>
-      <div style="display:flex;align-items:center;gap:10px">
-        <svg width="34" height="34" viewBox="0 0 48 48"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34A21.99 21.99 0 0 0 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg>
-        <div style="font-size:13px;color:#64748b;line-height:1.4">Avis<br><b style="color:#0f172a">Google</b></div>
-      </div>
-    </div>
-
-    <!-- Cartes d'avis -->
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px" id="reviews-grid">
-      <div class="rev"><div class="rev-h"><span class="rev-av" style="background:#4285F4">A</span><div><div class="rev-n">Amadou D.</div><div class="rev-d">Il y a 2 semaines</div></div><svg class="rev-g" viewBox="0 0 48 48"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34A21.99 21.99 0 0 0 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg></div><div class="rev-s">★★★★★</div><p class="rev-t">Enfin un logiciel d'emailing complet et 100% local. EvoSender m'a permis de doubler mon taux d'ouverture grâce à la rotation SMTP.</p></div>
-      <div class="rev"><div class="rev-h"><span class="rev-av" style="background:#34A853">F</span><div><div class="rev-n">Fatou K.</div><div class="rev-d">Il y a 1 mois</div></div><svg class="rev-g" viewBox="0 0 48 48"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34A21.99 21.99 0 0 0 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg></div><div class="rev-s">★★★★★</div><p class="rev-t">EvoVérificateur a nettoyé ma liste de 50 000 contacts en quelques minutes. Mes rebonds sont passés sous les 2%. Indispensable.</p></div>
-      <div class="rev"><div class="rev-h"><span class="rev-av" style="background:#EA4335">K</span><div><div class="rev-n">Koffi N.</div><div class="rev-d">Il y a 1 mois</div></div><svg class="rev-g" viewBox="0 0 48 48"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34A21.99 21.99 0 0 0 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg></div><div class="rev-s">★★★★★</div><p class="rev-t">Le serveur SMTP dédié est livré en quelques minutes et la délivrabilité est excellente. Support très réactif via le chat.</p></div>
-      <div class="rev"><div class="rev-h"><span class="rev-av" style="background:#FBBC04">S</span><div><div class="rev-n">Sarah M.</div><div class="rev-d">Il y a 2 mois</div></div><svg class="rev-g" viewBox="0 0 48 48"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34A21.99 21.99 0 0 0 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg></div><div class="rev-s">★★★★★</div><p class="rev-t">EvoExtractor trouve des adresses que je ne trouvais nulle part ailleurs. L'export CSV est parfait pour mon CRM.</p></div>
-      <div class="rev"><div class="rev-h"><span class="rev-av" style="background:#7c3aed">I</span><div><div class="rev-n">Ibrahim T.</div><div class="rev-d">Il y a 2 mois</div></div><svg class="rev-g" viewBox="0 0 48 48"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34A21.99 21.99 0 0 0 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg></div><div class="rev-s">★★★★★</div><p class="rev-t">Le rapport qualité-prix est imbattable. Une licence annuelle pour les 3 outils, c'est largement rentabilisé.</p></div>
-      <div class="rev"><div class="rev-h"><span class="rev-av" style="background:#0ea5e9">M</span><div><div class="rev-n">Marc L.</div><div class="rev-d">Il y a 3 mois</div></div><svg class="rev-g" viewBox="0 0 48 48"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34A21.99 21.99 0 0 0 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg></div><div class="rev-s">★★★★☆</div><p class="rev-t">Très bon outil, interface claire. J'aurais aimé plus de modèles d'emails mais l'essentiel y est. Je recommande.</p></div>
-    </div>
-
-    <div style="text-align:center;margin-top:26px">
-      <a href="https://www.google.com/search?q=EvoStudio+avis" target="_blank" rel="noopener" id="google-review-link" style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #e2e8f0;border-radius:0;padding:11px 20px;font-size:13px;font-weight:600;color:#0f172a;text-decoration:none">
-        <svg width="16" height="16" viewBox="0 0 48 48"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34A21.99 21.99 0 0 0 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg>
-        Laisser un avis sur Google
+    <div class="tools-row">
+      <a href="/produit.html?id=extractor" class="tool-card">
+        <img src="/EvoExtractor.png" alt="EvoExtractor" loading="lazy"/>
+        <div class="tool-label">EvoExtractor <em>Collecte d'adresses</em><b>→</b></div>
+      </a>
+      <a href="/produit.html?id=sender" class="tool-card">
+        <img src="/EvoSender.png" alt="EvoSender" loading="lazy"/>
+        <div class="tool-label">EvoSender <em>Envoi en masse</em><b>→</b></div>
+      </a>
+      <a href="/produit.html?id=verifier" class="tool-card">
+        <img src="/Evoverif.png" alt="EvoVérificateur" loading="lazy"/>
+        <div class="tool-label">EvoVérificateur <em>Vérification</em><b>→</b></div>
       </a>
     </div>
   </div>
-  <style>
-    #reviews-grid .rev{background:#fff;border:1px solid #e2e8f0;border-radius:0;padding:18px}
-    .rev-h{display:flex;align-items:center;gap:10px;margin-bottom:10px;position:relative}
-    .rev-av{width:38px;height:38px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;flex-shrink:0}
-    .rev-n{font-weight:700;font-size:13.5px;color:#0f172a}
-    .rev-d{font-size:11.5px;color:#94a3b8}
-    .rev-g{width:18px;height:18px;position:absolute;right:0;top:0}
-    .rev-s{color:#fbbc04;font-size:15px;letter-spacing:1px;margin-bottom:8px}
-    .rev-t{font-size:13.5px;color:#475569;line-height:1.6}
-    @media(max-width:820px){#reviews-grid{grid-template-columns:1fr 1fr!important}}
-    @media(max-width:560px){#reviews-grid{grid-template-columns:1fr!important}}
-  </style>
+</div>
+
+<!-- ═══ PRODUCTS ═══ -->
+<section id="produits" style="background:var(--bg)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label">Logiciels</div>
+      <h2 class="sec-title">Suite complète d'emailing</h2>
+      <p class="sec-sub">Trois outils professionnels pour tout votre flux email — 100 % local, aucune donnée en ligne.</p>
+    </div>
+    <div class="products-grid" id="products-grid"></div>
+  </div>
+</section>
+
+<!-- ═══ SMTP ═══ -->
+<section id="smtp" class="svc-section">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label">Infrastructure</div>
+      <h2 class="sec-title">Serveur SMTP dédié <span style="background:linear-gradient(90deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">haute délivrabilité</span></h2>
+      <p class="sec-sub">Relay professionnel avec IP dédiées, SPF/DKIM/DMARC configurés. Credentials livrés automatiquement dans votre espace client.</p>
+    </div>
+    <div class="svc-trust">
+      <div class="trust-pill"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> 99,9% uptime</div>
+      <div class="trust-pill"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> SPF · DKIM · DMARC</div>
+      <div class="trust-pill"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> TLS port 587</div>
+      <div class="trust-pill"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 0 20"/></svg> IP haute réputation</div>
+    </div>
+    <div class="plans-grid" id="smtp-plans-grid"></div>
+    <div class="svc-feats">
+      <div class="svc-feat">
+        <div class="svc-feat-ic" style="background:#eff6ff"><svg viewBox="0 0 24 24" stroke="#2563eb"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <h4>Accès immédiat</h4>
+        <p>Identifiants SMTP livrés automatiquement dès validation du paiement.</p>
+      </div>
+      <div class="svc-feat">
+        <div class="svc-feat-ic" style="background:#f0fdf4"><svg viewBox="0 0 24 24" stroke="#16a34a"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <h4>Chiffrement TLS</h4>
+        <p>Compatible EvoSender, PHPMailer, Postfix, Nodemailer et tout client SMTP standard.</p>
+      </div>
+      <div class="svc-feat">
+        <div class="svc-feat-ic" style="background:#f5f3ff"><svg viewBox="0 0 24 24" stroke="#7c3aed"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <h4>Logs en temps réel</h4>
+        <p>Suivi des livraisons, bounces et plaintes via votre espace client.</p>
+      </div>
+      <div class="svc-feat">
+        <div class="svc-feat-ic" style="background:#fff7ed"><svg viewBox="0 0 24 24" stroke="#ea580c"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 0 20"/></svg></div>
+        <h4>Infrastructure Exabytes</h4>
+        <p>Serveurs pros, IP haute réputation, infrastructure redondante.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROXY RÉSIDENTIEL ═══ -->
+<section id="proxy-section" class="svc-section" style="background:#fff">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label" style="color:var(--teal);background:#f0fdfa;border-color:#99f6e4">Proxy résidentiel</div>
+      <h2 class="sec-title">Proxy résidentiel <span style="background:linear-gradient(90deg,var(--teal),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">haute anonymité</span></h2>
+      <p class="sec-sub">IPs résidentielles authentiques issues de 30+ pays. Rotation automatique ou IP sticky. Facturation au Go, credentials instantanés dans votre espace client.</p>
+    </div>
+    <div class="svc-trust">
+      <div class="trust-pill" style="color:#0f766e"><svg viewBox="0 0 24 24" stroke="#0d9488"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 0 20"/></svg> 30+ pays disponibles</div>
+      <div class="trust-pill" style="color:#0f766e"><svg viewBox="0 0 24 24" stroke="#0d9488"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg> IP rotation & sticky</div>
+      <div class="trust-pill" style="color:#0f766e"><svg viewBox="0 0 24 24" stroke="#0d9488"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> IPs résidentielles réelles</div>
+      <div class="trust-pill" style="color:#0f766e"><svg viewBox="0 0 24 24" stroke="#0d9488"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Activation instantanée</div>
+    </div>
+    <div class="plans-grid" id="proxy-plans-grid"></div>
+    <div class="svc-feats">
+      <div class="svc-feat">
+        <div class="svc-feat-ic" style="background:#f0fdfa"><svg viewBox="0 0 24 24" stroke="#0d9488"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div>
+        <h4>Rotation automatique</h4>
+        <p>Changez d'IP à chaque requête ou gardez la même session (IP sticky) — à votre choix.</p>
+      </div>
+      <div class="svc-feat">
+        <div class="svc-feat-ic" style="background:#f0fdfa"><svg viewBox="0 0 24 24" stroke="#0d9488"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 0 20"/></svg></div>
+        <h4>30+ pays & ISP ciblés</h4>
+        <p>Canada, France, Belgique, USA, UK et plus. Ciblez un pays ET un opérateur précis.</p>
+      </div>
+      <div class="svc-feat">
+        <div class="svc-feat-ic" style="background:#f0fdfa"><svg viewBox="0 0 24 24" stroke="#0d9488"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg></div>
+        <h4>Compatible avec tout</h4>
+        <p>HTTP/HTTPS. S'intègre dans EvoSender, Puppeteer, Python, cURL et tous vos outils.</p>
+      </div>
+      <div class="svc-feat">
+        <div class="svc-feat-ic" style="background:#f0fdfa"><svg viewBox="0 0 24 24" stroke="#0d9488"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <h4>Facturation au Go</h4>
+        <p>Payez uniquement ce que vous consommez. Solde visible dans votre espace client.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ COMMENT ÇA MARCHE ═══ -->
+<section id="comment" style="background:var(--bg)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label">Simple & rapide</div>
+      <h2 class="sec-title">Comment ça marche</h2>
+      <p class="sec-sub">De l'achat à votre premier envoi en quelques minutes.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step"><div class="step-n">1</div><h4>Choisissez</h4><p>Logiciel, SMTP ou proxy résidentiel — selon votre besoin.</p></div>
+      <div class="step"><div class="step-n">2</div><h4>Payez</h4><p>USDT, Bitcoin, Wave ou Orange Money. Paiement sécurisé.</p></div>
+      <div class="step"><div class="step-n">3</div><h4>Recevez</h4><p>Licence ou identifiants générés automatiquement.</p></div>
+      <div class="step"><div class="step-n">4</div><h4>Lancez-vous</h4><p>Espace client centralisé pour gérer tous vos produits.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FONCTIONNALITÉS ═══ -->
+<section id="fonctionnalites">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label">Pourquoi EvoStudio</div>
+      <h2 class="sec-title">Conçu pour les professionnels</h2>
+      <p class="sec-sub">Des fonctionnalités avancées pour des résultats fiables.</p>
+    </div>
+    <div class="feats-grid">
+      <div class="feat-cell">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h4>100% local & privé</h4>
+        <p>Vos données ne quittent jamais votre poste. Aucune télémétrie.</p>
+      </div>
+      <div class="feat-cell">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg></div>
+        <h4>Rotation SMTP & proxy</h4>
+        <p>Délivrabilité maximale grâce à la rotation automatique des IPs.</p>
+      </div>
+      <div class="feat-cell">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <h4>Vérification réelle</h4>
+        <p>MX, SMTP, catch-all : nettoyez vos listes avant chaque campagne.</p>
+      </div>
+      <div class="feat-cell">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <h4>Personnalisation avancée</h4>
+        <p>Variables, templates HTML et expéditeurs dynamiques.</p>
+      </div>
+      <div class="feat-cell">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <h4>Licence annuelle</h4>
+        <p>Valable 1 an, renouvelable. Mises à jour incluses pendant la durée de validité.</p>
+      </div>
+      <div class="feat-cell">
+        <div class="feat-ic"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+        <h4>Espace client unifié</h4>
+        <p>Licences, SMTP et proxy dans un seul tableau de bord.</p>
+      </div>
+      <div class="feat-cell feat-wide" style="grid-column:1/-1">
+        <div style="display:flex;align-items:center;gap:32px;flex-wrap:wrap">
+          <div>
+            <div style="display:flex;align-items:center;gap:9px;margin-bottom:8px">
+              <div class="feat-ic" style="margin-bottom:0;background:rgba(96,165,250,.15)"><svg viewBox="0 0 24 24" stroke="#60a5fa"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+              <h4 style="color:#fff;margin-bottom:0">Multi-plateforme natif</h4>
+            </div>
+            <p style="color:rgba(255,255,255,.5);max-width:420px;font-size:13px">EvoStudio tourne nativement sur <strong style="color:#60a5fa">Windows 10/11</strong> et <strong style="color:#a78bfa">macOS Silicon M1/M2/M3</strong> — même licence, deux systèmes.</p>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-left:auto">
+            <div style="display:flex;align-items:center;gap:8px;background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.2);padding:9px 16px;border-radius:8px;color:#93c5fd;font-size:13px;font-weight:600">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="#60a5fa"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg> Windows
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.2);padding:9px 16px;border-radius:8px;color:#c4b5fd;font-size:13px;font-weight:600">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="#a78bfa"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg> Mac Silicon
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ AVIS ═══ -->
+<section id="avis" style="background:var(--bg)">
+  <div class="wrap" style="max-width:980px">
+    <div class="sec-head">
+      <div class="sec-label">Avis clients</div>
+      <h2 class="sec-title">Ils utilisent EvoStudio au quotidien</h2>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;margin-bottom:28px">
+      <div style="text-align:center">
+        <div id="rev-overall" style="font-size:42px;font-weight:900;line-height:1;color:var(--ink)">4,9</div>
+        <div id="rev-overall-stars" style="color:#fbbc04;font-size:16px;letter-spacing:2px;margin-top:3px">★★★★★</div>
+        <div id="rev-overall-count" style="font-size:12px;color:var(--slate);margin-top:3px">basé sur 37 avis</div>
+      </div>
+      <div style="height:50px;width:1px;background:var(--line)"></div>
+      <div style="display:flex;align-items:center;gap:9px">
+        <svg width="30" height="30" viewBox="0 0 48 48"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34A21.99 21.99 0 0 0 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg>
+        <div style="font-size:12px;color:var(--slate);line-height:1.4">Avis<br><b style="color:var(--ink)">Google</b></div>
+      </div>
+    </div>
+    <div class="reviews-grid" id="reviews-grid">
+      <div class="rev"><div class="rev-h"><span class="rev-av" style="background:#4285F4">A</span><div><div class="rev-n">Amadou D.</div><div class="rev-d">Il y a 2 semaines</div></div></div><div class="rev-s">★★★★★</div><p class="rev-t">Enfin un logiciel d'emailing complet et 100% local. EvoSender m'a permis de doubler mon taux d'ouverture grâce à la rotation SMTP.</p></div>
+      <div class="rev"><div class="rev-h"><span class="rev-av" style="background:#34A853">F</span><div><div class="rev-n">Fatou K.</div><div class="rev-d">Il y a 1 mois</div></div></div><div class="rev-s">★★★★★</div><p class="rev-t">EvoVérificateur a nettoyé ma liste de 50 000 contacts en quelques minutes. Mes rebonds sont passés sous les 2%.</p></div>
+      <div class="rev"><div class="rev-h"><span class="rev-av" style="background:#EA4335">K</span><div><div class="rev-n">Koffi N.</div><div class="rev-d">Il y a 1 mois</div></div></div><div class="rev-s">★★★★★</div><p class="rev-t">Le serveur SMTP dédié est livré en quelques minutes et la délivrabilité est excellente. Support très réactif.</p></div>
+      <div class="rev"><div class="rev-h"><span class="rev-av" style="background:#FBBC04;color:#000">S</span><div><div class="rev-n">Sarah M.</div><div class="rev-d">Il y a 2 mois</div></div></div><div class="rev-s">★★★★★</div><p class="rev-t">EvoExtractor trouve des adresses que je ne trouvais nulle part ailleurs. L'export CSV est parfait pour mon CRM.</p></div>
+      <div class="rev"><div class="rev-h"><span class="rev-av" style="background:#7c3aed">I</span><div><div class="rev-n">Ibrahim T.</div><div class="rev-d">Il y a 2 mois</div></div></div><div class="rev-s">★★★★★</div><p class="rev-t">Le rapport qualité-prix est imbattable. Une licence annuelle pour les 3 outils, c'est largement rentabilisé.</p></div>
+      <div class="rev"><div class="rev-h"><span class="rev-av" style="background:#0ea5e9">M</span><div><div class="rev-n">Marc L.</div><div class="rev-d">Il y a 3 mois</div></div></div><div class="rev-s">★★★★☆</div><p class="rev-t">Très bon outil, interface claire. J'aurais aimé plus de modèles d'emails mais l'essentiel y est. Je recommande.</p></div>
+    </div>
+    <div style="text-align:center;margin-top:22px">
+      <a href="https://www.google.com/search?q=EvoStudio+avis" target="_blank" rel="noopener" id="google-review-link" style="display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px 18px;font-size:13px;font-weight:600;color:var(--ink)">
+        <svg width="14" height="14" viewBox="0 0 48 48"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34A21.99 21.99 0 0 0 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg>
+        Laisser un avis Google
+      </a>
+    </div>
+  </div>
 </section>
 <script type="application/ld+json" id="ld-product">
-{"@context":"https://schema.org","@type":"Product","name":"EvoStudio","description":"Suite professionnelle d'emailing : extraction, vérification et envoi d'emails en masse.","image":"https://evostudio.fr/Hub.png","brand":{"@type":"Brand","name":"EvoStudio"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","reviewCount":"37","bestRating":"5","worstRating":"1"},"offers":{"@type":"Offer","priceCurrency":"USD","price":"69","availability":"https://schema.org/InStock","priceValidUntil":"2026-12-31","url":"https://evostudio.fr/pay.html","hasMerchantReturnPolicy":{"@type":"MerchantReturnPolicy","applicableCountry":"FR","returnPolicyCategory":"https://schema.org/MerchantReturnNotPermitted"},"shippingDetails":{"@type":"OfferShippingDetails","shippingRate":{"@type":"MonetaryAmount","value":"0","currency":"USD"},"shippingDestination":{"@type":"DefinedRegion","addressCountry":"FR"},"deliveryTime":{"@type":"ShippingDeliveryTime","handlingTime":{"@type":"QuantitativeValue","minValue":0,"maxValue":0,"unitCode":"DAY"},"transitTime":{"@type":"QuantitativeValue","minValue":0,"maxValue":0,"unitCode":"DAY"}}}}}
-</script>
-<script>
-(function(){
-  function esc(t){return String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-  function stars(n){n=Math.round(n||0);return '★★★★★'.slice(0,n)+'☆☆☆☆☆'.slice(0,5-n);}
-  var GLOGO='<svg class="rev-g" viewBox="0 0 48 48"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34A21.99 21.99 0 0 0 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg>';
-  var AV=['#4285F4','#34A853','#EA4335','#FBBC04','#7c3aed','#0ea5e9'];
-  fetch('https://admin.evostudio.fr/api/shop/google-reviews').then(function(r){return r.json();}).then(function(d){
-    if(!d || !d.configured || !d.reviews || !d.reviews.length) return; // garde les avis statiques
-    var grid=document.getElementById('reviews-grid'); if(!grid) return;
-    grid.innerHTML=d.reviews.map(function(v,i){
-      var init=(v.author||'?').trim().charAt(0).toUpperCase();
-      var photo=v.photo?('<img src="'+esc(v.photo)+'" referrerpolicy="no-referrer" style="width:38px;height:38px;border-radius:50%;object-fit:cover;flex-shrink:0" alt="">'):('<span class="rev-av" style="background:'+AV[i%AV.length]+'">'+esc(init)+'</span>');
-      return '<div class="rev"><div class="rev-h">'+photo+'<div><div class="rev-n">'+esc(v.author)+'</div><div class="rev-d">'+esc(v.when||'')+'</div></div>'+GLOGO+'</div><div class="rev-s">'+stars(v.rating)+'</div><p class="rev-t">'+esc(v.text||'')+'</p></div>';
-    }).join('');
-    // Note globale
-    if(d.rating){var o=document.getElementById('rev-overall');if(o)o.textContent=String(d.rating).replace('.',',');}
-    var os=document.getElementById('rev-overall-stars');if(os)os.textContent=stars(d.rating);
-    var oc=document.getElementById('rev-overall-count');if(oc&&d.total)oc.textContent='basé sur '+d.total+' avis';
-    // Données structurées réelles
-    try{var ld=document.getElementById('ld-product');if(ld&&d.rating&&d.total){var j=JSON.parse(ld.textContent);j.aggregateRating.ratingValue=String(d.rating);j.aggregateRating.reviewCount=String(d.total);ld.textContent=JSON.stringify(j);}}catch(e){}
-  }).catch(function(){});
-})();
+{"@context":"https://schema.org","@type":"Product","name":"EvoStudio","description":"Suite professionnelle d'emailing : extraction, vérification et envoi d'emails en masse.","image":"https://evostudio.fr/Hub.png","brand":{"@type":"Brand","name":"EvoStudio"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","reviewCount":"37","bestRating":"5","worstRating":"1"},"offers":{"@type":"Offer","priceCurrency":"USD","price":"69","availability":"https://schema.org/InStock","url":"https://evostudio.fr/pay.html"}}
 </script>
 
-<!-- ═══════════ PRICING ═══════════ -->
+<!-- ═══ TARIFS ═══ -->
 <section id="tarifs">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-tag">Tarifs</div>
-      <h2>Un prix simple, une licence annuelle</h2>
-      <p>Licence valable 1 an, renouvelable. Crypto ou Wave acceptés.</p>
+      <div class="sec-label">Tarifs</div>
+      <h2 class="sec-title">Un prix simple, une licence annuelle</h2>
+      <p class="sec-sub">Licence valable 1 an, renouvelable. Crypto, Wave ou Orange Money acceptés.</p>
     </div>
-    <div class="price-grid" id="pricing-grid" aria-live="polite"></div>
-    <div class="suite-cta" id="suite-cta"></div>
+    <div class="pricing-grid" id="pricing-grid"></div>
+    <div class="suite-note" id="suite-cta"></div>
   </div>
 </section>
 
-<!-- ═══════════ FAQ ═══════════ -->
-<section id="faq">
-  <div class="wrap" style="max-width:680px">
+<!-- ═══ FAQ ═══ -->
+<section id="faq" style="background:var(--bg)">
+  <div class="wrap" style="max-width:660px">
     <div class="sec-head">
-      <div class="sec-tag">Questions fréquentes</div>
-      <h2>Tout ce qu'il faut savoir</h2>
+      <div class="sec-label">Questions fréquentes</div>
+      <h2 class="sec-title">Tout ce qu'il faut savoir</h2>
     </div>
-    <div class="faq-item"><div class="faq-q">Comment recevoir ma licence après paiement ? <span class="ic" aria-hidden="true">+</span></div><div class="faq-a"><div>Dès que votre paiement crypto est confirmé sur la blockchain (ou validé pour Wave), votre licence est générée automatiquement et disponible dans votre espace client.</div></div></div>
-    <div class="faq-item"><div class="faq-q">Quels moyens de paiement acceptez-vous ? <span class="ic" aria-hidden="true">+</span></div><div class="faq-a"><div>USDT (TRC20), Bitcoin (BTC) et Wave (mobile money, XOF). Tous les paiements sont sécurisés.</div></div></div>
-    <div class="faq-item"><div class="faq-q">Combien de temps dure la licence ? <span class="ic" aria-hidden="true">+</span></div><div class="faq-a"><div>Chaque licence est valable 1 an (365 jours) à partir de l'achat. Un rappel vous est envoyé 30 jours avant l'échéance pour la renouveler depuis votre espace client. Les mises à jour sont incluses pendant la durée de validité.</div></div></div>
-    <div class="faq-item"><div class="faq-q">Mes données sont-elles en sécurité ? <span class="ic" aria-hidden="true">+</span></div><div class="faq-a"><div>EvoStudio est 100% local : vos contacts et emails restent sur votre ordinateur. Seule la vérification de licence contacte nos serveurs.</div></div></div>
-    <div class="faq-item"><div class="faq-q">Sur combien d'ordinateurs puis-je l'utiliser ? <span class="ic" aria-hidden="true">+</span></div><div class="faq-a"><div>Chaque licence est valable pour 1 utilisateur et 1 poste. La suite complète permet jusqu'à 3 activations.</div></div></div>
-    <div class="faq-item"><div class="faq-q">EvoStudio fonctionne-t-il sur Mac ? <span class="ic" aria-hidden="true">+</span></div><div class="faq-a"><div>Oui ! EvoStudio est désormais disponible nativement sur <strong>macOS Silicon (M1, M2, M3)</strong> en version .dmg. La même licence fonctionne sur Windows et Mac. Au premier lancement sur Mac, faites clic droit → Ouvrir pour autoriser l'app (étape unique).</div></div></div>
-    <div class="faq-item"><div class="faq-q">Quelle est la différence entre la version Windows et Mac ? <span class="ic" aria-hidden="true">+</span></div><div class="faq-a"><div>Aucune différence fonctionnelle — les deux versions partagent exactement les mêmes outils (EvoExtractor, EvoSender, EvoVérificateur) et sont mises à jour simultanément. Téléchargez simplement l'installeur correspondant à votre système.</div></div></div>
+    <div class="faq-item"><div class="faq-q">Comment recevoir ma licence après paiement ? <span class="ic">+</span></div><div class="faq-a"><div>Dès que votre paiement crypto est confirmé sur la blockchain (ou validé pour Wave), votre licence est générée automatiquement et disponible dans votre espace client.</div></div></div>
+    <div class="faq-item"><div class="faq-q">Quels moyens de paiement acceptez-vous ? <span class="ic">+</span></div><div class="faq-a"><div>USDT (TRC20), Bitcoin (BTC), Wave et Orange Money (mobile money XOF). Tous les paiements sont sécurisés.</div></div></div>
+    <div class="faq-item"><div class="faq-q">Combien de temps dure la licence ? <span class="ic">+</span></div><div class="faq-a"><div>Chaque licence est valable 1 an (365 jours) à partir de l'achat. Un rappel vous est envoyé 30 jours avant l'échéance. Les mises à jour sont incluses pendant la durée de validité.</div></div></div>
+    <div class="faq-item"><div class="faq-q">Mes données sont-elles en sécurité ? <span class="ic">+</span></div><div class="faq-a"><div>EvoStudio est 100% local : vos contacts et emails restent sur votre ordinateur. Seule la vérification de licence contacte nos serveurs.</div></div></div>
+    <div class="faq-item"><div class="faq-q">Le proxy résidentiel fonctionne avec quels outils ? <span class="ic">+</span></div><div class="faq-a"><div>Nos proxys HTTP/HTTPS sont compatibles avec EvoSender, Puppeteer, Python requests, cURL, et tout outil supportant HTTP proxy. Credentials disponibles immédiatement dans votre espace client.</div></div></div>
+    <div class="faq-item"><div class="faq-q">EvoStudio fonctionne-t-il sur Mac ? <span class="ic">+</span></div><div class="faq-a"><div>Oui ! EvoStudio est disponible nativement sur macOS Silicon (M1, M2, M3) en version .dmg. La même licence fonctionne sur Windows et Mac.</div></div></div>
+    <div class="faq-item"><div class="faq-q">Sur combien d'ordinateurs puis-je l'utiliser ? <span class="ic">+</span></div><div class="faq-a"><div>Chaque licence est valable pour 1 utilisateur et 1 poste. La suite complète permet jusqu'à 3 activations.</div></div></div>
   </div>
 </section>
 
-<!-- ═══════════ CTA BAND ═══════════ -->
-<section style="padding:48px 0 88px">
+<!-- ═══ CTA BAND ═══ -->
+<section style="padding:40px 0 80px">
   <div class="wrap">
     <div class="cta-band">
       <h2>Prêt à booster votre emailing ?</h2>
       <p>Rejoignez les professionnels qui font confiance à EvoStudio.</p>
-      <a href="/pay.html" class="btn btn-white" style="font-size:15px;padding:13px 26px">Obtenir EvoStudio →</a>
+      <a href="/pay.html" class="btn btn-white" style="font-size:14px;padding:12px 24px">Obtenir EvoStudio →</a>
     </div>
   </div>
 </section>
 
-<!-- ═══════════ FOOTER ═══════════ -->
+<!-- ═══ FOOTER ═══ -->
 <footer>
   <div class="foot-top">
     <div class="wrap">
       <div class="foot-grid">
         <div>
           <div class="foot-logo">
-            <img src="/logoevostudio2.png" alt="EvoStudio" height="32" style="display:block;max-width:150px;object-fit:contain;filter:drop-shadow(0 1px 3px rgba(0,0,0,.4))" />
+            <img src="/logoevostudio2.png" alt="EvoStudio" height="30" style="display:block;max-width:140px;object-fit:contain;filter:drop-shadow(0 1px 3px rgba(0,0,0,.4))" />
           </div>
-          <p class="foot-tagline">La suite d'emailing professionnelle : extraction, vérification et envoi en masse.</p>
-          <a class="foot-badge" href="https://egs.ci" target="_blank" rel="noopener" style="text-decoration:none">
-            <img src="/logo-egsci.png" alt="EGSCI SARL" width="14" height="14" loading="lazy">
+          <p class="foot-tagline">Suite professionnelle d'emailing et proxy résidentiel.</p>
+          <a class="foot-badge" href="https://egs.ci" target="_blank" rel="noopener">
+            <img src="/logo-egsci.png" alt="EGSCI SARL" width="13" height="13" loading="lazy">
             <span>Une marque <strong>EGSCI SARL</strong> ↗</span>
           </a>
         </div>
         <div class="foot-col">
           <h5>Produit</h5>
           <a href="#produits">Nos outils</a>
+          <a href="#smtp">Serveur SMTP</a>
+          <a href="#proxy-section">Proxy résidentiel</a>
           <a href="#tarifs">Tarifs</a>
-          <a href="#faq">FAQ</a>
-          <a href="/pay.html">Acheter une licence</a>
+          <a href="/pay.html">Acheter</a>
         </div>
         <div class="foot-col">
           <h5>Compte</h5>
@@ -706,13 +687,13 @@ footer{background:#0f172a;border-top:1px solid #1e293b;color:#94a3b8}
         </div>
         <div class="foot-col">
           <h5>Support</h5>
-          <div class="foot-contact-block">
+          <div class="foot-contact">
             <p>Une question ? Notre équipe vous répond rapidement.</p>
-            <div class="foot-contact-email" id="support-link">
+            <div class="foot-email" id="support-link">
               <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
               <span id="support-email-text">support@evostudio.fr</span>
             </div>
-            <div class="foot-response">⏱ Réponse sous 24h (jours ouvrés)</div>
+            <div class="foot-resp">⏱ Réponse sous 24h (jours ouvrés)</div>
           </div>
         </div>
       </div>
@@ -731,10 +712,9 @@ footer{background:#0f172a;border-top:1px solid #1e293b;color:#94a3b8}
 </footer>
 
 <script>
-function esc(str){
-  return String(str??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
-}
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 
+// FAQ
 document.querySelectorAll('.faq-q').forEach(q=>{
   q.addEventListener('click',()=>{
     const open=q.parentElement.classList.toggle('open');
@@ -742,21 +722,22 @@ document.querySelectorAll('.faq-q').forEach(q=>{
   });
 });
 
-(function initAuth(){
-  let token;
-  try{token=localStorage.getItem('evo_token');}catch(e){}
-  if(token){
+// Auth
+(function(){
+  let t;try{t=localStorage.getItem('evo_token');}catch(e){}
+  if(t){
     ['nav-login','drawer-login'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='none';});
     ['nav-account','drawer-account'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='';});
   }
 })();
 
+// Mobile nav
 const burger=document.getElementById('nav-burger');
 const drawer=document.getElementById('nav-drawer');
 const drawerBg=document.getElementById('nav-drawer-bg');
 const drawerClose=document.getElementById('nav-drawer-close');
-function openDrawer(){drawer.classList.add('open');burger.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';}
-function closeDrawer(){drawer.classList.remove('open');burger.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+function openDrawer(){drawer.classList.add('open');document.body.style.overflow='hidden';}
+function closeDrawer(){drawer.classList.remove('open');document.body.style.overflow='';}
 burger?.addEventListener('click',openDrawer);
 drawerClose?.addEventListener('click',closeDrawer);
 drawerBg?.addEventListener('click',closeDrawer);
@@ -770,6 +751,24 @@ const ICONS={
   verifier:{cls:'purple',svg:'<svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>'},
   suite:{cls:'blue',svg:'<svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>'},
 };
+const GLOGO='<svg class="rev-g" viewBox="0 0 48 48"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34A21.99 21.99 0 0 0 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg>';
+var AV=['#4285F4','#34A853','#EA4335','#FBBC04','#7c3aed','#0ea5e9'];
+
+// Google reviews
+fetch(API+'/api/shop/google-reviews').then(r=>r.json()).then(d=>{
+  if(!d||!d.configured||!d.reviews||!d.reviews.length)return;
+  var grid=document.getElementById('reviews-grid');if(!grid)return;
+  grid.innerHTML=d.reviews.map((v,i)=>{
+    var init=(v.author||'?').trim().charAt(0).toUpperCase();
+    var photo=v.photo?('<img src="'+esc(v.photo)+'" referrerpolicy="no-referrer" style="width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0" alt="">'):('<span class="rev-av" style="background:'+AV[i%AV.length]+'">'+esc(init)+'</span>');
+    var stars=n=>{n=Math.round(n||0);return'★★★★★'.slice(0,n)+'☆☆☆☆☆'.slice(0,5-n);};
+    return '<div class="rev"><div class="rev-h">'+photo+'<div><div class="rev-n">'+esc(v.author)+'</div><div class="rev-d">'+esc(v.when||'')+'</div></div>'+GLOGO+'</div><div class="rev-s">'+stars(v.rating)+'</div><p class="rev-t">'+esc(v.text||'')+'</p></div>';
+  }).join('');
+  if(d.rating){var o=document.getElementById('rev-overall');if(o)o.textContent=String(d.rating).replace('.',',');}
+  var os=document.getElementById('rev-overall-stars');if(os)os.textContent='★★★★★'.slice(0,Math.round(d.rating))+'☆☆☆☆☆'.slice(0,5-Math.round(d.rating));
+  var oc=document.getElementById('rev-overall-count');if(oc&&d.total)oc.textContent='basé sur '+d.total+' avis';
+  try{var ld=document.getElementById('ld-product');if(ld&&d.rating&&d.total){var j=JSON.parse(ld.textContent);j.aggregateRating.ratingValue=String(d.rating);j.aggregateRating.reviewCount=String(d.total);ld.textContent=JSON.stringify(j);}}catch(e){}
+}).catch(()=>{});
 
 async function loadProducts(){
   try{
@@ -778,9 +777,12 @@ async function loadProducts(){
     const data=await r.json();
     const products=Array.isArray(data.products)?data.products:[];
     const main=products.filter(p=>p.id!=='suite');
+    const discount=Number(data.discount_pct)||0;
+    const disc=orig=>discount>0?Math.round(orig*(1-discount/100)*100)/100:orig;
 
+    // Site settings
     const site=data.site||{};
-    if(site.hero_title){const el=document.getElementById('hero-title');if(el)el.textContent=site.hero_title;}
+    if(site.hero_title){const el=document.getElementById('hero-title');if(el)el.innerHTML=el.innerHTML.replace(/^[^<]+/,site.hero_title);}
     if(site.hero_subtitle){const el=document.getElementById('hero-sub');if(el)el.textContent=site.hero_subtitle;}
     if(site.announce){const b=document.getElementById('announce-bar');if(b){b.textContent=site.announce;b.style.display='block';}}
     if(site.support_email){
@@ -788,109 +790,98 @@ async function loadProducts(){
       const l=document.getElementById('support-link');if(l)l.setAttribute('href','mailto:'+encodeURIComponent(site.support_email));
     }
 
+    // Products grid
     const grid=document.getElementById('products-grid');
-    if(grid){
+    if(grid&&main.length){
       grid.innerHTML=main.map(p=>{
         const ic=ICONS[p.id]||ICONS.sender;
         const feats=Array.isArray(p.features)?p.features:[];
-        return `<div class="card">
-          <div class="p-icon ${esc(ic.cls)}">${ic.svg}</div>
-          <div class="p-name">${esc(p.name)}</div>
-          <p class="p-desc">${esc(p.description)}</p>
-          <ul class="p-feats">${feats.map(f=>`<li>${esc(f)}</li>`).join('')}</ul>
-          <div class="p-btns">
-            <a href="/pay.html?product=${esc(p.id)}" class="btn btn-primary">Acheter</a>
-            <a href="/produit.html?id=${esc(p.id)}" class="btn btn-dark">Détails →</a>
-          </div>
-        </div>`;
+        return '<div class="prod-card"><div class="prod-ic '+esc(ic.cls)+'">'+ic.svg+'</div><div class="prod-name">'+esc(p.name)+'</div><p class="prod-desc">'+esc(p.description)+'</p><ul class="prod-feats">'+feats.map(f=>'<li>'+esc(f)+'</li>').join('')+'</ul><div class="prod-btns"><a href="/pay.html?product='+esc(p.id)+'" class="btn btn-primary">Acheter</a><a href="/produit.html?id='+esc(p.id)+'" class="btn btn-dark">Détails →</a></div></div>';
       }).join('');
     }
 
-    const discount=Number(data.discount_pct)||0;
-    const discounted=orig=>discount>0?Math.round(orig*(1-discount/100)*100)/100:orig;
-    const priceHtml=(orig,suffix)=>discount>0
-      ?`<span style="text-decoration:line-through;color:var(--slate);font-size:.62em;font-weight:500">${esc(String(orig))}</span> ${esc(String(discounted(orig)))} <span>${esc(suffix)}</span>`
-      :`${esc(String(orig))} <span>${esc(suffix)}</span>`;
-    const discountBadge=()=>discount>0
-      ?`<div style="display:inline-block;background:#dc2626;color:#fff;font-size:10px;font-weight:800;padding:2px 8px;border-radius:0;margin-bottom:5px">-${esc(String(discount))}%</div>`
-      :'';
-
+    // Pricing grid
     const pgrid=document.getElementById('pricing-grid');
-    if(pgrid){
+    if(pgrid&&main.length){
+      const dbadge=discount>0?'<div style="display:inline-block;background:#dc2626;color:#fff;font-size:10px;font-weight:800;padding:2px 8px;border-radius:20px;margin-bottom:5px">-'+esc(String(discount))+'%</div>':'';
       pgrid.innerHTML=main.map(p=>{
-        const featured=p.id==='sender';
+        const feat=p.id==='sender';
         const ic=ICONS[p.id]||ICONS.sender;
         const feats=Array.isArray(p.features)?p.features:[];
-        return `<div class="price-card${featured?' featured':''}">
-          ${featured?'<div class="price-badge">⭐ Le plus populaire</div>':''}
-          <div class="price-head">
-            <div class="price-ic ${esc(ic.cls)}">${ic.svg}</div>
-            <div class="price-name">${esc(p.name)}</div>
-          </div>
-          <p class="price-desc">${esc((p.description||'').substring(0,60))}…</p>
-          ${discountBadge()}
-          <div class="price-amount">${priceHtml(p.price_usdt,'USD')}</div>
-          <p class="price-period">ou ${esc(String(p.price_btc||''))} BTC · Licence annuelle (1 an)</p>
-          <ul class="price-feats">${feats.map(f=>`<li><span class="ck" aria-hidden="true">✓</span> ${esc(f)}</li>`).join('')}</ul>
-          <a href="/pay.html?product=${esc(p.id)}" class="btn ${featured?'btn-primary':'btn-dark'}" style="justify-content:center">Acheter ${esc(p.name)}</a>
-        </div>`;
+        const sp=disc(p.price_usdt);
+        const soHtml=discount>0?'<span style="text-decoration:line-through;color:var(--slate-2);font-size:.6em;font-weight:500">'+esc(String(p.price_usdt))+'</span> ':'';
+        return '<div class="price-card'+(feat?' featured':'')+'">'+
+          (feat?'<div class="price-badge">⭐ Le plus populaire</div>':'')+
+          '<div class="price-head"><div class="price-ic '+esc(ic.cls)+'">'+ic.svg+'</div><div class="price-name">'+esc(p.name)+'</div></div>'+
+          '<p class="price-desc">'+esc((p.description||'').substring(0,65))+'…</p>'+
+          dbadge+
+          '<div class="price-amt">'+soHtml+esc(String(sp))+' <span>USD</span></div>'+
+          '<p class="price-per">Licence annuelle (1 an)</p>'+
+          '<ul class="price-feats">'+feats.map(f=>'<li><span class="ck">✓</span> '+esc(f)+'</li>').join('')+'</ul>'+
+          '<a href="/pay.html?product='+esc(p.id)+'" class="btn '+(feat?'btn-primary':'btn-dark')+'" style="justify-content:center">Acheter '+esc(p.name)+'</a></div>';
       }).join('');
-
       const suite=products.find(p=>p.id==='suite');
       const ctaEl=document.getElementById('suite-cta');
       if(suite&&ctaEl){
-        const sp=discounted(suite.price_usdt);
-        const soHtml=discount>0?`<span style="text-decoration:line-through;color:var(--slate);font-size:13px">${esc(String(suite.price_usdt))}</span> `:'';
-        const db=discount>0?`<span style="background:#dc2626;color:#fff;font-size:10px;font-weight:800;padding:2px 6px;border-radius:0;margin-left:4px">-${esc(String(discount))}%</span>`:'';
+        const sp=disc(suite.price_usdt);
+        const db=discount>0?' <span style="background:#dc2626;color:#fff;font-size:10px;font-weight:800;padding:2px 7px;border-radius:20px">-'+esc(String(discount))+'%</span>':'';
         ctaEl.style.display='block';
-        ctaEl.innerHTML=`🎁 <strong style="color:#1e3a8a">${esc(suite.name)}</strong> — les 3 outils à ${soHtml}<strong style="color:var(--blue)">${esc(String(sp))} USD</strong>${db} · <a href="/pay.html?product=suite" style="color:var(--blue);font-weight:700">Acheter la suite →</a>`;
+        ctaEl.innerHTML='🎁 <strong style="color:#1e3a8a">'+esc(suite.name)+'</strong> — les 3 outils à <strong style="color:var(--blue)">'+esc(String(sp))+' USD</strong>'+db+' · <a href="/pay.html?product=suite" style="color:var(--blue);font-weight:700">Acheter la suite →</a>';
       }
     }
 
+    // SMTP plans
     const smtpPlans=Array.isArray(data.smtp_plans)?data.smtp_plans:[];
-    const smtpSection=document.getElementById('smtp');
+    const smtpSec=document.getElementById('smtp');
     const smtpGrid=document.getElementById('smtp-plans-grid');
-    if(smtpPlans.length>0&&smtpSection&&smtpGrid){
-      smtpSection.style.display='block';
+    if(smtpPlans.length&&smtpSec&&smtpGrid){
+      smtpSec.style.display='block';
+      document.getElementById('nav-smtp').style.display='';
+      document.getElementById('drawer-smtp').style.display='';
       const VLABELS={smtp_10k:'10 000',smtp_50k:'50 000',smtp_100k:'100 000',smtp_500k:'500 000'};
       const POPULAR='smtp_50k';
-      const relayHost=esc(data.smtp_relay_host||'smtp.exabytes.com');
+      const relay=esc(data.smtp_relay_host||'smtp.exabytes.com');
       smtpGrid.innerHTML=smtpPlans.map(p=>{
         const vol=VLABELS[p.id]||esc(String(p.volume||''));
         const isP=p.id===POPULAR;
-        const sn=discounted(p.price_usdt);
-        const soHtml=discount>0?`<span style="text-decoration:line-through;color:#94a3b8;font-size:13px;font-weight:400">${esc(String(p.price_usdt))}</span> `:'';
-        const border=isP?'border:2px solid #2563eb;box-shadow:0 4px 20px rgba(37,99,235,.12)':'border:1px solid #e2e8f0';
-        return `<div style="background:#fff;padding:28px 20px;text-align:center;position:relative;${border}">
-          ${isP?`<div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#2563eb;color:#fff;font-size:10px;font-weight:700;padding:3px 14px;white-space:nowrap">⭐ Le plus populaire</div>`:''}
-          <div style="display:inline-flex;align-items:center;gap:6px;background:#eff6ff;color:#1d4ed8;font-size:11px;font-weight:700;padding:4px 10px;margin-bottom:14px">
-            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
-            ${vol} emails / mois
-          </div>
-          <div style="font-size:32px;font-weight:900;color:#0f172a;letter-spacing:-1px;line-height:1">${soHtml}${esc(String(sn))}<span style="font-size:14px;font-weight:500;color:#64748b"> USD</span></div>
-          <div style="font-size:12px;color:#94a3b8;margin:4px 0 18px">par mois · renouvelable</div>
-          <ul style="list-style:none;text-align:left;margin:0 0 20px;display:flex;flex-direction:column;gap:6px">
-            <li style="font-size:12.5px;color:#475569;display:flex;align-items:center;gap:7px"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#16a34a" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Relay ${relayHost}</li>
-            <li style="font-size:12.5px;color:#475569;display:flex;align-items:center;gap:7px"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#16a34a" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> SPF · DKIM · DMARC inclus</li>
-            <li style="font-size:12.5px;color:#475569;display:flex;align-items:center;gap:7px"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#16a34a" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> TLS/STARTTLS port 587</li>
-            <li style="font-size:12.5px;color:#475569;display:flex;align-items:center;gap:7px"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#16a34a" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Credentials dans votre dashboard</li>
-          </ul>
-          <a href="/pay.html?product=${esc(p.id)}" class="btn ${isP?'btn-primary':'btn-dark'}" style="justify-content:center;display:flex;font-size:13px;width:100%">${isP?'Commencer →':'Choisir ce plan'}</a>
-        </div>`;
+        const sp=disc(p.price_usdt);
+        const soHtml=discount>0?'<span style="text-decoration:line-through;color:var(--slate-2);font-size:13px;font-weight:400">'+esc(String(p.price_usdt))+'</span> ':'';
+        return '<div class="plan-card'+(isP?' popular':'')+'">'+
+          (isP?'<div class="plan-badge">⭐ Le plus populaire</div>':'')+
+          '<div class="plan-tag" style="background:#eff6ff;color:#1d4ed8"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg> '+vol+' emails/mois</div>'+
+          '<div class="plan-price">'+soHtml+esc(String(sp))+' <span style="font-size:14px;color:var(--slate);font-weight:500">USD</span></div>'+
+          '<p class="plan-period">par mois · renouvelable</p>'+
+          '<ul class="plan-feats"><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Relay '+relay+'</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> SPF · DKIM · DMARC</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> TLS port 587</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Credentials dashboard</li></ul>'+
+          '<a href="/pay.html?product='+esc(p.id)+'" class="btn '+(isP?'btn-primary':'btn-dark')+'" style="justify-content:center;display:flex;font-size:13px">'+(isP?'Commencer →':'Choisir ce plan')+'</a></div>';
       }).join('');
+    }
 
-      const nav=document.querySelector('.nav-links');
-      if(nav&&!nav.querySelector('a[href="#smtp"]')){
-        const a=document.createElement('a');a.href='#smtp';a.textContent='Serveur SMTP';
-        const before=nav.querySelector('a[href="#fonctionnalites"]');
-        if(before)nav.insertBefore(a,before);else nav.appendChild(a);
-      }
+    // Proxy plans
+    const proxyPlans=Array.isArray(data.proxy_plans)?data.proxy_plans:[];
+    const proxySec=document.getElementById('proxy-section');
+    const proxyGrid=document.getElementById('proxy-plans-grid');
+    if(proxyPlans.length&&proxySec&&proxyGrid){
+      proxySec.style.display='block';
+      document.getElementById('nav-proxy').style.display='';
+      document.getElementById('drawer-proxy').style.display='';
+      const POPLABEL='proxy_55gb';
+      proxyGrid.innerHTML=proxyPlans.map(p=>{
+        const isP=p.id===POPLABEL;
+        const sp=disc(p.price_usdt);
+        const soHtml=discount>0?'<span style="text-decoration:line-through;color:var(--slate-2);font-size:13px;font-weight:400">'+esc(String(p.price_usdt))+'</span> ':'';
+        return '<div class="plan-card'+(isP?' popular':'')+'">'+
+          (isP?'<div class="plan-badge">⭐ Le plus populaire</div>':'')+
+          '<div class="plan-tag" style="background:#f0fdfa;color:#0f766e"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 0 20"/></svg> '+esc(p.name)+'</div>'+
+          '<div class="plan-price">'+soHtml+esc(String(sp))+' <span style="font-size:14px;color:var(--slate);font-weight:500">USD</span></div>'+
+          '<p class="plan-period">paiement unique · '+esc(String(p.gb))+' Go</p>'+
+          '<ul class="plan-feats"><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> IPs résidentielles réelles</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 30+ pays disponibles</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Rotation & sticky IP</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Credentials instantanés</li></ul>'+
+          '<a href="/pay.html?product='+esc(p.id)+'" class="btn '+(isP?'btn-primary':'btn-dark')+'" style="justify-content:center;display:flex;font-size:13px;background:'+(isP?'var(--teal)':'')+';">'+(isP?'Commencer →':'Choisir ce plan')+'</a></div>';
+      }).join('');
     }
   }catch(e){console.warn('Produits non chargés',e);}
 }
 loadProducts();
 </script>
-
 <script src="/assistance.js" defer></script>
 </body>
 </html>
