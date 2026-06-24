@@ -1403,6 +1403,7 @@ async function loadProxyUsage(pxList){
         data.accounts.forEach(item=>{ if(item.proxy_id!=null) usageMap[item.proxy_id]=Number(item.used_mb||0); });
       }
     }
+    window._lastUsageMap=usageMap;
     renderProxyList(pxList, usageMap);
   }catch(e){
     // Si pas d'endpoint ou erreur, afficher "—" sans bloquer
@@ -1458,8 +1459,10 @@ async function loadProxyChart(days){
     var items=Array.isArray(raw)?raw:(raw.history||raw.data||[]);
 
     if(!items.length){
-      // Pas de données — générer des données fictives pour démo visuelle
-      items=generateDemoData(days);
+      // Pas de données historiques — tracer la valeur actuelle en ligne plate
+      var totalCurrentMb=_pxListCache.reduce((s,p)=>s+(Number((window._lastUsageMap||{})[p.id])||0),0);
+      var now=new Date();
+      for(var i=days-1;i>=0;i--){var d=new Date(now);d.setDate(d.getDate()-i);items.push({date:d.toISOString().slice(0,10),used_mb:i===0?totalCurrentMb:0});}
     }
 
     card.style.display='';
@@ -1538,9 +1541,19 @@ async function loadProxyChart(days){
     });
   }catch(e){
     console.warn('proxy-usage-history:',e.message);
-    // Afficher quand même avec données de démonstration
+    // Endpoint non disponible : afficher la valeur actuelle en ligne plate
     card.style.display='';
-    renderDemoChart(days);
+    if(emptyEl)emptyEl.style.display='none';
+    canvas.style.display='';
+    var totalCurrentMb=_pxListCache.reduce((s,p)=>s+(Number((window._lastUsageMap||{})[p.id])||0),0);
+    var items=[];var now=new Date();
+    for(var i=days-1;i>=0;i--){var d=new Date(now);d.setDate(d.getDate()-i);items.push({date:d.toISOString().slice(0,10),used_mb:i===0?totalCurrentMb:0});}
+    var labels=items.map(i=>fmtDateLabel(i.date));
+    var dataMb=items.map(i=>i.used_mb);
+    var ctx=canvas.getContext('2d');
+    var grad=ctx.createLinearGradient(0,0,0,200);grad.addColorStop(0,'rgba(13,148,136,0.2)');grad.addColorStop(1,'rgba(13,148,136,0.00)');
+    if(_proxyChart){_proxyChart.destroy();_proxyChart=null;}
+    _proxyChart=new Chart(ctx,{type:'line',data:{labels,datasets:[{label:'Utilisation (Mo)',data:dataMb,fill:true,backgroundColor:grad,borderColor:'#0d9488',borderWidth:2.5,pointRadius:3,pointHoverRadius:6,pointBackgroundColor:'#0d9488',tension:0.4}]},options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+' Mo'}}}}});
   }
 }
 
