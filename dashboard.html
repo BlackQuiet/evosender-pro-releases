@@ -1333,9 +1333,10 @@ function renderProxyList(pxList, usageMap){
     // Expiration
     var expHtml='';
     var expBanner='';
+    var ex=false;
     if(p.expires_at){
       var dj=Math.ceil((p.expires_at-Date.now())/86400000);
-      var ex=dj<=0;
+      ex=dj<=0;
       var col=ex?'var(--red)':(dj<=10?'var(--orange)':'var(--slate)');
       expHtml='<div class="svc-exp" style="color:'+col+'">⏳ '+(ex?'Expiré le '+new Date(p.expires_at).toLocaleDateString('fr-FR'):'Jusqu\'au '+new Date(p.expires_at).toLocaleDateString('fr-FR')+' · '+dj+' j restants')+'</div>';
       if(ex){
@@ -1372,8 +1373,8 @@ function renderProxyList(pxList, usageMap){
         '</div>'+
         '<div class="svc-actions" style="flex-shrink:0">'+
           '<span class="svc-status" style="background:'+bg+';color:'+fg+'">'+esc(lbl)+'</span>'+
-          (p.username&&p.status==='active'?'<button class="btn-sm primary" style="background:var(--teal);border-color:var(--teal)" onclick=\'openProxyModal('+JSON.stringify(p)+')\'>🔑 Identifiants</button>':'<span style="font-size:12px;color:var(--orange)">⏳ En activation</span>')+
-          '<a href="/pay.html?product=proxy_55gb" class="btn-sm">+ Acheter</a>'+
+          (ex?'<button class="btn-sm" disabled style="opacity:.4;cursor:not-allowed">🔑 Identifiants</button>':(p.username&&p.status==='active'?'<button class="btn-sm primary" style="background:var(--teal);border-color:var(--teal)" onclick=\'openProxyModal('+JSON.stringify(p)+')\'>🔑 Identifiants</button>':'<span style="font-size:12px;color:var(--orange)">⏳ En activation</span>'))+
+          (ex?'<a href="/pay.html?product=proxy_55gb" class="btn-sm" style="background:#dc2626;color:#fff;border-color:#dc2626">🔄 Renouveler</a>':'<a href="/pay.html?product=proxy_55gb" class="btn-sm">+ Acheter</a>')+
           '<button class="btn-sm danger" onclick="confirmDeleteProxy('+p.id+',\''+esc(String(p.gb))+'Go\')">🗑</button>'+
         '</div>'+
       '</div>'+
