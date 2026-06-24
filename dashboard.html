@@ -554,6 +554,33 @@ input,select,textarea{font-family:inherit}
   </div>
 </div>
 
+<!-- ═══ MODAL — Supprimer Proxy ═══ -->
+<div class="overlay" id="proxy-delete-modal" onclick="if(event.target===this)closeModal('proxy-delete-modal')">
+  <div class="modal modal-sm">
+    <div class="modal-head">
+      <div><h3>🗑 Supprimer le proxy</h3><p id="proxy-delete-sub">Cette action est irréversible.</p></div>
+      <button class="modal-close" onclick="closeModal('proxy-delete-modal')">×</button>
+    </div>
+    <div class="modal-body">
+      <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:12px 14px;font-size:13px;color:#991b1b;margin-bottom:16px">
+        ⚠️ Le compte proxy sera <b>définitivement supprimé</b>. Cette action ne peut pas être annulée.
+      </div>
+      <label class="gen-label">Confirmez avec votre mot de passe</label>
+      <input id="proxy-delete-pass" type="password" placeholder="Votre mot de passe"
+        style="width:100%;border:1.5px solid var(--line);border-radius:8px;padding:9px 12px;font-size:13px;font-family:inherit;outline:none;transition:border-color .15s;margin-bottom:4px"
+        onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--line)'"
+        onkeydown="if(event.key==='Enter')execDeleteProxy()"/>
+      <div id="proxy-delete-err" style="display:none;font-size:12px;color:var(--red);margin-top:6px;font-weight:600"></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-sm" onclick="closeModal('proxy-delete-modal')">Annuler</button>
+      <button class="btn-sm danger" id="proxy-delete-btn" onclick="execDeleteProxy()" style="background:#fef2f2">
+        🗑 Confirmer la suppression
+      </button>
+    </div>
+  </div>
+</div>
+
 <!-- ═══ MODAL — Générateur Proxy ═══ -->
 <div class="overlay" id="proxy-gen-modal" onclick="if(event.target===this)closeModal('proxy-gen-modal')">
   <div class="modal modal-lg">
@@ -1060,6 +1087,46 @@ async function load(){
   }catch(e){console.warn('Proxy:',e)}
 }
 
+// ── Suppression proxy avec confirmation mot de passe ──
+var _deleteProxyId = null;
+function confirmDeleteProxy(id, label){
+  _deleteProxyId = id;
+  document.getElementById('proxy-delete-sub').textContent = 'Proxy résidentiel — ' + label + ' · Cette action est irréversible.';
+  document.getElementById('proxy-delete-pass').value = '';
+  document.getElementById('proxy-delete-err').style.display = 'none';
+  document.getElementById('proxy-delete-btn').disabled = false;
+  openModal('proxy-delete-modal');
+  setTimeout(()=>document.getElementById('proxy-delete-pass').focus(), 200);
+}
+async function execDeleteProxy(){
+  var pass = document.getElementById('proxy-delete-pass').value.trim();
+  var errEl = document.getElementById('proxy-delete-err');
+  var btn = document.getElementById('proxy-delete-btn');
+  errEl.style.display = 'none';
+  if(!pass){ errEl.style.display=''; errEl.textContent='⚠️ Mot de passe requis.'; return; }
+  btn.disabled = true; btn.textContent = '⏳ Suppression…';
+  try{
+    var r = await fetch(API+'/api/auth/proxy-accounts/'+_deleteProxyId, {
+      method: 'DELETE',
+      headers: {...authHeaders(), 'Content-Type':'application/json'},
+      body: JSON.stringify({ password: pass })
+    });
+    var d = await r.json();
+    if(r.ok && d.ok){
+      closeModal('proxy-delete-modal');
+      showToast('🗑 Compte proxy supprimé.');
+      setTimeout(()=>location.reload(), 800);
+    } else {
+      errEl.style.display = '';
+      errEl.textContent = '❌ ' + (d.error || 'Erreur inconnue');
+      btn.disabled = false; btn.textContent = '🗑 Confirmer la suppression';
+    }
+  }catch(e){
+    errEl.style.display = ''; errEl.textContent = '❌ Erreur réseau. Réessayez.';
+    btn.disabled = false; btn.textContent = '🗑 Confirmer la suppression';
+  }
+}
+
 async function deleteSmtp(id){
   if(!confirm('Supprimer définitivement ce serveur SMTP ? La clé SMTP sera révoquée.'))return;
   try{
@@ -1264,6 +1331,7 @@ function renderProxyList(pxList, usageMap){
           '<span class="svc-status" style="background:'+bg+';color:'+fg+'">'+esc(lbl)+'</span>'+
           (p.username&&p.status==='active'?'<button class="btn-sm primary" style="background:var(--teal);border-color:var(--teal)" onclick=\'openProxyModal('+JSON.stringify(p)+')\'>🔑 Identifiants</button>':'<span style="font-size:12px;color:var(--orange)">⏳ En activation</span>')+
           '<a href="/pay.html?product=proxy_55gb" class="btn-sm">+ Acheter</a>'+
+          '<button class="btn-sm danger" onclick="confirmDeleteProxy('+p.id+',\''+esc(String(p.gb))+'Go\')">🗑</button>'+
         '</div>'+
       '</div>'+
       bwHtml+
