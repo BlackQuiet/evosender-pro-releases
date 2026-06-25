@@ -845,7 +845,7 @@ async function loadProducts(){
       document.getElementById('drawer-smtp').style.display='';
       const VLABELS={smtp_10k:'10 000',smtp_50k:'30 000',smtp_100k:'60 000',smtp_500k:'120 000'};
       const POPULAR='smtp_50k';
-      const relay=esc(data.smtp_relay_host||'postal.smtpevo.com');
+      const relay=esc(data.smtp_relay_host||'smtp.smtpevo.com');
       smtpGrid.innerHTML=smtpPlans.map(p=>{
         const vol=VLABELS[p.id]||esc(String(p.volume||''));
         const isP=p.id===POPULAR;
