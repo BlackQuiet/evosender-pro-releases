@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8"/>
@@ -654,7 +654,7 @@ input,select,textarea{font-family:inherit}
       <button id="cgu-close" onclick="closeCgu()" style="display:none" class="modal-close">×</button>
     </div>
     <div class="modal-body" id="cgu-body" style="max-height:55vh;overflow-y:auto;font-size:13px;line-height:1.65;color:#475569">
-      <p>Les présentes Conditions Générales d'Utilisation (« CGU ») régissent l'utilisation du logiciel <b>EvoStudio</b> (comprenant EvoExtractor, EvoSender et EvoVérificateur), édité par <b>EGSCI SARL</b>, société de droit ivoirien. En créant un compte, en achetant ou en utilisant le logiciel, l'utilisateur reconnaît avoir lu, compris et accepté l'intégralité des présentes CGU.</p>
+      <p>Les présentes Conditions Générales d'Utilisation (« CGU ») régissent l'utilisation du logiciel <b>EvoStudio</b> (comprenant EvoExtractor, EvoSender et EvoVerify), édité par <b>EGSCI SARL</b>, société de droit ivoirien. En créant un compte, en achetant ou en utilisant le logiciel, l'utilisateur reconnaît avoir lu, compris et accepté l'intégralité des présentes CGU.</p>
       <h4 style="font-size:12px;color:var(--ink);font-weight:700;margin:14px 0 4px;text-transform:uppercase;letter-spacing:.04em">Article 1 — Objet</h4>
       <p>Les présentes CGU ont pour objet de définir les modalités et conditions d'utilisation du logiciel EvoStudio.</p>
       <h4 style="font-size:12px;color:var(--ink);font-weight:700;margin:14px 0 4px;text-transform:uppercase;letter-spacing:.04em">Article 2 — Licence</h4>
@@ -731,7 +731,7 @@ input,select,textarea{font-family:inherit}
 
 <script>
 const API='https://admin.evostudio.fr';
-const PROD_LABELS={sender:'📤 EvoSender',extractor:'🔍 EvoExtractor',verifier:'✅ EvoVérificateur',suite:'🌐 Suite EvoStudio',proxy_5gb:'🌐 Proxy 5 Go',proxy_55gb:'🌐 Proxy 55 Go',proxy_100gb:'🌐 Proxy 100 Go',proxy_200gb:'🌐 Proxy 200 Go',proxy_1000gb:'🌐 Proxy 1 To',proxy_2000gb:'🌐 Proxy 2 To'};
+const PROD_LABELS={sender:'📤 EvoSender',extractor:'🔍 EvoExtractor',verifier:'✅ EvoVerify',suite:'🌐 Suite EvoStudio',proxy_5gb:'🌐 Proxy 5 Go',proxy_55gb:'🌐 Proxy 55 Go',proxy_100gb:'🌐 Proxy 100 Go',proxy_200gb:'🌐 Proxy 200 Go',proxy_1000gb:'🌐 Proxy 1 To',proxy_2000gb:'🌐 Proxy 2 To'};
 const STS_LABELS={pending:'En attente',paid:'Payée',expired:'Expirée',cancelled:'Annulée'};
 const CRYPTO_LABEL={usdt:'USDT',btc:'BTC',wave:'XOF',om:'XOF'};
 var _senderNotice='', _supportName='Support EvoStudio', _dlWin='#', _dlMac='#';
@@ -798,8 +798,8 @@ async function acceptCgu(){
 let _smtpModalId=null;
 function openSmtpModal(s,senderNotice){
   _smtpModalId=s.id;
-  document.getElementById('smtp-modal-sub').textContent='SMTP Relay — '+s.plan+' · '+s.relay_host;
-  document.getElementById('smtp-m-host').textContent=s.relay_host||'smtp.exabytes.com';
+  document.getElementById('smtp-modal-sub').textContent='SMTP Relay — '+s.plan+(s.relay_host?(' · '+s.relay_host):'');
+  document.getElementById('smtp-m-host').textContent=s.relay_host||'En préparation…';
   document.getElementById('smtp-m-port').textContent=(s.relay_port||587)+' (TLS)';
   document.getElementById('smtp-m-user').textContent=s.username||'—';
   var passEl=document.getElementById('smtp-m-pass-disp');
@@ -1040,19 +1040,19 @@ async function load(){
         document.getElementById('sb-smtp').style.display='';
         document.getElementById('st-smtp-card').style.display='';
         document.getElementById('st-smtp').textContent=smList.length;
-        var VOL={smtp_10k:'10K',smtp_50k:'50K',smtp_100k:'100K',smtp_500k:'500K'};
+        var VOL={smtp_10k:'10K',smtp_50k:'30K',smtp_100k:'60K',smtp_500k:'120K'};
         var SB={active:'#dcfce7',suspended:'#fee2e2',pending:'#fef9c3'};
         var SF={active:'#166534',suspended:'#991b1b',pending:'#854d0e'};
         var SL={active:'Actif',suspended:'Suspendu',pending:'En attente'};
         document.getElementById('smtp-wrap').innerHTML=smList.map(s=>{
-          var vol=VOL[s.plan]||String(s.volume||0);
+          var vol=s.volume?Math.round(s.volume/1000)+'K':(VOL[s.plan]||'');
           var bg=SB[s.status]||'#f1f5f9',fg=SF[s.status]||'#334155',lbl=SL[s.status]||s.status;
           var expHtml='';
           if(s.expires_at){var d=Math.ceil((s.expires_at-Date.now())/86400000);var ex=d<=0;var col=ex?'var(--red)':(d<=5?'var(--orange)':'var(--slate)');expHtml='<div class="svc-exp" style="color:'+col+'">⏳ '+(ex?'Expiré le '+new Date(s.expires_at).toLocaleDateString('fr-FR'):'Jusqu\'au '+new Date(s.expires_at).toLocaleDateString('fr-FR')+' ('+d+' j)')+'</div>';}
           return '<div class="svc-row">'+
             '<div class="svc-info">'+
               '<div class="svc-name">📧 SMTP Relay — '+esc(vol)+' emails/mois</div>'+
-              '<div class="svc-meta"><span>Plan '+esc(s.plan)+'</span><span>'+(s.relay_host||'smtp.exabytes.com')+'</span><span>Port '+(s.relay_port||587)+' TLS</span></div>'+
+              '<div class="svc-meta"><span>Plan '+esc(s.plan)+'</span><span>'+(s.relay_host||'En préparation…')+'</span><span>Port '+(s.relay_port||587)+' TLS</span></div>'+
               expHtml+
             '</div>'+
             '<div class="svc-actions">'+
