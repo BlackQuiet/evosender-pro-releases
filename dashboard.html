@@ -1053,6 +1053,7 @@ async function load(){
             '<div class="svc-info">'+
               '<div class="svc-name">📧 SMTP Relay — '+esc(vol)+' emails/mois</div>'+
               '<div class="svc-meta"><span>Plan '+esc(s.plan)+'</span><span>'+(s.relay_host||'En préparation…')+'</span><span>Port '+(s.relay_port||587)+' TLS</span></div>'+
+              (s.stats?('<div class="svc-meta" style="margin-top:5px"><span style="color:#2563eb">📊 '+s.stats.sent+' envoyés</span><span style="color:'+(s.stats.bounces>0?'#dc2626':'#16a34a')+'">↩️ '+s.stats.bounces+' bounces</span><span style="color:'+(s.stats.spam>0?'#dc2626':'#16a34a')+'">🚫 '+s.stats.spam+' spam</span><span style="color:#64748b">(30 j)</span></div>'):'')+
               expHtml+
             '</div>'+
             '<div class="svc-actions">'+
