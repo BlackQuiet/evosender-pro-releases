@@ -133,6 +133,13 @@
         <input type="email" id="invoice-email" placeholder="vous@exemple.com" />
         <div style="font-size:12px;color:var(--slate);margin-top:6px">Vous recevrez votre facture et votre licence à cette adresse après validation.</div>
 
+        <div class="mini-label" style="margin-top:14px">Code promo <span style="font-weight:400;color:var(--slate)">(optionnel)</span></div>
+        <div style="display:flex;gap:8px">
+          <input type="text" id="promo-code" placeholder="CODE" style="flex:1;background:#f8fafc;border:1.5px solid var(--line);color:var(--ink);border-radius:0;padding:12px 14px;font-size:14px;outline:none;font-family:inherit;text-transform:uppercase" />
+          <button type="button" onclick="applyPromo()" style="background:var(--ink);color:#fff;border:none;padding:0 18px;font-size:13px;font-weight:600;cursor:pointer">Appliquer</button>
+        </div>
+        <div id="promo-msg" style="font-size:12px;margin-top:6px"></div>
+
         <div class="total-row" id="total-row" style="display:none">
           <span>Total à payer</span>
           <strong id="total-val">—</strong>
@@ -188,6 +195,21 @@
     let products = [];
     let usdXofRate = 600;  // mis à jour depuis l'API
     let discountPct = 0;   // % de remise globale
+    let appliedPromo = ''; // code promo validé
+
+    async function applyPromo(){
+      const code=(document.getElementById('promo-code').value||'').trim().toUpperCase();
+      const msg=document.getElementById('promo-msg');
+      if(!code){ appliedPromo=''; msg.textContent=''; return; }
+      if(!selectedProduct){ msg.style.color='#ef4444'; msg.textContent='Sélectionnez d\'abord un produit.'; return; }
+      msg.style.color='#64748b'; msg.textContent='Vérification…';
+      try{
+        const r=await fetch(API+'/api/shop/validate-code',{method:'POST',headers:Object.assign({'Content-Type':'application/json'},authHeaders()),body:JSON.stringify({code:code,product:selectedProduct})});
+        const d=await r.json();
+        if(d.ok){ appliedPromo=code; msg.style.color='#16a34a'; msg.textContent='✓ Code valide : -'+d.percent+'% appliqué au paiement.'; }
+        else { appliedPromo=''; msg.style.color='#ef4444'; msg.textContent='✗ '+(d.error||'Code invalide'); }
+      }catch(e){ appliedPromo=''; msg.style.color='#ef4444'; msg.textContent='Erreur de vérification.'; }
+    }
 
     function isSmtp(id){ return (id||'').startsWith('smtp_'); }
     function isProxy(id){ return (id||'').startsWith('proxy_'); }
@@ -408,6 +430,8 @@
       document.querySelectorAll('.prod-btn').forEach(b => b.classList.remove('active'));
       el.classList.add('active');
       selectedProduct = el.dataset.product;
+      // Réinitialise le code promo (il est lié à un produit précis)
+      appliedPromo = ''; var _pc=document.getElementById('promo-code'); if(_pc)_pc.value=''; var _pm=document.getElementById('promo-msg'); if(_pm)_pm.textContent='';
       const qtySection = document.getElementById('qty-section');
       const qtyLabel   = document.getElementById('qty-label');
       const svc2 = isSmtp(selectedProduct) || isProxy(selectedProduct);
@@ -419,6 +443,7 @@
 
     function selectProductFromDropdown(sel) {
       selectedProduct = sel.value;
+      appliedPromo = ''; var _pc=document.getElementById('promo-code'); if(_pc)_pc.value=''; var _pm=document.getElementById('promo-msg'); if(_pm)_pm.textContent='';
       const svc3 = isSmtp(selectedProduct) || isProxy(selectedProduct);
       const qtySection = document.getElementById('qty-section');
       const qtyLabel   = document.getElementById('qty-label');
@@ -452,7 +477,7 @@
         const r = await fetch(API + '/api/shop/order', {
           method: 'POST',
           headers: authHeaders(),
-          body: JSON.stringify({ product: selectedProduct, crypto: selectedCrypto, quantity: isService(selectedProduct) ? 1 : quantity, invoice_email: (document.getElementById('invoice-email')?.value || '').trim() })
+          body: JSON.stringify({ product: selectedProduct, crypto: selectedCrypto, quantity: isService(selectedProduct) ? 1 : quantity, invoice_email: (document.getElementById('invoice-email')?.value || '').trim(), code: appliedPromo })
         });
         const d = await r.json();
         if (!r.ok) {
