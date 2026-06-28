@@ -384,6 +384,13 @@ input,select,textarea{font-family:inherit}
             <div><strong>Mac Silicon M1/M2/M3</strong><span>arm64 · .dmg · ~125 MB</span></div>
           </a>
         </div>
+        <!-- Notice macOS Gatekeeper -->
+        <div style="margin-top:12px;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:12px 14px;font-size:12.5px;color:#92400e;line-height:1.6">
+          <strong>⚠️ Mac : message "fichier endommagé" ?</strong> C'est une protection macOS normale. Pour ouvrir l'app :<br>
+          <strong>Option 1</strong> — Après installation, ouvrir <strong>Terminal</strong> et coller :<br>
+          <code style="display:block;background:#1e293b;color:#7dd3fc;border-radius:6px;padding:7px 10px;margin:6px 0;font-size:12px;letter-spacing:.01em">sudo xattr -rd com.apple.quarantine /Applications/EvoStudio.app</code>
+          <strong>Option 2</strong> — Aller dans <strong>Réglages Système → Confidentialité et sécurité</strong> → cliquer <strong>"Ouvrir quand même"</strong>.
+        </div>
       </div>
     </div>
     <!-- Quick actions -->
