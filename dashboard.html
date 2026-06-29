@@ -748,7 +748,9 @@ function esc(t){return String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'
 function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',2200)}
 function copyText(t){navigator.clipboard.writeText(t).then(()=>showToast('✓ Copié !'))}
 function authHeaders(){const t=localStorage.getItem('evo_token');return t?{'Authorization':'Bearer '+t}:{}}
-function logout(){localStorage.removeItem('evo_token');location.href='/login.html'}
+function logout(){localStorage.removeItem('evo_token');localStorage.removeItem('evo_logged_in');fetch(API+'/api/auth/logout',{method:'POST',credentials:'include'}).catch(()=>{});location.href='/login.html'}
+// Auto-inject credentials for all API calls so httpOnly cookie is sent
+(function(){const _f=window.fetch;window.fetch=function(u,o){if(typeof u==='string'&&u.startsWith(API)){o=Object.assign({credentials:'include'},o||{});}return _f.call(this,u,o);};}());
 
 // Sidebar toggle
 let _sbCollapsed=false;
@@ -956,14 +958,12 @@ async function testProxyModal(){
 
 // ── Main load ──
 async function load(){
-  const token=localStorage.getItem('evo_token');
-  if(!token){location.href='/login.html?redirect=/dashboard.html';return;}
   let user;
   try{
     const r=await fetch(API+'/api/auth/me',{headers:authHeaders()});
-    if(!r.ok){logout();return;}
+    if(!r.ok){location.href='/login.html?redirect=/dashboard.html';return;}
     user=await r.json();
-  }catch{logout();return;}
+  }catch{location.href='/login.html?redirect=/dashboard.html';return;}
 
   document.getElementById('loading-screen').style.display='none';
 
@@ -1019,7 +1019,7 @@ async function load(){
         '</div>'+
         '<div class="lic-row">'+
           '<div class="lic-key2">'+esc(o.license_key)+'</div>'+
-          '<button class="btn-sm" onclick="copyText(\''+o.license_key+'\')"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copier</button>'+
+          '<button class="btn-sm" data-key="'+esc(o.license_key)+'" onclick="copyText(this.dataset.key)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copier</button>'+
         '</div>'+
         '<div class="lic-date2">Acheté le '+new Date(o.paid_at).toLocaleDateString('fr-FR')+'</div>'+
         '<div class="lic-date2" style="color:'+col+';font-weight:600">⏳ '+esc(txt)+'</div>'+
@@ -1051,7 +1051,9 @@ async function load(){
         var SB={active:'#dcfce7',suspended:'#fee2e2',pending:'#fef9c3'};
         var SF={active:'#166534',suspended:'#991b1b',pending:'#854d0e'};
         var SL={active:'Actif',suspended:'Suspendu',pending:'En attente'};
+        window._smtpCache={};
         document.getElementById('smtp-wrap').innerHTML=smList.map(s=>{
+          _smtpCache[s.id]=s;
           var vol=s.volume?Math.round(s.volume/1000)+'K':(VOL[s.plan]||'');
           var bg=SB[s.status]||'#f1f5f9',fg=SF[s.status]||'#334155',lbl=SL[s.status]||s.status;
           var expHtml='';
@@ -1065,7 +1067,7 @@ async function load(){
             '</div>'+
             '<div class="svc-actions">'+
               '<span class="svc-status" style="background:'+bg+';color:'+fg+'">'+esc(lbl)+'</span>'+
-              (s.username?'<button class="btn-sm primary" onclick=\'openSmtpModal('+JSON.stringify(s)+','+JSON.stringify(_senderNotice)+')\'>🔑 Identifiants</button>':'<span style="font-size:12px;color:var(--orange)">⏳ En provisioning</span>')+
+              (s.username?'<button class="btn-sm primary" onclick="openSmtpModal(_smtpCache['+s.id+'],_senderNotice)">🔑 Identifiants</button>':'<span style="font-size:12px;color:var(--orange)">⏳ En provisioning</span>')+
               '<a href="/pay.html?product='+esc(s.plan)+'" class="btn-sm">↻ Renouveler</a>'+
               '<button class="btn-sm danger" onclick="deleteSmtp('+s.id+')">🗑</button>'+
             '</div>'+
@@ -1240,7 +1242,7 @@ async function init2fa(){
     if(!d.ok){document.getElementById('tfa-msg-setup').textContent=d.error||'Erreur';return;}
     _tfa2faSecret=d.secret;
     document.getElementById('tfa-secret').textContent=d.secret;
-    document.getElementById('tfa-qr').innerHTML='<img src="'+d.qr+'" width="180" height="180" style="display:block;border-radius:8px;margin:0 auto"/>';
+    const _qrImg=document.createElement('img');_qrImg.src=d.qr;_qrImg.width=180;_qrImg.height=180;_qrImg.style.cssText='display:block;border-radius:8px;margin:0 auto';const _qrEl=document.getElementById('tfa-qr');_qrEl.innerHTML='';_qrEl.appendChild(_qrImg);
     setTimeout(()=>document.getElementById('tfa-code').focus(),100);
   }catch{document.getElementById('tfa-msg-setup').textContent='Erreur réseau.';}
 }

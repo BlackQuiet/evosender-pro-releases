@@ -96,7 +96,10 @@
       btn.innerHTML = show ? EYE_OFF : EYE_OPEN;
       btn.setAttribute('aria-label', show ? 'Masquer le mot de passe' : 'Afficher le mot de passe');
     }
-    if (localStorage.getItem('evo_token')) location.href = '/dashboard.html';
+    (async function checkAuth(){
+      if (localStorage.getItem('evo_token')) { location.href = '/dashboard.html'; return; }
+      try { const r = await fetch(API + '/api/auth/me', { credentials: 'include' }); if (r.ok) location.href = '/dashboard.html'; } catch {}
+    })();
     let _preToken = null;
 
     // Pré-remplir l'email mémorisé (même navigateur) → focus direct sur le mot de passe
@@ -120,8 +123,9 @@
     }
 
     function finishLogin(token, email) {
-      localStorage.setItem('evo_token', token);
+      localStorage.removeItem('evo_token');
       localStorage.setItem('evo_email', email);
+      localStorage.setItem('evo_logged_in', '1');
       const msg = document.getElementById('msg') || document.getElementById('msg-2fa');
       msg.className = 'msg ok'; msg.textContent = '✓ Connecté ! Redirection...';
       const redir = new URLSearchParams(location.search).get('redirect') || '/dashboard.html';
@@ -135,7 +139,7 @@
       const msg = document.getElementById('msg'); const btn = document.getElementById('btn');
       btn.disabled = true; btn.textContent = 'Connexion...';
       try {
-        const r = await fetch(API + '/api/auth/login', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ email, password }) });
+        const r = await fetch(API + '/api/auth/login', { method:'POST', headers:{'Content-Type':'application/json'}, credentials:'include', body:JSON.stringify({ email, password }) });
         const d = await r.json();
         if (d.ok && d.requires2fa) {
           _preToken = d.pre_token;
@@ -157,7 +161,7 @@
       const msg = document.getElementById('msg-2fa'); const btn = document.getElementById('btn-2fa');
       btn.disabled = true; btn.textContent = 'Vérification...';
       try {
-        const r = await fetch(API + '/api/auth/2fa/verify', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ pre_token: _preToken, totp }) });
+        const r = await fetch(API + '/api/auth/2fa/verify', { method:'POST', headers:{'Content-Type':'application/json'}, credentials:'include', body:JSON.stringify({ pre_token: _preToken, totp }) });
         const d = await r.json();
         if (d.ok) {
           finishLogin(d.token, d.email);

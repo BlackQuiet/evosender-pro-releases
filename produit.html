@@ -77,7 +77,7 @@ const IMG={extractor:'/EvoExtractor.png',sender:'/EvoSender.png',verifier:'/Evov
 const LABEL={extractor:'Collecte d\'adresses email',sender:'Envoi en masse',verifier:'Vérification de listes',suite:'Suite complète'};
 function esc(t){return String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function qs(k){return new URLSearchParams(location.search).get(k);}
-if(localStorage.getItem('evo_token')){var a=document.getElementById('nav-account'),l=document.getElementById('nav-login');if(a)a.style.display='';if(l)l.style.display='none';}
+if(localStorage.getItem('evo_token')||localStorage.getItem('evo_logged_in')){var a=document.getElementById('nav-account'),l=document.getElementById('nav-login');if(a)a.style.display='';if(l)l.style.display='none';}
 
 (async function(){
   const id=qs('id')||'sender';

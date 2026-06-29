@@ -204,7 +204,7 @@
       if(!selectedProduct){ msg.style.color='#ef4444'; msg.textContent='Sélectionnez d\'abord un produit.'; return; }
       msg.style.color='#64748b'; msg.textContent='Vérification…';
       try{
-        const r=await fetch(API+'/api/shop/validate-code',{method:'POST',headers:Object.assign({'Content-Type':'application/json'},authHeaders()),body:JSON.stringify({code:code,product:selectedProduct})});
+        const r=await fetch(API+'/api/shop/validate-code',{method:'POST',headers:Object.assign({'Content-Type':'application/json'},authHeaders()),credentials:'include',body:JSON.stringify({code:code,product:selectedProduct})});
         const d=await r.json();
         if(d.ok){ appliedPromo=code; msg.style.color='#16a34a'; msg.textContent='✓ Code valide : -'+d.percent+'% appliqué au paiement.'; }
         else { appliedPromo=''; msg.style.color='#ef4444'; msg.textContent='✗ '+(d.error||'Code invalide'); }
@@ -268,10 +268,8 @@
     }
 
     async function loadSettings() {
-      const token = localStorage.getItem('evo_token');
-      if (!token) { location.href = '/login.html?redirect=' + encodeURIComponent(location.href); return; }
       try {
-        const r = await fetch(API + '/api/auth/me', { headers: authHeaders() });
+        const r = await fetch(API + '/api/auth/me', { headers: authHeaders(), credentials: 'include' });
         if (!r.ok) { location.href = '/login.html?redirect=' + encodeURIComponent(location.href); return; }
         const u = await r.json();
         const ie = document.getElementById('invoice-email');
@@ -477,6 +475,7 @@
         const r = await fetch(API + '/api/shop/order', {
           method: 'POST',
           headers: authHeaders(),
+          credentials: 'include',
           body: JSON.stringify({ product: selectedProduct, crypto: selectedCrypto, quantity: isService(selectedProduct) ? 1 : quantity, invoice_email: (document.getElementById('invoice-email')?.value || '').trim(), code: appliedPromo })
         });
         const d = await r.json();
@@ -561,7 +560,7 @@
     async function pollStatus() {
       if (!orderId) return;
       try {
-        const r = await fetch(API + '/api/shop/order/' + orderId, { headers: authHeaders() });
+        const r = await fetch(API + '/api/shop/order/' + orderId, { headers: authHeaders(), credentials: 'include' });
         const d = await r.json();
         if (d.status === 'paid') {
           clearInterval(pollInterval);
@@ -588,9 +587,12 @@
               '<div style="font-size:13px;color:#64748b;margin:6px 0 10px">Votre licence est prête :</div>' +
               '<div class="lic-key">' + d.license_key + '</div>' +
               '<div style="margin-top:14px">' +
-              '<button onclick="navigator.clipboard.writeText(\'' + d.license_key + '\')" style="background:#dcfce7;border:1px solid #bbf7d0;color:#15803d;border-radius:0;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer">Copier la licence</button>' +
+              '<button id="_lic-copy-btn" style="background:#dcfce7;border:1px solid #bbf7d0;color:#15803d;border-radius:0;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer">Copier la licence</button>' +
               '<a href="/dashboard.html" style="display:inline-block;margin-left:8px;background:#2563eb;color:#fff;border-radius:0;padding:8px 16px;font-size:12px;font-weight:700;text-decoration:none">Mon espace client →</a>' +
               '</div>';
+            const _licKey = d.license_key;
+            const _cpBtn = document.getElementById('_lic-copy-btn');
+            if (_cpBtn) _cpBtn.addEventListener('click', () => navigator.clipboard.writeText(_licKey).then(()=>showToast('✓ Licence copiée !'), ()=>{}));
           }
         } else if (d.status === 'expired') {
           clearInterval(pollInterval);

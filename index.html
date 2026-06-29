@@ -729,7 +729,7 @@ document.querySelectorAll('.faq-q').forEach(q=>{
 
 // Auth
 (function(){
-  let t;try{t=localStorage.getItem('evo_token');}catch(e){}
+  let t;try{t=localStorage.getItem('evo_token')||localStorage.getItem('evo_logged_in');}catch(e){}
   if(t){
     ['nav-login','drawer-login'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='none';});
     ['nav-account','drawer-account'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display='';});
@@ -787,7 +787,7 @@ async function loadProducts(){
 
     // Site settings
     const site=data.site||{};
-    if(site.hero_title){const el=document.getElementById('hero-title');if(el)el.innerHTML=el.innerHTML.replace(/^[^<]+/,site.hero_title);}
+    if(site.hero_title){const el=document.getElementById('hero-title');if(el){for(const n of el.childNodes){if(n.nodeType===3){n.nodeValue=site.hero_title;break;}}}}
     if(site.hero_subtitle){const el=document.getElementById('hero-sub');if(el)el.textContent=site.hero_subtitle;}
     if(site.announce){const b=document.getElementById('announce-bar');if(b){b.textContent=site.announce;b.style.display='block';}}
     if(site.support_email){

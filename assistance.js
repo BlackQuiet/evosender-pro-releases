@@ -6,7 +6,7 @@
   function token() { return localStorage.getItem('evo_token'); }
   function authHeaders() { var t = token(); return t ? { 'Authorization': 'Bearer ' + t } : {}; }
   function esc(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
-  var loggedIn = !!token();
+  var loggedIn = !!(token() || localStorage.getItem('evo_logged_in'));
   var open = false, started = false;
   var supportName = 'Support EvoStudio';
   var _lastUnread = 0, _lastAdmin = -1, _audioCtx = null;
@@ -87,7 +87,7 @@
   async function loadSupport() {
     var thread = document.getElementById('ev-thread'); if (!thread) return;
     try {
-      var r = await fetch(API + '/api/auth/support', { headers: authHeaders() });
+      var r = await fetch(API + '/api/auth/support', { headers: authHeaders(), credentials: 'include' });
       if (!r.ok) return;
       var data = await r.json();
       var msgs = data.messages || [];
@@ -108,7 +108,7 @@
   async function refreshUnread() {
     if (!loggedIn || open) return;
     try {
-      var r = await fetch(API + '/api/auth/support/unread', { headers: authHeaders() });
+      var r = await fetch(API + '/api/auth/support/unread', { headers: authHeaders(), credentials: 'include' });
       if (!r.ok) return;
       var d = await r.json();
       if (d.unread > _lastUnread) beep(); // nouveau message admin reçu
@@ -122,7 +122,7 @@
     var body = inp.value.trim(); if (!body) return;
     btn.disabled = true;
     try {
-      var r = await fetch(API + '/api/auth/support', { method: 'POST', headers: Object.assign({ 'Content-Type': 'application/json' }, authHeaders()), body: JSON.stringify({ body: body }) });
+      var r = await fetch(API + '/api/auth/support', { method: 'POST', headers: Object.assign({ 'Content-Type': 'application/json' }, authHeaders()), credentials: 'include', body: JSON.stringify({ body: body }) });
       var d = await r.json();
       if (r.ok && d.ok) { inp.value = ''; await loadSupport(); }
     } catch (e) {}

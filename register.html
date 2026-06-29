@@ -80,7 +80,10 @@
       btn.innerHTML = show ? EYE_OFF : EYE_OPEN;
       btn.setAttribute('aria-label', show ? 'Masquer le mot de passe' : 'Afficher le mot de passe');
     }
-    if (localStorage.getItem('evo_token')) location.href = '/dashboard.html';
+    (async function checkAuth(){
+      if (localStorage.getItem('evo_token')) { location.href = '/dashboard.html'; return; }
+      try { const r = await fetch(API + '/api/auth/me', { credentials: 'include' }); if (r.ok) location.href = '/dashboard.html'; } catch {}
+    })();
     document.getElementById('form').addEventListener('submit', async e => {
       e.preventDefault();
       const email = document.getElementById('email').value.trim();
@@ -90,10 +93,10 @@
       if (password !== password2) { msg.className='msg err'; msg.textContent='Les mots de passe ne correspondent pas.'; return; }
       btn.disabled = true; btn.textContent = 'Création...';
       try {
-        const r = await fetch(API + '/api/auth/register', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ email, password }) });
+        const r = await fetch(API + '/api/auth/register', { method:'POST', headers:{'Content-Type':'application/json'}, credentials:'include', body:JSON.stringify({ email, password }) });
         const d = await r.json();
         if (d.ok) {
-          localStorage.setItem('evo_token', d.token); localStorage.setItem('evo_email', d.email);
+          localStorage.removeItem('evo_token'); localStorage.setItem('evo_email', d.email); localStorage.setItem('evo_logged_in', '1');
           msg.className='msg ok'; msg.textContent='✓ Compte créé ! Redirection...';
           const redir = new URLSearchParams(location.search).get('redirect') || '/dashboard.html';
           setTimeout(() => location.href = redir, 1000);
