@@ -103,8 +103,8 @@ img{max-width:100%;height:auto}
     radial-gradient(60% 80% at 100% 10%,rgba(124,58,237,.18),transparent 60%);
   border-bottom:1px solid var(--glass-brd)}
 .hero::before{content:"";position:absolute;inset:0;pointer-events:none;
-  background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
-  background-size:46px 46px;mask-image:radial-gradient(110% 90% at 50% 0%,#000,transparent 72%)}
+  background-image:linear-gradient(rgba(96,165,250,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(96,165,250,.09) 1px,transparent 1px);
+  background-size:44px 44px;mask-image:radial-gradient(120% 95% at 50% 0%,#000,transparent 78%)}
 .hero-grid{position:relative;display:grid;grid-template-columns:1fr 330px;gap:48px;align-items:center}
 @media(max-width:860px){.hero-grid{grid-template-columns:1fr;gap:34px}}
 .hero-label{display:inline-flex;align-items:center;gap:8px;font-family:ui-monospace,monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#7dd3fc;padding:6px 14px;border-radius:999px;border:1px solid rgba(125,211,252,.28);background:rgba(125,211,252,.07);margin-bottom:22px}
@@ -148,8 +148,14 @@ section{padding:82px 0;position:relative}
 .sec-head .sec-sub{margin:0 auto}
 
 /* ── CARTES GÉNÉRIQUES (produits, features, plans, prix, avis) ── */
-.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-@media(max-width:860px){.products-grid{grid-template-columns:1fr}}
+/* Bento : carte vedette (EvoSender) large à gauche + 2 cartes empilées à droite */
+.products-grid{display:grid;grid-template-columns:1.3fr 1fr;grid-auto-rows:1fr;gap:14px}
+.prod-card.big{grid-column:1;grid-row:1 / span 2;position:relative;overflow:hidden;background:linear-gradient(160deg,rgba(37,99,235,.18),rgba(124,58,237,.08));border-color:rgba(96,165,250,.3)}
+.prod-card.big::after{content:"";position:absolute;right:-46px;bottom:-46px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(34,211,238,.28),transparent 70%);pointer-events:none}
+.prod-card.big .prod-ic{width:56px;height:56px}
+.prod-card.big .prod-name{font-size:22px}
+.prod-card.big .prod-desc{font-size:14.5px}
+@media(max-width:860px){.products-grid{grid-template-columns:1fr}.prod-card.big{grid-column:auto;grid-row:auto}}
 .prod-card,.feat-cell,.plan-card,.price-card,.rev,.step,.svc-feat,.faq-item{
   background:var(--glass);border:1px solid var(--glass-brd);border-radius:var(--radius);
   backdrop-filter:blur(6px);transition:transform .16s,border-color .16s,box-shadow .16s}

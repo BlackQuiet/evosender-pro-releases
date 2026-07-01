@@ -778,10 +778,11 @@ async function loadProducts(){
     // Products grid
     const grid=document.getElementById('products-grid');
     if(grid&&main.length){
-      grid.innerHTML=main.map(p=>{
+      const bento=[...main].sort((a,b)=>(a.id==='sender'?-1:b.id==='sender'?1:0));
+      grid.innerHTML=bento.map(p=>{
         const ic=ICONS[p.id]||ICONS.sender;
         const feats=Array.isArray(p.features)?p.features:[];
-        return '<div class="prod-card"><div class="prod-ic '+esc(ic.cls)+'">'+ic.svg+'</div><div class="prod-name">'+esc(p.name)+'</div><p class="prod-desc">'+esc(p.description)+'</p><ul class="prod-feats">'+feats.map(f=>'<li>'+esc(f)+'</li>').join('')+'</ul><div class="prod-btns"><a href="/pay.html?product='+esc(p.id)+'" class="btn btn-primary">Acheter</a><a href="/produit.html?id='+esc(p.id)+'" class="btn btn-dark">Détails →</a></div></div>';
+        return '<div class="prod-card'+(p.id==='sender'?' big':'')+'"><div class="prod-ic '+esc(ic.cls)+'">'+ic.svg+'</div><div class="prod-name">'+esc(p.name)+'</div><p class="prod-desc">'+esc(p.description)+'</p><ul class="prod-feats">'+feats.map(f=>'<li>'+esc(f)+'</li>').join('')+'</ul><div class="prod-btns"><a href="/pay.html?product='+esc(p.id)+'" class="btn btn-primary">Acheter</a><a href="/produit.html?id='+esc(p.id)+'" class="btn btn-dark">Détails →</a></div></div>';
       }).join('');
     }
 
