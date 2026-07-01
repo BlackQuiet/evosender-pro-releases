@@ -668,6 +668,15 @@ html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;backgr
             <label class="gen-label">Quantité</label>
             <input class="gen-input" id="prx-m-qty" type="number" min="1" max="999" value="1" oninput="proxyModalGen()" style="text-align:center;font-weight:700"/>
           </div>
+          <div style="grid-column:1/-1">
+            <label class="gen-label">Format de copie</label>
+            <select class="gen-select" id="prx-m-format" onchange="proxyModalGen()">
+              <option value="uphp" selected>USER:PASS:HOST:PORT</option>
+              <option value="up@hp">USER:PASS@HOST:PORT</option>
+              <option value="hpup">HOST:PORT:USER:PASS</option>
+              <option value="hp@up">HOST:PORT@USER:PASS</option>
+            </select>
+          </div>
         </div>
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
           <div style="font-size:11px;font-weight:700;color:var(--slate-2);text-transform:uppercase;letter-spacing:.06em">Chaînes générées <span id="prx-m-count" style="color:var(--blue)">× 1</span></div>
@@ -941,6 +950,12 @@ function proxyModalIspVal(){
   if(sel.value==='__manual__')return document.getElementById('prx-m-isp-manual').value.trim();
   return sel.value;
 }
+function fmtProxy(fmt,u,pw,h,p){
+  if(fmt==='hpup')return h+':'+p+':'+u+':'+pw;
+  if(fmt==='hp@up')return h+':'+p+'@'+u+':'+pw;
+  if(fmt==='up@hp')return u+':'+pw+'@'+h+':'+p;
+  return u+':'+pw+':'+h+':'+p; // uphp (défaut)
+}
 function proxyModalGen(){
   var sel=document.getElementById('prx-m-isp');
   var man=document.getElementById('prx-m-isp-manual');
@@ -954,11 +969,12 @@ function proxyModalGen(){
   var prefix=u;
   if(country)prefix+='-country-'+country;
   if(isp)prefix+='-isp-'+isp;
+  var fmt=(document.getElementById('prx-m-format')||{}).value||'uphp';
   var lines=[];
   for(var i=0;i<qty;i++){
     var uu=prefix;
     if(ssidBase){uu+='-ssid-'+ssidBase+(qty>1?i+1:'');}
-    lines.push(uu+':'+pw+':'+h+':'+p);
+    lines.push(fmtProxy(fmt,uu,pw,h,p));
   }
   document.getElementById('prx-m-result').value=lines.join('\n');
   document.getElementById('prx-m-result').rows=Math.min(qty,10);
