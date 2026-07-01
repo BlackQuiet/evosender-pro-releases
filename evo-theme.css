@@ -148,18 +148,13 @@ section{padding:82px 0;position:relative}
 .sec-head .sec-sub{margin:0 auto}
 
 /* ── CARTES GÉNÉRIQUES (produits, features, plans, prix, avis) ── */
-/* Bento : carte vedette (EvoSender) large à gauche + 2 cartes empilées à droite */
-.products-grid{display:grid;grid-template-columns:1.3fr 1fr;grid-auto-rows:1fr;gap:14px}
-.prod-card.big{grid-column:1;grid-row:1 / span 2;position:relative;overflow:hidden;background:linear-gradient(160deg,rgba(37,99,235,.18),rgba(124,58,237,.08));border-color:rgba(96,165,250,.3)}
-.prod-card.big::after{content:"";position:absolute;right:-46px;bottom:-46px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(34,211,238,.28),transparent 70%);pointer-events:none}
-.prod-card.big .prod-ic{width:56px;height:56px}
-.prod-card.big .prod-name{font-size:22px}
-.prod-card.big .prod-desc{font-size:14.5px}
-@media(max-width:860px){.products-grid{grid-template-columns:1fr}.prod-card.big{grid-column:auto;grid-row:auto}}
+/* Grille produits : 3 cartes égales, alignées (hauteur identique, boutons alignés en bas) */
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:stretch}
+@media(max-width:860px){.products-grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}}
 .prod-card,.feat-cell,.plan-card,.price-card,.rev,.step,.svc-feat,.faq-item{
   background:var(--glass);border:1px solid var(--glass-brd);border-radius:var(--radius);
   backdrop-filter:blur(6px);transition:transform .16s,border-color .16s,box-shadow .16s}
-.prod-card{padding:30px 26px}
+.prod-card{padding:30px 26px;display:flex;flex-direction:column}
 .prod-card:hover,.feat-cell:hover,.price-card:hover,.plan-card:hover{transform:translateY(-3px);border-color:rgba(59,130,246,.4);box-shadow:0 18px 44px rgba(0,0,0,.4),0 0 30px rgba(59,130,246,.1)}
 .prod-ic{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.2)}
 .prod-ic svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.7}
@@ -168,7 +163,7 @@ section{padding:82px 0;position:relative}
 .prod-ic.teal{color:var(--teal);background:rgba(45,212,191,.1);border-color:rgba(45,212,191,.2)}
 .prod-name{font-size:18px;font-weight:800;margin-bottom:6px;color:#fff}
 .prod-desc{color:var(--slate);font-size:13.5px;margin-bottom:16px;line-height:1.6}
-.prod-feats{list-style:none;margin-bottom:22px}
+.prod-feats{list-style:none;margin-bottom:22px;flex:1}
 .prod-feats li{display:flex;gap:9px;align-items:flex-start;color:var(--slate);font-size:13px;padding:4px 0}
 .prod-feats li::before{content:"✓";color:var(--cyan);font-weight:800;flex-shrink:0}
 .prod-btns{display:flex;gap:8px}
