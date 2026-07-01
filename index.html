@@ -840,7 +840,6 @@ async function loadProducts(){
       document.getElementById('drawer-smtp').style.display='';
       const VLABELS={smtp_10k:'10 000',smtp_30k:'30 000',smtp_60k:'60 000',smtp_90k:'90 000',smtp_120k:'120 000'};
       const POPULAR='smtp_30k';
-      const relay=esc(data.smtp_relay_host||'smtp.smtpevo.com');
       smtpGrid.innerHTML=smtpPlans.map(p=>{
         const vol=VLABELS[p.id]||esc(String(p.volume||''));
         const isP=p.id===POPULAR;
@@ -851,7 +850,7 @@ async function loadProducts(){
           '<div class="plan-tag" style="background:#eff6ff;color:#1d4ed8"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg> '+vol+' emails/mois</div>'+
           '<div class="plan-price">'+soHtml+esc(String(sp))+' <span style="font-size:14px;color:var(--slate);font-weight:500">USD</span></div>'+
           '<p class="plan-period">par mois · renouvelable</p>'+
-          '<ul class="plan-feats"><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Relay '+relay+'</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> SPF · DKIM · DMARC</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> TLS port 587</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Credentials dashboard</li></ul>'+
+          '<ul class="plan-feats"><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> SPF · DKIM · DMARC</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> TLS port 587</li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Credentials dashboard</li></ul>'+
           '<a href="/pay.html?product='+esc(p.id)+'" class="btn '+(isP?'btn-primary':'btn-dark')+'" style="justify-content:center;display:flex;font-size:13px">'+(isP?'Commencer →':'Choisir ce plan')+'</a></div>';
       }).join('');
     }
