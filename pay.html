@@ -9,10 +9,18 @@
           integrity="sha512-CNvkORF6P1H2eTe7ZCfD8r6H1j1pJLBBlVKrVdHFlRoRcFUcSTHYmzVXwRwH00bFUZ5oVxXDEoOmN8k+VaOjQ=="
           crossorigin="anonymous"></script>
   <style>
-    :root{--blue:#2563eb;--blue-dark:#1d4ed8;--blue-50:#eff6ff;--blue-100:#dbeafe;--ink:#0f172a;--slate:#64748b;--slate-2:#94a3b8;--line:#eef2f7;--green:#16a34a;--amber:#b45309}
+    :root{--blue:#3b82f6;--blue-dark:#2563eb;--blue-50:rgba(59,130,246,.13);--blue-100:rgba(59,130,246,.28);--ink:#eef2fb;--slate:#9aa7c2;--slate-2:#6b7896;--line:rgba(255,255,255,.1);--green:#34d399;--amber:#fbbf24;--purple:#a78bfa}
     *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'Inter',sans-serif;background:#eef2f7;color:var(--ink);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-    .checkout{width:100%;max-width:440px;background:#fff;border-radius:0;overflow:hidden;box-shadow:0 30px 80px rgba(15,23,42,.14)}
+    body{font-family:'Inter',sans-serif;color:var(--ink);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:radial-gradient(120% 80% at 15% 0%,rgba(37,99,235,.18),transparent 55%),radial-gradient(90% 70% at 100% 10%,rgba(124,58,237,.16),transparent 55%),#070a14}
+    .checkout{width:100%;max-width:440px;background:#0e1526;border:1px solid rgba(255,255,255,.09);border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 60px rgba(59,130,246,.1)}
+    /* — overrides dark des surfaces claires codées en dur — */
+    .prod-btn,.pill-btn{background:rgba(255,255,255,.03)!important}
+    .prod-btn:hover{background:rgba(255,255,255,.06)!important}
+    .prod-ic.green{background:rgba(52,211,153,.14)!important}.prod-ic.green svg{stroke:#34d399}
+    .prod-ic.purple{background:rgba(167,139,250,.16)!important}.prod-ic.purple svg{stroke:#a78bfa}
+    .prod-ic.amber{background:rgba(251,191,36,.16)!important}.prod-ic.amber svg{stroke:#fbbf24}
+    .pill-net{background:rgba(248,113,113,.16)!important;color:#fca5a5!important}
+    h1,.prod-name,.qty-val{color:#fff}
 
     .panel{padding:28px 30px}
     @media(max-width:480px){.panel{padding:20px 16px}}

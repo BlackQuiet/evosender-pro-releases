@@ -6,37 +6,37 @@
   <title>EvoStudio — Connexion</title><link rel="icon" href="/logo-EvoSender.ico" type="image/x-icon" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
-    :root{--blue:#2563eb;--blue-dark:#1d4ed8;--ink:#0f172a;--slate:#64748b;--line:#eceff4}
+    :root{--blue:#3b82f6;--blue-dark:#2563eb;--ink:#eef2fb;--slate:#9aa7c2;--line:rgba(255,255,255,.1);--purple:#a78bfa}
     *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'Inter',sans-serif;background:#f5f7fa;color:var(--ink);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
-    .auth{width:100%;max-width:400px;background:#fff;border:1px solid #f0f2f6;border-radius:18px;overflow:hidden;box-shadow:0 18px 50px rgba(15,23,42,.07)}
+    body{font-family:'Inter',sans-serif;color:var(--ink);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:radial-gradient(120% 80% at 15% 0%,rgba(37,99,235,.18),transparent 55%),radial-gradient(90% 70% at 100% 10%,rgba(124,58,237,.16),transparent 55%),#070a14}
+    .auth{width:100%;max-width:400px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.09);border-radius:18px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.5),0 0 50px rgba(59,130,246,.1);backdrop-filter:blur(10px)}
 
     .form{padding:14px 38px 40px;display:flex;flex-direction:column}
     @media(max-width:480px){.form{padding:12px 26px 34px}}
-    .logo-banner{position:relative;display:flex;justify-content:center;align-items:center;padding:34px 20px 26px;margin:0 -38px 30px;background:linear-gradient(180deg,#ffffff 0%,#f7faff 60%,#eef4ff 100%)}
+    .logo-banner{position:relative;display:flex;justify-content:center;align-items:center;padding:34px 20px 26px;margin:0 -38px 30px;background:linear-gradient(180deg,rgba(59,130,246,.12),transparent);border-bottom:1px solid rgba(255,255,255,.06)}
     @media(max-width:480px){.logo-banner{margin:0 -26px 26px}}
-    .home-btn{position:absolute;top:16px;left:16px;display:flex;align-items:center;justify-content:center;width:34px;height:34px;background:#f3f5f9;color:var(--slate);text-decoration:none;border-radius:10px;transition:.15s}
+    .home-btn{position:absolute;top:16px;left:16px;display:flex;align-items:center;justify-content:center;width:34px;height:34px;background:rgba(255,255,255,.06);color:var(--slate);text-decoration:none;border-radius:10px;transition:.15s;border:1px solid rgba(255,255,255,.08)}
     .home-btn:hover{background:var(--blue);color:#fff}
     .home-btn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.9}
     .logo-banner img{height:52px;max-width:210px;object-fit:contain}
-    h1{font-size:21px;font-weight:700;margin-bottom:5px;letter-spacing:-.3px;text-align:center}
+    h1{font-size:21px;font-weight:700;margin-bottom:5px;letter-spacing:-.3px;text-align:center;color:#fff}
     .sub{font-size:13.5px;color:var(--slate);margin-bottom:26px;text-align:center}
     label{display:block;font-size:11px;font-weight:600;color:var(--slate);text-transform:uppercase;letter-spacing:.05em;margin-bottom:7px;margin-top:18px}
     .inp{position:relative}
-    .inp>svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:17px;height:17px;stroke:#aab4c4;fill:none;stroke-width:1.7}
+    .inp>svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:17px;height:17px;stroke:#6b7896;fill:none;stroke-width:1.7}
     .eye{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;padding:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:8px}
-    .eye svg{width:17px;height:17px;stroke:#aab4c4;fill:none;stroke-width:1.7;transition:stroke .15s}
+    .eye svg{width:17px;height:17px;stroke:#6b7896;fill:none;stroke-width:1.7;transition:stroke .15s}
     .eye:hover svg{stroke:var(--blue)}
-    input{width:100%;background:#fafbfc;border:1px solid var(--line);color:var(--ink);border-radius:11px;padding:13px 14px 13px 44px;font-size:14px;outline:none;transition:.18s;font-family:inherit}
-    input::placeholder{color:#b4bcc8}
-    input:focus{border-color:var(--blue);background:#fff;box-shadow:0 0 0 3px rgba(37,99,235,.10)}
-    .btn{width:100%;margin-top:28px;background:var(--blue);color:#fff;border:none;border-radius:11px;padding:13px;font-size:14.5px;font-weight:600;cursor:pointer;transition:.18s;font-family:inherit}
-    .btn:hover{background:var(--blue-dark)}
+    input{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--ink);border-radius:11px;padding:13px 14px 13px 44px;font-size:14px;outline:none;transition:.18s;font-family:inherit}
+    input::placeholder{color:#6b7896}
+    input:focus{border-color:var(--blue);background:rgba(255,255,255,.06);box-shadow:0 0 0 3px rgba(59,130,246,.15)}
+    .btn{width:100%;margin-top:28px;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border:none;border-radius:11px;padding:13px;font-size:14.5px;font-weight:600;cursor:pointer;transition:.18s;font-family:inherit;box-shadow:0 8px 26px rgba(59,130,246,.35)}
+    .btn:hover{transform:translateY(-1px)}
     .btn:disabled{opacity:.55;cursor:not-allowed}
     .msg{font-size:13px;margin-top:14px;min-height:18px;text-align:center}
-    .msg.err{color:#dc2626}.msg.ok{color:#16a34a}
+    .msg.err{color:#f87171}.msg.ok{color:#34d399}
     .footer-link{text-align:center;margin-top:22px;font-size:13.5px;color:var(--slate)}
-    .footer-link a{color:var(--blue);text-decoration:none;font-weight:600}
+    .footer-link a{color:#60a5fa;text-decoration:none;font-weight:600}
     .footer-link a:hover{text-decoration:underline}
   </style>
 </head>
@@ -97,7 +97,6 @@
       btn.setAttribute('aria-label', show ? 'Masquer le mot de passe' : 'Afficher le mot de passe');
     }
     (async function checkAuth(){
-      if (localStorage.getItem('evo_token')) { location.href = '/dashboard.html'; return; }
       try { const r = await fetch(API + '/api/auth/me', { credentials: 'include' }); if (r.ok) location.href = '/dashboard.html'; } catch {}
     })();
     let _preToken = null;
@@ -122,13 +121,23 @@
       return false;
     }
 
+    function isSafeRedirect(url) {
+      if (!url || typeof url !== 'string') return false;
+      // Doit commencer par / mais pas // ni /\ (évite open redirect via /\evil.com ou //evil.com)
+      if (!url.startsWith('/') || url[1] === '/' || url[1] === '\\') return false;
+      // Pas de protocole embarqué
+      if (/^\/\/|^[a-z]+:/i.test(url)) return false;
+      return true;
+    }
+
     function finishLogin(token, email) {
       localStorage.removeItem('evo_token');
       localStorage.setItem('evo_email', email);
       localStorage.setItem('evo_logged_in', '1');
       const msg = document.getElementById('msg') || document.getElementById('msg-2fa');
       msg.className = 'msg ok'; msg.textContent = '✓ Connecté ! Redirection...';
-      const redir = new URLSearchParams(location.search).get('redirect') || '/dashboard.html';
+      const _redir = new URLSearchParams(location.search).get('redirect') || '/dashboard.html';
+      const redir = isSafeRedirect(_redir) ? _redir : '/dashboard.html';
       setTimeout(() => location.href = redir, 700);
     }
 
@@ -139,7 +148,9 @@
       const msg = document.getElementById('msg'); const btn = document.getElementById('btn');
       btn.disabled = true; btn.textContent = 'Connexion...';
       try {
-        const r = await fetch(API + '/api/auth/login', { method:'POST', headers:{'Content-Type':'application/json'}, credentials:'include', body:JSON.stringify({ email, password }) });
+        const _cl = new AbortController(); const _tl = setTimeout(() => _cl.abort(), 15000);
+        const r = await fetch(API + '/api/auth/login', { method:'POST', headers:{'Content-Type':'application/json'}, credentials:'include', signal:_cl.signal, body:JSON.stringify({ email, password }) });
+        clearTimeout(_tl);
         const d = await r.json();
         if (d.ok && d.requires2fa) {
           _preToken = d.pre_token;
@@ -161,7 +172,9 @@
       const msg = document.getElementById('msg-2fa'); const btn = document.getElementById('btn-2fa');
       btn.disabled = true; btn.textContent = 'Vérification...';
       try {
-        const r = await fetch(API + '/api/auth/2fa/verify', { method:'POST', headers:{'Content-Type':'application/json'}, credentials:'include', body:JSON.stringify({ pre_token: _preToken, totp }) });
+        const _c2 = new AbortController(); const _t2 = setTimeout(() => _c2.abort(), 15000);
+        const r = await fetch(API + '/api/auth/2fa/verify', { method:'POST', headers:{'Content-Type':'application/json'}, credentials:'include', signal:_c2.signal, body:JSON.stringify({ pre_token: _preToken, totp }) });
+        clearTimeout(_t2);
         const d = await r.json();
         if (d.ok) {
           finishLogin(d.token, d.email);

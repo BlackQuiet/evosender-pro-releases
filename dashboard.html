@@ -6,13 +6,15 @@
 <title>EvoStudio — Espace client</title>
 <link rel="icon" href="/logo-EvoSender.ico" type="image/x-icon"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<!-- SECURITY: add integrity hash before production — e.g. via: openssl dgst -sha384 -binary chart.umd.min.js | openssl base64 -A -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"
+        crossorigin="anonymous"></script>
 <style>
 :root{
-  --blue:#2563eb;--blue-d:#1d4ed8;--blue-50:#eff6ff;--blue-100:#dbeafe;
-  --ink:#0f172a;--slate:#64748b;--slate-2:#94a3b8;--line:#e2e8f0;--bg:#f0f2f5;
-  --green:#16a34a;--red:#dc2626;--teal:#0d9488;--orange:#ea580c;
-  --sb-bg:#1e293b;--sb-w:220px;--sb-w-col:60px;--topbar:52px;
+  --blue:#3b82f6;--blue-d:#2563eb;--blue-50:rgba(59,130,246,.13);--blue-100:rgba(59,130,246,.28);
+  --ink:#eef2fb;--slate:#9aa7c2;--slate-2:#6b7896;--line:rgba(255,255,255,.09);--bg:#070a14;
+  --green:#34d399;--red:#f87171;--teal:#2dd4bf;--orange:#fb923c;
+  --sb-bg:#0b1120;--sb-w:220px;--sb-w-col:60px;--topbar:52px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{height:100%}
@@ -127,6 +129,25 @@ input,select,textarea{font-family:inherit}
 .svc-status{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px}
 .svc-actions{display:flex;gap:7px;flex-wrap:wrap;align-items:center;flex-shrink:0}
 .svc-exp{font-size:11.5px;font-weight:600;margin-top:5px}
+
+/* ═══ OVERRIDES DARK — refonte deep-space (gagnent sur les surfaces claires) ═══ */
+body{background:radial-gradient(120% 60% at 15% 0%,rgba(37,99,235,.14),transparent 55%),radial-gradient(80% 50% at 100% 0%,rgba(124,58,237,.12),transparent 55%),var(--bg)!important}
+.topbar{background:rgba(11,17,32,.82)!important;backdrop-filter:blur(12px)}
+.user-chip{background:rgba(255,255,255,.05)!important}
+.btn-logout:hover{border-color:rgba(248,113,113,.5)!important;background:rgba(248,113,113,.12)!important}
+.card,.stat-card,.lic-card2,.svc-row{background:rgba(255,255,255,.03)!important}
+.lic-key2{background:rgba(0,0,0,.28)!important;color:#cbd5e1!important}
+.btn-sm{background:rgba(255,255,255,.05)!important;color:#dfe6f4!important}
+.btn-sm:hover{border-color:rgba(59,130,246,.5)!important}
+.btn-sm.primary{background:var(--blue)!important;color:#fff!important}
+.btn-sm.danger:hover{background:rgba(248,113,113,.12)!important}
+.tbl th{background:rgba(255,255,255,.04)!important;color:var(--slate)!important}
+.tbl td{border-bottom-color:rgba(255,255,255,.06)!important}
+.tbl tr:hover td{background:rgba(255,255,255,.03)!important}
+.sts-pending{background:rgba(251,191,36,.16)!important;color:#fcd34d!important}
+.sts-paid{background:rgba(52,211,153,.16)!important;color:#6ee7b7!important}
+.sts-expired{background:rgba(255,255,255,.06)!important;color:var(--slate)!important}
+.stat-n,.panel-title,.card-title,.lic-prod,.svc-name{color:#fff}
 
 /* Proxy bandwidth bar */
 .bw-wrap{margin-top:10px}
@@ -572,11 +593,6 @@ input,select,textarea{font-family:inherit}
       <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:12px 14px;font-size:13px;color:#991b1b;margin-bottom:16px">
         ⚠️ Le compte proxy sera <b>définitivement supprimé</b>. Cette action ne peut pas être annulée.
       </div>
-      <label class="gen-label">Confirmez avec votre mot de passe</label>
-      <input id="proxy-delete-pass" type="password" placeholder="Votre mot de passe"
-        style="width:100%;border:1.5px solid var(--line);border-radius:8px;padding:9px 12px;font-size:13px;font-family:inherit;outline:none;transition:border-color .15s;margin-bottom:4px"
-        onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--line)'"
-        onkeydown="if(event.key==='Enter')execDeleteProxy()"/>
       <div id="proxy-delete-err" style="display:none;font-size:12px;color:var(--red);margin-top:6px;font-weight:600"></div>
     </div>
     <div class="modal-foot">
@@ -742,6 +758,7 @@ const PROD_LABELS={sender:'📤 EvoSender',extractor:'🔍 EvoExtractor',verifie
 const STS_LABELS={pending:'En attente',paid:'Payée',expired:'Expirée',cancelled:'Annulée'};
 const CRYPTO_LABEL={usdt:'USDT',btc:'BTC',wave:'XOF',om:'XOF'};
 var _senderNotice='', _supportName='Support EvoStudio', _dlWin='#', _dlMac='#';
+var _smtpCache={}, _proxyCache={}, _lastUsageMap={};
 var _viewOnlyCgu=false;
 
 function esc(t){return String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
@@ -930,7 +947,9 @@ function proxyModalGen(){
   document.getElementById('prx-m-count').textContent='× '+qty;
 }
 function genSsidModal(){
-  document.getElementById('prx-m-ssid').value=Math.random().toString(36).slice(2,12);
+  const _arr=new Uint32Array(2);
+  window.crypto.getRandomValues(_arr);
+  document.getElementById('prx-m-ssid').value=Array.from(_arr,n=>n.toString(36)).join('').slice(0,10);
   proxyModalGen();
 }
 function copyProxyModal(){
@@ -951,16 +970,18 @@ async function testProxyModal(){
   try{
     var r=await fetch(API+'/api/auth/proxy-test',{method:'POST',headers:{...authHeaders(),'Content-Type':'application/json'},body:JSON.stringify({host:_prxData.host,port:_prxData.port,username:_prxData.user,password:_prxData.pass})});
     var d=await r.json();
-    if(d.ok){box.innerHTML='<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:13px"><div style="font-weight:700;color:#15803d;margin-bottom:8px">✅ Proxy fonctionnel !</div><div style="display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:12px"><span style="color:var(--slate-2);font-weight:600">IP publique</span><span style="font-family:monospace;font-weight:700">'+(d.ip||'—')+'</span><span style="color:var(--slate-2);font-weight:600">Pays</span><span style="font-weight:600">'+(d.country||'—')+'</span><span style="color:var(--slate-2);font-weight:600">Ville</span><span>'+([d.city,d.region].filter(Boolean).join(', ')||'—')+'</span><span style="color:var(--slate-2);font-weight:600">Opérateur</span><span style="font-size:11.5px">'+(d.org||'—')+'</span></div></div>';}
-    else{box.innerHTML='<div style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:11px;font-size:12.5px;color:var(--red)">❌ '+(d.error||'Erreur inconnue')+'</div>';}
-  }catch(e){box.innerHTML='<div style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:11px;font-size:12.5px;color:var(--red)">❌ Erreur réseau : '+e.message+'</div>';}
+    if(d.ok){box.innerHTML='<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:13px"><div style="font-weight:700;color:#15803d;margin-bottom:8px">✅ Proxy fonctionnel !</div><div style="display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:12px"><span style="color:var(--slate-2);font-weight:600">IP publique</span><span style="font-family:monospace;font-weight:700">'+esc(d.ip||'—')+'</span><span style="color:var(--slate-2);font-weight:600">Pays</span><span style="font-weight:600">'+esc(d.country||'—')+'</span><span style="color:var(--slate-2);font-weight:600">Ville</span><span>'+esc([d.city,d.region].filter(Boolean).join(', ')||'—')+'</span><span style="color:var(--slate-2);font-weight:600">Opérateur</span><span style="font-size:11.5px">'+esc(d.org||'—')+'</span></div></div>';}
+    else{box.innerHTML='<div style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:11px;font-size:12.5px;color:var(--red)">❌ '+esc(d.error||'Erreur inconnue')+'</div>';}
+  }catch(e){box.innerHTML='<div style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:11px;font-size:12.5px;color:var(--red)">❌ Erreur réseau : '+esc(e.message||'')+'</div>';}
 }
 
 // ── Main load ──
 async function load(){
   let user;
   try{
-    const r=await fetch(API+'/api/auth/me',{headers:authHeaders()});
+    const _cm=new AbortController();const _tm=setTimeout(()=>_cm.abort(),15000);
+    const r=await fetch(API+'/api/auth/me',{headers:authHeaders(),signal:_cm.signal});
+    clearTimeout(_tm);
     if(!r.ok){location.href='/login.html?redirect=/dashboard.html';return;}
     user=await r.json();
   }catch{location.href='/login.html?redirect=/dashboard.html';return;}
@@ -983,7 +1004,9 @@ async function load(){
 
   // Products config
   try{
-    const pr=await fetch(API+'/api/shop/products');
+    const _cp=new AbortController();const _tp=setTimeout(()=>_cp.abort(),15000);
+    const pr=await fetch(API+'/api/shop/products',{signal:_cp.signal});
+    clearTimeout(_tp);
     if(pr.ok){const pd=await pr.json();const site=pd.site||{};
       if(site.download_url_win)_dlWin=site.download_url_win;
       if(site.download_url_mac)_dlMac=site.download_url_mac;
@@ -995,7 +1018,9 @@ async function load(){
   document.getElementById('dl-mac').href=_dlMac;
 
   // Orders
-  const ordR=await fetch(API+'/api/shop/orders',{headers:authHeaders()});
+  const _co=new AbortController();const _to=setTimeout(()=>_co.abort(),15000);
+  const ordR=await fetch(API+'/api/shop/orders',{headers:authHeaders(),signal:_co.signal});
+  clearTimeout(_to);
   const orders=ordR.ok?await ordR.json():[];
   const paid=orders.filter(o=>o.status==='paid'&&o.license_key);
   document.getElementById('st-lic').textContent=paid.length;
@@ -1040,7 +1065,9 @@ async function load(){
 
   // ── SMTP ──
   try{
-    var smR=await fetch(API+'/api/auth/smtp-servers',{headers:authHeaders()});
+    const _cs=new AbortController();const _ts=setTimeout(()=>_cs.abort(),15000);
+    var smR=await fetch(API+'/api/auth/smtp-servers',{headers:authHeaders(),signal:_cs.signal});
+    clearTimeout(_ts);
     if(smR.ok){
       var smList=await smR.json();
       if(smList.length>0){
@@ -1051,7 +1078,7 @@ async function load(){
         var SB={active:'#dcfce7',suspended:'#fee2e2',pending:'#fef9c3'};
         var SF={active:'#166534',suspended:'#991b1b',pending:'#854d0e'};
         var SL={active:'Actif',suspended:'Suspendu',pending:'En attente'};
-        window._smtpCache={};
+        _smtpCache={};
         document.getElementById('smtp-wrap').innerHTML=smList.map(s=>{
           _smtpCache[s.id]=s;
           var vol=s.volume?Math.round(s.volume/1000)+'K':(VOL[s.plan]||'');
@@ -1061,7 +1088,7 @@ async function load(){
           return '<div class="svc-row">'+
             '<div class="svc-info">'+
               '<div class="svc-name">📧 SMTP Relay — '+esc(vol)+' emails/mois</div>'+
-              '<div class="svc-meta"><span>Plan '+esc(s.plan)+'</span><span>'+(s.relay_host||'En préparation…')+'</span><span>Port '+(s.relay_port||587)+' TLS</span></div>'+
+              '<div class="svc-meta"><span>Plan '+esc(s.plan)+'</span><span>'+esc(s.relay_host||'En préparation…')+'</span><span>Port '+esc(String(s.relay_port||587))+' TLS</span></div>'+
               (s.stats?('<div class="svc-meta" style="margin-top:5px"><span style="color:#2563eb">📊 '+s.stats.sent+' envoyés</span><span style="color:'+(s.stats.bounces>0?'#dc2626':'#16a34a')+'">↩️ '+s.stats.bounces+' bounces</span><span style="color:'+(s.stats.spam>0?'#dc2626':'#16a34a')+'">🚫 '+s.stats.spam+' spam</span><span style="color:#64748b">(30 j)</span></div>'):'')+
               expHtml+
             '</div>'+
@@ -1079,7 +1106,9 @@ async function load(){
 
   // ── Proxy ──
   try{
-    var pxR=await fetch(API+'/api/auth/proxy-accounts',{headers:authHeaders()});
+    const _cx=new AbortController();const _tx=setTimeout(()=>_cx.abort(),15000);
+    var pxR=await fetch(API+'/api/auth/proxy-accounts',{headers:authHeaders(),signal:_cx.signal});
+    clearTimeout(_tx);
     if(pxR.ok){
       var pxList=await pxR.json();
       if(pxList.length>0){
@@ -1102,24 +1131,19 @@ var _deleteProxyId = null;
 function confirmDeleteProxy(id, label){
   _deleteProxyId = id;
   document.getElementById('proxy-delete-sub').textContent = 'Proxy résidentiel — ' + label + ' · Cette action est irréversible.';
-  document.getElementById('proxy-delete-pass').value = '';
   document.getElementById('proxy-delete-err').style.display = 'none';
   document.getElementById('proxy-delete-btn').disabled = false;
   openModal('proxy-delete-modal');
-  setTimeout(()=>document.getElementById('proxy-delete-pass').focus(), 200);
 }
 async function execDeleteProxy(){
-  var pass = document.getElementById('proxy-delete-pass').value.trim();
   var errEl = document.getElementById('proxy-delete-err');
   var btn = document.getElementById('proxy-delete-btn');
   errEl.style.display = 'none';
-  if(!pass){ errEl.style.display=''; errEl.textContent='⚠️ Mot de passe requis.'; return; }
   btn.disabled = true; btn.textContent = '⏳ Suppression…';
   try{
     var r = await fetch(API+'/api/auth/proxy-accounts/'+_deleteProxyId, {
       method: 'DELETE',
-      headers: {...authHeaders(), 'Content-Type':'application/json'},
-      body: JSON.stringify({ password: pass })
+      headers: authHeaders(),
     });
     var d = await r.json();
     if(r.ok && d.ok){
@@ -1323,6 +1347,7 @@ function bwBarHtml(usedMb, totalGb){
 function renderProxyList(pxList, usageMap){
   usageMap=usageMap||{};
   _pxListCache=pxList;
+  _proxyCache={};
   var wrap=document.getElementById('proxy-wrap');
   if(!wrap)return;
 
@@ -1339,6 +1364,7 @@ function renderProxyList(pxList, usageMap){
   document.getElementById('prx-remain-gb').textContent=fmtGb(remGb||totalGbAll);
 
   wrap.innerHTML=pxList.map(p=>{
+    _proxyCache[p.id]=p;
     var bg=PSB[p.status]||'#f1f5f9',fg=PSF[p.status]||'#334155',lbl=PSL[p.status]||p.status;
     // Expiration
     var expHtml='';
@@ -1379,7 +1405,7 @@ function renderProxyList(pxList, usageMap){
     var credBtn=blocked
       ?'<button class="btn-sm" disabled style="opacity:.4;cursor:not-allowed">🔑 Identifiants</button>'
       :(p.username&&p.status==='active'
-        ?'<button class="btn-sm primary" style="background:var(--teal);border-color:var(--teal)" onclick=\'openProxyModal('+JSON.stringify(p)+')\'>🔑 Identifiants</button>'
+        ?'<button class="btn-sm primary" style="background:var(--teal);border-color:var(--teal)" onclick="openProxyModal(_proxyCache['+p.id+'])">🔑 Identifiants</button>'
         :'<span style="font-size:12px;color:var(--orange)">⏳ En activation</span>');
 
     // Bouton d'action unique dans svc-actions (pas de doublon avec les bannières)
@@ -1430,7 +1456,7 @@ async function loadProxyUsage(pxList){
         data.accounts.forEach(item=>{ if(item.proxy_id!=null) usageMap[item.proxy_id]=Number(item.used_mb||0); });
       }
     }
-    window._lastUsageMap=usageMap;
+    _lastUsageMap=usageMap;
     renderProxyList(pxList, usageMap);
   }catch(e){
     // Si pas d'endpoint ou erreur, afficher "—" sans bloquer
@@ -1487,7 +1513,7 @@ async function loadProxyChart(days){
 
     if(!items.length){
       // Pas de données historiques — tracer la valeur actuelle en ligne plate
-      var totalCurrentMb=_pxListCache.reduce((s,p)=>s+(Number((window._lastUsageMap||{})[p.id])||0),0);
+      var totalCurrentMb=_pxListCache.reduce((s,p)=>s+(Number((_lastUsageMap||{})[p.id])||0),0);
       var now=new Date();
       for(var i=days-1;i>=0;i--){var d=new Date(now);d.setDate(d.getDate()-i);items.push({date:d.toISOString().slice(0,10),used_mb:i===0?totalCurrentMb:0});}
     }
@@ -1572,7 +1598,7 @@ async function loadProxyChart(days){
     card.style.display='';
     if(emptyEl)emptyEl.style.display='none';
     canvas.style.display='';
-    var totalCurrentMb=_pxListCache.reduce((s,p)=>s+(Number((window._lastUsageMap||{})[p.id])||0),0);
+    var totalCurrentMb=_pxListCache.reduce((s,p)=>s+(Number((_lastUsageMap||{})[p.id])||0),0);
     var items=[];var now=new Date();
     for(var i=days-1;i>=0;i--){var d=new Date(now);d.setDate(d.getDate()-i);items.push({date:d.toISOString().slice(0,10),used_mb:i===0?totalCurrentMb:0});}
     var labels=items.map(i=>fmtDateLabel(i.date));
@@ -1633,8 +1659,38 @@ function renderDemoChart(days){
 }
 
 load();
+
+// ── Retour de paiement OxaPay (?paid=1) : bannière de confirmation + rafraîchissement auto ──
+// OxaPay redirige le payeur ici après paiement. Le webhook confirme la commande
+// côté serveur en quelques secondes/minutes ; on rafraîchit jusqu'à voir la licence.
+(function(){
+  if (new URLSearchParams(location.search).get('paid') !== '1') return;
+  try { history.replaceState({}, '', location.pathname); } catch {}
+  const close = ' <a href="#" onclick="var b=document.getElementById(\'paid-banner\');if(b)b.remove();return false" style="color:#fff;text-decoration:underline;margin-left:10px">Fermer</a>';
+  function banner(html, color){
+    let b = document.getElementById('paid-banner');
+    if (!b){ b = document.createElement('div'); b.id = 'paid-banner';
+      b.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:99999;padding:12px 16px;text-align:center;font-size:14px;font-weight:700;color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.2)';
+      (document.body || document.documentElement).prepend(b);
+    }
+    b.style.background = color; b.innerHTML = html;
+  }
+  banner('✅ Paiement reçu ! Validation en cours — tes accès vont apparaître ici. ⏳', '#16a34a');
+  const licCount = () => { const el = document.getElementById('st-lic'); return el ? (parseInt(el.textContent, 10) || 0) : 0; };
+  let baseline = null, tries = 0;
+  const iv = setInterval(async () => {
+    tries++;
+    if (typeof load === 'function') { try { await load(); } catch {} }
+    const n = licCount();
+    if (baseline === null) baseline = n;
+    else if (n > baseline) { clearInterval(iv); banner('✅ Paiement confirmé — ta licence est active !' + close, '#16a34a'); return; }
+    if (tries >= 16) { clearInterval(iv); banner('⏳ Paiement reçu — la confirmation blockchain peut prendre quelques minutes. Ta licence apparaîtra ici automatiquement.' + close, '#f59e0b'); }
+  }, 8000);
+})();
+
 refreshUnread();
-setInterval(()=>{if(_supOpen)loadSupport();else refreshUnread();},20000);
+if(window._dashboardPollInterval) clearInterval(window._dashboardPollInterval);
+window._dashboardPollInterval=setInterval(()=>{if(_supOpen)loadSupport();else refreshUnread();},20000);
 
 function toggleSidebar(){
   var sb=document.querySelector('.sidebar');
