@@ -90,7 +90,12 @@ footer strong{color:#f1f5f9}
 
 /* PRINT */
 @media print{nav,footer{display:none}.container{padding:0}body{font-size:12px}}
+/* ═══ MODE CLAIR ═══ */
+html[data-theme="light"]{--blue:#2563eb;--ink:#0f172a;--slate:#475569;--line:#e2e8f0;--bg:#f8fafc;--surface:#ffffff}
+html[data-theme="light"] body{background:radial-gradient(120% 70% at 12% -5%,rgba(37,99,235,.06),transparent 55%),var(--bg)}
+html[data-theme="light"] .footer-divider{border-top-color:#e2e8f0}
 </style>
+<script src="/theme.js"></script>
 </head>
 <body>
 

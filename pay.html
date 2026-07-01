@@ -83,7 +83,20 @@
     .spinner{display:inline-block;width:18px;height:18px;border:2px solid var(--blue-100);border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite;margin-right:8px;vertical-align:middle}
     @keyframes spin{to{transform:rotate(360deg)}}
     .lic-key{font-family:monospace;font-size:15px;font-weight:700;color:var(--green);background:#f0fdf4;border:1px solid #bbf7d0;border-radius:0;padding:10px 14px;margin-top:10px;word-break:break-all}
+    /* ═══ MODE CLAIR ═══ */
+    html[data-theme="light"]{--blue:#2563eb;--blue-50:#eff6ff;--blue-100:#dbeafe;--ink:#0f172a;--slate:#475569;--slate-2:#94a3b8;--line:#eef2f7;--green:#16a34a;--amber:#b45309}
+    html[data-theme="light"] body{background:radial-gradient(120% 80% at 15% 0%,rgba(37,99,235,.1),transparent 55%),#eef2f7}
+    html[data-theme="light"] .checkout{background:#fff;border-color:#eef2f7;box-shadow:0 30px 80px rgba(15,23,42,.14)}
+    html[data-theme="light"] .prod-btn,html[data-theme="light"] .pill-btn{background:#fff!important}
+    html[data-theme="light"] .prod-btn:hover{background:#fafcff!important}
+    html[data-theme="light"] .prod-ic.green{background:#dcfce7!important}html[data-theme="light"] .prod-ic.green svg{stroke:#16a34a}
+    html[data-theme="light"] .prod-ic.purple{background:#f3e8ff!important}html[data-theme="light"] .prod-ic.purple svg{stroke:#9333ea}
+    html[data-theme="light"] .prod-ic.amber{background:#fef3c7!important}html[data-theme="light"] .prod-ic.amber svg{stroke:#d97706}
+    html[data-theme="light"] .pill-net{background:#fee2e2!important;color:#b91c1c!important}
+    html[data-theme="light"] h1,html[data-theme="light"] .prod-name,html[data-theme="light"] .qty-val,html[data-theme="light"] .total-row strong{color:#0f172a!important}
+    html[data-theme="light"] #invoice-email,html[data-theme="light"] .addr-box,html[data-theme="light"] .status-box{background:#f8fafc}
   </style>
+<script src="/theme.js"></script>
 </head>
 <body>
   <div class="checkout">

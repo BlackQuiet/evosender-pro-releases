@@ -44,3 +44,23 @@ article strong{color:#fff}
 .post h2{font-size:18px;font-weight:800;color:#fff;margin:7px 0 5px}
 .post p{color:var(--slate);font-size:13.5px;line-height:1.55}
 @media(max-width:600px){article h1{font-size:27px}.blog-hero h1{font-size:26px}.container{padding:30px 16px 50px}}
+
+/* ── BOUTON THÈME ── */
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--slate);cursor:pointer;transition:.15s;padding:0;flex-shrink:0}
+.theme-toggle:hover{color:#fff}
+.theme-toggle svg{display:block}.theme-toggle .ic-sun{display:none}
+html[data-theme="light"] .theme-toggle .ic-moon{display:none}html[data-theme="light"] .theme-toggle .ic-sun{display:block}
+
+/* ═══ MODE CLAIR ═══ */
+html[data-theme="light"]{--blue:#2563eb;--ink:#0f172a;--slate:#475569;--slate-2:#94a3b8;--line:#e6ebf3}
+html[data-theme="light"] body{background:radial-gradient(120% 70% at 12% -5%,rgba(37,99,235,.07),transparent 55%),radial-gradient(90% 60% at 100% 0%,rgba(124,58,237,.05),transparent 55%),#f4f7fc}
+html[data-theme="light"] a{color:#2563eb}
+html[data-theme="light"] .nav{background:rgba(255,255,255,.88)}
+html[data-theme="light"] .nav .links a:hover{background:#f1f5f9;color:#0f172a}
+html[data-theme="light"] .theme-toggle{background:#fff;border-color:#e2e8f0}
+html[data-theme="light"] .theme-toggle:hover{color:#0f172a;background:#f1f5f9}
+html[data-theme="light"] article h1,html[data-theme="light"] article h2,html[data-theme="light"] article h3,html[data-theme="light"] article strong,html[data-theme="light"] .related h2,html[data-theme="light"] .related a,html[data-theme="light"] .blog-hero h1,html[data-theme="light"] .post h2{color:#0f172a}
+html[data-theme="light"] .callout{background:#eff6ff;border-color:#dbeafe;color:#1e3a8a}
+html[data-theme="light"] .post{background:#fff;box-shadow:0 1px 3px rgba(15,23,42,.05)}
+html[data-theme="light"] .post:hover{box-shadow:0 12px 30px rgba(37,99,235,.1)}
+html[data-theme="light"] .post .tag{color:#2563eb}
