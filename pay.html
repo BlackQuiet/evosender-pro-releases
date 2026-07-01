@@ -9,7 +9,7 @@
           integrity="sha512-CNvkORF6P1H2eTe7ZCfD8r6H1j1pJLBBlVKrVdHFlRoRcFUcSTHYmzVXwRwH00bFUZ5oVxXDEoOmN8k+VaOjQ=="
           crossorigin="anonymous"></script>
   <style>
-    :root{--blue:#3b82f6;--blue-dark:#2563eb;--blue-50:rgba(59,130,246,.13);--blue-100:rgba(59,130,246,.28);--ink:#eef2fb;--slate:#9aa7c2;--slate-2:#6b7896;--line:rgba(255,255,255,.1);--green:#34d399;--amber:#fbbf24;--purple:#a78bfa}
+    :root{--blue:#3b82f6;--blue-dark:#2563eb;--blue-50:rgba(59,130,246,.13);--blue-100:rgba(59,130,246,.28);--ink:#eef2fb;--slate:#9aa7c2;--slate-2:#6b7896;--line:rgba(255,255,255,.1);--green:#34d399;--amber:#fbbf24;--purple:#a78bfa;--field:rgba(255,255,255,.05)}
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:'Inter',sans-serif;color:var(--ink);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:radial-gradient(120% 80% at 15% 0%,rgba(37,99,235,.18),transparent 55%),radial-gradient(90% 70% at 100% 10%,rgba(124,58,237,.16),transparent 55%),#070a14}
     .checkout{width:100%;max-width:440px;background:#0e1526;border:1px solid rgba(255,255,255,.09);border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 60px rgba(59,130,246,.1)}
@@ -21,6 +21,7 @@
     .prod-ic.amber{background:rgba(251,191,36,.16)!important}.prod-ic.amber svg{stroke:#fbbf24}
     .pill-net{background:rgba(248,113,113,.16)!important;color:#fca5a5!important}
     h1,.prod-name,.qty-val{color:#fff}
+    #product-select option{background:#0e1526;color:#eef2fb}
 
     .panel{padding:28px 30px}
     @media(max-width:480px){.panel{padding:20px 16px}}
@@ -56,7 +57,7 @@
     .pay-logo{width:22px;height:22px;object-fit:contain}
     .pill-net{font-size:9px;font-weight:700;background:#fee2e2;color:#b91c1c;padding:1px 4px;border-radius:0}
 
-    #invoice-email{width:100%;background:#f8fafc;border:1.5px solid var(--line);color:var(--ink);border-radius:0;padding:12px 14px;font-size:14px;outline:none;font-family:inherit;transition:.2s}
+    #invoice-email{width:100%;background:var(--field);border:1.5px solid var(--line);color:var(--ink);border-radius:0;padding:12px 14px;font-size:14px;outline:none;font-family:inherit;transition:.2s}
     #invoice-email:focus{border-color:var(--blue);background:#fff;box-shadow:0 0 0 4px rgba(37,99,235,.08)}
     .total-row{display:flex;align-items:center;justify-content:space-between;border-top:1.5px dashed var(--line);margin-top:24px;padding-top:18px;font-size:14px;color:var(--slate)}
     .total-row strong{font-size:25px;color:var(--ink);font-weight:900;letter-spacing:-.5px}
@@ -73,18 +74,18 @@
     .amount-val{font-size:25px;font-weight:900;letter-spacing:-.4px;color:var(--blue)}
     .amount-copy{background:var(--blue);border:none;border-radius:0;padding:8px 14px;font-size:12px;font-weight:700;color:#fff;cursor:pointer}
     .addr-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--slate);margin-bottom:8px}
-    .addr-box{background:#f8fafc;border:1px solid var(--line);border-radius:0;padding:12px 14px;font-family:monospace;font-size:13px;word-break:break-all;display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:18px;font-weight:600}
+    .addr-box{background:var(--field);border:1px solid var(--line);border-radius:0;padding:12px 14px;font-family:monospace;font-size:13px;word-break:break-all;display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:18px;font-weight:600}
     .addr-copy{background:#fff;border:1px solid var(--line);color:var(--slate);border-radius:0;padding:6px 11px;font-size:11px;cursor:pointer;flex-shrink:0;font-weight:600}
     #qrcode{margin:0 auto 18px;width:fit-content;background:#fff;padding:14px;border-radius:16px;border:1px solid var(--line)}
     .warning{background:#fffbeb;border:1px solid #fde68a;border-radius:0;padding:14px 16px;font-size:13px;color:var(--amber);line-height:1.6;margin-bottom:18px}
-    .status-box{text-align:center;padding:20px;border-radius:0;border:1px solid var(--line);background:#f8fafc}
+    .status-box{text-align:center;padding:20px;border-radius:0;border:1px solid var(--line);background:var(--field)}
     .status-pending{background:#fffbeb;border-color:#fde68a}
     .status-paid{background:#f0fdf4;border-color:#bbf7d0}
     .spinner{display:inline-block;width:18px;height:18px;border:2px solid var(--blue-100);border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite;margin-right:8px;vertical-align:middle}
     @keyframes spin{to{transform:rotate(360deg)}}
     .lic-key{font-family:monospace;font-size:15px;font-weight:700;color:var(--green);background:#f0fdf4;border:1px solid #bbf7d0;border-radius:0;padding:10px 14px;margin-top:10px;word-break:break-all}
     /* ═══ MODE CLAIR ═══ */
-    html[data-theme="light"]{--blue:#2563eb;--blue-50:#eff6ff;--blue-100:#dbeafe;--ink:#0f172a;--slate:#475569;--slate-2:#94a3b8;--line:#eef2f7;--green:#16a34a;--amber:#b45309}
+    html[data-theme="light"]{--blue:#2563eb;--blue-50:#eff6ff;--blue-100:#dbeafe;--ink:#0f172a;--slate:#475569;--slate-2:#94a3b8;--line:#eef2f7;--green:#16a34a;--amber:#b45309;--field:#f8fafc}
     html[data-theme="light"] body{background:radial-gradient(120% 80% at 15% 0%,rgba(37,99,235,.1),transparent 55%),#eef2f7}
     html[data-theme="light"] .checkout{background:#fff;border-color:#eef2f7;box-shadow:0 30px 80px rgba(15,23,42,.14)}
     html[data-theme="light"] .prod-btn,html[data-theme="light"] .pill-btn{background:#fff!important}
@@ -95,6 +96,7 @@
     html[data-theme="light"] .pill-net{background:#fee2e2!important;color:#b91c1c!important}
     html[data-theme="light"] h1,html[data-theme="light"] .prod-name,html[data-theme="light"] .qty-val,html[data-theme="light"] .total-row strong{color:#0f172a!important}
     html[data-theme="light"] #invoice-email,html[data-theme="light"] .addr-box,html[data-theme="light"] .status-box{background:#f8fafc}
+    html[data-theme="light"] #product-select option{background:#fff;color:#0f172a}
   </style>
 <script src="/theme.js"></script>
 </head>
@@ -115,7 +117,7 @@
 
         <div class="mini-label" id="product-label">Produit</div>
         <div id="product-grid"></div>
-        <select id="product-select" onchange="selectProductFromDropdown(this)" style="display:none;width:100%;background:#f8fafc;border:1.5px solid var(--line);color:var(--ink);border-radius:0;padding:12px 14px;font-size:14px;font-weight:600;outline:none;font-family:inherit;cursor:pointer;transition:.2s">
+        <select id="product-select" onchange="selectProductFromDropdown(this)" style="display:none;width:100%;background:var(--field);border:1.5px solid var(--line);color:var(--ink);border-radius:0;padding:12px 14px;font-size:14px;font-weight:600;outline:none;font-family:inherit;cursor:pointer;transition:.2s">
           <option value="">— Choisir un produit —</option>
         </select>
 
@@ -146,7 +148,7 @@
           <div class="pill-btn" data-crypto="om" id="btn-om" onclick="selectCrypto(this)" style="display:none">
             <span style="font-size:18px;line-height:1">🟠</span>Orange Money
           </div>
-          <div id="btn-card" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:0;padding:8px 6px;font-size:11px;font-weight:600;color:#94a3b8;cursor:not-allowed;opacity:.65" title="Visa/Mastercard — non disponible">
+          <div id="btn-card" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:var(--field);border:1.5px solid var(--line);border-radius:0;padding:8px 6px;font-size:11px;font-weight:600;color:var(--slate-2);cursor:not-allowed;opacity:.65" title="Visa/Mastercard — non disponible">
             <span style="font-size:18px;line-height:1">💳</span>
             Visa/MC<span style="font-size:9px;background:#fef2f2;color:#ef4444;border-radius:6px;padding:1px 5px">Indispo</span>
           </div>
@@ -158,7 +160,7 @@
 
         <div class="mini-label" style="margin-top:14px">Code promo <span style="font-weight:400;color:var(--slate)">(optionnel)</span></div>
         <div style="display:flex;gap:8px">
-          <input type="text" id="promo-code" placeholder="CODE" style="flex:1;background:#f8fafc;border:1.5px solid var(--line);color:var(--ink);border-radius:0;padding:12px 14px;font-size:14px;outline:none;font-family:inherit;text-transform:uppercase" />
+          <input type="text" id="promo-code" placeholder="CODE" style="flex:1;background:var(--field);border:1.5px solid var(--line);color:var(--ink);border-radius:0;padding:12px 14px;font-size:14px;outline:none;font-family:inherit;text-transform:uppercase" />
           <button type="button" onclick="applyPromo()" style="background:var(--ink);color:#fff;border:none;padding:0 18px;font-size:13px;font-weight:600;cursor:pointer">Appliquer</button>
         </div>
         <div id="promo-msg" style="font-size:12px;margin-top:6px"></div>
