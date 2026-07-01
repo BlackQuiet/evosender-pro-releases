@@ -133,13 +133,9 @@
 
         <div class="mini-label">Paiement</div>
         <div class="pay-pills" id="crypto-grid">
-          <div class="pill-btn active" data-crypto="usdt" id="btn-usdt" onclick="selectCrypto(this)">
+          <div class="pill-btn active" data-crypto="usdt" id="btn-crypto" onclick="selectCrypto(this)">
             <img src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons/svg/color/usdt.svg" alt="" class="pay-logo" onerror="this.style.display='none'" />
-            USDT<span class="pill-net">TRC20</span>
-          </div>
-          <div class="pill-btn" data-crypto="btc" id="btn-btc" onclick="selectCrypto(this)">
-            <img src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons/svg/color/btc.svg" alt="" class="pay-logo" onerror="this.style.display='none'" />
-            Bitcoin
+            Cryptomonnaie<span class="pill-net">USDT · BTC…</span>
           </div>
           <div class="pill-btn" data-crypto="wave" id="btn-wave" onclick="selectCrypto(this)" style="display:none">
             <img src="https://paywall.senaffiche.com/assets/images/logo_wave_circle_818.png" alt="Wave" class="pay-logo" style="border-radius:50%" />
@@ -350,9 +346,8 @@
       const waveOn = data.wave_enabled, omOn = data.om_enabled;
       const show = (id, flex) => { const e = document.getElementById(id); if (e) e.style.display = flex ? 'flex' : 'none'; };
 
-      // USDT + BTC toujours visibles
-      show('btn-usdt', true);
-      show('btn-btc', true);
+      // Bouton crypto unique — la devise (USDT/BTC/…) se choisit sur la page OxaPay
+      show('btn-crypto', true);
       // Visa/Mastercard "non dispo" toujours affiché (dans les deux zones)
       show('btn-card', true);
 
