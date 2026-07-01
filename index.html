@@ -805,7 +805,7 @@ async function loadProducts(){
     if(pgrid&&main.length){
       const dbadge=discount>0?'<div style="display:inline-block;background:#dc2626;color:#fff;font-size:10px;font-weight:800;padding:2px 8px;border-radius:20px;margin-bottom:5px">-'+esc(String(discount))+'%</div>':'';
       pgrid.innerHTML=main.map(p=>{
-        const feat=p.id==='sender';
+        const feat=p.id===(data.popular_product||'sender');
         const ic=ICONS[p.id]||ICONS.sender;
         const feats=Array.isArray(p.features)?p.features:[];
         const sp=disc(p.price_usdt);
@@ -839,7 +839,7 @@ async function loadProducts(){
       document.getElementById('nav-smtp').style.display='';
       document.getElementById('drawer-smtp').style.display='';
       const VLABELS={smtp_10k:'10 000',smtp_30k:'30 000',smtp_60k:'60 000',smtp_90k:'90 000',smtp_120k:'120 000'};
-      const POPULAR='smtp_30k';
+      const POPULAR=data.popular_smtp||'smtp_30k';
       smtpGrid.innerHTML=smtpPlans.map(p=>{
         const vol=VLABELS[p.id]||esc(String(p.volume||''));
         const isP=p.id===POPULAR;
@@ -863,7 +863,7 @@ async function loadProducts(){
       proxySec.style.display='block';
       document.getElementById('nav-proxy').style.display='';
       document.getElementById('drawer-proxy').style.display='';
-      const POPLABEL='proxy_55gb';
+      const POPLABEL=data.popular_proxy||'proxy_55gb';
       proxyGrid.innerHTML=proxyPlans.map(p=>{
         const isP=p.id===POPLABEL;
         const sp=disc(p.price_usdt);
