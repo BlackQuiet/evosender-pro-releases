@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EvoStudio — Paiement</title><link rel="icon" href="/logo-EvoSender.ico" type="image/x-icon" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
+          integrity="sha512-CNvkORF6P1H2eTe7ZCfD8r6H1j1pJLBBlVKrVdHFlRoRcFUcSTHYmzVXwRwH00bFUZ5oVxXDEoOmN8k+VaOjQ=="
+          crossorigin="anonymous"></script>
   <style>
     :root{--blue:#2563eb;--blue-dark:#1d4ed8;--blue-50:#eff6ff;--blue-100:#dbeafe;--ink:#0f172a;--slate:#64748b;--slate-2:#94a3b8;--line:#eef2f7;--green:#16a34a;--amber:#b45309}
     *{box-sizing:border-box;margin:0;padding:0}
@@ -187,6 +189,7 @@
   <script>
     const API = 'https://admin.evostudio.fr';
     const FIAT = ['wave', 'om'];
+    function esc(s) { return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
     let selectedProduct = null;
     let selectedCrypto  = 'usdt';
     let quantity = 1;
@@ -196,19 +199,25 @@
     let usdXofRate = 600;  // mis à jour depuis l'API
     let discountPct = 0;   // % de remise globale
     let appliedPromo = ''; // code promo validé
+    let _promoLoading = false;
 
     async function applyPromo(){
+      if(_promoLoading) return;
       const code=(document.getElementById('promo-code').value||'').trim().toUpperCase();
       const msg=document.getElementById('promo-msg');
       if(!code){ appliedPromo=''; msg.textContent=''; return; }
       if(!selectedProduct){ msg.style.color='#ef4444'; msg.textContent='Sélectionnez d\'abord un produit.'; return; }
+      _promoLoading=true;
       msg.style.color='#64748b'; msg.textContent='Vérification…';
       try{
-        const r=await fetch(API+'/api/shop/validate-code',{method:'POST',headers:Object.assign({'Content-Type':'application/json'},authHeaders()),credentials:'include',body:JSON.stringify({code:code,product:selectedProduct})});
+        const _ca = new AbortController(); const _ta = setTimeout(() => _ca.abort(), 15000);
+        const r=await fetch(API+'/api/shop/validate-code',{method:'POST',headers:Object.assign({'Content-Type':'application/json'},authHeaders()),credentials:'include',signal:_ca.signal,body:JSON.stringify({code:code,product:selectedProduct})});
+        clearTimeout(_ta);
         const d=await r.json();
         if(d.ok){ appliedPromo=code; msg.style.color='#16a34a'; msg.textContent='✓ Code valide : -'+d.percent+'% appliqué au paiement.'; }
         else { appliedPromo=''; msg.style.color='#ef4444'; msg.textContent='✗ '+(d.error||'Code invalide'); }
       }catch(e){ appliedPromo=''; msg.style.color='#ef4444'; msg.textContent='Erreur de vérification.'; }
+      finally{ _promoLoading=false; }
     }
 
     function isSmtp(id){ return (id||'').startsWith('smtp_'); }
@@ -269,7 +278,9 @@
 
     async function loadSettings() {
       try {
-        const r = await fetch(API + '/api/auth/me', { headers: authHeaders(), credentials: 'include' });
+        const _c1 = new AbortController(); const _t1 = setTimeout(() => _c1.abort(), 15000);
+        const r = await fetch(API + '/api/auth/me', { headers: authHeaders(), credentials: 'include', signal: _c1.signal });
+        clearTimeout(_t1);
         if (!r.ok) { location.href = '/login.html?redirect=' + encodeURIComponent(location.href); return; }
         const u = await r.json();
         const ie = document.getElementById('invoice-email');
@@ -277,7 +288,9 @@
       } catch { return; }
 
       try {
-        const r = await fetch(API + '/api/shop/products');
+        const _c2 = new AbortController(); const _t2 = setTimeout(() => _c2.abort(), 15000);
+        const r = await fetch(API + '/api/shop/products', { signal: _c2.signal });
+        clearTimeout(_t2);
         if (r.ok) {
           const data = await r.json();
           // Stocker le taux et la remise globaux
@@ -302,7 +315,9 @@
 
     async function detectAfrica(){
       try{
-        const r = await fetch('https://ipapi.co/json/');
+        const _cd = new AbortController(); const _td = setTimeout(() => _cd.abort(), 15000);
+        const r = await fetch('https://ipapi.co/json/', { signal: _cd.signal });
+        clearTimeout(_td);
         if(r.ok){ const j = await r.json(); return (j.continent_code||'').toUpperCase() === 'AF'; }
       }catch{}
       return false;
@@ -472,12 +487,16 @@
       const msg = document.getElementById('msg-choose');
       btn.disabled = true; btn.textContent = 'Chargement...';
       try {
+        const _ctrl = new AbortController();
+        const _ctrlTimer = setTimeout(() => _ctrl.abort(), 15000);
         const r = await fetch(API + '/api/shop/order', {
           method: 'POST',
           headers: authHeaders(),
           credentials: 'include',
+          signal: _ctrl.signal,
           body: JSON.stringify({ product: selectedProduct, crypto: selectedCrypto, quantity: isService(selectedProduct) ? 1 : quantity, invoice_email: (document.getElementById('invoice-email')?.value || '').trim(), code: appliedPromo })
         });
+        clearTimeout(_ctrlTimer);
         const d = await r.json();
         if (!r.ok) {
           if (r.status === 401) { location.href = '/login.html?redirect=' + encodeURIComponent(location.href); return; }
@@ -532,7 +551,20 @@
 
         document.getElementById('status-text').textContent = `En attente de confirmation du paiement ${moyen}…`;
         document.querySelector('#status-box div').textContent = 'Vérification toutes les 10 secondes';
+        if (pollInterval) clearInterval(pollInterval);
         pollInterval = setInterval(pollStatus, 10000);
+        return;
+      }
+
+      // ── Crypto via OxaPay : redirection vers la page de paiement hébergée ──
+      // (n'importe quelle crypto, conversion automatique). Le retour se fait sur
+      // dashboard.html?paid=1 et la confirmation arrive par webhook côté serveur.
+      if (d.pay_link && d.gateway === 'oxapay') {
+        const sub = document.getElementById('pay-sub');
+        if (sub) sub.textContent = 'Redirection vers le paiement sécurisé…';
+        const st = document.getElementById('status-text');
+        if (st) st.textContent = 'Ouverture de la page de paiement OxaPay…';
+        window.location.href = d.pay_link;
         return;
       }
 
@@ -543,7 +575,7 @@
         const usd = (p ? Number(p.price_usdt) : 0) * (d.quantity || 1);
         if (usd > 0) usdNote = ` <span style="font-size:14px;color:var(--slate);font-weight:600">≈ $${usd}</span>`;
       }
-      document.getElementById('pay-amount').innerHTML = d.price_exact + ' ' + symbol + usdNote;
+      document.getElementById('pay-amount').innerHTML = esc(parseFloat(d.price_exact).toFixed(8)) + ' ' + esc(symbol) + usdNote;
       document.getElementById('pay-address').textContent = d.address;
       document.getElementById('pay-sub').textContent =
         `Envoyez exactement ${d.price_exact} ${symbol} · Réseau ${d.crypto === 'usdt' ? 'TRC20 (Tron)' : 'Bitcoin'}`;
@@ -554,13 +586,17 @@
         : `bitcoin:${d.address}?amount=${d.price_exact}`;
       new QRCode(document.getElementById('qrcode'), { text: qrVal, width: 160, height: 160 });
 
+      if (pollInterval) clearInterval(pollInterval);
       pollInterval = setInterval(pollStatus, 10000);
     }
 
     async function pollStatus() {
       if (!orderId) return;
       try {
-        const r = await fetch(API + '/api/shop/order/' + orderId, { headers: authHeaders(), credentials: 'include' });
+        const _pc = new AbortController();
+        const _pt = setTimeout(() => _pc.abort(), 15000);
+        const r = await fetch(API + '/api/shop/order/' + orderId, { headers: authHeaders(), credentials: 'include', signal: _pc.signal });
+        clearTimeout(_pt);
         const d = await r.json();
         if (d.status === 'paid') {
           clearInterval(pollInterval);
