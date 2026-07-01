@@ -297,3 +297,40 @@ input,select,textarea{font-family:inherit;background:rgba(255,255,255,.04);borde
 input::placeholder,textarea::placeholder{color:var(--slate-2)}
 input:focus,select:focus,textarea:focus{border-color:rgba(59,130,246,.6);box-shadow:0 0 0 3px rgba(59,130,246,.15)}
 .card{background:var(--glass);border:1px solid var(--glass-brd);border-radius:var(--radius);backdrop-filter:blur(6px)}
+
+/* ── BOUTON THÈME (lune / soleil) ── */
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid var(--glass-brd);color:var(--slate);cursor:pointer;transition:.15s;flex-shrink:0;padding:0}
+.theme-toggle:hover{color:#fff;background:rgba(255,255,255,.09);border-color:rgba(59,130,246,.45)}
+.theme-toggle svg{display:block}
+.theme-toggle .ic-sun{display:none}
+html[data-theme="light"] .theme-toggle .ic-moon{display:none}
+html[data-theme="light"] .theme-toggle .ic-sun{display:block}
+
+/* ═══════════════════ MODE CLAIR ═══════════════════ */
+html[data-theme="light"]{
+  --bg:#f4f7fc;--bg2:#eceff7;--white:#ffffff;--card:#ffffff;
+  --glass:#ffffff;--glass-brd:#e4e9f2;--line:#e6ebf3;
+  --ink:#0f172a;--slate:#475569;--slate-2:#8290a8;
+}
+html[data-theme="light"] body{background:radial-gradient(120% 70% at 12% -5%,rgba(37,99,235,.08),transparent 55%),radial-gradient(90% 60% at 100% 0%,rgba(124,58,237,.06),transparent 55%),var(--bg)}
+html[data-theme="light"] .nav-wrap{background:rgba(255,255,255,.86)}
+html[data-theme="light"] .nav-submenu{background:#fff;box-shadow:0 12px 40px rgba(15,23,42,.1)}
+html[data-theme="light"] .nav-submenu a b{color:#0f172a}
+html[data-theme="light"] .nav-submenu a:hover{background:#f5f8ff}
+html[data-theme="light"] .logo{color:#0f172a}
+html[data-theme="light"] .nav-links a:hover,html[data-theme="light"] .nav-dd:hover .nav-dd-trigger{color:#0f172a;background:#f1f5f9}
+html[data-theme="light"] .btn-outline,html[data-theme="light"] .btn-dark,html[data-theme="light"] .theme-toggle{background:#fff;color:#0f172a;border-color:#e2e8f0}
+html[data-theme="light"] .theme-toggle:hover{background:#f1f5f9;color:#0f172a}
+html[data-theme="light"] .nav-burger{color:#0f172a}
+html[data-theme="light"] .hero{background:radial-gradient(70% 90% at 0% 40%,rgba(59,130,246,.1),transparent 60%),radial-gradient(60% 80% at 100% 10%,rgba(124,58,237,.08),transparent 60%);border-bottom-color:#e6ebf3}
+html[data-theme="light"] .hero::before{background-image:linear-gradient(rgba(37,99,235,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,.06) 1px,transparent 1px)}
+html[data-theme="light"] .hero h1{color:#0f172a}
+html[data-theme="light"] .hero-pill,html[data-theme="light"] .dl-card{background:#fff;color:#0f172a}
+html[data-theme="light"] .dl-card-txt strong{color:#0f172a}
+html[data-theme="light"] .sec-title,html[data-theme="light"] .prod-name,html[data-theme="light"] .price-name,html[data-theme="light"] .price-amt,html[data-theme="light"] .plan-price,html[data-theme="light"] .rev-n,html[data-theme="light"] .faq-q,html[data-theme="light"] .step h4,html[data-theme="light"] .feat-cell h4,html[data-theme="light"] .svc-feat h4,html[data-theme="light"] .stat-n{color:#0f172a}
+html[data-theme="light"] .prod-card,html[data-theme="light"] .feat-cell,html[data-theme="light"] .plan-card,html[data-theme="light"] .price-card,html[data-theme="light"] .rev,html[data-theme="light"] .step,html[data-theme="light"] .svc-feat,html[data-theme="light"] .faq-item,html[data-theme="light"] .trust-pill{background:#fff;box-shadow:0 1px 3px rgba(15,23,42,.05)}
+html[data-theme="light"] .prod-card.big{background:linear-gradient(160deg,rgba(37,99,235,.08),rgba(124,58,237,.05))}
+html[data-theme="light"] .tool-label{background:linear-gradient(0deg,rgba(15,23,42,.82),transparent)}
+html[data-theme="light"] .feat-wide{background:linear-gradient(135deg,#1e3a8a,#2563eb)!important;border-color:transparent!important}
+html[data-theme="light"] .feat-wide h4,html[data-theme="light"] .feat-wide p{color:#fff!important}
+html[data-theme="light"] .app-frame{box-shadow:0 30px 70px rgba(15,23,42,.15),0 0 0 1px #e2e8f0}
