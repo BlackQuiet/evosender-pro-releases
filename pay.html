@@ -134,8 +134,20 @@
         <div class="mini-label">Paiement</div>
         <div class="pay-pills" id="crypto-grid">
           <div class="pill-btn active" data-crypto="usdt" id="btn-crypto" onclick="selectCrypto(this)">
-            <img src="https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons/svg/color/usdt.svg" alt="" class="pay-logo" onerror="this.style.display='none'" />
-            Cryptomonnaie<span class="pill-net">USDT · BTC…</span>
+            <svg class="pay-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="8.4" cy="8" r="4.8" fill="#627EEA"/>
+              <path d="M8.4 4.9 L10.8 8.3 L8.4 9.7 L6 8.3 Z" fill="#fff" opacity=".92"/>
+              <path d="M6.1 8.85 L8.4 10.2 L10.7 8.85 L8.4 12 Z" fill="#fff" opacity=".6"/>
+              <circle cx="15.6" cy="8" r="4.8" fill="#26A17B"/>
+              <g stroke="#fff" stroke-width="1.05" stroke-linecap="round">
+                <line x1="13.5" y1="6.3" x2="17.7" y2="6.3"/>
+                <line x1="15.6" y1="6.3" x2="15.6" y2="10.2"/>
+                <line x1="14.1" y1="7.9" x2="17.1" y2="7.9"/>
+              </g>
+              <circle cx="12" cy="15" r="5.8" fill="#F7931A" stroke="#fff" stroke-width="1"/>
+              <text x="12" y="18.15" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="8.8" font-weight="800" fill="#fff">&#8383;</text>
+            </svg>
+            Cryptomonnaie
           </div>
           <div class="pill-btn" data-crypto="wave" id="btn-wave" onclick="selectCrypto(this)" style="display:none">
             <img src="https://paywall.senaffiche.com/assets/images/logo_wave_circle_818.png" alt="Wave" class="pay-logo" style="border-radius:50%" />
