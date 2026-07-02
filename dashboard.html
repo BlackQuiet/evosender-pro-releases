@@ -305,6 +305,12 @@ html[data-theme="light"] .stat-n,html[data-theme="light"] .panel-title,html[data
 html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;background:#fef2f2!important}
 </style>
 <script src="/theme.js"></script>
+<script>
+        (function(w,d,s,r,n){w.TrustpilotObject=n;w[n]=w[n]||function(){(w[n].q=w[n].q||[]).push(arguments)};
+            a=d.createElement(s);a.async=1;a.src=r;a.type='text/java'+s;f=d.getElementsByTagName(s)[0];
+            f.parentNode.insertBefore(a,f)})(window,document,'script', 'https://invitejs.trustpilot.com/tp.min.js', 'tp');
+            tp('register', 'tnSI3StYQOnaA728');
+</script>
 </head>
 <body>
 
@@ -1717,7 +1723,26 @@ load();
     if (typeof load === 'function') { try { await load(); } catch {} }
     const n = licCount();
     if (baseline === null) baseline = n;
-    else if (n > baseline) { clearInterval(iv); banner('✅ Paiement confirmé — ta licence est active !' + close, '#16a34a'); return; }
+    else if (n > baseline) {
+      clearInterval(iv);
+      banner('✅ Paiement confirmé — ta licence est active !' + close, '#16a34a');
+      // Invitation d'avis Trustpilot — données réelles du client, déclenchée une seule fois à la confirmation.
+      try {
+        if (typeof tp === 'function') {
+          const [meRes, ordersRes] = await Promise.all([
+            fetch(API + '/api/auth/me', { headers: authHeaders() }),
+            fetch(API + '/api/shop/orders', { headers: authHeaders() }),
+          ]);
+          const me = await meRes.json();
+          const orders = await ordersRes.json();
+          const latest = Array.isArray(orders) ? orders[0] : null;
+          if (me && me.email && latest && latest.id) {
+            tp('createInvitation', { recipientEmail: me.email, referenceId: 'order_' + latest.id, source: 'InvitationScript' });
+          }
+        }
+      } catch (e) {}
+      return;
+    }
     if (tries >= 16) { clearInterval(iv); banner('⏳ Paiement reçu — la confirmation blockchain peut prendre quelques minutes. Ta licence apparaîtra ici automatiquement.' + close, '#f59e0b'); }
   }, 8000);
 })();
