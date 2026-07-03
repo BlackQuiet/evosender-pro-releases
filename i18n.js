@@ -71,8 +71,7 @@
 
   function curLang() {
     try { var s = localStorage.getItem('evo-lang'); if (s && LANGS.indexOf(s) >= 0) return s; } catch (e) {}
-    var n = (navigator.language || 'fr').slice(0, 2).toLowerCase();
-    return LANGS.indexOf(n) >= 0 ? n : 'fr';
+    return 'en'; // langue par défaut = anglais (le visiteur choisit FR/RU via le drapeau, mémorisé)
   }
   var lang = curLang();
   document.documentElement.setAttribute('lang', lang);
