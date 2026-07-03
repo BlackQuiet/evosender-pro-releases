@@ -54,6 +54,24 @@
   .ocard .od{font-size:12.5px;color:var(--slate);line-height:1.5}
   .loading{text-align:center;padding:60px;color:var(--slate)}
   .footer{text-align:center;font-size:12px;color:var(--slate-2);padding:26px}
+  /* Détails complets produit */
+  .det-block{margin-top:44px}
+  .det-block h2{font-size:21px;font-weight:800;margin-bottom:14px;color:#fff}
+  .det-block h3{font-size:15.5px;font-weight:700;margin:20px 0 8px;color:#dbe4f5}
+  .det-block p{font-size:14.5px;color:var(--slate);line-height:1.72;margin-bottom:12px}
+  .det-block ul{list-style:none;margin:0 0 12px;padding:0}
+  .det-block li{position:relative;padding-left:24px;font-size:14px;color:var(--slate);line-height:1.6;margin-bottom:8px}
+  .det-block li:before{content:"";position:absolute;left:3px;top:8px;width:8px;height:8px;border-radius:50%;background:var(--cyan)}
+  .det-block b{color:#e7edf8}
+  .steps{display:grid;gap:11px;margin:8px 0 12px;counter-reset:s}
+  .step{position:relative;padding:13px 16px 13px 52px;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;font-size:14px;color:var(--slate);line-height:1.55}
+  .step:before{counter-increment:s;content:counter(s);position:absolute;left:13px;top:12px;width:26px;height:26px;border-radius:8px;background:rgba(59,130,246,.15);color:#7dd3fc;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+  .step b{color:#e7edf8;font-weight:700}
+  .uc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+  @media(max-width:620px){.uc-grid{grid-template-columns:1fr}}
+  .uc{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .uc .uct{font-weight:700;color:#fff;font-size:14px;margin-bottom:4px}
+  .uc .ucd{font-size:13px;color:var(--slate);line-height:1.5}
   /* ═══ MODE CLAIR ═══ */
   html[data-theme="light"]{--blue:#2563eb;--ink:#0f172a;--slate:#475569;--slate-2:#94a3b8;--line:#e6ebf3;--green:#16a34a}
   html[data-theme="light"] body{background:radial-gradient(120% 70% at 12% -5%,rgba(37,99,235,.07),transparent 55%),radial-gradient(90% 60% at 100% 0%,rgba(124,58,237,.05),transparent 55%),#f4f7fc}
@@ -65,6 +83,9 @@
   html[data-theme="light"] .feat,html[data-theme="light"] .ocard{background:#fff}
   html[data-theme="light"] .feat span{color:#334155}
   html[data-theme="light"] .shot{box-shadow:0 30px 70px rgba(15,23,42,.15),0 0 0 1px #e2e8f0}
+  html[data-theme="light"] .det-block h2,html[data-theme="light"] .det-block h3,html[data-theme="light"] .uc .uct,html[data-theme="light"] .det-block b,html[data-theme="light"] .step b{color:#0f172a}
+  html[data-theme="light"] .det-block p,html[data-theme="light"] .det-block li,html[data-theme="light"] .step,html[data-theme="light"] .uc .ucd{color:#334155}
+  html[data-theme="light"] .step,html[data-theme="light"] .uc{background:#fff}
 </style>
 <script src="/theme.js"></script>
 <script>window.I18N_PAGE={
@@ -141,6 +162,287 @@ if(localStorage.getItem('evo_token')||localStorage.getItem('evo_logged_in')){var
 let SHOP_DATA=null;              // données /api/shop/products (hors périmètre i18n)
 const PROD_ID=qs('id')||'sender';
 
+// ── Détails complets par produit (FR = source ; en/ru ajoutés par traduction) ──
+const DETAILS={
+  extractor:{ fr:`<div class="det-block">
+    <h2>Ce que fait EvoExtractor</h2>
+    <p><b>EvoExtractor</b> collecte automatiquement des adresses email professionnelles depuis de multiples sources, <b>100 % sur votre ordinateur</b> — aucune donnée n'est envoyée en ligne. Vous partez de mots-clés ou de fichiers, l'outil parcourt les sources, extrait les adresses, les nettoie (doublons, format) et vous les exporte prêtes à l'emploi.</p>
+    <h3>Sources d'extraction</h3>
+    <ul>
+      <li><b>Web par mots-clés</b> — moteurs de recherche (Google, Bing) et Brave Search API : saisissez un secteur ou un mot-clé, le crawler collecte les emails des sites correspondants.</li>
+      <li><b>Fichiers locaux</b> — TXT, CSV, XLSX, PDF, DOCX, HTML : EvoExtractor lit vos fichiers et en extrait toutes les adresses.</li>
+      <li><b>Comptes IMAP</b> — connectez une boîte mail et récupérez les adresses de vos emails reçus et envoyés.</li>
+      <li><b>URLs & sites</b> — fournissez une liste d'URLs pour en extraire les contacts.</li>
+    </ul>
+    <h3>Ciblage & nettoyage</h3>
+    <ul>
+      <li>Filtrage par <b>pays / région</b> et par mots-clés.</li>
+      <li><b>Déduplication</b> automatique et exclusions (domaines et motifs à ignorer).</li>
+      <li>Historique complet des extractions.</li>
+    </ul>
+    <h3>Comment ça marche</h3>
+    <div class="steps">
+      <div class="step">Choisissez la source (mots-clés web, fichiers, IMAP) et vos critères.</div>
+      <div class="step">Lancez la recherche : l'extraction se fait <b>en temps réel</b>, avec le compteur d'adresses trouvées.</div>
+      <div class="step">EvoExtractor nettoie et <b>dédoublonne</b> automatiquement les résultats.</div>
+      <div class="step">Exportez en <b>CSV, TXT ou JSON</b> — prêt pour EvoVerify ou EvoSender.</div>
+    </div>
+    <h3>Cas d'usage</h3>
+    <div class="uc-grid">
+      <div class="uc"><div class="uct">Prospection B2B</div><div class="ucd">Constituez des listes ciblées par secteur et par pays.</div></div>
+      <div class="uc"><div class="uct">Constitution de base</div><div class="ucd">Rassemblez vos contacts éparpillés (fichiers, boîtes mail).</div></div>
+      <div class="uc"><div class="uct">Veille & recherche</div><div class="ucd">Collectez les contacts d'un marché ou d'une zone géographique.</div></div>
+      <div class="uc"><div class="uct">Alimenter une campagne</div><div class="ucd">Envoyez directement les listes vers EvoSender.</div></div>
+    </div>
+  </div>`,
+  en:`<div class="det-block">
+    <h2>What EvoExtractor does</h2>
+    <p><b>EvoExtractor</b> automatically collects professional email addresses from multiple sources, <b>100% on your computer</b> — no data is ever sent online. Start from keywords or files, the tool scans the sources, extracts the addresses, cleans them (duplicates, format) and exports them ready to use.</p>
+    <h3>Extraction sources</h3>
+    <ul>
+      <li><b>Web by keywords</b> — search engines (Google, Bing) and Brave Search API: enter an industry or keyword, the crawler collects emails from matching sites.</li>
+      <li><b>Local files</b> — TXT, CSV, XLSX, PDF, DOCX, HTML: EvoExtractor reads your files and extracts all addresses from them.</li>
+      <li><b>IMAP accounts</b> — connect a mailbox and retrieve the addresses from your received and sent emails.</li>
+      <li><b>URLs & websites</b> — provide a list of URLs to extract contacts from them.</li>
+    </ul>
+    <h3>Targeting & cleaning</h3>
+    <ul>
+      <li>Filtering by <b>country / region</b> and by keywords.</li>
+      <li>Automatic <b>deduplication</b> and exclusions (domains and patterns to ignore).</li>
+      <li>Full extraction history.</li>
+    </ul>
+    <h3>How it works</h3>
+    <div class="steps">
+      <div class="step">Choose the source (web keywords, files, IMAP) and your criteria.</div>
+      <div class="step">Run the search: extraction happens <b>in real time</b>, with a live counter of addresses found.</div>
+      <div class="step">EvoExtractor automatically cleans and <b>deduplicates</b> the results.</div>
+      <div class="step">Export as <b>CSV, TXT or JSON</b> — ready for EvoVerify or EvoSender.</div>
+    </div>
+    <h3>Use cases</h3>
+    <div class="uc-grid">
+      <div class="uc"><div class="uct">B2B prospecting</div><div class="ucd">Build targeted lists by industry and country.</div></div>
+      <div class="uc"><div class="uct">Database building</div><div class="ucd">Gather your scattered contacts (files, mailboxes).</div></div>
+      <div class="uc"><div class="uct">Market research</div><div class="ucd">Collect contacts from a market or geographic area.</div></div>
+      <div class="uc"><div class="uct">Fuel a campaign</div><div class="ucd">Send lists directly to EvoSender.</div></div>
+    </div>
+  </div>`,
+  ru:`<div class="det-block">
+    <h2>Что делает EvoExtractor</h2>
+    <p><b>EvoExtractor</b> автоматически собирает профессиональные email-адреса из множества источников, <b>на 100% на вашем компьютере</b> — никакие данные не отправляются в сеть. Вы начинаете с ключевых слов или файлов, инструмент проходит по источникам, извлекает адреса, очищает их (дубликаты, формат) и экспортирует готовыми к использованию.</p>
+    <h3>Источники извлечения</h3>
+    <ul>
+      <li><b>Веб по ключевым словам</b> — поисковые системы (Google, Bing) и Brave Search API: введите отрасль или ключевое слово, краулер соберёт email-адреса с соответствующих сайтов.</li>
+      <li><b>Локальные файлы</b> — TXT, CSV, XLSX, PDF, DOCX, HTML: EvoExtractor читает ваши файлы и извлекает из них все адреса.</li>
+      <li><b>IMAP-аккаунты</b> — подключите почтовый ящик и получите адреса из полученных и отправленных писем.</li>
+      <li><b>URL и сайты</b> — предоставьте список URL для извлечения контактов из них.</li>
+    </ul>
+    <h3>Таргетинг и очистка</h3>
+    <ul>
+      <li>Фильтрация по <b>стране / региону</b> и по ключевым словам.</li>
+      <li>Автоматическая <b>дедупликация</b> и исключения (домены и шаблоны для игнорирования).</li>
+      <li>Полная история извлечений.</li>
+    </ul>
+    <h3>Как это работает</h3>
+    <div class="steps">
+      <div class="step">Выберите источник (веб по ключевым словам, файлы, IMAP) и свои критерии.</div>
+      <div class="step">Запустите поиск: извлечение происходит <b>в реальном времени</b>, со счётчиком найденных адресов.</div>
+      <div class="step">EvoExtractor автоматически очищает и <b>дедуплицирует</b> результаты.</div>
+      <div class="step">Экспортируйте в <b>CSV, TXT или JSON</b> — готово для EvoVerify или EvoSender.</div>
+    </div>
+    <h3>Сценарии использования</h3>
+    <div class="uc-grid">
+      <div class="uc"><div class="uct">B2B-поиск клиентов</div><div class="ucd">Составляйте целевые списки по отрасли и стране.</div></div>
+      <div class="uc"><div class="uct">Формирование базы</div><div class="ucd">Соберите разрозненные контакты (файлы, почтовые ящики).</div></div>
+      <div class="uc"><div class="uct">Мониторинг и исследования</div><div class="ucd">Собирайте контакты рынка или географической зоны.</div></div>
+      <div class="uc"><div class="uct">Наполнение кампании</div><div class="ucd">Отправляйте списки напрямую в EvoSender.</div></div>
+    </div>
+  </div>` },
+  sender:{ fr:`<div class="det-block">
+    <h2>Ce que fait EvoSender</h2>
+    <p><b>EvoSender</b> envoie vos campagnes email en masse avec une <b>haute délivrabilité</b>, en faisant tourner plusieurs serveurs SMTP (et, en option, des proxys résidentiels) pour protéger votre réputation d'expéditeur. Tout tourne en local : vos listes ne quittent jamais votre machine.</p>
+    <h3>Fonctionnalités clés</h3>
+    <ul>
+      <li><b>Rotation multi-SMTP</b> — répartit les envois sur plusieurs serveurs pour éviter les limites et améliorer la délivrabilité.</li>
+      <li><b>Envoi via proxy</b> — modes SMTP-over-proxy et hybride pour masquer votre IP.</li>
+      <li><b>Éditeur HTML + modèles</b> et <b>personnalisation</b> (prénom, nom, champs sur mesure) par contact.</li>
+      <li><b>Groupes de campagne</b> — sujets, noms d'expéditeur, Reply-To, pièces jointes et lettre réutilisables ; <b>adresse témoin</b> pour recevoir une copie.</li>
+      <li><b>Suivi</b> des ouvertures et des clics via un domaine de tracking dédié.</li>
+      <li><b>Gestion des retours</b> (rebonds / auto-réponses) et <b>désinscription</b> conforme, activable ou désactivable.</li>
+      <li><b>Rapports PDF</b> de campagne, <b>mode anti-spam</b> et <b>mode image</b>.</li>
+    </ul>
+    <h3>Comment ça marche</h3>
+    <div class="steps">
+      <div class="step">Importez vos contacts (ou récupérez-les depuis EvoExtractor / EvoVerify).</div>
+      <div class="step">Configurez vos serveurs SMTP (et proxys) — la <b>rotation est automatique</b>.</div>
+      <div class="step">Composez votre message (modèle, personnalisation, pièces jointes) via les groupes.</div>
+      <div class="step">Lancez la campagne et <b>suivez les statistiques</b> en temps réel.</div>
+    </div>
+    <h3>Pensé pour la délivrabilité</h3>
+    <p>Arriver en boîte de réception : rotation SMTP, en-têtes conformes (<b>List-Unsubscribe</b>), Reply-To propre, montée en charge progressive et compatibilité <b>SPF / DKIM</b> de vos domaines.</p>
+    <h3>Cas d'usage</h3>
+    <div class="uc-grid">
+      <div class="uc"><div class="uct">Newsletters</div><div class="ucd">Diffusez vos actualités à toute votre base.</div></div>
+      <div class="uc"><div class="uct">Campagnes marketing</div><div class="ucd">Promotions, lancements, relances personnalisées.</div></div>
+      <div class="uc"><div class="uct">Notifications</div><div class="ucd">Emails informatifs et transactionnels en volume.</div></div>
+      <div class="uc"><div class="uct">Prospection</div><div class="ucd">Approche directe avec suivi des ouvertures et clics.</div></div>
+    </div>
+  </div>`,
+  en:`<div class="det-block">
+    <h2>What EvoSender does</h2>
+    <p><b>EvoSender</b> sends your bulk email campaigns with <b>high deliverability</b>, rotating multiple SMTP servers (and, optionally, residential proxies) to protect your sender reputation. Everything runs locally: your lists never leave your machine.</p>
+    <h3>Key features</h3>
+    <ul>
+      <li><b>Multi-SMTP rotation</b> — spreads sending across several servers to avoid limits and improve deliverability.</li>
+      <li><b>Proxy sending</b> — SMTP-over-proxy and hybrid modes to mask your IP.</li>
+      <li><b>HTML editor + templates</b> and <b>personalization</b> (first name, last name, custom fields) per contact.</li>
+      <li><b>Campaign groups</b> — reusable subjects, sender names, Reply-To, attachments and letter; <b>test address</b> to receive a copy.</li>
+      <li><b>Tracking</b> of opens and clicks via a dedicated tracking domain.</li>
+      <li><b>Bounce handling</b> (bounces / auto-replies) and compliant <b>unsubscribe</b>, can be enabled or disabled.</li>
+      <li><b>PDF campaign reports</b>, <b>anti-spam mode</b> and <b>image mode</b>.</li>
+    </ul>
+    <h3>How it works</h3>
+    <div class="steps">
+      <div class="step">Import your contacts (or fetch them from EvoExtractor / EvoVerify).</div>
+      <div class="step">Configure your SMTP servers (and proxies) — <b>rotation is automatic</b>.</div>
+      <div class="step">Compose your message (template, personalization, attachments) via groups.</div>
+      <div class="step">Launch the campaign and <b>track statistics</b> in real time.</div>
+    </div>
+    <h3>Built for deliverability</h3>
+    <p>Landing in the inbox: SMTP rotation, compliant headers (<b>List-Unsubscribe</b>), clean Reply-To, gradual ramp-up and <b>SPF / DKIM</b> compatibility for your domains.</p>
+    <h3>Use cases</h3>
+    <div class="uc-grid">
+      <div class="uc"><div class="uct">Newsletters</div><div class="ucd">Broadcast your news to your entire base.</div></div>
+      <div class="uc"><div class="uct">Marketing campaigns</div><div class="ucd">Promotions, launches, personalized follow-ups.</div></div>
+      <div class="uc"><div class="uct">Notifications</div><div class="ucd">Informational and transactional emails at volume.</div></div>
+      <div class="uc"><div class="uct">Prospecting</div><div class="ucd">Direct outreach with open and click tracking.</div></div>
+    </div>
+  </div>`,
+  ru:`<div class="det-block">
+    <h2>Что делает EvoSender</h2>
+    <p><b>EvoSender</b> отправляет ваши массовые email-кампании с <b>высокой доставляемостью</b>, используя ротацию нескольких SMTP-серверов (и, опционально, резидентных прокси) для защиты репутации отправителя. Всё работает локально: ваши списки никогда не покидают ваш компьютер.</p>
+    <h3>Ключевые функции</h3>
+    <ul>
+      <li><b>Ротация нескольких SMTP</b> — распределяет отправку по нескольким серверам, чтобы избежать лимитов и повысить доставляемость.</li>
+      <li><b>Отправка через прокси</b> — режимы SMTP-over-proxy и гибридный для маскировки вашего IP.</li>
+      <li><b>HTML-редактор + шаблоны</b> и <b>персонализация</b> (имя, фамилия, пользовательские поля) для каждого контакта.</li>
+      <li><b>Группы кампаний</b> — переиспользуемые темы, имена отправителя, Reply-To, вложения и письмо; <b>тестовый адрес</b> для получения копии.</li>
+      <li><b>Отслеживание</b> открытий и кликов через выделенный домен трекинга.</li>
+      <li><b>Управление отказами</b> (отказы / автоответы) и соответствующая нормам <b>отписка</b>, можно включать или отключать.</li>
+      <li><b>PDF-отчёты</b> по кампании, <b>антиспам-режим</b> и <b>режим изображения</b>.</li>
+    </ul>
+    <h3>Как это работает</h3>
+    <div class="steps">
+      <div class="step">Импортируйте контакты (или получите их из EvoExtractor / EvoVerify).</div>
+      <div class="step">Настройте SMTP-серверы (и прокси) — <b>ротация автоматическая</b>.</div>
+      <div class="step">Составьте сообщение (шаблон, персонализация, вложения) через группы.</div>
+      <div class="step">Запустите кампанию и <b>отслеживайте статистику</b> в реальном времени.</div>
+    </div>
+    <h3>Создано для доставляемости</h3>
+    <p>Попадание во входящие: ротация SMTP, корректные заголовки (<b>List-Unsubscribe</b>), чистый Reply-To, постепенный разогрев и совместимость <b>SPF / DKIM</b> ваших доменов.</p>
+    <h3>Сценарии использования</h3>
+    <div class="uc-grid">
+      <div class="uc"><div class="uct">Рассылки новостей</div><div class="ucd">Распространяйте новости среди всей вашей базы.</div></div>
+      <div class="uc"><div class="uct">Маркетинговые кампании</div><div class="ucd">Акции, запуски, персонализированные напоминания.</div></div>
+      <div class="uc"><div class="uct">Уведомления</div><div class="ucd">Информационные и транзакционные письма в большом объёме.</div></div>
+      <div class="uc"><div class="uct">Поиск клиентов</div><div class="ucd">Прямое обращение с отслеживанием открытий и кликов.</div></div>
+    </div>
+  </div>` },
+  verifier:{ fr:`<div class="det-block">
+    <h2>Ce que fait EvoVerify</h2>
+    <p><b>EvoVerify</b> vérifie l'existence et la validité de vos adresses email <b>avant l'envoi</b>, pour éliminer les adresses mortes, réduire les rebonds et protéger votre réputation d'expéditeur. Vérification 100 % locale, sans limite.</p>
+    <h3>Niveaux de vérification</h3>
+    <ul>
+      <li><b>Syntaxe</b> — format de l'adresse conforme.</li>
+      <li><b>Domaine & MX</b> — le domaine existe et accepte les emails (enregistrements MX).</li>
+      <li><b>SMTP</b> — interrogation du serveur pour confirmer l'existence réelle de la boîte.</li>
+      <li>Détection des <b>catch-all</b>, des adresses <b>jetables</b> et <b>génériques</b> (rôle).</li>
+    </ul>
+    <h3>Résultats</h3>
+    <ul>
+      <li>Classement par statut : <b>Valides</b>, <b>Invalides</b>, <b>Catch-all</b>, <b>Inconnus</b>.</li>
+      <li><b>Score de confiance</b> et raison détaillée par adresse.</li>
+      <li>Export par statut — ne gardez que les adresses valides.</li>
+    </ul>
+    <h3>Comment ça marche</h3>
+    <div class="steps">
+      <div class="step">Collez vos adresses ou importez un fichier (ou depuis EvoExtractor).</div>
+      <div class="step">Lancez la vérification : <b>syntaxe → MX → SMTP</b>.</div>
+      <div class="step">Consultez les résultats classés par statut, avec score et raison.</div>
+      <div class="step">Exportez la liste propre vers EvoSender.</div>
+    </div>
+    <h3>Cas d'usage</h3>
+    <div class="uc-grid">
+      <div class="uc"><div class="uct">Nettoyer une liste</div><div class="ucd">Retirez les adresses invalides avant campagne.</div></div>
+      <div class="uc"><div class="uct">Réduire les rebonds</div><div class="ucd">Moins de bounces = meilleure réputation d'envoi.</div></div>
+      <div class="uc"><div class="uct">Protéger la délivrabilité</div><div class="ucd">Évitez le classement spam dû aux mauvaises adresses.</div></div>
+      <div class="uc"><div class="uct">Valider un achat de base</div><div class="ucd">Contrôlez la qualité d'une liste externe.</div></div>
+    </div>
+  </div>`,
+  en:`<div class="det-block">
+    <h2>What EvoVerify does</h2>
+    <p><b>EvoVerify</b> checks the existence and validity of your email addresses <b>before sending</b>, to eliminate dead addresses, reduce bounces and protect your sender reputation. 100% local verification, with no limit.</p>
+    <h3>Verification levels</h3>
+    <ul>
+      <li><b>Syntax</b> — address format compliance.</li>
+      <li><b>Domain & MX</b> — the domain exists and accepts emails (MX records).</li>
+      <li><b>SMTP</b> — server query to confirm the mailbox actually exists.</li>
+      <li>Detection of <b>catch-all</b>, <b>disposable</b> and <b>generic</b> (role) addresses.</li>
+    </ul>
+    <h3>Results</h3>
+    <ul>
+      <li>Classification by status: <b>Valid</b>, <b>Invalid</b>, <b>Catch-all</b>, <b>Unknown</b>.</li>
+      <li><b>Confidence score</b> and detailed reason for each address.</li>
+      <li>Export by status — keep only valid addresses.</li>
+    </ul>
+    <h3>How it works</h3>
+    <div class="steps">
+      <div class="step">Paste your addresses or import a file (or from EvoExtractor).</div>
+      <div class="step">Run the verification: <b>syntax → MX → SMTP</b>.</div>
+      <div class="step">Review results sorted by status, with score and reason.</div>
+      <div class="step">Export the clean list to EvoSender.</div>
+    </div>
+    <h3>Use cases</h3>
+    <div class="uc-grid">
+      <div class="uc"><div class="uct">Clean a list</div><div class="ucd">Remove invalid addresses before a campaign.</div></div>
+      <div class="uc"><div class="uct">Reduce bounces</div><div class="ucd">Fewer bounces = better sending reputation.</div></div>
+      <div class="uc"><div class="uct">Protect deliverability</div><div class="ucd">Avoid spam classification caused by bad addresses.</div></div>
+      <div class="uc"><div class="uct">Validate a purchased list</div><div class="ucd">Check the quality of an external list.</div></div>
+    </div>
+  </div>`,
+  ru:`<div class="det-block">
+    <h2>Что делает EvoVerify</h2>
+    <p><b>EvoVerify</b> проверяет существование и валидность ваших email-адресов <b>перед отправкой</b>, чтобы устранить несуществующие адреса, снизить количество отказов и защитить репутацию отправителя. Проверка на 100% локальная, без ограничений.</p>
+    <h3>Уровни проверки</h3>
+    <ul>
+      <li><b>Синтаксис</b> — соответствие формата адреса.</li>
+      <li><b>Домен и MX</b> — домен существует и принимает почту (записи MX).</li>
+      <li><b>SMTP</b> — запрос к серверу для подтверждения реального существования ящика.</li>
+      <li>Обнаружение <b>catch-all</b>, <b>одноразовых</b> и <b>общих</b> (ролевых) адресов.</li>
+    </ul>
+    <h3>Результаты</h3>
+    <ul>
+      <li>Классификация по статусу: <b>Валидные</b>, <b>Невалидные</b>, <b>Catch-all</b>, <b>Неизвестные</b>.</li>
+      <li><b>Оценка достоверности</b> и подробная причина для каждого адреса.</li>
+      <li>Экспорт по статусу — оставляйте только валидные адреса.</li>
+    </ul>
+    <h3>Как это работает</h3>
+    <div class="steps">
+      <div class="step">Вставьте адреса или импортируйте файл (или из EvoExtractor).</div>
+      <div class="step">Запустите проверку: <b>синтаксис → MX → SMTP</b>.</div>
+      <div class="step">Просмотрите результаты, отсортированные по статусу, с оценкой и причиной.</div>
+      <div class="step">Экспортируйте чистый список в EvoSender.</div>
+    </div>
+    <h3>Сценарии использования</h3>
+    <div class="uc-grid">
+      <div class="uc"><div class="uct">Очистка списка</div><div class="ucd">Удалите невалидные адреса перед кампанией.</div></div>
+      <div class="uc"><div class="uct">Снижение отказов</div><div class="ucd">Меньше отказов = лучшая репутация отправителя.</div></div>
+      <div class="uc"><div class="uct">Защита доставляемости</div><div class="ucd">Избегайте попадания в спам из-за плохих адресов.</div></div>
+      <div class="uc"><div class="uct">Проверка купленной базы</div><div class="ucd">Контролируйте качество внешнего списка.</div></div>
+    </div>
+  </div>` }
+};
+function detailsFor(id){ var d=DETAILS[id]; if(!d) return ''; var lg=(window.getLang?window.getLang():'fr'); return d[lg]||d.fr||''; }
+
 function renderError(msgKey,frMsg,linkHref,linkKey,frLink){
   document.getElementById('content').innerHTML=
     '<div class="loading">'+esc(t(msgKey,frMsg))+' <a href="'+linkHref+'" style="color:#2563eb">'+esc(t(linkKey,frLink))+'</a></div>';
@@ -182,6 +484,7 @@ function renderProduct(){
       '</div>'+
     '</div>'+
     (feats.length?('<div class="sec"><h2>'+esc(t('prod.features','✨ Fonctionnalités'))+'</h2><div class="feats">'+feats.map(function(f){return '<div class="feat">'+check+'<span>'+esc(f)+'</span></div>';}).join('')+'</div></div>'):'')+
+    detailsFor(id)+
     '<div class="sec"><h2>'+esc(t('prod.other_tools','Les autres outils EvoStudio'))+'</h2><div class="other">'+othersHtml+'</div></div>';
 }
 

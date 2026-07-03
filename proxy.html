@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EvoStudio — Proxy résidentiel</title>
+<meta name="description" content="Proxy résidentiel EvoStudio : IP réelles dans 30+ pays, ciblage pays et ISP, sessions rotatives ou sticky, forfaits au Go. Pour l'envoi email, l'extraction et la navigation anonyme." />
+<meta name="robots" content="index, follow" />
+<meta name="theme-color" content="#2563eb" />
+<meta property="og:type" content="product" />
+<meta property="og:site_name" content="EvoStudio" />
+<meta property="og:title" content="Proxy résidentiel — EvoStudio" />
+<meta property="og:description" content="IP résidentielles réelles, 30+ pays, ciblage pays/ISP, sessions rotatives ou sticky, forfaits au Go." />
+<meta property="og:url" content="https://evostudio.fr/proxy.html" />
+<meta property="og:image" content="https://evostudio.fr/Hub.png" />
+<link rel="canonical" href="https://evostudio.fr/proxy.html" />
+<link rel="icon" href="/logo-EvoSender.ico" type="image/x-icon" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  :root{--blue:#3b82f6;--blue-dark:#2563eb;--ink:#eef2fb;--slate:#9aa7c2;--slate-2:#6b7896;--line:rgba(255,255,255,.09);--green:#34d399;--cyan:#22d3ee;--purple:#a78bfa;--teal:#2dd4bf}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',-apple-system,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;min-height:100vh;background:radial-gradient(120% 70% at 12% -5%,rgba(37,99,235,.16),transparent 55%),radial-gradient(90% 60% at 100% 0%,rgba(124,58,237,.14),transparent 55%),#070a14;background-attachment:fixed}
+  a{color:inherit}
+  .nav{position:sticky;top:0;z-index:50;background:rgba(7,10,20,.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:12px 22px}
+  .nav .logo img{display:block;height:34px;max-width:150px;object-fit:contain}
+  .nav .right{display:flex;gap:8px;align-items:center}
+  .btn{display:inline-flex;align-items:center;gap:6px;border-radius:10px;padding:10px 18px;font-size:13.5px;font-weight:600;text-decoration:none;cursor:pointer;border:none;font-family:inherit;transition:.15s}
+  .btn-primary{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;box-shadow:0 8px 26px rgba(59,130,246,.35)}.btn-primary:hover{transform:translateY(-1px)}
+  .btn-ghost{background:rgba(255,255,255,.05);color:#dfe6f4;border:1px solid var(--line)}.btn-ghost:hover{color:#fff;background:rgba(255,255,255,.09)}
+  .wrap{max-width:1060px;margin:0 auto;padding:34px 20px 70px}
+  .crumb{font-size:13px;color:var(--slate);margin-bottom:20px}.crumb a{color:#60a5fa;text-decoration:none}
+  .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:center;margin-bottom:14px}
+  @media(max-width:820px){.hero{grid-template-columns:1fr;gap:22px}}
+  .badge{display:inline-flex;align-items:center;gap:7px;background:rgba(45,212,191,.12);border:1px solid rgba(45,212,191,.28);color:#5eead4;font-weight:700;font-size:11px;padding:4px 12px;border-radius:999px;margin-bottom:14px}
+  h1{font-size:36px;font-weight:900;letter-spacing:-.7px;line-height:1.08;margin-bottom:14px;color:#fff}
+  @media(max-width:820px){h1{font-size:28px}}
+  .lead{font-size:15.5px;color:var(--slate);line-height:1.7;margin-bottom:22px}
+  .cta{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+  .hero-facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .fact{background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:999px;padding:6px 13px;font-size:12.5px;color:var(--slate)}.fact b{color:#fff}
+  .globe{border-radius:18px;background:linear-gradient(160deg,rgba(45,212,191,.12),rgba(59,130,246,.1));border:1px solid var(--line);padding:30px;display:flex;align-items:center;justify-content:center}
+  .globe svg{width:100%;height:auto;max-width:260px;display:block}
+  .sec{margin-top:52px}
+  .sec h2{font-size:22px;font-weight:800;margin-bottom:8px;color:#fff}
+  .sec .sub{font-size:14px;color:var(--slate);line-height:1.6;margin-bottom:20px;max-width:720px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:720px){.grid2{grid-template-columns:1fr}}
+  .card{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .card h3{font-size:16px;font-weight:800;color:#fff;margin-bottom:8px;display:flex;align-items:center;gap:9px}
+  .card h3 .ico{width:34px;height:34px;border-radius:9px;background:rgba(45,212,191,.14);color:#5eead4;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .card h3 .ico svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2}
+  .card p{font-size:13.5px;color:var(--slate);line-height:1.6}
+  .card ul{list-style:none;margin:8px 0 0;padding:0}
+  .card li{position:relative;padding-left:22px;font-size:13.5px;color:var(--slate);line-height:1.55;margin-bottom:6px}
+  .card li:before{content:"";position:absolute;left:2px;top:7px;width:7px;height:7px;border-radius:50%;background:var(--teal)}
+  .card b{color:#e7edf8}
+  .uc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:760px){.uc-grid{grid-template-columns:1fr}}
+  .uc{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:16px}
+  .uc .uct{font-weight:700;color:#fff;font-size:14.5px;margin-bottom:5px}
+  .uc .ucd{font-size:13px;color:var(--slate);line-height:1.55}
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  @media(max-width:760px){.plans{grid-template-columns:1fr 1fr}}
+  @media(max-width:480px){.plans{grid-template-columns:1fr}}
+  .plan{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:16px;text-align:center}
+  .plan .gb{font-size:22px;font-weight:900;color:#fff}
+  .plan .pn{font-size:12px;color:var(--slate);margin-top:2px}
+  .steps{display:grid;gap:11px;margin-top:6px;counter-reset:s}
+  .step{position:relative;padding:14px 16px 14px 54px;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;font-size:14px;color:var(--slate);line-height:1.55}
+  .step:before{counter-increment:s;content:counter(s);position:absolute;left:14px;top:13px;width:28px;height:28px;border-radius:8px;background:rgba(45,212,191,.15);color:#5eead4;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+  .step b{color:#e7edf8;font-weight:700}
+  .code{font-family:'Courier New',monospace;font-size:13px;background:rgba(2,6,23,.5);border:1px solid var(--line);border-radius:8px;padding:10px 13px;color:#7dd3fc;margin-top:10px;overflow-x:auto;white-space:nowrap}
+  .faq{display:grid;gap:10px}
+  .faq details{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:2px 16px}
+  .faq summary{cursor:pointer;font-weight:700;color:#fff;font-size:14.5px;padding:14px 0;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary:after{content:"+";color:var(--teal);font-weight:800;font-size:18px}
+  .faq details[open] summary:after{content:"−"}
+  .faq p{font-size:13.5px;color:var(--slate);line-height:1.6;padding:0 0 14px}
+  .ctabox{margin-top:56px;text-align:center;background:linear-gradient(135deg,rgba(59,130,246,.14),rgba(124,58,237,.12));border:1px solid var(--line);border-radius:18px;padding:34px 24px}
+  .ctabox h2{font-size:22px;color:#fff;margin-bottom:8px}
+  .ctabox p{font-size:14px;color:var(--slate);margin-bottom:18px}
+  .footer{text-align:center;font-size:12px;color:var(--slate-2);padding:26px}
+  /* ═══ MODE CLAIR ═══ */
+  html[data-theme="light"]{--blue:#2563eb;--ink:#0f172a;--slate:#475569;--slate-2:#94a3b8;--line:#e6ebf3;--green:#16a34a;--teal:#0d9488}
+  html[data-theme="light"] body{background:radial-gradient(120% 70% at 12% -5%,rgba(37,99,235,.07),transparent 55%),radial-gradient(90% 60% at 100% 0%,rgba(124,58,237,.05),transparent 55%),#f4f7fc}
+  html[data-theme="light"] .nav{background:rgba(255,255,255,.88)}
+  html[data-theme="light"] .btn-ghost{background:#fff;color:#475569;border-color:#e2e8f0}
+  html[data-theme="light"] h1,html[data-theme="light"] .sec h2,html[data-theme="light"] .card h3,html[data-theme="light"] .uc .uct,html[data-theme="light"] .plan .gb,html[data-theme="light"] .faq summary,html[data-theme="light"] .ctabox h2,html[data-theme="light"] .card b,html[data-theme="light"] .step b{color:#0f172a}
+  html[data-theme="light"] .card p,html[data-theme="light"] .card li,html[data-theme="light"] .uc .ucd,html[data-theme="light"] .step,html[data-theme="light"] .faq p,html[data-theme="light"] .lead,html[data-theme="light"] .sec .sub{color:#334155}
+  html[data-theme="light"] .card,html[data-theme="light"] .uc,html[data-theme="light"] .plan,html[data-theme="light"] .step,html[data-theme="light"] .faq details,html[data-theme="light"] .fact{background:#fff}
+  html[data-theme="light"] .badge{background:#ecfdf5;border-color:#a7f3d0;color:#0d9488}
+</style>
+<script src="/theme.js"></script>
+<script>window.I18N_PAGE={ en:{
+  "prx.crumb_home": "Home",
+  "prx.crumb_current": "Residential proxy",
+  "prx.badge": "30+ countries · Real IPs",
+  "prx.h1": "Residential proxy",
+  "prx.lead": "<b>Real residential IP addresses</b>, from genuine devices connected via Internet Service Providers — undetectable, unlike datacenter IPs. Target a country and a carrier, choose a rotating or sticky IP, and pay only for the volume you use.",
+  "prx.cta_buy": "Get a proxy plan →",
+  "prx.cta_dash": "My client area",
+  "prx.fact_countries": "<b>30+</b> countries",
+  "prx.fact_target": "<b>Targeting</b> country + ISP",
+  "prx.fact_session": "<b>Rotating</b> or sticky",
+  "prx.fact_validity": "<b>180 days</b> validity",
+  "prx.role_h2": "What is a residential proxy for?",
+  "prx.role_sub": "A proxy routes your connection through another IP address. With a <b>residential</b> IP (belonging to a real individual), you appear as an ordinary local user — websites, mailboxes and services won't block your traffic the way they would with a server IP.",
+  "prx.role_c1_h": "Stay undetectable",
+  "prx.role_c1_p": "Residential IPs are seen as normal human connections. Ideal when a datacenter IP would be immediately flagged or blocked.",
+  "prx.role_c2_h": "Appear in the right country",
+  "prx.role_c2_p": "Choose the exit country (and carrier): your traffic looks like it comes from a local user, wherever you actually are.",
+  "prx.role_c3_h": "Protect your sending",
+  "prx.role_c3_p": "Combined with EvoSender, the proxy hides your real IP and spreads out your sending, to preserve your reputation and deliverability.",
+  "prx.role_c4_h": "Reliability & rotation",
+  "prx.role_c4_p": "A huge pool of addresses: renew the IP on every request, or keep the same one for the length of a session.",
+  "prx.uc_h2": "What you can do",
+  "prx.uc1_t": "Email sending via proxy",
+  "prx.uc1_d": "Send your EvoSender campaigns through residential IPs (proxy or hybrid mode) so you don't expose your server.",
+  "prx.uc2_t": "Extraction without blocking",
+  "prx.uc2_d": "Collect addresses with EvoExtractor without being blocked by search engines and websites.",
+  "prx.uc3_t": "Multi-country verification",
+  "prx.uc3_d": "Test services and content exactly as they appear from a given country.",
+  "prx.uc4_t": "Anonymous browsing",
+  "prx.uc4_d": "Hide your real IP and browse like a local user.",
+  "prx.uc5_t": "Price & ad monitoring",
+  "prx.uc5_d": "Check how prices, ads or results are displayed depending on the region.",
+  "prx.uc6_t": "Multi-account management",
+  "prx.uc6_d": "Separate your accounts with distinct, geographically consistent IPs.",
+  "prx.target_h2": "Precise targeting: country + carrier",
+  "prx.target_sub": "From your client area, a generator builds your connection credentials based on your criteria — no technical setup needed.",
+  "prx.target_c1_h": "🌍 By country",
+  "prx.target_c1_l1": "Over <b>30 countries</b>: Americas, Europe, Asia-Pacific, Middle East, Africa.",
+  "prx.target_c1_l2": "Or <b>worldwide random</b> if the country doesn't matter.",
+  "prx.target_c2_h": "📡 By ISP / carrier",
+  "prx.target_c2_l1": "Target a <b>specific internet service provider</b> (ASN code) for an even more credible IP.",
+  "prx.target_c2_l2": "Optional: leave it “random” for all carriers in the country.",
+  "prx.sess_h2": "Rotating or fixed (sticky)",
+  "prx.sess_c1_h": "🔄 Rotating IP",
+  "prx.sess_c1_p": "Leave the session field empty: you get a <b>new IP on every request</b>. Perfect for extraction and high-volume tasks where you want varied addresses.",
+  "prx.sess_c2_h": "📌 Fixed IP (sticky)",
+  "prx.sess_c2_p": "Set a <b>session ID</b>: you keep the <b>same IP</b> for the length of the session. Ideal when a service requires a stable IP (login, continuous sending).",
+  "prx.plans_h2": "Volume-based plans",
+  "prx.plans_sub": "You pay for <b>bandwidth</b> (in GB), not the number of IPs. Each plan is valid for <b>180 days</b> and activates automatically after payment.",
+  "prx.plan_start": "To get started",
+  "prx.plan_popular": "Most chosen",
+  "prx.plan_pro": "Regular use",
+  "prx.plan_intensive": "Intensive",
+  "prx.plan_scale": "High volume",
+  "prx.plan_max": "Maximum",
+  "prx.how_h2": "How it works",
+  "prx.how_s1": "Choose a GB plan and pay — <b>automatic activation</b>.",
+  "prx.how_s2": "In your client area, open the <b>credentials generator</b>.",
+  "prx.how_s3": "Select the <b>country</b>, optionally the <b>ISP</b>, and the session type (rotating / sticky).",
+  "prx.how_s4": "Copy your credentials <span class=\"code\">user:pass@host:port</span> and use them in EvoSender, EvoExtractor or your tool.",
+  "prx.faq_h2": "Frequently asked questions",
+  "prx.faq_q1": "What's the difference with a datacenter proxy?",
+  "prx.faq_a1": "A datacenter IP belongs to a hosting provider and is easily identified and blocked. A residential IP belongs to a real individual via their internet provider: it passes for a normal user, making it far more reliable.",
+  "prx.faq_q2": "How does country targeting work?",
+  "prx.faq_a2": "You choose the country (and carrier) in the generator in your client area; the settings are embedded in your credentials. The exit IP then comes from the requested region.",
+  "prx.faq_q3": "Rotating or sticky: which should I choose?",
+  "prx.faq_a3": "Rotating (empty session) = a new IP on every request, useful for extraction. Sticky (session set) = same IP for the length of the session, useful when a service requires a stable IP.",
+  "prx.faq_q4": "Does the plan expire?",
+  "prx.faq_a4": "Each plan is valid for 180 days from activation. You use up your GB volume during that period.",
+  "prx.faq_q5": "Can I use it with EvoSender and EvoExtractor?",
+  "prx.faq_a5": "Yes. EvoSender offers a proxy sending mode (and a hybrid mode), and EvoExtractor can extract through the proxy to avoid blocks.",
+  "prx.faq_q6": "Is my real IP exposed?",
+  "prx.faq_a6": "No: your traffic exits through the proxy's residential IP. Your real address stays hidden.",
+  "prx.cta_h": "Ready to switch to a residential IP?",
+  "prx.cta_p": "Choose a GB plan, activate it instantly, and generate your targeted credentials.",
+  "prx.cta_btn": "Get a proxy plan →",
+  "prx.footer": "© 2025–2026 EGSCI SARL — EvoStudio · Russian Federation"
+}, ru:{
+  "prx.crumb_home": "Главная",
+  "prx.crumb_current": "Резидентный прокси",
+  "prx.badge": "30+ стран · Реальные IP",
+  "prx.h1": "Резидентный прокси",
+  "prx.lead": "Настоящие <b>реальные резидентные IP-адреса</b> от настоящих устройств, подключённых через провайдеров интернет-доступа — необнаружимые, в отличие от IP дата-центров. Выбирайте страну и провайдера, выбирайте ротационный или фиксированный IP и платите только за используемый объём.",
+  "prx.cta_buy": "Получить тариф прокси →",
+  "prx.cta_dash": "Мой личный кабинет",
+  "prx.fact_countries": "<b>30+</b> стран",
+  "prx.fact_target": "<b>Таргетинг</b> по стране + ISP",
+  "prx.fact_session": "<b>Ротационный</b> или фиксированный",
+  "prx.fact_validity": "<b>180 дней</b> срок действия",
+  "prx.role_h2": "Для чего нужен резидентный прокси?",
+  "prx.role_sub": "Прокси пропускает ваше соединение через другой IP-адрес. С <b>резидентным</b> IP (принадлежащим реальному человеку) вы выглядите как обычный местный пользователь — сайты, почтовые сервисы и службы не блокируют ваш трафик, как это было бы с IP сервера.",
+  "prx.role_c1_h": "Оставаться необнаружимым",
+  "prx.role_c1_p": "Резидентные IP воспринимаются как обычные человеческие подключения. Идеально, когда IP дата-центра сразу же был бы помечен или заблокирован.",
+  "prx.role_c2_h": "Появляться в нужной стране",
+  "prx.role_c2_p": "Выберите страну выхода (и провайдера): ваш трафик будет выглядеть так, будто он исходит от местного пользователя, где бы вы ни находились на самом деле.",
+  "prx.role_c3_h": "Защитить ваши рассылки",
+  "prx.role_c3_p": "В сочетании с EvoSender прокси скрывает ваш реальный IP и распределяет отправку, чтобы сохранить вашу репутацию и доставляемость.",
+  "prx.role_c4_h": "Надёжность и ротация",
+  "prx.role_c4_p": "Огромный пул адресов: обновляйте IP при каждом запросе или сохраняйте один и тот же на время сессии.",
+  "prx.uc_h2": "Что вы можете делать",
+  "prx.uc1_t": "Отправка почты через прокси",
+  "prx.uc1_d": "Отправляйте свои кампании EvoSender через резидентные IP (режим прокси или гибридный), не раскрывая свой сервер.",
+  "prx.uc2_t": "Извлечение без блокировок",
+  "prx.uc2_d": "Собирайте адреса с помощью EvoExtractor, не будучи заблокированными поисковыми системами и сайтами.",
+  "prx.uc3_t": "Проверка в нескольких странах",
+  "prx.uc3_d": "Тестируйте сервисы и контент такими, какими они выглядят из определённой страны.",
+  "prx.uc4_t": "Анонимный сёрфинг",
+  "prx.uc4_d": "Скройте свой реальный IP и передвигайтесь как местный пользователь.",
+  "prx.uc5_t": "Контроль цен и рекламы",
+  "prx.uc5_d": "Проверяйте отображение цен, рекламы или результатов в зависимости от региона.",
+  "prx.uc6_t": "Управление несколькими аккаунтами",
+  "prx.uc6_d": "Разделяйте свои аккаунты с помощью разных, географически согласованных IP.",
+  "prx.target_h2": "Точный таргетинг: страна + провайдер",
+  "prx.target_sub": "Из вашего личного кабинета генератор создаёт данные для подключения по вашим критериям — без необходимости технической настройки.",
+  "prx.target_c1_h": "🌍 По стране",
+  "prx.target_c1_l1": "Более <b>30 стран</b>: Америка, Европа, Азиатско-Тихоокеанский регион, Ближний Восток, Африка.",
+  "prx.target_c1_l2": "Или <b>случайный выбор по всему миру</b>, если страна не важна.",
+  "prx.target_c2_h": "📡 По ISP / провайдеру",
+  "prx.target_c2_l1": "Выберите <b>конкретного провайдера интернет-доступа</b> (код ASN) для ещё более достоверного IP.",
+  "prx.target_c2_l2": "Опционально: оставьте «случайный» для всех провайдеров страны.",
+  "prx.sess_h2": "Ротационный или фиксированный (sticky)",
+  "prx.sess_c1_h": "🔄 Ротационный IP",
+  "prx.sess_c1_p": "Оставьте поле сессии пустым: вы получаете <b>новый IP на каждый запрос</b>. Идеально для извлечения данных и задач с большим объёмом, где нужно разнообразие адресов.",
+  "prx.sess_c2_h": "📌 Фиксированный IP (sticky)",
+  "prx.sess_c2_p": "Укажите <b>идентификатор сессии</b>: вы сохраняете <b>один и тот же IP</b> на время сессии. Идеально, когда сервису требуется стабильный IP (вход, непрерывная отправка).",
+  "prx.plans_h2": "Тарифы по объёму",
+  "prx.plans_sub": "Вы платите за <b>трафик</b> (в ГБ), а не за количество IP. Каждый тариф действителен <b>180 дней</b> и активируется автоматически после оплаты.",
+  "prx.plan_start": "Для начала",
+  "prx.plan_popular": "Самый популярный",
+  "prx.plan_pro": "Регулярное использование",
+  "prx.plan_intensive": "Интенсивный",
+  "prx.plan_scale": "Большой объём",
+  "prx.plan_max": "Максимум",
+  "prx.how_h2": "Как это работает",
+  "prx.how_s1": "Выберите тариф по ГБ и оплатите его — <b>автоматическая активация</b>.",
+  "prx.how_s2": "В своём личном кабинете откройте <b>генератор данных для подключения</b>.",
+  "prx.how_s3": "Выберите <b>страну</b>, при желании <b>ISP</b> и тип сессии (ротационный / sticky).",
+  "prx.how_s4": "Скопируйте данные для подключения <span class=\"code\">user:pass@host:port</span> и используйте их в EvoSender, EvoExtractor или вашем инструменте.",
+  "prx.faq_h2": "Часто задаваемые вопросы",
+  "prx.faq_q1": "В чём разница с прокси дата-центра?",
+  "prx.faq_a1": "IP дата-центра принадлежит хостинг-провайдеру и легко вычисляется и блокируется. Резидентный IP принадлежит реальному человеку через его провайдера: он выглядит как обычный пользователь, поэтому гораздо надёжнее.",
+  "prx.faq_q2": "Как работает таргетинг по стране?",
+  "prx.faq_a2": "Вы выбираете страну (и провайдера) в генераторе в личном кабинете; настройки встраиваются в ваши данные для подключения. Исходящий IP будет из запрошенного региона.",
+  "prx.faq_q3": "Ротационный или sticky: что выбрать?",
+  "prx.faq_a3": "Ротационный (пустая сессия) = новый IP на каждый запрос, полезно для извлечения данных. Sticky (указанная сессия) = один и тот же IP на время сессии, полезно, когда сервису требуется стабильный IP.",
+  "prx.faq_q4": "Истекает ли срок действия тарифа?",
+  "prx.faq_a4": "Каждый тариф действителен 180 дней с момента активации. Вы расходуете свой объём в ГБ в течение этого периода.",
+  "prx.faq_q5": "Могу ли я использовать его с EvoSender и EvoExtractor?",
+  "prx.faq_a5": "Да. EvoSender предлагает режим отправки через прокси (и гибридный режим), а EvoExtractor может вести извлечение через прокси, чтобы избежать блокировок.",
+  "prx.faq_q6": "Открыт ли мой реальный IP?",
+  "prx.faq_a6": "Нет: ваш трафик выходит через резидентный IP прокси. Ваш реальный адрес остаётся скрытым.",
+  "prx.cta_h": "Готовы перейти на резидентный IP?",
+  "prx.cta_p": "Выберите тариф по ГБ, активируйте его мгновенно и сгенерируйте свои целевые данные для подключения.",
+  "prx.cta_btn": "Получить тариф прокси →",
+  "prx.footer": "© 2025–2026 EGSCI SARL — EvoStudio · Российская Федерация"
+} };</script>
+<script src="/i18n.js" defer></script>
+</head>
+<body>
+<div class="nav">
+  <a href="/" class="logo"><img src="/logoevostudio2.png" alt="EvoStudio" /></a>
+  <div class="right">
+    <a href="/#produits" class="btn btn-ghost" data-i18n="nav.products">Produits</a>
+    <a href="/login.html" class="btn btn-ghost" id="nav-login" data-i18n="nav.login">Connexion</a>
+    <a href="/dashboard.html" class="btn btn-ghost" id="nav-account" style="display:none" data-i18n="nav.account">Espace client</a>
+    <div id="lang-switch"></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="crumb"><a href="/" data-i18n="prx.crumb_home">Accueil</a> › <span data-i18n="prx.crumb_current">Proxy résidentiel</span></div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div>
+      <div class="badge">● <span data-i18n="prx.badge">30+ pays · IP réelles</span></div>
+      <h1 data-i18n="prx.h1">Proxy résidentiel</h1>
+      <p class="lead" data-i18n-html="prx.lead">Des adresses IP <b>résidentielles réelles</b>, issues de vrais appareils connectés via des fournisseurs d'accès Internet — indétectables, contrairement aux IP de datacenter. Ciblez un pays et un opérateur, choisissez une IP tournante ou fixe, et payez uniquement le volume que vous consommez.</p>
+      <div class="cta">
+        <a class="btn btn-primary" style="padding:13px 26px;font-size:15px" href="/pay.html?product=proxy_55gb" data-i18n="prx.cta_buy">Obtenir un forfait proxy →</a>
+        <a class="btn btn-ghost" style="padding:13px 22px" href="/dashboard.html" data-i18n="prx.cta_dash">Mon espace client</a>
+      </div>
+      <div class="hero-facts">
+        <span class="fact" data-i18n-html="prx.fact_countries"><b>30+</b> pays</span>
+        <span class="fact" data-i18n-html="prx.fact_target"><b>Ciblage</b> pays + ISP</span>
+        <span class="fact" data-i18n-html="prx.fact_session"><b>Rotatif</b> ou sticky</span>
+        <span class="fact" data-i18n-html="prx.fact_validity"><b>180 j</b> de validité</span>
+      </div>
+    </div>
+    <div class="globe">
+      <svg viewBox="0 0 200 200" fill="none">
+        <circle cx="100" cy="100" r="78" stroke="#2dd4bf" stroke-width="1.5" opacity=".5"/>
+        <ellipse cx="100" cy="100" rx="78" ry="30" stroke="#60a5fa" stroke-width="1.2" opacity=".45"/>
+        <ellipse cx="100" cy="100" rx="30" ry="78" stroke="#60a5fa" stroke-width="1.2" opacity=".45"/>
+        <line x1="22" y1="100" x2="178" y2="100" stroke="#60a5fa" stroke-width="1.2" opacity=".45"/>
+        <line x1="100" y1="22" x2="100" y2="178" stroke="#60a5fa" stroke-width="1.2" opacity=".45"/>
+        <g fill="#2dd4bf"><circle cx="70" cy="72" r="4"/><circle cx="135" cy="88" r="4"/><circle cx="88" cy="132" r="4"/><circle cx="120" cy="60" r="3"/><circle cx="58" cy="112" r="3"/><circle cx="146" cy="128" r="3"/></g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- RÔLE -->
+  <div class="sec">
+    <h2 data-i18n="prx.role_h2">À quoi sert un proxy résidentiel ?</h2>
+    <p class="sub" data-i18n-html="prx.role_sub">Un proxy fait transiter votre connexion par une autre adresse IP. Avec une IP <b>résidentielle</b> (celle d'un vrai particulier), vous apparaissez comme un internaute local ordinaire — les sites, boîtes mail et services ne bloquent pas votre trafic comme ils le feraient avec une IP de serveur.</p>
+    <div class="grid2">
+      <div class="card">
+        <h3><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span><span data-i18n="prx.role_c1_h">Rester indétectable</span></h3>
+        <p data-i18n="prx.role_c1_p">Les IP résidentielles sont vues comme des connexions humaines normales. Idéal quand une IP de datacenter serait immédiatement signalée ou bloquée.</p>
+      </div>
+      <div class="card">
+        <h3><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 0 20"/></svg></span><span data-i18n="prx.role_c2_h">Apparaître dans le bon pays</span></h3>
+        <p data-i18n="prx.role_c2_p">Choisissez le pays (et l'opérateur) de sortie : votre trafic semble provenir d'un utilisateur local, où que vous soyez réellement.</p>
+      </div>
+      <div class="card">
+        <h3><span class="ico"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg></span><span data-i18n="prx.role_c3_h">Protéger vos envois</span></h3>
+        <p data-i18n="prx.role_c3_p">Combiné à EvoSender, le proxy masque votre IP réelle et répartit l'envoi, pour préserver votre réputation et votre délivrabilité.</p>
+      </div>
+      <div class="card">
+        <h3><span class="ico"><svg viewBox="0 0 24 24"><path d="M23 12l-2.4-2.4.3-3.4-3.3-.8L15.9 2 12 3.5 8.1 2 6.7 5.4l-3.3.8.3 3.4L1 12l2.4 2.4-.3 3.4 3.3.8L8.1 22 12 20.5 15.9 22l1.4-3.4 3.3-.8-.3-3.4z"/></svg></span><span data-i18n="prx.role_c4_h">Fiabilité & rotation</span></h3>
+        <p data-i18n="prx.role_c4_p">Un immense pool d'adresses : renouvelez l'IP à chaque requête, ou gardez la même le temps d'une session.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CAS D'USAGE -->
+  <div class="sec">
+    <h2 data-i18n="prx.uc_h2">Ce que vous pouvez faire</h2>
+    <div class="uc-grid">
+      <div class="uc"><div class="uct" data-i18n="prx.uc1_t">Envoi email en proxy</div><div class="ucd" data-i18n="prx.uc1_d">Envoyez vos campagnes EvoSender via des IP résidentielles (mode proxy ou hybride) pour ne pas exposer votre serveur.</div></div>
+      <div class="uc"><div class="uct" data-i18n="prx.uc2_t">Extraction sans blocage</div><div class="ucd" data-i18n="prx.uc2_d">Collectez des adresses avec EvoExtractor sans être bloqué par les moteurs et les sites.</div></div>
+      <div class="uc"><div class="uct" data-i18n="prx.uc3_t">Vérification multi-pays</div><div class="ucd" data-i18n="prx.uc3_d">Testez des services et des contenus tels qu'ils apparaissent depuis un pays donné.</div></div>
+      <div class="uc"><div class="uct" data-i18n="prx.uc4_t">Navigation anonyme</div><div class="ucd" data-i18n="prx.uc4_d">Masquez votre IP réelle et naviguez comme un utilisateur local.</div></div>
+      <div class="uc"><div class="uct" data-i18n="prx.uc5_t">Contrôle prix & pub</div><div class="ucd" data-i18n="prx.uc5_d">Vérifiez l'affichage de prix, d'annonces ou de résultats selon la région.</div></div>
+      <div class="uc"><div class="uct" data-i18n="prx.uc6_t">Gestion multi-comptes</div><div class="ucd" data-i18n="prx.uc6_d">Séparez vos accès avec des IP distinctes et cohérentes géographiquement.</div></div>
+    </div>
+  </div>
+
+  <!-- CIBLAGE -->
+  <div class="sec">
+    <h2 data-i18n="prx.target_h2">Ciblage précis : pays + opérateur</h2>
+    <p class="sub" data-i18n="prx.target_sub">Depuis votre espace client, un générateur construit vos identifiants de connexion selon vos critères — pas besoin de configuration technique.</p>
+    <div class="grid2">
+      <div class="card">
+        <h3 data-i18n="prx.target_c1_h">🌍 Par pays</h3>
+        <ul>
+          <li data-i18n-html="prx.target_c1_l1">Plus de <b>30 pays</b> : Amérique, Europe, Asie-Pacifique, Moyen-Orient, Afrique.</li>
+          <li data-i18n-html="prx.target_c1_l2">Ou <b>aléatoire mondial</b> si le pays n'a pas d'importance.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 data-i18n="prx.target_c2_h">📡 Par ISP / opérateur</h3>
+        <ul>
+          <li data-i18n-html="prx.target_c2_l1">Ciblez un <b>fournisseur d'accès précis</b> (code ASN) pour une IP encore plus crédible.</li>
+          <li data-i18n-html="prx.target_c2_l2">Optionnel : laissez « aléatoire » pour tous les opérateurs du pays.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SESSIONS -->
+  <div class="sec">
+    <h2 data-i18n="prx.sess_h2">Rotative ou fixe (sticky)</h2>
+    <div class="grid2">
+      <div class="card">
+        <h3 data-i18n="prx.sess_c1_h">🔄 IP rotative</h3>
+        <p data-i18n-html="prx.sess_c1_p">Laissez le champ session vide : vous obtenez une <b>nouvelle IP à chaque requête</b>. Parfait pour l'extraction et les tâches à fort volume où l'on veut varier les adresses.</p>
+      </div>
+      <div class="card">
+        <h3 data-i18n="prx.sess_c2_h">📌 IP fixe (sticky)</h3>
+        <p data-i18n-html="prx.sess_c2_p">Renseignez un <b>identifiant de session</b> : vous gardez la <b>même IP</b> le temps de la session. Idéal quand un service exige une IP stable (connexion, envoi continu).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORFAITS -->
+  <div class="sec">
+    <h2 data-i18n="prx.plans_h2">Forfaits au volume</h2>
+    <p class="sub" data-i18n="prx.plans_sub">Vous payez la <b>bande passante</b> (en Go), pas le nombre d'IP. Chaque forfait est valable <b>180 jours</b> et s'active automatiquement après paiement.</p>
+    <div class="plans">
+      <div class="plan"><div class="gb">5 Go</div><div class="pn" data-i18n="prx.plan_start">Pour démarrer</div></div>
+      <div class="plan"><div class="gb">55 Go</div><div class="pn" data-i18n="prx.plan_popular">Le plus choisi</div></div>
+      <div class="plan"><div class="gb">100 Go</div><div class="pn" data-i18n="prx.plan_pro">Usage régulier</div></div>
+      <div class="plan"><div class="gb">200 Go</div><div class="pn" data-i18n="prx.plan_intensive">Intensif</div></div>
+      <div class="plan"><div class="gb">1 To</div><div class="pn" data-i18n="prx.plan_scale">Gros volume</div></div>
+      <div class="plan"><div class="gb">2 To</div><div class="pn" data-i18n="prx.plan_max">Maximum</div></div>
+    </div>
+  </div>
+
+  <!-- COMMENT ÇA MARCHE -->
+  <div class="sec">
+    <h2 data-i18n="prx.how_h2">Comment ça marche</h2>
+    <div class="steps">
+      <div class="step" data-i18n-html="prx.how_s1">Choisissez un forfait au Go et payez — <b>activation automatique</b>.</div>
+      <div class="step" data-i18n-html="prx.how_s2">Dans votre espace client, ouvrez le <b>générateur d'identifiants</b>.</div>
+      <div class="step" data-i18n-html="prx.how_s3">Sélectionnez le <b>pays</b>, éventuellement l'<b>ISP</b> et le type de session (rotative / sticky).</div>
+      <div class="step" data-i18n-html="prx.how_s4">Copiez vos identifiants <span class="code">user:pass@host:port</span> et utilisez-les dans EvoSender, EvoExtractor ou votre outil.</div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="sec">
+    <h2 data-i18n="prx.faq_h2">Questions fréquentes</h2>
+    <div class="faq">
+      <details><summary data-i18n="prx.faq_q1">Quelle différence avec un proxy datacenter ?</summary><p data-i18n="prx.faq_a1">Une IP datacenter appartient à un hébergeur et est facilement identifiée et bloquée. Une IP résidentielle appartient à un vrai particulier via son fournisseur d'accès : elle passe pour un internaute normal, donc bien plus fiable.</p></details>
+      <details><summary data-i18n="prx.faq_q2">Comment fonctionne le ciblage par pays ?</summary><p data-i18n="prx.faq_a2">Vous choisissez le pays (et l'opérateur) dans le générateur de votre espace client ; les paramètres sont intégrés à vos identifiants. L'IP de sortie provient alors de la zone demandée.</p></details>
+      <details><summary data-i18n="prx.faq_q3">Rotative ou sticky : que choisir ?</summary><p data-i18n="prx.faq_a3">Rotative (session vide) = nouvelle IP à chaque requête, utile pour l'extraction. Sticky (session renseignée) = même IP le temps de la session, utile quand un service exige une IP stable.</p></details>
+      <details><summary data-i18n="prx.faq_q4">Le forfait expire-t-il ?</summary><p data-i18n="prx.faq_a4">Chaque forfait est valable 180 jours à partir de l'activation. Vous consommez votre volume de Go pendant cette période.</p></details>
+      <details><summary data-i18n="prx.faq_q5">Puis-je l'utiliser avec EvoSender et EvoExtractor ?</summary><p data-i18n="prx.faq_a5">Oui. EvoSender propose un mode d'envoi via proxy (et un mode hybride), et EvoExtractor peut extraire à travers le proxy pour éviter les blocages.</p></details>
+      <details><summary data-i18n="prx.faq_q6">Mon IP réelle est-elle exposée ?</summary><p data-i18n="prx.faq_a6">Non : votre trafic sort par l'IP résidentielle du proxy. Votre adresse réelle reste masquée.</p></details>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="ctabox">
+    <h2 data-i18n="prx.cta_h">Prêt à passer par une IP résidentielle ?</h2>
+    <p data-i18n="prx.cta_p">Choisissez un forfait au Go, activez-le en un instant, et générez vos identifiants ciblés.</p>
+    <a class="btn btn-primary" style="padding:14px 30px;font-size:15px" href="/pay.html?product=proxy_55gb" data-i18n="prx.cta_btn">Obtenir un forfait proxy →</a>
+  </div>
+</div>
+
+<div class="footer" data-i18n="prx.footer">© 2025–2026 EGSCI SARL — EvoStudio · Fédération de Russie</div>
+
+<script src="/assistance.js" defer></script>
+<script>
+  if(localStorage.getItem('evo_token')||localStorage.getItem('evo_logged_in')){var a=document.getElementById('nav-account'),l=document.getElementById('nav-login');if(a)a.style.display='';if(l)l.style.display='none';}
+</script>
+</body>
+</html>
