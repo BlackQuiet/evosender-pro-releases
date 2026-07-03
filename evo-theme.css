@@ -330,7 +330,7 @@ html[data-theme="light"] .feat-wide{background:linear-gradient(135deg,#1e3a8a,#2
 html[data-theme="light"] .feat-wide h4,html[data-theme="light"] .feat-wide p{color:#fff!important}
 html[data-theme="light"] .app-frame{box-shadow:0 30px 70px rgba(15,23,42,.15),0 0 0 1px #e2e8f0}
 
-/* ── Bandeau presse « Comme on le voit sur » (logos défilants) ── */
+/* ── Bandeau écosystème EGSCI/EvoStudio (logos défilants) ── */
 .press-band{padding:32px 0 34px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden}
 .press-band .press-h{text-align:center;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:20px}
 .marq{position:relative;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
@@ -339,5 +339,7 @@ html[data-theme="light"] .app-frame{box-shadow:0 30px 70px rgba(15,23,42,.15),0 
 .press-logo{font-weight:800;font-size:21px;letter-spacing:-.5px;color:var(--slate-2);white-space:nowrap;flex-shrink:0;opacity:.72;transition:opacity .2s}
 .press-logo:hover{opacity:1}
 .press-logo .r{opacity:.55}
+.press-logo.egsci{color:#16a34a;opacity:.9}
+.press-logo.egsci:hover{opacity:1}
 @keyframes marqScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){.marq-track{animation:none}}

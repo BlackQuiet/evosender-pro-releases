@@ -1,6 +1,12 @@
 /* Widget d'assistance flottant partagé — sur toutes les pages du site.
    - Connecté (evo_token présent) → chat bidirectionnel (/api/auth/support)
    - Visiteur sans compte       → formulaire de contact (/api/shop/contact) */
+
+/* Charge la bannière de consentement cookies sur toutes les pages (RGPD). */
+(function () {
+  try { if (!document.getElementById('evc-cookies-js') && !window.EvoCookies) { var s = document.createElement('script'); s.id = 'evc-cookies-js'; s.src = '/cookies.js'; s.defer = true; (document.head || document.documentElement).appendChild(s); } } catch (e) {}
+})();
+
 (function () {
   var API = 'https://admin.evostudio.fr';
   function token() { return localStorage.getItem('evo_token'); }
@@ -150,7 +156,10 @@
     document.getElementById('ev-send').addEventListener('click', sendSupport);
     document.getElementById('ev-input').addEventListener('keydown', function (e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendSupport(); } });
     refreshUnread();
-    setInterval(function () { if (open) loadSupport(); else refreshUnread(); }, 20000);
+    var _assistInterval = null;
+    if (_assistInterval) clearInterval(_assistInterval);
+    _assistInterval = setInterval(function () { if (open) loadSupport(); else refreshUnread(); }, 20000);
+    window.addEventListener('beforeunload', function () { if (_assistInterval) clearInterval(_assistInterval); });
   } else {
     document.getElementById('ev-csend').addEventListener('click', sendContact);
   }
