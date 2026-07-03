@@ -1016,12 +1016,18 @@ async function testProxyModal(){
   if(country)uname+='-country-'+country;
   if(isp)uname+='-isp-'+isp;
   if(ssidBase)uname+='-ssid-'+ssidBase;
+  var _ac=new AbortController(); var _to=setTimeout(function(){_ac.abort();},30000);
   try{
-    var r=await fetch(API+'/api/auth/proxy-test',{method:'POST',headers:{...authHeaders(),'Content-Type':'application/json'},body:JSON.stringify({host:_prxData.host,port:_prxData.port,username:uname,password:_prxData.pass})});
+    var r=await fetch(API+'/api/auth/proxy-test',{method:'POST',headers:{...authHeaders(),'Content-Type':'application/json'},body:JSON.stringify({host:_prxData.host,port:_prxData.port,username:uname,password:_prxData.pass}),signal:_ac.signal});
+    clearTimeout(_to);
     var d=await r.json();
     if(d.ok){box.innerHTML='<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:13px"><div style="font-weight:700;color:#15803d;margin-bottom:8px">✅ Proxy fonctionnel !</div><div style="display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:12px"><span style="color:var(--slate-2);font-weight:600">IP publique</span><span style="font-family:monospace;font-weight:700">'+esc(d.ip||'—')+'</span><span style="color:var(--slate-2);font-weight:600">Pays</span><span style="font-weight:600">'+esc(d.country||'—')+'</span><span style="color:var(--slate-2);font-weight:600">Ville</span><span>'+esc([d.city,d.region].filter(Boolean).join(', ')||'—')+'</span><span style="color:var(--slate-2);font-weight:600">Opérateur</span><span style="font-size:11.5px">'+esc(d.org||'—')+'</span></div></div>';}
     else{box.innerHTML='<div style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:11px;font-size:12.5px;color:var(--red)">❌ '+esc(d.error||'Erreur inconnue')+'</div>';}
-  }catch(e){box.innerHTML='<div style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:11px;font-size:12.5px;color:var(--red)">❌ Erreur réseau : '+esc(e.message||'')+'</div>';}
+  }catch(e){
+    clearTimeout(_to);
+    var m=(e&&e.name==='AbortError')?'Test trop long (>30 s) — le pays/ISP choisi n\'a peut-être pas d\'IP disponible. Réessaie ou change d\'ISP.':('Erreur réseau : '+(e.message||'')+'. Réessaie (le serveur peut se réveiller après une inactivité).');
+    box.innerHTML='<div style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:11px;font-size:12.5px;color:var(--red)">❌ '+esc(m)+'</div>';
+  }
 }
 
 // ── Main load ──
