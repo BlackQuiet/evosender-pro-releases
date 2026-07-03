@@ -969,18 +969,21 @@ function proxyModalGen(){
   var u=_prxData.user,pw=_prxData.pass,h=_prxData.host,p=_prxData.port;
   if(!u)return;
   var country=document.getElementById('prx-m-country').value;
-  var isp=proxyModalIspVal();
+  var ispCode=proxyModalIspVal();
+  var asn=(String(ispCode).match(/(\d{2,7})/)||[])[1]||''; // ASN depuis as7922_Comcast → 7922
   var ssidBase=(document.getElementById('prx-m-ssid').value||'').trim();
   var qty=Math.min(999,Math.max(1,parseInt(document.getElementById('prx-m-qty').value,10)||1));
-  var prefix=u;
-  if(country)prefix+='-country-'+country;
-  if(isp)prefix+='-isp-'+isp;
+  // IPRoyal : le ciblage (country / asn / session) va dans le MOT DE PASSE, séparé par des « _ »
+  // (pas dans l'username). L'username reste inchangé.
+  var passBase=pw;
+  if(country)passBase+='_country-'+country;
+  if(asn)passBase+='_asn-'+asn;
   var fmt=(document.getElementById('prx-m-format')||{}).value||'uphp';
   var lines=[];
   for(var i=0;i<qty;i++){
-    var uu=prefix;
-    if(ssidBase){uu+='-ssid-'+ssidBase+(qty>1?i+1:'');}
-    lines.push(fmtProxy(fmt,uu,pw,h,p));
+    var pp=passBase;
+    if(ssidBase){pp+='_session-'+ssidBase+(qty>1?i+1:'');}
+    lines.push(fmtProxy(fmt,u,pp,h,p));
   }
   document.getElementById('prx-m-result').value=lines.join('\n');
   document.getElementById('prx-m-result').rows=Math.min(qty,10);
@@ -1007,18 +1010,19 @@ async function testProxyModal(){
   var box=document.getElementById('prx-m-test-result');
   box.style.display='';
   box.innerHTML='<div style="background:#f8fafc;border:1px solid var(--line);border-radius:8px;padding:11px;font-size:12.5px;color:var(--slate)">⏳ Test en cours…</div>';
-  // Reconstruit l'username AVEC le ciblage sélectionné (pays / ISP / ssid), comme le générateur,
-  // sinon le test porte sur le proxy générique et renvoie un pays au hasard.
-  var uname=_prxData.user;
+  // Applique le ciblage (pays / ASN / session) dans le MOT DE PASSE, comme le générateur —
+  // format IPRoyal correct (l'username reste la base), sinon le test porte sur un IP au hasard.
   var country=document.getElementById('prx-m-country').value;
-  var isp=proxyModalIspVal();
+  var ispCode=proxyModalIspVal();
+  var asn=(String(ispCode).match(/(\d{2,7})/)||[])[1]||'';
   var ssidBase=(document.getElementById('prx-m-ssid').value||'').trim();
-  if(country)uname+='-country-'+country;
-  if(isp)uname+='-isp-'+isp;
-  if(ssidBase)uname+='-ssid-'+ssidBase;
+  var upass=_prxData.pass;
+  if(country)upass+='_country-'+country;
+  if(asn)upass+='_asn-'+asn;
+  if(ssidBase)upass+='_session-'+ssidBase;
   var _ac=new AbortController(); var _to=setTimeout(function(){_ac.abort();},30000);
   try{
-    var r=await fetch(API+'/api/auth/proxy-test',{method:'POST',headers:{...authHeaders(),'Content-Type':'application/json'},body:JSON.stringify({host:_prxData.host,port:_prxData.port,username:uname,password:_prxData.pass}),signal:_ac.signal});
+    var r=await fetch(API+'/api/auth/proxy-test',{method:'POST',headers:{...authHeaders(),'Content-Type':'application/json'},body:JSON.stringify({host:_prxData.host,port:_prxData.port,username:_prxData.user,password:upass}),signal:_ac.signal});
     clearTimeout(_to);
     var d=await r.json();
     if(d.ok){box.innerHTML='<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:13px"><div style="font-weight:700;color:#15803d;margin-bottom:8px">✅ Proxy fonctionnel !</div><div style="display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:12px"><span style="color:var(--slate-2);font-weight:600">IP publique</span><span style="font-family:monospace;font-weight:700">'+esc(d.ip||'—')+'</span><span style="color:var(--slate-2);font-weight:600">Pays</span><span style="font-weight:600">'+esc(d.country||'—')+'</span><span style="color:var(--slate-2);font-weight:600">Ville</span><span>'+esc([d.city,d.region].filter(Boolean).join(', ')||'—')+'</span><span style="color:var(--slate-2);font-weight:600">Opérateur</span><span style="font-size:11.5px">'+esc(d.org||'—')+'</span></div></div>';}
