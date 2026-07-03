@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EvoStudio — Paiement</title><link rel="icon" href="/logo-EvoSender.ico" type="image/x-icon" />
+  <title data-i18n="pay.doc_title">EvoStudio — Paiement</title><link rel="icon" href="/logo-EvoSender.ico" type="image/x-icon" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
           integrity="sha512-CNvkORF6P1H2eTe7ZCfD8r6H1j1pJLBBlVKrVdHFlRoRcFUcSTHYmzVXwRwH00bFUZ5oVxXDEoOmN8k+VaOjQ=="
@@ -99,31 +99,190 @@
     html[data-theme="light"] #product-select option{background:#fff;color:#0f172a}
   </style>
 <script src="/theme.js"></script>
+<script>window.I18N_PAGE={
+  en:{
+    "pay.doc_title":"EvoStudio — Payment",
+    "pay.back":"Back",
+    "pay.h_order":"Your order",
+    "pay.sub_order":"Choose the product and the payment method.",
+    "pay.product":"Product",
+    "pay.choose_product":"— Choose a product —",
+    "pay.qty_label":"Computers (PC)",
+    "pay.qty_hint_one":"1 license — 1 PC",
+    "pay.payment":"Payment",
+    "pay.crypto":"Cryptocurrency",
+    "pay.om":"Orange Money",
+    "pay.card_indispo_title":"Visa/Mastercard — unavailable",
+    "pay.card_unavail":"Unavailable",
+    "pay.invoice_email":"Billing email",
+    "pay.invoice_ph":"you@example.com",
+    "pay.invoice_note":"You will receive your invoice and your license at this address after validation.",
+    "pay.promo":"Promo code",
+    "pay.promo_optional":"(optional)",
+    "pay.promo_ph":"CODE",
+    "pay.apply":"Apply",
+    "pay.total":"Total to pay",
+    "pay.proceed":"Continue to payment",
+    "pay.step_label":"Last step — payment",
+    "pay.h_finalize":"Finalize your payment",
+    "pay.sub_finalize":"Send exactly this amount to the address below.",
+    "pay.amount_exact":"EXACT amount to send",
+    "pay.copy":"Copy",
+    "pay.address":"Receiving address",
+    "pay.warning":"⚠️ Send <strong>exactly</strong> the amount indicated (with decimals). This unique amount identifies your payment and the license is generated automatically upon receipt.",
+    "pay.status_pending":"Waiting for payment…",
+    "pay.status_auto_90":"Automatic check every 90 seconds",
+    "pay.beneficiary":"Beneficiary",
+    "pay.select_product_first":"Select a product first.",
+    "pay.checking":"Checking…",
+    "pay.promo_valid":"✓ Valid code: -{p}% applied at payment.",
+    "pay.code_invalid":"Code invalid",
+    "pay.verify_error":"Verification error.",
+    "pay.error":"Error.",
+    "pay.network_error":"Network error.",
+    "pay.loading":"Loading...",
+    "pay.qty_hint_many":"{n} PCs on one license",
+    "pay.softwares":"Software",
+    "pay.smtp_relay":"SMTP Relay servers",
+    "pay.proxy_res":"Residential proxy",
+    "pay.emails_per_month":"e/month",
+    "pay.per_month":"/ month",
+    "pay.per_month_short":"month",
+    "pay.per_pc":"/ PC",
+    "pay.change_product":"← Change product",
+    "pay.proxy_traffic":"of traffic",
+    "pay.emails_month_lbl":"emails/month",
+    "pay.pkg_proxy":"Proxy plan",
+    "pay.sub_monthly":"Monthly subscription",
+    "pay.annual_license":"Annual license",
+    "pay.pay_fiat_sub":"Pay exactly {amount} XOF via {method} by scanning the QR code below",
+    "pay.pay_with":"Pay with",
+    "pay.warn_fiat":"Scan the QR code or click <strong>“Pay with {method}”</strong> to pay <strong>exactly {amount} XOF</strong> to <strong>EGSCI SARL</strong>. This unique amount identifies your order. Your license will be activated as soon as the payment is validated.",
+    "pay.status_fiat_pending":"Waiting for {method} payment confirmation…",
+    "pay.status_auto_10":"Check every 10 seconds",
+    "pay.redirect_secure":"Redirecting to secure payment…",
+    "pay.opening_oxapay":"Opening the OxaPay payment page…",
+    "pay.send_exact_crypto":"Send exactly {amount} {symbol} · {network} network",
+    "pay.net_tron":"TRC20 (Tron)",
+    "pay.net_btc":"Bitcoin",
+    "pay.paid_title":"Payment confirmed!",
+    "pay.paid_smtp":"Your SMTP server is being provisioned.<br>You will receive your relay credentials by <strong>email within 24h</strong>.",
+    "pay.see_smtp":"View my SMTP servers →",
+    "pay.paid_proxy":"Your residential proxy plan is being activated.<br>Your connection credentials will be sent to you by <strong>email</strong> and will be visible in your client area.",
+    "pay.see_proxy":"View my proxies →",
+    "pay.license_ready":"Your license is ready:",
+    "pay.copy_license":"Copy license",
+    "pay.my_account":"My client area →",
+    "pay.license_copied":"✓ License copied!",
+    "pay.expired":"⏱ Order expired. Refresh to start over.",
+    "pay.amount_copied":"Amount copied!",
+    "pay.address_copied":"Address copied!"
+  },
+  ru:{
+    "pay.doc_title":"EvoStudio — Оплата",
+    "pay.back":"Назад",
+    "pay.h_order":"Ваш заказ",
+    "pay.sub_order":"Выберите продукт и способ оплаты.",
+    "pay.product":"Продукт",
+    "pay.choose_product":"— Выберите продукт —",
+    "pay.qty_label":"Компьютеры (ПК)",
+    "pay.qty_hint_one":"1 лицензия — 1 ПК",
+    "pay.payment":"Оплата",
+    "pay.crypto":"Криптовалюта",
+    "pay.om":"Orange Money",
+    "pay.card_indispo_title":"Visa/Mastercard — недоступно",
+    "pay.card_unavail":"Недоступно",
+    "pay.invoice_email":"Email для счёта",
+    "pay.invoice_ph":"vy@primer.com",
+    "pay.invoice_note":"После подтверждения вы получите счёт и лицензию на этот адрес.",
+    "pay.promo":"Промокод",
+    "pay.promo_optional":"(необязательно)",
+    "pay.promo_ph":"КОД",
+    "pay.apply":"Применить",
+    "pay.total":"Итого к оплате",
+    "pay.proceed":"Перейти к оплате",
+    "pay.step_label":"Последний шаг — оплата",
+    "pay.h_finalize":"Завершите оплату",
+    "pay.sub_finalize":"Отправьте точно эту сумму на адрес ниже.",
+    "pay.amount_exact":"ТОЧНАЯ сумма к отправке",
+    "pay.copy":"Копировать",
+    "pay.address":"Адрес получения",
+    "pay.warning":"⚠️ Отправьте <strong>точно</strong> указанную сумму (с десятичными знаками). Эта уникальная сумма идентифицирует ваш платёж, и лицензия генерируется автоматически при получении.",
+    "pay.status_pending":"Ожидание оплаты…",
+    "pay.status_auto_90":"Автоматическая проверка каждые 90 секунд",
+    "pay.beneficiary":"Получатель",
+    "pay.select_product_first":"Сначала выберите продукт.",
+    "pay.checking":"Проверка…",
+    "pay.promo_valid":"✓ Код действителен: -{p}% применено при оплате.",
+    "pay.code_invalid":"Недействительный код",
+    "pay.verify_error":"Ошибка проверки.",
+    "pay.error":"Ошибка.",
+    "pay.network_error":"Ошибка сети.",
+    "pay.loading":"Загрузка...",
+    "pay.qty_hint_many":"{n} ПК на одной лицензии",
+    "pay.softwares":"Программы",
+    "pay.smtp_relay":"SMTP Relay-серверы",
+    "pay.proxy_res":"Резидентный прокси",
+    "pay.emails_per_month":"писем/мес",
+    "pay.per_month":"/ месяц",
+    "pay.per_month_short":"мес",
+    "pay.per_pc":"/ ПК",
+    "pay.change_product":"← Сменить продукт",
+    "pay.proxy_traffic":"трафика",
+    "pay.emails_month_lbl":"писем/месяц",
+    "pay.pkg_proxy":"Тариф прокси",
+    "pay.sub_monthly":"Ежемесячная подписка",
+    "pay.annual_license":"Годовая лицензия",
+    "pay.pay_fiat_sub":"Оплатите ровно {amount} XOF через {method}, отсканировав QR-код ниже",
+    "pay.pay_with":"Оплатить через",
+    "pay.warn_fiat":"Отсканируйте QR-код или нажмите <strong>«Оплатить через {method}»</strong>, чтобы оплатить <strong>ровно {amount} XOF</strong> получателю <strong>EGSCI SARL</strong>. Эта уникальная сумма идентифицирует ваш заказ. Ваша лицензия будет активирована сразу после подтверждения оплаты.",
+    "pay.status_fiat_pending":"Ожидание подтверждения оплаты {method}…",
+    "pay.status_auto_10":"Проверка каждые 10 секунд",
+    "pay.redirect_secure":"Перенаправление на безопасную оплату…",
+    "pay.opening_oxapay":"Открытие страницы оплаты OxaPay…",
+    "pay.send_exact_crypto":"Отправьте ровно {amount} {symbol} · Сеть {network}",
+    "pay.net_tron":"TRC20 (Tron)",
+    "pay.net_btc":"Bitcoin",
+    "pay.paid_title":"Оплата подтверждена!",
+    "pay.paid_smtp":"Ваш SMTP-сервер настраивается.<br>Вы получите данные для доступа к relay по <strong>email в течение 24 ч</strong>.",
+    "pay.see_smtp":"Мои SMTP-серверы →",
+    "pay.paid_proxy":"Ваш тариф резидентного прокси активируется.<br>Данные для подключения будут отправлены вам по <strong>email</strong> и будут доступны в личном кабинете.",
+    "pay.see_proxy":"Мои прокси →",
+    "pay.license_ready":"Ваша лицензия готова:",
+    "pay.copy_license":"Копировать лицензию",
+    "pay.my_account":"Личный кабинет →",
+    "pay.license_copied":"✓ Лицензия скопирована!",
+    "pay.expired":"⏱ Заказ истёк. Обновите страницу, чтобы начать заново.",
+    "pay.amount_copied":"Сумма скопирована!",
+    "pay.address_copied":"Адрес скопирован!"
+  }
+};</script>
+<script src="/i18n.js" defer></script>
 </head>
 <body>
   <div class="checkout">
     <main class="panel">
       <div style="display:flex;align-items:center;margin-bottom:24px">
-        <a onclick="history.back();return false" href="#" title="Retour" style="display:flex;align-items:center;justify-content:center;width:32px;height:32px;background:#2563eb;color:#fff;text-decoration:none;flex-shrink:0;transition:.15s" onmouseover="this.style.background='#1d4ed8'" onmouseout="this.style.background='#2563eb'">
+        <a onclick="history.back();return false" href="#" title="Retour" data-i18n-title="pay.back" style="display:flex;align-items:center;justify-content:center;width:32px;height:32px;background:#2563eb;color:#fff;text-decoration:none;flex-shrink:0;transition:.15s" onmouseover="this.style.background='#1d4ed8'" onmouseout="this.style.background='#2563eb'">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="15 18 9 12 15 6"/></svg>
         </a>
         <div style="flex:1;text-align:center"><a href="/"><img src="/logoevostudio2.png" alt="EvoStudio" height="39" style="display:inline-block;max-width:182px;object-fit:contain" /></a></div>
-        <div style="width:32px;flex-shrink:0"></div>
+        <div id="lang-switch" style="flex-shrink:0;display:flex;justify-content:flex-end"></div>
       </div>
       <!-- Étape 1 -->
       <div id="step-choose">
-        <h1>Votre commande</h1>
-        <p class="sub">Choisissez le produit et le moyen de paiement.</p>
+        <h1 data-i18n="pay.h_order">Votre commande</h1>
+        <p class="sub" data-i18n="pay.sub_order">Choisissez le produit et le moyen de paiement.</p>
 
-        <div class="mini-label" id="product-label">Produit</div>
+        <div class="mini-label" id="product-label" data-i18n="pay.product">Produit</div>
         <div id="product-grid"></div>
         <select id="product-select" onchange="selectProductFromDropdown(this)" style="display:none;width:100%;background:var(--field);border:1.5px solid var(--line);color:var(--ink);border-radius:0;padding:12px 14px;font-size:14px;font-weight:600;outline:none;font-family:inherit;cursor:pointer;transition:.2s">
-          <option value="">— Choisir un produit —</option>
+          <option value="" data-i18n="pay.choose_product">— Choisir un produit —</option>
         </select>
 
-        <div class="mini-label" id="qty-label">Ordinateurs (PC)</div>
+        <div class="mini-label" id="qty-label" data-i18n="pay.qty_label">Ordinateurs (PC)</div>
         <div class="mini-row" id="qty-section">
-          <div class="qty-hint" id="qty-hint">1 licence — 1 PC</div>
+          <div class="qty-hint" id="qty-hint" data-i18n="pay.qty_hint_one">1 licence — 1 PC</div>
           <div class="qty-stepper">
             <button type="button" class="qty-btn" onclick="changeQty(-1)">−</button>
             <div class="qty-val" id="qty-val">1</div>
@@ -131,7 +290,7 @@
           </div>
         </div>
 
-        <div class="mini-label">Paiement</div>
+        <div class="mini-label" data-i18n="pay.payment">Paiement</div>
         <div class="pay-pills" id="crypto-grid">
           <div class="pill-btn active" data-crypto="usdt" id="btn-crypto" onclick="selectCrypto(this)">
             <svg class="pay-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -141,71 +300,71 @@
               <rect x="13.5" y="11" width="8.5" height="5" rx="2.5" fill="#1e40af"/>
               <circle cx="17.2" cy="13.5" r="1.25" fill="#fff"/>
             </svg>
-            Cryptomonnaie
+            <span data-i18n="pay.crypto">Cryptomonnaie</span>
           </div>
           <div class="pill-btn" data-crypto="wave" id="btn-wave" onclick="selectCrypto(this)" style="display:none">
             <img src="https://paywall.senaffiche.com/assets/images/logo_wave_circle_818.png" alt="Wave" class="pay-logo" style="border-radius:50%" />
             Wave
           </div>
           <div class="pill-btn" data-crypto="om" id="btn-om" onclick="selectCrypto(this)" style="display:none">
-            <span style="font-size:18px;line-height:1">🟠</span>Orange Money
+            <span style="font-size:18px;line-height:1">🟠</span><span data-i18n="pay.om">Orange Money</span>
           </div>
-          <div id="btn-card" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:var(--field);border:1.5px solid var(--line);border-radius:0;padding:8px 6px;font-size:11px;font-weight:600;color:var(--slate-2);cursor:not-allowed;opacity:.65" title="Visa/Mastercard — non disponible">
+          <div id="btn-card" style="display:none;flex-direction:column;align-items:center;justify-content:center;gap:4px;background:var(--field);border:1.5px solid var(--line);border-radius:0;padding:8px 6px;font-size:11px;font-weight:600;color:var(--slate-2);cursor:not-allowed;opacity:.65" title="Visa/Mastercard — non disponible" data-i18n-title="pay.card_indispo_title">
             <span style="font-size:18px;line-height:1">💳</span>
-            Visa/MC<span style="font-size:9px;background:#fef2f2;color:#ef4444;border-radius:6px;padding:1px 5px">Indispo</span>
+            Visa/MC<span style="font-size:9px;background:#fef2f2;color:#ef4444;border-radius:6px;padding:1px 5px" data-i18n="pay.card_unavail">Indispo</span>
           </div>
         </div>
 
-        <div class="mini-label">Email de facturation</div>
-        <input type="email" id="invoice-email" placeholder="vous@exemple.com" />
-        <div style="font-size:12px;color:var(--slate);margin-top:6px">Vous recevrez votre facture et votre licence à cette adresse après validation.</div>
+        <div class="mini-label" data-i18n="pay.invoice_email">Email de facturation</div>
+        <input type="email" id="invoice-email" placeholder="vous@exemple.com" data-i18n-ph="pay.invoice_ph" />
+        <div style="font-size:12px;color:var(--slate);margin-top:6px" data-i18n="pay.invoice_note">Vous recevrez votre facture et votre licence à cette adresse après validation.</div>
 
-        <div class="mini-label" style="margin-top:14px">Code promo <span style="font-weight:400;color:var(--slate)">(optionnel)</span></div>
+        <div class="mini-label" style="margin-top:14px"><span data-i18n="pay.promo">Code promo</span> <span style="font-weight:400;color:var(--slate)" data-i18n="pay.promo_optional">(optionnel)</span></div>
         <div style="display:flex;gap:8px">
-          <input type="text" id="promo-code" placeholder="CODE" style="flex:1;background:var(--field);border:1.5px solid var(--line);color:var(--ink);border-radius:0;padding:12px 14px;font-size:14px;outline:none;font-family:inherit;text-transform:uppercase" />
-          <button type="button" onclick="applyPromo()" style="background:var(--ink);color:#fff;border:none;padding:0 18px;font-size:13px;font-weight:600;cursor:pointer">Appliquer</button>
+          <input type="text" id="promo-code" placeholder="CODE" data-i18n-ph="pay.promo_ph" style="flex:1;background:var(--field);border:1.5px solid var(--line);color:var(--ink);border-radius:0;padding:12px 14px;font-size:14px;outline:none;font-family:inherit;text-transform:uppercase" />
+          <button type="button" onclick="applyPromo()" data-i18n="pay.apply" style="background:var(--ink);color:#fff;border:none;padding:0 18px;font-size:13px;font-weight:600;cursor:pointer">Appliquer</button>
         </div>
         <div id="promo-msg" style="font-size:12px;margin-top:6px"></div>
 
         <div class="total-row" id="total-row" style="display:none">
-          <span>Total à payer</span>
+          <span data-i18n="pay.total">Total à payer</span>
           <strong id="total-val">—</strong>
         </div>
 
-        <button class="btn" id="btn-proceed" onclick="proceed()" disabled>Continuer vers le paiement</button>
+        <button class="btn" id="btn-proceed" onclick="proceed()" disabled data-i18n="pay.proceed">Continuer vers le paiement</button>
         <div class="msg err" id="msg-choose"></div>
       </div>
 
       <!-- Étape 2 -->
       <div class="pay-box" id="step-pay">
-        <span class="step-label">Dernière étape — paiement</span>
-        <h1>Finalisez votre paiement</h1>
-        <p class="sub" id="pay-sub">Envoyez exactement ce montant à l'adresse ci-dessous.</p>
+        <span class="step-label" data-i18n="pay.step_label">Dernière étape — paiement</span>
+        <h1 data-i18n="pay.h_finalize">Finalisez votre paiement</h1>
+        <p class="sub" id="pay-sub" data-i18n="pay.sub_finalize">Envoyez exactement ce montant à l'adresse ci-dessous.</p>
 
         <div class="amount-row">
           <div>
-            <div style="font-size:11px;color:var(--slate);margin-bottom:2px">Montant EXACT à envoyer</div>
+            <div style="font-size:11px;color:var(--slate);margin-bottom:2px" data-i18n="pay.amount_exact">Montant EXACT à envoyer</div>
             <div class="amount-val" id="pay-amount">—</div>
           </div>
-          <button class="amount-copy" onclick="copyAmount()">Copier</button>
+          <button class="amount-copy" onclick="copyAmount()" data-i18n="pay.copy">Copier</button>
         </div>
 
-        <div class="addr-label">Adresse de réception</div>
+        <div class="addr-label" data-i18n="pay.address">Adresse de réception</div>
         <div class="addr-box">
           <span id="pay-address">—</span>
-          <button class="addr-copy" onclick="copyAddress()">Copier</button>
+          <button class="addr-copy" onclick="copyAddress()" data-i18n="pay.copy">Copier</button>
         </div>
 
         <div id="qrcode"></div>
 
-        <div class="warning">
+        <div class="warning" data-i18n-html="pay.warning">
           ⚠️ Envoyez <strong>exactement</strong> le montant indiqué (avec les décimales). Ce montant unique identifie votre paiement et la licence est générée automatiquement à la réception.
         </div>
 
         <div class="status-box status-pending" id="status-box">
           <span class="spinner"></span>
-          <span id="status-text">En attente du paiement…</span>
-          <div style="font-size:11px;color:var(--slate);margin-top:6px">Vérification automatique toutes les 90 secondes</div>
+          <span id="status-text" data-i18n="pay.status_pending">En attente du paiement…</span>
+          <div style="font-size:11px;color:var(--slate);margin-top:6px" data-i18n="pay.status_auto_90">Vérification automatique toutes les 90 secondes</div>
         </div>
       </div>
     </main>
@@ -231,17 +390,17 @@
       const code=(document.getElementById('promo-code').value||'').trim().toUpperCase();
       const msg=document.getElementById('promo-msg');
       if(!code){ appliedPromo=''; msg.textContent=''; return; }
-      if(!selectedProduct){ msg.style.color='#ef4444'; msg.textContent='Sélectionnez d\'abord un produit.'; return; }
+      if(!selectedProduct){ msg.style.color='#ef4444'; msg.textContent=t('pay.select_product_first','Sélectionnez d\'abord un produit.'); return; }
       _promoLoading=true;
-      msg.style.color='#64748b'; msg.textContent='Vérification…';
+      msg.style.color='#64748b'; msg.textContent=t('pay.checking','Vérification…');
       try{
         const _ca = new AbortController(); const _ta = setTimeout(() => _ca.abort(), 15000);
         const r=await fetch(API+'/api/shop/validate-code',{method:'POST',headers:Object.assign({'Content-Type':'application/json'},authHeaders()),credentials:'include',signal:_ca.signal,body:JSON.stringify({code:code,product:selectedProduct})});
         clearTimeout(_ta);
         const d=await r.json();
-        if(d.ok){ appliedPromo=code; msg.style.color='#16a34a'; msg.textContent='✓ Code valide : -'+d.percent+'% appliqué au paiement.'; }
-        else { appliedPromo=''; msg.style.color='#ef4444'; msg.textContent='✗ '+(d.error||'Code invalide'); }
-      }catch(e){ appliedPromo=''; msg.style.color='#ef4444'; msg.textContent='Erreur de vérification.'; }
+        if(d.ok){ appliedPromo=code; msg.style.color='#16a34a'; msg.textContent=t('pay.promo_valid','✓ Code valide : -{p}% appliqué au paiement.').replace('{p}',d.percent); }
+        else { appliedPromo=''; msg.style.color='#ef4444'; msg.textContent='✗ '+(d.error||t('pay.code_invalid','Code invalide')); }
+      }catch(e){ appliedPromo=''; msg.style.color='#ef4444'; msg.textContent=t('pay.verify_error','Erreur de vérification.'); }
       finally{ _promoLoading=false; }
     }
 
@@ -269,7 +428,7 @@
     function changeQty(d){
       quantity = Math.min(10, Math.max(1, quantity + d));
       document.getElementById('qty-val').textContent = quantity;
-      document.getElementById('qty-hint').textContent = quantity === 1 ? '1 licence — 1 PC' : quantity + ' PC sur une licence';
+      document.getElementById('qty-hint').textContent = quantity === 1 ? t('pay.qty_hint_one','1 licence — 1 PC') : t('pay.qty_hint_many','{n} PC sur une licence').replace('{n}', quantity);
       updateTotal();
     }
     function updateTotal(){
@@ -375,7 +534,7 @@
     const VOL_LABELS = {smtp_10k:'10 000',smtp_50k:'50 000',smtp_100k:'100 000',smtp_500k:'500 000'};
     const PROXY_LABELS = {proxy_5gb:'5 Go',proxy_55gb:'55 Go',proxy_100gb:'100 Go',proxy_200gb:'200 Go',proxy_1000gb:'1 To',proxy_2000gb:'2 To'};
     function priceLabel(p) {
-      const suffix = isSmtp(p.id) ? ' <span style="opacity:.6">/ mois</span>' : (isProxy(p.id) ? '' : ' <span style="opacity:.6">/ PC</span>');
+      const suffix = isSmtp(p.id) ? ' <span style="opacity:.6">' + t('pay.per_month','/ mois') + '</span>' : (isProxy(p.id) ? '' : ' <span style="opacity:.6">' + t('pay.per_pc','/ PC') + '</span>');
       const unit = selectedCrypto === 'btc' ? ' BTC' : (FIAT.includes(selectedCrypto) ? ' XOF' : ' USD');
       let html = '';
       if (discountPct > 0 && selectedCrypto !== 'btc') {
@@ -408,14 +567,14 @@
         const svc = smtp || proxy;
         const ic = proxy ? PROD_ICONS.proxy : (smtp ? PROD_ICONS.smtp : (PROD_ICONS[p.id] || PROD_ICONS.sender));
         const vol = smtp ? (VOL_LABELS[p.id] || (p.volume||'').toLocaleString('fr-FR')) : '';
-        const subLabel = proxy ? '🌐 ' + (PROXY_LABELS[p.id] || p.gb + ' Go') + ' de trafic' : (smtp ? '🖥 ' + vol + ' emails/mois' : '');
-        const typeLabel = proxy ? 'Forfait proxy' : (smtp ? 'Abonnement mensuel' : 'Licence annuelle');
+        const subLabel = proxy ? '🌐 ' + (PROXY_LABELS[p.id] || p.gb + ' Go') + ' ' + t('pay.proxy_traffic','de trafic') : (smtp ? '🖥 ' + vol + ' ' + t('pay.emails_month_lbl','emails/mois') : '');
+        const typeLabel = proxy ? t('pay.pkg_proxy','Forfait proxy') : (smtp ? t('pay.sub_monthly','Abonnement mensuel') : t('pay.annual_license','Licence annuelle'));
         if (label) label.style.display = 'none';
         grid.innerHTML =
           '<div style="display:flex;align-items:center;gap:14px;background:var(--blue-50);border:2px solid var(--blue);border-radius:16px;padding:16px 18px;margin-bottom:4px">' +
             '<div class="prod-ic ' + ic.cls + '" style="flex-shrink:0">' + ic.svg + '</div>' +
             '<div style="flex:1">' +
-              '<div style="font-size:15px;font-weight:800;color:var(--ink)">' + (proxy ? 'Proxy résidentiel — ' + p.name : p.name) + '</div>' +
+              '<div style="font-size:15px;font-weight:800;color:var(--ink)">' + (proxy ? t('pay.proxy_res','Proxy résidentiel') + ' — ' + p.name : p.name) + '</div>' +
               (subLabel ? '<div style="font-size:12px;color:#7c3aed;margin-top:2px">' + subLabel + '</div>' : '') +
             '</div>' +
             '<div style="text-align:right">' +
@@ -423,7 +582,7 @@
               '<div style="font-size:11px;color:var(--slate);margin-top:2px">' + typeLabel + '</div>' +
             '</div>' +
           '</div>' +
-          '<a href="javascript:history.back()" style="font-size:12px;color:var(--slate);display:inline-block;margin-top:6px;text-decoration:none">← Changer de produit</a>';
+          '<a href="javascript:history.back()" style="font-size:12px;color:var(--slate);display:inline-block;margin-top:6px;text-decoration:none">' + t('pay.change_product','← Changer de produit') + '</a>';
 
         const qtySection = document.getElementById('qty-section');
         const qtyLabel = document.getElementById('qty-label');
@@ -442,20 +601,20 @@
       const softProds = products.filter(p => !isSmtp(p.id) && !isProxy(p.id));
       const smtpProds = products.filter(p => isSmtp(p.id));
       const proxyProds = products.filter(p => isProxy(p.id));
-      let opts = '<option value="">— Choisir un produit —</option>';
-      opts += '<optgroup label="Logiciels">';
+      let opts = '<option value="">' + t('pay.choose_product','— Choisir un produit —') + '</option>';
+      opts += '<optgroup label="' + esc(t('pay.softwares','Logiciels')) + '">';
       opts += softProds.map(p => '<option value="' + p.id + '">' + p.name + ' — ' + unitPrice(p) + (selectedCrypto==='btc'?' BTC':' USD') + ' / PC</option>').join('');
       opts += '</optgroup>';
       if (smtpProds.length) {
-        opts += '<optgroup label="Serveurs SMTP Relay">';
+        opts += '<optgroup label="' + esc(t('pay.smtp_relay','Serveurs SMTP Relay')) + '">';
         opts += smtpProds.map(p => {
           const vol = VOL_LABELS[p.id] || (p.volume||'').toLocaleString('fr-FR');
-          return '<option value="' + p.id + '">' + p.name + ' (' + vol + ' e/mois) — ' + unitPrice(p) + ' USDT / mois</option>';
+          return '<option value="' + p.id + '">' + p.name + ' (' + vol + ' ' + t('pay.emails_per_month','e/mois') + ') — ' + unitPrice(p) + ' USDT / ' + t('pay.per_month_short','mois') + '</option>';
         }).join('');
         opts += '</optgroup>';
       }
       if (proxyProds.length) {
-        opts += '<optgroup label="Proxy résidentiel">';
+        opts += '<optgroup label="' + esc(t('pay.proxy_res','Proxy résidentiel')) + '">';
         opts += proxyProds.map(p => '<option value="' + p.id + '">Proxy ' + p.name + ' — ' + unitPrice(p) + ' USDT</option>').join('');
         opts += '</optgroup>';
       }
@@ -509,7 +668,7 @@
     async function proceed() {
       const btn = document.getElementById('btn-proceed');
       const msg = document.getElementById('msg-choose');
-      btn.disabled = true; btn.textContent = 'Chargement...';
+      btn.disabled = true; btn.textContent = t('pay.loading','Chargement...');
       try {
         const _ctrl = new AbortController();
         const _ctrlTimer = setTimeout(() => _ctrl.abort(), 15000);
@@ -524,19 +683,22 @@
         const d = await r.json();
         if (!r.ok) {
           if (r.status === 401) { location.href = '/login.html?redirect=' + encodeURIComponent(location.href); return; }
-          msg.textContent = d.error || 'Erreur.';
-          btn.disabled = false; btn.textContent = 'Continuer vers le paiement';
+          msg.textContent = d.error || t('pay.error','Erreur.');
+          btn.disabled = false; btn.textContent = t('pay.proceed','Continuer vers le paiement');
           return;
         }
         orderId = d.order_id;
         showPayStep(d);
       } catch(e) {
-        msg.textContent = 'Erreur réseau.';
-        btn.disabled = false; btn.textContent = 'Continuer vers le paiement';
+        msg.textContent = t('pay.network_error','Erreur réseau.');
+        btn.disabled = false; btn.textContent = t('pay.proceed','Continuer vers le paiement');
       }
     }
 
+    let _lastPayData = null;   // pour re-rendu au changement de langue (étape paiement)
+    let _lastPaidData = null;  // idem pour l'écran « paiement confirmé »
     function showPayStep(d) {
+      _lastPayData = d; _lastPaidData = null;
       document.getElementById('step-choose').style.display = 'none';
       document.getElementById('step-pay').style.display = 'block';
 
@@ -546,10 +708,10 @@
         const montant = Number(d.price_exact).toLocaleString('fr-FR');
         document.getElementById('pay-amount').textContent = montant + ' XOF';
         document.getElementById('pay-address').textContent = 'EGSCI SARL';
-        document.querySelector('.addr-label').textContent = 'Bénéficiaire';
+        document.querySelector('.addr-label').textContent = t('pay.beneficiary','Bénéficiaire');
         document.querySelector('.addr-box .addr-copy').style.display = 'none';
         document.getElementById('pay-sub').textContent =
-          `Payez exactement ${montant} XOF via ${moyen} en scannant le QR code ci-dessous`;
+          t('pay.pay_fiat_sub',`Payez exactement ${montant} XOF via ${moyen} en scannant le QR code ci-dessous`).replace('{amount}',montant).replace('{method}',moyen);
 
         document.getElementById('qrcode').innerHTML = '';
         let url = d.address;
@@ -565,16 +727,16 @@
           const a = document.createElement('a');
           a.href = url; a.target = '_blank';
           a.className = 'btn'; a.style.cssText = 'display:block;text-align:center;text-decoration:none;margin:-4px 0 18px;background:' + (isWave ? '#1dc3ff' : '#ff7900');
-          a.textContent = (isWave ? '🌊 Payer avec Wave' : '🟠 Payer avec Orange Money');
+          a.textContent = (isWave ? '🌊 ' : '🟠 ') + t('pay.pay_with','Payer avec') + ' ' + moyen;
           document.getElementById('qrcode').after(a);
         }
 
         document.querySelector('.warning').innerHTML =
-          `${isWave ? '🌊' : '🟠'} Scannez le QR code ou cliquez sur <strong>« Payer avec ${moyen} »</strong> pour payer <strong>exactement ${montant} XOF</strong> à <strong>EGSCI SARL</strong>. ` +
-          'Ce montant unique identifie votre commande. Votre licence sera activée dès validation du paiement.';
+          `${isWave ? '🌊' : '🟠'} ` +
+          t('pay.warn_fiat',`Scannez le QR code ou cliquez sur <strong>« Payer avec ${moyen} »</strong> pour payer <strong>exactement ${montant} XOF</strong> à <strong>EGSCI SARL</strong>. Ce montant unique identifie votre commande. Votre licence sera activée dès validation du paiement.`).replace(/\{method\}/g,moyen).replace('{amount}',montant);
 
-        document.getElementById('status-text').textContent = `En attente de confirmation du paiement ${moyen}…`;
-        document.querySelector('#status-box div').textContent = 'Vérification toutes les 10 secondes';
+        document.getElementById('status-text').textContent = t('pay.status_fiat_pending',`En attente de confirmation du paiement ${moyen}…`).replace('{method}',moyen);
+        document.querySelector('#status-box div').textContent = t('pay.status_auto_10','Vérification toutes les 10 secondes');
         if (pollInterval) clearInterval(pollInterval);
         pollInterval = setInterval(pollStatus, 10000);
         return;
@@ -585,9 +747,9 @@
       // dashboard.html?paid=1 et la confirmation arrive par webhook côté serveur.
       if (d.pay_link && d.gateway === 'oxapay') {
         const sub = document.getElementById('pay-sub');
-        if (sub) sub.textContent = 'Redirection vers le paiement sécurisé…';
+        if (sub) sub.textContent = t('pay.redirect_secure','Redirection vers le paiement sécurisé…');
         const st = document.getElementById('status-text');
-        if (st) st.textContent = 'Ouverture de la page de paiement OxaPay…';
+        if (st) st.textContent = t('pay.opening_oxapay','Ouverture de la page de paiement OxaPay…');
         window.location.href = d.pay_link;
         return;
       }
@@ -601,8 +763,9 @@
       }
       document.getElementById('pay-amount').innerHTML = esc(parseFloat(d.price_exact).toFixed(8)) + ' ' + esc(symbol) + usdNote;
       document.getElementById('pay-address').textContent = d.address;
+      const _net = d.crypto === 'usdt' ? t('pay.net_tron','TRC20 (Tron)') : t('pay.net_btc','Bitcoin');
       document.getElementById('pay-sub').textContent =
-        `Envoyez exactement ${d.price_exact} ${symbol} · Réseau ${d.crypto === 'usdt' ? 'TRC20 (Tron)' : 'Bitcoin'}`;
+        t('pay.send_exact_crypto',`Envoyez exactement ${d.price_exact} ${symbol} · Réseau ${_net}`).replace('{amount}',d.price_exact).replace('{symbol}',symbol).replace('{network}',_net);
 
       document.getElementById('qrcode').innerHTML = '';
       const qrVal = d.crypto === 'usdt'
@@ -612,6 +775,39 @@
 
       if (pollInterval) clearInterval(pollInterval);
       pollInterval = setInterval(pollStatus, 10000);
+    }
+
+    function renderPaidBox(d) {
+      const box = document.getElementById('status-box');
+      box.className = 'status-box status-paid';
+      const isSmtpOrder = isSmtp(d.product || selectedProduct || '');
+      const isProxyOrder = isProxy(d.product || selectedProduct || '');
+      if (isSmtpOrder) {
+        box.innerHTML =
+          '<div style="font-size:22px;margin-bottom:8px">🎉</div>' +
+          '<div style="font-size:15px;font-weight:700;color:#16a34a">' + t('pay.paid_title','Paiement confirmé !') + '</div>' +
+          '<div style="font-size:13px;color:#64748b;margin:10px 0 14px;line-height:1.6">' + t('pay.paid_smtp','Votre serveur SMTP est en cours de provisioning.<br>Vous recevrez vos identifiants relay par <strong>email dans les 24h</strong>.') + '</div>' +
+          '<a href="/dashboard.html" style="display:inline-block;background:#2563eb;color:#fff;border-radius:0;padding:10px 18px;font-size:13px;font-weight:700;text-decoration:none">' + t('pay.see_smtp','Voir mes serveurs SMTP →') + '</a>';
+      } else if (isProxyOrder) {
+        box.innerHTML =
+          '<div style="font-size:22px;margin-bottom:8px">🎉</div>' +
+          '<div style="font-size:15px;font-weight:700;color:#16a34a">' + t('pay.paid_title','Paiement confirmé !') + '</div>' +
+          '<div style="font-size:13px;color:#64748b;margin:10px 0 14px;line-height:1.6">' + t('pay.paid_proxy','Votre forfait proxy résidentiel est en cours d\'activation.<br>Vos identifiants de connexion vous seront envoyés par <strong>email</strong> et seront visibles dans votre espace client.') + '</div>' +
+          '<a href="/dashboard.html" style="display:inline-block;background:#2563eb;color:#fff;border-radius:0;padding:10px 18px;font-size:13px;font-weight:700;text-decoration:none">' + t('pay.see_proxy','Voir mes proxies →') + '</a>';
+      } else {
+        box.innerHTML =
+          '<div style="font-size:22px;margin-bottom:8px">🎉</div>' +
+          '<div style="font-size:15px;font-weight:700;color:#16a34a">' + t('pay.paid_title','Paiement confirmé !') + '</div>' +
+          '<div style="font-size:13px;color:#64748b;margin:6px 0 10px">' + t('pay.license_ready','Votre licence est prête :') + '</div>' +
+          '<div class="lic-key">' + d.license_key + '</div>' +
+          '<div style="margin-top:14px">' +
+          '<button id="_lic-copy-btn" style="background:#dcfce7;border:1px solid #bbf7d0;color:#15803d;border-radius:0;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer">' + t('pay.copy_license','Copier la licence') + '</button>' +
+          '<a href="/dashboard.html" style="display:inline-block;margin-left:8px;background:#2563eb;color:#fff;border-radius:0;padding:8px 16px;font-size:12px;font-weight:700;text-decoration:none">' + t('pay.my_account','Mon espace client →') + '</a>' +
+          '</div>';
+        const _licKey = d.license_key;
+        const _cpBtn = document.getElementById('_lic-copy-btn');
+        if (_cpBtn) _cpBtn.addEventListener('click', () => navigator.clipboard.writeText(_licKey).then(()=>showToast(t('pay.license_copied','✓ Licence copiée !')), ()=>{}));
+      }
     }
 
     async function pollStatus() {
@@ -624,39 +820,11 @@
         const d = await r.json();
         if (d.status === 'paid') {
           clearInterval(pollInterval);
-          const box = document.getElementById('status-box');
-          box.className = 'status-box status-paid';
-          const isSmtpOrder = isSmtp(d.product || selectedProduct || '');
-          const isProxyOrder = isProxy(d.product || selectedProduct || '');
-          if (isSmtpOrder) {
-            box.innerHTML =
-              '<div style="font-size:22px;margin-bottom:8px">🎉</div>' +
-              '<div style="font-size:15px;font-weight:700;color:#16a34a">Paiement confirmé !</div>' +
-              '<div style="font-size:13px;color:#64748b;margin:10px 0 14px;line-height:1.6">Votre serveur SMTP est en cours de provisioning.<br>Vous recevrez vos identifiants relay par <strong>email dans les 24h</strong>.</div>' +
-              '<a href="/dashboard.html" style="display:inline-block;background:#2563eb;color:#fff;border-radius:0;padding:10px 18px;font-size:13px;font-weight:700;text-decoration:none">Voir mes serveurs SMTP →</a>';
-          } else if (isProxyOrder) {
-            box.innerHTML =
-              '<div style="font-size:22px;margin-bottom:8px">🎉</div>' +
-              '<div style="font-size:15px;font-weight:700;color:#16a34a">Paiement confirmé !</div>' +
-              '<div style="font-size:13px;color:#64748b;margin:10px 0 14px;line-height:1.6">Votre forfait proxy résidentiel est en cours d\'activation.<br>Vos identifiants de connexion vous seront envoyés par <strong>email</strong> et seront visibles dans votre espace client.</div>' +
-              '<a href="/dashboard.html" style="display:inline-block;background:#2563eb;color:#fff;border-radius:0;padding:10px 18px;font-size:13px;font-weight:700;text-decoration:none">Voir mes proxies →</a>';
-          } else {
-            box.innerHTML =
-              '<div style="font-size:22px;margin-bottom:8px">🎉</div>' +
-              '<div style="font-size:15px;font-weight:700;color:#16a34a">Paiement confirmé !</div>' +
-              '<div style="font-size:13px;color:#64748b;margin:6px 0 10px">Votre licence est prête :</div>' +
-              '<div class="lic-key">' + d.license_key + '</div>' +
-              '<div style="margin-top:14px">' +
-              '<button id="_lic-copy-btn" style="background:#dcfce7;border:1px solid #bbf7d0;color:#15803d;border-radius:0;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer">Copier la licence</button>' +
-              '<a href="/dashboard.html" style="display:inline-block;margin-left:8px;background:#2563eb;color:#fff;border-radius:0;padding:8px 16px;font-size:12px;font-weight:700;text-decoration:none">Mon espace client →</a>' +
-              '</div>';
-            const _licKey = d.license_key;
-            const _cpBtn = document.getElementById('_lic-copy-btn');
-            if (_cpBtn) _cpBtn.addEventListener('click', () => navigator.clipboard.writeText(_licKey).then(()=>showToast('✓ Licence copiée !'), ()=>{}));
-          }
+          _lastPaidData = d;
+          renderPaidBox(d);
         } else if (d.status === 'expired') {
           clearInterval(pollInterval);
-          document.getElementById('status-text').textContent = '⏱ Commande expirée. Actualisez pour recommencer.';
+          document.getElementById('status-text').textContent = t('pay.expired','⏱ Commande expirée. Actualisez pour recommencer.');
         }
       } catch {}
     }
@@ -664,11 +832,11 @@
     function copyAmount() {
       const t = document.getElementById('pay-amount').textContent.split(' ')[0];
       navigator.clipboard.writeText(t);
-      showToast('Montant copié !');
+      showToast(window.t('pay.amount_copied','Montant copié !'));
     }
     function copyAddress() {
       navigator.clipboard.writeText(document.getElementById('pay-address').textContent);
-      showToast('Adresse copiée !');
+      showToast(window.t('pay.address_copied','Adresse copiée !'));
     }
     function showToast(msg) {
       const t = document.createElement('div');
@@ -677,6 +845,30 @@
       document.body.appendChild(t);
       setTimeout(() => t.remove(), 2000);
     }
+
+    // ── Re-rendu du texte dynamique au changement de langue ──
+    window.addEventListener('evo-langchange', function () {
+      // Étape 1 : reconstruire la grille/récap produit et le total (libellés traduits)
+      try {
+        if (document.getElementById('step-choose').style.display !== 'none') {
+          const _sel = document.getElementById('product-select');
+          const _saved = selectedProduct;
+          renderProducts();
+          if (_sel && _sel.style.display !== 'none' && _saved) { _sel.value = _saved; selectedProduct = _saved; }
+          document.getElementById('qty-hint').textContent = quantity === 1
+            ? t('pay.qty_hint_one','1 licence — 1 PC')
+            : t('pay.qty_hint_many','{n} PC sur une licence').replace('{n}', quantity);
+          updateTotal();
+        }
+      } catch (e) {}
+      // Étape 2 : ré-afficher l'écran « payé » ou l'écran de paiement en attente
+      try {
+        if (_lastPaidData) { renderPaidBox(_lastPaidData); }
+        else if (_lastPayData && document.getElementById('step-pay').style.display !== 'none') {
+          showPayStep(_lastPayData);
+        }
+      } catch (e) {}
+    });
 
     loadSettings();
   </script>

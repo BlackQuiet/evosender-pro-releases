@@ -64,48 +64,43 @@
   var st = document.createElement('style'); st.id = 'evc-style'; st.textContent = css;
   (document.head || document.documentElement).appendChild(st);
 
-  // ── DOM ──
+  // ── i18n : lit la langue courante gérée par i18n.js (localStorage 'evo-lang') ──
+  var L = {
+    fr: { banner_t: '🍪 Respect de votre vie privée', banner_p: 'Nous utilisons des cookies <b>strictement nécessaires</b> au fonctionnement du site et, <b>avec votre accord</b>, des cookies de mesure d\'audience pour l\'améliorer. Aucun cookie publicitaire, aucun traceur tiers. <a href="/privacy.html#s10">En savoir plus</a>', refuse: 'Refuser', custom: 'Personnaliser', accept: 'Tout accepter', modal_t: 'Préférences de cookies', modal_p: 'Choisissez les catégories que vous autorisez. Votre choix est enregistré sur cet appareil et modifiable à tout moment.', nec_h: 'Strictement nécessaires', nec_p: 'Indispensables : session, sécurité, préférences. Toujours actifs.', ana_h: 'Mesure d\'audience', ana_p: 'Statistiques anonymes de fréquentation pour améliorer le site. Optionnel.', m_refuse: 'Tout refuser', m_save: 'Enregistrer mes choix', pill: 'Cookies', pill_aria: 'Gérer les cookies' },
+    en: { banner_t: '🍪 Your privacy matters', banner_p: 'We use <b>strictly necessary</b> cookies to run the site and, <b>with your consent</b>, audience-measurement cookies to improve it. No advertising cookies, no third-party trackers. <a href="/privacy.html#s10">Learn more</a>', refuse: 'Decline', custom: 'Customize', accept: 'Accept all', modal_t: 'Cookie preferences', modal_p: 'Choose the categories you allow. Your choice is saved on this device and can be changed at any time.', nec_h: 'Strictly necessary', nec_p: 'Essential: session, security, preferences. Always on.', ana_h: 'Audience measurement', ana_p: 'Anonymous traffic statistics to improve the site. Optional.', m_refuse: 'Decline all', m_save: 'Save my choices', pill: 'Cookies', pill_aria: 'Manage cookies' },
+    ru: { banner_t: '🍪 Ваша конфиденциальность важна', banner_p: 'Мы используем <b>строго необходимые</b> файлы cookie для работы сайта и, <b>с вашего согласия</b>, cookie аналитики посещаемости для его улучшения. Никакой рекламы и сторонних трекеров. <a href="/privacy.html#s10">Подробнее</a>', refuse: 'Отклонить', custom: 'Настроить', accept: 'Принять все', modal_t: 'Настройки cookie', modal_p: 'Выберите разрешённые категории. Ваш выбор сохраняется на этом устройстве и может быть изменён в любое время.', nec_h: 'Строго необходимые', nec_p: 'Обязательные: сессия, безопасность, настройки. Всегда включены.', ana_h: 'Аналитика посещаемости', ana_p: 'Анонимная статистика посещений для улучшения сайта. Необязательно.', m_refuse: 'Отклонить все', m_save: 'Сохранить выбор', pill: 'Cookies', pill_aria: 'Управление cookie' }
+  };
+  function lng() { var s; try { s = localStorage.getItem('evo-lang'); } catch (e) {} return (s === 'en' || s === 'ru') ? s : 'fr'; }
+  function LT() { return L[lng()]; }
+  function el(tag, id, cls) { var n = document.createElement(tag); if (id) n.id = id; if (cls) n.className = cls; return n; }
+
+  // ── DOM (contenu (re)généré par render() selon la langue) ──
   var ov = el('div', 'evc-ov');
   var banner = el('div', null, 'evc-card'); banner.id = 'evc-banner';
-  banner.innerHTML =
-    '<div class="evc-t">🍪 Respect de votre vie privée</div>' +
-    '<p class="evc-p">Nous utilisons des cookies <b>strictement nécessaires</b> au fonctionnement du site et, <b>avec votre accord</b>, des cookies de mesure d\'audience pour l\'améliorer. Aucun cookie publicitaire, aucun traceur tiers. ' +
-    '<a href="/privacy.html#s10">En savoir plus</a></p>' +
-    '<div class="evc-row">' +
-      '<button class="evc-btn evc-ghost" id="evc-refuse">Refuser</button>' +
-      '<button class="evc-btn evc-ghost" id="evc-custom">Personnaliser</button>' +
-      '<button class="evc-btn evc-primary" id="evc-accept">Tout accepter</button>' +
-    '</div>';
-
   var modal = el('div', null, 'evc-card'); modal.id = 'evc-modal';
-  modal.innerHTML =
-    '<div class="evc-t">Préférences de cookies</div>' +
-    '<p class="evc-p">Choisissez les catégories que vous autorisez. Votre choix est enregistré sur cet appareil et modifiable à tout moment.</p>' +
-    '<div class="evc-cat">' +
-      '<div><h4>Strictement nécessaires</h4><p>Indispensables : session, sécurité, préférences. Toujours actifs.</p></div>' +
-      '<label class="evc-sw"><input type="checkbox" checked disabled><span class="evc-sl"></span></label>' +
-    '</div>' +
-    '<div class="evc-cat">' +
-      '<div><h4>Mesure d\'audience</h4><p>Statistiques anonymes de fréquentation pour améliorer le site. Optionnel.</p></div>' +
-      '<label class="evc-sw"><input type="checkbox" id="evc-analytics"><span class="evc-sl"></span></label>' +
-    '</div>' +
-    '<div class="evc-row" style="margin-top:18px">' +
-      '<button class="evc-btn evc-ghost" id="evc-m-refuse">Tout refuser</button>' +
-      '<button class="evc-btn evc-primary" id="evc-m-save">Enregistrer mes choix</button>' +
-    '</div>';
+  var pill = el('div', null, 'evc-card'); pill.id = 'evc-pill'; pill.setAttribute('role', 'button');
 
-  var pill = el('div', null, 'evc-card'); pill.id = 'evc-pill';
-  pill.innerHTML = '<span>🍪</span><span>Cookies</span>';
-  pill.setAttribute('role', 'button'); pill.setAttribute('aria-label', 'Gérer les cookies');
-
-  function mount() {
-    var b = document.body; if (!b) return;
-    b.appendChild(ov); b.appendChild(banner); b.appendChild(modal); b.appendChild(pill);
-    wire();
-    if (load()) { apply(load()); showPill(); } else { showBanner(); }
+  function render() {
+    var x = LT();
+    banner.innerHTML =
+      '<div class="evc-t">' + x.banner_t + '</div>' +
+      '<p class="evc-p">' + x.banner_p + '</p>' +
+      '<div class="evc-row">' +
+        '<button class="evc-btn evc-ghost" id="evc-refuse">' + x.refuse + '</button>' +
+        '<button class="evc-btn evc-ghost" id="evc-custom">' + x.custom + '</button>' +
+        '<button class="evc-btn evc-primary" id="evc-accept">' + x.accept + '</button>' +
+      '</div>';
+    modal.innerHTML =
+      '<div class="evc-t">' + x.modal_t + '</div>' +
+      '<p class="evc-p">' + x.modal_p + '</p>' +
+      '<div class="evc-cat"><div><h4>' + x.nec_h + '</h4><p>' + x.nec_p + '</p></div><label class="evc-sw"><input type="checkbox" checked disabled><span class="evc-sl"></span></label></div>' +
+      '<div class="evc-cat"><div><h4>' + x.ana_h + '</h4><p>' + x.ana_p + '</p></div><label class="evc-sw"><input type="checkbox" id="evc-analytics"><span class="evc-sl"></span></label></div>' +
+      '<div class="evc-row" style="margin-top:18px"><button class="evc-btn evc-ghost" id="evc-m-refuse">' + x.m_refuse + '</button><button class="evc-btn evc-primary" id="evc-m-save">' + x.m_save + '</button></div>';
+    pill.innerHTML = '<span>🍪</span><span>' + x.pill + '</span>';
+    pill.setAttribute('aria-label', x.pill_aria);
+    wireButtons();
   }
 
-  function el(tag, id, cls) { var n = document.createElement(tag); if (id) n.id = id; if (cls) n.className = cls; return n; }
   function showBanner() { banner.classList.add('show'); }
   function hideBanner() { banner.classList.remove('show'); }
   function showModal() { var a = document.getElementById('evc-analytics'); var r = load(); if (a) a.checked = !!(r && r.analytics); ov.classList.add('show'); modal.classList.add('show'); }
@@ -113,15 +108,23 @@
   function showPill() { pill.style.display = 'inline-flex'; }
   function done(analytics) { persist(analytics); hideBanner(); hideModal(); showPill(); }
 
-  function wire() {
+  function wireButtons() {
     document.getElementById('evc-accept').addEventListener('click', function () { done(true); });
     document.getElementById('evc-refuse').addEventListener('click', function () { done(false); });
     document.getElementById('evc-custom').addEventListener('click', function () { hideBanner(); showModal(); });
     document.getElementById('evc-m-refuse').addEventListener('click', function () { done(false); });
     document.getElementById('evc-m-save').addEventListener('click', function () { var a = document.getElementById('evc-analytics'); done(a && a.checked); });
+  }
+
+  function mount() {
+    var b = document.body; if (!b) return;
+    b.appendChild(ov); b.appendChild(banner); b.appendChild(modal); b.appendChild(pill);
+    render();
     ov.addEventListener('click', function () { hideModal(); if (!load()) showBanner(); });
     pill.addEventListener('click', showModal);
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { hideModal(); if (!load()) showBanner(); } });
+    window.addEventListener('evo-langchange', render); // re-render à la volée au changement de langue
+    if (load()) { apply(load()); showPill(); } else { showBanner(); }
   }
 
   // API publique

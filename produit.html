@@ -67,38 +67,92 @@
   html[data-theme="light"] .shot{box-shadow:0 30px 70px rgba(15,23,42,.15),0 0 0 1px #e2e8f0}
 </style>
 <script src="/theme.js"></script>
+<script>window.I18N_PAGE={
+  en:{
+    "prod.nav.back_products":"← Products",
+    "prod.loading":"Loading product…",
+    "prod.err_load":"Unable to load the product.",
+    "prod.err_back_home":"Back to home",
+    "prod.err_notfound":"Product not found.",
+    "prod.err_see_all":"See all products",
+    "prod.crumb.home":"Home",
+    "prod.crumb.products":"Products",
+    "prod.label.extractor":"Email address collection",
+    "prod.label.sender":"Bulk email sending",
+    "prod.label.verifier":"List verification",
+    "prod.label.suite":"Full suite",
+    "prod.label.default":"EvoStudio tool",
+    "prod.license":"Annual license (1 year)",
+    "prod.buy_now":"Buy now →",
+    "prod.have_account":"I already have an account",
+    "prod.features":"✨ Features",
+    "prod.other_tools":"The other EvoStudio tools",
+    "prod.footer_copy":"© 2025–2026 EGSCI SARL — EvoStudio · Russian Federation"
+  },
+  ru:{
+    "prod.nav.back_products":"← Продукты",
+    "prod.loading":"Загрузка продукта…",
+    "prod.err_load":"Не удалось загрузить продукт.",
+    "prod.err_back_home":"Вернуться на главную",
+    "prod.err_notfound":"Продукт не найден.",
+    "prod.err_see_all":"Посмотреть все продукты",
+    "prod.crumb.home":"Главная",
+    "prod.crumb.products":"Продукты",
+    "prod.label.extractor":"Сбор email-адресов",
+    "prod.label.sender":"Массовая рассылка",
+    "prod.label.verifier":"Проверка списков",
+    "prod.label.suite":"Полный набор",
+    "prod.label.default":"Инструмент EvoStudio",
+    "prod.license":"Годовая лицензия (1 год)",
+    "prod.buy_now":"Купить сейчас →",
+    "prod.have_account":"У меня уже есть аккаунт",
+    "prod.features":"✨ Возможности",
+    "prod.other_tools":"Другие инструменты EvoStudio",
+    "prod.footer_copy":"© 2025–2026 EGSCI SARL — EvoStudio · Российская Федерация"
+  }
+};</script>
+<script src="/i18n.js" defer></script>
 </head>
 <body>
 <div class="nav">
   <a href="/" class="logo"><img src="/logoevostudio2.png" alt="EvoStudio" /></a>
   <div class="right">
-    <a href="/#produits" class="btn btn-ghost">← Produits</a>
-    <a href="/login.html" class="btn btn-ghost" id="nav-login">Connexion</a>
-    <a href="/dashboard.html" class="btn btn-ghost" id="nav-account" style="display:none">Espace client</a>
+    <a href="/#produits" class="btn btn-ghost" data-i18n="prod.nav.back_products">← Produits</a>
+    <a href="/login.html" class="btn btn-ghost" id="nav-login" data-i18n="nav.login">Connexion</a>
+    <a href="/dashboard.html" class="btn btn-ghost" id="nav-account" style="display:none" data-i18n="nav.account">Espace client</a>
+    <div id="lang-switch"></div>
   </div>
 </div>
 
-<div class="wrap" id="content"><div class="loading">Chargement du produit…</div></div>
+<div class="wrap" id="content"><div class="loading" data-i18n="prod.loading">Chargement du produit…</div></div>
 
-<div class="footer">© 2025–2026 EGSCI SARL — EvoStudio · Fédération de Russie</div>
+<div class="footer" data-i18n="prod.footer_copy">© 2025–2026 EGSCI SARL — EvoStudio · Fédération de Russie</div>
 
 <script src="/assistance.js" defer></script>
 <script>
 const API='https://admin.evostudio.fr';
 const IMG={extractor:'/EvoExtractor.png',sender:'/EvoSender.png',verifier:'/Evoverif.png',suite:'/Hub.png'};
-const LABEL={extractor:'Collecte d\'adresses email',sender:'Envoi en masse',verifier:'Vérification de listes',suite:'Suite complète'};
+const LABEL_FR={extractor:'Collecte d\'adresses email',sender:'Envoi en masse',verifier:'Vérification de listes',suite:'Suite complète'};
+function labelFor(id){return t('prod.label.'+id,LABEL_FR[id]||t('prod.label.default','Outil EvoStudio'));}
 function esc(t){return String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function qs(k){return new URLSearchParams(location.search).get(k);}
 if(localStorage.getItem('evo_token')||localStorage.getItem('evo_logged_in')){var a=document.getElementById('nav-account'),l=document.getElementById('nav-login');if(a)a.style.display='';if(l)l.style.display='none';}
 
-(async function(){
-  const id=qs('id')||'sender';
-  let data;
-  try{ const r=await fetch(API+'/api/shop/products'); data=await r.json(); }
-  catch(e){ document.getElementById('content').innerHTML='<div class="loading">Impossible de charger le produit. <a href="/" style="color:#2563eb">Retour à l\'accueil</a></div>'; return; }
+let SHOP_DATA=null;              // données /api/shop/products (hors périmètre i18n)
+const PROD_ID=qs('id')||'sender';
+
+function renderError(msgKey,frMsg,linkHref,linkKey,frLink){
+  document.getElementById('content').innerHTML=
+    '<div class="loading">'+esc(t(msgKey,frMsg))+' <a href="'+linkHref+'" style="color:#2563eb">'+esc(t(linkKey,frLink))+'</a></div>';
+}
+
+function renderProduct(){
+  const id=PROD_ID;
+  if(!SHOP_DATA) return;
+  const data=SHOP_DATA;
   const products=Array.isArray(data.products)?data.products:[];
   const p=products.find(x=>x.id===id);
-  if(!p){ document.getElementById('content').innerHTML='<div class="loading">Produit introuvable. <a href="/#produits" style="color:#2563eb">Voir tous les produits</a></div>'; return; }
+  if(!p){ renderError('prod.err_notfound','Produit introuvable.','/#produits','prod.err_see_all','Voir tous les produits'); return; }
 
   const disc=Number(data.discount_pct)||0;
   const newPrice=disc>0?Math.round(p.price_usdt*(1-disc/100)*100)/100:p.price_usdt;
@@ -111,24 +165,33 @@ if(localStorage.getItem('evo_token')||localStorage.getItem('evo_logged_in')){var
   const check='<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
 
   const others=products.filter(x=>x.id!==id);
-  const othersHtml=others.map(function(o){return '<a class="ocard" href="/produit.html?id='+esc(o.id)+'"><div class="on">'+esc(o.name)+'</div><div class="od">'+esc(o.description||LABEL[o.id]||'')+'</div></a>';}).join('');
+  const othersHtml=others.map(function(o){return '<a class="ocard" href="/produit.html?id='+esc(o.id)+'"><div class="on">'+esc(o.name)+'</div><div class="od">'+esc(o.description||labelFor(o.id))+'</div></a>';}).join('');
 
   document.title='EvoStudio — '+p.name;
   document.getElementById('content').innerHTML=
-    '<div class="crumb"><a href="/">Accueil</a> › <a href="/#produits">Produits</a> › '+esc(p.name)+'</div>'+
+    '<div class="crumb"><a href="/">'+esc(t('prod.crumb.home','Accueil'))+'</a> › <a href="/#produits">'+esc(t('prod.crumb.products','Produits'))+'</a> › '+esc(p.name)+'</div>'+
     '<div class="hero">'+
       '<div class="shot"><img src="'+(IMG[id]||IMG.sender)+'" alt="'+esc(p.name)+'" /></div>'+
       '<div>'+
-        '<div class="badge">● '+esc(LABEL[id]||'Outil EvoStudio')+'</div>'+
+        '<div class="badge">● '+esc(labelFor(id))+'</div>'+
         '<h1>'+esc(p.name)+'</h1>'+
         '<p class="desc">'+esc(p.description||'')+'</p>'+
         '<div class="price">'+priceHtml+(disc>0?' <span style="background:#dc2626;color:#fff;font-size:11px;font-weight:800;padding:2px 8px;border-radius:999px">-'+disc+'%</span>':'')+'</div>'+
-        '<div class="price-sub">Licence annuelle (1 an)'+btc+xof+'</div>'+
-        '<div class="cta"><a class="btn btn-primary" style="padding:13px 26px;font-size:15px" href="/pay.html?product='+esc(id)+'">Acheter maintenant →</a><a class="btn btn-ghost" style="padding:13px 22px" href="/login.html">J\'ai déjà un compte</a></div>'+
+        '<div class="price-sub">'+esc(t('prod.license','Licence annuelle (1 an)'))+btc+xof+'</div>'+
+        '<div class="cta"><a class="btn btn-primary" style="padding:13px 26px;font-size:15px" href="/pay.html?product='+esc(id)+'">'+esc(t('prod.buy_now','Acheter maintenant →'))+'</a><a class="btn btn-ghost" style="padding:13px 22px" href="/login.html">'+esc(t('prod.have_account','J\'ai déjà un compte'))+'</a></div>'+
       '</div>'+
     '</div>'+
-    (feats.length?('<div class="sec"><h2>✨ Fonctionnalités</h2><div class="feats">'+feats.map(function(f){return '<div class="feat">'+check+'<span>'+esc(f)+'</span></div>';}).join('')+'</div></div>'):'')+
-    '<div class="sec"><h2>Les autres outils EvoStudio</h2><div class="other">'+othersHtml+'</div></div>';
+    (feats.length?('<div class="sec"><h2>'+esc(t('prod.features','✨ Fonctionnalités'))+'</h2><div class="feats">'+feats.map(function(f){return '<div class="feat">'+check+'<span>'+esc(f)+'</span></div>';}).join('')+'</div></div>'):'')+
+    '<div class="sec"><h2>'+esc(t('prod.other_tools','Les autres outils EvoStudio'))+'</h2><div class="other">'+othersHtml+'</div></div>';
+}
+
+// Re-render le contenu généré en JS quand la langue change
+window.addEventListener('evo-langchange',renderProduct);
+
+(async function(){
+  try{ const r=await fetch(API+'/api/shop/products'); SHOP_DATA=await r.json(); }
+  catch(e){ renderError('prod.err_load','Impossible de charger le produit.','/','prod.err_back_home','Retour à l\'accueil'); return; }
+  renderProduct();
 })();
 </script>
 </body>

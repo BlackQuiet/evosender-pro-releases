@@ -17,49 +17,87 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="/article.css" />
 <script src="/theme.js"></script>
+<script>window.I18N_PAGE={
+  en:{
+    "blog.h1":"The EvoStudio blog",
+    "blog.intro":"Practical guides on emailing, deliverability and sending infrastructure.",
+    "blog.tag_sending":"Sending",
+    "blog.t_mass":"Bulk email sending software: the complete guide",
+    "blog.p_mass":"How to choose bulk email sending software, deliverability criteria and the pitfalls to avoid so you don't end up in spam.",
+    "blog.tag_collect":"Collection",
+    "blog.t_extract":"Email extractor: collect addresses efficiently",
+    "blog.p_extract":"Sources, methods and best practices (GDPR included) to extract email addresses from the web, your files or your IMAP accounts.",
+    "blog.tag_clean":"Cleaning",
+    "blog.t_verify":"Bulk email verifier: cleaning your lists",
+    "blog.p_verify":"Why and how to verify your lists (syntax, MX, SMTP) to reduce the bounce rate and protect your sender reputation.",
+    "blog.tag_infra":"Infrastructure",
+    "blog.t_smtp":"Dedicated SMTP server: everything explained",
+    "blog.p_smtp":"Dedicated or shared SMTP, dedicated IP, reputation and deliverability: the guide to choosing your sending infrastructure.",
+    "blog.foot":"© 2025–2026 EGSCI SARL — EvoStudio · <a href=\"/a-propos.html\">About</a> · <a href=\"/privacy.html\">Legal notice</a>"
+  },
+  ru:{
+    "blog.h1":"Блог EvoStudio",
+    "blog.intro":"Практические руководства по email-рассылкам, доставляемости и инфраструктуре отправки.",
+    "blog.tag_sending":"Отправка",
+    "blog.t_mass":"Программа для массовой рассылки email: полное руководство",
+    "blog.p_mass":"Как выбрать программу для массовой рассылки email, критерии доставляемости и подводные камни, которых стоит избегать, чтобы не попасть в спам.",
+    "blog.tag_collect":"Сбор",
+    "blog.t_extract":"Экстрактор email: эффективный сбор адресов",
+    "blog.p_extract":"Источники, методы и рекомендации (включая GDPR) для сбора адресов email из интернета, ваших файлов или ваших IMAP-аккаунтов.",
+    "blog.tag_clean":"Очистка",
+    "blog.t_verify":"Массовая проверка email: очистка списков",
+    "blog.p_verify":"Зачем и как проверять списки (синтаксис, MX, SMTP), чтобы снизить долю отказов и защитить репутацию отправителя.",
+    "blog.tag_infra":"Инфраструктура",
+    "blog.t_smtp":"Выделенный SMTP-сервер: разбираемся во всём",
+    "blog.p_smtp":"Выделенный или общий SMTP, выделенный IP, репутация и доставляемость: руководство по выбору инфраструктуры отправки.",
+    "blog.foot":"© 2025–2026 EGSCI SARL — EvoStudio · <a href=\"/a-propos.html\">О нас</a> · <a href=\"/privacy.html\">Правовая информация</a>"
+  }
+};</script>
+<script src="/i18n.js" defer></script>
 </head>
 <body>
 <header class="nav">
   <a href="/" class="logo"><img src="/logoevostudio2.png" alt="EvoStudio" /></a>
   <nav class="links">
-    <a href="/">Accueil</a>
-    <a href="/#produits">Produits</a>
-    <a href="/blog.html">Blog</a>
-    <a href="/a-propos.html">À propos</a>
-    <a href="/pay.html" class="cta">Acheter</a>
+    <a href="/" data-i18n="nav.home">Accueil</a>
+    <a href="/#produits" data-i18n="nav.products">Produits</a>
+    <a href="/blog.html" data-i18n="nav.blog">Blog</a>
+    <a href="/a-propos.html" data-i18n="nav.about">À propos</a>
+    <a href="/pay.html" class="cta" data-i18n="nav.buy">Acheter</a>
+    <div id="lang-switch"></div>
   </nav>
 </header>
 
 <div class="container">
   <div class="blog-hero">
-    <h1>Le blog EvoStudio</h1>
-    <p>Guides pratiques sur l'emailing, la délivrabilité et l'infrastructure d'envoi.</p>
+    <h1 data-i18n="blog.h1">Le blog EvoStudio</h1>
+    <p data-i18n="blog.intro">Guides pratiques sur l'emailing, la délivrabilité et l'infrastructure d'envoi.</p>
   </div>
   <div class="posts">
     <a class="post" href="/logiciel-envoi-email-masse.html">
-      <div class="tag">Envoi</div>
-      <h2>Logiciel d'envoi d'email en masse : le guide complet</h2>
-      <p>Comment choisir un logiciel d'envoi d'email en masse, les critères de délivrabilité et les pièges à éviter pour ne pas finir en spam.</p>
+      <div class="tag" data-i18n="blog.tag_sending">Envoi</div>
+      <h2 data-i18n="blog.t_mass">Logiciel d'envoi d'email en masse : le guide complet</h2>
+      <p data-i18n="blog.p_mass">Comment choisir un logiciel d'envoi d'email en masse, les critères de délivrabilité et les pièges à éviter pour ne pas finir en spam.</p>
     </a>
     <a class="post" href="/extracteur-emails.html">
-      <div class="tag">Collecte</div>
-      <h2>Extracteur d'emails : collecter des adresses efficacement</h2>
-      <p>Sources, méthodes et bonnes pratiques (RGPD inclus) pour extraire des adresses email depuis le web, vos fichiers ou vos comptes IMAP.</p>
+      <div class="tag" data-i18n="blog.tag_collect">Collecte</div>
+      <h2 data-i18n="blog.t_extract">Extracteur d'emails : collecter des adresses efficacement</h2>
+      <p data-i18n="blog.p_extract">Sources, méthodes et bonnes pratiques (RGPD inclus) pour extraire des adresses email depuis le web, vos fichiers ou vos comptes IMAP.</p>
     </a>
     <a class="post" href="/verificateur-email-masse.html">
-      <div class="tag">Nettoyage</div>
-      <h2>Vérificateur d'email en masse : nettoyer ses listes</h2>
-      <p>Pourquoi et comment vérifier ses listes (syntaxe, MX, SMTP) pour réduire le taux de rebond et protéger sa réputation d'expéditeur.</p>
+      <div class="tag" data-i18n="blog.tag_clean">Nettoyage</div>
+      <h2 data-i18n="blog.t_verify">Vérificateur d'email en masse : nettoyer ses listes</h2>
+      <p data-i18n="blog.p_verify">Pourquoi et comment vérifier ses listes (syntaxe, MX, SMTP) pour réduire le taux de rebond et protéger sa réputation d'expéditeur.</p>
     </a>
     <a class="post" href="/serveur-smtp-dedie.html">
-      <div class="tag">Infrastructure</div>
-      <h2>Serveur SMTP dédié : tout comprendre</h2>
-      <p>SMTP dédié ou partagé, IP dédiée, réputation et délivrabilité : le guide pour bien choisir votre infrastructure d'envoi.</p>
+      <div class="tag" data-i18n="blog.tag_infra">Infrastructure</div>
+      <h2 data-i18n="blog.t_smtp">Serveur SMTP dédié : tout comprendre</h2>
+      <p data-i18n="blog.p_smtp">SMTP dédié ou partagé, IP dédiée, réputation et délivrabilité : le guide pour bien choisir votre infrastructure d'envoi.</p>
     </a>
   </div>
 </div>
 
-<footer class="footer">© 2025–2026 EGSCI SARL — EvoStudio · <a href="/a-propos.html">À propos</a> · <a href="/privacy.html">Mentions légales</a></footer>
+<footer class="footer" data-i18n-html="blog.foot">© 2025–2026 EGSCI SARL — EvoStudio · <a href="/a-propos.html">À propos</a> · <a href="/privacy.html">Mentions légales</a></footer>
 <script src="/assistance.js" defer></script>
 </body>
 </html>

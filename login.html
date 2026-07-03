@@ -51,49 +51,104 @@
     html[data-theme="light"] .inp>svg,html[data-theme="light"] .eye svg{stroke:#94a3b8}
   </style>
 <script src="/theme.js"></script>
+  <script>window.I18N_PAGE={
+    en:{
+      "login.title":"Log in",
+      "login.sub":"Access your client area.",
+      "login.email_label":"Email address",
+      "login.email_ph":"you@example.com",
+      "login.pw_label":"Password",
+      "login.submit":"Sign in",
+      "login.submit_loading":"Signing in...",
+      "login.no_account":"No account yet?",
+      "login.create_account":"Create account",
+      "login.show_pw":"Show password",
+      "login.hide_pw":"Hide password",
+      "login.2fa_title":"🔐 2FA verification",
+      "login.2fa_sub":"Enter the 6-digit code from your authenticator app (Google Authenticator, Authy…).",
+      "login.totp_label":"TOTP code",
+      "login.2fa_submit":"Verify",
+      "login.2fa_loading":"Verifying...",
+      "login.back":"← Back to log in",
+      "login.msg_connecting":"Signing in...",
+      "login.msg_connected":"✓ Signed in! Redirecting...",
+      "login.msg_not_verified":"Account not verified — redirecting to confirmation...",
+      "login.msg_bad_creds":"Incorrect email or password.",
+      "login.msg_bad_code":"Incorrect code.",
+      "login.msg_network":"Network error. Try again.",
+      "login.home":"Home"
+    },
+    ru:{
+      "login.title":"Вход",
+      "login.sub":"Доступ к личному кабинету.",
+      "login.email_label":"Адрес email",
+      "login.email_ph":"you@example.com",
+      "login.pw_label":"Пароль",
+      "login.submit":"Войти",
+      "login.submit_loading":"Вход...",
+      "login.no_account":"Ещё нет аккаунта?",
+      "login.create_account":"Создать аккаунт",
+      "login.show_pw":"Показать пароль",
+      "login.hide_pw":"Скрыть пароль",
+      "login.2fa_title":"🔐 Подтверждение 2FA",
+      "login.2fa_sub":"Введите 6-значный код из приложения-аутентификатора (Google Authenticator, Authy…).",
+      "login.totp_label":"Код TOTP",
+      "login.2fa_submit":"Подтвердить",
+      "login.2fa_loading":"Проверка...",
+      "login.back":"← Назад ко входу",
+      "login.msg_connecting":"Вход...",
+      "login.msg_connected":"✓ Вход выполнен! Перенаправление...",
+      "login.msg_not_verified":"Аккаунт не подтверждён — перенаправление на подтверждение...",
+      "login.msg_bad_creds":"Неверный email или пароль.",
+      "login.msg_bad_code":"Неверный код.",
+      "login.msg_network":"Ошибка сети. Повторите попытку.",
+      "login.home":"Главная"
+    }
+  };</script>
+  <script src="/i18n.js" defer></script>
 </head>
 <body>
   <div class="auth">
 
     <main class="form">
-      <div class="logo-banner"><a href="/" class="home-btn" title="Accueil" aria-label="Accueil"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9.5 21v-6h5v6"/></svg></a><img src="/logoevostudio2.png" alt="EvoStudio" /></div>
+      <div class="logo-banner"><a href="/" class="home-btn" title="Accueil" aria-label="Accueil" data-i18n-title="login.home" data-i18n-aria="login.home"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9.5 21v-6h5v6"/></svg></a><img src="/logoevostudio2.png" alt="EvoStudio" /><div id="lang-switch" style="position:absolute;top:16px;right:16px"></div></div>
 
       <!-- Étape 1 : email + mot de passe -->
       <div id="step-login">
-        <h1>Connexion</h1>
-        <p class="sub">Accédez à votre espace client.</p>
+        <h1 data-i18n="login.title">Connexion</h1>
+        <p class="sub" data-i18n="login.sub">Accédez à votre espace client.</p>
         <form id="form" autocomplete="off">
-          <label>Adresse email</label>
+          <label data-i18n="login.email_label">Adresse email</label>
           <div class="inp">
             <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
-            <input type="email" id="email" placeholder="vous@exemple.com" required autofocus autocomplete="off" />
+            <input type="email" id="email" placeholder="vous@exemple.com" data-i18n-ph="login.email_ph" required autofocus autocomplete="off" />
           </div>
-          <label>Mot de passe</label>
+          <label data-i18n="login.pw_label">Mot de passe</label>
           <div class="inp">
             <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
             <input type="password" id="password" placeholder="••••••••" required style="padding-right:42px" autocomplete="new-password" />
-            <button type="button" class="eye" aria-label="Afficher le mot de passe" onclick="togglePw('password',this)"><svg viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></button>
+            <button type="button" class="eye" aria-label="Afficher le mot de passe" data-i18n-aria="login.show_pw" onclick="togglePw('password',this)"><svg viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></button>
           </div>
-          <button class="btn" type="submit" id="btn">Se connecter</button>
+          <button class="btn" type="submit" id="btn" data-i18n="login.submit">Se connecter</button>
         </form>
         <div class="msg" id="msg"></div>
-        <div class="footer-link">Pas encore de compte ? <a href="/register.html">Créer un compte</a></div>
+        <div class="footer-link"><span data-i18n="login.no_account">Pas encore de compte ?</span> <a href="/register.html" data-i18n="login.create_account">Créer un compte</a></div>
       </div>
 
       <!-- Étape 2 : code TOTP (affiché si 2FA activé) -->
       <div id="step-2fa" style="display:none">
-        <h1>🔐 Vérification 2FA</h1>
-        <p class="sub">Entrez le code à 6 chiffres de votre application d'authentification (Google Authenticator, Authy…).</p>
+        <h1 data-i18n="login.2fa_title">🔐 Vérification 2FA</h1>
+        <p class="sub" data-i18n="login.2fa_sub">Entrez le code à 6 chiffres de votre application d'authentification (Google Authenticator, Authy…).</p>
         <form id="form-2fa">
-          <label>Code TOTP</label>
+          <label data-i18n="login.totp_label">Code TOTP</label>
           <div class="inp">
             <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
             <input type="text" id="totp" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" placeholder="000000" autocomplete="one-time-code" />
           </div>
-          <button class="btn" type="submit" id="btn-2fa">Vérifier</button>
+          <button class="btn" type="submit" id="btn-2fa" data-i18n="login.2fa_submit">Vérifier</button>
         </form>
         <div class="msg" id="msg-2fa"></div>
-        <div class="footer-link"><a href="#" onclick="resetLogin()">← Retour à la connexion</a></div>
+        <div class="footer-link"><a href="#" onclick="resetLogin()" data-i18n="login.back">← Retour à la connexion</a></div>
       </div>
     </main>
   </div>
@@ -106,7 +161,7 @@
       const show = inp.type === 'password';
       inp.type = show ? 'text' : 'password';
       btn.innerHTML = show ? EYE_OFF : EYE_OPEN;
-      btn.setAttribute('aria-label', show ? 'Masquer le mot de passe' : 'Afficher le mot de passe');
+      btn.setAttribute('aria-label', show ? t('login.hide_pw','Masquer le mot de passe') : t('login.show_pw','Afficher le mot de passe'));
     }
     (async function checkAuth(){
       try { const r = await fetch(API + '/api/auth/me', { credentials: 'include' }); if (r.ok) location.href = '/dashboard.html'; } catch {}
@@ -129,7 +184,7 @@
       document.getElementById('step-2fa').style.display = 'none';
       document.getElementById('msg').textContent = '';
       document.getElementById('btn').disabled = false;
-      document.getElementById('btn').textContent = 'Se connecter';
+      document.getElementById('btn').textContent = t('login.submit','Se connecter');
       return false;
     }
 
@@ -147,7 +202,7 @@
       localStorage.setItem('evo_email', email);
       localStorage.setItem('evo_logged_in', '1');
       const msg = document.getElementById('msg') || document.getElementById('msg-2fa');
-      msg.className = 'msg ok'; msg.textContent = '✓ Connecté ! Redirection...';
+      msg.className = 'msg ok'; msg.textContent = t('login.msg_connected','✓ Connecté ! Redirection...');
       const _redir = new URLSearchParams(location.search).get('redirect') || '/dashboard.html';
       const redir = isSafeRedirect(_redir) ? _redir : '/dashboard.html';
       setTimeout(() => location.href = redir, 700);
@@ -158,7 +213,7 @@
       const email = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value;
       const msg = document.getElementById('msg'); const btn = document.getElementById('btn');
-      btn.disabled = true; btn.textContent = 'Connexion...';
+      btn.disabled = true; btn.textContent = t('login.submit_loading','Connexion...');
       try {
         const _cl = new AbortController(); const _tl = setTimeout(() => _cl.abort(), 15000);
         const r = await fetch(API + '/api/auth/login', { method:'POST', headers:{'Content-Type':'application/json'}, credentials:'include', signal:_cl.signal, body:JSON.stringify({ email, password }) });
@@ -172,20 +227,20 @@
         } else if (d.ok) {
           finishLogin(d.token, d.email);
         } else if (d.needVerification) {
-          msg.className='msg ok'; msg.textContent='Compte non vérifié — redirection vers la confirmation...';
+          msg.className='msg ok'; msg.textContent=t('login.msg_not_verified','Compte non vérifié — redirection vers la confirmation...');
           setTimeout(() => location.href = '/verify.html?email=' + encodeURIComponent(d.email || email), 800);
         } else {
-          msg.className='msg err'; msg.textContent = d.error || 'Email ou mot de passe incorrect.';
-          btn.disabled=false; btn.textContent='Se connecter';
+          msg.className='msg err'; msg.textContent = d.error || t('login.msg_bad_creds','Email ou mot de passe incorrect.');
+          btn.disabled=false; btn.textContent=t('login.submit','Se connecter');
         }
-      } catch { msg.className='msg err'; msg.textContent='Erreur réseau. Réessayez.'; btn.disabled=false; btn.textContent='Se connecter'; }
+      } catch { msg.className='msg err'; msg.textContent=t('login.msg_network','Erreur réseau. Réessayez.'); btn.disabled=false; btn.textContent=t('login.submit','Se connecter'); }
     });
 
     document.getElementById('form-2fa').addEventListener('submit', async e => {
       e.preventDefault();
       const totp = document.getElementById('totp').value.trim();
       const msg = document.getElementById('msg-2fa'); const btn = document.getElementById('btn-2fa');
-      btn.disabled = true; btn.textContent = 'Vérification...';
+      btn.disabled = true; btn.textContent = t('login.2fa_loading','Vérification...');
       try {
         const _c2 = new AbortController(); const _t2 = setTimeout(() => _c2.abort(), 15000);
         const r = await fetch(API + '/api/auth/2fa/verify', { method:'POST', headers:{'Content-Type':'application/json'}, credentials:'include', signal:_c2.signal, body:JSON.stringify({ pre_token: _preToken, totp }) });
@@ -194,12 +249,20 @@
         if (d.ok) {
           finishLogin(d.token, d.email);
         } else {
-          msg.className='msg err'; msg.textContent = d.error || 'Code incorrect.';
-          btn.disabled=false; btn.textContent='Vérifier';
+          msg.className='msg err'; msg.textContent = d.error || t('login.msg_bad_code','Code incorrect.');
+          btn.disabled=false; btn.textContent=t('login.2fa_submit','Vérifier');
           document.getElementById('totp').value = '';
           document.getElementById('totp').focus();
         }
-      } catch { msg.className='msg err'; msg.textContent='Erreur réseau.'; btn.disabled=false; btn.textContent='Vérifier'; }
+      } catch { msg.className='msg err'; msg.textContent=t('login.msg_network','Erreur réseau.'); btn.disabled=false; btn.textContent=t('login.2fa_submit','Vérifier'); }
+    });
+
+    // Ré-applique le libellé des boutons au changement de langue (états au repos)
+    window.addEventListener('evo-langchange', function(){
+      var b = document.getElementById('btn');
+      if (b && !b.disabled) b.textContent = t('login.submit','Se connecter');
+      var b2 = document.getElementById('btn-2fa');
+      if (b2 && !b2.disabled) b2.textContent = t('login.2fa_submit','Vérifier');
     });
   </script>
 <script src="/assistance.js" defer></script>

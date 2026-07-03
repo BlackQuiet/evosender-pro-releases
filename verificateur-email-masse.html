@@ -17,6 +17,69 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="/article.css" />
 <script src="/theme.js"></script>
+<script>window.I18N_PAGE={
+  en:{
+    "verif.crumb_full":"<a href=\"/\">Home</a> › <a href=\"/blog.html\">Blog</a> › Bulk email verifier",
+    "verif.h1":"Bulk email verifier: clean up your lists",
+    "verif.lead":"A <strong>bulk email verifier</strong> tests the validity of thousands of addresses before sending. It's the most cost-effective step in any emailing strategy: it protects your reputation and improves your results.",
+    "verif.meta":"EvoStudio guide · Updated in 2026",
+    "verif.h2_why":"Why verify your addresses?",
+    "verif.p_why":"Sending to invalid addresses generates <strong>bounces</strong>. A high bounce rate signals to providers (Gmail, Outlook…) that you're sending to low-quality lists — and damages your <strong>sender reputation</strong>. As a result, even your legitimate emails end up in spam. Cleaning up beforehand avoids this vicious circle.",
+    "verif.h2_levels":"The levels of verification",
+    "verif.h3_syntax":"1. Syntax",
+    "verif.p_syntax":"First, we check that the address is well-formed (format, characters, domain). This eliminates obvious typos.",
+    "verif.h3_mx":"2. MX records",
+    "verif.p_mx":"We check that the domain has mail servers (MX) capable of receiving emails. A domain without MX cannot receive mail.",
+    "verif.h3_smtp":"3. SMTP test",
+    "verif.p_smtp":"The most thorough test: we query the recipient's server to find out whether the mailbox really exists, without sending an email. This is what distinguishes a real verifier from a simple syntax checker.",
+    "verif.callout":"📉 <strong>Goal:</strong> keep your bounce rate below 2–3%. Beyond that, your deliverability drops quickly. Regular verification is the best insurance.",
+    "verif.h2_when":"When to verify?",
+    "verif.li_extract":"After each <a href=\"/extracteur-emails.html\">address extraction</a>.",
+    "verif.li_campaign":"Before each large campaign.",
+    "verif.li_old":"Periodically on your older lists (addresses expire).",
+    "verif.h2_evoverify":"EvoVerify: clean lists, guaranteed",
+    "verif.p_evoverify":"<strong>EvoVerify</strong>, EvoStudio's validation tool, combines <strong>syntax, MX and SMTP</strong> tests, provides a detailed validity score and lets you export your results by status. You only send to real addresses — and your deliverability soars.",
+    "verif.cta_h3":"Clean your lists with EvoVerify",
+    "verif.cta_p":"Syntax + MX + SMTP verification. Validity score and export by status.",
+    "verif.cta_btn":"Discover EvoVerify →",
+    "verif.related_h2":"Related reading",
+    "verif.related_send":"Bulk email software<span>Succeed with your campaigns after cleaning up.</span>",
+    "verif.related_extract":"Email extractor<span>Collect addresses before verifying them.</span>",
+    "verif.related_smtp":"Dedicated SMTP server<span>The high-deliverability sending infrastructure.</span>",
+    "foot.line":"© 2025–2026 EGSCI SARL — EvoStudio · <a href=\"/a-propos.html\">About</a> · <a href=\"/privacy.html\">Legal notice</a>"
+  },
+  ru:{
+    "verif.crumb_full":"<a href=\"/\">Главная</a> › <a href=\"/blog.html\">Блог</a> › Массовая проверка email",
+    "verif.h1":"Массовая проверка email: очистка ваших списков",
+    "verif.lead":"<strong>Инструмент массовой проверки email</strong> тестирует валидность тысяч адресов перед отправкой. Это самый рентабельный шаг любой email-стратегии: он защищает вашу репутацию и улучшает результаты.",
+    "verif.meta":"Руководство EvoStudio · Обновлено в 2026",
+    "verif.h2_why":"Зачем проверять адреса?",
+    "verif.p_why":"Отправка на недействительные адреса вызывает <strong>отказы (bounces)</strong>. Высокий процент отказов сигнализирует провайдерам (Gmail, Outlook…), что вы отправляете по некачественным спискам — и ухудшает вашу <strong>репутацию отправителя</strong>. В результате даже ваши легитимные письма попадают в спам. Очистка заранее позволяет избежать этого порочного круга.",
+    "verif.h2_levels":"Уровни проверки",
+    "verif.h3_syntax":"1. Синтаксис",
+    "verif.p_syntax":"Сначала мы проверяем, что адрес правильно сформирован (формат, символы, домен). Это устраняет очевидные опечатки.",
+    "verif.h3_mx":"2. MX-записи",
+    "verif.p_mx":"Мы проверяем, что у домена есть почтовые серверы (MX), способные принимать email. Домен без MX не может получать почту.",
+    "verif.h3_smtp":"3. SMTP-тест",
+    "verif.p_smtp":"Самый углублённый тест: мы обращаемся к серверу получателя, чтобы узнать, существует ли ящик на самом деле, не отправляя письмо. Именно это отличает настоящий инструмент проверки от простого корректора синтаксиса.",
+    "verif.callout":"📉 <strong>Цель:</strong> удерживать процент отказов ниже 2–3%. Свыше этого ваша доставляемость быстро падает. Регулярная проверка — лучшая страховка.",
+    "verif.h2_when":"Когда проверять?",
+    "verif.li_extract":"После каждого <a href=\"/extracteur-emails.html\">извлечения адресов</a>.",
+    "verif.li_campaign":"Перед каждой крупной кампанией.",
+    "verif.li_old":"Периодически на ваших старых списках (адреса устаревают).",
+    "verif.h2_evoverify":"EvoVerify: чистые списки с гарантией",
+    "verif.p_evoverify":"<strong>EvoVerify</strong>, инструмент валидации от EvoStudio, сочетает тесты <strong>синтаксиса, MX и SMTP</strong>, предоставляет подробную оценку валидности и позволяет экспортировать результаты по статусу. Вы отправляете только на реальные адреса — и ваша доставляемость взлетает.",
+    "verif.cta_h3":"Очистите ваши списки с EvoVerify",
+    "verif.cta_p":"Проверка синтаксиса + MX + SMTP. Оценка валидности и экспорт по статусу.",
+    "verif.cta_btn":"Открыть EvoVerify →",
+    "verif.related_h2":"Читайте также",
+    "verif.related_send":"Программа для массовой email-рассылки<span>Проведите успешные кампании после очистки.</span>",
+    "verif.related_extract":"Экстрактор email<span>Собирайте адреса перед их проверкой.</span>",
+    "verif.related_smtp":"Выделенный SMTP-сервер<span>Инфраструктура отправки с высокой доставляемостью.</span>",
+    "foot.line":"© 2025–2026 EGSCI SARL — EvoStudio · <a href=\"/a-propos.html\">О нас</a> · <a href=\"/privacy.html\">Правовая информация</a>"
+  }
+};</script>
+<script src="/i18n.js" defer></script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","headline":"Vérificateur d'email en masse : nettoyer ses listes","description":"Pourquoi et comment vérifier ses listes (syntaxe, MX, SMTP) pour réduire le taux de rebond.","image":"https://evostudio.fr/EvoVerify.png","author":{"@type":"Organization","name":"EvoStudio"},"publisher":{"@type":"Organization","name":"EvoStudio","logo":{"@type":"ImageObject","url":"https://evostudio.fr/logoevostudio2.png"}},"mainEntityOfPage":"https://evostudio.fr/verificateur-email-masse.html","inLanguage":"fr-FR"}
 </script>
@@ -25,56 +88,57 @@
 <header class="nav">
   <a href="/" class="logo"><img src="/logoevostudio2.png" alt="EvoStudio" /></a>
   <nav class="links">
-    <a href="/">Accueil</a><a href="/#produits">Produits</a><a href="/blog.html">Blog</a><a href="/a-propos.html">À propos</a><a href="/pay.html" class="cta">Acheter</a>
+    <a href="/" data-i18n="nav.home">Accueil</a><a href="/#produits" data-i18n="nav.products">Produits</a><a href="/blog.html" data-i18n="nav.blog">Blog</a><a href="/a-propos.html" data-i18n="nav.about">À propos</a>
+    <div id="lang-switch"></div>
   </nav>
 </header>
 
 <div class="container">
-  <div class="crumb"><a href="/">Accueil</a> › <a href="/blog.html">Blog</a> › Vérificateur d'email en masse</div>
+  <div class="crumb" data-i18n-html="verif.crumb_full"><a href="/">Accueil</a> › <a href="/blog.html">Blog</a> › Vérificateur d'email en masse</div>
   <article>
-    <h1>Vérificateur d'email en masse : nettoyer ses listes</h1>
-    <p class="lead">Un <strong>vérificateur d'email en masse</strong> teste la validité de milliers d'adresses avant l'envoi. C'est l'étape la plus rentable de toute stratégie d'emailing : elle protège votre réputation et améliore vos résultats.</p>
-    <p class="meta">Guide EvoStudio · Mis à jour en 2026</p>
+    <h1 data-i18n="verif.h1">Vérificateur d'email en masse : nettoyer ses listes</h1>
+    <p class="lead" data-i18n-html="verif.lead">Un <strong>vérificateur d'email en masse</strong> teste la validité de milliers d'adresses avant l'envoi. C'est l'étape la plus rentable de toute stratégie d'emailing : elle protège votre réputation et améliore vos résultats.</p>
+    <p class="meta" data-i18n="verif.meta">Guide EvoStudio · Mis à jour en 2026</p>
 
-    <h2>Pourquoi vérifier ses adresses ?</h2>
-    <p>Envoyer à des adresses invalides génère des <strong>rebonds (bounces)</strong>. Un taux de rebond élevé signale aux fournisseurs (Gmail, Outlook…) que vous envoyez à des listes de mauvaise qualité — et dégrade votre <strong>réputation d'expéditeur</strong>. Résultat : même vos emails légitimes finissent en spam. Nettoyer en amont évite ce cercle vicieux.</p>
+    <h2 data-i18n="verif.h2_why">Pourquoi vérifier ses adresses ?</h2>
+    <p data-i18n-html="verif.p_why">Envoyer à des adresses invalides génère des <strong>rebonds (bounces)</strong>. Un taux de rebond élevé signale aux fournisseurs (Gmail, Outlook…) que vous envoyez à des listes de mauvaise qualité — et dégrade votre <strong>réputation d'expéditeur</strong>. Résultat : même vos emails légitimes finissent en spam. Nettoyer en amont évite ce cercle vicieux.</p>
 
-    <h2>Les niveaux de vérification</h2>
-    <h3>1. Syntaxe</h3>
-    <p>On vérifie d'abord que l'adresse est bien formée (format, caractères, domaine). Cela élimine les fautes de frappe évidentes.</p>
-    <h3>2. Enregistrements MX</h3>
-    <p>On contrôle que le domaine possède bien des serveurs de messagerie (MX) capables de recevoir des emails. Un domaine sans MX ne peut pas recevoir de courrier.</p>
-    <h3>3. Test SMTP</h3>
-    <p>Le test le plus poussé : on interroge le serveur du destinataire pour savoir si la boîte existe réellement, sans envoyer d'email. C'est ce qui distingue un vrai vérificateur d'un simple correcteur de syntaxe.</p>
+    <h2 data-i18n="verif.h2_levels">Les niveaux de vérification</h2>
+    <h3 data-i18n="verif.h3_syntax">1. Syntaxe</h3>
+    <p data-i18n="verif.p_syntax">On vérifie d'abord que l'adresse est bien formée (format, caractères, domaine). Cela élimine les fautes de frappe évidentes.</p>
+    <h3 data-i18n="verif.h3_mx">2. Enregistrements MX</h3>
+    <p data-i18n="verif.p_mx">On contrôle que le domaine possède bien des serveurs de messagerie (MX) capables de recevoir des emails. Un domaine sans MX ne peut pas recevoir de courrier.</p>
+    <h3 data-i18n="verif.h3_smtp">3. Test SMTP</h3>
+    <p data-i18n="verif.p_smtp">Le test le plus poussé : on interroge le serveur du destinataire pour savoir si la boîte existe réellement, sans envoyer d'email. C'est ce qui distingue un vrai vérificateur d'un simple correcteur de syntaxe.</p>
 
-    <div class="callout">📉 <strong>Objectif :</strong> garder un taux de rebond sous les 2-3%. Au-delà, votre délivrabilité chute rapidement. Une vérification régulière est la meilleure assurance.</div>
+    <div class="callout" data-i18n-html="verif.callout">📉 <strong>Objectif :</strong> garder un taux de rebond sous les 2-3%. Au-delà, votre délivrabilité chute rapidement. Une vérification régulière est la meilleure assurance.</div>
 
-    <h2>Quand vérifier ?</h2>
+    <h2 data-i18n="verif.h2_when">Quand vérifier ?</h2>
     <ul>
-      <li>Après chaque <a href="/extracteur-emails.html">extraction d'adresses</a>.</li>
-      <li>Avant chaque grosse campagne.</li>
-      <li>Périodiquement sur vos listes anciennes (les adresses se périment).</li>
+      <li data-i18n-html="verif.li_extract">Après chaque <a href="/extracteur-emails.html">extraction d'adresses</a>.</li>
+      <li data-i18n="verif.li_campaign">Avant chaque grosse campagne.</li>
+      <li data-i18n="verif.li_old">Périodiquement sur vos listes anciennes (les adresses se périment).</li>
     </ul>
 
-    <h2>EvoVerify : des listes propres, garanties</h2>
-    <p><strong>EvoVerify</strong>, l'outil de validation d'EvoStudio, combine les tests de <strong>syntaxe, MX et SMTP</strong>, fournit un score de validité détaillé et permet d'exporter vos résultats par statut. Vous n'envoyez plus qu'à des adresses réelles — et votre délivrabilité s'envole.</p>
+    <h2 data-i18n="verif.h2_evoverify">EvoVerify : des listes propres, garanties</h2>
+    <p data-i18n-html="verif.p_evoverify"><strong>EvoVerify</strong>, l'outil de validation d'EvoStudio, combine les tests de <strong>syntaxe, MX et SMTP</strong>, fournit un score de validité détaillé et permet d'exporter vos résultats par statut. Vous n'envoyez plus qu'à des adresses réelles — et votre délivrabilité s'envole.</p>
 
     <div class="cta-box">
-      <h3>Nettoyez vos listes avec EvoVerify</h3>
-      <p>Vérification syntaxe + MX + SMTP. Score de validité et export par statut.</p>
-      <a class="btn" href="/produit.html?id=verifier">Découvrir EvoVerify →</a>
+      <h3 data-i18n="verif.cta_h3">Nettoyez vos listes avec EvoVerify</h3>
+      <p data-i18n="verif.cta_p">Vérification syntaxe + MX + SMTP. Score de validité et export par statut.</p>
+      <a class="btn" href="/produit.html?id=verifier" data-i18n="verif.cta_btn">Découvrir EvoVerify →</a>
     </div>
 
     <div class="related">
-      <h2>À lire aussi</h2>
-      <a href="/logiciel-envoi-email-masse.html">Logiciel d'envoi d'email en masse<span>Réussir vos campagnes après le nettoyage.</span></a>
-      <a href="/extracteur-emails.html">Extracteur d'emails<span>Collecter des adresses avant de les vérifier.</span></a>
-      <a href="/serveur-smtp-dedie.html">Serveur SMTP dédié<span>L'infrastructure d'envoi haute délivrabilité.</span></a>
+      <h2 data-i18n="verif.related_h2">À lire aussi</h2>
+      <a href="/logiciel-envoi-email-masse.html" data-i18n-html="verif.related_send">Logiciel d'envoi d'email en masse<span>Réussir vos campagnes après le nettoyage.</span></a>
+      <a href="/extracteur-emails.html" data-i18n-html="verif.related_extract">Extracteur d'emails<span>Collecter des adresses avant de les vérifier.</span></a>
+      <a href="/serveur-smtp-dedie.html" data-i18n-html="verif.related_smtp">Serveur SMTP dédié<span>L'infrastructure d'envoi haute délivrabilité.</span></a>
     </div>
   </article>
 </div>
 
-<footer class="footer">© 2025–2026 EGSCI SARL — EvoStudio · <a href="/a-propos.html">À propos</a> · <a href="/privacy.html">Mentions légales</a></footer>
+<footer class="footer" data-i18n-html="foot.line">© 2025–2026 EGSCI SARL — EvoStudio · <a href="/a-propos.html">À propos</a> · <a href="/privacy.html">Mentions légales</a></footer>
 <script src="/assistance.js" defer></script>
 </body>
 </html>

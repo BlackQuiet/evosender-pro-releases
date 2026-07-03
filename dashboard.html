@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>EvoStudio — Espace client</title>
+<title data-i18n="dash.page_title">EvoStudio — Espace client</title>
 <link rel="icon" href="/logo-EvoSender.ico" type="image/x-icon"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <!-- SECURITY: add integrity hash before production — e.g. via: openssl dgst -sha384 -binary chart.umd.min.js | openssl base64 -A -->
@@ -308,6 +308,179 @@ html[data-theme="light"] .stat-n,html[data-theme="light"] .panel-title,html[data
 html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;background:#fef2f2!important}
 </style>
 <script src="/theme.js"></script>
+<script>window.I18N_PAGE={
+  en:{
+    'dash.page_title':'EvoStudio — Client area',
+    'dash.logout':'Log out','dash.logout_title':'Log out','dash.theme_title':'Light / dark mode','dash.theme_aria':'Toggle light / dark','dash.menu_aria':'Menu',
+    'dash.sb_brand':'My area','dash.sb_reduce':'Collapse',
+    'dash.nav_home':'Home','dash.nav_licenses':'Licenses','dash.nav_orders':'Orders','dash.nav_smtp':'SMTP servers','dash.nav_proxy':'Residential proxy','dash.nav_account':'My account',
+    'dash.since':'Since',
+    'dash.hello':'Hello 👋','dash.welcome':'Welcome to your EvoStudio area.',
+    'dash.stat_licenses':'Licenses','dash.stat_orders':'Orders','dash.stat_smtp':'SMTP servers','dash.stat_proxy':'Proxy accounts',
+    'dash.dl_title':'Download EvoStudio','dash.dl_win_name':'Windows 10 / 11','dash.dl_win_meta':'x64 · .exe · ~95 MB','dash.dl_mac_name':'Mac Silicon M1/M2/M3','dash.dl_mac_meta':'arm64 · .dmg · ~125 MB',
+    'dash.mac_notice':'<strong>⚠️ Mac: "file is damaged" message?</strong> This is a normal macOS protection. To open the app:<br><strong>Option 1</strong> — After installing, open <strong>Terminal</strong> and paste:<br><code style="display:block;background:#1e293b;color:#7dd3fc;border-radius:6px;padding:7px 10px;margin:6px 0;font-size:12px;letter-spacing:.01em">sudo xattr -rd com.apple.quarantine /Applications/EvoStudio.app</code><strong>Option 2</strong> — Go to <strong>System Settings → Privacy & Security</strong> → click <strong>"Open Anyway"</strong>.',
+    'dash.quick_title':'Quick access','dash.quick_new_license':'New license','dash.quick_my_licenses':'My licenses','dash.quick_history':'History','dash.quick_support':'Support',
+    'dash.lic_title':'Licenses','dash.lic_sub':'Your active EvoStudio license keys.','dash.lic_active':'Active licenses','dash.buy':'Buy','dash.loading':'Loading…',
+    'dash.ord_title':'Orders','dash.ord_sub':'History of all your purchases.',
+    'dash.smtp_title':'SMTP servers','dash.smtp_sub':'Your high-deliverability email relays.','dash.smtp_active':'Active servers','dash.smtp_new':'New SMTP',
+    'dash.proxy_title':'Residential proxy','dash.proxy_sub':'Your proxy plans — residential IPs from 30+ countries · 180-day validity.',
+    'dash.proxy_gb_bought':'GB purchased','dash.proxy_gb_used':'GB used','dash.proxy_gb_left':'GB remaining',
+    'dash.proxy_active':'Active proxy accounts','dash.refresh':'↻ Refresh','dash.refresh_title':'Refresh statistics','dash.proxy_buy':'Buy proxy',
+    'dash.chart_title':'Usage over time','dash.chart_7d':'7 d','dash.chart_30d':'30 d','dash.chart_90d':'90 d','dash.chart_empty':'No usage data available for this period.',
+    'dash.acc_title':'My account','dash.acc_sub':'Account settings and security.','dash.acc_profile':'Profile','dash.acc_email':'Email address','dash.acc_member_since':'Member since','dash.acc_cgu':'Terms','dash.acc_view':'View',
+    'dash.acc_security':'Security','dash.acc_2fa':'Two-factor authentication (2FA)','dash.acc_2fa_setup':'Set up',
+    'dash.smtp_creds_title':'📧 SMTP credentials','dash.smtp_creds_sub':'Email relay','dash.host':'Host','dash.port':'Port','dash.user':'User','dash.password':'Password','dash.copy':'Copy','dash.copy_all_creds':'📋 Copy all credentials',
+    'dash.smtp_test_title':'🧪 Test sending','dash.smtp_test_ph':'Destination email (e.g. you@gmail.com)','dash.smtp_test_send':'Send a test',
+    'dash.proxy_del_title':'🗑 Delete proxy','dash.proxy_del_sub':'This action is irreversible.','dash.proxy_del_warn':'⚠️ The proxy account will be <b>permanently deleted</b>. This action cannot be undone.','dash.cancel':'Cancel','dash.proxy_del_confirm':'🗑 Confirm deletion',
+    'dash.proxy_gen_title':'🌐 Proxy credentials & generator','dash.proxy_gen_sub':'Residential proxy','dash.gen_title':'🔧 Connection generator',
+    'dash.country':'Country','dash.country_random':'Random (worldwide)',
+    'dash.grp_america':'America','dash.grp_europe':'Europe','dash.grp_asia':'Asia / Pacific','dash.grp_mideast':'Middle East','dash.grp_africa':'Africa',
+    'dash.c_us':'USA','dash.c_ca':'Canada','dash.c_br':'Brazil','dash.c_mx':'Mexico','dash.c_ar':'Argentina','dash.c_co':'Colombia',
+    'dash.c_gb':'United Kingdom','dash.c_fr':'France','dash.c_de':'Germany','dash.c_be':'Belgium','dash.c_nl':'Netherlands','dash.c_ch':'Switzerland','dash.c_es':'Spain','dash.c_it':'Italy','dash.c_pt':'Portugal','dash.c_se':'Sweden','dash.c_no':'Norway','dash.c_pl':'Poland','dash.c_ro':'Romania','dash.c_ru':'Russia','dash.c_ua':'Ukraine',
+    'dash.c_jp':'Japan','dash.c_kr':'South Korea','dash.c_cn':'China','dash.c_hk':'Hong Kong','dash.c_sg':'Singapore','dash.c_au':'Australia','dash.c_in':'India','dash.c_id':'Indonesia','dash.c_vn':'Vietnam','dash.c_th':'Thailand','dash.c_ph':'Philippines',
+    'dash.c_ae':'UAE','dash.c_sa':'Saudi Arabia','dash.c_tr':'Turkey','dash.c_il':'Israel',
+    'dash.c_za':'South Africa','dash.c_ng':'Nigeria','dash.c_ci':'Ivory Coast','dash.c_gh':'Ghana','dash.c_sn':'Senegal','dash.c_ma':'Morocco','dash.c_eg':'Egypt',
+    'dash.isp':'ISP','dash.isp_optional':'(optional)','dash.isp_random':'🌐 Random','dash.isp_manual_ph':'Manual code: as7922_Comcast',
+    'dash.ssid_label':'Session ID (ssid) — ','dash.ssid_hint':'empty=Rotating · filled=Sticky','dash.ssid_ph':'Empty = rotating IP','dash.random_title':'Random',
+    'dash.quantity':'Quantity','dash.copy_format':'Copy format','dash.gen_strings':'Generated strings','dash.reset':'↺ Reset',
+    'dash.test':'⚡ Test','dash.rotation_sticky_hint':'🔄 <b>Rotation</b>: empty ssid · 🔒 <b>Sticky</b>: filled ssid',
+    'dash.cgu_title':'⚖️ Terms and conditions of use','dash.cgu_sub':'Please read and accept to use EvoStudio.',
+    'dash.cgu_intro':'These Terms and Conditions of Use ("Terms") govern the use of the <b>EvoStudio</b> software (including EvoExtractor, EvoSender and EvoVerify), published by <b>EGSCI SARL</b>, a company under Russian law. By creating an account, purchasing or using the software, the user acknowledges having read, understood and accepted these Terms in full.',
+    'dash.cgu_a1_t':'Article 1 — Purpose','dash.cgu_a1':'The purpose of these Terms is to define the terms and conditions for using the EvoStudio software.',
+    'dash.cgu_a2_t':'Article 2 — License','dash.cgu_a2':'EvoStudio is licensed on an <b>individual, personal, non-exclusive and non-transferable</b> basis. Strictly prohibited: resale, sharing, decompilation, modification.',
+    'dash.cgu_a4_t':'Article 4 — Payment','dash.cgu_a4':'Payment by crypto or mobile money. <b>No refunds after the license is generated</b> (digital product delivered immediately).',
+    'dash.cgu_a5_t':'Article 5 — Disclaimer of liability','dash.cgu_a5':'EGSCI SARL disclaims all liability. The user is <b>solely and fully responsible</b> for the compliance of their sendings (GDPR, CAN-SPAM, LCEN, etc.), for recipient consent and for any use of the software.',
+    'dash.cgu_a6_t':'Article 6 — Prohibited uses','dash.cgu_a6':'Prohibited: spam, phishing, fraud, identity theft, harassment, illegal content, GDPR violation. Any unlawful use results in immediate revocation of the license.',
+    'dash.cgu_a8_t':'Article 8 — Data','dash.cgu_a8':'EvoStudio is 100% local: no data is transmitted. Only license verification contacts our servers.',
+    'dash.cgu_a12_t':'Article 12 — Governing law','dash.cgu_a12':'Terms governed by Russian law. Disputes submitted to the courts of the Russian Federation. Contact: <a href="mailto:support@evostudio.fr" style="color:var(--blue)">support@evostudio.fr</a>',
+    'dash.cgu_copy':'© 2025–2026 EGSCI SARL — Russian Federation',
+    'dash.cgu_accept_lbl':'I have read and accept the terms and conditions of use, and I acknowledge that EGSCI SARL disclaims all liability regarding my use of the software.','dash.cgu_accept_btn':'Accept and continue',
+    'dash.tfa_title':'🔐 Enable 2FA','dash.tfa_sub':'Scan the QR code with Google Authenticator or Authy','dash.tfa_or_manual':'Or enter manually:','dash.tfa_code_ph':'6-digit code','dash.tfa_enable_btn':'Enable 2FA','dash.tfa_note':'⚠️ Save the secret code — without it you will not be able to recover access.',
+    'dash.tfa_disable_intro':'Enter your current TOTP code to disable 2FA.','dash.tfa_disable_btn':'Disable 2FA',
+    'dash.sup_title':'EvoStudio Support','dash.sup_reply':'We reply within 24h','dash.sup_input_ph':'Type your message…','dash.sup_aria':'Support',
+    'dash.loading_screen':'Loading…',
+    /* JS-generated */
+    'dash.prod_sender':'📤 EvoSender','dash.prod_extractor':'🔍 EvoExtractor','dash.prod_verifier':'✅ EvoVerify','dash.prod_suite':'🌐 EvoStudio Suite',
+    'dash.prod_proxy_5gb':'🌐 Proxy 5 GB','dash.prod_proxy_55gb':'🌐 Proxy 55 GB','dash.prod_proxy_100gb':'🌐 Proxy 100 GB','dash.prod_proxy_200gb':'🌐 Proxy 200 GB','dash.prod_proxy_1000gb':'🌐 Proxy 1 TB','dash.prod_proxy_2000gb':'🌐 Proxy 2 TB',
+    'dash.sts_pending':'Pending','dash.sts_paid':'Paid','dash.sts_expired':'Expired','dash.sts_cancelled':'Cancelled',
+    'dash.st_active':'Active','dash.st_suspended':'Suspended','dash.st_pending':'Pending',
+    'dash.copied':'✓ Copied!','dash.cgu_validating':'Validating…','dash.cgu_accepted':'✓ Accepted','dash.cgu_accepted_toast':'✓ Terms accepted',
+    'dash.smtp_from_label':'✉️ "From" address: ','dash.smtp_copy_host':'SMTP host','dash.smtp_copy_port':'Port','dash.smtp_copy_user':'User','dash.smtp_copy_pass':'Password','dash.smtp_copy_enc':'Encryption: TLS/STARTTLS',
+    'dash.smtp_test_invalid':'⚠️ Please enter a valid email address.','dash.smtp_test_sending':'⏳ Sending…','dash.smtp_test_ok':'✅ Test email sent to <b>{to}</b>! Check your inbox (and spam).','dash.smtp_test_fail':'❌ Failed: ','dash.err_unknown':'Unknown error','dash.err_unreachable':'Server unreachable. Check your connection or retry in 1 minute (the server sometimes restarts).',
+    'dash.in_preparation':'In preparation…','dash.see':'See','dash.hide':'Hide',
+    'dash.proxy_modal_sub':'Residential proxy — {gb} GB · {plan}','dash.gen_isp_random_all':'🌐 Random (all ISPs)','dash.gen_isp_manual':'✏️ Enter manually…',
+    'dash.proxy_copied':'✅ {n} string(s) copied!','dash.proxy_testing':'⏳ Testing…',
+    'dash.proxy_ok':'✅ Proxy working!','dash.proxy_public_ip':'Public IP','dash.proxy_country':'Country','dash.proxy_city':'City','dash.proxy_operator':'Operator',
+    'dash.proxy_test_timeout':"Test too long (>30 s) — the chosen country/ISP may not have an available IP. Retry or change ISP.",'dash.proxy_net_err':'Network error: {msg}. Retry (the server may wake up after inactivity).',
+    'dash.proxy_deleting':'⏳ Deleting…','dash.proxy_deleted':'🗑 Proxy account deleted.','dash.proxy_unreachable':'Server unreachable — wait 1 minute and retry.',
+    'dash.smtp_confirm_delete':'Permanently delete this SMTP server? The SMTP key will be revoked.','dash.smtp_deleted':'🗑 SMTP server deleted.','dash.net_error':'❌ Network error','dash.error':'Error',
+    'dash.sup_ask':'Ask our team a question.','dash.sup_resolved':'✓ Conversation resolved. Write to reopen it.',
+    'dash.tfa_title_disable':'🔓 Disable 2FA','dash.tfa_sub_disable':'Confirm with your current TOTP code.','dash.tfa_title_enable':'🔐 Enable 2FA','dash.tfa_sub_enable':'Scan the QR code with Google Authenticator or Authy.',
+    'dash.tfa_setup_err':'Error','dash.tfa_net_err':'Network error.','dash.tfa_enter_code':'Enter the 6-digit code.','dash.tfa_verifying':'Verifying…','dash.tfa_enabled_toast':'✅ 2FA enabled!','dash.tfa_bad_code':'Incorrect code.','dash.tfa_enabled_btn':'🔐 2FA enabled ✓','dash.tfa_disabled_toast':'🔓 2FA disabled.','dash.tfa_disable_btn2':'🔓 Enable 2FA',
+    'dash.2fa_on':'🔐 2FA enabled ✓','dash.2fa_off':'🔓 Enable 2FA','dash.cgu_not_accepted':'Not accepted','dash.cgu_accepted_on':'✓ Accepted on {date}',
+    'dash.smtp_relay_name':'📧 SMTP Relay — {vol} emails/month','dash.plan':'Plan','dash.port_tls':'Port {port} TLS','dash.stat_sent':'{n} sent','dash.stat_bounces':'{n} bounces','dash.stat_spam':'{n} spam','dash.stat_30d':'(30 d)',
+    'dash.creds_btn':'🔑 Credentials','dash.provisioning':'⏳ Provisioning','dash.renew':'↻ Renew','dash.activating':'⏳ Activating',
+    'dash.expired_on':'Expired on {date}','dash.until_days':'Until {date} ({n} d)','dash.until_days_left':'Until {date} · {n} days left',
+    'dash.empty_licenses':'No active license.','dash.buy_license':'Buy a license','dash.empty_orders':'No orders.','dash.empty_smtp':'No active SMTP server.','dash.empty_proxy':'No active proxy plan.',
+    'dash.col_product':'Product','dash.col_amount':'Amount','dash.col_status':'Status','dash.col_date':'Date',
+    'dash.pc':'PC','dash.year_1':'1 year','dash.reactivate':'Reactivate','dash.renew_word':'Renew','dash.bought_on':'Bought on {date}','dash.win':'Windows','dash.mac':'Mac M1/M2/M3',
+    'dash.proxy_name':'🌐 Residential proxy — {gb} GB','dash.badge_180':'180 d','dash.plan_word':'Plan {plan}',
+    'dash.bw_label':'📶 Bandwidth','dash.pct_used':'{pct}% used','dash.remaining':'{v} remaining','dash.stats_unavailable':'Stats unavailable',
+    'dash.quota_exhausted':'🚫 Quota exhausted — Proxy suspended','dash.quota_exhausted_sub':'Your {gb} GB plan is fully consumed.','dash.buy_volume':'🛒 Buy volume',
+    'dash.vol_low':'⚠️ Volume almost exhausted ({pct}%)','dash.vol_low_sub':'You have {v} left out of {gb} GB.',
+    'dash.proxy_expired_banner':'⛔ Proxy expired — Access suspended','dash.proxy_expired_sub':'Your 180-day plan ended on {date}.','dash.renew_btn':'🔄 Renew',
+    'dash.proxy_exp_soon':'⚠️ Expires in {n} day(s)','dash.proxy_exp_soon_sub':'Renew now so you don\'t lose access.','dash.buy_more':'+ Buy',
+    'dash.chart_usage':'Usage ({unit})','dash.chart_usage_demo':'Usage (MB) — demo','dash.chart_used_suffix':'{v} {unit} used',
+    'dash.paid_received':'✅ Payment received! Validation in progress — your access will appear here. ⏳','dash.paid_confirmed':'✅ Payment confirmed — your license is active!','dash.paid_pending':'⏳ Payment received — blockchain confirmation may take a few minutes. Your license will appear here automatically.','dash.paid_close':'Close',
+    'dash.day':'day','dash.days':'days','dash.gb':'GB','dash.mb':'MB'
+  },
+  ru:{
+    'dash.page_title':'EvoStudio — Личный кабинет',
+    'dash.logout':'Выход','dash.logout_title':'Выход','dash.theme_title':'Светлая / тёмная тема','dash.theme_aria':'Переключить светлую / тёмную тему','dash.menu_aria':'Меню',
+    'dash.sb_brand':'Мой кабинет','dash.sb_reduce':'Свернуть',
+    'dash.nav_home':'Главная','dash.nav_licenses':'Лицензии','dash.nav_orders':'Заказы','dash.nav_smtp':'SMTP-серверы','dash.nav_proxy':'Резидентный прокси','dash.nav_account':'Мой аккаунт',
+    'dash.since':'С',
+    'dash.hello':'Здравствуйте 👋','dash.welcome':'Добро пожаловать в ваш кабинет EvoStudio.',
+    'dash.stat_licenses':'Лицензии','dash.stat_orders':'Заказы','dash.stat_smtp':'SMTP-серверы','dash.stat_proxy':'Прокси-аккаунты',
+    'dash.dl_title':'Скачать EvoStudio','dash.dl_win_name':'Windows 10 / 11','dash.dl_win_meta':'x64 · .exe · ~95 МБ','dash.dl_mac_name':'Mac Silicon M1/M2/M3','dash.dl_mac_meta':'arm64 · .dmg · ~125 МБ',
+    'dash.mac_notice':'<strong>⚠️ Mac: сообщение «файл повреждён»?</strong> Это обычная защита macOS. Чтобы открыть приложение:<br><strong>Вариант 1</strong> — После установки откройте <strong>Терминал</strong> и вставьте:<br><code style="display:block;background:#1e293b;color:#7dd3fc;border-radius:6px;padding:7px 10px;margin:6px 0;font-size:12px;letter-spacing:.01em">sudo xattr -rd com.apple.quarantine /Applications/EvoStudio.app</code><strong>Вариант 2</strong> — Перейдите в <strong>Системные настройки → Конфиденциальность и безопасность</strong> → нажмите <strong>«Открыть всё равно»</strong>.',
+    'dash.quick_title':'Быстрый доступ','dash.quick_new_license':'Новая лицензия','dash.quick_my_licenses':'Мои лицензии','dash.quick_history':'История','dash.quick_support':'Поддержка',
+    'dash.lic_title':'Лицензии','dash.lic_sub':'Ваши активные ключи лицензий EvoStudio.','dash.lic_active':'Активные лицензии','dash.buy':'Купить','dash.loading':'Загрузка…',
+    'dash.ord_title':'Заказы','dash.ord_sub':'История всех ваших покупок.',
+    'dash.smtp_title':'SMTP-серверы','dash.smtp_sub':'Ваши почтовые релеи с высокой доставляемостью.','dash.smtp_active':'Активные серверы','dash.smtp_new':'Новый SMTP',
+    'dash.proxy_title':'Резидентный прокси','dash.proxy_sub':'Ваши прокси-тарифы — резидентные IP из 30+ стран · срок действия 180 дней.',
+    'dash.proxy_gb_bought':'ГБ куплено','dash.proxy_gb_used':'ГБ использовано','dash.proxy_gb_left':'ГБ осталось',
+    'dash.proxy_active':'Активные прокси-аккаунты','dash.refresh':'↻ Обновить','dash.refresh_title':'Обновить статистику','dash.proxy_buy':'Купить прокси',
+    'dash.chart_title':'Потребление во времени','dash.chart_7d':'7 дн','dash.chart_30d':'30 дн','dash.chart_90d':'90 дн','dash.chart_empty':'Нет данных об использовании за этот период.',
+    'dash.acc_title':'Мой аккаунт','dash.acc_sub':'Настройки и безопасность аккаунта.','dash.acc_profile':'Профиль','dash.acc_email':'Адрес email','dash.acc_member_since':'Участник с','dash.acc_cgu':'Условия','dash.acc_view':'Просмотреть',
+    'dash.acc_security':'Безопасность','dash.acc_2fa':'Двухфакторная аутентификация (2FA)','dash.acc_2fa_setup':'Настроить',
+    'dash.smtp_creds_title':'📧 Учётные данные SMTP','dash.smtp_creds_sub':'Почтовый релей','dash.host':'Хост','dash.port':'Порт','dash.user':'Пользователь','dash.password':'Пароль','dash.copy':'Копировать','dash.copy_all_creds':'📋 Копировать все данные',
+    'dash.smtp_test_title':'🧪 Тест отправки','dash.smtp_test_ph':'Email получателя (напр. you@gmail.com)','dash.smtp_test_send':'Отправить тест',
+    'dash.proxy_del_title':'🗑 Удалить прокси','dash.proxy_del_sub':'Это действие необратимо.','dash.proxy_del_warn':'⚠️ Прокси-аккаунт будет <b>удалён навсегда</b>. Это действие нельзя отменить.','dash.cancel':'Отмена','dash.proxy_del_confirm':'🗑 Подтвердить удаление',
+    'dash.proxy_gen_title':'🌐 Данные и генератор прокси','dash.proxy_gen_sub':'Резидентный прокси','dash.gen_title':'🔧 Генератор подключения',
+    'dash.country':'Страна','dash.country_random':'Случайно (по всему миру)',
+    'dash.grp_america':'Америка','dash.grp_europe':'Европа','dash.grp_asia':'Азия / Тихий океан','dash.grp_mideast':'Ближний Восток','dash.grp_africa':'Африка',
+    'dash.c_us':'США','dash.c_ca':'Канада','dash.c_br':'Бразилия','dash.c_mx':'Мексика','dash.c_ar':'Аргентина','dash.c_co':'Колумбия',
+    'dash.c_gb':'Великобритания','dash.c_fr':'Франция','dash.c_de':'Германия','dash.c_be':'Бельгия','dash.c_nl':'Нидерланды','dash.c_ch':'Швейцария','dash.c_es':'Испания','dash.c_it':'Италия','dash.c_pt':'Португалия','dash.c_se':'Швеция','dash.c_no':'Норвегия','dash.c_pl':'Польша','dash.c_ro':'Румыния','dash.c_ru':'Россия','dash.c_ua':'Украина',
+    'dash.c_jp':'Япония','dash.c_kr':'Южная Корея','dash.c_cn':'Китай','dash.c_hk':'Гонконг','dash.c_sg':'Сингапур','dash.c_au':'Австралия','dash.c_in':'Индия','dash.c_id':'Индонезия','dash.c_vn':'Вьетнам','dash.c_th':'Таиланд','dash.c_ph':'Филиппины',
+    'dash.c_ae':'ОАЭ','dash.c_sa':'Саудовская Аравия','dash.c_tr':'Турция','dash.c_il':'Израиль',
+    'dash.c_za':'ЮАР','dash.c_ng':'Нигерия','dash.c_ci':'Кот-д’Ивуар','dash.c_gh':'Гана','dash.c_sn':'Сенегал','dash.c_ma':'Марокко','dash.c_eg':'Египет',
+    'dash.isp':'Провайдер','dash.isp_optional':'(необязательно)','dash.isp_random':'🌐 Случайно','dash.isp_manual_ph':'Код вручную: as7922_Comcast',
+    'dash.ssid_label':'ID сессии (ssid) — ','dash.ssid_hint':'пусто=ротация · заполнено=Sticky','dash.ssid_ph':'Пусто = сменный IP','dash.random_title':'Случайно',
+    'dash.quantity':'Количество','dash.copy_format':'Формат копирования','dash.gen_strings':'Сгенерированные строки','dash.reset':'↺ Сброс',
+    'dash.test':'⚡ Тест','dash.rotation_sticky_hint':'🔄 <b>Ротация</b>: пустой ssid · 🔒 <b>Sticky</b>: заполненный ssid',
+    'dash.cgu_title':'⚖️ Условия использования','dash.cgu_sub':'Пожалуйста, прочтите и примите, чтобы пользоваться EvoStudio.',
+    'dash.cgu_intro':'Настоящие Условия использования («Условия») регулируют использование программного обеспечения <b>EvoStudio</b> (включая EvoExtractor, EvoSender и EvoVerify), издаваемого <b>EGSCI SARL</b>, компанией по российскому праву. Создавая аккаунт, покупая или используя ПО, пользователь подтверждает, что прочитал, понял и полностью принял настоящие Условия.',
+    'dash.cgu_a1_t':'Статья 1 — Предмет','dash.cgu_a1':'Цель настоящих Условий — определить порядок и условия использования программного обеспечения EvoStudio.',
+    'dash.cgu_a2_t':'Статья 2 — Лицензия','dash.cgu_a2':'EvoStudio предоставляется по <b>индивидуальной, персональной, неисключительной и непередаваемой</b> лицензии. Строго запрещены: перепродажа, передача, декомпиляция, изменение.',
+    'dash.cgu_a4_t':'Статья 4 — Оплата','dash.cgu_a4':'Оплата криптовалютой или мобильными деньгами. <b>Возврат средств после генерации лицензии невозможен</b> (цифровой продукт поставляется немедленно).',
+    'dash.cgu_a5_t':'Статья 5 — Отказ от ответственности','dash.cgu_a5':'EGSCI SARL снимает с себя всякую ответственность. Пользователь <b>единолично и полностью несёт ответственность</b> за соответствие своих рассылок (GDPR, CAN-SPAM, LCEN и т. д.), за согласие получателей и за любое использование ПО.',
+    'dash.cgu_a6_t':'Статья 6 — Запрещённое использование','dash.cgu_a6':'Запрещены: спам, фишинг, мошенничество, кража личности, преследование, незаконный контент, нарушение GDPR. Любое незаконное использование влечёт немедленный отзыв лицензии.',
+    'dash.cgu_a8_t':'Статья 8 — Данные','dash.cgu_a8':'EvoStudio работает на 100% локально: никакие данные не передаются. Только проверка лицензии обращается к нашим серверам.',
+    'dash.cgu_a12_t':'Статья 12 — Применимое право','dash.cgu_a12':'Условия регулируются российским правом. Споры передаются в суды Российской Федерации. Контакт: <a href="mailto:support@evostudio.fr" style="color:var(--blue)">support@evostudio.fr</a>',
+    'dash.cgu_copy':'© 2025–2026 EGSCI SARL — Российская Федерация',
+    'dash.cgu_accept_lbl':'Я прочитал(а) и принимаю условия использования и признаю, что EGSCI SARL снимает с себя всякую ответственность за моё использование ПО.','dash.cgu_accept_btn':'Принять и продолжить',
+    'dash.tfa_title':'🔐 Включить 2FA','dash.tfa_sub':'Отсканируйте QR-код в Google Authenticator или Authy','dash.tfa_or_manual':'Или введите вручную:','dash.tfa_code_ph':'6-значный код','dash.tfa_enable_btn':'Включить 2FA','dash.tfa_note':'⚠️ Сохраните секретный код — без него вы не сможете восстановить доступ.',
+    'dash.tfa_disable_intro':'Введите текущий код TOTP, чтобы отключить 2FA.','dash.tfa_disable_btn':'Отключить 2FA',
+    'dash.sup_title':'Поддержка EvoStudio','dash.sup_reply':'Мы отвечаем в течение 24 ч','dash.sup_input_ph':'Напишите сообщение…','dash.sup_aria':'Поддержка',
+    'dash.loading_screen':'Загрузка…',
+    /* JS-generated */
+    'dash.prod_sender':'📤 EvoSender','dash.prod_extractor':'🔍 EvoExtractor','dash.prod_verifier':'✅ EvoVerify','dash.prod_suite':'🌐 EvoStudio Suite',
+    'dash.prod_proxy_5gb':'🌐 Прокси 5 ГБ','dash.prod_proxy_55gb':'🌐 Прокси 55 ГБ','dash.prod_proxy_100gb':'🌐 Прокси 100 ГБ','dash.prod_proxy_200gb':'🌐 Прокси 200 ГБ','dash.prod_proxy_1000gb':'🌐 Прокси 1 ТБ','dash.prod_proxy_2000gb':'🌐 Прокси 2 ТБ',
+    'dash.sts_pending':'В ожидании','dash.sts_paid':'Оплачено','dash.sts_expired':'Истекло','dash.sts_cancelled':'Отменено',
+    'dash.st_active':'Активен','dash.st_suspended':'Приостановлен','dash.st_pending':'В ожидании',
+    'dash.copied':'✓ Скопировано!','dash.cgu_validating':'Проверка…','dash.cgu_accepted':'✓ Приняты','dash.cgu_accepted_toast':'✓ Условия приняты',
+    'dash.smtp_from_label':'✉️ Адрес «От / From»: ','dash.smtp_copy_host':'SMTP-хост','dash.smtp_copy_port':'Порт','dash.smtp_copy_user':'Пользователь','dash.smtp_copy_pass':'Пароль','dash.smtp_copy_enc':'Шифрование: TLS/STARTTLS',
+    'dash.smtp_test_invalid':'⚠️ Пожалуйста, введите действительный email.','dash.smtp_test_sending':'⏳ Отправка…','dash.smtp_test_ok':'✅ Тестовое письмо отправлено на <b>{to}</b>! Проверьте входящие (и спам).','dash.smtp_test_fail':'❌ Ошибка: ','dash.err_unknown':'Неизвестная ошибка','dash.err_unreachable':'Сервер недоступен. Проверьте соединение или повторите через 1 минуту (сервер иногда перезапускается).',
+    'dash.in_preparation':'В подготовке…','dash.see':'Показать','dash.hide':'Скрыть',
+    'dash.proxy_modal_sub':'Резидентный прокси — {gb} ГБ · {plan}','dash.gen_isp_random_all':'🌐 Случайно (все провайдеры)','dash.gen_isp_manual':'✏️ Ввести вручную…',
+    'dash.proxy_copied':'✅ Скопировано строк: {n}!','dash.proxy_testing':'⏳ Идёт тест…',
+    'dash.proxy_ok':'✅ Прокси работает!','dash.proxy_public_ip':'Публичный IP','dash.proxy_country':'Страна','dash.proxy_city':'Город','dash.proxy_operator':'Оператор',
+    'dash.proxy_test_timeout':'Тест слишком долгий (>30 с) — у выбранной страны/провайдера может не быть доступного IP. Повторите или смените провайдера.','dash.proxy_net_err':'Ошибка сети: {msg}. Повторите (сервер может «просыпаться» после простоя).',
+    'dash.proxy_deleting':'⏳ Удаление…','dash.proxy_deleted':'🗑 Прокси-аккаунт удалён.','dash.proxy_unreachable':'Сервер недоступен — подождите 1 минуту и повторите.',
+    'dash.smtp_confirm_delete':'Удалить этот SMTP-сервер навсегда? Ключ SMTP будет отозван.','dash.smtp_deleted':'🗑 SMTP-сервер удалён.','dash.net_error':'❌ Ошибка сети','dash.error':'Ошибка',
+    'dash.sup_ask':'Задайте вопрос нашей команде.','dash.sup_resolved':'✓ Обращение решено. Напишите, чтобы возобновить его.',
+    'dash.tfa_title_disable':'🔓 Отключить 2FA','dash.tfa_sub_disable':'Подтвердите текущим кодом TOTP.','dash.tfa_title_enable':'🔐 Включить 2FA','dash.tfa_sub_enable':'Отсканируйте QR-код в Google Authenticator или Authy.',
+    'dash.tfa_setup_err':'Ошибка','dash.tfa_net_err':'Ошибка сети.','dash.tfa_enter_code':'Введите 6-значный код.','dash.tfa_verifying':'Проверка…','dash.tfa_enabled_toast':'✅ 2FA включена!','dash.tfa_bad_code':'Неверный код.','dash.tfa_enabled_btn':'🔐 2FA включена ✓','dash.tfa_disabled_toast':'🔓 2FA отключена.','dash.tfa_disable_btn2':'🔓 Включить 2FA',
+    'dash.2fa_on':'🔐 2FA включена ✓','dash.2fa_off':'🔓 Включить 2FA','dash.cgu_not_accepted':'Не приняты','dash.cgu_accepted_on':'✓ Приняты {date}',
+    'dash.smtp_relay_name':'📧 SMTP Relay — {vol} писем/месяц','dash.plan':'Тариф','dash.port_tls':'Порт {port} TLS','dash.stat_sent':'{n} отправлено','dash.stat_bounces':'{n} отказов','dash.stat_spam':'{n} спам','dash.stat_30d':'(30 дн)',
+    'dash.creds_btn':'🔑 Данные','dash.provisioning':'⏳ Провижининг','dash.renew':'↻ Продлить','dash.activating':'⏳ Активация',
+    'dash.expired_on':'Истёк {date}','dash.until_days':'До {date} ({n} дн)','dash.until_days_left':'До {date} · осталось {n} дн',
+    'dash.empty_licenses':'Нет активных лицензий.','dash.buy_license':'Купить лицензию','dash.empty_orders':'Нет заказов.','dash.empty_smtp':'Нет активных SMTP-серверов.','dash.empty_proxy':'Нет активных прокси-тарифов.',
+    'dash.col_product':'Продукт','dash.col_amount':'Сумма','dash.col_status':'Статус','dash.col_date':'Дата',
+    'dash.pc':'ПК','dash.year_1':'1 год','dash.reactivate':'Активировать снова','dash.renew_word':'Продлить','dash.bought_on':'Куплено {date}','dash.win':'Windows','dash.mac':'Mac M1/M2/M3',
+    'dash.proxy_name':'🌐 Резидентный прокси — {gb} ГБ','dash.badge_180':'180 дн','dash.plan_word':'Тариф {plan}',
+    'dash.bw_label':'📶 Трафик','dash.pct_used':'{pct}% использовано','dash.remaining':'осталось {v}','dash.stats_unavailable':'Статистика недоступна',
+    'dash.quota_exhausted':'🚫 Квота исчерпана — прокси приостановлен','dash.quota_exhausted_sub':'Ваш тариф {gb} ГБ полностью израсходован.','dash.buy_volume':'🛒 Купить трафик',
+    'dash.vol_low':'⚠️ Трафик скоро закончится ({pct}%)','dash.vol_low_sub':'У вас осталось {v} из {gb} ГБ.',
+    'dash.proxy_expired_banner':'⛔ Прокси истёк — доступ приостановлен','dash.proxy_expired_sub':'Ваш 180-дневный тариф закончился {date}.','dash.renew_btn':'🔄 Продлить',
+    'dash.proxy_exp_soon':'⚠️ Истекает через {n} дн.','dash.proxy_exp_soon_sub':'Продлите сейчас, чтобы не потерять доступ.','dash.buy_more':'+ Купить',
+    'dash.chart_usage':'Использование ({unit})','dash.chart_usage_demo':'Использование (МБ) — демо','dash.chart_used_suffix':'использовано {v} {unit}',
+    'dash.paid_received':'✅ Платёж получен! Идёт проверка — ваш доступ появится здесь. ⏳','dash.paid_confirmed':'✅ Платёж подтверждён — ваша лицензия активна!','dash.paid_pending':'⏳ Платёж получен — подтверждение в блокчейне может занять несколько минут. Ваша лицензия появится здесь автоматически.','dash.paid_close':'Закрыть',
+    'dash.day':'день','dash.days':'дн.','dash.gb':'ГБ','dash.mb':'МБ'
+  }
+};</script>
+<script src="/i18n.js" defer></script>
 <script>
         (function(w,d,s,r,n){w.TrustpilotObject=n;w[n]=w[n]||function(){(w[n].q=w[n].q||[]).push(arguments)};
             a=d.createElement(s);a.async=1;a.src=r;a.type='text/java'+s;f=d.getElementsByTagName(s)[0];
@@ -321,7 +494,7 @@ html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;backgr
 <div class="sb-overlay" id="sb-overlay" onclick="closeSidebar()"></div>
 <header class="topbar">
   <div style="display:flex;align-items:center;gap:10px">
-    <button class="mob-ham" id="mob-ham" onclick="toggleSidebar()" aria-label="Menu">
+    <button class="mob-ham" id="mob-ham" onclick="toggleSidebar()" aria-label="Menu" data-i18n-aria="dash.menu_aria">
       <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
     <a href="/" class="topbar-logo"><img src="/logoevostudio2.png" alt="EvoStudio"/></a>
@@ -331,13 +504,14 @@ html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;backgr
       <div class="user-av" id="nav-av">?</div>
       <span class="user-email" id="nav-email" style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
     </div>
-    <button class="btn-theme" type="button" id="theme-toggle" title="Mode clair / sombre" aria-label="Basculer clair / sombre">
+    <div id="lang-switch"></div>
+    <button class="btn-theme" type="button" id="theme-toggle" title="Mode clair / sombre" aria-label="Basculer clair / sombre" data-i18n-title="dash.theme_title" data-i18n-aria="dash.theme_aria">
       <svg class="tt-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       <svg class="tt-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
     </button>
-    <button class="btn-logout" onclick="logout()" title="Déconnexion">
+    <button class="btn-logout" onclick="logout()" title="Déconnexion" data-i18n-title="dash.logout_title">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-      <span style="display:none" class="logout-txt">Déconnexion</span>
+      <span style="display:none" class="logout-txt" data-i18n="dash.logout">Déconnexion</span>
     </button>
   </div>
 </header>
@@ -361,37 +535,37 @@ html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;backgr
 <!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
   <div class="sb-head">
-    <span class="sb-brand">Mon espace</span>
-    <button class="sb-toggle" id="sb-toggle" onclick="toggleSidebar()" title="Réduire">
+    <span class="sb-brand" data-i18n="dash.sb_brand">Mon espace</span>
+    <button class="sb-toggle" id="sb-toggle" onclick="toggleSidebar()" title="Réduire" data-i18n-title="dash.sb_reduce">
       <svg viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
   </div>
   <nav class="sb-nav">
     <div class="sb-item active" data-panel="home" onclick="showPanel('home')">
       <svg viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      <span class="sb-label">Accueil</span>
+      <span class="sb-label" data-i18n="dash.nav_home">Accueil</span>
     </div>
     <div class="sb-item" data-panel="licences" onclick="showPanel('licences')">
       <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-      <span class="sb-label">Licences</span>
+      <span class="sb-label" data-i18n="dash.nav_licenses">Licences</span>
     </div>
     <div class="sb-item" data-panel="orders" onclick="showPanel('orders')">
       <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-      <span class="sb-label">Commandes</span>
+      <span class="sb-label" data-i18n="dash.nav_orders">Commandes</span>
     </div>
     <div class="sb-sep"></div>
     <div class="sb-item" id="sb-smtp" data-panel="smtp" onclick="showPanel('smtp')" style="display:none">
       <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
-      <span class="sb-label">Serveurs SMTP</span>
+      <span class="sb-label" data-i18n="dash.nav_smtp">Serveurs SMTP</span>
     </div>
     <div class="sb-item" id="sb-proxy" data-panel="proxy" onclick="showPanel('proxy')" style="display:none">
       <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 0 20"/></svg>
-      <span class="sb-label">Proxy résidentiel</span>
+      <span class="sb-label" data-i18n="dash.nav_proxy">Proxy résidentiel</span>
     </div>
     <div class="sb-sep"></div>
     <div class="sb-item" data-panel="account" onclick="showPanel('account')">
       <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      <span class="sb-label">Mon compte</span>
+      <span class="sb-label" data-i18n="dash.nav_account">Mon compte</span>
     </div>
   </nav>
   <div class="sb-foot">
@@ -410,48 +584,48 @@ html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;backgr
 
   <!-- ── ACCUEIL ── -->
   <div class="panel active" id="panel-home">
-    <div class="panel-title">Bonjour 👋</div>
-    <p class="panel-sub">Bienvenue dans votre espace EvoStudio.</p>
+    <div class="panel-title" data-i18n="dash.hello">Bonjour 👋</div>
+    <p class="panel-sub" data-i18n="dash.welcome">Bienvenue dans votre espace EvoStudio.</p>
     <div class="stats-row">
       <div class="stat-card">
         <div class="stat-ic" style="background:#eff6ff;color:var(--blue)"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
         <div class="stat-n" id="st-lic">—</div>
-        <div class="stat-l">Licences</div>
+        <div class="stat-l" data-i18n="dash.stat_licenses">Licences</div>
       </div>
       <div class="stat-card">
         <div class="stat-ic" style="background:#f0fdf4;color:var(--green)"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
         <div class="stat-n" id="st-ord">—</div>
-        <div class="stat-l">Commandes</div>
+        <div class="stat-l" data-i18n="dash.stat_orders">Commandes</div>
       </div>
       <div class="stat-card" id="st-smtp-card" style="display:none">
         <div class="stat-ic" style="background:#eff6ff;color:var(--blue)"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg></div>
         <div class="stat-n" id="st-smtp">—</div>
-        <div class="stat-l">Serveurs SMTP</div>
+        <div class="stat-l" data-i18n="dash.stat_smtp">Serveurs SMTP</div>
       </div>
       <div class="stat-card" id="st-proxy-card" style="display:none">
         <div class="stat-ic" style="background:#f0fdfa;color:var(--teal)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 0 20"/></svg></div>
         <div class="stat-n" id="st-proxy">—</div>
-        <div class="stat-l">Comptes Proxy</div>
+        <div class="stat-l" data-i18n="dash.stat_proxy">Comptes Proxy</div>
       </div>
     </div>
     <!-- Downloads -->
     <div class="card">
       <div class="card-head">
-        <div class="card-title"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Télécharger EvoStudio</div>
+        <div class="card-title"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span data-i18n="dash.dl_title">Télécharger EvoStudio</span></div>
       </div>
       <div class="card-body">
         <div class="dl-row">
           <a class="dl-btn2" id="dl-win" href="#" style="background:#eff6ff;border-color:#bfdbfe;color:#1e40af" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" width="28" height="28" fill="#2563eb" style="flex-shrink:0"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
-            <div><strong>Windows 10 / 11</strong><span>x64 · .exe · ~95 MB</span></div>
+            <div><strong data-i18n="dash.dl_win_name">Windows 10 / 11</strong><span data-i18n="dash.dl_win_meta">x64 · .exe · ~95 MB</span></div>
           </a>
           <a class="dl-btn2" id="dl-mac" href="#" style="background:#faf5ff;border-color:#ddd6fe;color:#5b21b6" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" width="28" height="28" fill="#7c3aed" style="flex-shrink:0"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
-            <div><strong>Mac Silicon M1/M2/M3</strong><span>arm64 · .dmg · ~125 MB</span></div>
+            <div><strong data-i18n="dash.dl_mac_name">Mac Silicon M1/M2/M3</strong><span data-i18n="dash.dl_mac_meta">arm64 · .dmg · ~125 MB</span></div>
           </a>
         </div>
         <!-- Notice macOS Gatekeeper -->
-        <div style="margin-top:12px;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:12px 14px;font-size:12.5px;color:#92400e;line-height:1.6">
+        <div data-i18n-html="dash.mac_notice" style="margin-top:12px;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:12px 14px;font-size:12.5px;color:#92400e;line-height:1.6">
           <strong>⚠️ Mac : message "fichier endommagé" ?</strong> C'est une protection macOS normale. Pour ouvrir l'app :<br>
           <strong>Option 1</strong> — Après installation, ouvrir <strong>Terminal</strong> et coller :<br>
           <code style="display:block;background:#1e293b;color:#7dd3fc;border-radius:6px;padding:7px 10px;margin:6px 0;font-size:12px;letter-spacing:.01em">sudo xattr -rd com.apple.quarantine /Applications/EvoStudio.app</code>
@@ -461,75 +635,75 @@ html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;backgr
     </div>
     <!-- Quick actions -->
     <div class="card">
-      <div class="card-head"><div class="card-title"><svg viewBox="0 0 24 24"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Accès rapide</div></div>
+      <div class="card-head"><div class="card-title"><svg viewBox="0 0 24 24"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> <span data-i18n="dash.quick_title">Accès rapide</span></div></div>
       <div class="card-body" style="display:flex;flex-wrap:wrap;gap:8px">
-        <a href="/pay.html" class="btn-sm primary"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Nouvelle licence</a>
-        <button class="btn-sm" onclick="showPanel('licences')"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Mes licences</button>
-        <button class="btn-sm" onclick="showPanel('orders')"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> Historique</button>
-        <button class="btn-sm" onclick="toggleSupport()"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Support</button>
+        <a href="/pay.html" class="btn-sm primary"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> <span data-i18n="dash.quick_new_license">Nouvelle licence</span></a>
+        <button class="btn-sm" onclick="showPanel('licences')"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> <span data-i18n="dash.quick_my_licenses">Mes licences</span></button>
+        <button class="btn-sm" onclick="showPanel('orders')"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> <span data-i18n="dash.quick_history">Historique</span></button>
+        <button class="btn-sm" onclick="toggleSupport()"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> <span data-i18n="dash.quick_support">Support</span></button>
       </div>
     </div>
   </div>
 
   <!-- ── LICENCES ── -->
   <div class="panel" id="panel-licences">
-    <div class="panel-title">Licences</div>
-    <p class="panel-sub">Vos clés de licence EvoStudio actives.</p>
+    <div class="panel-title" data-i18n="dash.lic_title">Licences</div>
+    <p class="panel-sub" data-i18n="dash.lic_sub">Vos clés de licence EvoStudio actives.</p>
     <div class="sec-lbl">
-      Licences actives
-      <a href="/pay.html" class="btn-sm primary"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Acheter</a>
+      <span data-i18n="dash.lic_active">Licences actives</span>
+      <a href="/pay.html" class="btn-sm primary"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> <span data-i18n="dash.buy">Acheter</span></a>
     </div>
-    <div id="lic-wrap"><div style="color:var(--slate-2);font-size:13px;padding:20px 0">Chargement…</div></div>
+    <div id="lic-wrap"><div style="color:var(--slate-2);font-size:13px;padding:20px 0" data-i18n="dash.loading">Chargement…</div></div>
   </div>
 
   <!-- ── COMMANDES ── -->
   <div class="panel" id="panel-orders">
-    <div class="panel-title">Commandes</div>
-    <p class="panel-sub">Historique de tous vos achats.</p>
+    <div class="panel-title" data-i18n="dash.ord_title">Commandes</div>
+    <p class="panel-sub" data-i18n="dash.ord_sub">Historique de tous vos achats.</p>
     <div class="card">
-      <div id="ord-wrap"><div style="color:var(--slate-2);font-size:13px;padding:20px">Chargement…</div></div>
+      <div id="ord-wrap"><div style="color:var(--slate-2);font-size:13px;padding:20px" data-i18n="dash.loading">Chargement…</div></div>
     </div>
   </div>
 
   <!-- ── SMTP ── -->
   <div class="panel" id="panel-smtp">
-    <div class="panel-title">Serveurs SMTP</div>
-    <p class="panel-sub">Vos relais d'envoi email à haute délivrabilité.</p>
+    <div class="panel-title" data-i18n="dash.smtp_title">Serveurs SMTP</div>
+    <p class="panel-sub" data-i18n="dash.smtp_sub">Vos relais d'envoi email à haute délivrabilité.</p>
     <div class="sec-lbl">
-      Serveurs actifs
-      <a href="/pay.html?product=smtp_50k" class="btn-sm primary"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Nouveau SMTP</a>
+      <span data-i18n="dash.smtp_active">Serveurs actifs</span>
+      <a href="/pay.html?product=smtp_50k" class="btn-sm primary"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> <span data-i18n="dash.smtp_new">Nouveau SMTP</span></a>
     </div>
     <div id="smtp-wrap"></div>
   </div>
 
   <!-- ── PROXY ── -->
   <div class="panel" id="panel-proxy">
-    <div class="panel-title">Proxy résidentiel</div>
-    <p class="panel-sub">Vos forfaits proxy — IPs résidentielles 30+ pays · Validité 180 jours.</p>
+    <div class="panel-title" data-i18n="dash.proxy_title">Proxy résidentiel</div>
+    <p class="panel-sub" data-i18n="dash.proxy_sub">Vos forfaits proxy — IPs résidentielles 30+ pays · Validité 180 jours.</p>
     <!-- Stats globales -->
     <div class="proxy-stats-row" id="proxy-global-stats" style="display:none">
       <div class="proxy-stat-card">
         <div class="stat-ic" style="background:#f0fdfa;color:var(--teal)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 0 20"/></svg></div>
         <div class="stat-n" id="prx-total-gb">—</div>
-        <div class="stat-l">Go achetés</div>
+        <div class="stat-l" data-i18n="dash.proxy_gb_bought">Go achetés</div>
       </div>
       <div class="proxy-stat-card">
         <div class="stat-ic" style="background:#eff6ff;color:var(--blue)"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
         <div class="stat-n" id="prx-used-gb">—</div>
-        <div class="stat-l">Go utilisés</div>
+        <div class="stat-l" data-i18n="dash.proxy_gb_used">Go utilisés</div>
       </div>
       <div class="proxy-stat-card">
         <div class="stat-ic" style="background:#f0fdf4;color:var(--green)"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
         <div class="stat-n" id="prx-remain-gb">—</div>
-        <div class="stat-l">Go restants</div>
+        <div class="stat-l" data-i18n="dash.proxy_gb_left">Go restants</div>
       </div>
     </div>
     <!-- Comptes actifs D'ABORD (visibles tout de suite) -->
     <div class="sec-lbl">
-      Comptes proxy actifs
+      <span data-i18n="dash.proxy_active">Comptes proxy actifs</span>
       <div style="display:flex;gap:6px;align-items:center">
-        <button class="btn-sm" id="prx-refresh-btn" onclick="refreshProxyUsage()" title="Actualiser les statistiques">↻ Actualiser</button>
-        <a href="/pay.html?product=proxy_55gb" class="btn-sm primary" style="background:var(--teal);border-color:var(--teal)"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Acheter du proxy</a>
+        <button class="btn-sm" id="prx-refresh-btn" onclick="refreshProxyUsage()" title="Actualiser les statistiques" data-i18n="dash.refresh" data-i18n-title="dash.refresh_title">↻ Actualiser</button>
+        <a href="/pay.html?product=proxy_55gb" class="btn-sm primary" style="background:var(--teal);border-color:var(--teal)"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> <span data-i18n="dash.proxy_buy">Acheter du proxy</span></a>
       </div>
     </div>
     <div id="proxy-wrap"></div>
@@ -539,18 +713,18 @@ html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;backgr
       <div class="card-head" style="padding:11px 18px">
         <div class="card-title">
           <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          Consommation dans le temps
+          <span data-i18n="dash.chart_title">Consommation dans le temps</span>
         </div>
         <div style="display:flex;gap:6px">
-          <button class="btn-sm" id="chart-period-7"  onclick="setChartPeriod(7)"  style="background:var(--blue);color:#fff;border-color:var(--blue)">7 j</button>
-          <button class="btn-sm" id="chart-period-30" onclick="setChartPeriod(30)">30 j</button>
-          <button class="btn-sm" id="chart-period-90" onclick="setChartPeriod(90)">90 j</button>
+          <button class="btn-sm" id="chart-period-7"  onclick="setChartPeriod(7)"  style="background:var(--blue);color:#fff;border-color:var(--blue)" data-i18n="dash.chart_7d">7 j</button>
+          <button class="btn-sm" id="chart-period-30" onclick="setChartPeriod(30)" data-i18n="dash.chart_30d">30 j</button>
+          <button class="btn-sm" id="chart-period-90" onclick="setChartPeriod(90)" data-i18n="dash.chart_90d">90 j</button>
         </div>
       </div>
       <div class="card-body" style="padding:12px 18px 10px">
         <div style="position:relative;height:150px">
           <canvas id="proxy-usage-chart"></canvas>
-          <div id="proxy-chart-empty" style="display:none;position:absolute;inset:0;padding-top:56px;text-align:center;color:var(--slate-2);font-size:13px">Aucune donnée d'utilisation disponible pour cette période.</div>
+          <div id="proxy-chart-empty" style="display:none;position:absolute;inset:0;padding-top:56px;text-align:center;color:var(--slate-2);font-size:13px" data-i18n="dash.chart_empty">Aucune donnée d'utilisation disponible pour cette période.</div>
         </div>
       </div>
     </div>
@@ -558,32 +732,32 @@ html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;backgr
 
   <!-- ── COMPTE ── -->
   <div class="panel" id="panel-account">
-    <div class="panel-title">Mon compte</div>
-    <p class="panel-sub">Paramètres et sécurité de votre compte.</p>
+    <div class="panel-title" data-i18n="dash.acc_title">Mon compte</div>
+    <p class="panel-sub" data-i18n="dash.acc_sub">Paramètres et sécurité de votre compte.</p>
     <div class="card">
-      <div class="card-head"><div class="card-title"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Profil</div></div>
+      <div class="card-head"><div class="card-title"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> <span data-i18n="dash.acc_profile">Profil</span></div></div>
       <div class="card-body">
         <div class="account-row">
-          <div class="account-row-info"><h4>Adresse email</h4><p id="acc-email">—</p></div>
+          <div class="account-row-info"><h4 data-i18n="dash.acc_email">Adresse email</h4><p id="acc-email">—</p></div>
         </div>
         <div class="account-row">
-          <div class="account-row-info"><h4>Membre depuis</h4><p id="acc-since">—</p></div>
+          <div class="account-row-info"><h4 data-i18n="dash.acc_member_since">Membre depuis</h4><p id="acc-since">—</p></div>
         </div>
         <div class="account-row">
-          <div class="account-row-info"><h4>CGU</h4><p id="acc-cgu" style="color:var(--green)">—</p></div>
-          <a href="#" onclick="openCgu(true);return false" class="btn-sm">Consulter</a>
+          <div class="account-row-info"><h4 data-i18n="dash.acc_cgu">CGU</h4><p id="acc-cgu" style="color:var(--green)">—</p></div>
+          <a href="#" onclick="openCgu(true);return false" class="btn-sm" data-i18n="dash.acc_view">Consulter</a>
         </div>
       </div>
     </div>
     <div class="card">
-      <div class="card-head"><div class="card-title"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Sécurité</div></div>
+      <div class="card-head"><div class="card-title"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> <span data-i18n="dash.acc_security">Sécurité</span></div></div>
       <div class="card-body">
         <div class="account-row">
           <div class="account-row-info">
-            <h4>Double authentification (2FA)</h4>
+            <h4 data-i18n="dash.acc_2fa">Double authentification (2FA)</h4>
             <p id="acc-2fa-status">—</p>
           </div>
-          <button id="acc-2fa-btn" class="btn-sm" onclick="open2faModal()">Configurer</button>
+          <button id="acc-2fa-btn" class="btn-sm" onclick="open2faModal()" data-i18n="dash.acc_2fa_setup">Configurer</button>
         </div>
       </div>
     </div>
@@ -596,32 +770,32 @@ html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;backgr
 <div class="overlay" id="smtp-creds-modal" onclick="if(event.target===this)closeModal('smtp-creds-modal')">
   <div class="modal modal-md">
     <div class="modal-head">
-      <div><h3>📧 Identifiants SMTP</h3><p id="smtp-modal-sub">Relay email</p></div>
+      <div><h3 data-i18n="dash.smtp_creds_title">📧 Identifiants SMTP</h3><p id="smtp-modal-sub">Relay email</p></div>
       <button class="modal-close" onclick="closeModal('smtp-creds-modal')">×</button>
     </div>
     <div class="modal-body">
       <div class="creds-grid">
-        <div class="cred-item"><div class="cred-lbl">Serveur (Host)</div><div class="cred-val"><span id="smtp-m-host">—</span><button class="btn-sm" onclick="copyText(document.getElementById('smtp-m-host').textContent)">Copier</button></div></div>
-        <div class="cred-item"><div class="cred-lbl">Port</div><div class="cred-val"><span id="smtp-m-port">587</span><span style="font-size:10px;color:var(--slate);margin-left:6px">TLS</span></div></div>
-        <div class="cred-item"><div class="cred-lbl">Utilisateur</div><div class="cred-val"><span id="smtp-m-user">—</span><button class="btn-sm" onclick="copyText(document.getElementById('smtp-m-user').textContent)">Copier</button></div></div>
-        <div class="cred-item"><div class="cred-lbl">Mot de passe</div><div class="cred-val"><span id="smtp-m-pass-disp">••••••••</span><button class="pass-tog" onclick="toggleModalPass('smtp-m-pass-disp','smtp-m-pass-real')">Voir</button></div></div>
+        <div class="cred-item"><div class="cred-lbl" data-i18n="dash.host">Serveur (Host)</div><div class="cred-val"><span id="smtp-m-host">—</span><button class="btn-sm" onclick="copyText(document.getElementById('smtp-m-host').textContent)" data-i18n="dash.copy">Copier</button></div></div>
+        <div class="cred-item"><div class="cred-lbl" data-i18n="dash.port">Port</div><div class="cred-val"><span id="smtp-m-port">587</span><span style="font-size:10px;color:var(--slate);margin-left:6px">TLS</span></div></div>
+        <div class="cred-item"><div class="cred-lbl" data-i18n="dash.user">Utilisateur</div><div class="cred-val"><span id="smtp-m-user">—</span><button class="btn-sm" onclick="copyText(document.getElementById('smtp-m-user').textContent)" data-i18n="dash.copy">Copier</button></div></div>
+        <div class="cred-item"><div class="cred-lbl" data-i18n="dash.password">Mot de passe</div><div class="cred-val"><span id="smtp-m-pass-disp">••••••••</span><button class="pass-tog" onclick="toggleModalPass('smtp-m-pass-disp','smtp-m-pass-real')" data-i18n="dash.see">Voir</button></div></div>
       </div>
       <input type="hidden" id="smtp-m-pass-real"/>
       <div id="smtp-m-sender" style="display:none;background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 13px;font-size:12.5px;color:#1e40af;margin-bottom:12px"></div>
       <div id="smtp-m-notice" style="display:none;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:10px 13px;font-size:12.5px;color:#92400e;margin-bottom:12px"></div>
-      <button onclick="copySmtpModal()" class="btn-sm primary" style="width:100%;justify-content:center">📋 Copier tous les identifiants</button>
+      <button onclick="copySmtpModal()" class="btn-sm primary" style="width:100%;justify-content:center" data-i18n="dash.copy_all_creds">📋 Copier tous les identifiants</button>
 
       <!-- ── TEST D'ENVOI ── -->
       <div style="margin-top:18px;border-top:1px solid var(--line);padding-top:16px">
-        <div style="font-size:12px;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px">🧪 Tester l'envoi</div>
+        <div style="font-size:12px;font-weight:700;color:var(--slate);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px" data-i18n="dash.smtp_test_title">🧪 Tester l'envoi</div>
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-          <input id="smtp-test-email" type="email" placeholder="Email de destination (ex: vous@gmail.com)"
+          <input id="smtp-test-email" type="email" placeholder="Email de destination (ex: vous@gmail.com)" data-i18n-ph="dash.smtp_test_ph"
             style="flex:1;min-width:180px;border:1.5px solid var(--line);border-radius:8px;padding:8px 12px;font-size:13px;font-family:inherit;outline:none;transition:border-color .15s"
             onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='var(--line)'"
             onkeydown="if(event.key==='Enter')sendSmtpTest()"/>
           <button onclick="sendSmtpTest()" id="smtp-test-btn" class="btn-sm primary" style="white-space:nowrap">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            Envoyer un test
+            <span data-i18n="dash.smtp_test_send">Envoyer un test</span>
           </button>
         </div>
         <div id="smtp-test-result" style="display:none;margin-top:10px;border-radius:8px;padding:10px 13px;font-size:12.5px;font-weight:600"></div>
@@ -634,18 +808,18 @@ html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;backgr
 <div class="overlay" id="proxy-delete-modal" onclick="if(event.target===this)closeModal('proxy-delete-modal')">
   <div class="modal modal-sm">
     <div class="modal-head">
-      <div><h3>🗑 Supprimer le proxy</h3><p id="proxy-delete-sub">Cette action est irréversible.</p></div>
+      <div><h3 data-i18n="dash.proxy_del_title">🗑 Supprimer le proxy</h3><p id="proxy-delete-sub" data-i18n="dash.proxy_del_sub">Cette action est irréversible.</p></div>
       <button class="modal-close" onclick="closeModal('proxy-delete-modal')">×</button>
     </div>
     <div class="modal-body">
-      <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:12px 14px;font-size:13px;color:#991b1b;margin-bottom:16px">
+      <div data-i18n-html="dash.proxy_del_warn" style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:12px 14px;font-size:13px;color:#991b1b;margin-bottom:16px">
         ⚠️ Le compte proxy sera <b>définitivement supprimé</b>. Cette action ne peut pas être annulée.
       </div>
       <div id="proxy-delete-err" style="display:none;font-size:12px;color:var(--red);margin-top:6px;font-weight:600"></div>
     </div>
     <div class="modal-foot">
-      <button class="btn-sm" onclick="closeModal('proxy-delete-modal')">Annuler</button>
-      <button class="btn-sm danger" id="proxy-delete-btn" onclick="execDeleteProxy()" style="background:#fef2f2">
+      <button class="btn-sm" onclick="closeModal('proxy-delete-modal')" data-i18n="dash.cancel">Annuler</button>
+      <button class="btn-sm danger" id="proxy-delete-btn" onclick="execDeleteProxy()" style="background:#fef2f2" data-i18n="dash.proxy_del_confirm">
         🗑 Confirmer la suppression
       </button>
     </div>
@@ -656,50 +830,50 @@ html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;backgr
 <div class="overlay" id="proxy-gen-modal" onclick="if(event.target===this)closeModal('proxy-gen-modal')">
   <div class="modal modal-lg">
     <div class="modal-head">
-      <div><h3>🌐 Identifiants & Générateur proxy</h3><p id="proxy-modal-sub">Proxy résidentiel</p></div>
+      <div><h3 data-i18n="dash.proxy_gen_title">🌐 Identifiants & Générateur proxy</h3><p id="proxy-modal-sub">Proxy résidentiel</p></div>
       <button class="modal-close" onclick="closeModal('proxy-gen-modal')">×</button>
     </div>
     <div class="modal-body">
       <!-- Creds -->
       <div class="creds-grid" style="margin-bottom:16px">
-        <div class="cred-item"><div class="cred-lbl">Hôte</div><div class="cred-val"><span id="prx-m-host">—</span></div></div>
-        <div class="cred-item"><div class="cred-lbl">Port</div><div class="cred-val"><span id="prx-m-port">—</span></div></div>
-        <div class="cred-item"><div class="cred-lbl">Utilisateur</div><div class="cred-val"><span id="prx-m-user" style="color:var(--blue)">—</span><button class="btn-sm" onclick="copyText(document.getElementById('prx-m-user').textContent)">Copier</button></div></div>
-        <div class="cred-item"><div class="cred-lbl">Mot de passe</div><div class="cred-val"><span id="prx-m-pass-disp">••••••••</span><button class="pass-tog" onclick="toggleModalPass('prx-m-pass-disp','prx-m-pass-real')">Voir</button></div></div>
+        <div class="cred-item"><div class="cred-lbl" data-i18n="dash.host">Hôte</div><div class="cred-val"><span id="prx-m-host">—</span></div></div>
+        <div class="cred-item"><div class="cred-lbl" data-i18n="dash.port">Port</div><div class="cred-val"><span id="prx-m-port">—</span></div></div>
+        <div class="cred-item"><div class="cred-lbl" data-i18n="dash.user">Utilisateur</div><div class="cred-val"><span id="prx-m-user" style="color:var(--blue)">—</span><button class="btn-sm" onclick="copyText(document.getElementById('prx-m-user').textContent)" data-i18n="dash.copy">Copier</button></div></div>
+        <div class="cred-item"><div class="cred-lbl" data-i18n="dash.password">Mot de passe</div><div class="cred-val"><span id="prx-m-pass-disp">••••••••</span><button class="pass-tog" onclick="toggleModalPass('prx-m-pass-disp','prx-m-pass-real')" data-i18n="dash.see">Voir</button></div></div>
       </div>
       <input type="hidden" id="prx-m-pass-real"/>
       <div style="border-top:1px solid var(--line);padding-top:16px;margin-top:4px">
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--slate-2);margin-bottom:12px">🔧 Générateur de connexion</div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--slate-2);margin-bottom:12px" data-i18n="dash.gen_title">🔧 Générateur de connexion</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
           <div>
-            <label class="gen-label">Pays</label>
+            <label class="gen-label" data-i18n="dash.country">Pays</label>
             <select class="gen-select" id="prx-m-country" onchange="proxyModalIspChange()">
-              <option value="">Aléatoire (mondial)</option>
-              <optgroup label="Amérique"><option value="us">USA</option><option value="ca">Canada</option><option value="br">Brésil</option><option value="mx">Mexique</option><option value="ar">Argentine</option><option value="co">Colombie</option></optgroup>
-              <optgroup label="Europe"><option value="gb">Royaume-Uni</option><option value="fr">France</option><option value="de">Allemagne</option><option value="be">Belgique</option><option value="nl">Pays-Bas</option><option value="ch">Suisse</option><option value="es">Espagne</option><option value="it">Italie</option><option value="pt">Portugal</option><option value="se">Suède</option><option value="no">Norvège</option><option value="pl">Pologne</option><option value="ro">Roumanie</option><option value="ru">Russie</option><option value="ua">Ukraine</option></optgroup>
-              <optgroup label="Asie / Pacifique"><option value="jp">Japon</option><option value="kr">Corée du Sud</option><option value="cn">Chine</option><option value="hk">Hong Kong</option><option value="sg">Singapour</option><option value="au">Australie</option><option value="in">Inde</option><option value="id">Indonésie</option><option value="vn">Vietnam</option><option value="th">Thaïlande</option><option value="ph">Philippines</option></optgroup>
-              <optgroup label="Moyen-Orient"><option value="ae">Émirats arabes</option><option value="sa">Arabie Saoudite</option><option value="tr">Turquie</option><option value="il">Israël</option></optgroup>
-              <optgroup label="Afrique"><option value="za">Afrique du Sud</option><option value="ng">Nigeria</option><option value="ci">Côte d'Ivoire</option><option value="gh">Ghana</option><option value="sn">Sénégal</option><option value="ma">Maroc</option><option value="eg">Égypte</option></optgroup>
+              <option value="" data-i18n="dash.country_random">Aléatoire (mondial)</option>
+              <optgroup label="Amérique" data-i18n-label="dash.grp_america"><option value="us" data-i18n="dash.c_us">USA</option><option value="ca" data-i18n="dash.c_ca">Canada</option><option value="br" data-i18n="dash.c_br">Brésil</option><option value="mx" data-i18n="dash.c_mx">Mexique</option><option value="ar" data-i18n="dash.c_ar">Argentine</option><option value="co" data-i18n="dash.c_co">Colombie</option></optgroup>
+              <optgroup label="Europe" data-i18n-label="dash.grp_europe"><option value="gb" data-i18n="dash.c_gb">Royaume-Uni</option><option value="fr" data-i18n="dash.c_fr">France</option><option value="de" data-i18n="dash.c_de">Allemagne</option><option value="be" data-i18n="dash.c_be">Belgique</option><option value="nl" data-i18n="dash.c_nl">Pays-Bas</option><option value="ch" data-i18n="dash.c_ch">Suisse</option><option value="es" data-i18n="dash.c_es">Espagne</option><option value="it" data-i18n="dash.c_it">Italie</option><option value="pt" data-i18n="dash.c_pt">Portugal</option><option value="se" data-i18n="dash.c_se">Suède</option><option value="no" data-i18n="dash.c_no">Norvège</option><option value="pl" data-i18n="dash.c_pl">Pologne</option><option value="ro" data-i18n="dash.c_ro">Roumanie</option><option value="ru" data-i18n="dash.c_ru">Russie</option><option value="ua" data-i18n="dash.c_ua">Ukraine</option></optgroup>
+              <optgroup label="Asie / Pacifique" data-i18n-label="dash.grp_asia"><option value="jp" data-i18n="dash.c_jp">Japon</option><option value="kr" data-i18n="dash.c_kr">Corée du Sud</option><option value="cn" data-i18n="dash.c_cn">Chine</option><option value="hk" data-i18n="dash.c_hk">Hong Kong</option><option value="sg" data-i18n="dash.c_sg">Singapour</option><option value="au" data-i18n="dash.c_au">Australie</option><option value="in" data-i18n="dash.c_in">Inde</option><option value="id" data-i18n="dash.c_id">Indonésie</option><option value="vn" data-i18n="dash.c_vn">Vietnam</option><option value="th" data-i18n="dash.c_th">Thaïlande</option><option value="ph" data-i18n="dash.c_ph">Philippines</option></optgroup>
+              <optgroup label="Moyen-Orient" data-i18n-label="dash.grp_mideast"><option value="ae" data-i18n="dash.c_ae">Émirats arabes</option><option value="sa" data-i18n="dash.c_sa">Arabie Saoudite</option><option value="tr" data-i18n="dash.c_tr">Turquie</option><option value="il" data-i18n="dash.c_il">Israël</option></optgroup>
+              <optgroup label="Afrique" data-i18n-label="dash.grp_africa"><option value="za" data-i18n="dash.c_za">Afrique du Sud</option><option value="ng" data-i18n="dash.c_ng">Nigeria</option><option value="ci" data-i18n="dash.c_ci">Côte d'Ivoire</option><option value="gh" data-i18n="dash.c_gh">Ghana</option><option value="sn" data-i18n="dash.c_sn">Sénégal</option><option value="ma" data-i18n="dash.c_ma">Maroc</option><option value="eg" data-i18n="dash.c_eg">Égypte</option></optgroup>
             </select>
           </div>
           <div>
-            <label class="gen-label">ISP <span style="font-weight:400;color:var(--slate-2)">(optionnel)</span></label>
-            <select class="gen-select" id="prx-m-isp" onchange="proxyModalGen()"><option value="">🌐 Aléatoire</option></select>
-            <input class="gen-input" id="prx-m-isp-manual" type="text" placeholder="Code manuel: as7922_Comcast" oninput="proxyModalGen()" style="display:none;margin-top:6px"/>
+            <label class="gen-label"><span data-i18n="dash.isp">ISP</span> <span style="font-weight:400;color:var(--slate-2)" data-i18n="dash.isp_optional">(optionnel)</span></label>
+            <select class="gen-select" id="prx-m-isp" onchange="proxyModalGen()"><option value="" data-i18n="dash.isp_random">🌐 Aléatoire</option></select>
+            <input class="gen-input" id="prx-m-isp-manual" type="text" placeholder="Code manuel: as7922_Comcast" data-i18n-ph="dash.isp_manual_ph" oninput="proxyModalGen()" style="display:none;margin-top:6px"/>
           </div>
           <div>
-            <label class="gen-label">Session ID (ssid) — <span style="font-weight:400;color:var(--slate-2)">vide=Rotating · rempli=Sticky</span></label>
+            <label class="gen-label"><span data-i18n="dash.ssid_label">Session ID (ssid) — </span><span style="font-weight:400;color:var(--slate-2)" data-i18n="dash.ssid_hint">vide=Rotating · rempli=Sticky</span></label>
             <div style="display:flex;gap:6px">
-              <input class="gen-input" id="prx-m-ssid" type="text" placeholder="Vide = IP tournante" oninput="proxyModalGen()"/>
-              <button class="btn-sm" onclick="genSsidModal()" title="Aléatoire">🎲</button>
+              <input class="gen-input" id="prx-m-ssid" type="text" placeholder="Vide = IP tournante" data-i18n-ph="dash.ssid_ph" oninput="proxyModalGen()"/>
+              <button class="btn-sm" onclick="genSsidModal()" title="Aléatoire" data-i18n-title="dash.random_title">🎲</button>
             </div>
           </div>
           <div>
-            <label class="gen-label">Quantité</label>
+            <label class="gen-label" data-i18n="dash.quantity">Quantité</label>
             <input class="gen-input" id="prx-m-qty" type="number" min="1" max="999" value="1" oninput="proxyModalGen()" style="text-align:center;font-weight:700"/>
           </div>
           <div style="grid-column:1/-1">
-            <label class="gen-label">Format de copie</label>
+            <label class="gen-label" data-i18n="dash.copy_format">Format de copie</label>
             <select class="gen-select" id="prx-m-format" onchange="proxyModalGen()">
               <option value="uphp" selected>USER:PASS:HOST:PORT</option>
               <option value="up@hp">USER:PASS@HOST:PORT</option>
@@ -709,16 +883,16 @@ html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;backgr
           </div>
         </div>
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-          <div style="font-size:11px;font-weight:700;color:var(--slate-2);text-transform:uppercase;letter-spacing:.06em">Chaînes générées <span id="prx-m-count" style="color:var(--blue)">× 1</span></div>
+          <div style="font-size:11px;font-weight:700;color:var(--slate-2);text-transform:uppercase;letter-spacing:.06em"><span data-i18n="dash.gen_strings">Chaînes générées</span> <span id="prx-m-count" style="color:var(--blue)">× 1</span></div>
           <div style="display:flex;gap:6px">
-            <button class="btn-sm" onclick="resetProxyModal()">↺ Reset</button>
-            <button class="btn-sm primary" onclick="copyProxyModal()">📋 Copier</button>
+            <button class="btn-sm" onclick="resetProxyModal()" data-i18n="dash.reset">↺ Reset</button>
+            <button class="btn-sm primary" onclick="copyProxyModal()" data-i18n="dash.copy">📋 Copier</button>
           </div>
         </div>
         <textarea class="gen-result" id="prx-m-result" readonly rows="3"></textarea>
         <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
-          <button class="btn-sm" onclick="testProxyModal()" style="background:#0f172a;color:#7dd3fc;border-color:#0f172a">⚡ Tester</button>
-          <div style="flex:1;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:8px 12px;font-size:11px;color:#166534;line-height:1.5;min-width:160px">🔄 <b>Rotation</b> : ssid vide · 🔒 <b>Sticky</b> : ssid rempli</div>
+          <button class="btn-sm" onclick="testProxyModal()" style="background:#0f172a;color:#7dd3fc;border-color:#0f172a" data-i18n="dash.test">⚡ Tester</button>
+          <div data-i18n-html="dash.rotation_sticky_hint" style="flex:1;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:8px 12px;font-size:11px;color:#166534;line-height:1.5;min-width:160px">🔄 <b>Rotation</b> : ssid vide · 🔒 <b>Sticky</b> : ssid rempli</div>
         </div>
         <div id="prx-m-test-result" style="display:none;margin-top:10px"></div>
       </div>
@@ -730,33 +904,33 @@ html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;backgr
 <div class="overlay" id="cgu-overlay">
   <div class="modal modal-md">
     <div class="modal-head" style="display:flex;align-items:flex-start;justify-content:space-between">
-      <div><h3>⚖️ Conditions générales d'utilisation</h3><p>Veuillez lire et accepter pour utiliser EvoStudio.</p></div>
+      <div><h3 data-i18n="dash.cgu_title">⚖️ Conditions générales d'utilisation</h3><p data-i18n="dash.cgu_sub">Veuillez lire et accepter pour utiliser EvoStudio.</p></div>
       <button id="cgu-close" onclick="closeCgu()" style="display:none" class="modal-close">×</button>
     </div>
     <div class="modal-body" id="cgu-body" style="max-height:55vh;overflow-y:auto;font-size:13px;line-height:1.65;color:#475569">
-      <p>Les présentes Conditions Générales d'Utilisation (« CGU ») régissent l'utilisation du logiciel <b>EvoStudio</b> (comprenant EvoExtractor, EvoSender et EvoVerify), édité par <b>EGSCI SARL</b>, société de droit russe. En créant un compte, en achetant ou en utilisant le logiciel, l'utilisateur reconnaît avoir lu, compris et accepté l'intégralité des présentes CGU.</p>
-      <h4 style="font-size:12px;color:var(--ink);font-weight:700;margin:14px 0 4px;text-transform:uppercase;letter-spacing:.04em">Article 1 — Objet</h4>
-      <p>Les présentes CGU ont pour objet de définir les modalités et conditions d'utilisation du logiciel EvoStudio.</p>
-      <h4 style="font-size:12px;color:var(--ink);font-weight:700;margin:14px 0 4px;text-transform:uppercase;letter-spacing:.04em">Article 2 — Licence</h4>
-      <p>EvoStudio est concédé sous licence <b>individuelle, personnelle, non-exclusive et non-transférable</b>. Strictement interdits : revente, partage, décompilation, modification.</p>
-      <h4 style="font-size:12px;color:var(--ink);font-weight:700;margin:14px 0 4px;text-transform:uppercase;letter-spacing:.04em">Article 4 — Paiement</h4>
-      <p>Paiement par crypto ou mobile money. <b>Aucun remboursement après génération de la licence</b> (produit numérique délivré immédiatement).</p>
-      <h4 style="font-size:12px;color:var(--ink);font-weight:700;margin:14px 0 4px;text-transform:uppercase;letter-spacing:.04em">Article 5 — Décharge de responsabilité</h4>
-      <p>EGSCI SARL décline toute responsabilité. L'utilisateur est <b>seul et entièrement responsable</b> de la conformité de ses envois (RGPD, CAN-SPAM, LCEN, etc.), du consentement des destinataires et de tout usage du logiciel.</p>
-      <h4 style="font-size:12px;color:var(--ink);font-weight:700;margin:14px 0 4px;text-transform:uppercase;letter-spacing:.04em">Article 6 — Usages interdits</h4>
-      <p>Interdits : spam, phishing, escroquerie, usurpation d'identité, harcèlement, contenus illicites, violation RGPD. Tout usage illicite entraîne la révocation immédiate de la licence.</p>
-      <h4 style="font-size:12px;color:var(--ink);font-weight:700;margin:14px 0 4px;text-transform:uppercase;letter-spacing:.04em">Article 8 — Données</h4>
-      <p>EvoStudio est 100% local : aucune donnée n'est transmise. Seule la vérification de licence contacte nos serveurs.</p>
-      <h4 style="font-size:12px;color:var(--ink);font-weight:700;margin:14px 0 4px;text-transform:uppercase;letter-spacing:.04em">Article 12 — Droit applicable</h4>
-      <p>CGU régies par le droit russe. Litiges soumis aux tribunaux de la Fédération de Russie. Contact : <a href="mailto:support@evostudio.fr" style="color:var(--blue)">support@evostudio.fr</a></p>
-      <p style="margin-top:14px;font-size:11px;color:var(--slate-2)">© 2025–2026 EGSCI SARL — Fédération de Russie</p>
+      <p data-i18n-html="dash.cgu_intro">Les présentes Conditions Générales d'Utilisation (« CGU ») régissent l'utilisation du logiciel <b>EvoStudio</b> (comprenant EvoExtractor, EvoSender et EvoVerify), édité par <b>EGSCI SARL</b>, société de droit russe. En créant un compte, en achetant ou en utilisant le logiciel, l'utilisateur reconnaît avoir lu, compris et accepté l'intégralité des présentes CGU.</p>
+      <h4 style="font-size:12px;color:var(--ink);font-weight:700;margin:14px 0 4px;text-transform:uppercase;letter-spacing:.04em" data-i18n="dash.cgu_a1_t">Article 1 — Objet</h4>
+      <p data-i18n="dash.cgu_a1">Les présentes CGU ont pour objet de définir les modalités et conditions d'utilisation du logiciel EvoStudio.</p>
+      <h4 style="font-size:12px;color:var(--ink);font-weight:700;margin:14px 0 4px;text-transform:uppercase;letter-spacing:.04em" data-i18n="dash.cgu_a2_t">Article 2 — Licence</h4>
+      <p data-i18n-html="dash.cgu_a2">EvoStudio est concédé sous licence <b>individuelle, personnelle, non-exclusive et non-transférable</b>. Strictement interdits : revente, partage, décompilation, modification.</p>
+      <h4 style="font-size:12px;color:var(--ink);font-weight:700;margin:14px 0 4px;text-transform:uppercase;letter-spacing:.04em" data-i18n="dash.cgu_a4_t">Article 4 — Paiement</h4>
+      <p data-i18n-html="dash.cgu_a4">Paiement par crypto ou mobile money. <b>Aucun remboursement après génération de la licence</b> (produit numérique délivré immédiatement).</p>
+      <h4 style="font-size:12px;color:var(--ink);font-weight:700;margin:14px 0 4px;text-transform:uppercase;letter-spacing:.04em" data-i18n="dash.cgu_a5_t">Article 5 — Décharge de responsabilité</h4>
+      <p data-i18n-html="dash.cgu_a5">EGSCI SARL décline toute responsabilité. L'utilisateur est <b>seul et entièrement responsable</b> de la conformité de ses envois (RGPD, CAN-SPAM, LCEN, etc.), du consentement des destinataires et de tout usage du logiciel.</p>
+      <h4 style="font-size:12px;color:var(--ink);font-weight:700;margin:14px 0 4px;text-transform:uppercase;letter-spacing:.04em" data-i18n="dash.cgu_a6_t">Article 6 — Usages interdits</h4>
+      <p data-i18n="dash.cgu_a6">Interdits : spam, phishing, escroquerie, usurpation d'identité, harcèlement, contenus illicites, violation RGPD. Tout usage illicite entraîne la révocation immédiate de la licence.</p>
+      <h4 style="font-size:12px;color:var(--ink);font-weight:700;margin:14px 0 4px;text-transform:uppercase;letter-spacing:.04em" data-i18n="dash.cgu_a8_t">Article 8 — Données</h4>
+      <p data-i18n="dash.cgu_a8">EvoStudio est 100% local : aucune donnée n'est transmise. Seule la vérification de licence contacte nos serveurs.</p>
+      <h4 style="font-size:12px;color:var(--ink);font-weight:700;margin:14px 0 4px;text-transform:uppercase;letter-spacing:.04em" data-i18n="dash.cgu_a12_t">Article 12 — Droit applicable</h4>
+      <p data-i18n-html="dash.cgu_a12">CGU régies par le droit russe. Litiges soumis aux tribunaux de la Fédération de Russie. Contact : <a href="mailto:support@evostudio.fr" style="color:var(--blue)">support@evostudio.fr</a></p>
+      <p style="margin-top:14px;font-size:11px;color:var(--slate-2)" data-i18n="dash.cgu_copy">© 2025–2026 EGSCI SARL — Fédération de Russie</p>
     </div>
     <div class="modal-foot" id="cgu-foot" style="flex-direction:column;align-items:stretch">
       <label style="display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#475569;cursor:pointer;margin-bottom:12px">
         <input type="checkbox" id="cgu-check" style="margin-top:3px;width:15px;height:15px;flex-shrink:0"/>
-        <span>J'ai lu et j'accepte les conditions générales d'utilisation, et je reconnais qu'EGSCI SARL décline toute responsabilité quant à mon utilisation du logiciel.</span>
+        <span data-i18n="dash.cgu_accept_lbl">J'ai lu et j'accepte les conditions générales d'utilisation, et je reconnais qu'EGSCI SARL décline toute responsabilité quant à mon utilisation du logiciel.</span>
       </label>
-      <button class="btn-sm primary" id="cgu-accept" disabled onclick="acceptCgu()" style="padding:12px;font-size:14px;font-weight:700;border-radius:8px">Accepter et continuer</button>
+      <button class="btn-sm primary" id="cgu-accept" disabled onclick="acceptCgu()" style="padding:12px;font-size:14px;font-weight:700;border-radius:8px" data-i18n="dash.cgu_accept_btn">Accepter et continuer</button>
     </div>
   </div>
 </div>
@@ -765,22 +939,22 @@ html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;backgr
 <div class="overlay" id="tfa-overlay" onclick="if(event.target===this)close2faModal()">
   <div class="modal modal-sm">
     <div class="modal-head">
-      <div><h3 id="tfa-title">🔐 Activer le 2FA</h3><p id="tfa-sub">Scannez le QR code avec Google Authenticator ou Authy</p></div>
+      <div><h3 id="tfa-title" data-i18n="dash.tfa_title">🔐 Activer le 2FA</h3><p id="tfa-sub" data-i18n="dash.tfa_sub">Scannez le QR code avec Google Authenticator ou Authy</p></div>
       <button class="modal-close" onclick="close2faModal()">×</button>
     </div>
     <div id="tfa-step-setup" class="modal-body" style="text-align:center">
-      <div class="tfa-qr-wrap" id="tfa-qr"><div style="width:180px;height:180px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;color:var(--slate-2);font-size:12px;margin:0 auto">Chargement…</div></div>
-      <p style="font-size:11px;color:var(--slate);margin-bottom:4px">Ou entrez manuellement :</p>
+      <div class="tfa-qr-wrap" id="tfa-qr"><div style="width:180px;height:180px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;color:var(--slate-2);font-size:12px;margin:0 auto" data-i18n="dash.loading">Chargement…</div></div>
+      <p style="font-size:11px;color:var(--slate);margin-bottom:4px" data-i18n="dash.tfa_or_manual">Ou entrez manuellement :</p>
       <div id="tfa-secret" style="font-family:monospace;font-size:11px;background:#f8fafc;border:1px solid var(--line);border-radius:6px;padding:6px 10px;word-break:break-all;margin-bottom:16px;color:#475569">—</div>
-      <input id="tfa-code" type="text" inputmode="numeric" maxlength="6" placeholder="Code à 6 chiffres" autocomplete="one-time-code" style="width:100%;border:1.5px solid var(--line);border-radius:8px;padding:11px 14px;font-size:16px;text-align:center;letter-spacing:.2em;font-family:monospace;outline:none;transition:.2s;font-family:inherit" onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='var(--line)'" oninput="if(this.value.length===6)document.getElementById('tfa-confirm-btn').focus()"/>
-      <button id="tfa-confirm-btn" onclick="confirm2fa()" class="btn-sm primary" style="width:100%;margin-top:10px;padding:11px;font-size:14px;border-radius:8px;justify-content:center">Activer le 2FA</button>
+      <input id="tfa-code" type="text" inputmode="numeric" maxlength="6" placeholder="Code à 6 chiffres" data-i18n-ph="dash.tfa_code_ph" autocomplete="one-time-code" style="width:100%;border:1.5px solid var(--line);border-radius:8px;padding:11px 14px;font-size:16px;text-align:center;letter-spacing:.2em;font-family:monospace;outline:none;transition:.2s;font-family:inherit" onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='var(--line)'" oninput="if(this.value.length===6)document.getElementById('tfa-confirm-btn').focus()"/>
+      <button id="tfa-confirm-btn" onclick="confirm2fa()" class="btn-sm primary" style="width:100%;margin-top:10px;padding:11px;font-size:14px;border-radius:8px;justify-content:center" data-i18n="dash.tfa_enable_btn">Activer le 2FA</button>
       <div id="tfa-msg-setup" style="font-size:12px;margin-top:8px;min-height:16px;color:var(--red)"></div>
-      <p style="font-size:11px;color:var(--slate-2);margin-top:10px;line-height:1.5">⚠️ Notez le code secret — sans lui vous ne pourrez pas récupérer l'accès.</p>
+      <p style="font-size:11px;color:var(--slate-2);margin-top:10px;line-height:1.5" data-i18n="dash.tfa_note">⚠️ Notez le code secret — sans lui vous ne pourrez pas récupérer l'accès.</p>
     </div>
     <div id="tfa-step-disable" class="modal-body" style="display:none;text-align:center">
-      <p style="font-size:14px;color:var(--ink);margin-bottom:18px">Entrez votre code TOTP actuel pour désactiver le 2FA.</p>
-      <input id="tfa-disable-code" type="text" inputmode="numeric" maxlength="6" placeholder="Code à 6 chiffres" style="width:100%;border:1.5px solid var(--line);border-radius:8px;padding:11px 14px;font-size:16px;text-align:center;letter-spacing:.2em;font-family:monospace;outline:none;font-family:inherit;transition:.2s" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--line)'"/>
-      <button onclick="disable2fa()" class="btn-sm danger" style="width:100%;margin-top:10px;padding:11px;font-size:14px;border-radius:8px;justify-content:center;background:var(--red);color:#fff;border-color:var(--red)">Désactiver le 2FA</button>
+      <p style="font-size:14px;color:var(--ink);margin-bottom:18px" data-i18n="dash.tfa_disable_intro">Entrez votre code TOTP actuel pour désactiver le 2FA.</p>
+      <input id="tfa-disable-code" type="text" inputmode="numeric" maxlength="6" placeholder="Code à 6 chiffres" data-i18n-ph="dash.tfa_code_ph" style="width:100%;border:1.5px solid var(--line);border-radius:8px;padding:11px 14px;font-size:16px;text-align:center;letter-spacing:.2em;font-family:monospace;outline:none;font-family:inherit;transition:.2s" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='var(--line)'"/>
+      <button onclick="disable2fa()" class="btn-sm danger" style="width:100%;margin-top:10px;padding:11px;font-size:14px;border-radius:8px;justify-content:center;background:var(--red);color:#fff;border-color:var(--red)" data-i18n="dash.tfa_disable_btn">Désactiver le 2FA</button>
       <div id="tfa-msg-disable" style="font-size:12px;margin-top:8px;min-height:16px;color:var(--red)"></div>
     </div>
   </div>
@@ -791,28 +965,30 @@ html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;backgr
   <div style="background:var(--blue);color:#fff;padding:13px 16px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
     <div style="display:flex;align-items:center;gap:10px">
       <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:15px">💬</div>
-      <div><div style="font-weight:700;font-size:14px">Assistance EvoStudio</div><div style="font-size:11px;opacity:.8">Nous répondons sous 24h</div></div>
+      <div><div style="font-weight:700;font-size:14px" data-i18n="dash.sup_title">Assistance EvoStudio</div><div style="font-size:11px;opacity:.8" data-i18n="dash.sup_reply">Nous répondons sous 24h</div></div>
     </div>
     <button onclick="toggleSupport()" style="background:none;border:none;color:#fff;font-size:22px;cursor:pointer;line-height:1;padding:0 4px">×</button>
   </div>
   <div id="support-thread" style="flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;background:#f8fafc"></div>
   <div style="border-top:1px solid var(--line);padding:10px;display:flex;gap:8px;align-items:flex-end;flex-shrink:0">
-    <textarea id="support-input" rows="1" placeholder="Écrivez votre message…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendSupport();}" style="flex:1;resize:none;border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:13.5px;font-family:inherit;outline:none;max-height:120px;transition:border-color .15s" onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='var(--line)'"></textarea>
+    <textarea id="support-input" rows="1" placeholder="Écrivez votre message…" data-i18n-ph="dash.sup_input_ph" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendSupport();}" style="flex:1;resize:none;border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:13.5px;font-family:inherit;outline:none;max-height:120px;transition:border-color .15s" onfocus="this.style.borderColor='var(--blue)'" onblur="this.style.borderColor='var(--line)'"></textarea>
     <button id="support-send" onclick="sendSupport()" style="background:var(--blue);color:#fff;border:none;border-radius:10px;width:40px;height:40px;font-size:15px;cursor:pointer;flex-shrink:0">➤</button>
   </div>
 </div>
-<button id="sup-fab" onclick="toggleSupport()" aria-label="Assistance">
+<button id="sup-fab" onclick="toggleSupport()" aria-label="Assistance" data-i18n-aria="dash.sup_aria">
   💬
   <span id="support-unread" style="display:none;position:absolute;top:-3px;right:-3px;background:var(--red);color:#fff;font-size:11px;font-weight:700;border-radius:999px;min-width:20px;height:20px;align-items:center;justify-content:center;padding:0 5px;border:2px solid #fff"></span>
 </button>
 
-<div class="loading-screen" id="loading-screen">Chargement…</div>
+<div class="loading-screen" id="loading-screen" data-i18n="dash.loading_screen">Chargement…</div>
 <div class="toast" id="toast"></div>
 
 <script>
 const API='https://admin.evostudio.fr';
-const PROD_LABELS={sender:'📤 EvoSender',extractor:'🔍 EvoExtractor',verifier:'✅ EvoVerify',suite:'🌐 Suite EvoStudio',proxy_5gb:'🌐 Proxy 5 Go',proxy_55gb:'🌐 Proxy 55 Go',proxy_100gb:'🌐 Proxy 100 Go',proxy_200gb:'🌐 Proxy 200 Go',proxy_1000gb:'🌐 Proxy 1 To',proxy_2000gb:'🌐 Proxy 2 To'};
-const STS_LABELS={pending:'En attente',paid:'Payée',expired:'Expirée',cancelled:'Annulée'};
+// i18n helper (fallback si i18n.js pas encore chargé)
+function _t(k,fr){return (typeof window.t==='function')?window.t(k,fr):fr;}
+function PROD_LABELS_get(p){var m={sender:_t('dash.prod_sender','📤 EvoSender'),extractor:_t('dash.prod_extractor','🔍 EvoExtractor'),verifier:_t('dash.prod_verifier','✅ EvoVerify'),suite:_t('dash.prod_suite','🌐 Suite EvoStudio'),proxy_5gb:_t('dash.prod_proxy_5gb','🌐 Proxy 5 Go'),proxy_55gb:_t('dash.prod_proxy_55gb','🌐 Proxy 55 Go'),proxy_100gb:_t('dash.prod_proxy_100gb','🌐 Proxy 100 Go'),proxy_200gb:_t('dash.prod_proxy_200gb','🌐 Proxy 200 Go'),proxy_1000gb:_t('dash.prod_proxy_1000gb','🌐 Proxy 1 To'),proxy_2000gb:_t('dash.prod_proxy_2000gb','🌐 Proxy 2 To')};return m[p];}
+function STS_LABELS_get(s){var m={pending:_t('dash.sts_pending','En attente'),paid:_t('dash.sts_paid','Payée'),expired:_t('dash.sts_expired','Expirée'),cancelled:_t('dash.sts_cancelled','Annulée')};return m[s];}
 const CRYPTO_LABEL={usdt:'USDT',btc:'BTC',wave:'XOF',om:'XOF'};
 var _senderNotice='', _supportName='Support EvoStudio', _dlWin='#', _dlMac='#';
 var _smtpCache={}, _proxyCache={}, _lastUsageMap={};
@@ -1112,26 +1288,27 @@ async function load(){
   // ── Licences ──
   const licWrap=document.getElementById('lic-wrap');
   if(paid.length===0){
-    licWrap.innerHTML='<div class="empty"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><p>Aucune licence active.</p><a href="/pay.html" class="btn-sm primary">Acheter une licence</a></div>';
+    licWrap.innerHTML='<div class="empty"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><p>'+_t('dash.empty_licenses','Aucune licence active.')+'</p><a href="/pay.html" class="btn-sm primary">'+_t('dash.buy_license','Acheter une licence')+'</a></div>';
   }else{
     licWrap.innerHTML='<div class="lic-grid">'+paid.map(o=>{
       var exp=o.paid_at+365*86400000;
       var days=Math.ceil((exp-Date.now())/86400000);
       var col=days<=0?'var(--red)':(days<=30?'var(--orange)':'var(--slate-2)');
-      var txt=days<=0?'Expirée le '+new Date(exp).toLocaleDateString('fr-FR'):'Valable jusqu\'au '+new Date(exp).toLocaleDateString('fr-FR')+' ('+days+' j)';
+      var _d=new Date(exp).toLocaleDateString('fr-FR');
+      var txt=days<=0?_t('dash.expired_on','Expirée le '+_d).replace('{date}',_d):_t('dash.until_days','Valable jusqu\'au '+_d+' ('+days+' j)').replace('{date}',_d).replace('{n}',days);
       return '<div class="lic-card2">'+
-        '<div class="lic-prod">'+esc(PROD_LABELS[o.product]||o.product)+(o.quantity>1?'<span class="lic-tag">'+o.quantity+' PC</span>':'<span class="lic-tag">1 an</span>')+'</div>'+
+        '<div class="lic-prod">'+esc(PROD_LABELS_get(o.product)||o.product)+(o.quantity>1?'<span class="lic-tag">'+o.quantity+' '+_t('dash.pc','PC')+'</span>':'<span class="lic-tag">'+_t('dash.year_1','1 an')+'</span>')+'</div>'+
         '<div class="dl-row" style="grid-template-columns:1fr 1fr;gap:8px">'+
-          '<a href="'+esc(_dlWin)+'" target="_blank" rel="noopener" class="dl-btn2" style="background:#eff6ff;border-color:#bfdbfe;color:#1e40af"><svg viewBox="0 0 24 24" width="20" height="20" fill="#2563eb"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg><div><strong style="font-size:11.5px">Windows</strong><span>x64 · .exe</span></div></a>'+
-          '<a href="'+esc(_dlMac)+'" target="_blank" rel="noopener" class="dl-btn2" style="background:#faf5ff;border-color:#ddd6fe;color:#5b21b6"><svg viewBox="0 0 24 24" width="20" height="20" fill="#7c3aed"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg><div><strong style="font-size:11.5px">Mac M1/M2/M3</strong><span>arm64 · .dmg</span></div></a>'+
+          '<a href="'+esc(_dlWin)+'" target="_blank" rel="noopener" class="dl-btn2" style="background:#eff6ff;border-color:#bfdbfe;color:#1e40af"><svg viewBox="0 0 24 24" width="20" height="20" fill="#2563eb"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg><div><strong style="font-size:11.5px">'+_t('dash.win','Windows')+'</strong><span>x64 · .exe</span></div></a>'+
+          '<a href="'+esc(_dlMac)+'" target="_blank" rel="noopener" class="dl-btn2" style="background:#faf5ff;border-color:#ddd6fe;color:#5b21b6"><svg viewBox="0 0 24 24" width="20" height="20" fill="#7c3aed"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg><div><strong style="font-size:11.5px">'+_t('dash.mac','Mac M1/M2/M3')+'</strong><span>arm64 · .dmg</span></div></a>'+
         '</div>'+
         '<div class="lic-row">'+
           '<div class="lic-key2">'+esc(o.license_key)+'</div>'+
-          '<button class="btn-sm" data-key="'+esc(o.license_key)+'" onclick="copyText(this.dataset.key)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copier</button>'+
+          '<button class="btn-sm" data-key="'+esc(o.license_key)+'" onclick="copyText(this.dataset.key)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> '+_t('dash.copy','Copier')+'</button>'+
         '</div>'+
-        '<div class="lic-date2">Acheté le '+new Date(o.paid_at).toLocaleDateString('fr-FR')+'</div>'+
+        '<div class="lic-date2">'+_t('dash.bought_on','Acheté le '+new Date(o.paid_at).toLocaleDateString('fr-FR')).replace('{date}',new Date(o.paid_at).toLocaleDateString('fr-FR'))+'</div>'+
         '<div class="lic-date2" style="color:'+col+';font-weight:600">⏳ '+esc(txt)+'</div>'+
-        '<a href="/pay.html?product='+esc(o.product)+'" class="btn-sm" style="margin-top:4px">↻ '+(days<=0?'Réactiver':'Renouveler')+'</a>'+
+        '<a href="/pay.html?product='+esc(o.product)+'" class="btn-sm" style="margin-top:4px">↻ '+(days<=0?_t('dash.reactivate','Réactiver'):_t('dash.renew_word','Renouveler'))+'</a>'+
       '</div>';
     }).join('')+'</div>';
   }
@@ -1139,10 +1316,10 @@ async function load(){
   // ── Orders table ──
   const ordWrap=document.getElementById('ord-wrap');
   if(orders.length===0){
-    ordWrap.innerHTML='<div class="empty"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><p>Aucune commande.</p></div>';
+    ordWrap.innerHTML='<div class="empty"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><p>'+_t('dash.empty_orders','Aucune commande.')+'</p></div>';
   }else{
-    ordWrap.innerHTML='<div style="overflow-x:auto"><table class="tbl"><thead><tr><th>#</th><th>Produit</th><th>Montant</th><th>Statut</th><th>Date</th></tr></thead><tbody>'+
-      orders.map(o=>'<tr><td style="color:var(--slate-2)">#'+o.id+'</td><td>'+esc(PROD_LABELS[o.product]||o.product)+(o.quantity>1?' ×'+o.quantity:'')+'</td><td style="font-family:monospace;font-size:12px">'+esc(String(o.price_exact))+' '+esc(CRYPTO_LABEL[o.crypto]||'')+'</td><td><span class="sts sts-'+esc(o.status)+'">'+esc(STS_LABELS[o.status]||o.status)+'</span></td><td style="color:var(--slate-2)">'+new Date(o.created_at).toLocaleDateString('fr-FR')+'</td></tr>').join('')+
+    ordWrap.innerHTML='<div style="overflow-x:auto"><table class="tbl"><thead><tr><th>#</th><th>'+_t('dash.col_product','Produit')+'</th><th>'+_t('dash.col_amount','Montant')+'</th><th>'+_t('dash.col_status','Statut')+'</th><th>'+_t('dash.col_date','Date')+'</th></tr></thead><tbody>'+
+      orders.map(o=>'<tr><td style="color:var(--slate-2)">#'+o.id+'</td><td>'+esc(PROD_LABELS_get(o.product)||o.product)+(o.quantity>1?' ×'+o.quantity:'')+'</td><td style="font-family:monospace;font-size:12px">'+esc(String(o.price_exact))+' '+esc(CRYPTO_LABEL[o.crypto]||'')+'</td><td><span class="sts sts-'+esc(o.status)+'">'+esc(STS_LABELS_get(o.status)||o.status)+'</span></td><td style="color:var(--slate-2)">'+new Date(o.created_at).toLocaleDateString('fr-FR')+'</td></tr>').join('')+
     '</tbody></table></div>';
   }
 
@@ -1160,25 +1337,25 @@ async function load(){
         var VOL={smtp_10k:'10K',smtp_30k:'30K',smtp_60k:'60K',smtp_90k:'90K',smtp_120k:'120K'};
         var SB={active:'#dcfce7',suspended:'#fee2e2',pending:'#fef9c3'};
         var SF={active:'#166534',suspended:'#991b1b',pending:'#854d0e'};
-        var SL={active:'Actif',suspended:'Suspendu',pending:'En attente'};
+        var SL={active:_t('dash.st_active','Actif'),suspended:_t('dash.st_suspended','Suspendu'),pending:_t('dash.st_pending','En attente')};
         _smtpCache={};
         document.getElementById('smtp-wrap').innerHTML=smList.map(s=>{
           _smtpCache[s.id]=s;
           var vol=s.volume?Math.round(s.volume/1000)+'K':(VOL[s.plan]||'');
           var bg=SB[s.status]||'#f1f5f9',fg=SF[s.status]||'#334155',lbl=SL[s.status]||s.status;
           var expHtml='';
-          if(s.expires_at){var d=Math.ceil((s.expires_at-Date.now())/86400000);var ex=d<=0;var col=ex?'var(--red)':(d<=5?'var(--orange)':'var(--slate)');expHtml='<div class="svc-exp" style="color:'+col+'">⏳ '+(ex?'Expiré le '+new Date(s.expires_at).toLocaleDateString('fr-FR'):'Jusqu\'au '+new Date(s.expires_at).toLocaleDateString('fr-FR')+' ('+d+' j)')+'</div>';}
+          if(s.expires_at){var d=Math.ceil((s.expires_at-Date.now())/86400000);var ex=d<=0;var col=ex?'var(--red)':(d<=5?'var(--orange)':'var(--slate)');var _de=new Date(s.expires_at).toLocaleDateString('fr-FR');expHtml='<div class="svc-exp" style="color:'+col+'">⏳ '+(ex?_t('dash.expired_on','Expiré le '+_de).replace('{date}',_de):_t('dash.until_days','Jusqu\'au '+_de+' ('+d+' j)').replace('{date}',_de).replace('{n}',d))+'</div>';}
           return '<div class="svc-row">'+
             '<div class="svc-info">'+
-              '<div class="svc-name">📧 SMTP Relay — '+esc(vol)+' emails/mois</div>'+
-              '<div class="svc-meta"><span>Plan '+esc(s.plan)+'</span><span>'+esc(s.relay_host||'En préparation…')+'</span><span>Port '+esc(String(s.relay_port||587))+' TLS</span></div>'+
-              (s.stats?('<div class="svc-meta" style="margin-top:5px"><span style="color:#2563eb">📊 '+s.stats.sent+' envoyés</span><span style="color:'+(s.stats.bounces>0?'#dc2626':'#16a34a')+'">↩️ '+s.stats.bounces+' bounces</span><span style="color:'+(s.stats.spam>0?'#dc2626':'#16a34a')+'">🚫 '+s.stats.spam+' spam</span><span style="color:#64748b">(30 j)</span></div>'):'')+
+              '<div class="svc-name">'+_t('dash.smtp_relay_name','📧 SMTP Relay — '+esc(vol)+' emails/mois').replace('{vol}',esc(vol))+'</div>'+
+              '<div class="svc-meta"><span>'+_t('dash.plan','Plan')+' '+esc(s.plan)+'</span><span>'+esc(s.relay_host||_t('dash.in_preparation','En préparation…'))+'</span><span>'+_t('dash.port_tls','Port '+esc(String(s.relay_port||587))+' TLS').replace('{port}',esc(String(s.relay_port||587)))+'</span></div>'+
+              (s.stats?('<div class="svc-meta" style="margin-top:5px"><span style="color:#2563eb">📊 '+_t('dash.stat_sent',s.stats.sent+' envoyés').replace('{n}',s.stats.sent)+'</span><span style="color:'+(s.stats.bounces>0?'#dc2626':'#16a34a')+'">↩️ '+_t('dash.stat_bounces',s.stats.bounces+' bounces').replace('{n}',s.stats.bounces)+'</span><span style="color:'+(s.stats.spam>0?'#dc2626':'#16a34a')+'">🚫 '+_t('dash.stat_spam',s.stats.spam+' spam').replace('{n}',s.stats.spam)+'</span><span style="color:#64748b">'+_t('dash.stat_30d','(30 j)')+'</span></div>'):'')+
               expHtml+
             '</div>'+
             '<div class="svc-actions">'+
               '<span class="svc-status" style="background:'+bg+';color:'+fg+'">'+esc(lbl)+'</span>'+
-              (s.username?'<button class="btn-sm primary" onclick="openSmtpModal(_smtpCache['+s.id+'],_senderNotice)">🔑 Identifiants</button>':'<span style="font-size:12px;color:var(--orange)">⏳ En provisioning</span>')+
-              '<a href="/pay.html?product='+esc(s.plan)+'" class="btn-sm">↻ Renouveler</a>'+
+              (s.username?'<button class="btn-sm primary" onclick="openSmtpModal(_smtpCache['+s.id+'],_senderNotice)">'+_t('dash.creds_btn','🔑 Identifiants')+'</button>':'<span style="font-size:12px;color:var(--orange)">'+_t('dash.provisioning','⏳ En provisioning')+'</span>')+
+              '<a href="/pay.html?product='+esc(s.plan)+'" class="btn-sm">'+_t('dash.renew','↻ Renouveler')+'</a>'+
               '<button class="btn-sm danger" onclick="deleteSmtp('+s.id+')">🗑</button>'+
             '</div>'+
           '</div>';
@@ -1203,7 +1380,7 @@ async function load(){
         loadProxyUsage(pxList);
         loadProxyChart(7);
       }else{
-        document.getElementById('proxy-wrap').innerHTML='<div class="empty"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 0 20"/></svg><p>Aucun forfait proxy actif.</p><a href="/pay.html?product=proxy_55gb" class="btn-sm primary">Acheter du proxy</a></div>';
+        document.getElementById('proxy-wrap').innerHTML='<div class="empty"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 0 20"/></svg><p>'+_t('dash.empty_proxy','Aucun forfait proxy actif.')+'</p><a href="/pay.html?product=proxy_55gb" class="btn-sm primary">'+_t('dash.proxy_buy','Acheter du proxy')+'</a></div>';
       }
     }
   }catch(e){console.warn('Proxy:',e)}

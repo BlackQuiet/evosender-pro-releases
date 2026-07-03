@@ -17,6 +17,67 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="/article.css" />
 <script src="/theme.js"></script>
+<script>window.I18N_PAGE = {
+  en: {
+    "smtp.crumb.current": "Dedicated SMTP server",
+    "smtp.h1": "Dedicated SMTP server: everything explained",
+    "smtp.lead": "A <strong>dedicated SMTP server</strong> is the infrastructure that actually sends your emails. More than anything else, it determines whether your messages land in the inbox or in spam.",
+    "smtp.meta": "EvoStudio guide · Updated in 2026",
+    "smtp.h2.what": "What is an SMTP server?",
+    "smtp.p.what": "SMTP (Simple Mail Transfer Protocol) is the standard protocol for sending emails. An SMTP server receives your messages from your software and forwards them to the recipients' servers. To connect to it, you use a host, a port (often 587), a username and a password.",
+    "smtp.h2.vs": "Dedicated or shared SMTP: what's the difference?",
+    "smtp.h3.shared": "Shared SMTP",
+    "smtp.p.shared": "Your sends go through an infrastructure pooled with other senders. It is cost-effective, but your reputation also depends on theirs: if a neighbor spams, your deliverability may suffer.",
+    "smtp.h3.dedicated": "Dedicated SMTP",
+    "smtp.p.dedicated": "You have your own sending channel, often with a <strong>dedicated IP</strong>. Your reputation depends only on you. It is the choice of serious senders and large volumes.",
+    "smtp.callout": "🌐 <strong>The dedicated IP:</strong> an IP address that sends only your emails. Well managed (with a gradual « warm-up »), it builds a solid and lasting sender reputation.",
+    "smtp.h2.pillars": "The pillars of deliverability",
+    "smtp.li.auth": "<strong>Authentication</strong>: SPF, DKIM and DMARC prove that you are a legitimate sender.",
+    "smtp.li.reputation": "<strong>IP &amp; domain reputation</strong>: built over time, through regular and clean sending.",
+    "smtp.li.warmup": "<strong>Warm-up</strong>: raise the volume gradually on a fresh IP.",
+    "smtp.li.quality": "<strong>List quality</strong>: <a href=\"/verificateur-email-masse.html\">verified</a> addresses and a low complaint rate.",
+    "smtp.h2.evostudio": "The EvoStudio SMTP server",
+    "smtp.p.evostudio": "EvoStudio offers high-deliverability <strong>dedicated SMTP servers</strong>, delivered turnkey: ready-to-use credentials, professional infrastructure and direct integration with <a href=\"/produit.html?id=sender\">EvoSender</a>. You manage your service from your client area, with simple renewal.",
+    "smtp.cta.h3": "A dedicated SMTP, ready in minutes",
+    "smtp.cta.p": "Professional infrastructure, immediate credentials, integration with EvoSender.",
+    "smtp.cta.btn": "See SMTP plans →",
+    "smtp.related.h2": "See also",
+    "smtp.related.bulk": "Bulk email software<span>The tool that leverages your SMTP.</span>",
+    "smtp.related.verifier": "Bulk email verifier<span>Protect your IP's reputation.</span>",
+    "smtp.related.extractor": "Email extractor<span>Build quality lists.</span>",
+    "foot.article": "© 2025–2026 EGSCI SARL — EvoStudio · <a href=\"/a-propos.html\">About</a> · <a href=\"/privacy.html\">Legal notice</a>"
+  },
+  ru: {
+    "smtp.crumb.current": "Выделенный SMTP-сервер",
+    "smtp.h1": "Выделенный SMTP-сервер: всё, что нужно знать",
+    "smtp.lead": "<strong>Выделенный SMTP-сервер</strong> — это инфраструктура, которая фактически отправляет ваши письма. Именно он, больше чем что-либо ещё, определяет, попадут ли ваши сообщения во «Входящие» или в спам.",
+    "smtp.meta": "Руководство EvoStudio · Обновлено в 2026",
+    "smtp.h2.what": "Что такое SMTP-сервер?",
+    "smtp.p.what": "SMTP (Simple Mail Transfer Protocol) — это стандартный протокол отправки писем. SMTP-сервер получает ваши сообщения из вашей программы и передаёт их на серверы получателей. Для подключения к нему используются хост, порт (часто 587), логин и пароль.",
+    "smtp.h2.vs": "Выделенный или общий SMTP: в чём разница?",
+    "smtp.h3.shared": "Общий SMTP",
+    "smtp.p.shared": "Ваши отправления идут через инфраструктуру, разделяемую с другими отправителями. Это экономично, но ваша репутация зависит также от их репутации: если сосед рассылает спам, ваша доставляемость может пострадать.",
+    "smtp.h3.dedicated": "Выделенный SMTP",
+    "smtp.p.dedicated": "У вас есть собственный канал отправки, часто с <strong>выделенным IP</strong>. Ваша репутация зависит только от вас. Это выбор серьёзных отправителей и больших объёмов.",
+    "smtp.callout": "🌐 <strong>Выделенный IP:</strong> IP-адрес, с которого отправляются только ваши письма. При грамотном управлении (с постепенным «прогревом») он формирует прочную и долговременную репутацию отправителя.",
+    "smtp.h2.pillars": "Столпы доставляемости",
+    "smtp.li.auth": "<strong>Аутентификация</strong>: SPF, DKIM и DMARC подтверждают, что вы легитимный отправитель.",
+    "smtp.li.reputation": "<strong>Репутация IP и домена</strong>: формируется со временем за счёт регулярной и чистой отправки.",
+    "smtp.li.warmup": "<strong>Прогрев</strong>: постепенно наращивайте объём на новом IP.",
+    "smtp.li.quality": "<strong>Качество списков</strong>: <a href=\"/verificateur-email-masse.html\">проверенные</a> адреса и низкий уровень жалоб.",
+    "smtp.h2.evostudio": "SMTP-сервер EvoStudio",
+    "smtp.p.evostudio": "EvoStudio предлагает <strong>выделенные SMTP-серверы</strong> с высокой доставляемостью, поставляемые под ключ: готовые к использованию учётные данные, профессиональная инфраструктура и прямая интеграция с <a href=\"/produit.html?id=sender\">EvoSender</a>. Вы управляете своим сервисом из личного кабинета с простым продлением.",
+    "smtp.cta.h3": "Выделенный SMTP, готовый за несколько минут",
+    "smtp.cta.p": "Профессиональная инфраструктура, мгновенные учётные данные, интеграция с EvoSender.",
+    "smtp.cta.btn": "Смотреть тарифы SMTP →",
+    "smtp.related.h2": "Читайте также",
+    "smtp.related.bulk": "Программа для массовой рассылки email<span>Инструмент, использующий ваш SMTP.</span>",
+    "smtp.related.verifier": "Массовая проверка email<span>Защитите репутацию вашего IP.</span>",
+    "smtp.related.extractor": "Экстрактор email<span>Создавайте качественные списки.</span>",
+    "foot.article": "© 2025–2026 EGSCI SARL — EvoStudio · <a href=\"/a-propos.html\">О нас</a> · <a href=\"/privacy.html\">Правовая информация</a>"
+  }
+};</script>
+<script src="/i18n.js" defer></script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","headline":"Serveur SMTP dédié : tout comprendre","description":"SMTP dédié ou partagé, IP dédiée, réputation et délivrabilité : le guide complet.","image":"https://evostudio.fr/Hub.png","author":{"@type":"Organization","name":"EvoStudio"},"publisher":{"@type":"Organization","name":"EvoStudio","logo":{"@type":"ImageObject","url":"https://evostudio.fr/logoevostudio2.png"}},"mainEntityOfPage":"https://evostudio.fr/serveur-smtp-dedie.html","inLanguage":"fr-FR"}
 </script>
@@ -25,55 +86,55 @@
 <header class="nav">
   <a href="/" class="logo"><img src="/logoevostudio2.png" alt="EvoStudio" /></a>
   <nav class="links">
-    <a href="/">Accueil</a><a href="/#produits">Produits</a><a href="/blog.html">Blog</a><a href="/a-propos.html">À propos</a><a href="/pay.html" class="cta">Acheter</a>
+    <a href="/" data-i18n="nav.home">Accueil</a><a href="/#produits" data-i18n="nav.products">Produits</a><a href="/blog.html" data-i18n="nav.blog">Blog</a><a href="/a-propos.html" data-i18n="nav.about">À propos</a><a href="/pay.html" class="cta" data-i18n="nav.buy">Acheter</a><div id="lang-switch"></div>
   </nav>
 </header>
 
 <div class="container">
-  <div class="crumb"><a href="/">Accueil</a> › <a href="/blog.html">Blog</a> › Serveur SMTP dédié</div>
+  <div class="crumb"><a href="/" data-i18n="nav.home">Accueil</a> › <a href="/blog.html" data-i18n="nav.blog">Blog</a> › <span data-i18n="smtp.crumb.current">Serveur SMTP dédié</span></div>
   <article>
-    <h1>Serveur SMTP dédié : tout comprendre</h1>
-    <p class="lead">Un <strong>serveur SMTP dédié</strong> est l'infrastructure qui expédie réellement vos emails. C'est lui qui détermine, plus que tout le reste, si vos messages arrivent en boîte de réception ou en spam.</p>
-    <p class="meta">Guide EvoStudio · Mis à jour en 2026</p>
+    <h1 data-i18n="smtp.h1">Serveur SMTP dédié : tout comprendre</h1>
+    <p class="lead" data-i18n-html="smtp.lead">Un <strong>serveur SMTP dédié</strong> est l'infrastructure qui expédie réellement vos emails. C'est lui qui détermine, plus que tout le reste, si vos messages arrivent en boîte de réception ou en spam.</p>
+    <p class="meta" data-i18n="smtp.meta">Guide EvoStudio · Mis à jour en 2026</p>
 
-    <h2>Qu'est-ce qu'un serveur SMTP ?</h2>
-    <p>SMTP (Simple Mail Transfer Protocol) est le protocole standard d'envoi d'emails. Un serveur SMTP reçoit vos messages depuis votre logiciel et les transmet aux serveurs des destinataires. Pour s'y connecter, on utilise un hôte, un port (souvent 587), un identifiant et un mot de passe.</p>
+    <h2 data-i18n="smtp.h2.what">Qu'est-ce qu'un serveur SMTP ?</h2>
+    <p data-i18n="smtp.p.what">SMTP (Simple Mail Transfer Protocol) est le protocole standard d'envoi d'emails. Un serveur SMTP reçoit vos messages depuis votre logiciel et les transmet aux serveurs des destinataires. Pour s'y connecter, on utilise un hôte, un port (souvent 587), un identifiant et un mot de passe.</p>
 
-    <h2>SMTP dédié ou partagé : quelle différence ?</h2>
-    <h3>SMTP partagé</h3>
-    <p>Vos envois passent par une infrastructure mutualisée avec d'autres expéditeurs. C'est économique, mais votre réputation dépend aussi de celle des autres : si un voisin spamme, votre délivrabilité peut en souffrir.</p>
-    <h3>SMTP dédié</h3>
-    <p>Vous disposez de votre propre canal d'envoi, souvent avec une <strong>IP dédiée</strong>. Votre réputation ne dépend que de vous. C'est le choix des envoyeurs sérieux et des volumes importants.</p>
+    <h2 data-i18n="smtp.h2.vs">SMTP dédié ou partagé : quelle différence ?</h2>
+    <h3 data-i18n="smtp.h3.shared">SMTP partagé</h3>
+    <p data-i18n="smtp.p.shared">Vos envois passent par une infrastructure mutualisée avec d'autres expéditeurs. C'est économique, mais votre réputation dépend aussi de celle des autres : si un voisin spamme, votre délivrabilité peut en souffrir.</p>
+    <h3 data-i18n="smtp.h3.dedicated">SMTP dédié</h3>
+    <p data-i18n-html="smtp.p.dedicated">Vous disposez de votre propre canal d'envoi, souvent avec une <strong>IP dédiée</strong>. Votre réputation ne dépend que de vous. C'est le choix des envoyeurs sérieux et des volumes importants.</p>
 
-    <div class="callout">🌐 <strong>L'IP dédiée :</strong> une adresse IP qui n'envoie que vos emails. Bien gérée (avec un « warm-up » progressif), elle construit une réputation d'expéditeur solide et durable.</div>
+    <div class="callout" data-i18n-html="smtp.callout">🌐 <strong>L'IP dédiée :</strong> une adresse IP qui n'envoie que vos emails. Bien gérée (avec un « warm-up » progressif), elle construit une réputation d'expéditeur solide et durable.</div>
 
-    <h2>Les piliers de la délivrabilité</h2>
+    <h2 data-i18n="smtp.h2.pillars">Les piliers de la délivrabilité</h2>
     <ul>
-      <li><strong>Authentification</strong> : SPF, DKIM et DMARC prouvent que vous êtes un expéditeur légitime.</li>
-      <li><strong>Réputation IP &amp; domaine</strong> : construite dans le temps, par un envoi régulier et propre.</li>
-      <li><strong>Warm-up</strong> : monter le volume progressivement sur une IP neuve.</li>
-      <li><strong>Qualité des listes</strong> : des adresses <a href="/verificateur-email-masse.html">vérifiées</a> et un faible taux de plaintes.</li>
+      <li data-i18n-html="smtp.li.auth"><strong>Authentification</strong> : SPF, DKIM et DMARC prouvent que vous êtes un expéditeur légitime.</li>
+      <li data-i18n-html="smtp.li.reputation"><strong>Réputation IP &amp; domaine</strong> : construite dans le temps, par un envoi régulier et propre.</li>
+      <li data-i18n-html="smtp.li.warmup"><strong>Warm-up</strong> : monter le volume progressivement sur une IP neuve.</li>
+      <li data-i18n-html="smtp.li.quality"><strong>Qualité des listes</strong> : des adresses <a href="/verificateur-email-masse.html">vérifiées</a> et un faible taux de plaintes.</li>
     </ul>
 
-    <h2>Le serveur SMTP EvoStudio</h2>
-    <p>EvoStudio propose des <strong>serveurs SMTP dédiés</strong> à haute délivrabilité, livrés clés en main : identifiants prêts à l'emploi, infrastructure professionnelle et intégration directe avec <a href="/produit.html?id=sender">EvoSender</a>. Vous gérez votre service depuis votre espace client, avec renouvellement simple.</p>
+    <h2 data-i18n="smtp.h2.evostudio">Le serveur SMTP EvoStudio</h2>
+    <p data-i18n-html="smtp.p.evostudio">EvoStudio propose des <strong>serveurs SMTP dédiés</strong> à haute délivrabilité, livrés clés en main : identifiants prêts à l'emploi, infrastructure professionnelle et intégration directe avec <a href="/produit.html?id=sender">EvoSender</a>. Vous gérez votre service depuis votre espace client, avec renouvellement simple.</p>
 
     <div class="cta-box">
-      <h3>Un SMTP dédié, prêt en quelques minutes</h3>
-      <p>Infrastructure professionnelle, identifiants immédiats, intégration avec EvoSender.</p>
-      <a class="btn" href="/pay.html">Voir les offres SMTP →</a>
+      <h3 data-i18n="smtp.cta.h3">Un SMTP dédié, prêt en quelques minutes</h3>
+      <p data-i18n="smtp.cta.p">Infrastructure professionnelle, identifiants immédiats, intégration avec EvoSender.</p>
+      <a class="btn" href="/pay.html" data-i18n="smtp.cta.btn">Voir les offres SMTP →</a>
     </div>
 
     <div class="related">
-      <h2>À lire aussi</h2>
-      <a href="/logiciel-envoi-email-masse.html">Logiciel d'envoi d'email en masse<span>L'outil qui exploite votre SMTP.</span></a>
-      <a href="/verificateur-email-masse.html">Vérificateur d'email en masse<span>Protégez la réputation de votre IP.</span></a>
-      <a href="/extracteur-emails.html">Extracteur d'emails<span>Construire des listes de qualité.</span></a>
+      <h2 data-i18n="smtp.related.h2">À lire aussi</h2>
+      <a href="/logiciel-envoi-email-masse.html" data-i18n-html="smtp.related.bulk">Logiciel d'envoi d'email en masse<span>L'outil qui exploite votre SMTP.</span></a>
+      <a href="/verificateur-email-masse.html" data-i18n-html="smtp.related.verifier">Vérificateur d'email en masse<span>Protégez la réputation de votre IP.</span></a>
+      <a href="/extracteur-emails.html" data-i18n-html="smtp.related.extractor">Extracteur d'emails<span>Construire des listes de qualité.</span></a>
     </div>
   </article>
 </div>
 
-<footer class="footer">© 2025–2026 EGSCI SARL — EvoStudio · <a href="/a-propos.html">À propos</a> · <a href="/privacy.html">Mentions légales</a></footer>
+<footer class="footer" data-i18n-html="foot.article">© 2025–2026 EGSCI SARL — EvoStudio · <a href="/a-propos.html">À propos</a> · <a href="/privacy.html">Mentions légales</a></footer>
 <script src="/assistance.js" defer></script>
 </body>
 </html>

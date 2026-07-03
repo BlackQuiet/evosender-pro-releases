@@ -17,6 +17,15 @@
   var supportName = 'Support EvoStudio';
   var _lastUnread = 0, _lastAdmin = -1, _audioCtx = null;
 
+  // ── i18n : lit la langue courante gérée par i18n.js (localStorage 'evo-lang') ──
+  function lng() { var s; try { s = localStorage.getItem('evo-lang'); } catch (e) {} return (s === 'en' || s === 'ru') ? s : 'fr'; }
+  var TXT = {
+    fr: { fab: 'Assistance', title: 'Assistance EvoStudio', sub_in: 'Nous répondons sous 24h', sub_out: 'Réponse par email sous 24h', close: 'Fermer', input_ph: 'Écrivez votre message…', send: 'Envoyer', intro: 'Une question avant de créer votre compte ? Écrivez-nous, réponse par email.', email_l: 'Votre email', email_ph: 'vous@exemple.com', subject_l: 'Sujet', o1: 'Question générale', o2: 'Avant-vente / Tarifs', o3: 'Serveurs SMTP', o4: 'Support technique', o5: 'Autre', msg_l: 'Message', msg_ph: 'Votre message…', send_btn: 'Envoyer', no_msg: 'Aucun message. Posez votre question ci-dessous.', resolved: '✓ Conversation résolue. Écrivez un message pour la rouvrir.', err_email: 'Email invalide.', err_msg: 'Écrivez un message.', sending: 'Envoi…', sent_t: 'Message envoyé !', sent_a: 'Merci, nous vous répondrons à ', sent_b: ' sous 24h.', err: 'Erreur', err_net: 'Erreur réseau, réessayez.' },
+    en: { fab: 'Support', title: 'EvoStudio Support', sub_in: 'We reply within 24h', sub_out: 'Email reply within 24h', close: 'Close', input_ph: 'Write your message…', send: 'Send', intro: 'A question before creating your account? Write to us — reply by email.', email_l: 'Your email', email_ph: 'you@example.com', subject_l: 'Subject', o1: 'General question', o2: 'Pre-sales / Pricing', o3: 'SMTP servers', o4: 'Technical support', o5: 'Other', msg_l: 'Message', msg_ph: 'Your message…', send_btn: 'Send', no_msg: 'No messages yet. Ask your question below.', resolved: '✓ Conversation resolved. Write a message to reopen it.', err_email: 'Invalid email.', err_msg: 'Write a message.', sending: 'Sending…', sent_t: 'Message sent!', sent_a: 'Thank you, we will reply to ', sent_b: ' within 24h.', err: 'Error', err_net: 'Network error, please retry.' },
+    ru: { fab: 'Поддержка', title: 'Поддержка EvoStudio', sub_in: 'Мы отвечаем в течение 24 ч', sub_out: 'Ответ по email в течение 24 ч', close: 'Закрыть', input_ph: 'Напишите сообщение…', send: 'Отправить', intro: 'Есть вопрос перед созданием аккаунта? Напишите нам — ответим по email.', email_l: 'Ваш email', email_ph: 'you@example.com', subject_l: 'Тема', o1: 'Общий вопрос', o2: 'Предпродажа / Тарифы', o3: 'SMTP-серверы', o4: 'Техническая поддержка', o5: 'Другое', msg_l: 'Сообщение', msg_ph: 'Ваше сообщение…', send_btn: 'Отправить', no_msg: 'Сообщений пока нет. Задайте вопрос ниже.', resolved: '✓ Диалог закрыт. Напишите сообщение, чтобы открыть заново.', err_email: 'Некорректный email.', err_msg: 'Напишите сообщение.', sending: 'Отправка…', sent_t: 'Сообщение отправлено!', sent_a: 'Спасибо, мы ответим на ', sent_b: ' в течение 24 ч.', err: 'Ошибка', err_net: 'Ошибка сети, повторите.' }
+  };
+  function A(k) { return (TXT[lng()] || TXT.fr)[k]; }
+
   // Récupère le nom du support (configurable dans l'admin)
   if (loggedIn) {
     try { fetch(API + '/api/shop/products').then(function(r){return r.json();}).then(function(d){ if(d && d.support_name) supportName = d.support_name; }).catch(function(){}); } catch (e) {}
@@ -43,33 +52,33 @@
   win.style.cssText = "display:none;position:fixed;right:20px;bottom:90px;z-index:99999;width:360px;max-width:calc(100vw - 32px);background:#fff;border:1px solid #e6eaf1;border-radius:16px;box-shadow:0 18px 50px rgba(15,23,42,.28);overflow:hidden;font-family:'Inter',-apple-system,Segoe UI,sans-serif;flex-direction:column";
   var fab = document.createElement('button');
   fab.id = 'ev-help-fab';
-  fab.setAttribute('aria-label', 'Assistance');
+  fab.setAttribute('aria-label', A('fab'));
   fab.style.cssText = 'position:fixed;right:20px;bottom:20px;z-index:99999;width:58px;height:58px;border-radius:50%;background:#2563eb;color:#fff;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 24px rgba(37,99,235,.45);font-size:26px';
   fab.innerHTML = '💬<span id="ev-help-badge" style="display:none;position:absolute;top:-3px;right:-3px;background:#dc2626;color:#fff;font-size:11px;font-weight:700;border-radius:999px;min-width:20px;height:20px;align-items:center;justify-content:center;padding:0 5px;border:2px solid #fff"></span>';
 
   var header = '<div style="background:#2563eb;color:#fff;padding:15px 16px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0">' +
     '<div style="display:flex;align-items:center;gap:10px"><div style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:16px">💬</div>' +
-    '<div><div style="font-weight:700;font-size:14px">Assistance EvoStudio</div><div style="font-size:11px;opacity:.85">' + (loggedIn ? 'Nous répondons sous 24h' : 'Réponse par email sous 24h') + '</div></div></div>' +
-    '<button id="ev-help-close" aria-label="Fermer" style="background:none;border:none;color:#fff;font-size:24px;cursor:pointer;line-height:1;padding:0 4px">×</button></div>';
+    '<div><div style="font-weight:700;font-size:14px">' + A('title') + '</div><div style="font-size:11px;opacity:.85">' + (loggedIn ? A('sub_in') : A('sub_out')) + '</div></div></div>' +
+    '<button id="ev-help-close" aria-label="' + A('close') + '" style="background:none;border:none;color:#fff;font-size:24px;cursor:pointer;line-height:1;padding:0 4px">×</button></div>';
 
   if (loggedIn) {
     win.innerHTML = header +
       '<div id="ev-thread" style="flex:1;overflow-y:auto;max-height:360px;padding:16px;display:flex;flex-direction:column;gap:10px;background:#f8fafc"></div>' +
       '<div style="border-top:1px solid #e6eaf1;padding:10px;display:flex;gap:8px;align-items:flex-end;flex-shrink:0">' +
-        '<textarea id="ev-input" rows="1" placeholder="Écrivez votre message…" style="flex:1;resize:none;border:1px solid #e6eaf1;border-radius:10px;padding:10px 12px;font-size:13.5px;font-family:inherit;outline:none;max-height:120px"></textarea>' +
-        '<button id="ev-send" aria-label="Envoyer" style="background:#2563eb;color:#fff;border:none;border-radius:10px;width:42px;height:42px;font-size:16px;cursor:pointer;flex-shrink:0">➤</button></div>';
+        '<textarea id="ev-input" rows="1" placeholder="' + A('input_ph') + '" style="flex:1;resize:none;border:1px solid #e6eaf1;border-radius:10px;padding:10px 12px;font-size:13.5px;font-family:inherit;outline:none;max-height:120px"></textarea>' +
+        '<button id="ev-send" aria-label="' + A('send') + '" style="background:#2563eb;color:#fff;border:none;border-radius:10px;width:42px;height:42px;font-size:16px;cursor:pointer;flex-shrink:0">➤</button></div>';
   } else {
     win.innerHTML = header +
       '<div id="ev-cbody" style="padding:16px">' +
-      '<p style="font-size:13px;color:#475569;margin:0 0 14px;line-height:1.5">Une question avant de créer votre compte ? Écrivez-nous, réponse par email.</p>' +
-      '<label style="display:block;font-size:11px;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px">Votre email</label>' +
-      '<input id="ev-email" type="email" placeholder="vous@exemple.com" style="width:100%;border:1px solid #e6eaf1;border-radius:10px;padding:11px 13px;font-size:14px;outline:none;font-family:inherit;margin-bottom:12px" />' +
-      '<label style="display:block;font-size:11px;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px">Sujet</label>' +
+      '<p style="font-size:13px;color:#475569;margin:0 0 14px;line-height:1.5">' + A('intro') + '</p>' +
+      '<label style="display:block;font-size:11px;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px">' + A('email_l') + '</label>' +
+      '<input id="ev-email" type="email" placeholder="' + A('email_ph') + '" style="width:100%;border:1px solid #e6eaf1;border-radius:10px;padding:11px 13px;font-size:14px;outline:none;font-family:inherit;margin-bottom:12px" />' +
+      '<label style="display:block;font-size:11px;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px">' + A('subject_l') + '</label>' +
       '<select id="ev-subject" style="width:100%;border:1px solid #e6eaf1;border-radius:10px;padding:11px 13px;font-size:14px;outline:none;font-family:inherit;margin-bottom:12px;background:#fff">' +
-        '<option>Question générale</option><option>Avant-vente / Tarifs</option><option>Serveurs SMTP</option><option>Support technique</option><option>Autre</option></select>' +
-      '<label style="display:block;font-size:11px;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px">Message</label>' +
-      '<textarea id="ev-msg" rows="4" placeholder="Votre message…" style="width:100%;border:1px solid #e6eaf1;border-radius:10px;padding:11px 13px;font-size:14px;outline:none;font-family:inherit;resize:vertical;margin-bottom:12px"></textarea>' +
-      '<button id="ev-csend" style="width:100%;background:#2563eb;color:#fff;border:none;border-radius:10px;padding:12px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit">Envoyer</button>' +
+        '<option>' + A('o1') + '</option><option>' + A('o2') + '</option><option>' + A('o3') + '</option><option>' + A('o4') + '</option><option>' + A('o5') + '</option></select>' +
+      '<label style="display:block;font-size:11px;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px">' + A('msg_l') + '</label>' +
+      '<textarea id="ev-msg" rows="4" placeholder="' + A('msg_ph') + '" style="width:100%;border:1px solid #e6eaf1;border-radius:10px;padding:11px 13px;font-size:14px;outline:none;font-family:inherit;resize:vertical;margin-bottom:12px"></textarea>' +
+      '<button id="ev-csend" style="width:100%;background:#2563eb;color:#fff;border:none;border-radius:10px;padding:12px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit">' + A('send_btn') + '</button>' +
       '<div id="ev-cstatus" style="font-size:13px;margin-top:10px;text-align:center;min-height:18px"></div></div>';
   }
 
@@ -104,8 +113,8 @@
         if (m.sender === 'system') return '<div style="text-align:center"><span style="display:inline-block;background:#eef2f7;color:#64748b;font-size:11px;padding:4px 12px;border-radius:999px">' + esc(m.body) + '</span></div>';
         var mine = m.sender === 'user';
         return '<div style="display:flex;justify-content:' + (mine ? 'flex-end' : 'flex-start') + '"><div style="max-width:78%;background:' + (mine ? '#2563eb' : '#f1f5f9') + ';color:' + (mine ? '#fff' : '#0f172a') + ';padding:9px 13px;font-size:13.5px;line-height:1.5;word-break:break-word;border-radius:12px">' + (mine ? '' : '<div style="font-size:10px;font-weight:700;color:#2563eb;margin-bottom:3px">' + esc(supportName) + '</div>') + esc(m.body).replace(/\n/g, '<br>') + '<div style="font-size:10px;opacity:.7;margin-top:4px;text-align:right">' + when + '</div></div></div>';
-      }).join('') : '<div style="text-align:center;color:#94a3b8;font-size:13px;padding:20px">Aucun message. Posez votre question ci-dessous.</div>';
-      if (data.closed) html += '<div style="text-align:center;margin-top:10px;padding:10px;background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;font-size:12px;border-radius:8px">✓ Conversation résolue. Écrivez un message pour la rouvrir.</div>';
+      }).join('') : '<div style="text-align:center;color:#94a3b8;font-size:13px;padding:20px">' + A('no_msg') + '</div>';
+      if (data.closed) html += '<div style="text-align:center;margin-top:10px;padding:10px;background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;font-size:12px;border-radius:8px">' + A('resolved') + '</div>';
       thread.innerHTML = html; thread.scrollTop = thread.scrollHeight;
       if (_lastAdmin >= 0 && adminCount > _lastAdmin) beep(); // nouvelle réponse admin
       _lastAdmin = adminCount;
@@ -141,15 +150,15 @@
     var subject = document.getElementById('ev-subject').value;
     var message = document.getElementById('ev-msg').value.trim();
     var st = document.getElementById('ev-cstatus'), btn = document.getElementById('ev-csend');
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { st.style.color = '#dc2626'; st.textContent = 'Email invalide.'; return; }
-    if (!message) { st.style.color = '#dc2626'; st.textContent = 'Écrivez un message.'; return; }
-    btn.disabled = true; st.style.color = '#64748b'; st.textContent = 'Envoi…';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { st.style.color = '#dc2626'; st.textContent = A('err_email'); return; }
+    if (!message) { st.style.color = '#dc2626'; st.textContent = A('err_msg'); return; }
+    btn.disabled = true; st.style.color = '#64748b'; st.textContent = A('sending');
     try {
       var r = await fetch(API + '/api/shop/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: email, subject: subject, message: message }) });
       var d = await r.json();
-      if (r.ok && d.ok) document.getElementById('ev-cbody').innerHTML = '<div style="text-align:center;padding:24px 8px"><div style="font-size:40px;margin-bottom:10px">✅</div><div style="font-weight:700;font-size:15px;color:#0f172a;margin-bottom:6px">Message envoyé !</div><div style="font-size:13px;color:#64748b;line-height:1.5">Merci, nous vous répondrons à <b>' + esc(email) + '</b> sous 24h.</div></div>';
-      else { st.style.color = '#dc2626'; st.textContent = '❌ ' + (d.error || 'Erreur'); btn.disabled = false; }
-    } catch (e) { st.style.color = '#dc2626'; st.textContent = '❌ Erreur réseau, réessayez.'; btn.disabled = false; }
+      if (r.ok && d.ok) document.getElementById('ev-cbody').innerHTML = '<div style="text-align:center;padding:24px 8px"><div style="font-size:40px;margin-bottom:10px">✅</div><div style="font-weight:700;font-size:15px;color:#0f172a;margin-bottom:6px">' + A('sent_t') + '</div><div style="font-size:13px;color:#64748b;line-height:1.5">' + A('sent_a') + '<b>' + esc(email) + '</b>' + A('sent_b') + '</div></div>';
+      else { st.style.color = '#dc2626'; st.textContent = '❌ ' + (d.error || A('err')); btn.disabled = false; }
+    } catch (e) { st.style.color = '#dc2626'; st.textContent = '❌ ' + A('err_net'); btn.disabled = false; }
   }
 
   if (loggedIn) {
