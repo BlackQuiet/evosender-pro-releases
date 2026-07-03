@@ -50,6 +50,8 @@
   "home.hero_label":"Professional suite",
   "home.hero_h1":"Email, SMTP & Proxy<br><em>all-in-one</em>",
   "home.hero_sub":"EvoStudio brings together email extraction, verification, bulk sending, a dedicated SMTP server and a residential proxy. A single client area, professional tools.",
+  "home.cms_hero_title":"Extract, verify and send your emails in bulk",
+  "home.cms_hero_sub":"EvoStudio brings together 3 powerful tools: address collection, list cleaning and high-deliverability campaigns. Annual license, 100% local.",
   "home.hero_buy":"Buy now →",
   "home.hero_discover":"Discover the tools",
   "home.pill_smtp":"Dedicated SMTP",
@@ -213,6 +215,8 @@
   "home.hero_label":"Профессиональный набор",
   "home.hero_h1":"Email, SMTP и прокси<br><em>всё в одном</em>",
   "home.hero_sub":"EvoStudio объединяет извлечение email, проверку, массовую рассылку, выделенный SMTP-сервер и резидентный прокси. Единый личный кабинет, профессиональные инструменты.",
+  "home.cms_hero_title":"Извлекайте, проверяйте и отправляйте email массово",
+  "home.cms_hero_sub":"EvoStudio объединяет 3 мощных инструмента: сбор адресов, очистку списков и рассылки с высокой доставляемостью. Годовая лицензия, 100% локально.",
   "home.hero_buy":"Купить сейчас →",
   "home.hero_discover":"Ознакомиться с инструментами",
   "home.pill_smtp":"Выделенный SMTP",
@@ -1134,8 +1138,8 @@ async function loadProducts(){
 
     // Site settings
     const site=data.site||{};
-    if(site.hero_title){const el=document.getElementById('hero-title');if(el){for(const n of el.childNodes){if(n.nodeType===3){n.nodeValue=site.hero_title;break;}}}}
-    if(site.hero_subtitle){const el=document.getElementById('hero-sub');if(el)el.textContent=site.hero_subtitle;}
+    if(site.hero_title){const el=document.getElementById('hero-title');if(el){const ht=(window.t?t('home.cms_hero_title',site.hero_title):site.hero_title);for(const n of el.childNodes){if(n.nodeType===3){n.nodeValue=ht;break;}}}}
+    if(site.hero_subtitle){const el=document.getElementById('hero-sub');if(el)el.textContent=(window.t?t('home.cms_hero_sub',site.hero_subtitle):site.hero_subtitle);}
     if(site.announce){const b=document.getElementById('announce-bar');if(b){b.textContent=site.announce;b.style.display='block';}}
     if(site.support_email){
       const t=document.getElementById('support-email-text');if(t)t.textContent=site.support_email;
