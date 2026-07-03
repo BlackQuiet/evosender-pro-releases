@@ -17,7 +17,12 @@
 */
 (function () {
   var LANGS = ['fr', 'en', 'ru'];
-  var FLAGS = { fr: '🇫🇷', ru: '🇷🇺', en: '🇬🇧' };
+  // Drapeaux en SVG (les emoji drapeaux ne se rendent PAS sur Windows) — s'affichent partout.
+  var FLAGS = {
+    fr: '<svg class="flag" viewBox="0 0 3 2" preserveAspectRatio="none"><rect width="3" height="2" fill="#fff"/><rect width="1" height="2" fill="#0055A4"/><rect x="2" width="1" height="2" fill="#EF4135"/></svg>',
+    en: '<svg class="flag" viewBox="0 0 60 40" preserveAspectRatio="none"><rect width="60" height="40" fill="#012169"/><path d="M0,0 60,40 M60,0 0,40" stroke="#fff" stroke-width="8"/><path d="M0,0 60,40 M60,0 0,40" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v40 M0,20 h60" stroke="#fff" stroke-width="12"/><path d="M30,0 v40 M0,20 h60" stroke="#C8102E" stroke-width="7"/></svg>',
+    ru: '<svg class="flag" viewBox="0 0 3 3" preserveAspectRatio="none"><rect width="3" height="1" y="0" fill="#fff"/><rect width="3" height="1" y="1" fill="#0039A6"/><rect width="3" height="1" y="2" fill="#D52B1E"/></svg>'
+  };
   var NAMES = { fr: 'Français', en: 'English', ru: 'Русский' };
 
   // ── Dico CORE : éléments partagés (nav, footer, commun). FR = source (non stocké). ──
@@ -143,7 +148,8 @@
       '.lang-btn{display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:10px;color:inherit;cursor:pointer;font-size:16px;line-height:1;font-weight:700;transition:.15s}' +
       '.lang-btn:hover{background:rgba(255,255,255,.13)}' +
       '.lang-btn .lang-code{font-size:12px;font-weight:800;letter-spacing:.02em}' +
-      '.lang-btn svg{opacity:.6}' +
+      '.lang-btn svg:last-child{opacity:.5}' +
+      '.lang-switch .flag,.lang-menu .flag{width:22px;height:15px;border-radius:2px;flex-shrink:0;display:inline-block;box-shadow:0 0 0 1px rgba(0,0,0,.18)}' +
       'html[data-theme=light] .lang-btn{background:#fff;border-color:#e2e8f0;color:#0f172a}' +
       '.lang-menu{position:absolute;top:calc(100% + 6px);right:0;min-width:158px;background:#0f172a;border:1px solid rgba(255,255,255,.12);border-radius:12px;box-shadow:0 16px 40px rgba(0,0,0,.45);padding:6px}' +
       'html[data-theme=light] .lang-menu{background:#fff;border-color:#e6eaf1;box-shadow:0 16px 40px rgba(15,23,42,.18)}' +
