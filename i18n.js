@@ -42,7 +42,7 @@
       'foot.account': 'Client area', 'foot.privacy': 'Privacy',
       'foot.h_support': 'Support', 'foot.support_text': 'A question? Our team replies quickly.',
       'foot.resp': '⏱ Reply within 24h (business days)',
-      'foot.copy': '© 2018–2026 EGSCI SARL · Russian Federation',
+      'foot.copy': '© 2018–2026 EGSCI SARL',
       'foot.privacy_policy': 'Privacy policy', 'foot.your_rights': 'Your rights',
       'foot.contact': 'Contact us',
       'common.details': 'Details →', 'common.buy': 'Buy', 'common.learn_more': 'Learn more'
@@ -62,7 +62,7 @@
       'foot.account': 'Личный кабинет', 'foot.privacy': 'Конфиденциальность',
       'foot.h_support': 'Поддержка', 'foot.support_text': 'Есть вопрос? Наша команда быстро ответит.',
       'foot.resp': '⏱ Ответ в течение 24 ч (в рабочие дни)',
-      'foot.copy': '© 2018–2026 EGSCI SARL · Российская Федерация',
+      'foot.copy': '© 2018–2026 EGSCI SARL',
       'foot.privacy_policy': 'Политика конфиденциальности', 'foot.your_rights': 'Ваши права',
       'foot.contact': 'Связаться с нами',
       'common.details': 'Подробнее →', 'common.buy': 'Купить', 'common.learn_more': 'Узнать больше'
