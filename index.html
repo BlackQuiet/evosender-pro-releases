@@ -813,6 +813,31 @@ async function loadProducts(){
     if(site.download_url_win){const w=document.getElementById('dl-win');if(w)w.href=site.download_url_win;}
     if(site.download_url_mac){const m=document.getElementById('dl-mac');if(m)m.href=site.download_url_mac;}
 
+    // Bandeau « écosystème » piloté depuis l'admin (Contenu du site → Bandeau écosystème).
+    // Si le backend ne renvoie rien, le HTML statique par défaut reste affiché.
+    if(site.eco_band){
+      const band=document.querySelector('.press-band');
+      if(band){
+        if(site.eco_band.enabled===false){band.style.display='none';}
+        else{
+          band.style.display='';
+          const h=band.querySelector('.press-h');
+          if(h&&site.eco_band.title)h.textContent=site.eco_band.title;
+          const track=band.querySelector('.marq-track');
+          const items=Array.isArray(site.eco_band.items)?site.eco_band.items:[];
+          if(track&&items.length){
+            const cell=(it,hidden)=>{
+              const col=it.color?(' style="color:'+esc(it.color)+';opacity:.95"'):'';
+              const ah=hidden?' aria-hidden="true"':'';
+              return '<span class="press-logo"'+ah+col+'>'+esc(it.label)+'</span>';
+            };
+            // séquence + copie (aria-hidden) pour un défilement continu et sans à-coup
+            track.innerHTML=items.map(it=>cell(it,false)).join('')+items.map(it=>cell(it,true)).join('');
+          }
+        }
+      }
+    }
+
     // Products grid
     const grid=document.getElementById('products-grid');
     if(grid&&main.length){
