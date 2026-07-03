@@ -315,7 +315,7 @@ html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;backgr
     'dash.sb_brand':'My area','dash.sb_reduce':'Collapse',
     'dash.nav_home':'Home','dash.nav_licenses':'Licenses','dash.nav_orders':'Orders','dash.nav_smtp':'SMTP servers','dash.nav_proxy':'Residential proxy','dash.nav_account':'My account',
     'dash.since':'Since',
-    'dash.hello':'Hello 👋','dash.welcome':'Welcome to your EvoStudio area.',
+    'dash.hello':'Hello 👋','dash.welcome':'Welcome to your EvoStudio area.','dash.hello_name':'Hello {n} 👋',
     'dash.stat_licenses':'Licenses','dash.stat_orders':'Orders','dash.stat_smtp':'SMTP servers','dash.stat_proxy':'Proxy accounts',
     'dash.dl_title':'Download EvoStudio','dash.dl_win_name':'Windows 10 / 11','dash.dl_win_meta':'x64 · .exe · ~95 MB','dash.dl_mac_name':'Mac Silicon M1/M2/M3','dash.dl_mac_meta':'arm64 · .dmg · ~125 MB',
     'dash.mac_notice':'<strong>⚠️ Mac: "file is damaged" message?</strong> This is a normal macOS protection. To open the app:<br><strong>Option 1</strong> — After installing, open <strong>Terminal</strong> and paste:<br><code style="display:block;background:#1e293b;color:#7dd3fc;border-radius:6px;padding:7px 10px;margin:6px 0;font-size:12px;letter-spacing:.01em">sudo xattr -rd com.apple.quarantine /Applications/EvoStudio.app</code><strong>Option 2</strong> — Go to <strong>System Settings → Privacy & Security</strong> → click <strong>"Open Anyway"</strong>.',
@@ -325,13 +325,13 @@ html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;backgr
     'dash.smtp_title':'SMTP servers','dash.smtp_sub':'Your high-deliverability email relays.','dash.smtp_active':'Active servers','dash.smtp_new':'New SMTP',
     'dash.proxy_title':'Residential proxy','dash.proxy_sub':'Your proxy plans — residential IPs from 30+ countries · 180-day validity.',
     'dash.proxy_gb_bought':'GB purchased','dash.proxy_gb_used':'GB used','dash.proxy_gb_left':'GB remaining',
-    'dash.proxy_active':'Active proxy accounts','dash.refresh':'↻ Refresh','dash.refresh_title':'Refresh statistics','dash.proxy_buy':'Buy proxy',
+    'dash.proxy_active':'Active proxy accounts','dash.refresh':'↻ Refresh','dash.refresh_title':'Refresh statistics','dash.proxy_buy':'Buy proxy','dash.stats_refreshed':'✓ Stats refreshed',
     'dash.chart_title':'Usage over time','dash.chart_7d':'7 d','dash.chart_30d':'30 d','dash.chart_90d':'90 d','dash.chart_empty':'No usage data available for this period.',
     'dash.acc_title':'My account','dash.acc_sub':'Account settings and security.','dash.acc_profile':'Profile','dash.acc_email':'Email address','dash.acc_member_since':'Member since','dash.acc_cgu':'Terms','dash.acc_view':'View',
     'dash.acc_security':'Security','dash.acc_2fa':'Two-factor authentication (2FA)','dash.acc_2fa_setup':'Set up',
     'dash.smtp_creds_title':'📧 SMTP credentials','dash.smtp_creds_sub':'Email relay','dash.host':'Host','dash.port':'Port','dash.user':'User','dash.password':'Password','dash.copy':'Copy','dash.copy_all_creds':'📋 Copy all credentials',
     'dash.smtp_test_title':'🧪 Test sending','dash.smtp_test_ph':'Destination email (e.g. you@gmail.com)','dash.smtp_test_send':'Send a test',
-    'dash.proxy_del_title':'🗑 Delete proxy','dash.proxy_del_sub':'This action is irreversible.','dash.proxy_del_warn':'⚠️ The proxy account will be <b>permanently deleted</b>. This action cannot be undone.','dash.cancel':'Cancel','dash.proxy_del_confirm':'🗑 Confirm deletion',
+    'dash.proxy_del_title':'🗑 Delete proxy','dash.proxy_del_sub':'This action is irreversible.','dash.proxy_del_sub_full':'Residential proxy — {label} · This action is irreversible.','dash.proxy_del_warn':'⚠️ The proxy account will be <b>permanently deleted</b>. This action cannot be undone.','dash.cancel':'Cancel','dash.proxy_del_confirm':'🗑 Confirm deletion',
     'dash.proxy_gen_title':'🌐 Proxy credentials & generator','dash.proxy_gen_sub':'Residential proxy','dash.gen_title':'🔧 Connection generator',
     'dash.country':'Country','dash.country_random':'Random (worldwide)',
     'dash.grp_america':'America','dash.grp_europe':'Europe','dash.grp_asia':'Asia / Pacific','dash.grp_mideast':'Middle East','dash.grp_africa':'Africa',
@@ -400,7 +400,7 @@ html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;backgr
     'dash.sb_brand':'Мой кабинет','dash.sb_reduce':'Свернуть',
     'dash.nav_home':'Главная','dash.nav_licenses':'Лицензии','dash.nav_orders':'Заказы','dash.nav_smtp':'SMTP-серверы','dash.nav_proxy':'Резидентный прокси','dash.nav_account':'Мой аккаунт',
     'dash.since':'С',
-    'dash.hello':'Здравствуйте 👋','dash.welcome':'Добро пожаловать в ваш кабинет EvoStudio.',
+    'dash.hello':'Здравствуйте 👋','dash.welcome':'Добро пожаловать в ваш кабинет EvoStudio.','dash.hello_name':'Здравствуйте, {n} 👋',
     'dash.stat_licenses':'Лицензии','dash.stat_orders':'Заказы','dash.stat_smtp':'SMTP-серверы','dash.stat_proxy':'Прокси-аккаунты',
     'dash.dl_title':'Скачать EvoStudio','dash.dl_win_name':'Windows 10 / 11','dash.dl_win_meta':'x64 · .exe · ~95 МБ','dash.dl_mac_name':'Mac Silicon M1/M2/M3','dash.dl_mac_meta':'arm64 · .dmg · ~125 МБ',
     'dash.mac_notice':'<strong>⚠️ Mac: сообщение «файл повреждён»?</strong> Это обычная защита macOS. Чтобы открыть приложение:<br><strong>Вариант 1</strong> — После установки откройте <strong>Терминал</strong> и вставьте:<br><code style="display:block;background:#1e293b;color:#7dd3fc;border-radius:6px;padding:7px 10px;margin:6px 0;font-size:12px;letter-spacing:.01em">sudo xattr -rd com.apple.quarantine /Applications/EvoStudio.app</code><strong>Вариант 2</strong> — Перейдите в <strong>Системные настройки → Конфиденциальность и безопасность</strong> → нажмите <strong>«Открыть всё равно»</strong>.',
@@ -410,13 +410,13 @@ html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;backgr
     'dash.smtp_title':'SMTP-серверы','dash.smtp_sub':'Ваши почтовые релеи с высокой доставляемостью.','dash.smtp_active':'Активные серверы','dash.smtp_new':'Новый SMTP',
     'dash.proxy_title':'Резидентный прокси','dash.proxy_sub':'Ваши прокси-тарифы — резидентные IP из 30+ стран · срок действия 180 дней.',
     'dash.proxy_gb_bought':'ГБ куплено','dash.proxy_gb_used':'ГБ использовано','dash.proxy_gb_left':'ГБ осталось',
-    'dash.proxy_active':'Активные прокси-аккаунты','dash.refresh':'↻ Обновить','dash.refresh_title':'Обновить статистику','dash.proxy_buy':'Купить прокси',
+    'dash.proxy_active':'Активные прокси-аккаунты','dash.refresh':'↻ Обновить','dash.refresh_title':'Обновить статистику','dash.proxy_buy':'Купить прокси','dash.stats_refreshed':'✓ Статистика обновлена',
     'dash.chart_title':'Потребление во времени','dash.chart_7d':'7 дн','dash.chart_30d':'30 дн','dash.chart_90d':'90 дн','dash.chart_empty':'Нет данных об использовании за этот период.',
     'dash.acc_title':'Мой аккаунт','dash.acc_sub':'Настройки и безопасность аккаунта.','dash.acc_profile':'Профиль','dash.acc_email':'Адрес email','dash.acc_member_since':'Участник с','dash.acc_cgu':'Условия','dash.acc_view':'Просмотреть',
     'dash.acc_security':'Безопасность','dash.acc_2fa':'Двухфакторная аутентификация (2FA)','dash.acc_2fa_setup':'Настроить',
     'dash.smtp_creds_title':'📧 Учётные данные SMTP','dash.smtp_creds_sub':'Почтовый релей','dash.host':'Хост','dash.port':'Порт','dash.user':'Пользователь','dash.password':'Пароль','dash.copy':'Копировать','dash.copy_all_creds':'📋 Копировать все данные',
     'dash.smtp_test_title':'🧪 Тест отправки','dash.smtp_test_ph':'Email получателя (напр. you@gmail.com)','dash.smtp_test_send':'Отправить тест',
-    'dash.proxy_del_title':'🗑 Удалить прокси','dash.proxy_del_sub':'Это действие необратимо.','dash.proxy_del_warn':'⚠️ Прокси-аккаунт будет <b>удалён навсегда</b>. Это действие нельзя отменить.','dash.cancel':'Отмена','dash.proxy_del_confirm':'🗑 Подтвердить удаление',
+    'dash.proxy_del_title':'🗑 Удалить прокси','dash.proxy_del_sub':'Это действие необратимо.','dash.proxy_del_sub_full':'Резидентный прокси — {label} · Это действие необратимо.','dash.proxy_del_warn':'⚠️ Прокси-аккаунт будет <b>удалён навсегда</b>. Это действие нельзя отменить.','dash.cancel':'Отмена','dash.proxy_del_confirm':'🗑 Подтвердить удаление',
     'dash.proxy_gen_title':'🌐 Данные и генератор прокси','dash.proxy_gen_sub':'Резидентный прокси','dash.gen_title':'🔧 Генератор подключения',
     'dash.country':'Страна','dash.country_random':'Случайно (по всему миру)',
     'dash.grp_america':'Америка','dash.grp_europe':'Европа','dash.grp_asia':'Азия / Тихий океан','dash.grp_mideast':'Ближний Восток','dash.grp_africa':'Африка',
@@ -996,7 +996,7 @@ var _viewOnlyCgu=false;
 
 function esc(t){return String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',2200)}
-function copyText(t){navigator.clipboard.writeText(t).then(()=>showToast('✓ Copié !'))}
+function copyText(t){navigator.clipboard.writeText(t).then(()=>showToast(_t('dash.copied','✓ Copié !')))}
 function authHeaders(){const t=localStorage.getItem('evo_token');return t?{'Authorization':'Bearer '+t}:{}}
 function logout(){localStorage.removeItem('evo_token');localStorage.removeItem('evo_logged_in');fetch(API+'/api/auth/logout',{method:'POST',credentials:'include'}).catch(()=>{});location.href='/login.html'}
 // Auto-inject credentials for all API calls so httpOnly cookie is sent
@@ -1032,7 +1032,7 @@ function toggleModalPass(dispId,realId){
   const shown=disp.dataset.shown==='1';
   disp.textContent=shown?'••••••••':real.value;
   disp.dataset.shown=shown?'0':'1';
-  disp.nextElementSibling.textContent=shown?'Voir':'Masquer';
+  disp.nextElementSibling.textContent=shown?_t('dash.see','Voir'):_t('dash.hide','Masquer');
 }
 
 // CGU
@@ -1046,11 +1046,11 @@ function openCgu(viewOnly){
 function closeCgu(){document.getElementById('cgu-overlay').classList.remove('show')}
 document.getElementById('cgu-check').addEventListener('change',e=>{document.getElementById('cgu-accept').disabled=!e.target.checked});
 async function acceptCgu(){
-  const btn=document.getElementById('cgu-accept');btn.disabled=true;btn.textContent='Validation…';
+  const btn=document.getElementById('cgu-accept');btn.disabled=true;btn.textContent=_t('dash.cgu_validating','Validation…');
   try{await fetch(API+'/api/auth/accept-cgu',{method:'POST',headers:{...authHeaders(),'Content-Type':'application/json'}})}catch{}
   document.getElementById('cgu-overlay').classList.remove('show');
-  document.getElementById('acc-cgu').textContent='✓ Acceptées';
-  showToast('✓ Conditions acceptées');
+  document.getElementById('acc-cgu').textContent=_t('dash.cgu_accepted','✓ Acceptées');
+  showToast(_t('dash.cgu_accepted_toast','✓ Conditions acceptées'));
 }
 
 // SMTP modal
@@ -1058,14 +1058,14 @@ let _smtpModalId=null;
 function openSmtpModal(s,senderNotice){
   _smtpModalId=s.id;
   document.getElementById('smtp-modal-sub').textContent='SMTP Relay — '+s.plan+(s.relay_host?(' · '+s.relay_host):'');
-  document.getElementById('smtp-m-host').textContent=s.relay_host||'En préparation…';
+  document.getElementById('smtp-m-host').textContent=s.relay_host||_t('dash.in_preparation','En préparation…');
   document.getElementById('smtp-m-port').textContent=(s.relay_port||587)+' (TLS)';
   document.getElementById('smtp-m-user').textContent=s.username||'—';
   var passEl=document.getElementById('smtp-m-pass-disp');
-  passEl.textContent='••••••••';passEl.dataset.shown='0';passEl.nextElementSibling.textContent='Voir';
+  passEl.textContent='••••••••';passEl.dataset.shown='0';passEl.nextElementSibling.textContent=_t('dash.see','Voir');
   document.getElementById('smtp-m-pass-real').value=s.password||'';
   var sEl=document.getElementById('smtp-m-sender');
-  if(s.sender_from){sEl.style.display='';sEl.innerHTML='✉️ Adresse « De / From » : <b style="font-family:monospace">'+esc(s.sender_from)+'</b>'}else{sEl.style.display='none'}
+  if(s.sender_from){sEl.style.display='';sEl.innerHTML=_t('dash.smtp_from_label','✉️ Adresse « De / From » : ')+'<b style="font-family:monospace">'+esc(s.sender_from)+'</b>'}else{sEl.style.display='none'}
   var nEl=document.getElementById('smtp-m-notice');
   var n=s.sender_notice||senderNotice||'';
   if(n){nEl.style.display='';nEl.textContent='⚠️ '+n}else{nEl.style.display='none'}
@@ -1079,7 +1079,7 @@ function copySmtpModal(){
   var port=document.getElementById('smtp-m-port').textContent.replace(' (TLS)','');
   var user=document.getElementById('smtp-m-user').textContent;
   var pass=document.getElementById('smtp-m-pass-real').value;
-  copyText('Hôte SMTP : '+host+'\nPort : '+port+'\nUtilisateur : '+user+'\nMot de passe : '+pass+'\nChiffrement : TLS/STARTTLS');
+  copyText(_t('dash.smtp_copy_host','Hôte SMTP')+' : '+host+'\n'+_t('dash.smtp_copy_port','Port')+' : '+port+'\n'+_t('dash.smtp_copy_user','Utilisateur')+' : '+user+'\n'+_t('dash.smtp_copy_pass','Mot de passe')+' : '+pass+'\n'+_t('dash.smtp_copy_enc','Chiffrement : TLS/STARTTLS'));
 }
 async function sendSmtpTest(){
   var to=document.getElementById('smtp-test-email').value.trim();
@@ -1088,10 +1088,10 @@ async function sendSmtpTest(){
   if(!to||!to.includes('@')){
     res.style.display='';
     res.style.background='#fef2f2';res.style.border='1px solid #fecaca';res.style.color='var(--red)';
-    res.textContent='⚠️ Veuillez saisir une adresse email valide.';
+    res.textContent=_t('dash.smtp_test_invalid','⚠️ Veuillez saisir une adresse email valide.');
     return;
   }
-  btn.disabled=true;btn.textContent='⏳ Envoi…';
+  btn.disabled=true;btn.textContent=_t('dash.smtp_test_sending','⏳ Envoi…');
   res.style.display='none';
   try{
     var r=await fetch(API+'/api/auth/smtp-test',{
@@ -1103,20 +1103,20 @@ async function sendSmtpTest(){
     if(r.ok&&d.ok){
       res.style.display='';
       res.style.background='#f0fdf4';res.style.border='1px solid #bbf7d0';res.style.color='var(--green)';
-      res.innerHTML='✅ Email de test envoyé à <b>'+esc(to)+'</b> ! Vérifiez votre boîte de réception (et les spams).';
+      res.innerHTML=_t('dash.smtp_test_ok','✅ Email de test envoyé à <b>{to}</b> ! Vérifiez votre boîte de réception (et les spams).').replace('{to}',esc(to));
     }else{
-      throw new Error(d.error||d.message||'Erreur inconnue');
+      throw new Error(d.error||d.message||_t('dash.err_unknown','Erreur inconnue'));
     }
   }catch(e){
     res.style.display='';
     res.style.background='#fef2f2';res.style.border='1px solid #fecaca';res.style.color='var(--red)';
     var msg=e.message||'';
     if(msg==='Failed to fetch'||msg.includes('NetworkError')||msg.includes('network'))
-      msg='Serveur injoignable. Vérifiez votre connexion ou réessayez dans 1 minute (le serveur redémarre parfois).';
-    res.innerHTML='❌ Échec : <span style="font-family:monospace;font-size:11.5px">'+esc(msg)+'</span>';
+      msg=_t('dash.err_unreachable','Serveur injoignable. Vérifiez votre connexion ou réessayez dans 1 minute (le serveur redémarre parfois).');
+    res.innerHTML=_t('dash.smtp_test_fail','❌ Échec : ')+'<span style="font-family:monospace;font-size:11.5px">'+esc(msg)+'</span>';
   }finally{
     btn.disabled=false;
-    btn.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Envoyer un test';
+    btn.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> '+_t('dash.smtp_test_send','Envoyer un test');
   }
 }
 
@@ -1124,12 +1124,12 @@ async function sendSmtpTest(){
 var _prxData={host:'',port:'',user:'',pass:''};
 function openProxyModal(p){
   _prxData={host:p.host,port:p.port,user:p.username,pass:p.password};
-  document.getElementById('proxy-modal-sub').textContent='Proxy résidentiel — '+p.gb+' Go · '+p.plan;
+  document.getElementById('proxy-modal-sub').textContent=_t('dash.proxy_modal_sub','Proxy résidentiel — {gb} Go · {plan}').replace('{gb}',p.gb).replace('{plan}',p.plan);
   document.getElementById('prx-m-host').textContent=p.host||'—';
   document.getElementById('prx-m-port').textContent=p.port||'—';
   document.getElementById('prx-m-user').textContent=p.username||'—';
   var pd=document.getElementById('prx-m-pass-disp');
-  pd.textContent='••••••••';pd.dataset.shown='0';pd.nextElementSibling.textContent='Voir';
+  pd.textContent='••••••••';pd.dataset.shown='0';pd.nextElementSibling.textContent=_t('dash.see','Voir');
   document.getElementById('prx-m-pass-real').value=p.password||'';
   // Reset generator
   document.getElementById('prx-m-country').value='';
@@ -1144,9 +1144,9 @@ function proxyModalIspChange(){
   var c=document.getElementById('prx-m-country').value;
   var sel=document.getElementById('prx-m-isp');
   var isps=PROXY_ISPS[c]||[];
-  var opts='<option value="">🌐 Aléatoire (tous ISP)</option>';
+  var opts='<option value="">'+_t('dash.gen_isp_random_all','🌐 Aléatoire (tous ISP)')+'</option>';
   isps.forEach(i=>{opts+='<option value="'+i[0]+'">'+i[1]+'</option>'});
-  opts+='<option value="__manual__">✏️ Saisir manuellement…</option>';
+  opts+='<option value="__manual__">'+_t('dash.gen_isp_manual','✏️ Saisir manuellement…')+'</option>';
   sel.innerHTML=opts;sel.value='';
   document.getElementById('prx-m-isp-manual').style.display='none';
   proxyModalGen();
@@ -1198,7 +1198,7 @@ function genSsidModal(){
 function copyProxyModal(){
   var txt=document.getElementById('prx-m-result').value;
   var qty=(txt.match(/\n/g)||[]).length+1;
-  navigator.clipboard.writeText(txt).then(()=>showToast('✅ '+qty+' chaîne'+(qty>1?'s':'')+' copiée'+(qty>1?'s':'')+'!'));
+  navigator.clipboard.writeText(txt).then(()=>showToast(_t('dash.proxy_copied','✅ {n} chaîne(s) copiée(s) !').replace('{n}',qty)));
 }
 function resetProxyModal(){
   document.getElementById('prx-m-country').value='';
@@ -1209,7 +1209,7 @@ function resetProxyModal(){
 async function testProxyModal(){
   var box=document.getElementById('prx-m-test-result');
   box.style.display='';
-  box.innerHTML='<div style="background:#f8fafc;border:1px solid var(--line);border-radius:8px;padding:11px;font-size:12.5px;color:var(--slate)">⏳ Test en cours…</div>';
+  box.innerHTML='<div style="background:#f8fafc;border:1px solid var(--line);border-radius:8px;padding:11px;font-size:12.5px;color:var(--slate)">'+_t('dash.proxy_testing','⏳ Test en cours…')+'</div>';
   // Applique le ciblage (pays / ASN / session) dans le MOT DE PASSE, comme le générateur —
   // format IPRoyal correct (l'username reste la base), sinon le test porte sur un IP au hasard.
   var country=document.getElementById('prx-m-country').value;
@@ -1225,11 +1225,11 @@ async function testProxyModal(){
     var r=await fetch(API+'/api/auth/proxy-test',{method:'POST',headers:{...authHeaders(),'Content-Type':'application/json'},body:JSON.stringify({host:_prxData.host,port:_prxData.port,username:_prxData.user,password:upass}),signal:_ac.signal});
     clearTimeout(_to);
     var d=await r.json();
-    if(d.ok){box.innerHTML='<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:13px"><div style="font-weight:700;color:#15803d;margin-bottom:8px">✅ Proxy fonctionnel !</div><div style="display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:12px"><span style="color:var(--slate-2);font-weight:600">IP publique</span><span style="font-family:monospace;font-weight:700">'+esc(d.ip||'—')+'</span><span style="color:var(--slate-2);font-weight:600">Pays</span><span style="font-weight:600">'+esc(d.country||'—')+'</span><span style="color:var(--slate-2);font-weight:600">Ville</span><span>'+esc([d.city,d.region].filter(Boolean).join(', ')||'—')+'</span><span style="color:var(--slate-2);font-weight:600">Opérateur</span><span style="font-size:11.5px">'+esc(d.org||'—')+'</span></div></div>';}
-    else{box.innerHTML='<div style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:11px;font-size:12.5px;color:var(--red)">❌ '+esc(d.error||'Erreur inconnue')+'</div>';}
+    if(d.ok){box.innerHTML='<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:13px"><div style="font-weight:700;color:#15803d;margin-bottom:8px">'+_t('dash.proxy_ok','✅ Proxy fonctionnel !')+'</div><div style="display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:12px"><span style="color:var(--slate-2);font-weight:600">'+_t('dash.proxy_public_ip','IP publique')+'</span><span style="font-family:monospace;font-weight:700">'+esc(d.ip||'—')+'</span><span style="color:var(--slate-2);font-weight:600">'+_t('dash.proxy_country','Pays')+'</span><span style="font-weight:600">'+esc(d.country||'—')+'</span><span style="color:var(--slate-2);font-weight:600">'+_t('dash.proxy_city','Ville')+'</span><span>'+esc([d.city,d.region].filter(Boolean).join(', ')||'—')+'</span><span style="color:var(--slate-2);font-weight:600">'+_t('dash.proxy_operator','Opérateur')+'</span><span style="font-size:11.5px">'+esc(d.org||'—')+'</span></div></div>';}
+    else{box.innerHTML='<div style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:11px;font-size:12.5px;color:var(--red)">❌ '+esc(d.error||_t('dash.err_unknown','Erreur inconnue'))+'</div>';}
   }catch(e){
     clearTimeout(_to);
-    var m=(e&&e.name==='AbortError')?'Test trop long (>30 s) — le pays/ISP choisi n\'a peut-être pas d\'IP disponible. Réessaie ou change d\'ISP.':('Erreur réseau : '+(e.message||'')+'. Réessaie (le serveur peut se réveiller après une inactivité).');
+    var m=(e&&e.name==='AbortError')?_t('dash.proxy_test_timeout',"Test trop long (>30 s) — le pays/ISP choisi n'a peut-être pas d'IP disponible. Réessaie ou change d'ISP."):_t('dash.proxy_net_err','Erreur réseau : {msg}. Réessaie (le serveur peut se réveiller après une inactivité).').replace('{msg}',e.message||'');
     box.innerHTML='<div style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:11px;font-size:12.5px;color:var(--red)">❌ '+esc(m)+'</div>';
   }
 }
@@ -1252,14 +1252,14 @@ async function load(){
   document.getElementById('nav-email').textContent=user.email;
   document.getElementById('sb-av').textContent=ini;
   document.getElementById('sb-email').textContent=user.email;
-  if(user.created_at)document.getElementById('sb-since').textContent='Depuis '+new Date(user.created_at).toLocaleDateString('fr-FR');
+  if(user.created_at)document.getElementById('sb-since').textContent=_t('dash.since','Depuis')+' '+new Date(user.created_at).toLocaleDateString('fr-FR');
   document.getElementById('acc-email').textContent=user.email;
   if(user.created_at)document.getElementById('acc-since').textContent=new Date(user.created_at).toLocaleDateString('fr-FR');
-  if(user.cgu_accepted_at){document.getElementById('acc-cgu').textContent='✓ Acceptées le '+new Date(user.cgu_accepted_at).toLocaleDateString('fr-FR');document.getElementById('acc-cgu').style.color='var(--green)';}
-  else{document.getElementById('acc-cgu').textContent='Non acceptées';document.getElementById('acc-cgu').style.color='var(--red)';openCgu(false);}
+  if(user.cgu_accepted_at){var _cguD=new Date(user.cgu_accepted_at).toLocaleDateString('fr-FR');document.getElementById('acc-cgu').textContent=_t('dash.cgu_accepted_on','✓ Acceptées {date}').replace('{date}',_cguD);document.getElementById('acc-cgu').style.color='var(--green)';}
+  else{document.getElementById('acc-cgu').textContent=_t('dash.cgu_not_accepted','Non acceptées');document.getElementById('acc-cgu').style.color='var(--red)';openCgu(false);}
   const btn2fa=document.getElementById('acc-2fa-btn');
-  btn2fa.textContent=user.totp_enabled?'🔐 2FA activé ✓':'🔓 Activer le 2FA';
-  document.getElementById('panel-home').querySelector('.panel-title').textContent='Bonjour '+ini+' 👋';
+  btn2fa.textContent=user.totp_enabled?_t('dash.2fa_on','🔐 2FA activé ✓'):_t('dash.2fa_off','🔓 Activer le 2FA');
+  document.getElementById('panel-home').querySelector('.panel-title').textContent=_t('dash.hello_name','Bonjour {n} 👋').replace('{n}',ini);
 
   // Products config
   try{
@@ -1390,7 +1390,7 @@ async function load(){
 var _deleteProxyId = null;
 function confirmDeleteProxy(id, label){
   _deleteProxyId = id;
-  document.getElementById('proxy-delete-sub').textContent = 'Proxy résidentiel — ' + label + ' · Cette action est irréversible.';
+  document.getElementById('proxy-delete-sub').textContent = _t('dash.proxy_del_sub_full','Proxy résidentiel — {label} · Cette action est irréversible.').replace('{label}',label);
   document.getElementById('proxy-delete-err').style.display = 'none';
   document.getElementById('proxy-delete-btn').disabled = false;
   openModal('proxy-delete-modal');
@@ -1399,7 +1399,7 @@ async function execDeleteProxy(){
   var errEl = document.getElementById('proxy-delete-err');
   var btn = document.getElementById('proxy-delete-btn');
   errEl.style.display = 'none';
-  btn.disabled = true; btn.textContent = '⏳ Suppression…';
+  btn.disabled = true; btn.textContent = _t('dash.proxy_deleting','⏳ Suppression…');
   try{
     var r = await fetch(API+'/api/auth/proxy-accounts/'+_deleteProxyId, {
       method: 'DELETE',
@@ -1408,30 +1408,30 @@ async function execDeleteProxy(){
     var d = await r.json();
     if(r.ok && d.ok){
       closeModal('proxy-delete-modal');
-      showToast('🗑 Compte proxy supprimé.');
+      showToast(_t('dash.proxy_deleted','🗑 Compte proxy supprimé.'));
       setTimeout(()=>location.reload(), 800);
     } else {
       errEl.style.display = '';
-      errEl.textContent = '❌ ' + (d.error || 'Erreur inconnue');
-      btn.disabled = false; btn.textContent = '🗑 Confirmer la suppression';
+      errEl.textContent = '❌ ' + (d.error || _t('dash.err_unknown','Erreur inconnue'));
+      btn.disabled = false; btn.textContent = _t('dash.proxy_del_confirm','🗑 Confirmer la suppression');
     }
   }catch(e){
-    var msg = e.message || 'Erreur inconnue';
+    var msg = e.message || _t('dash.err_unknown','Erreur inconnue');
     if(msg === 'Failed to fetch' || msg.includes('NetworkError'))
-      msg = 'Serveur injoignable — attendez 1 minute et réessayez.';
+      msg = _t('dash.proxy_unreachable','Serveur injoignable — attendez 1 minute et réessayez.');
     errEl.style.display = ''; errEl.textContent = '❌ ' + msg;
-    btn.disabled = false; btn.textContent = '🗑 Confirmer la suppression';
+    btn.disabled = false; btn.textContent = _t('dash.proxy_del_confirm','🗑 Confirmer la suppression');
   }
 }
 
 async function deleteSmtp(id){
-  if(!confirm('Supprimer définitivement ce serveur SMTP ? La clé SMTP sera révoquée.'))return;
+  if(!confirm(_t('dash.smtp_confirm_delete','Supprimer définitivement ce serveur SMTP ? La clé SMTP sera révoquée.')))return;
   try{
     var r=await fetch(API+'/api/auth/smtp-servers/'+id,{method:'DELETE',headers:authHeaders()});
     var d=await r.json();
-    if(r.ok&&d.ok){showToast('🗑 Serveur SMTP supprimé.');setTimeout(()=>location.reload(),800);}
-    else showToast('❌ '+(d.error||'Erreur'));
-  }catch{showToast('❌ Erreur réseau')}
+    if(r.ok&&d.ok){showToast(_t('dash.smtp_deleted','🗑 Serveur SMTP supprimé.'));setTimeout(()=>location.reload(),800);}
+    else showToast('❌ '+(d.error||_t('dash.error','Erreur')));
+  }catch{showToast(_t('dash.net_error','❌ Erreur réseau'))}
 }
 
 // ── Support chat ──
@@ -1444,14 +1444,14 @@ async function loadSupport(){
     var data=await r.json();var msgs=data.messages||[];
     var ac=msgs.filter(m=>m.sender==='admin').length;
     var html='';
-    if(!msgs.length){html='<div style="text-align:center;color:var(--slate-2);font-size:13px;padding:20px">Posez votre question à notre équipe.</div>';}
+    if(!msgs.length){html='<div style="text-align:center;color:var(--slate-2);font-size:13px;padding:20px">'+_t('dash.sup_ask','Posez votre question à notre équipe.')+'</div>';}
     else{html=msgs.map(m=>{
       var when=new Date(m.created_at).toLocaleString('fr-FR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
       if(m.sender==='system')return '<div style="text-align:center;margin:4px 0"><span style="display:inline-block;background:#eef2f7;color:var(--slate);font-size:11px;padding:4px 12px;border-radius:999px">'+esc(m.body)+'</span></div>';
       var mine=m.sender==='user';
       return '<div style="display:flex;justify-content:'+(mine?'flex-end':'flex-start')+'"><div style="max-width:78%;background:'+(mine?'var(--blue)':'#f1f5f9')+';color:'+(mine?'#fff':'var(--ink)')+';padding:9px 13px;font-size:13.5px;line-height:1.5;word-break:break-word;border-radius:10px;'+(mine?'border-bottom-right-radius:2px':'border-bottom-left-radius:2px')+'">'+(mine?'':'<div style="font-size:10px;font-weight:700;color:var(--blue);margin-bottom:3px">'+esc(_supportName)+'</div>')+esc(m.body).replace(/\n/g,'<br>')+'<div style="font-size:10px;opacity:.6;margin-top:4px;text-align:right">'+when+'</div></div></div>';
     }).join('');}
-    if(data.closed)html+='<div style="text-align:center;margin-top:10px;padding:10px;background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;font-size:12px;border-radius:8px">✓ Conversation résolue. Écrivez pour la rouvrir.</div>';
+    if(data.closed)html+='<div style="text-align:center;margin-top:10px;padding:10px;background:#f0fdf4;border:1px solid #bbf7d0;color:#166534;font-size:12px;border-radius:8px">'+_t('dash.sup_resolved','✓ Conversation résolue. Écrivez pour la rouvrir.')+'</div>';
     thread.innerHTML=html;thread.scrollTop=thread.scrollHeight;
     if(_supLastAdmin>=0&&ac>_supLastAdmin)supBeep();
     _supLastAdmin=ac;
@@ -1485,25 +1485,25 @@ async function sendSupport(){
     var r=await fetch(API+'/api/auth/support',{method:'POST',headers:Object.assign({'Content-Type':'application/json'},authHeaders()),body:JSON.stringify({body})});
     var d=await r.json();
     if(r.ok&&d.ok){inp.value='';await loadSupport();}
-    else showToast('❌ '+(d.error||'Erreur'));
-  }catch(e){showToast('❌ Erreur réseau')}
+    else showToast('❌ '+(d.error||_t('dash.error','Erreur')));
+  }catch(e){showToast(_t('dash.net_error','❌ Erreur réseau'))}
   btn.disabled=false;
 }
 
 // ── 2FA ──
 let _tfa2faSecret=null,_tfa2faEnabled=false;
 function open2faModal(){
-  _tfa2faEnabled=document.getElementById('acc-2fa-btn').textContent.includes('activé');
+  _tfa2faEnabled=document.getElementById('acc-2fa-btn').textContent.includes('activé')||document.getElementById('acc-2fa-btn').textContent.includes('enabled')||document.getElementById('acc-2fa-btn').textContent.includes('включена');
   document.getElementById('tfa-overlay').classList.add('show');
   if(_tfa2faEnabled){
-    document.getElementById('tfa-title').textContent='🔓 Désactiver le 2FA';
-    document.getElementById('tfa-sub').textContent='Confirmez avec votre code TOTP actuel.';
+    document.getElementById('tfa-title').textContent=_t('dash.tfa_title_disable','🔓 Désactiver le 2FA');
+    document.getElementById('tfa-sub').textContent=_t('dash.tfa_sub_disable','Confirmez avec votre code TOTP actuel.');
     document.getElementById('tfa-step-setup').style.display='none';
     document.getElementById('tfa-step-disable').style.display='';
     setTimeout(()=>document.getElementById('tfa-disable-code').focus(),100);
   }else{
-    document.getElementById('tfa-title').textContent='🔐 Activer le 2FA';
-    document.getElementById('tfa-sub').textContent='Scannez le QR code avec Google Authenticator ou Authy.';
+    document.getElementById('tfa-title').textContent=_t('dash.tfa_title_enable','🔐 Activer le 2FA');
+    document.getElementById('tfa-sub').textContent=_t('dash.tfa_sub_enable','Scannez le QR code avec Google Authenticator ou Authy.');
     document.getElementById('tfa-step-setup').style.display='';
     document.getElementById('tfa-step-disable').style.display='none';
     init2fa();
@@ -1518,54 +1518,54 @@ function close2faModal(){
   _tfa2faSecret=null;
 }
 async function init2fa(){
-  document.getElementById('tfa-qr').innerHTML='<div style="width:180px;height:180px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;color:var(--slate-2);font-size:12px;margin:0 auto">Chargement…</div>';
+  document.getElementById('tfa-qr').innerHTML='<div style="width:180px;height:180px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;color:var(--slate-2);font-size:12px;margin:0 auto">'+_t('dash.loading','Chargement…')+'</div>';
   document.getElementById('tfa-secret').textContent='—';
   try{
     const r=await fetch(API+'/api/auth/2fa/setup/init',{method:'POST',headers:authHeaders()});
     const d=await r.json();
-    if(!d.ok){document.getElementById('tfa-msg-setup').textContent=d.error||'Erreur';return;}
+    if(!d.ok){document.getElementById('tfa-msg-setup').textContent=d.error||_t('dash.tfa_setup_err','Erreur');return;}
     _tfa2faSecret=d.secret;
     document.getElementById('tfa-secret').textContent=d.secret;
     const _qrImg=document.createElement('img');_qrImg.src=d.qr;_qrImg.width=180;_qrImg.height=180;_qrImg.style.cssText='display:block;border-radius:8px;margin:0 auto';const _qrEl=document.getElementById('tfa-qr');_qrEl.innerHTML='';_qrEl.appendChild(_qrImg);
     setTimeout(()=>document.getElementById('tfa-code').focus(),100);
-  }catch{document.getElementById('tfa-msg-setup').textContent='Erreur réseau.';}
+  }catch{document.getElementById('tfa-msg-setup').textContent=_t('dash.tfa_net_err','Erreur réseau.');}
 }
 async function confirm2fa(){
   const code=document.getElementById('tfa-code').value.trim();
   const msg=document.getElementById('tfa-msg-setup');
   const btn=document.getElementById('tfa-confirm-btn');
-  if(!code||code.length!==6){msg.textContent='Entrez le code à 6 chiffres.';return;}
-  btn.disabled=true;btn.textContent='Vérification…';
+  if(!code||code.length!==6){msg.textContent=_t('dash.tfa_enter_code','Entrez le code à 6 chiffres.');return;}
+  btn.disabled=true;btn.textContent=_t('dash.tfa_verifying','Vérification…');
   try{
     const r=await fetch(API+'/api/auth/2fa/setup/confirm',{method:'POST',headers:{...authHeaders(),'Content-Type':'application/json'},body:JSON.stringify({secret:_tfa2faSecret,totp:code})});
     const d=await r.json();
-    if(d.ok){showToast('✅ 2FA activé !');close2faModal();document.getElementById('acc-2fa-btn').textContent='🔐 2FA activé ✓';}
-    else{msg.textContent=d.error||'Code incorrect.';document.getElementById('tfa-code').value='';document.getElementById('tfa-code').focus();}
-  }catch{msg.textContent='Erreur réseau.';}
-  btn.disabled=false;btn.textContent='Activer le 2FA';
+    if(d.ok){showToast(_t('dash.tfa_enabled_toast','✅ 2FA activé !'));close2faModal();document.getElementById('acc-2fa-btn').textContent=_t('dash.2fa_on','🔐 2FA activé ✓');}
+    else{msg.textContent=d.error||_t('dash.tfa_bad_code','Code incorrect.');document.getElementById('tfa-code').value='';document.getElementById('tfa-code').focus();}
+  }catch{msg.textContent=_t('dash.tfa_net_err','Erreur réseau.');}
+  btn.disabled=false;btn.textContent=_t('dash.tfa_enable_btn','Activer le 2FA');
 }
 async function disable2fa(){
   const code=document.getElementById('tfa-disable-code').value.trim();
   const msg=document.getElementById('tfa-msg-disable');
-  if(!code||code.length!==6){msg.textContent='Entrez le code à 6 chiffres.';return;}
+  if(!code||code.length!==6){msg.textContent=_t('dash.tfa_enter_code','Entrez le code à 6 chiffres.');return;}
   try{
     const r=await fetch(API+'/api/auth/2fa/disable',{method:'POST',headers:{...authHeaders(),'Content-Type':'application/json'},body:JSON.stringify({totp:code})});
     const d=await r.json();
-    if(d.ok){showToast('🔓 2FA désactivé.');close2faModal();document.getElementById('acc-2fa-btn').textContent='🔓 Activer le 2FA';}
-    else{msg.textContent=d.error||'Code incorrect.';document.getElementById('tfa-disable-code').value='';document.getElementById('tfa-disable-code').focus();}
-  }catch{msg.textContent='Erreur réseau.';}
+    if(d.ok){showToast(_t('dash.tfa_disabled_toast','🔓 2FA désactivé.'));close2faModal();document.getElementById('acc-2fa-btn').textContent=_t('dash.2fa_off','🔓 Activer le 2FA');}
+    else{msg.textContent=d.error||_t('dash.tfa_bad_code','Code incorrect.');document.getElementById('tfa-disable-code').value='';document.getElementById('tfa-disable-code').focus();}
+  }catch{msg.textContent=_t('dash.tfa_net_err','Erreur réseau.');}
 }
 
 // ── Proxy : rendu des cartes ──────────────────────────────────────────────────
 var _pxListCache=[];
 var PSB={active:'#dcfce7',suspended:'#fee2e2',pending:'#fef9c3'};
 var PSF={active:'#166534',suspended:'#991b1b',pending:'#854d0e'};
-var PSL={active:'Actif',suspended:'Suspendu',pending:'En attente'};
+var PSL={active:_t('dash.st_active','Actif'),suspended:_t('dash.st_suspended','Suspendu'),pending:_t('dash.st_pending','En attente')};
 
 function fmtBw(mb){
   if(mb==null||isNaN(mb))return '—';
-  if(mb>=1024)return (mb/1024).toFixed(2)+' Go';
-  return mb.toFixed(0)+' Mo';
+  if(mb>=1024)return (mb/1024).toFixed(2)+' '+_t('dash.gb','Go');
+  return mb.toFixed(0)+' '+_t('dash.mb','Mo');
 }
 
 function bwBarHtml(usedMb, totalGb){
@@ -1579,27 +1579,27 @@ function bwBarHtml(usedMb, totalGb){
   if(exhausted){
     alertHtml='<div style="margin-top:10px;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">'+
       '<div>'+
-        '<div style="font-size:12.5px;font-weight:700;color:#991b1b">🚫 Quota épuisé — Proxy suspendu</div>'+
-        '<div style="font-size:11.5px;color:#b91c1c;margin-top:2px">Votre forfait de '+totalGb+' Go est entièrement consommé.</div>'+
+        '<div style="font-size:12.5px;font-weight:700;color:#991b1b">'+_t('dash.quota_exhausted','🚫 Quota épuisé — Proxy suspendu')+'</div>'+
+        '<div style="font-size:11.5px;color:#b91c1c;margin-top:2px">'+_t('dash.quota_exhausted_sub','Votre forfait de {gb} Go est entièrement consommé.').replace('{gb}',totalGb)+'</div>'+
       '</div>'+
-      '<a href="/pay.html?product=proxy_55gb" class="btn-sm" style="background:#dc2626;color:#fff;border-color:#dc2626;white-space:nowrap;flex-shrink:0">🛒 Acheter du volume</a>'+
+      '<a href="/pay.html?product=proxy_55gb" class="btn-sm" style="background:#dc2626;color:#fff;border-color:#dc2626;white-space:nowrap;flex-shrink:0">'+_t('dash.buy_volume','🛒 Acheter du volume')+'</a>'+
     '</div>';
   } else if(warn){
     alertHtml='<div style="margin-top:10px;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">'+
       '<div>'+
-        '<div style="font-size:12.5px;font-weight:700;color:#92400e">⚠️ Volume bientôt épuisé ('+pct+'%)</div>'+
-        '<div style="font-size:11.5px;color:#b45309;margin-top:2px">Il vous reste '+fmtBw(remainMb)+' sur '+totalGb+' Go.</div>'+
+        '<div style="font-size:12.5px;font-weight:700;color:#92400e">'+_t('dash.vol_low','⚠️ Volume bientôt épuisé ({pct}%)').replace('{pct}',pct)+'</div>'+
+        '<div style="font-size:11.5px;color:#b45309;margin-top:2px">'+_t('dash.vol_low_sub','Il vous reste {v} sur {gb} Go.').replace('{v}',fmtBw(remainMb)).replace('{gb}',totalGb)+'</div>'+
       '</div>'+
-      '<a href="/pay.html?product=proxy_55gb" class="btn-sm" style="background:#f59e0b;color:#fff;border-color:#f59e0b;white-space:nowrap;flex-shrink:0">🛒 Acheter du volume</a>'+
+      '<a href="/pay.html?product=proxy_55gb" class="btn-sm" style="background:#f59e0b;color:#fff;border-color:#f59e0b;white-space:nowrap;flex-shrink:0">'+_t('dash.buy_volume','🛒 Acheter du volume')+'</a>'+
     '</div>';
   }
   return '<div class="bw-wrap">'+
     '<div class="bw-header">'+
-      '<span class="bw-label">📶 Bande passante</span>'+
-      '<span class="bw-nums" style="color:'+(exhausted?'var(--red)':warn?'var(--orange)':'var(--ink)')+'">'+fmtBw(usedMb)+' / '+totalGb+' Go</span>'+
+      '<span class="bw-label">'+_t('dash.bw_label','📶 Bande passante')+'</span>'+
+      '<span class="bw-nums" style="color:'+(exhausted?'var(--red)':warn?'var(--orange)':'var(--ink)')+'">'+fmtBw(usedMb)+' / '+totalGb+' '+_t('dash.gb','Go')+'</span>'+
     '</div>'+
     '<div class="bw-track"><div class="bw-bar'+(exhausted?' warn':warn?' warn':'')+'" style="width:'+pct+'%"></div></div>'+
-    '<div class="bw-footer"><span style="color:'+(exhausted?'var(--red)':warn?'var(--orange)':'var(--slate-2)')+'">'+pct+'% utilisé</span><span style="color:'+(exhausted?'var(--red)':warn?'var(--orange)':'var(--green)')+'">'+fmtBw(remainMb)+' restants</span></div>'+
+    '<div class="bw-footer"><span style="color:'+(exhausted?'var(--red)':warn?'var(--orange)':'var(--slate-2)')+'">'+_t('dash.pct_used','{pct}% utilisé').replace('{pct}',pct)+'</span><span style="color:'+(exhausted?'var(--red)':warn?'var(--orange)':'var(--green)')+'">'+_t('dash.remaining','{v} restants').replace('{v}',fmtBw(remainMb))+'</span></div>'+
     alertHtml+
   '</div>';
 }
@@ -1616,11 +1616,11 @@ function renderProxyList(pxList, usageMap){
   var totalUsedMb=pxList.reduce((s,p)=>s+(Number(usageMap[p.id])||0),0);
   var usedGb=totalUsedMb/1024;
   var remGb=Math.max(0,totalGbAll-usedGb);
-  var fmtGb=function(v){return v>=1?v.toFixed(1)+' Go':(v*1024).toFixed(0)+' Mo';};
+  var fmtGb=function(v){return v>=1?v.toFixed(1)+' '+_t('dash.gb','Go'):(v*1024).toFixed(0)+' '+_t('dash.mb','Mo');};
   var statsEl=document.getElementById('proxy-global-stats');
   if(statsEl)statsEl.style.display='';
-  document.getElementById('prx-total-gb').textContent=totalGbAll+' Go';
-  document.getElementById('prx-used-gb').textContent=totalUsedMb>0?fmtGb(usedGb):'0 Mo';
+  document.getElementById('prx-total-gb').textContent=totalGbAll+' '+_t('dash.gb','Go');
+  document.getElementById('prx-used-gb').textContent=totalUsedMb>0?fmtGb(usedGb):'0 '+_t('dash.mb','Mo');
   document.getElementById('prx-remain-gb').textContent=fmtGb(remGb||totalGbAll);
 
   wrap.innerHTML=pxList.map(p=>{
@@ -1634,22 +1634,23 @@ function renderProxyList(pxList, usageMap){
       var dj=Math.ceil((p.expires_at-Date.now())/86400000);
       ex=dj<=0;
       var col=ex?'var(--red)':(dj<=10?'var(--orange)':'var(--slate)');
-      expHtml='<div class="svc-exp" style="color:'+col+'">⏳ '+(ex?'Expiré le '+new Date(p.expires_at).toLocaleDateString('fr-FR'):'Jusqu\'au '+new Date(p.expires_at).toLocaleDateString('fr-FR')+' · '+dj+' j restants')+'</div>';
+      var _pexD=new Date(p.expires_at).toLocaleDateString('fr-FR');
+      expHtml='<div class="svc-exp" style="color:'+col+'">⏳ '+(ex?_t('dash.expired_on','Expiré le {date}').replace('{date}',_pexD):_t('dash.until_days_left','Jusqu\'au {date} · {n} jours restants').replace('{date}',_pexD).replace('{n}',dj))+'</div>';
       if(ex){
         expBanner='<div style="margin-top:10px;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">'+
           '<div>'+
-            '<div style="font-size:12.5px;font-weight:700;color:#991b1b">⛔ Proxy expiré — Accès suspendu</div>'+
-            '<div style="font-size:11.5px;color:#b91c1c;margin-top:2px">Votre forfait 180 jours est arrivé à terme le '+new Date(p.expires_at).toLocaleDateString('fr-FR')+'.</div>'+
+            '<div style="font-size:12.5px;font-weight:700;color:#991b1b">'+_t('dash.proxy_expired_banner','⛔ Proxy expiré — Accès suspendu')+'</div>'+
+            '<div style="font-size:11.5px;color:#b91c1c;margin-top:2px">'+_t('dash.proxy_expired_sub','Votre forfait 180 jours est arrivé à terme le {date}.').replace('{date}',_pexD)+'</div>'+
           '</div>'+
-          '<a href="/pay.html?product=proxy_55gb" class="btn-sm" style="background:#dc2626;color:#fff;border-color:#dc2626;white-space:nowrap;flex-shrink:0">🔄 Renouveler</a>'+
+          '<a href="/pay.html?product=proxy_55gb" class="btn-sm" style="background:#dc2626;color:#fff;border-color:#dc2626;white-space:nowrap;flex-shrink:0">'+_t('dash.renew_btn','🔄 Renouveler')+'</a>'+
         '</div>';
       } else if(dj<=10){
         expBanner='<div style="margin-top:10px;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">'+
           '<div>'+
-            '<div style="font-size:12.5px;font-weight:700;color:#92400e">⚠️ Expiration dans '+dj+' jour'+(dj>1?'s':'')+'</div>'+
-            '<div style="font-size:11.5px;color:#b45309;margin-top:2px">Renouvelez maintenant pour ne pas perdre l\'accès.</div>'+
+            '<div style="font-size:12.5px;font-weight:700;color:#92400e">'+_t('dash.proxy_exp_soon','⚠️ Expiration dans {n} jour(s)').replace('{n}',dj)+'</div>'+
+            '<div style="font-size:11.5px;color:#b45309;margin-top:2px">'+_t('dash.proxy_exp_soon_sub','Renouvelez maintenant pour ne pas perdre l\'accès.')+'</div>'+
           '</div>'+
-          '<a href="/pay.html?product=proxy_55gb" class="btn-sm" style="background:#f59e0b;color:#fff;border-color:#f59e0b;white-space:nowrap;flex-shrink:0">🔄 Renouveler</a>'+
+          '<a href="/pay.html?product=proxy_55gb" class="btn-sm" style="background:#f59e0b;color:#fff;border-color:#f59e0b;white-space:nowrap;flex-shrink:0">'+_t('dash.renew_btn','🔄 Renouveler')+'</a>'+
         '</div>';
       }
     }
@@ -1663,25 +1664,25 @@ function renderProxyList(pxList, usageMap){
     // Bouton identifiants : désactivé si expiré OU quota épuisé
     var blocked=ex||exhausted;
     var credBtn=blocked
-      ?'<button class="btn-sm" disabled style="opacity:.4;cursor:not-allowed">🔑 Identifiants</button>'
+      ?'<button class="btn-sm" disabled style="opacity:.4;cursor:not-allowed">'+_t('dash.creds_btn','🔑 Identifiants')+'</button>'
       :(p.username&&p.status==='active'
-        ?'<button class="btn-sm primary" style="background:var(--teal);border-color:var(--teal)" onclick="openProxyModal(_proxyCache['+p.id+'])">🔑 Identifiants</button>'
-        :'<span style="font-size:12px;color:var(--orange)">⏳ En activation</span>');
+        ?'<button class="btn-sm primary" style="background:var(--teal);border-color:var(--teal)" onclick="openProxyModal(_proxyCache['+p.id+'])">'+_t('dash.creds_btn','🔑 Identifiants')+'</button>'
+        :'<span style="font-size:12px;color:var(--orange)">'+_t('dash.activating','⏳ En activation')+'</span>');
 
     // Bouton d'action unique dans svc-actions (pas de doublon avec les bannières)
     var actionBtn=ex
-      ?'<a href="/pay.html?product=proxy_55gb" class="btn-sm" style="background:#dc2626;color:#fff;border-color:#dc2626">🔄 Renouveler</a>'
+      ?'<a href="/pay.html?product=proxy_55gb" class="btn-sm" style="background:#dc2626;color:#fff;border-color:#dc2626">'+_t('dash.renew_btn','🔄 Renouveler')+'</a>'
       :(exhausted
         ?'' // le bouton est déjà dans la bannière bande passante
-        :'<a href="/pay.html?product=proxy_55gb" class="btn-sm">+ Acheter</a>');
+        :'<a href="/pay.html?product=proxy_55gb" class="btn-sm">'+_t('dash.buy_more','+ Acheter')+'</a>');
 
     return '<div class="svc-row" style="flex-direction:column;align-items:stretch">'+
       '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap">'+
         '<div class="svc-info">'+
-          '<div class="svc-name">🌐 Proxy résidentiel — '+esc(String(p.gb))+' Go'+
-            (p.expires_at&&Math.ceil((p.expires_at-Date.now())/86400000)>0?'<span style="font-size:10px;font-weight:600;background:#f0fdfa;color:var(--teal);border:1px solid #99f6e4;border-radius:20px;padding:2px 8px;margin-left:8px">180 j</span>':'')+
+          '<div class="svc-name">'+_t('dash.proxy_name','🌐 Proxy résidentiel — {gb} Go').replace('{gb}',esc(String(p.gb)))+
+            (p.expires_at&&Math.ceil((p.expires_at-Date.now())/86400000)>0?'<span style="font-size:10px;font-weight:600;background:#f0fdfa;color:var(--teal);border:1px solid #99f6e4;border-radius:20px;padding:2px 8px;margin-left:8px">'+_t('dash.badge_180','180 j')+'</span>':'')+
           '</div>'+
-          '<div class="svc-meta"><span>Forfait '+esc(p.plan)+'</span>'+(p.username?'<span style="font-family:monospace">'+esc(p.username)+'</span>':'')+'<span>'+esc(p.host||'')+(p.port?':'+esc(String(p.port)):'')+'</span></div>'+
+          '<div class="svc-meta"><span>'+_t('dash.plan_word','Forfait {plan}').replace('{plan}',esc(p.plan))+'</span>'+(p.username?'<span style="font-family:monospace">'+esc(p.username)+'</span>':'')+'<span>'+esc(p.host||'')+(p.port?':'+esc(String(p.port)):'')+'</span></div>'+
           expHtml+
         '</div>'+
         '<div class="svc-actions" style="flex-shrink:0">'+
@@ -1723,7 +1724,7 @@ async function loadProxyUsage(pxList){
     console.warn('proxy-usage:',e.message);
     pxList.forEach(p=>{
       var el=document.getElementById('bw-'+p.id);
-      if(el)el.innerHTML='<span style="font-size:11px;color:var(--slate-2)">Stats non disponibles</span>';
+      if(el)el.innerHTML='<span style="font-size:11px;color:var(--slate-2)">'+_t('dash.stats_unavailable','Stats non disponibles')+'</span>';
     });
   }
 }
@@ -1734,7 +1735,7 @@ async function refreshProxyUsage(){
   if(btn){btn.textContent='⏳ …';btn.disabled=true;}
   await loadProxyUsage(_pxListCache);
   await loadProxyChart(_chartPeriod);
-  if(btn){btn.textContent='↻ Actualiser';btn.disabled=false;showToast('✓ Stats actualisées');}
+  if(btn){btn.textContent=_t('dash.refresh','↻ Actualiser');btn.disabled=false;showToast(_t('dash.stats_refreshed','✓ Stats actualisées'));}
 }
 
 // ── Graphique usage proxy ──────────────────────────────────────────────────────
@@ -1792,7 +1793,7 @@ async function loadProxyChart(days){
     var maxVal=Math.max(...dataMb,0);
     var useGo=maxVal>500;
     var displayData=useGo?dataMb.map(v=>+(v/1024).toFixed(3)):dataMb;
-    var unit=useGo?'Go':'Mo';
+    var unit=useGo?_t('dash.gb','Go'):_t('dash.mb','Mo');
 
     // Couleur dégradé teal→blue
     var ctx=canvas.getContext('2d');
@@ -1806,7 +1807,7 @@ async function loadProxyChart(days){
       data:{
         labels,
         datasets:[{
-          label:'Utilisation ('+unit+')',
+          label:_t('dash.chart_usage','Usage ({unit})').replace('{unit}',unit),
           data:displayData,
           fill:true,
           backgroundColor:grad,
@@ -1832,7 +1833,7 @@ async function loadProxyChart(days){
             borderWidth:1,
             padding:10,
             callbacks:{
-              label:ctx=>ctx.parsed.y+' '+unit+' utilisés',
+              label:ctx=>_t('dash.chart_used_suffix','{v} {unit} utilisés').replace('{v}',ctx.parsed.y).replace('{unit}',unit),
             }
           }
         },
@@ -1867,7 +1868,7 @@ async function loadProxyChart(days){
     var ctx=canvas.getContext('2d');
     var grad=ctx.createLinearGradient(0,0,0,200);grad.addColorStop(0,'rgba(13,148,136,0.2)');grad.addColorStop(1,'rgba(13,148,136,0.00)');
     if(_proxyChart){_proxyChart.destroy();_proxyChart=null;}
-    _proxyChart=new Chart(ctx,{type:'line',data:{labels,datasets:[{label:'Utilisation (Mo)',data:dataMb,fill:true,backgroundColor:grad,borderColor:'#0d9488',borderWidth:2.5,pointRadius:3,pointHoverRadius:6,pointBackgroundColor:'#0d9488',tension:0.4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+' Mo'}}}}});
+    _proxyChart=new Chart(ctx,{type:'line',data:{labels,datasets:[{label:_t('dash.chart_usage','Usage ({unit})').replace('{unit}',_t('dash.mb','Mo')),data:dataMb,fill:true,backgroundColor:grad,borderColor:'#0d9488',borderWidth:2.5,pointRadius:3,pointHoverRadius:6,pointBackgroundColor:'#0d9488',tension:0.4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+' '+_t('dash.mb','Mo')}}}}});
   }
 }
 
@@ -1898,7 +1899,7 @@ function renderDemoChart(days){
   _proxyChart=new Chart(ctx,{
     type:'line',
     data:{labels,datasets:[{
-      label:'Utilisation (Mo) — démo',
+      label:_t('dash.chart_usage_demo','Utilisation (Mo) — démo'),
       data:dataMb,fill:true,backgroundColor:grad,
       borderColor:'#0d9488',borderWidth:2.5,
       pointRadius:3,pointHoverRadius:6,pointBackgroundColor:'#0d9488',tension:0.4
@@ -1908,11 +1909,11 @@ function renderDemoChart(days){
       interaction:{mode:'index',intersect:false},
       plugins:{
         legend:{display:true,labels:{color:'#94a3b8',font:{size:11},boxWidth:12}},
-        tooltip:{backgroundColor:'#1e293b',titleColor:'#94a3b8',bodyColor:'#fff',borderColor:'#334155',borderWidth:1,padding:10,callbacks:{label:c=>c.parsed.y+' Mo'}}
+        tooltip:{backgroundColor:'#1e293b',titleColor:'#94a3b8',bodyColor:'#fff',borderColor:'#334155',borderWidth:1,padding:10,callbacks:{label:c=>c.parsed.y+' '+_t('dash.mb','Mo')}}
       },
       scales:{
         x:{grid:{color:'rgba(0,0,0,0.04)'},ticks:{color:'#94a3b8',font:{size:11},maxRotation:45}},
-        y:{beginAtZero:true,grid:{color:'rgba(0,0,0,0.06)'},ticks:{color:'#94a3b8',font:{size:11},callback:v=>v+' Mo'}}
+        y:{beginAtZero:true,grid:{color:'rgba(0,0,0,0.06)'},ticks:{color:'#94a3b8',font:{size:11},callback:v=>v+' '+_t('dash.mb','Mo')}}
       }
     }
   });
@@ -1927,7 +1928,7 @@ load();
 (function(){
   if (new URLSearchParams(location.search).get('paid') !== '1') return;
   try { history.replaceState({}, '', location.pathname); } catch {}
-  const close = ' <a href="#" onclick="var b=document.getElementById(\'paid-banner\');if(b)b.remove();return false" style="color:#fff;text-decoration:underline;margin-left:10px">Fermer</a>';
+  const close = ' <a href="#" onclick="var b=document.getElementById(\'paid-banner\');if(b)b.remove();return false" style="color:#fff;text-decoration:underline;margin-left:10px">'+_t('dash.paid_close','Fermer')+'</a>';
   function banner(html, color){
     let b = document.getElementById('paid-banner');
     if (!b){ b = document.createElement('div'); b.id = 'paid-banner';
@@ -1936,7 +1937,7 @@ load();
     }
     b.style.background = color; b.innerHTML = html;
   }
-  banner('✅ Paiement reçu ! Validation en cours — tes accès vont apparaître ici. ⏳', '#16a34a');
+  banner(_t('dash.paid_received','✅ Paiement reçu ! Validation en cours — tes accès vont apparaître ici. ⏳'), '#16a34a');
   const licCount = () => { const el = document.getElementById('st-lic'); return el ? (parseInt(el.textContent, 10) || 0) : 0; };
   let baseline = null, tries = 0;
   const iv = setInterval(async () => {
@@ -1946,7 +1947,7 @@ load();
     if (baseline === null) baseline = n;
     else if (n > baseline) {
       clearInterval(iv);
-      banner('✅ Paiement confirmé — ta licence est active !' + close, '#16a34a');
+      banner(_t('dash.paid_confirmed','✅ Paiement confirmé — ta licence est active !') + close, '#16a34a');
       // Invitation d'avis Trustpilot — données réelles du client, déclenchée une seule fois à la confirmation.
       try {
         if (typeof tp === 'function') {
@@ -1964,7 +1965,7 @@ load();
       } catch (e) {}
       return;
     }
-    if (tries >= 16) { clearInterval(iv); banner('⏳ Paiement reçu — la confirmation blockchain peut prendre quelques minutes. Ta licence apparaîtra ici automatiquement.' + close, '#f59e0b'); }
+    if (tries >= 16) { clearInterval(iv); banner(_t('dash.paid_pending','⏳ Paiement reçu — la confirmation blockchain peut prendre quelques minutes. Ta licence apparaîtra ici automatiquement.') + close, '#f59e0b'); }
   }, 8000);
 })();
 
@@ -1989,6 +1990,31 @@ function closeSidebar(){
 // Ferme sidebar auto quand on clique un item nav (mobile)
 document.querySelectorAll('.sb-item').forEach(function(el){
   el.addEventListener('click',function(){if(window.innerWidth<=540)closeSidebar();});
+});
+
+// ── Re-rendu des listes dynamiques au changement de langue (FR/EN/RU) ──
+// i18n.js émet 'evo-langchange' sur window après avoir changé window.t(). On recalcule
+// les maps de libellés (dépendent de _t) et on rappelle les fonctions de rendu avec les
+// données déjà en cache, sans re-fetch réseau ni rechargement de page.
+window.addEventListener('evo-langchange', function(){
+  // Maps de statut recalculées (elles capturent _t() au moment de leur définition)
+  PSL={active:_t('dash.st_active','Actif'),suspended:_t('dash.st_suspended','Suspendu'),pending:_t('dash.st_pending','En attente')};
+  if(_smtpCache && Object.keys(_smtpCache).length && typeof load==='function'){
+    // SMTP n'a pas de fonction de rendu isolée réutilisable → on relance le chargement complet,
+    // qui re-rend aussi les licences/commandes/proxy depuis les données fraîches.
+    load();
+  }else if(typeof renderProxyList==='function' && _pxListCache && _pxListCache.length){
+    // Pas de SMTP à recharger : re-rendu du proxy depuis le cache local, sans re-fetch réseau.
+    renderProxyList(_pxListCache, _lastUsageMap||{});
+  }
+  // Graphique d'utilisation proxy (labels/axes traduits)
+  if(typeof loadProxyChart==='function' && document.getElementById('proxy-usage-chart') && document.getElementById('proxy-usage-chart').offsetParent){
+    loadProxyChart(_chartPeriod);
+  }
+  // Support : re-rendu du fil de discussion (message vide / bandeau résolu traduits)
+  if(_supOpen && typeof loadSupport==='function'){
+    loadSupport();
+  }
 });
 </script>
 <script src="/assistance.js" defer></script>
