@@ -119,11 +119,12 @@
         clearTimeout(_tr);
         const d = await r.json();
         if (d.ok) {
-          localStorage.setItem('evo_email', d.email); localStorage.setItem('evo_logged_in', '1');
-          msg.className='msg ok'; msg.textContent='✓ Compte créé ! Redirection...';
-          const _redir = new URLSearchParams(location.search).get('redirect') || '/dashboard.html';
-          const redir = isSafeRedirect(_redir) ? _redir : '/dashboard.html';
-          setTimeout(() => location.href = redir, 1000);
+          // Le compte est créé mais NON actif : il faut confirmer l'email (code + lien envoyés).
+          localStorage.setItem('evo_email', d.email);
+          msg.className='msg ok'; msg.textContent='✓ Compte créé ! Vérification de l\'email...';
+          const _redir = new URLSearchParams(location.search).get('redirect');
+          const q = '?email=' + encodeURIComponent(d.email) + (isSafeRedirect(_redir) ? '&redirect=' + encodeURIComponent(_redir) : '');
+          setTimeout(() => location.href = '/verify.html' + q, 700);
         } else { msg.className='msg err'; msg.textContent = d.error || 'Erreur lors de la création.'; btn.disabled=false; btn.textContent='Créer mon compte'; }
       } catch { msg.className='msg err'; msg.textContent='Erreur réseau. Réessayez.'; btn.disabled=false; btn.textContent='Créer mon compte'; }
     });

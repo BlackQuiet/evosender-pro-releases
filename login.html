@@ -171,6 +171,9 @@
           setTimeout(() => document.getElementById('totp').focus(), 100);
         } else if (d.ok) {
           finishLogin(d.token, d.email);
+        } else if (d.needVerification) {
+          msg.className='msg ok'; msg.textContent='Compte non vérifié — redirection vers la confirmation...';
+          setTimeout(() => location.href = '/verify.html?email=' + encodeURIComponent(d.email || email), 800);
         } else {
           msg.className='msg err'; msg.textContent = d.error || 'Email ou mot de passe incorrect.';
           btn.disabled=false; btn.textContent='Se connecter';

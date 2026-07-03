@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EvoStudio — Confirmer votre email</title><link rel="icon" href="/logo-EvoSender.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root{--blue:#3b82f6;--blue-dark:#2563eb;--ink:#eef2fb;--slate:#9aa7c2;--line:rgba(255,255,255,.1);--purple:#a78bfa}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Inter',sans-serif;color:var(--ink);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:radial-gradient(120% 80% at 15% 0%,rgba(37,99,235,.18),transparent 55%),radial-gradient(90% 70% at 100% 10%,rgba(124,58,237,.16),transparent 55%),#070a14}
+    .auth{width:100%;max-width:400px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.09);border-radius:18px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.5),0 0 50px rgba(59,130,246,.1);backdrop-filter:blur(10px)}
+    .form{padding:14px 38px 40px;display:flex;flex-direction:column}
+    @media(max-width:480px){.form{padding:12px 26px 34px}}
+    .logo-banner{position:relative;display:flex;justify-content:center;align-items:center;padding:34px 20px 26px;margin:0 -38px 30px;background:linear-gradient(180deg,rgba(59,130,246,.12),transparent);border-bottom:1px solid rgba(255,255,255,.06)}
+    @media(max-width:480px){.logo-banner{margin:0 -26px 26px}}
+    .home-btn{position:absolute;top:16px;left:16px;display:flex;align-items:center;justify-content:center;width:34px;height:34px;background:rgba(255,255,255,.06);color:var(--slate);text-decoration:none;border-radius:10px;transition:.15s;border:1px solid rgba(255,255,255,.08)}
+    .home-btn:hover{background:var(--blue);color:#fff}
+    .home-btn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.9}
+    .logo-banner img{height:52px;max-width:210px;object-fit:contain}
+    h1{font-size:21px;font-weight:700;margin-bottom:5px;letter-spacing:-.3px;text-align:center;color:#fff}
+    .sub{font-size:13.5px;color:var(--slate);margin-bottom:6px;text-align:center;line-height:1.5}
+    .sub b{color:var(--ink)}
+    label{display:block;font-size:11px;font-weight:600;color:var(--slate);text-transform:uppercase;letter-spacing:.05em;margin-bottom:7px;margin-top:22px;text-align:center}
+    .code-inp{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--ink);border-radius:12px;padding:16px;font-size:30px;font-weight:800;letter-spacing:12px;text-align:center;outline:none;transition:.18s;font-family:inherit}
+    .code-inp::placeholder{color:#4b5675;letter-spacing:12px}
+    .code-inp:focus{border-color:var(--blue);background:rgba(255,255,255,.06);box-shadow:0 0 0 3px rgba(59,130,246,.15)}
+    .btn{width:100%;margin-top:24px;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border:none;border-radius:11px;padding:13px;font-size:14.5px;font-weight:600;cursor:pointer;transition:.18s;font-family:inherit;box-shadow:0 8px 26px rgba(59,130,246,.35)}
+    .btn:hover{transform:translateY(-1px)}
+    .btn:disabled{opacity:.55;cursor:not-allowed}
+    .msg{font-size:13px;margin-top:14px;min-height:18px;text-align:center;line-height:1.5}
+    .msg.err{color:#f87171}.msg.ok{color:#34d399}
+    .footer-link{text-align:center;margin-top:22px;font-size:13.5px;color:var(--slate)}
+    .footer-link a,.link{color:#60a5fa;text-decoration:none;font-weight:600;background:none;border:none;cursor:pointer;font-family:inherit;font-size:13.5px}
+    .footer-link a:hover,.link:hover{text-decoration:underline}
+    .resend{text-align:center;margin-top:16px;font-size:13px;color:var(--slate)}
+    html[data-theme="light"]{--blue:#2563eb;--ink:#0f172a;--slate:#475569;--line:#e2e8f0}
+    html[data-theme="light"] body{background:radial-gradient(120% 80% at 15% 0%,rgba(37,99,235,.1),transparent 55%),radial-gradient(90% 70% at 100% 10%,rgba(124,58,237,.08),transparent 55%),#f4f7fc}
+    html[data-theme="light"] .auth{background:#fff;border-color:#e8ecf2;box-shadow:0 18px 50px rgba(15,23,42,.08)}
+    html[data-theme="light"] .logo-banner{background:linear-gradient(180deg,#fff,#f7faff);border-bottom-color:#eef2f7}
+    html[data-theme="light"] .home-btn{background:#f3f5f9;border-color:#e2e8f0}
+    html[data-theme="light"] h1{color:#0f172a}
+    html[data-theme="light"] .code-inp{background:#fafbfc;color:#0f172a}
+    html[data-theme="light"] .code-inp:focus{background:#fff}
+  </style>
+<script src="/theme.js"></script>
+</head>
+<body>
+  <div class="auth">
+    <main class="form">
+      <div class="logo-banner"><a href="/" class="home-btn" title="Accueil" aria-label="Accueil"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9.5 21v-6h5v6"/></svg></a><img src="/logoevostudio2.png" alt="EvoStudio" /></div>
+      <h1>Confirmez votre email</h1>
+      <p class="sub">Un code à 6 chiffres a été envoyé à<br><b id="who">votre adresse</b>.</p>
+      <form id="form">
+        <label>Code de confirmation</label>
+        <input class="code-inp" id="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="––––––" required autofocus />
+        <button class="btn" type="submit" id="btn">Confirmer mon compte</button>
+      </form>
+      <div class="msg" id="msg"></div>
+      <div class="resend">Pas reçu ? <button type="button" class="link" id="resend">Renvoyer le code</button></div>
+      <div class="footer-link"><a href="/login.html">← Retour à la connexion</a></div>
+    </main>
+  </div>
+  <script>
+    const API = 'https://admin.evostudio.fr';
+    const params = new URLSearchParams(location.search);
+    const email = (params.get('email') || localStorage.getItem('evo_email') || '').trim();
+    const redirectParam = params.get('redirect');
+    function isSafeRedirect(url){ return !!url && url.startsWith('/') && url[1] !== '/' && url[1] !== '\\' && !/^\/\/|^[a-z]+:/i.test(url); }
+    const redir = isSafeRedirect(redirectParam) ? redirectParam : '/dashboard.html';
+    document.getElementById('who').textContent = email || 'votre adresse';
+
+    const msg = document.getElementById('msg'); const btn = document.getElementById('btn');
+    // Message d'erreur si arrivé depuis un lien expiré/invalide
+    const e = params.get('e');
+    if (e === 'expired') { msg.className='msg err'; msg.textContent='Le lien a expiré. Saisissez le code ou demandez-en un nouveau.'; }
+    else if (e === 'invalid') { msg.className='msg err'; msg.textContent='Lien invalide. Saisissez le code reçu par email.'; }
+
+    if (!email) { msg.className='msg err'; msg.textContent='Adresse email manquante. Recommencez l\'inscription.'; }
+
+    document.getElementById('code').addEventListener('input', ev => { ev.target.value = ev.target.value.replace(/\D/g,'').slice(0,6); });
+
+    document.getElementById('form').addEventListener('submit', async ev => {
+      ev.preventDefault();
+      const code = document.getElementById('code').value.trim();
+      if (code.length !== 6) { msg.className='msg err'; msg.textContent='Entrez le code à 6 chiffres.'; return; }
+      if (!email) return;
+      btn.disabled = true; btn.textContent = 'Vérification...';
+      try {
+        const r = await fetch(API + '/api/auth/verify', { method:'POST', headers:{'Content-Type':'application/json'}, credentials:'include', body:JSON.stringify({ email, code }) });
+        const d = await r.json();
+        if (d.ok) {
+          localStorage.setItem('evo_email', email); localStorage.setItem('evo_logged_in', '1');
+          msg.className='msg ok'; msg.textContent='✓ Compte confirmé ! Redirection...';
+          setTimeout(() => location.href = redir, 900);
+        } else { msg.className='msg err'; msg.textContent = d.error || 'Code incorrect.'; btn.disabled=false; btn.textContent='Confirmer mon compte'; }
+      } catch { msg.className='msg err'; msg.textContent='Erreur réseau. Réessayez.'; btn.disabled=false; btn.textContent='Confirmer mon compte'; }
+    });
+
+    let resendCooldown = 0;
+    const resendBtn = document.getElementById('resend');
+    resendBtn.addEventListener('click', async () => {
+      if (resendCooldown > 0 || !email) return;
+      resendBtn.disabled = true;
+      try {
+        await fetch(API + '/api/auth/verify/resend', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ email }) });
+        msg.className='msg ok'; msg.textContent='✓ Un nouveau code vient d\'être envoyé.';
+      } catch { msg.className='msg err'; msg.textContent='Erreur réseau. Réessayez.'; }
+      resendCooldown = 30;
+      const tick = setInterval(() => {
+        resendCooldown--;
+        resendBtn.textContent = resendCooldown > 0 ? `Renvoyer (${resendCooldown}s)` : 'Renvoyer le code';
+        if (resendCooldown <= 0) { clearInterval(tick); resendBtn.disabled = false; }
+      }, 1000);
+    });
+  </script>
+<script src="/assistance.js" defer></script>
+</body>
+</html>
