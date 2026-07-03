@@ -343,3 +343,7 @@ html[data-theme="light"] .app-frame{box-shadow:0 30px 70px rgba(15,23,42,.15),0 
 .press-logo.egsci:hover{opacity:1}
 @keyframes marqScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){.marq-track{animation:none}}
+/* Icônes de téléchargement du hero (Windows / Mac) */
+.hero-dl-ico{display:flex;align-items:center;justify-content:center;width:60px;height:60px;border-radius:16px;background:rgba(13,20,38,.7);border:1px solid rgba(255,255,255,.13);box-shadow:0 8px 26px rgba(0,0,0,.35);text-decoration:none;transition:transform .15s,border-color .15s,background .15s}
+.hero-dl-ico:hover{transform:translateY(-3px);border-color:rgba(96,165,250,.6);background:rgba(37,99,235,.2)}
+html[data-theme=light] .hero-dl-ico{background:#fff;border-color:#e2e8f0;box-shadow:0 8px 24px rgba(15,23,42,.1)}
