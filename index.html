@@ -484,8 +484,8 @@ img{max-width:100%;height:auto}
 /* Carrousel hero (3 slides) */
 .hero-carousel{position:relative}
 @media(min-width:821px){.hero-carousel{min-height:430px}}
-.hero-slide{display:none}
-.hero-slide.active{display:block;animation:heroFade .5s ease}
+#hero-carousel .hero-slide{display:none!important}
+#hero-carousel .hero-slide.active{display:block!important;animation:heroFade .5s ease}
 @keyframes heroFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .hero-dots{display:flex;justify-content:center;gap:8px;margin-top:26px;position:relative;z-index:3}
 .hero-dot{width:9px;height:9px;border-radius:50%;border:none;background:rgba(255,255,255,.22);cursor:pointer;padding:0;transition:all .2s}
@@ -868,7 +868,7 @@ footer{background:#0f172a;border-top:1px solid #1e293b;color:var(--slate-2)}
   var i = 0, timer;
   function go(n){
     i = (n + slides.length) % slides.length;
-    slides.forEach(function(s,k){ s.classList.toggle('active', k===i); });
+    slides.forEach(function(s,k){ var on = k===i; s.classList.toggle('active', on); s.style.setProperty('display', on ? 'block' : 'none', 'important'); });
     dots.forEach(function(d,k){ d.classList.toggle('active', k===i); });
   }
   function start(){ stop(); timer = setInterval(function(){ go(i+1); }, 6500); }
@@ -879,6 +879,7 @@ footer{background:#0f172a;border-top:1px solid #1e293b;color:var(--slate-2)}
   if(next) next.addEventListener('click', function(){ go(i+1); start(); });
   car.addEventListener('mouseenter', stop);
   car.addEventListener('mouseleave', start);
+  go(0);
   start();
 })();
 </script>
