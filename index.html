@@ -91,6 +91,22 @@
   "home.proxy_sub":"Authentic residential IPs from 30+ countries. Automatic rotation or sticky IP. Billed per GB, instant credentials in your client area.",
   "home.proxy_partner":"Need a wider range?",
   "home.proxy_partner_link":"Our partner Proxyscrape →",
+  "home.h2_label":"Residential proxy",
+  "home.h2_h1":"Residential proxy<br><em>high anonymity</em>",
+  "home.h2_sub":"Real residential IPs from 30+ countries, rotating or sticky, billed per GB with instant credentials. Need a wider range? Our partner ProxyScrape.",
+  "home.h2_btn1":"View proxies →",
+  "home.h2_btn2":"ProxyScrape partner",
+  "home.h2_pill1":"30+ countries & ISPs",
+  "home.h2_pill2":"Rotating / sticky",
+  "home.h2_partner_badge":"🤝 Partner",
+  "home.h2_partner_note":"Partner link",
+  "home.h3_label":"Dedicated SMTP server",
+  "home.h3_h1":"Dedicated SMTP server<br><em>high deliverability</em>",
+  "home.h3_sub":"An SMTP server all to yourself, with a dedicated IP, to send in bulk without a third party's limits. Ready to plug into EvoSender, SPF/DKIM included.",
+  "home.h3_btn1":"See SMTP plans →",
+  "home.h3_btn2":"Buy now",
+  "home.h3_pill1":"Dedicated IP",
+  "home.h3_pill2":"SPF / DKIM ready",
   "home.proxy_validity_full":"<svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"#0d9488\" stroke-width=\"2\"><rect x=\"3\" y=\"4\" width=\"18\" height=\"18\" rx=\"2\"/><line x1=\"16\" y1=\"2\" x2=\"16\" y2=\"6\"/><line x1=\"8\" y1=\"2\" x2=\"8\" y2=\"6\"/><line x1=\"3\" y1=\"10\" x2=\"21\" y2=\"10\"/></svg> Validity <span style=\"color:#0d9488;font-size:17px;margin:0 3px\">180 days</span> from the activation date",
   "home.proxy_trust_countries":"30+ countries available",
   "home.proxy_trust_rotation":"IP rotation & sticky",
@@ -258,6 +274,22 @@
   "home.proxy_sub":"Настоящие резидентные IP из более чем 30 стран. Автоматическая ротация или sticky IP. Оплата за ГБ, мгновенные учётные данные в личном кабинете.",
   "home.proxy_partner":"Нужен более широкий выбор?",
   "home.proxy_partner_link":"Наш партнёр Proxyscrape →",
+  "home.h2_label":"Резидентный прокси",
+  "home.h2_h1":"Резидентный прокси<br><em>высокая анонимность</em>",
+  "home.h2_sub":"Реальные резидентные IP из 30+ стран, ротация или sticky, оплата за ГБ и мгновенные учётные данные. Нужен более широкий выбор? Наш партнёр ProxyScrape.",
+  "home.h2_btn1":"Смотреть прокси →",
+  "home.h2_btn2":"Партнёр ProxyScrape",
+  "home.h2_pill1":"30+ стран и ISP",
+  "home.h2_pill2":"Ротация / sticky",
+  "home.h2_partner_badge":"🤝 Партнёр",
+  "home.h2_partner_note":"Партнёрская ссылка",
+  "home.h3_label":"Выделенный SMTP-сервер",
+  "home.h3_h1":"Выделенный SMTP-сервер<br><em>высокая доставляемость</em>",
+  "home.h3_sub":"SMTP-сервер только для вас, с выделенным IP, для массовой рассылки без ограничений третьих сторон. Готов к подключению в EvoSender, SPF/DKIM включены.",
+  "home.h3_btn1":"Смотреть тарифы SMTP →",
+  "home.h3_btn2":"Купить сейчас",
+  "home.h3_pill1":"Выделенный IP",
+  "home.h3_pill2":"SPF / DKIM готовы",
   "home.proxy_validity_full":"<svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"#0d9488\" stroke-width=\"2\"><rect x=\"3\" y=\"4\" width=\"18\" height=\"18\" rx=\"2\"/><line x1=\"16\" y1=\"2\" x2=\"16\" y2=\"6\"/><line x1=\"8\" y1=\"2\" x2=\"8\" y2=\"6\"/><line x1=\"3\" y1=\"10\" x2=\"21\" y2=\"10\"/></svg> Действует <span style=\"color:#0d9488;font-size:17px;margin:0 3px\">180 дней</span> с даты активации",
   "home.proxy_trust_countries":"Более 30 стран доступно",
   "home.proxy_trust_rotation":"Ротация и sticky IP",
@@ -449,6 +481,19 @@ img{max-width:100%;height:auto}
 .hero-pill{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;color:rgba(255,255,255,.45);padding:4px 10px;border:1px solid rgba(255,255,255,.1);border-radius:20px}
 .hero-pill svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0}
 .hero-right{display:flex;flex-direction:column;gap:10px}
+/* Carrousel hero (3 slides) */
+.hero-carousel{position:relative}
+@media(min-width:821px){.hero-carousel{min-height:430px}}
+.hero-slide{display:none}
+.hero-slide.active{display:block;animation:heroFade .5s ease}
+@keyframes heroFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.hero-dots{display:flex;justify-content:center;gap:8px;margin-top:26px;position:relative;z-index:3}
+.hero-dot{width:9px;height:9px;border-radius:50%;border:none;background:rgba(255,255,255,.22);cursor:pointer;padding:0;transition:all .2s}
+.hero-dot.active{background:#60a5fa;width:24px;border-radius:5px}
+.hero-arrow{position:absolute;top:38%;transform:translateY(-50%);z-index:4;width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:rgba(10,15,30,.5);color:#cbd5e1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.hero-arrow:hover{background:rgba(37,99,235,.45);color:#fff}
+.hero-arrow.prev{left:-8px}.hero-arrow.next{right:-8px}
+@media(max-width:900px){.hero-arrow{display:none}}
 .dl-card{display:flex;align-items:center;gap:12px;padding:14px 16px;border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#fff;transition:border-color .2s;background:rgba(255,255,255,.03)}
 .dl-card:hover{border-color:rgba(96,165,250,.4)}
 .dl-card-txt{flex:1;min-width:0}
@@ -691,6 +736,12 @@ footer{background:#0f172a;border-top:1px solid #1e293b;color:var(--slate-2)}
 <!-- ═══ HERO ═══ -->
 <header class="hero">
   <div class="wrap">
+    <div class="hero-carousel" id="hero-carousel">
+      <button class="hero-arrow prev" type="button" aria-label="Précédent"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <button class="hero-arrow next" type="button" aria-label="Suivant"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+
+      <!-- SLIDE 1 : SUITE (hero actuel, piloté par le CMS) -->
+      <div class="hero-slide active" data-slide="0">
     <div class="hero-grid">
       <div style="position:relative;z-index:2">
         <div class="hero-label"><span class="dot"></span> <span data-i18n="home.hero_label">Suite professionnelle</span></div>
@@ -744,8 +795,93 @@ footer{background:#0f172a;border-top:1px solid #1e293b;color:var(--slate-2)}
         </div>
       </div>
     </div>
+      </div><!-- /slide 1 -->
+
+      <!-- SLIDE 2 : PROXY + bannière affiliation ProxyScrape -->
+      <div class="hero-slide" data-slide="1">
+        <div class="hero-grid">
+          <div style="position:relative;z-index:2">
+            <div class="hero-label"><span class="dot" style="background:#2dd4bf;box-shadow:0 0 0 3px rgba(45,212,191,.2)"></span> <span data-i18n="home.h2_label">Proxy résidentiel</span></div>
+            <h1 data-i18n-html="home.h2_h1">Proxy résidentiel<br><em>haute anonymité</em></h1>
+            <p class="hero-sub" data-i18n="home.h2_sub">IPs résidentielles réelles de 30+ pays, rotation ou IP sticky, facturation au Go et identifiants instantanés. Besoin d'une gamme plus large ? Notre partenaire ProxyScrape.</p>
+            <div class="hero-btns">
+              <a href="/proxy.html" class="btn btn-primary" style="font-size:14px;padding:11px 22px" data-i18n="home.h2_btn1">Voir les proxies →</a>
+              <a href="https://proxyscrape.com/home?tap_a=124509-ea8c77&ref=mtc4zte" target="_blank" rel="sponsored nofollow noopener noreferrer" class="btn btn-outline" style="font-size:14px;padding:11px 22px" data-i18n="home.h2_btn2">Partenaire ProxyScrape</a>
+            </div>
+            <div class="hero-pills">
+              <span class="hero-pill"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 0 20"/></svg> <span data-i18n="home.h2_pill1">30+ pays &amp; ISP</span></span>
+              <span class="hero-pill"><svg viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg> <span data-i18n="home.h2_pill2">Rotation / sticky</span></span>
+            </div>
+          </div>
+          <div class="hero-right" style="position:relative;align-items:center">
+            <div style="display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#5eead4;background:rgba(45,212,191,.12);border:1px solid rgba(45,212,191,.3);padding:4px 10px;border-radius:20px;margin:0 auto 12px" data-i18n="home.h2_partner_badge">🤝 Partenaire</div>
+            <a href="https://proxyscrape.com/home?tap_a=124509-ea8c77&ref=mtc4zte" target="_blank" rel="sponsored nofollow noopener noreferrer" style="display:block;line-height:0;max-width:300px;margin:0 auto" aria-label="ProxyScrape">
+              <img src="https://static.tapfiliate.com/63c9f361c1a1c907620015.jpeg?a=124509-ea8c77" alt="ProxyScrape" loading="lazy" style="width:100%;height:auto;border-radius:12px;border:1px solid rgba(255,255,255,.12);display:block" />
+            </a>
+            <span style="display:block;text-align:center;font-size:10.5px;color:#94a3b8;opacity:.7;margin-top:6px" data-i18n="home.h2_partner_note">Lien partenaire</span>
+          </div>
+        </div>
+      </div><!-- /slide 2 -->
+
+      <!-- SLIDE 3 : SMTP dédié -->
+      <div class="hero-slide" data-slide="2">
+        <div class="hero-grid">
+          <div style="position:relative;z-index:2">
+            <div class="hero-label"><span class="dot" style="background:#818cf8;box-shadow:0 0 0 3px rgba(129,140,248,.2)"></span> <span data-i18n="home.h3_label">Serveur SMTP dédié</span></div>
+            <h1 data-i18n-html="home.h3_h1">Serveur SMTP dédié<br><em>haute délivrabilité</em></h1>
+            <p class="hero-sub" data-i18n="home.h3_sub">Un serveur SMTP rien qu'à vous, avec IP dédiée, pour envoyer en masse sans subir les limites d'un tiers. Prêt à brancher dans EvoSender, SPF/DKIM inclus.</p>
+            <div class="hero-btns">
+              <a href="/serveur-smtp-dedie.html" class="btn btn-primary" style="font-size:14px;padding:11px 22px" data-i18n="home.h3_btn1">Voir les offres SMTP →</a>
+              <a href="/pay.html" class="btn btn-outline" style="font-size:14px;padding:11px 22px" data-i18n="home.h3_btn2">Acheter maintenant</a>
+            </div>
+            <div class="hero-pills">
+              <span class="hero-pill"><svg viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2 15 22 11 13 2 9l20-7z"/></svg> <span data-i18n="home.h3_pill1">IP dédiée</span></span>
+              <span class="hero-pill"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> <span data-i18n="home.h3_pill2">SPF / DKIM prêts</span></span>
+            </div>
+          </div>
+          <div class="hero-right" style="position:relative;align-items:center;justify-content:center">
+            <svg viewBox="0 0 240 200" style="width:100%;max-width:260px;filter:drop-shadow(0 16px 38px rgba(99,102,241,.3))" aria-hidden="true">
+              <defs><linearGradient id="smtpG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6366f1"/><stop offset="1" stop-color="#4338ca"/></linearGradient></defs>
+              <rect x="40" y="24" width="160" height="46" rx="10" fill="url(#smtpG)"/><circle cx="60" cy="47" r="5" fill="#c7d2fe"/><rect x="76" y="43" width="86" height="8" rx="4" fill="rgba(255,255,255,.55)"/><rect x="76" y="55" width="54" height="6" rx="3" fill="rgba(255,255,255,.3)"/>
+              <rect x="40" y="80" width="160" height="46" rx="10" fill="url(#smtpG)" opacity=".85"/><circle cx="60" cy="103" r="5" fill="#c7d2fe"/><rect x="76" y="99" width="86" height="8" rx="4" fill="rgba(255,255,255,.55)"/><rect x="76" y="111" width="54" height="6" rx="3" fill="rgba(255,255,255,.3)"/>
+              <rect x="40" y="136" width="160" height="46" rx="10" fill="url(#smtpG)" opacity=".7"/><circle cx="60" cy="159" r="5" fill="#c7d2fe"/><rect x="76" y="155" width="86" height="8" rx="4" fill="rgba(255,255,255,.55)"/><rect x="76" y="167" width="54" height="6" rx="3" fill="rgba(255,255,255,.3)"/>
+            </svg>
+          </div>
+        </div>
+      </div><!-- /slide 3 -->
+
+      <div class="hero-dots" id="hero-dots">
+        <button class="hero-dot active" type="button" aria-label="Suite"></button>
+        <button class="hero-dot" type="button" aria-label="Proxy"></button>
+        <button class="hero-dot" type="button" aria-label="SMTP"></button>
+      </div>
+    </div><!-- /hero-carousel -->
   </div>
 </header>
+<script>
+(function(){
+  var car = document.getElementById('hero-carousel');
+  if(!car) return;
+  var slides = car.querySelectorAll('.hero-slide');
+  var dots = car.querySelectorAll('#hero-dots .hero-dot');
+  if(slides.length < 2) return;
+  var i = 0, timer;
+  function go(n){
+    i = (n + slides.length) % slides.length;
+    slides.forEach(function(s,k){ s.classList.toggle('active', k===i); });
+    dots.forEach(function(d,k){ d.classList.toggle('active', k===i); });
+  }
+  function start(){ stop(); timer = setInterval(function(){ go(i+1); }, 6500); }
+  function stop(){ if(timer) clearInterval(timer); }
+  dots.forEach(function(d,k){ d.addEventListener('click', function(){ go(k); start(); }); });
+  var prev = car.querySelector('.hero-arrow.prev'), next = car.querySelector('.hero-arrow.next');
+  if(prev) prev.addEventListener('click', function(){ go(i-1); start(); });
+  if(next) next.addEventListener('click', function(){ go(i+1); start(); });
+  car.addEventListener('mouseenter', stop);
+  car.addEventListener('mouseleave', start);
+  start();
+})();
+</script>
 
 <!-- ═══ BANDEAU ÉCOSYSTÈME (logos défilants) ═══ -->
 <section class="press-band" aria-label="Écosystème EvoStudio">
