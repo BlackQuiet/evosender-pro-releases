@@ -482,11 +482,11 @@ img{max-width:100%;height:auto}
 .hero-pill svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0}
 .hero-right{display:flex;flex-direction:column;gap:10px}
 /* Carrousel hero (3 slides) */
-.hero-carousel{position:relative}
-@media(min-width:821px){.hero-carousel{min-height:430px}}
-#hero-carousel .hero-slide{display:none!important}
-#hero-carousel .hero-slide.active{display:block!important;animation:heroFade .5s ease}
-@keyframes heroFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+/* Carrousel : les 3 slides empilees dans la MEME cellule grid -> hauteur = slide la plus haute (Suite) => stable, aucun saut */
+.hero-carousel{position:relative;display:grid}
+#hero-carousel .hero-slide{grid-area:1/1;opacity:0;visibility:hidden;transition:opacity .45s ease}
+#hero-carousel .hero-slide.active{opacity:1;visibility:visible}
+#hero-carousel .hero-dots{grid-area:2/1}
 .hero-dots{display:flex;justify-content:center;gap:8px;margin-top:26px;position:relative;z-index:3}
 .hero-dot{width:9px;height:9px;border-radius:50%;border:none;background:rgba(255,255,255,.22);cursor:pointer;padding:0;transition:all .2s}
 .hero-dot.active{background:#60a5fa;width:24px;border-radius:5px}
@@ -860,10 +860,13 @@ footer{background:#0f172a;border-top:1px solid #1e293b;color:var(--slate-2)}
   var slides = car.querySelectorAll('.hero-slide');
   var dots = car.querySelectorAll('#hero-dots .hero-dot');
   if(slides.length < 2) return;
+  // Empilement bulletproof (inline !important bat toute feuille) : toutes les slides dans la MEME cellule grid
+  car.style.setProperty('display','grid','important');
+  slides.forEach(function(s){ s.style.setProperty('grid-column','1','important'); s.style.setProperty('grid-row','1','important'); s.style.setProperty('transition','opacity .45s ease','important'); });
   var i = 0, timer;
   function go(n){
     i = (n + slides.length) % slides.length;
-    slides.forEach(function(s,k){ var on = k===i; s.classList.toggle('active', on); s.style.setProperty('display', on ? 'block' : 'none', 'important'); });
+    slides.forEach(function(s,k){ var on = k===i; s.classList.toggle('active', on); s.style.setProperty('opacity', on?'1':'0','important'); s.style.setProperty('visibility', on?'visible':'hidden','important'); s.style.setProperty('pointer-events', on?'auto':'none','important'); });
     dots.forEach(function(d,k){ d.classList.toggle('active', k===i); });
   }
   function start(){ stop(); timer = setInterval(function(){ go(i+1); }, 6500); }
