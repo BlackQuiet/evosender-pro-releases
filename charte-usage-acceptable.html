@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Charte d'usage acceptable — EvoStudio</title>
+<meta name="description" content="Charte d'usage acceptable (anti-spam / anti-abus) — EvoStudio by EGSCI SARL">
+<link rel="icon" href="/logo-EvoSender.ico" type="image/x-icon" />
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --blue:#3b82f6;--blue-dark:#2563eb;--ink:#eef2fb;--slate:#9aa7c2;
+  --line:rgba(255,255,255,.09);--bg:#070a14;--surface:#0e1526;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:var(--ink);line-height:1.7;font-size:15px;min-height:100vh;background:radial-gradient(120% 70% at 12% -5%,rgba(37,99,235,.16),transparent 55%),radial-gradient(90% 60% at 100% 0%,rgba(124,58,237,.14),transparent 55%),var(--bg);background-attachment:fixed}
+nav{background:var(--surface);border-bottom:1px solid var(--line);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 1px 8px rgba(0,0,0,.05)}
+.nav-logo{font-size:17px;font-weight:800;color:var(--blue);text-decoration:none;display:flex;align-items:center;gap:8px}
+.nav-back{font-size:13px;color:var(--slate);text-decoration:none;display:flex;align-items:center;gap:5px}
+.nav-back:hover{color:var(--blue)}
+.hero{background:linear-gradient(135deg,#7c2d12 0%,#b91c1c 55%,#ef4444 100%);color:#fff;padding:56px 24px 48px;text-align:center}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);padding:5px 14px;border-radius:20px;font-size:12px;font-weight:600;margin-bottom:18px}
+.hero h1{font-size:clamp(24px,4vw,38px);font-weight:900;margin-bottom:12px;letter-spacing:-.5px}
+.hero p{font-size:15px;opacity:.9;max-width:600px;margin:0 auto 20px}
+.hero-meta{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;font-size:12px;opacity:.8}
+.hero-meta span{display:flex;align-items:center;gap:5px}
+.container{max-width:860px;margin:0 auto;padding:48px 24px}
+.section{margin-bottom:40px;scroll-margin-top:80px}
+.section h2{font-size:20px;font-weight:800;color:var(--ink);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--line);display:flex;align-items:center;gap:10px}
+.section h2 .num{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;padding:0 6px;background:var(--blue);color:#fff;border-radius:8px;font-size:13px;font-weight:800;flex-shrink:0}
+.section h3{font-size:14px;font-weight:800;color:var(--ink);margin:18px 0 8px;text-transform:uppercase;letter-spacing:.04em}
+.section p{color:#334155;margin-bottom:12px}
+.section ul{padding-left:20px;margin-bottom:12px}
+.section li{color:#334155;margin-bottom:6px}
+.section strong{color:var(--ink)}
+.box{border-radius:12px;padding:16px 20px;margin:16px 0;font-size:13px}
+.box-blue{background:#eff6ff;border-left:4px solid var(--blue);color:#1e3a8a}
+.box-green{background:#f0fdf4;border-left:4px solid #22c55e;color:#14532d}
+.box-red{background:#fef2f2;border-left:4px solid #ef4444;color:#7f1d1d}
+.box strong{font-weight:700;color:inherit}
+.forbid li{position:relative;list-style:none;padding-left:24px}
+.forbid li::before{content:"⛔";position:absolute;left:0;font-size:12px}
+.forbid{padding-left:0!important}
+.oblig li{position:relative;list-style:none;padding-left:24px}
+.oblig li::before{content:"✅";position:absolute;left:0;font-size:12px}
+.oblig{padding-left:0!important}
+footer{background:var(--ink);color:#94a3b8;padding:36px 24px;text-align:center;font-size:12px}
+footer a{color:#60a5fa;text-decoration:none}
+footer strong{color:#f1f5f9}
+.footer-divider{border:none;border-top:1px solid #1e293b;margin:20px 0}
+@media print{nav,footer{display:none}.container{padding:0}body{font-size:12px}}
+html:not([data-theme="light"]) .section p,
+html:not([data-theme="light"]) .section li{color:#b9c4d8}
+html:not([data-theme="light"]) footer{background:#0b1120}
+html:not([data-theme="light"]) .box-blue{background:rgba(37,99,235,.10);color:#bcd2ff}
+html:not([data-theme="light"]) .box-green{background:rgba(34,197,94,.10);color:#a7f3c9}
+html:not([data-theme="light"]) .box-red{background:rgba(239,68,68,.10);color:#f7b6b6}
+html[data-theme="light"]{--blue:#2563eb;--ink:#0f172a;--slate:#475569;--line:#e2e8f0;--bg:#f8fafc;--surface:#ffffff}
+html[data-theme="light"] body{background:radial-gradient(120% 70% at 12% -5%,rgba(37,99,235,.06),transparent 55%),var(--bg)}
+html[data-theme="light"] .footer-divider{border-top-color:#e2e8f0}
+</style>
+<script src="/theme.js"></script>
+<script src="/i18n.js" defer></script>
+</head>
+<body>
+
+<nav>
+  <a href="/index.html" class="nav-logo">
+    <img src="/logoevostudio2.png" alt="EvoStudio" height="28" style="display:block;max-width:130px;object-fit:contain" />
+  </a>
+  <span style="display:flex;align-items:center;gap:8px;font-size:12px;color:#64748b">
+    <img src="/logo-egsci.png" alt="EGSCI SARL" style="height:28px;width:auto;object-fit:contain;border-radius:4px">
+  </span>
+  <span style="display:flex;align-items:center;gap:12px">
+    <div id="lang-switch"></div>
+    <a href="/index.html" class="nav-back">← Retour au site</a>
+  </span>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">🛡️ Usage responsable</div>
+  <h1>Charte d'usage acceptable</h1>
+  <p>Les règles d'utilisation d'EvoStudio contre le spam et l'usage abusif. Elles complètent les CGU et s'imposent à tout utilisateur.</p>
+  <div class="hero-meta">
+    <span>📅 Dernière mise à jour : juillet 2026</span>
+    <span>🏢 EGSCI SARL — Côte d'Ivoire</span>
+    <span>🌍 Version française faisant foi</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="box box-red"><strong>Le non-respect de cette Charte entraîne la suspension ou la résiliation immédiate de la licence, sans remboursement</strong>, et peut engager la responsabilité de l'utilisateur.</div>
+
+  <div class="section" id="c1">
+    <h2><span class="num">1</span> Principe général</h2>
+    <p>EvoStudio (EvoSender, EvoExtractor, EvoVérificateur) est un outil destiné à l'<strong>emailing légitime et à la gestion de contacts consentants</strong>. L'Utilisateur s'engage à respecter, en toutes circonstances, <strong>le consentement des destinataires, la transparence de l'expéditeur et l'ensemble des lois applicables</strong> (RGPD, LCEN, CAN-SPAM Act, CASL, et toute réglementation locale des destinataires). La présente Charte complète les <a href="/cgu.html" style="color:var(--blue)">Conditions Générales d'Utilisation</a> et en fait partie intégrante.</p>
+  </div>
+
+  <div class="section" id="c2">
+    <h2><span class="num">2</span> Vous vous engagez à</h2>
+    <ul class="oblig">
+      <li>N'envoyer qu'à des destinataires ayant <strong>consenti</strong> (opt-in) ou pour lesquels vous disposez d'une <strong>base légale</strong> valable.</li>
+      <li><strong>Identifier clairement l'expéditeur</strong> (nom, entité) et l'objet réel du message.</li>
+      <li>Inclure une <strong>adresse postale valide</strong> et un <strong>lien de désinscription fonctionnel</strong> dans chaque envoi.</li>
+      <li><strong>Traiter sans délai</strong> les demandes de désinscription et ne plus contacter les personnes désinscrites.</li>
+      <li>Conserver les <strong>preuves de consentement</strong> de vos contacts.</li>
+      <li>Utiliser vos <strong>propres serveurs SMTP / comptes</strong> dans le respect de leurs conditions.</li>
+      <li>Respecter les conditions des sites tiers lors de toute extraction et la réglementation sur les données personnelles.</li>
+    </ul>
+  </div>
+
+  <div class="section" id="c3">
+    <h2><span class="num">3</span> Il est strictement interdit de</h2>
+
+    <h3>Spam &amp; non-sollicité</h3>
+    <ul class="forbid">
+      <li>Envoyer des emails en masse <strong>non sollicités</strong> à des personnes sans consentement ni base légale.</li>
+      <li>Utiliser des listes <strong>achetées, louées, échangées, collectées ou extraites sans consentement</strong> ni base légale.</li>
+      <li>Contourner, désactiver ou ignorer les <strong>désinscriptions</strong>.</li>
+    </ul>
+
+    <h3>Tromperie &amp; usurpation</h3>
+    <ul class="forbid">
+      <li>Falsifier les <strong>en-têtes</strong>, l'adresse d'expéditeur, l'objet ou le chemin de retour de manière trompeuse.</li>
+      <li><strong>Usurper l'identité</strong> d'une personne, entreprise, marque ou domaine (spoofing, phishing).</li>
+      <li>Dissimuler ou déguiser l'origine des messages dans un but <strong>frauduleux ou illégal</strong>.</li>
+    </ul>
+
+    <h3>Contenus illégaux ou nuisibles</h3>
+    <ul class="forbid">
+      <li>Diffuser des contenus <strong>frauduleux, trompeurs, diffamatoires, haineux, violents, pornographiques illégaux, pédopornographiques</strong>, ou portant atteinte aux droits de tiers.</li>
+      <li>Diffuser des <strong>malwares, rançongiciels, liens malveillants, escroqueries</strong> (arnaques financières, faux supports, faux organismes).</li>
+      <li>Promouvoir des activités <strong>illégales</strong> ou réglementées sans autorisation.</li>
+    </ul>
+
+    <h3>Détournement technique</h3>
+    <ul class="forbid">
+      <li>Utiliser des <strong>proxies, VPN, tunnels ou rotation d'IP</strong> pour dissimuler une <strong>activité illégale</strong> ou contourner un bannissement / une mesure anti-abus.</li>
+      <li>Utiliser les Services pour du <strong>harcèlement</strong>, des attaques (déni de service), du credential stuffing ou toute atteinte à des systèmes tiers.</li>
+      <li><strong>Revendre, partager ou dupliquer</strong> la licence ou la clé de licence.</li>
+    </ul>
+  </div>
+
+  <div class="section" id="c4">
+    <h2><span class="num">4</span> Extraction et vérification</h2>
+    <p>L'extraction (EvoExtractor) et la vérification (EvoVérificateur) d'adresses ne dispensent <strong>jamais</strong> de disposer d'une base légale pour contacter les personnes concernées. La collecte d'adresses aux seules fins d'envoi non sollicité (« email harvesting ») est <strong>interdite</strong> et illégale dans de nombreuses juridictions.</p>
+  </div>
+
+  <div class="section" id="c5">
+    <h2><span class="num">5</span> Signalement d'abus</h2>
+    <p>Tout abus peut être signalé à <strong>abuse@evostudio.fr</strong>. L'Éditeur examine les signalements et peut prendre les mesures prévues aux articles 6 et 7.</p>
+  </div>
+
+  <div class="section" id="c6">
+    <h2><span class="num">6</span> Sanctions</h2>
+    <p>En cas de manquement à la présente Charte, l'Éditeur peut, sans préavis ni remboursement :</p>
+    <ul>
+      <li><strong>suspendre ou désactiver</strong> la licence et l'accès aux Services ;</li>
+      <li><strong>résilier</strong> le contrat ;</li>
+      <li><strong>conserver et transmettre</strong> aux autorités compétentes les informations requises par la loi ou une décision de justice.</li>
+    </ul>
+  </div>
+
+  <div class="section" id="c7">
+    <h2><span class="num">7</span> Responsabilité</h2>
+    <div class="box box-red"><strong>L'Utilisateur est seul responsable</strong> de son usage des Services, de son Contenu et de ses destinataires. Il <strong>garantit et indemnise</strong> l'Éditeur contre toute réclamation, plainte, sanction ou dommage résultant d'un usage contraire à la présente Charte ou à la loi.</div>
+    <div class="box box-green">En utilisant EvoStudio, vous reconnaissez avoir lu, compris et accepté la présente Charte d'usage acceptable.</div>
+  </div>
+
+</div>
+
+<footer>
+  <strong>EXPERT GLOBAL SEVEN COTE D'IVOIRE (EGSCI)</strong><br>
+  SARL Uni-personnelle · N° RCCM CI-ABJ-2018-B-10429 · Capital social : 1 000 000 XOF<br>
+  Anyama, Blankro 1 Extension — Abidjan, Côte d'Ivoire
+  <hr class="footer-divider">
+  <a href="/index.html">Accueil</a> &nbsp;·&nbsp;
+  <a href="/cgu.html">CGU</a> &nbsp;·&nbsp;
+  <a href="/charte-usage-acceptable.html">Charte d'usage</a> &nbsp;·&nbsp;
+  <a href="/privacy.html">Confidentialité</a> &nbsp;·&nbsp;
+  <a href="mailto:support@evostudio.fr">support@evostudio.fr</a>
+  <div style="margin-top:12px;color:#475569">© 2018–2026 EGSCI — EvoStudio. Tous droits réservés.</div>
+</footer>
+
+</body>
+</html>

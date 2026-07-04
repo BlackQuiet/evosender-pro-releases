@@ -70,6 +70,8 @@
       "register.msg_pw_long":"The password is too long (max 72 characters).",
       "register.msg_pw_weak":"The password must contain at least one uppercase letter and one digit.",
       "register.msg_pw_mismatch":"The passwords do not match.",
+      "register.accept":"I accept the <a href=\"/cgu.html\" target=\"_blank\" style=\"color:#3b82f6\">Terms</a> and the <a href=\"/charte-usage-acceptable.html\" target=\"_blank\" style=\"color:#3b82f6\">Acceptable Use Policy</a>.",
+      "register.msg_terms":"You must accept the Terms and the Acceptable Use Policy.",
       "register.msg_created":"✓ Account created! Verifying email...",
       "register.msg_error":"Error during creation.",
       "register.msg_network":"Network error. Try again.",
@@ -94,6 +96,8 @@
       "register.msg_pw_long":"Пароль слишком длинный (макс. 72 символа).",
       "register.msg_pw_weak":"Пароль должен содержать хотя бы одну заглавную букву и одну цифру.",
       "register.msg_pw_mismatch":"Пароли не совпадают.",
+      "register.accept":"Я принимаю <a href=\"/cgu.html\" target=\"_blank\" style=\"color:#3b82f6\">Условия</a> и <a href=\"/charte-usage-acceptable.html\" target=\"_blank\" style=\"color:#3b82f6\">Правила использования</a>.",
+      "register.msg_terms":"Вы должны принять Условия и Правила использования.",
       "register.msg_created":"✓ Аккаунт создан! Подтверждение email...",
       "register.msg_error":"Ошибка при создании.",
       "register.msg_network":"Ошибка сети. Повторите попытку.",
@@ -126,6 +130,10 @@
           <input type="password" id="password2" placeholder="Répéter le mot de passe" data-i18n-ph="register.pw2_ph" required style="padding-right:42px" autocomplete="new-password" />
           <button type="button" class="eye" aria-label="Afficher le mot de passe" data-i18n-aria="register.show_pw" onclick="togglePw('password2',this)"><svg viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></button>
         </div>
+        <label style="display:flex;align-items:flex-start;gap:8px;font-size:12.5px;line-height:1.45;margin:4px 2px 2px;cursor:pointer">
+          <input type="checkbox" id="accept-terms" style="margin-top:2px;flex-shrink:0" />
+          <span data-i18n-html="register.accept">J'accepte les <a href="/cgu.html" target="_blank" style="color:#3b82f6">CGU</a> et la <a href="/charte-usage-acceptable.html" target="_blank" style="color:#3b82f6">Charte d'usage acceptable</a>.</span>
+        </label>
         <button class="btn" type="submit" id="btn" data-i18n="register.submit">Créer mon compte</button>
       </form>
       <div class="msg" id="msg"></div>
@@ -163,6 +171,7 @@
       if (password.length > 72) { msg.className='msg err'; msg.textContent=t('register.msg_pw_long','Le mot de passe est trop long (max 72 caractères).'); return; }
       if (!/[A-Z]/.test(password) || !/[0-9]/.test(password)) { msg.className='msg err'; msg.textContent=t('register.msg_pw_weak','Le mot de passe doit contenir au moins une majuscule et un chiffre.'); return; }
       if (password !== password2) { msg.className='msg err'; msg.textContent=t('register.msg_pw_mismatch','Les mots de passe ne correspondent pas.'); return; }
+      if (!document.getElementById('accept-terms').checked) { msg.className='msg err'; msg.textContent=t('register.msg_terms','Vous devez accepter les CGU et la Charte d\'usage acceptable.'); return; }
       btn.disabled = true; btn.textContent = t('register.submit_loading','Création...');
       try {
         const _cr = new AbortController(); const _tr = setTimeout(() => _cr.abort(), 15000);
