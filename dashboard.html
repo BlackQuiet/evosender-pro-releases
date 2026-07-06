@@ -632,6 +632,12 @@ html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;backgr
             <div><strong data-i18n="dash.dl_mac_name">Mac Silicon M1/M2/M3</strong><span data-i18n="dash.dl_mac_meta">arm64 · .dmg · ~125 MB</span></div>
           </a>
         </div>
+        <div style="margin-top:10px">
+          <a id="dl-mac-intel" href="https://github.com/BlackQuiet/evosender-pro-releases/releases/download/v3.2.5/EvoStudio-3.2.5-x64.dmg" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:#7c3aed;text-decoration:none;font-weight:600;border-bottom:1px dotted rgba(124,58,237,.5)" title="EvoStudio pour Mac Intel (x64)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#7c3aed"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
+            Mac Intel (x64)
+          </a>
+        </div>
         <!-- Notice macOS Gatekeeper -->
         <div data-i18n-html="dash.mac_notice" style="margin-top:12px;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:12px 14px;font-size:12.5px;color:#92400e;line-height:1.6">
           <strong>⚠️ Mac : message "fichier endommagé" ?</strong> C'est une protection macOS normale. Pour ouvrir l'app :<br>
@@ -998,7 +1004,7 @@ function _t(k,fr){return (typeof window.t==='function')?window.t(k,fr):fr;}
 function PROD_LABELS_get(p){var m={sender:_t('dash.prod_sender','📤 EvoSender'),extractor:_t('dash.prod_extractor','🔍 EvoExtractor'),verifier:_t('dash.prod_verifier','✅ EvoVerify'),suite:_t('dash.prod_suite','🌐 Suite EvoStudio'),proxy_5gb:_t('dash.prod_proxy_5gb','🌐 Proxy 5 Go'),proxy_55gb:_t('dash.prod_proxy_55gb','🌐 Proxy 55 Go'),proxy_100gb:_t('dash.prod_proxy_100gb','🌐 Proxy 100 Go'),proxy_200gb:_t('dash.prod_proxy_200gb','🌐 Proxy 200 Go'),proxy_1000gb:_t('dash.prod_proxy_1000gb','🌐 Proxy 1 To'),proxy_2000gb:_t('dash.prod_proxy_2000gb','🌐 Proxy 2 To')};return m[p];}
 function STS_LABELS_get(s){var m={pending:_t('dash.sts_pending','En attente'),paid:_t('dash.sts_paid','Payée'),expired:_t('dash.sts_expired','Expirée'),cancelled:_t('dash.sts_cancelled','Annulée')};return m[s];}
 const CRYPTO_LABEL={usdt:'USDT',btc:'BTC',wave:'XOF',om:'XOF'};
-var _senderNotice='', _supportName='Support EvoStudio', _dlWin='#', _dlMac='#';
+var _senderNotice='', _supportName='Support EvoStudio', _dlWin='https://github.com/BlackQuiet/evosender-pro-releases/releases/latest', _dlMac='https://github.com/BlackQuiet/evosender-pro-releases/releases/download/v3.2.5/EvoStudio-3.2.5-arm64.dmg';
 var _smtpCache={}, _proxyCache={}, _lastUsageMap={};
 var _viewOnlyCgu=false;
 
