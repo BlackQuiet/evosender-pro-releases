@@ -1312,12 +1312,12 @@ async function loadProducts(){
       const t=document.getElementById('support-email-text');if(t)t.textContent=site.support_email;
       const l=document.getElementById('support-link');if(l)l.setAttribute('href','mailto:'+encodeURIComponent(site.support_email));
     }
-    // Liens de téléchargement : le HTML fait foi. Windows → 'releases/latest' (toujours à jour, zéro
-    // maintenance) ; Mac → DMG arm64/x64 versionnés. Override admin DÉSACTIVÉ car les valeurs étaient
-    // périmées (pointaient vers d'anciennes versions et écrasaient le bon lien). Pour changer le lien
-    // Mac à chaque release, éditer directement le href de #dl-mac / #dl-mac-intel dans le HTML.
-    // if(site.download_url_win){const w=document.getElementById('dl-win');if(w)w.href=site.download_url_win;}
-    // if(site.download_url_mac){const m=document.getElementById('dl-mac');if(m)m.href=site.download_url_mac;}
+    // Liens de téléchargement : pilotés par l'admin (Boutique → Liens Windows / Mac) si définis, sinon
+    // fallback HTML à jour (Windows → releases/latest ; Mac → DMG arm64). ⚠️ Garder les valeurs admin
+    // À JOUR à chaque release (une valeur périmée écraserait le bon lien). Champ vide = fallback HTML.
+    // Le lien « Mac Intel (x64) » (#dl-mac-intel) reste piloté par le HTML (pas de champ admin dédié).
+    if(site.download_url_win){const w=document.getElementById('dl-win');if(w)w.href=site.download_url_win;}
+    if(site.download_url_mac){const m=document.getElementById('dl-mac');if(m)m.href=site.download_url_mac;}
 
     // Bandeau « écosystème » piloté depuis l'admin (Contenu du site → Bandeau écosystème).
     // Si le backend ne renvoie rien, le HTML statique par défaut reste affiché.
