@@ -710,7 +710,8 @@
         document.getElementById('pay-sub').textContent =
           t('pay.pay_fiat_sub',`Payez exactement ${montant} XOF via ${moyen} en scannant le QR code ci-dessous`).replace('{amount}',montant).replace('{method}',moyen);
 
-        document.getElementById('qrcode').innerHTML = '';
+        const qrEl = document.getElementById('qrcode');
+        qrEl.innerHTML = '';
         let url = d.address;
         const link = (d.pay_link || '').trim();
         if (link) {
@@ -719,7 +720,16 @@
             url = base + (base.includes('?') ? '&' : '?') + 'amount=' + Math.round(d.price_exact);
           } else { url = link; }
         }
-        new QRCode(document.getElementById('qrcode'), { text: url, width: 160, height: 160 });
+        // GARDE : qrcodejs plante sur une chaîne vide (lien Wave/OM non configuré côté admin),
+        // ce qui interrompait toute la suite (bouton, statut, polling) → spinner figé.
+        // On ne génère le QR que si on a une valeur ; sinon on masque le bloc sans casser la page.
+        const _qr = String(url || '').trim();
+        if (_qr) {
+          try { new QRCode(qrEl, { text: _qr, width: 160, height: 160 }); qrEl.style.display = ''; }
+          catch (e) { qrEl.style.display = 'none'; }
+        } else {
+          qrEl.style.display = 'none';
+        }
         if (link) {
           const a = document.createElement('a');
           a.href = url; a.target = '_blank';
