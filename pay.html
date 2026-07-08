@@ -5,9 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title data-i18n="pay.doc_title">EvoStudio — Paiement</title><link rel="icon" href="/logo-EvoSender.ico" type="image/x-icon" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
-          integrity="sha512-CNvkORF6P1H2eTe7ZCfD8r6H1j1pJLBBlVKrVdHFlRoRcFUcSTHYmzVXwRwH00bFUZ5oVxXDEoOmN8k+VaOjQ=="
-          crossorigin="anonymous"></script>
+  <!-- QR : auto-hébergé (l'ancien lien cdnjs avait un hash SRI erroné → script bloqué par le
+       navigateur → « QR indisponible ». Auto-hébergement = fiable partout, y compris régions où
+       le CDN Cloudflare est lent/bloqué). -->
+  <script src="/qrcode.min.js"></script>
   <style>
     :root{--blue:#3b82f6;--blue-dark:#2563eb;--blue-50:rgba(59,130,246,.13);--blue-100:rgba(59,130,246,.28);--ink:#eef2fb;--slate:#9aa7c2;--slate-2:#6b7896;--line:rgba(255,255,255,.1);--green:#34d399;--amber:#fbbf24;--purple:#a78bfa;--field:rgba(255,255,255,.05)}
     *{box-sizing:border-box;margin:0;padding:0}
