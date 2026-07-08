@@ -516,18 +516,15 @@
       // Visa/Mastercard "non dispo" toujours affiché (dans les deux zones)
       show('btn-card', true);
 
-      if (isAfrica) {
-        // Afrique : ajouter Wave et Orange Money si configurés
-        show('btn-wave', waveOn);
-        show('btn-om', omOn);
-        // Par défaut : Wave si dispo, sinon OM, sinon USDT
-        selectedCrypto = waveOn ? 'wave' : (omOn ? 'om' : 'usdt');
-      } else {
-        // Hors Afrique : masquer Wave/OM
-        show('btn-wave', false);
-        show('btn-om', false);
-        selectedCrypto = 'usdt';
-      }
+      // Wave + Orange Money : disponibles dans TOUS les pays (si activés en admin) — plus
+      // seulement en Afrique. Le paiement se fait en XOF (mobile money), le backend n'impose
+      // aucune restriction de pays.
+      show('btn-wave', waveOn);
+      show('btn-om', omOn);
+      // Défaut : en Afrique on met le mobile money local en avant (Wave puis OM) ; ailleurs on
+      // garde la crypto par défaut, mais Wave/OM restent sélectionnables partout.
+      if (isAfrica) selectedCrypto = waveOn ? 'wave' : (omOn ? 'om' : 'usdt');
+      else selectedCrypto = 'usdt';
       document.querySelectorAll(".pill-btn").forEach(b => b.classList.toggle('active', b.dataset.crypto === selectedCrypto));
     }
 
