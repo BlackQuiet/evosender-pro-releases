@@ -663,6 +663,7 @@ html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;backgr
   <div class="panel" id="panel-licences">
     <div class="panel-title" data-i18n="dash.lic_title">Licences</div>
     <p class="panel-sub" data-i18n="dash.lic_sub">Vos clés de licence EvoStudio actives.</p>
+    <div id="demo-card" style="display:none"></div>
     <div class="sec-lbl">
       <span data-i18n="dash.lic_active">Licences actives</span>
       <a href="/pay.html" class="btn-sm primary"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> <span data-i18n="dash.buy">Acheter</span></a>
@@ -1033,6 +1034,54 @@ function showPanel(id){
   const panel=document.getElementById('panel-'+id);
   if(panel)panel.classList.add('active');
   document.querySelectorAll('[data-panel="'+id+'"]').forEach(i=>i.classList.add('active'));
+  if(id==='licences'&&typeof loadDemoStatus==='function')loadDemoStatus();
+}
+
+// ─── LICENCE DÉMO (essai gratuit 3 jours) ───
+async function loadDemoStatus(){
+  const box=document.getElementById('demo-card');
+  if(!box)return;
+  try{
+    const r=await fetch(API+'/api/auth/demo-status',{headers:authHeaders()});
+    if(!r.ok){box.style.display='none';return;}
+    const d=await r.json();
+    box.style.display='block';
+    if(d.has_demo){
+      const days=d.expires_at?Math.ceil((d.expires_at-Date.now())/86400000):0;
+      let expTxt='';try{expTxt=d.expires_at?new Date(d.expires_at).toLocaleDateString():'';}catch{}
+      const status=d.expired
+        ?'<span style="color:var(--red);font-weight:700">'+_t('dash.demo_expired','Expirée')+'</span>'
+        :'<span style="color:#16a34a;font-weight:700">'+_t('dash.demo_active','Active')+'</span> · '+days+' '+_t('dash.demo_days_left','j restants');
+      box.innerHTML='<div style="border:1px solid #bbf7d0;background:linear-gradient(135deg,#f0fdf4,#eff6ff);border-radius:14px;padding:18px 20px;margin-bottom:18px">'+
+        '<div style="font-weight:800;font-size:14px;color:#15803d;margin-bottom:10px">🎁 '+_t('dash.demo_have_title','Votre licence d\'essai (3 jours)')+'</div>'+
+        '<div id="demo-key" style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:18px;font-weight:800;letter-spacing:1px;color:#1e40af;background:#fff;border:1px dashed #bfdbfe;border-radius:8px;padding:11px 12px;text-align:center;user-select:all">'+esc(d.key)+'</div>'+
+        '<div style="font-size:12px;color:var(--slate-2);margin-top:8px">'+status+(expTxt?(' · '+_t('dash.demo_until','jusqu\'au')+' '+expTxt):'')+'</div>'+
+        '<div style="margin-top:11px"><button class="btn-sm" onclick="copyDemoKey()">'+_t('dash.demo_copy','Copier la clé')+'</button></div>'+
+        '<div style="font-size:11.5px;color:var(--slate-2);margin-top:11px;line-height:1.5">'+_t('dash.demo_note_have','Collez cette clé au 1er lancement de l\'application. Usage unique : activable sur un seul ordinateur.')+'</div>'+
+        '</div>';
+    }else{
+      box.innerHTML='<div style="border:1px solid #ddd6fe;background:linear-gradient(135deg,#faf5ff,#eff6ff);border-radius:14px;padding:18px 20px;margin-bottom:18px">'+
+        '<div style="font-weight:800;font-size:15px;color:#5b21b6;margin-bottom:6px">🎁 '+_t('dash.demo_offer','Essayez EvoStudio gratuitement')+'</div>'+
+        '<div style="font-size:13px;color:var(--slate-2);line-height:1.5;margin-bottom:13px">'+_t('dash.demo_desc','Obtenez une licence d\'essai de la Suite complète (EvoSender + EvoExtractor + EvoVerify) pendant 3 jours. 1 démo par compte, envoyée aussi par email.')+'</div>'+
+        '<button class="btn-sm primary" id="demo-btn" onclick="requestDemo()">'+_t('dash.demo_get','Obtenir ma licence démo 3 jours')+'</button>'+
+        '</div>';
+    }
+  }catch{box.style.display='none';}
+}
+async function requestDemo(){
+  const btn=document.getElementById('demo-btn');
+  if(btn){btn.disabled=true;btn.textContent=_t('dash.demo_loading','Génération…');}
+  try{
+    const r=await fetch(API+'/api/auth/demo-request',{method:'POST',headers:authHeaders()});
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok||!d.ok){showToast(d.error||_t('dash.demo_err','Erreur, réessayez.'));if(btn){btn.disabled=false;btn.textContent=_t('dash.demo_get','Obtenir ma licence démo 3 jours');}return;}
+    showToast(d.already?_t('dash.demo_already','Vous avez déjà une licence démo.'):_t('dash.demo_ok','Licence démo générée ! Envoyée par email.'));
+    loadDemoStatus();
+  }catch{showToast(_t('dash.demo_err','Erreur, réessayez.'));if(btn){btn.disabled=false;btn.textContent=_t('dash.demo_get','Obtenir ma licence démo 3 jours');}}
+}
+function copyDemoKey(){
+  const el=document.getElementById('demo-key');if(!el)return;
+  try{navigator.clipboard.writeText(el.textContent.trim()).then(()=>showToast(_t('dash.demo_copied','Clé copiée !'))).catch(()=>{});}catch{}
 }
 
 // Modals
