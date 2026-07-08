@@ -367,12 +367,26 @@
           <div style="font-size:11px;color:var(--slate);margin-top:6px" data-i18n="pay.status_auto_90">Vérification automatique toutes les 90 secondes</div>
         </div>
       </div>
+
+      <!-- Modale paiement mobile money : QR + confirmation « J'ai payé » (n'agrandit pas le formulaire) -->
+      <div id="pay-modal" style="display:none;position:fixed;inset:0;background:rgba(15,23,42,.62);z-index:1000;align-items:center;justify-content:center;padding:16px" onclick="if(event.target===this)closePayModal()">
+        <div style="background:#fff;border-radius:16px;max-width:340px;width:100%;padding:24px 22px;text-align:center;position:relative;box-shadow:0 24px 70px rgba(0,0,0,.35)">
+          <button onclick="closePayModal()" aria-label="Fermer" style="position:absolute;top:6px;right:12px;background:none;border:none;font-size:26px;line-height:1;cursor:pointer;color:#94a3b8">×</button>
+          <div id="pay-modal-title" style="font-size:16px;font-weight:800;color:#0f172a;margin-bottom:3px">Payer</div>
+          <div id="pay-modal-amount" style="font-size:15px;font-weight:800;color:#2563eb;margin-bottom:16px"></div>
+          <div id="pay-modal-qr" style="display:flex;justify-content:center;align-items:center;min-height:172px;margin-bottom:14px"></div>
+          <a id="pay-modal-link" href="#" target="_blank" rel="noopener" style="display:none;text-decoration:none;color:#fff;border-radius:10px;padding:11px;font-size:14px;font-weight:700;margin-bottom:10px"></a>
+          <button id="pay-modal-paid" onclick="confirmWavePaid()" style="width:100%;background:#16a34a;color:#fff;border:none;border-radius:10px;padding:12px;font-size:14px;font-weight:800;cursor:pointer">✓ J'ai effectué le paiement</button>
+          <div id="pay-modal-note" style="font-size:11px;color:#94a3b8;margin-top:10px;line-height:1.5"></div>
+        </div>
+      </div>
     </main>
   </div>
 
   <script>
     const API = 'https://admin.evostudio.fr';
     const FIAT = ['wave', 'om'];
+    let _wavePay = null;   // { orderId, url, link, moyen, isWave, montant } pour la modale mobile money
     function esc(s) { return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
     let selectedProduct = null;
     let selectedCrypto  = 'usdt';
@@ -708,10 +722,9 @@
         document.querySelector('.addr-label').textContent = t('pay.beneficiary','Bénéficiaire');
         document.querySelector('.addr-box .addr-copy').style.display = 'none';
         document.getElementById('pay-sub').textContent =
-          t('pay.pay_fiat_sub',`Payez exactement ${montant} XOF via ${moyen} en scannant le QR code ci-dessous`).replace('{amount}',montant).replace('{method}',moyen);
+          t('pay.pay_fiat_sub2',`Cliquez sur « Payer avec ${moyen} » pour afficher le QR code et régler exactement ${montant} XOF.`).replace('{amount}',montant).replace(/\{method\}/g,moyen);
 
-        const qrEl = document.getElementById('qrcode');
-        qrEl.innerHTML = '';
+        // URL de paiement (lien marchand + montant exact) → affichée dans la MODALE, pas inline.
         let url = d.address;
         const link = (d.pay_link || '').trim();
         if (link) {
@@ -720,27 +733,22 @@
             url = base + (base.includes('?') ? '&' : '?') + 'amount=' + Math.round(d.price_exact);
           } else { url = link; }
         }
-        // GARDE : qrcodejs plante sur une chaîne vide (lien Wave/OM non configuré côté admin),
-        // ce qui interrompait toute la suite (bouton, statut, polling) → spinner figé.
-        // On ne génère le QR que si on a une valeur ; sinon on masque le bloc sans casser la page.
-        const _qr = String(url || '').trim();
-        if (_qr) {
-          try { new QRCode(qrEl, { text: _qr, width: 160, height: 160 }); qrEl.style.display = ''; }
-          catch (e) { qrEl.style.display = 'none'; }
-        } else {
-          qrEl.style.display = 'none';
-        }
-        if (link) {
-          const a = document.createElement('a');
-          a.href = url; a.target = '_blank';
-          a.className = 'btn'; a.style.cssText = 'display:block;text-align:center;text-decoration:none;margin:-4px 0 18px;background:' + (isWave ? '#1dc3ff' : '#ff7900');
-          a.textContent = (isWave ? '🌊 ' : '🟠 ') + t('pay.pay_with','Payer avec') + ' ' + moyen;
-          document.getElementById('qrcode').after(a);
-        }
+        _wavePay = { orderId: d.order_id, url: String(url || '').trim(), link, moyen, isWave, montant };
+
+        // QR déplacé en modale → on masque la zone inline pour ne pas agrandir le formulaire.
+        const qrEl = document.getElementById('qrcode');
+        qrEl.innerHTML = ''; qrEl.style.display = 'none';
+
+        // Bouton sur le formulaire qui OUVRE la modale (QR + « J'ai payé »).
+        let openBtn = document.getElementById('open-pay-modal');
+        if (!openBtn) { openBtn = document.createElement('button'); openBtn.id = 'open-pay-modal'; qrEl.after(openBtn); }
+        openBtn.style.cssText = 'display:block;width:100%;text-align:center;border:none;cursor:pointer;border-radius:10px;padding:13px;font-size:14px;font-weight:700;color:#fff;margin:2px 0 18px;background:' + (isWave ? '#1dc3ff' : '#ff7900');
+        openBtn.textContent = (isWave ? '🌊 ' : '🟠 ') + t('pay.pay_with','Payer avec') + ' ' + moyen;
+        openBtn.onclick = openWaveModal;
 
         document.querySelector('.warning').innerHTML =
           `${isWave ? '🌊' : '🟠'} ` +
-          t('pay.warn_fiat',`Scannez le QR code ou cliquez sur <strong>« Payer avec ${moyen} »</strong> pour payer <strong>exactement ${montant} XOF</strong> à <strong>EGSCI SARL</strong>. Ce montant unique identifie votre commande. Votre licence sera activée dès validation du paiement.`).replace(/\{method\}/g,moyen).replace('{amount}',montant);
+          t('pay.warn_fiat',`Cliquez sur <strong>« Payer avec ${moyen} »</strong>, réglez <strong>exactement ${montant} XOF</strong> à <strong>EGSCI SARL</strong>, puis confirmez. Votre licence est générée dès validation.`).replace(/\{method\}/g,moyen).replace('{amount}',montant);
 
         document.getElementById('status-text').textContent = t('pay.status_fiat_pending',`En attente de confirmation du paiement ${moyen}…`).replace('{method}',moyen);
         document.querySelector('#status-box div').textContent = t('pay.status_auto_10','Vérification toutes les 10 secondes');
@@ -782,6 +790,54 @@
 
       if (pollInterval) clearInterval(pollInterval);
       pollInterval = setInterval(pollStatus, 10000);
+    }
+
+    // ── Modale mobile money (QR + « J'ai payé ») ──
+    function openWaveModal() {
+      if (!_wavePay) return;
+      const isWave = _wavePay.isWave;
+      document.getElementById('pay-modal-title').textContent = t('pay.pay_with','Payer avec') + ' ' + _wavePay.moyen;
+      document.getElementById('pay-modal-amount').textContent = _wavePay.montant + ' XOF';
+      const qb = document.getElementById('pay-modal-qr');
+      qb.innerHTML = '';
+      if (_wavePay.url) {
+        try { new QRCode(qb, { text: _wavePay.url, width: 172, height: 172 }); }
+        catch (e) { qb.innerHTML = '<div style="color:#94a3b8;font-size:12px;padding:20px">' + t('pay.qr_na','QR indisponible — utilisez le bouton ci-dessous') + '</div>'; }
+      } else {
+        qb.innerHTML = '<div style="color:#94a3b8;font-size:12px;padding:20px">' + t('pay.qr_na','QR indisponible — utilisez le bouton ci-dessous') + '</div>';
+      }
+      const a = document.getElementById('pay-modal-link');
+      if (_wavePay.link) {
+        a.href = _wavePay.url; a.style.display = 'block';
+        a.style.background = isWave ? '#1dc3ff' : '#ff7900';
+        a.textContent = (isWave ? '🌊 ' : '🟠 ') + t('pay.open_app','Ouvrir') + ' ' + _wavePay.moyen;
+      } else { a.style.display = 'none'; }
+      document.getElementById('pay-modal-note').textContent = t('pay.modal_note','Scannez le QR ou ouvrez l\'app, réglez le montant exact, puis confirmez ci-dessus. Votre commande sera validée après vérification.');
+      document.getElementById('pay-modal-paid').textContent = '✓ ' + t('pay.i_paid','J\'ai effectué le paiement');
+      document.getElementById('pay-modal').style.display = 'flex';
+    }
+    function closePayModal() { const m = document.getElementById('pay-modal'); if (m) m.style.display = 'none'; }
+    async function confirmWavePaid() {
+      if (!_wavePay || !_wavePay.orderId) return;
+      const btn = document.getElementById('pay-modal-paid');
+      if (btn) { btn.disabled = true; btn.textContent = t('pay.sending','Envoi…'); }
+      try {
+        const r = await fetch(API + '/api/shop/order/' + _wavePay.orderId + '/paid', { method: 'POST', headers: { ...authHeaders(), 'Content-Type': 'application/json' }, credentials: 'include' });
+        const d = await r.json().catch(() => ({}));
+        if (!r.ok || !d.ok) { showToast(d.error || t('pay.err_retry','Erreur, réessayez.')); if (btn) { btn.disabled = false; btn.textContent = '✓ ' + t('pay.i_paid','J\'ai effectué le paiement'); } return; }
+        closePayModal();
+        renderProcessingBox();
+      } catch { showToast(t('pay.err_retry','Erreur, réessayez.')); if (btn) { btn.disabled = false; btn.textContent = '✓ ' + t('pay.i_paid','J\'ai effectué le paiement'); } }
+    }
+    // Affiche l'état « commande en préparation » (client a déclaré payé, validation admin en attente)
+    function renderProcessingBox() {
+      const box = document.getElementById('status-box');
+      if (!box) return;
+      box.className = 'status-box status-pending';
+      box.innerHTML =
+        '<div style="font-size:22px;margin-bottom:6px">⏳</div>' +
+        '<div style="font-size:15px;font-weight:800;color:#d97706">' + t('pay.processing_title','Commande en préparation') + '</div>' +
+        '<div style="font-size:13px;color:#64748b;margin-top:8px;line-height:1.6">' + t('pay.processing_desc','Nous vérifions la réception de votre paiement. Votre licence sera générée dès validation — vous pouvez garder cette page ouverte.') + '</div>';
     }
 
     function renderPaidBox(d) {
@@ -829,6 +885,8 @@
           clearInterval(pollInterval);
           _lastPaidData = d;
           renderPaidBox(d);
+        } else if (d.status === 'processing') {
+          renderProcessingBox();   // client a déclaré payé → en attente de validation admin
         } else if (d.status === 'expired') {
           clearInterval(pollInterval);
           document.getElementById('status-text').textContent = t('pay.expired','⏱ Commande expirée. Actualisez pour recommencer.');
