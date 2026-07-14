@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EvoStudio — Extraire · Vérifier · Envoyer vos emails en masse</title>
+<meta name="description" content="EvoStudio : la suite email professionnelle tout-en-un. Extraction, vérification et envoi d'emails en masse à haute délivrabilité, 100% local. Essai gratuit 3 jours." />
+<meta name="theme-color" content="#0d1220" />
+<link rel="canonical" href="https://evostudio.fr/pub.html" />
+<link rel="icon" href="/logo-EvoSender.ico" type="image/x-icon" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="EvoStudio — La suite email tout-en-un" />
+<meta property="og:description" content="Extraire · Vérifier · Envoyer. Suite email pro 100% local. Essai gratuit 3 jours." />
+<meta property="og:url" content="https://evostudio.fr/pub.html" />
+<meta property="og:image" content="https://evostudio.fr/logoevostudio2.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="EvoStudio — La suite email tout-en-un" />
+<meta name="twitter:description" content="Extraire · Vérifier · Envoyer. 100% local. Essai gratuit 3 jours." />
+<meta name="twitter:image" content="https://evostudio.fr/logoevostudio2.png" />
+</head>
+<body style="margin:0;background:#080b14">
+<style>
+  :root{
+    --navy:#0d1220; --navy2:#080b14; --tile:#161b27;
+    --gold:#f0bf4a; --goldhi:#ffe6ab; --goldmid:#e3ad3e; --golddeep:#b9831f;
+    --ink:#f5eeddff; --muted:#98a0b6; --green:#63d6a0;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --T:24s;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  .ad-wrap{min-height:100vh;width:100%;background:
+    radial-gradient(120% 90% at 50% -10%,#121a2e 0,transparent 60%),
+    radial-gradient(80% 60% at 50% 120%,rgba(240,191,74,.06),transparent 60%),
+    linear-gradient(160deg,var(--navy),var(--navy2));
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+    padding:18px;font-family:var(--sans)}
+  .stage{position:relative;width:min(94vw,calc(88vh * 16/9));aspect-ratio:16/9;max-width:1120px;
+    background:radial-gradient(90% 120% at 30% 0%,#141b2e,#0c101c 70%);
+    border:1px solid rgba(240,191,74,.16);border-radius:16px;overflow:hidden;
+    container-type:size;box-shadow:0 30px 90px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.04)}
+  .glow{position:absolute;inset:0;background:radial-gradient(40% 55% at 50% 46%,rgba(240,191,74,.14),transparent 70%);
+    animation:glow var(--T) ease-in-out infinite}
+  @keyframes glow{0%,100%{opacity:.5}50%{opacity:1}}
+  .spark{position:absolute;width:.5cqw;height:.5cqw;border-radius:50%;background:var(--gold);opacity:0;
+    box-shadow:0 0 6px var(--gold);animation:drift 7s linear infinite}
+  @keyframes drift{0%{opacity:0;transform:translateY(6cqh) scale(.6)}12%{opacity:.9}88%{opacity:.6}100%{opacity:0;transform:translateY(-8cqh) scale(1)}}
+
+  .scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;opacity:0;padding:4cqw;gap:2.4cqh}
+  .gold{background:linear-gradient(178deg,var(--goldhi),var(--goldmid) 52%,var(--golddeep));
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .logo-svg{width:15cqw;height:15cqw;filter:drop-shadow(0 6px 22px rgba(240,191,74,.28))}
+  .wordmark{font-weight:800;font-size:8.4cqw;letter-spacing:-.02em;line-height:1}
+  .kicker{font-size:2.1cqw;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);font-weight:600}
+  .sub{font-size:2.5cqw;color:var(--muted);font-weight:500;max-width:70cqw;line-height:1.4}
+  .big{font-weight:800;font-size:7.2cqw;letter-spacing:-.02em;line-height:1.02;color:var(--ink);text-wrap:balance}
+
+  /* ---- S1 logo ---- */
+  .s1{animation:sc1 var(--T) infinite}
+  .s1 .logo-svg{animation:pop var(--T) cubic-bezier(.2,1.3,.35,1) infinite}
+  .s1 .wordmark,.s1 .sub{animation:rise var(--T) ease-out infinite}
+  @keyframes sc1{0%{opacity:0}2%{opacity:1}17%{opacity:1}20.5%{opacity:0}100%{opacity:0}}
+  @keyframes pop{0%{transform:scale(.66) rotate(-7deg)}4%{transform:scale(1.07) rotate(0)}8%{transform:scale(1)}100%{transform:scale(1)}}
+  @keyframes rise{0%,3%{transform:translateY(2.5cqh);opacity:0}8%{transform:translateY(0);opacity:1}100%{opacity:1}}
+
+  /* ---- S2 verbs ---- */
+  .s2{animation:sc2 var(--T) infinite}
+  .verbs{display:flex;gap:2.6cqw;flex-wrap:wrap;justify-content:center}
+  .verbs span{font-weight:800;font-size:7cqw;letter-spacing:-.02em}
+  .v1{animation:vlit var(--T) infinite}.v2{animation:vlit2 var(--T) infinite}.v3{animation:vlit3 var(--T) infinite}
+  @keyframes sc2{0%,18%{opacity:0}21%{opacity:1}35%{opacity:1}38%{opacity:0}100%{opacity:0}}
+  @keyframes vlit{0%,20%{opacity:.18;filter:none}23%{opacity:1}100%{opacity:1}}
+  @keyframes vlit2{0%,23%{opacity:.18}26%{opacity:1}100%{opacity:1}}
+  @keyframes vlit3{0%,26%{opacity:.18}29%{opacity:1}100%{opacity:1}}
+
+  /* ---- S3 pipeline ---- */
+  .s3{animation:sc3 var(--T) infinite;gap:5cqh}
+  @keyframes sc3{0%,36%{opacity:0}39%{opacity:1}64%{opacity:1}67%{opacity:0}100%{opacity:0}}
+  .pipe{position:relative;width:80cqw;height:22cqh;display:flex;align-items:flex-start;justify-content:space-between}
+  .track{position:absolute;top:5.4cqh;left:8%;right:8%;height:.35cqh;background:rgba(240,191,74,.18);border-radius:2px}
+  .track::after{content:"";position:absolute;inset:0;width:0;background:linear-gradient(90deg,var(--goldmid),var(--gold));border-radius:2px;animation:fill var(--T) linear infinite}
+  @keyframes fill{0%,45%{width:0}58%{width:100%}66%{width:100%}67%{width:0}100%{width:0}}
+  .station{position:relative;width:26%;display:flex;flex-direction:column;align-items:center;gap:1.3cqh;z-index:2}
+  .node{width:11cqh;height:11cqh;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    background:#141b2c;border:.35cqh solid rgba(240,191,74,.35)}
+  .node svg{width:5.4cqh;height:5.4cqh}
+  .st1 .node{animation:lit1 var(--T) infinite}.st2 .node{animation:lit2 var(--T) infinite}.st3 .node{animation:lit3 var(--T) infinite}
+  @keyframes lit1{0%,45%{background:#141b2c;box-shadow:none}47%{background:#3a2c10;border-color:var(--gold);box-shadow:0 0 0 1.2cqh rgba(240,191,74,.12)}66%{background:#3a2c10;border-color:var(--gold)}67%{background:#141b2c;box-shadow:none}100%{background:#141b2c}}
+  @keyframes lit2{0%,51%{background:#141b2c;box-shadow:none}53%{background:#3a2c10;border-color:var(--gold);box-shadow:0 0 0 1.2cqh rgba(240,191,74,.12)}66%{background:#3a2c10;border-color:var(--gold)}67%{background:#141b2c;box-shadow:none}100%{background:#141b2c}}
+  @keyframes lit3{0%,57%{background:#141b2c;box-shadow:none}59%{background:#3a2c10;border-color:var(--gold);box-shadow:0 0 0 1.2cqh rgba(240,191,74,.12)}66%{background:#3a2c10;border-color:var(--gold)}67%{background:#141b2c;box-shadow:none}100%{background:#141b2c}}
+  .st-name{font-weight:700;font-size:2.4cqw;color:var(--ink)}
+  .st-role{font-size:1.7cqw;color:var(--muted);letter-spacing:.02em}
+  .env{position:absolute;top:2.2cqh;left:8%;width:6cqh;height:6cqh;margin-left:-3cqh;z-index:3;
+    animation:travel var(--T) cubic-bezier(.55,0,.45,1) infinite}
+  .env svg{width:100%;height:100%;filter:drop-shadow(0 4px 12px rgba(240,191,74,.4))}
+  @keyframes travel{0%,44%{left:8%;opacity:0}46%{left:8%;opacity:1}52%{left:50%}58%{left:92%}61%{left:92%;opacity:1}63%{opacity:0}100%{opacity:0}}
+  .badge{position:absolute;top:-1cqh;right:1.5cqw;width:4cqh;height:4cqh;border-radius:50%;background:var(--green);
+    display:flex;align-items:center;justify-content:center;color:#062;font-weight:900;font-size:2.4cqh;opacity:0;transform:scale(0)}
+  .st2 .badge{animation:badge var(--T) cubic-bezier(.2,1.5,.4,1) infinite}
+  .st3 .badge{animation:badge3 var(--T) cubic-bezier(.2,1.5,.4,1) infinite}
+  @keyframes badge{0%,53%{opacity:0;transform:scale(0)}55%{opacity:1;transform:scale(1.15)}57%{transform:scale(1)}66%{opacity:1}67%{opacity:0}100%{opacity:0}}
+  @keyframes badge3{0%,59%{opacity:0;transform:scale(0)}61%{opacity:1;transform:scale(1.15)}63%{transform:scale(1)}66%{opacity:1}67%{opacity:0}100%{opacity:0}}
+  .delivered{font-size:2.3cqw;color:var(--green);font-weight:700;opacity:0;animation:deliv var(--T) infinite}
+  @keyframes deliv{0%,60%{opacity:0;transform:translateY(1cqh)}63%{opacity:1;transform:translateY(0)}64%{opacity:1}67%{opacity:0}100%{opacity:0}}
+
+  /* ---- S4 chips ---- */
+  .s4{animation:sc4 var(--T) infinite;gap:4cqh}
+  @keyframes sc4{0%,65%{opacity:0}68%{opacity:1}82%{opacity:1}85%{opacity:0}100%{opacity:0}}
+  .chips{display:flex;gap:2cqw;flex-wrap:wrap;justify-content:center;max-width:82cqw}
+  .chip{display:flex;align-items:center;gap:1cqw;padding:1.7cqh 2.6cqw;border-radius:999px;
+    background:rgba(240,191,74,.08);border:1px solid rgba(240,191,74,.3);color:var(--ink);
+    font-weight:600;font-size:2.5cqw;white-space:nowrap}
+  .chip b{color:var(--gold);font-size:2.9cqw}
+  .c1{animation:chip var(--T) cubic-bezier(.2,1.4,.4,1) infinite}
+  .c2{animation:chip2 var(--T) cubic-bezier(.2,1.4,.4,1) infinite}
+  .c3{animation:chip3 var(--T) cubic-bezier(.2,1.4,.4,1) infinite}
+  .c4{animation:chip4 var(--T) cubic-bezier(.2,1.4,.4,1) infinite}
+  @keyframes chip{0%,68%{opacity:0;transform:translateY(2cqh) scale(.9)}71%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:1}}
+  @keyframes chip2{0%,70%{opacity:0;transform:translateY(2cqh) scale(.9)}73%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:1}}
+  @keyframes chip3{0%,72%{opacity:0;transform:translateY(2cqh) scale(.9)}75%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:1}}
+  @keyframes chip4{0%,74%{opacity:0;transform:translateY(2cqh) scale(.9)}77%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:1}}
+
+  /* ---- S5 CTA ---- */
+  .s5{animation:sc5 var(--T) infinite;gap:2.6cqh}
+  @keyframes sc5{0%,83%{opacity:0}86%{opacity:1}98%{opacity:1}100%{opacity:0}}
+  .s5 .logo-svg{width:11cqw;height:11cqw}
+  .s5 .url{font-weight:800;font-size:7.6cqw;letter-spacing:-.01em}
+  .cta-btn{margin-top:1.4cqh;padding:2cqh 4cqw;border-radius:999px;font-weight:800;font-size:2.7cqw;color:#20160a;
+    background:linear-gradient(180deg,var(--goldhi),var(--goldmid));box-shadow:0 8px 26px rgba(240,191,74,.35);
+    animation:pulse 2.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}
+  .trial{font-size:2.4cqw;color:var(--gold);font-weight:600;letter-spacing:.03em}
+
+  .tl{position:absolute;left:0;bottom:0;height:.5cqh;width:100%;background:rgba(255,255,255,.06)}
+  .tl i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--goldmid),var(--goldhi));animation:tl var(--T) linear infinite}
+  @keyframes tl{0%{width:0}100%{width:100%}}
+  .corner{position:absolute;top:2.6cqh;left:2.6cqw;display:flex;align-items:center;gap:.9cqw;opacity:0;animation:corner var(--T) infinite;z-index:5}
+  .corner svg{width:4cqh;height:4cqh}.corner span{font-weight:800;font-size:2.4cqw}
+  @keyframes corner{0%,20%{opacity:0}23%{opacity:.92}82%{opacity:.92}86%{opacity:0}100%{opacity:0}}
+
+  .controls{display:flex;gap:10px;align-items:center}
+  .controls button{font-family:var(--sans);font-weight:600;font-size:13px;color:var(--ink);cursor:pointer;
+    background:rgba(240,191,74,.1);border:1px solid rgba(240,191,74,.35);border-radius:999px;padding:8px 16px}
+  .controls button:hover{background:rgba(240,191,74,.2)}
+  .controls .hint{color:var(--muted);font-size:12px}
+  .paused *{animation-play-state:paused!important}
+
+  @media (prefers-reduced-motion:reduce){
+    .glow,.spark,.tl i{animation:none}
+    .scene{animation:none!important;opacity:0}
+    .scene *{animation:none!important;opacity:1;transform:none!important}
+    .s5{opacity:1}
+  }
+</style>
+
+<div class="ad-wrap">
+  <div class="stage" id="stage">
+    <div class="glow"></div>
+    <div class="spark" style="left:18%;animation-delay:0s"></div>
+    <div class="spark" style="left:32%;animation-delay:2.1s"></div>
+    <div class="spark" style="left:47%;animation-delay:4.4s"></div>
+    <div class="spark" style="left:63%;animation-delay:1.2s"></div>
+    <div class="spark" style="left:78%;animation-delay:3.3s"></div>
+    <div class="spark" style="left:88%;animation-delay:5.5s"></div>
+
+    <div class="corner">
+      <svg viewBox="0 0 64 64"><defs><linearGradient id="cg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe19a"/><stop offset=".55" stop-color="#e3ad3e"/><stop offset="1" stop-color="#b9831f"/></linearGradient></defs><rect x="2" y="2" width="60" height="60" rx="15" fill="#161b27"/><rect x="12" y="24" width="34" height="22" rx="4" fill="url(#cg)"/><path d="M14 27 L29 37 L44 27" fill="none" stroke="#161b27" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M50 11 L52.4 17.6 L59 20 L52.4 22.4 L50 29 L47.6 22.4 L41 20 L47.6 17.6 Z" fill="#ffd980"/></svg>
+      <span class="gold">EvoStudio</span>
+    </div>
+
+    <!-- S1 -->
+    <div class="scene s1">
+      <svg class="logo-svg" viewBox="0 0 64 64"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe19a"/><stop offset=".55" stop-color="#e3ad3e"/><stop offset="1" stop-color="#b9831f"/></linearGradient></defs><rect x="2" y="2" width="60" height="60" rx="15" fill="#161b27"/><rect x="12" y="24" width="34" height="22" rx="4" fill="url(#g1)"/><path d="M14 27 L29 37 L44 27" fill="none" stroke="#161b27" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M50 11 L52.4 17.6 L59 20 L52.4 22.4 L50 29 L47.6 22.4 L41 20 L47.6 17.6 Z" fill="#ffd980"/></svg>
+      <div class="wordmark gold">EvoStudio</div>
+      <div class="sub">Suite email professionnelle</div>
+    </div>
+
+    <!-- S2 -->
+    <div class="scene s2">
+      <div class="verbs"><span class="v1 gold">Extraire.</span><span class="v2 gold">Vérifier.</span><span class="v3 gold">Envoyer.</span></div>
+      <div class="sub">Toute votre chaîne emailing dans un seul outil — 100&nbsp;% local.</div>
+    </div>
+
+    <!-- S3 pipeline -->
+    <div class="scene s3">
+      <div class="kicker">Un flux, trois outils</div>
+      <div class="pipe">
+        <div class="track"></div>
+        <div class="station st1">
+          <div class="node"><svg viewBox="0 0 24 24" fill="none" stroke="#f0bf4a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></div>
+          <div class="st-name">EvoExtractor</div><div class="st-role">Extraire</div>
+        </div>
+        <div class="station st2">
+          <div class="node"><svg viewBox="0 0 24 24" fill="none" stroke="#f0bf4a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 20 6v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6Z"/><path d="m9 12 2 2 4-4"/></svg><div class="badge">✓</div></div>
+          <div class="st-name">EvoVerify</div><div class="st-role">Vérifier</div>
+        </div>
+        <div class="station st3">
+          <div class="node"><svg viewBox="0 0 24 24" fill="none" stroke="#f0bf4a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4Z"/></svg><div class="badge">✓</div></div>
+          <div class="st-name">EvoSender</div><div class="st-role">Envoyer</div>
+        </div>
+        <div class="env"><svg viewBox="0 0 64 64"><defs><linearGradient id="ge" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe19a"/><stop offset="1" stop-color="#e3ad3e"/></linearGradient></defs><rect x="2" y="2" width="60" height="60" rx="15" fill="#1b2233"/><rect x="12" y="22" width="40" height="26" rx="4" fill="url(#ge)"/><path d="M14 26 L32 39 L50 26" fill="none" stroke="#1b2233" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="delivered">✓ Livré en boîte de réception</div>
+    </div>
+
+    <!-- S4 -->
+    <div class="scene s4">
+      <div class="kicker">Pourquoi EvoStudio</div>
+      <div class="chips">
+        <div class="chip c1"><b>100&nbsp;%</b> local</div>
+        <div class="chip c2">Rotation <b>multi‑SMTP</b></div>
+        <div class="chip c3">Haute <b>délivrabilité</b></div>
+        <div class="chip c4">Conforme <b>RGPD</b></div>
+      </div>
+      <div class="sub">Vos listes restent sur votre machine. Aucun serveur tiers.</div>
+    </div>
+
+    <!-- S5 CTA -->
+    <div class="scene s5">
+      <svg class="logo-svg" viewBox="0 0 64 64"><defs><linearGradient id="g5" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe19a"/><stop offset=".55" stop-color="#e3ad3e"/><stop offset="1" stop-color="#b9831f"/></linearGradient></defs><rect x="2" y="2" width="60" height="60" rx="15" fill="#161b27"/><rect x="12" y="24" width="34" height="22" rx="4" fill="url(#g5)"/><path d="M14 27 L29 37 L44 27" fill="none" stroke="#161b27" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M50 11 L52.4 17.6 L59 20 L52.4 22.4 L50 29 L47.6 22.4 L41 20 L47.6 17.6 Z" fill="#ffd980"/></svg>
+      <div class="trial">✦ Essai gratuit 3 jours ✦</div>
+      <div class="url gold">evostudio.fr</div>
+      <div class="cta-btn">Télécharger EvoStudio →</div>
+    </div>
+
+    <div class="tl"><i></i></div>
+  </div>
+  <a href="/" style="margin-top:4px;padding:13px 30px;border-radius:999px;font-weight:800;font-size:15px;text-decoration:none;color:#20160a;background:linear-gradient(180deg,#ffe19a,#e3ad3e);box-shadow:0 10px 30px rgba(240,191,74,.32);font-family:system-ui,-apple-system,'Segoe UI',sans-serif">Découvrir EvoStudio →</a>
+</div>
+</body>
+</html>
