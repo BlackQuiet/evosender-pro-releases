@@ -1472,6 +1472,7 @@ window.addEventListener('evo-langchange',function(){
   var KEY='evo_intro_seen';
   try{ if(localStorage.getItem(KEY)) return; }catch(e){ return; }
   var m=document.getElementById('evoIntro'); if(!m) return;
+  if(!window.matchMedia||!window.matchMedia('(min-width:768px)').matches) return; // desktop uniquement (SEO mobile : pas d'interstitiel)
   var opened=false;
   function open(){ if(opened) return; opened=true;
     var f=document.getElementById('evoIntroFrame'); if(f && !f.src) f.src=f.getAttribute('data-src');
