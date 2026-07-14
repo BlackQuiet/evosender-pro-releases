@@ -734,6 +734,30 @@ footer{background:#0f172a;border-top:1px solid #1e293b;color:var(--slate-2)}
 
 <!-- ═══ HERO ═══ -->
 <header class="hero">
+  <style>
+  header.hero{background:linear-gradient(135deg,#0a1020,#0d1a35 60%,#0a1226)!important}
+  header.hero .hero-carousel{position:relative;z-index:1}
+  header.hero h1{color:#fff!important}
+  header.hero .hero-sub{color:rgba(255,255,255,.62)!important}
+  header.hero .hero-lic{color:rgba(255,255,255,.34)!important}
+  .hero-anim{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:linear-gradient(135deg,#0a1020,#0d1a35 58%,#0a1226)}
+  .hero-anim .ha-glow{position:absolute;right:-12%;top:-25%;width:65%;height:150%;background:radial-gradient(circle at 50% 50%,rgba(240,191,74,.16),transparent 62%);animation:haGlow 9s ease-in-out infinite}
+  .hero-anim .ha-env{position:absolute;opacity:0;filter:drop-shadow(0 4px 12px rgba(0,0,0,.35));animation:haFly linear infinite;will-change:transform,opacity}
+  .hero-anim .ha-env use{color:inherit}
+  .hero-anim .ha-spark{position:absolute;width:4px;height:4px;border-radius:50%;background:#f0bf4a;box-shadow:0 0 8px #f0bf4a;opacity:0;animation:haTw 6s ease-in-out infinite}
+  .hero-anim .ha-veil{position:absolute;inset:0;background:linear-gradient(90deg,rgba(9,14,26,.95) 0%,rgba(9,14,26,.6) 40%,rgba(9,14,26,.14) 72%,rgba(9,14,26,0) 100%)}
+  @keyframes haFly{0%{transform:translate(0,34px) rotate(-6deg);opacity:0}13%{opacity:var(--o,.4)}82%{opacity:var(--o,.4)}100%{transform:translate(72px,-84px) rotate(6deg);opacity:0}}
+  @keyframes haGlow{0%,100%{opacity:.4}50%{opacity:.9}}
+  @keyframes haTw{0%,100%{opacity:0;transform:scale(.6)}50%{opacity:.9;transform:scale(1)}}
+  @media (prefers-reduced-motion:reduce){.hero-anim .ha-env,.hero-anim .ha-spark,.hero-anim .ha-glow{animation:none}.hero-anim .ha-env{opacity:var(--o,.4)}}
+  </style>
+  <div class="hero-anim" aria-hidden="true">
+    <svg width="0" height="0" style="position:absolute"><defs><linearGradient id="haGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe19a"/><stop offset=".55" stop-color="#e3ad3e"/><stop offset="1" stop-color="#b9831f"/></linearGradient><symbol id="haEnv" viewBox="0 0 64 48"><rect x="2" y="4" width="60" height="40" rx="6" fill="url(#haGrad)"/><path d="M6 11 L32 30 L58 11" fill="none" stroke="#0d1526" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></symbol></defs></svg>
+    <div class="ha-glow"></div>
+    <svg class="ha-env" style="left:58%;top:68%;width:54px;--o:0.5;animation-duration:17s;animation-delay:0s"><use href="#haEnv"/></svg><svg class="ha-env" style="left:74%;top:28%;width:40px;--o:0.4;animation-duration:21s;animation-delay:-7s"><use href="#haEnv"/></svg><svg class="ha-env" style="left:86%;top:60%;width:62px;--o:0.55;animation-duration:18s;animation-delay:-12s"><use href="#haEnv"/></svg><svg class="ha-env" style="left:50%;top:84%;width:34px;--o:0.32;animation-duration:23s;animation-delay:-4s"><use href="#haEnv"/></svg><svg class="ha-env" style="left:90%;top:18%;width:44px;--o:0.46;animation-duration:15s;animation-delay:-10s"><use href="#haEnv"/></svg><svg class="ha-env" style="left:64%;top:44%;width:30px;--o:0.28;animation-duration:25s;animation-delay:-16s"><use href="#haEnv"/></svg>
+    <span class="ha-spark" style="left:46%;top:30%;animation-delay:0s"></span><span class="ha-spark" style="left:60%;top:72%;animation-delay:-3s"></span><span class="ha-spark" style="left:80%;top:40%;animation-delay:-6s"></span><span class="ha-spark" style="left:88%;top:80%;animation-delay:-1.5s"></span><span class="ha-spark" style="left:70%;top:20%;animation-delay:-4.5s"></span>
+    <div class="ha-veil"></div>
+  </div>
   <div class="wrap">
     <div class="hero-carousel" id="hero-carousel">
 
@@ -756,52 +780,6 @@ footer{background:#0f172a;border-top:1px solid #1e293b;color:var(--slate-2)}
         </div>
       </div>
       <div class="hero-right" style="position:relative">
-        <!-- Démo animée du produit : flux Extraire → Vérifier → Envoyer (remplace l'écran statique) -->
-        <style>
-        .hv-wrap{width:100%;max-width:340px;margin:0 auto 18px}
-        .hv-card{position:relative;border-radius:16px;overflow:hidden;background:radial-gradient(120% 90% at 30% 0%,#18223a,#0c1526 72%);border:1px solid rgba(240,191,74,.28);box-shadow:0 20px 46px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.05);padding:14px 16px 15px}
-        .hv-bar{display:flex;align-items:center;gap:8px;margin-bottom:20px}
-        .hv-dots{display:flex;gap:5px}.hv-dots i{width:8px;height:8px;border-radius:50%;display:block}
-        .hv-logo{width:22px;height:22px;display:block;margin-left:2px}
-        .hv-name{font-weight:800;font-size:12.5px;background:linear-gradient(180deg,#ffe19a,#e3ad3e 55%,#b9831f);-webkit-background-clip:text;background-clip:text;color:transparent}
-        .hv-ver{margin-left:auto;font-size:10px;color:#8a93a7}
-        .hv-pipe{position:relative;display:flex;justify-content:space-between;padding:2px 4px}
-        .hv-track{position:absolute;left:34px;right:34px;top:27px;height:3px;background:rgba(240,191,74,.16);border-radius:2px;overflow:hidden}
-        .hv-track::after{content:"";position:absolute;inset:0;width:0;border-radius:2px;background:linear-gradient(90deg,#e3ad3e,#f0bf4a);animation:hvfill 8s linear infinite}
-        .hv-step{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;width:33%}
-        .hv-node{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#141d31;border:2px solid rgba(240,191,74,.32)}
-        .hv-node svg{width:22px;height:22px;stroke:#f0bf4a;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-        .hv-s1 .hv-node{animation:hvl1 8s infinite}.hv-s2 .hv-node{animation:hvl2 8s infinite}.hv-s3 .hv-node{animation:hvl3 8s infinite}
-        .hv-lab{font-size:11px;font-weight:700;color:#d3d9e8}
-        .hv-env{position:absolute;top:5px;left:16.5%;width:36px;height:36px;margin-left:-18px;z-index:3;animation:hvtravel 8s cubic-bezier(.6,0,.4,1) infinite}
-        .hv-env svg{width:100%;height:100%;filter:drop-shadow(0 3px 8px rgba(240,191,74,.45))}
-        .hv-foot{display:flex;align-items:center;justify-content:center;margin-top:16px;height:16px}
-        .hv-status{font-size:11.5px;font-weight:700;color:#63d6a0;opacity:0;animation:hvstatus 8s infinite}
-        @keyframes hvtravel{0%,8%{left:16.5%;opacity:0}12%{opacity:1}16%{left:16.5%}40%{left:50%}64%{left:83.5%}68%{opacity:1}73%{opacity:0}100%{left:16.5%;opacity:0}}
-        @keyframes hvfill{0%,14%{width:0}64%{width:100%}73%{width:100%}75%{width:0}100%{width:0}}
-        @keyframes hvl1{0%,13%{background:#141d31;box-shadow:none;border-color:rgba(240,191,74,.32)}16%{background:#3a2c10;border-color:#f0bf4a;box-shadow:0 0 0 5px rgba(240,191,74,.1)}73%{background:#3a2c10;border-color:#f0bf4a}75%{background:#141d31;box-shadow:none;border-color:rgba(240,191,74,.32)}100%{background:#141d31}}
-        @keyframes hvl2{0%,39%{background:#141d31;box-shadow:none;border-color:rgba(240,191,74,.32)}42%{background:#3a2c10;border-color:#f0bf4a;box-shadow:0 0 0 5px rgba(240,191,74,.1)}73%{background:#3a2c10;border-color:#f0bf4a}75%{background:#141d31;box-shadow:none;border-color:rgba(240,191,74,.32)}100%{background:#141d31}}
-        @keyframes hvl3{0%,63%{background:#141d31;box-shadow:none;border-color:rgba(240,191,74,.32)}66%{background:#3a2c10;border-color:#f0bf4a;box-shadow:0 0 0 5px rgba(240,191,74,.1)}73%{background:#3a2c10;border-color:#f0bf4a}75%{background:#141d31;box-shadow:none;border-color:rgba(240,191,74,.32)}100%{background:#141d31}}
-        @keyframes hvstatus{0%,64%{opacity:0;transform:translateY(4px)}68%{opacity:1;transform:translateY(0)}73%{opacity:1}79%{opacity:0}100%{opacity:0}}
-        @media (prefers-reduced-motion:reduce){.hv-track::after,.hv-env,.hv-status,.hv-s1 .hv-node,.hv-s2 .hv-node,.hv-s3 .hv-node{animation:none}.hv-env{opacity:1;left:50%}}
-        </style>
-        <div class="hv-wrap" aria-hidden="true">
-          <div class="hv-card">
-            <div class="hv-bar">
-              <div class="hv-dots"><i style="background:#ef4444"></i><i style="background:#f59e0b"></i><i style="background:#22c55e"></i></div>
-              <svg class="hv-logo" viewBox="0 0 64 64"><defs><linearGradient id="hvg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe19a"/><stop offset=".55" stop-color="#e3ad3e"/><stop offset="1" stop-color="#b9831f"/></linearGradient></defs><rect x="2" y="2" width="60" height="60" rx="15" fill="#161b27"/><rect x="12" y="24" width="34" height="22" rx="4" fill="url(#hvg)"/><path d="M14 27 L29 37 L44 27" fill="none" stroke="#161b27" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M50 11 L52.4 17.6 L59 20 L52.4 22.4 L50 29 L47.6 22.4 L41 20 L47.6 17.6 Z" fill="#ffd980"/></svg>
-              <span class="hv-name">EvoStudio</span><span class="hv-ver">Suite Email Pro</span>
-            </div>
-            <div class="hv-pipe">
-              <div class="hv-track"></div>
-              <div class="hv-step hv-s1"><div class="hv-node"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></div><span class="hv-lab" data-i18n="home.hv_extract">Extraire</span></div>
-              <div class="hv-step hv-s2"><div class="hv-node"><svg viewBox="0 0 24 24"><path d="M12 2 20 6v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6Z"/><path d="m9 12 2 2 4-4"/></svg></div><span class="hv-lab" data-i18n="home.hv_verify">Vérifier</span></div>
-              <div class="hv-step hv-s3"><div class="hv-node"><svg viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4Z"/></svg></div><span class="hv-lab" data-i18n="home.hv_send">Envoyer</span></div>
-              <div class="hv-env"><svg viewBox="0 0 64 64"><defs><linearGradient id="hve" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe19a"/><stop offset="1" stop-color="#e3ad3e"/></linearGradient></defs><rect x="4" y="13" width="56" height="38" rx="6" fill="url(#hve)"/><path d="M8 19 L32 36 L56 19" fill="none" stroke="#161b27" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            </div>
-            <div class="hv-foot"><span class="hv-status" data-i18n="home.hv_delivered">✓ Livré en boîte de réception</span></div>
-          </div>
-        </div>
         <p class="hero-lic" data-i18n-html="home.hero_lic_full" style="position:relative;z-index:1;text-align:center;margin-bottom:0">Licence requise · <a href="/pay.html">Obtenir une licence →</a></p>
         <div style="position:relative;z-index:1;display:flex;gap:16px;justify-content:center;margin-top:14px">
           <a id="dl-win" href="https://github.com/BlackQuiet/evosender-pro-releases/releases/latest" class="hero-dl-ico" title="Windows 10 / 11 · x64 · .exe · ~95 MB" aria-label="Windows 10 / 11">
