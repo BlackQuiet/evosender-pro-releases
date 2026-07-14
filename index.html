@@ -1446,5 +1446,44 @@ window.addEventListener('evo-langchange',function(){
 });
 </script>
 <script src="/assistance.js" defer></script>
+
+<!-- Popup pub — 1re visite (par navigateur, localStorage) -->
+<style>
+.evo-intro{display:none;position:fixed;inset:0;z-index:99999;align-items:center;justify-content:center;padding:18px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif}
+.evo-intro.show{display:flex}
+.evo-intro-bd{position:absolute;inset:0;background:rgba(6,10,20,.8);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.evo-intro-card{position:relative;width:min(880px,96vw);border-radius:16px;overflow:hidden;box-shadow:0 34px 100px rgba(0,0,0,.6);animation:evoIn .4s cubic-bezier(.2,1.2,.35,1)}
+.evo-intro-x{position:absolute;top:10px;right:10px;z-index:4;width:34px;height:34px;border-radius:50%;border:none;cursor:pointer;background:rgba(0,0,0,.5);color:#fff;font-size:15px;line-height:1;display:flex;align-items:center;justify-content:center}
+.evo-intro-x:hover{background:rgba(0,0,0,.78)}
+.evo-intro-frame{position:relative;width:100%;aspect-ratio:16/10;background:#0a0e18}
+.evo-intro-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+@keyframes evoIn{0%{opacity:0;transform:scale(.94) translateY(10px)}100%{opacity:1;transform:scale(1) translateY(0)}}
+@media(max-width:560px){.evo-intro-frame{aspect-ratio:4/5}}
+</style>
+<div class="evo-intro" id="evoIntro" role="dialog" aria-modal="true" aria-label="Présentation EvoStudio">
+  <div class="evo-intro-bd" data-close></div>
+  <div class="evo-intro-card">
+    <button class="evo-intro-x" data-close aria-label="Fermer">✕</button>
+    <div class="evo-intro-frame"><iframe id="evoIntroFrame" data-src="/pub.html" title="Présentation animée EvoStudio" scrolling="no" loading="lazy"></iframe></div>
+  </div>
+</div>
+<script>
+(function(){
+  var KEY='evo_intro_seen';
+  try{ if(localStorage.getItem(KEY)) return; }catch(e){ return; }
+  var m=document.getElementById('evoIntro'); if(!m) return;
+  var opened=false;
+  function open(){ if(opened) return; opened=true;
+    var f=document.getElementById('evoIntroFrame'); if(f && !f.src) f.src=f.getAttribute('data-src');
+    m.classList.add('show'); document.documentElement.style.overflow='hidden';
+    try{ localStorage.setItem(KEY,'1'); }catch(e){} }
+  function close(){ m.classList.remove('show'); document.documentElement.style.overflow='';
+    var f=document.getElementById('evoIntroFrame'); if(f) f.src='about:blank'; }
+  setTimeout(open, 1200);
+  m.querySelectorAll('[data-close]').forEach(function(el){ el.addEventListener('click', close); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && m.classList.contains('show')) close(); });
+})();
+</script>
+
 </body>
 </html>
