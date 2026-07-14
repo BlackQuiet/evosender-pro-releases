@@ -1,13 +1,13 @@
-:root{--blue:#3b82f6;--blue-dark:#2563eb;--ink:#eef2fb;--slate:#9aa7c2;--slate-2:#6b7896;--line:rgba(255,255,255,.09);--cyan:#22d3ee;--purple:#a78bfa}
+:root{--blue:#d29a2b;--blue-dark:#b9831f;--ink:#eef2fb;--slate:#9aa7c2;--slate-2:#6b7896;--line:rgba(255,255,255,.09);--cyan:#f2c94c;--purple:#dcb968}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.65;min-height:100vh;background:radial-gradient(120% 70% at 12% -5%,rgba(37,99,235,.16),transparent 55%),radial-gradient(90% 60% at 100% 0%,rgba(124,58,237,.14),transparent 55%),#070a14;background-attachment:fixed}
-a{color:#60a5fa}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.65;min-height:100vh;background:radial-gradient(120% 70% at 12% -5%,rgba(185,131,31,.16),transparent 55%),radial-gradient(90% 60% at 100% 0%,rgba(169,120,26,.14),transparent 55%),#070a14;background-attachment:fixed}
+a{color:#e6b756}
 .nav{position:sticky;top:0;z-index:50;background:rgba(7,10,20,.72);backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:12px 22px;gap:12px;flex-wrap:wrap}
 .nav .logo img{display:block;height:32px;max-width:150px;object-fit:contain}
 .nav .links{display:flex;gap:4px;align-items:center;flex-wrap:wrap}
 .nav .links a{color:var(--slate);text-decoration:none;font-size:13px;font-weight:500;padding:7px 11px;border-radius:8px}
 .nav .links a:hover{background:rgba(255,255,255,.06);color:#fff}
-.nav .links a.cta{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;box-shadow:0 6px 20px rgba(59,130,246,.35)}
+.nav .links a.cta{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;box-shadow:0 6px 20px rgba(224,169,60,.35)}
 .nav .links a.cta:hover{filter:brightness(1.08)}
 .container{max-width:760px;margin:0 auto;padding:42px 20px 70px}
 .crumb{font-size:13px;color:var(--slate);margin-bottom:18px}
@@ -21,8 +21,8 @@ article p{margin-bottom:14px;color:var(--slate)}
 article ul,article ol{margin:0 0 16px 22px;color:var(--slate)}
 article li{margin-bottom:7px}
 article strong{color:#fff}
-.callout{background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.25);border-radius:12px;padding:16px 18px;margin:22px 0;font-size:14.5px;color:#bcd0f5;line-height:1.6}
-.cta-box{position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(37,99,235,.92),rgba(124,58,237,.86));border-radius:16px;padding:30px;margin:34px 0;text-align:center;color:#fff;box-shadow:0 24px 60px rgba(59,130,246,.28)}
+.callout{background:rgba(224,169,60,.1);border:1px solid rgba(224,169,60,.25);border-radius:12px;padding:16px 18px;margin:22px 0;font-size:14.5px;color:#bcd0f5;line-height:1.6}
+.cta-box{position:relative;overflow:hidden;background:linear-gradient(135deg,rgba(185,131,31,.92),rgba(169,120,26,.86));border-radius:16px;padding:30px;margin:34px 0;text-align:center;color:#fff;box-shadow:0 24px 60px rgba(224,169,60,.28)}
 .cta-box h3{color:#fff;font-size:19px;margin-bottom:6px}
 .cta-box p{color:rgba(255,255,255,.82);margin-bottom:16px;font-size:14px}
 .btn{display:inline-block;background:#fff;color:#0a0f1e;text-decoration:none;border-radius:10px;padding:12px 24px;font-weight:700;font-size:14.5px}
@@ -39,8 +39,8 @@ article strong{color:#fff}
 .blog-hero p{color:var(--slate);font-size:15px;margin-top:8px}
 .posts{display:grid;gap:16px}
 .post{display:block;text-decoration:none;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:14px;padding:22px;transition:.15s}
-.post:hover{border-color:rgba(59,130,246,.4);box-shadow:0 12px 30px rgba(59,130,246,.12);transform:translateY(-2px)}
-.post .tag{font-size:11px;font-weight:700;color:#7dd3fc;text-transform:uppercase;letter-spacing:.05em}
+.post:hover{border-color:rgba(224,169,60,.4);box-shadow:0 12px 30px rgba(224,169,60,.12);transform:translateY(-2px)}
+.post .tag{font-size:11px;font-weight:700;color:#f0d99e;text-transform:uppercase;letter-spacing:.05em}
 .post h2{font-size:18px;font-weight:800;color:#fff;margin:7px 0 5px}
 .post p{color:var(--slate);font-size:13.5px;line-height:1.55}
 @media(max-width:600px){article h1{font-size:27px}.blog-hero h1{font-size:26px}.container{padding:30px 16px 50px}}
@@ -52,15 +52,15 @@ article strong{color:#fff}
 html[data-theme="light"] .theme-toggle .ic-moon{display:none}html[data-theme="light"] .theme-toggle .ic-sun{display:block}
 
 /* ═══ MODE CLAIR ═══ */
-html[data-theme="light"]{--blue:#2563eb;--ink:#0f172a;--slate:#475569;--slate-2:#94a3b8;--line:#e6ebf3}
-html[data-theme="light"] body{background:radial-gradient(120% 70% at 12% -5%,rgba(37,99,235,.07),transparent 55%),radial-gradient(90% 60% at 100% 0%,rgba(124,58,237,.05),transparent 55%),#f4f7fc}
-html[data-theme="light"] a{color:#2563eb}
+html[data-theme="light"]{--blue:#b9831f;--ink:#0f172a;--slate:#475569;--slate-2:#94a3b8;--line:#e6ebf3}
+html[data-theme="light"] body{background:radial-gradient(120% 70% at 12% -5%,rgba(185,131,31,.07),transparent 55%),radial-gradient(90% 60% at 100% 0%,rgba(169,120,26,.05),transparent 55%),#f4f7fc}
+html[data-theme="light"] a{color:#b9831f}
 html[data-theme="light"] .nav{background:rgba(255,255,255,.88)}
 html[data-theme="light"] .nav .links a:hover{background:#f1f5f9;color:#0f172a}
 html[data-theme="light"] .theme-toggle{background:#fff;border-color:#e2e8f0}
 html[data-theme="light"] .theme-toggle:hover{color:#0f172a;background:#f1f5f9}
 html[data-theme="light"] article h1,html[data-theme="light"] article h2,html[data-theme="light"] article h3,html[data-theme="light"] article strong,html[data-theme="light"] .related h2,html[data-theme="light"] .related a,html[data-theme="light"] .blog-hero h1,html[data-theme="light"] .post h2{color:#0f172a}
-html[data-theme="light"] .callout{background:#eff6ff;border-color:#dbeafe;color:#1e3a8a}
+html[data-theme="light"] .callout{background:#fdf8ec;border-color:#f8edc9;color:#5f4310}
 html[data-theme="light"] .post{background:#fff;box-shadow:0 1px 3px rgba(15,23,42,.05)}
-html[data-theme="light"] .post:hover{box-shadow:0 12px 30px rgba(37,99,235,.1)}
-html[data-theme="light"] .post .tag{color:#2563eb}
+html[data-theme="light"] .post:hover{box-shadow:0 12px 30px rgba(185,131,31,.1)}
+html[data-theme="light"] .post .tag{color:#b9831f}

@@ -12,9 +12,9 @@
         crossorigin="anonymous"></script>
 <style>
 :root{
-  --blue:#3b82f6;--blue-d:#2563eb;--blue-50:rgba(59,130,246,.13);--blue-100:rgba(59,130,246,.28);
+  --blue:#d29a2b;--blue-d:#b9831f;--blue-50:rgba(224,169,60,.13);--blue-100:rgba(224,169,60,.28);
   --ink:#eef2fb;--slate:#9aa7c2;--slate-2:#6b7896;--line:rgba(255,255,255,.09);--bg:#070a14;
-  --green:#34d399;--red:#f87171;--teal:#2dd4bf;--orange:#fb923c;
+  --green:#34d399;--red:#f87171;--teal:#e0b45a;--orange:#fb923c;
   --sb-bg:#0b1120;--sb-w:220px;--sb-w-col:60px;--topbar:52px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -53,7 +53,7 @@ input,select,textarea{font-family:inherit}
 .sb-nav{flex:1;overflow-y:auto;overflow-x:hidden;padding:8px 0;display:flex;flex-direction:column;gap:1px}
 .sb-item{display:flex;align-items:center;gap:12px;padding:9px 14px;color:rgba(255,255,255,.55);font-size:13px;font-weight:500;cursor:pointer;border-left:3px solid transparent;transition:all .15s;white-space:nowrap;user-select:none}
 .sb-item:hover{background:rgba(255,255,255,.06);color:#fff}
-.sb-item.active{background:rgba(37,99,235,.25);border-left-color:var(--blue);color:#fff}
+.sb-item.active{background:rgba(185,131,31,.25);border-left-color:var(--blue);color:#fff}
 .sb-item svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.7;flex-shrink:0}
 .sb-label{transition:opacity .15s}
 .sidebar.collapsed .sb-label{opacity:0;pointer-events:none}
@@ -107,7 +107,7 @@ input,select,textarea{font-family:inherit}
 .lic-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .lic-date2{font-size:11px;color:var(--slate-2);margin-top:2px}
 .btn-sm{padding:6px 13px;font-size:12px;font-weight:600;border-radius:6px;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
-.btn-sm:hover{border-color:#93c5fd;color:var(--blue)}
+.btn-sm:hover{border-color:#eecf86;color:var(--blue)}
 .btn-sm.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
 .btn-sm.primary:hover{background:var(--blue-d);border-color:var(--blue-d)}
 .btn-sm.danger{border-color:#fecaca;color:var(--red)}
@@ -135,14 +135,14 @@ input,select,textarea{font-family:inherit}
 .svc-exp{font-size:11.5px;font-weight:600;margin-top:5px}
 
 /* ═══ OVERRIDES DARK — refonte deep-space (gagnent sur les surfaces claires) ═══ */
-body{background:radial-gradient(120% 60% at 15% 0%,rgba(37,99,235,.14),transparent 55%),radial-gradient(80% 50% at 100% 0%,rgba(124,58,237,.12),transparent 55%),var(--bg)!important}
+body{background:radial-gradient(120% 60% at 15% 0%,rgba(185,131,31,.14),transparent 55%),radial-gradient(80% 50% at 100% 0%,rgba(169,120,26,.12),transparent 55%),var(--bg)!important}
 .topbar{background:rgba(11,17,32,.82)!important;backdrop-filter:blur(12px)}
 .user-chip{background:rgba(255,255,255,.05)!important}
 .btn-logout:hover{border-color:rgba(248,113,113,.5)!important;background:rgba(248,113,113,.12)!important}
 .card,.stat-card,.proxy-stat-card,.lic-card2,.svc-row{background:rgba(255,255,255,.03)!important}
 .lic-key2{background:rgba(0,0,0,.28)!important;color:#cbd5e1!important}
 .btn-sm{background:rgba(255,255,255,.05)!important;color:#dfe6f4!important}
-.btn-sm:hover{border-color:rgba(59,130,246,.5)!important}
+.btn-sm:hover{border-color:rgba(224,169,60,.5)!important}
 .btn-sm.primary{background:var(--blue)!important;color:#fff!important}
 .btn-sm.danger:hover{background:rgba(248,113,113,.12)!important}
 .tbl th{background:rgba(255,255,255,.04)!important;color:var(--slate)!important}
@@ -159,7 +159,7 @@ body{background:radial-gradient(120% 60% at 15% 0%,rgba(37,99,235,.14),transpare
 .bw-label{font-size:11px;font-weight:600;color:var(--slate-2);text-transform:uppercase;letter-spacing:.07em}
 .bw-nums{font-size:12px;font-weight:700;color:var(--ink)}
 .bw-track{height:7px;background:#e2e8f0;border-radius:999px;overflow:hidden}
-.bw-bar{height:100%;border-radius:999px;background:linear-gradient(90deg,#0d9488,#2563eb);transition:width .6s ease}
+.bw-bar{height:100%;border-radius:999px;background:linear-gradient(90deg,#b3781f,#b9831f);transition:width .6s ease}
 .bw-bar.warn{background:linear-gradient(90deg,#f59e0b,#ef4444)}
 .bw-footer{display:flex;justify-content:space-between;margin-top:4px;font-size:11px;color:var(--slate-2)}
 .proxy-stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
@@ -214,7 +214,7 @@ html:not([data-theme="light"]) .modal input,html:not([data-theme="light"]) .moda
 html:not([data-theme="light"]) .pass-tog:hover{background:rgba(255,255,255,.08)}
 .gen-select,.gen-input{width:100%;border:1.5px solid var(--line);border-radius:8px;padding:8px 10px;font-size:12.5px;background:#fff;color:#0f172a;outline:none;transition:border-color .15s}
 .gen-select:focus,.gen-input:focus{border-color:var(--blue)}
-.gen-result{background:#0f172a;color:#7dd3fc;font-family:'Courier New',monospace;font-size:11.5px;border-radius:8px;padding:12px 14px;resize:vertical;width:100%;border:none;outline:none;line-height:1.8}
+.gen-result{background:#0f172a;color:#f0d99e;font-family:'Courier New',monospace;font-size:11.5px;border-radius:8px;padding:12px 14px;resize:vertical;width:100%;border:none;outline:none;line-height:1.8}
 
 /* Account */
 .account-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line);gap:12px;flex-wrap:wrap}
@@ -224,7 +224,7 @@ html:not([data-theme="light"]) .pass-tog:hover{background:rgba(255,255,255,.08)}
 
 /* Support chat */
 #sup-window{display:none;position:fixed;right:20px;bottom:90px;z-index:300;width:360px;max-width:calc(100vw - 32px);height:520px;max-height:calc(100vh - 130px);background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 18px 50px rgba(15,23,42,.28);flex-direction:column;overflow:hidden}
-#sup-fab{position:fixed;right:20px;bottom:20px;z-index:300;width:52px;height:52px;border-radius:50%;background:var(--blue);color:#fff;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 24px rgba(37,99,235,.45);font-size:22px;transition:transform .15s}
+#sup-fab{position:fixed;right:20px;bottom:20px;z-index:300;width:52px;height:52px;border-radius:50%;background:var(--blue);color:#fff;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 24px rgba(185,131,31,.45);font-size:22px;transition:transform .15s}
 #sup-fab:hover{transform:scale(1.06)}
 
 /* Toast */
@@ -299,14 +299,14 @@ html:not([data-theme="light"]) .pass-tog:hover{background:rgba(255,255,255,.08)}
   .dl-row{grid-template-columns:1fr}
 }
 /* ═══ MODE CLAIR (barre latérale conservée sombre = look pro) ═══ */
-html[data-theme="light"]{--blue:#2563eb;--blue-50:#eff6ff;--blue-100:#dbeafe;--ink:#0f172a;--slate:#475569;--slate-2:#94a3b8;--line:#e2e8f0;--bg:#f0f2f5;--green:#16a34a;--red:#dc2626;--teal:#0d9488;--orange:#ea580c}
+html[data-theme="light"]{--blue:#b9831f;--blue-50:#fdf8ec;--blue-100:#f8edc9;--ink:#0f172a;--slate:#475569;--slate-2:#94a3b8;--line:#e2e8f0;--bg:#f0f2f5;--green:#16a34a;--red:#dc2626;--teal:#b3781f;--orange:#ea580c}
 html[data-theme="light"] body{background:var(--bg)!important}
 html[data-theme="light"] .topbar{background:#fff!important;backdrop-filter:none}
 html[data-theme="light"] .user-chip{background:#f8fafc!important}
 html[data-theme="light"] .card,html[data-theme="light"] .stat-card,html[data-theme="light"] .proxy-stat-card,html[data-theme="light"] .lic-card2,html[data-theme="light"] .svc-row{background:#fff!important}
 html[data-theme="light"] .lic-key2{background:#f8fafc!important;color:#334155!important}
 html[data-theme="light"] .btn-sm{background:#fff!important;color:#0f172a!important}
-html[data-theme="light"] .btn-sm:hover{border-color:#93c5fd!important}
+html[data-theme="light"] .btn-sm:hover{border-color:#eecf86!important}
 html[data-theme="light"] .tbl th{background:#f8fafc!important;color:#475569!important}
 html[data-theme="light"] .tbl td{border-bottom-color:#f1f5f9!important}
 html[data-theme="light"] .tbl tr:hover td{background:#fafbfc!important}
@@ -328,7 +328,7 @@ html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;backgr
     'dash.hello':'Hello 👋','dash.welcome':'Welcome to your EvoStudio area.','dash.hello_name':'Hello {n} 👋',
     'dash.stat_licenses':'Licenses','dash.stat_orders':'Orders','dash.stat_smtp':'SMTP servers','dash.stat_proxy':'Proxy accounts',
     'dash.dl_title':'Download EvoStudio','dash.dl_win_name':'Windows 10 / 11','dash.dl_win_meta':'x64 · .exe · ~95 MB','dash.dl_mac_name':'Mac Silicon M1/M2/M3','dash.dl_mac_meta':'arm64 · .dmg · ~125 MB',
-    'dash.mac_notice':'<strong>⚠️ Mac: "file is damaged" message?</strong> This is a normal macOS protection. To open the app:<br><strong>Option 1</strong> — After installing, open <strong>Terminal</strong> and paste:<br><code style="display:block;background:#1e293b;color:#7dd3fc;border-radius:6px;padding:7px 10px;margin:6px 0;font-size:12px;letter-spacing:.01em">sudo xattr -rd com.apple.quarantine /Applications/EvoStudio.app</code><strong>Option 2</strong> — Go to <strong>System Settings → Privacy & Security</strong> → click <strong>"Open Anyway"</strong>.',
+    'dash.mac_notice':'<strong>⚠️ Mac: "file is damaged" message?</strong> This is a normal macOS protection. To open the app:<br><strong>Option 1</strong> — After installing, open <strong>Terminal</strong> and paste:<br><code style="display:block;background:#1e293b;color:#f0d99e;border-radius:6px;padding:7px 10px;margin:6px 0;font-size:12px;letter-spacing:.01em">sudo xattr -rd com.apple.quarantine /Applications/EvoStudio.app</code><strong>Option 2</strong> — Go to <strong>System Settings → Privacy & Security</strong> → click <strong>"Open Anyway"</strong>.',
     'dash.quick_title':'Quick access','dash.quick_new_license':'New license','dash.quick_my_licenses':'My licenses','dash.quick_history':'History','dash.quick_support':'Support',
     'dash.lic_title':'Licenses','dash.lic_sub':'Your active EvoStudio license keys.','dash.lic_active':'Active licenses','dash.buy':'Buy','dash.loading':'Loading…',
     'dash.ord_title':'Orders','dash.ord_sub':'History of all your purchases.',
@@ -414,7 +414,7 @@ html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;backgr
     'dash.hello':'Здравствуйте 👋','dash.welcome':'Добро пожаловать в ваш кабинет EvoStudio.','dash.hello_name':'Здравствуйте, {n} 👋',
     'dash.stat_licenses':'Лицензии','dash.stat_orders':'Заказы','dash.stat_smtp':'SMTP-серверы','dash.stat_proxy':'Прокси-аккаунты',
     'dash.dl_title':'Скачать EvoStudio','dash.dl_win_name':'Windows 10 / 11','dash.dl_win_meta':'x64 · .exe · ~95 МБ','dash.dl_mac_name':'Mac Silicon M1/M2/M3','dash.dl_mac_meta':'arm64 · .dmg · ~125 МБ',
-    'dash.mac_notice':'<strong>⚠️ Mac: сообщение «файл повреждён»?</strong> Это обычная защита macOS. Чтобы открыть приложение:<br><strong>Вариант 1</strong> — После установки откройте <strong>Терминал</strong> и вставьте:<br><code style="display:block;background:#1e293b;color:#7dd3fc;border-radius:6px;padding:7px 10px;margin:6px 0;font-size:12px;letter-spacing:.01em">sudo xattr -rd com.apple.quarantine /Applications/EvoStudio.app</code><strong>Вариант 2</strong> — Перейдите в <strong>Системные настройки → Конфиденциальность и безопасность</strong> → нажмите <strong>«Открыть всё равно»</strong>.',
+    'dash.mac_notice':'<strong>⚠️ Mac: сообщение «файл повреждён»?</strong> Это обычная защита macOS. Чтобы открыть приложение:<br><strong>Вариант 1</strong> — После установки откройте <strong>Терминал</strong> и вставьте:<br><code style="display:block;background:#1e293b;color:#f0d99e;border-radius:6px;padding:7px 10px;margin:6px 0;font-size:12px;letter-spacing:.01em">sudo xattr -rd com.apple.quarantine /Applications/EvoStudio.app</code><strong>Вариант 2</strong> — Перейдите в <strong>Системные настройки → Конфиденциальность и безопасность</strong> → нажмите <strong>«Открыть всё равно»</strong>.',
     'dash.quick_title':'Быстрый доступ','dash.quick_new_license':'Новая лицензия','dash.quick_my_licenses':'Мои лицензии','dash.quick_history':'История','dash.quick_support':'Поддержка',
     'dash.lic_title':'Лицензии','dash.lic_sub':'Ваши активные ключи лицензий EvoStudio.','dash.lic_active':'Активные лицензии','dash.buy':'Купить','dash.loading':'Загрузка…',
     'dash.ord_title':'Заказы','dash.ord_sub':'История всех ваших покупок.',
@@ -599,7 +599,7 @@ html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;backgr
     <p class="panel-sub" data-i18n="dash.welcome">Bienvenue dans votre espace EvoStudio.</p>
     <div class="stats-row">
       <div class="stat-card">
-        <div class="stat-ic" style="background:#eff6ff;color:var(--blue)"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div class="stat-ic" style="background:#fdf8ec;color:var(--blue)"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
         <div class="stat-n" id="st-lic">—</div>
         <div class="stat-l" data-i18n="dash.stat_licenses">Licences</div>
       </div>
@@ -609,12 +609,12 @@ html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;backgr
         <div class="stat-l" data-i18n="dash.stat_orders">Commandes</div>
       </div>
       <div class="stat-card" id="st-smtp-card" style="display:none">
-        <div class="stat-ic" style="background:#eff6ff;color:var(--blue)"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg></div>
+        <div class="stat-ic" style="background:#fdf8ec;color:var(--blue)"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg></div>
         <div class="stat-n" id="st-smtp">—</div>
         <div class="stat-l" data-i18n="dash.stat_smtp">Serveurs SMTP</div>
       </div>
       <div class="stat-card" id="st-proxy-card" style="display:none">
-        <div class="stat-ic" style="background:#f0fdfa;color:var(--teal)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 0 20"/></svg></div>
+        <div class="stat-ic" style="background:#fdf8ec;color:var(--teal)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 0 20"/></svg></div>
         <div class="stat-n" id="st-proxy">—</div>
         <div class="stat-l" data-i18n="dash.stat_proxy">Comptes Proxy</div>
       </div>
@@ -626,18 +626,18 @@ html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;backgr
       </div>
       <div class="card-body">
         <div class="dl-row">
-          <a class="dl-btn2" id="dl-win" href="#" style="background:#eff6ff;border-color:#bfdbfe;color:#1e40af" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" width="28" height="28" fill="#2563eb" style="flex-shrink:0"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+          <a class="dl-btn2" id="dl-win" href="#" style="background:#fdf8ec;border-color:#f3e2b4;color:#7c5612" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="#b9831f" style="flex-shrink:0"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
             <div><strong data-i18n="dash.dl_win_name">Windows 10 / 11</strong><span data-i18n="dash.dl_win_meta">x64 · .exe · ~95 MB</span></div>
           </a>
           <a class="dl-btn2" id="dl-mac" href="#" style="background:#faf5ff;border-color:#ddd6fe;color:#5b21b6" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" width="28" height="28" fill="#7c3aed" style="flex-shrink:0"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="#a9781a" style="flex-shrink:0"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
             <div><strong data-i18n="dash.dl_mac_name">Mac Silicon M1/M2/M3</strong><span data-i18n="dash.dl_mac_meta">arm64 · .dmg · ~125 MB</span></div>
           </a>
         </div>
         <div style="margin-top:10px">
-          <a id="dl-mac-intel" href="https://github.com/BlackQuiet/evosender-pro-releases/releases/download/v3.2.5/EvoStudio-3.2.5-x64.dmg" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:#7c3aed;text-decoration:none;font-weight:600;border-bottom:1px dotted rgba(124,58,237,.5)" title="EvoStudio pour Mac Intel (x64)">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="#7c3aed"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
+          <a id="dl-mac-intel" href="https://github.com/BlackQuiet/evosender-pro-releases/releases/download/v3.2.5/EvoStudio-3.2.5-x64.dmg" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:#a9781a;text-decoration:none;font-weight:600;border-bottom:1px dotted rgba(169,120,26,.5)" title="EvoStudio pour Mac Intel (x64)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="#a9781a"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
             Mac Intel (x64)
           </a>
         </div>
@@ -645,7 +645,7 @@ html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;backgr
         <div data-i18n-html="dash.mac_notice" style="margin-top:12px;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:12px 14px;font-size:12.5px;color:#92400e;line-height:1.6">
           <strong>⚠️ Mac : message "fichier endommagé" ?</strong> C'est une protection macOS normale. Pour ouvrir l'app :<br>
           <strong>Option 1</strong> — Après installation, ouvrir <strong>Terminal</strong> et coller :<br>
-          <code style="display:block;background:#1e293b;color:#7dd3fc;border-radius:6px;padding:7px 10px;margin:6px 0;font-size:12px;letter-spacing:.01em">sudo xattr -rd com.apple.quarantine /Applications/EvoStudio.app</code>
+          <code style="display:block;background:#1e293b;color:#f0d99e;border-radius:6px;padding:7px 10px;margin:6px 0;font-size:12px;letter-spacing:.01em">sudo xattr -rd com.apple.quarantine /Applications/EvoStudio.app</code>
           <strong>Option 2</strong> — Aller dans <strong>Réglages Système → Confidentialité et sécurité</strong> → cliquer <strong>"Ouvrir quand même"</strong>.
         </div>
       </div>
@@ -701,12 +701,12 @@ html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;backgr
     <!-- Stats globales -->
     <div class="proxy-stats-row" id="proxy-global-stats" style="display:none">
       <div class="proxy-stat-card">
-        <div class="stat-ic" style="background:#f0fdfa;color:var(--teal)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 0 20"/></svg></div>
+        <div class="stat-ic" style="background:#fdf8ec;color:var(--teal)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 0 20"/></svg></div>
         <div class="stat-n" id="prx-total-gb">—</div>
         <div class="stat-l" data-i18n="dash.proxy_gb_bought">Go achetés</div>
       </div>
       <div class="proxy-stat-card">
-        <div class="stat-ic" style="background:#eff6ff;color:var(--blue)"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div class="stat-ic" style="background:#fdf8ec;color:var(--blue)"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
         <div class="stat-n" id="prx-used-gb">—</div>
         <div class="stat-l" data-i18n="dash.proxy_gb_used">Go utilisés</div>
       </div>
@@ -799,7 +799,7 @@ html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;backgr
         <div class="cred-item"><div class="cred-lbl" data-i18n="dash.password">Mot de passe</div><div class="cred-val"><span id="smtp-m-pass-disp">••••••••</span><button class="pass-tog" onclick="toggleModalPass('smtp-m-pass-disp','smtp-m-pass-real')" data-i18n="dash.see">Voir</button></div></div>
       </div>
       <input type="hidden" id="smtp-m-pass-real"/>
-      <div id="smtp-m-sender" style="display:none;background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 13px;font-size:12.5px;color:#1e40af;margin-bottom:12px"></div>
+      <div id="smtp-m-sender" style="display:none;background:#fdf8ec;border:1px solid #f3e2b4;border-radius:8px;padding:10px 13px;font-size:12.5px;color:#7c5612;margin-bottom:12px"></div>
       <div id="smtp-m-notice" style="display:none;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:10px 13px;font-size:12.5px;color:#92400e;margin-bottom:12px"></div>
       <button onclick="copySmtpModal()" class="btn-sm primary" style="width:100%;justify-content:center" data-i18n="dash.copy_all_creds">📋 Copier tous les identifiants</button>
 
@@ -909,7 +909,7 @@ html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;backgr
         </div>
         <textarea class="gen-result" id="prx-m-result" readonly rows="3"></textarea>
         <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
-          <button class="btn-sm" onclick="testProxyModal()" style="background:#0f172a;color:#7dd3fc;border-color:#0f172a" data-i18n="dash.test">⚡ Tester</button>
+          <button class="btn-sm" onclick="testProxyModal()" style="background:#0f172a;color:#f0d99e;border-color:#0f172a" data-i18n="dash.test">⚡ Tester</button>
           <div data-i18n-html="dash.rotation_sticky_hint" style="flex:1;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:8px 12px;font-size:11px;color:#166534;line-height:1.5;min-width:160px">🔄 <b>Rotation</b> : ssid vide · 🔒 <b>Sticky</b> : ssid rempli</div>
         </div>
         <div id="prx-m-test-result" style="display:none;margin-top:10px"></div>
@@ -1055,15 +1055,15 @@ async function loadDemoStatus(){
       const status=d.expired
         ?'<span style="color:var(--red);font-weight:700">'+_t('dash.demo_expired','Expirée')+'</span>'
         :'<span style="color:#16a34a;font-weight:700">'+_t('dash.demo_active','Active')+'</span> · '+days+' '+_t('dash.demo_days_left','j restants');
-      box.innerHTML='<div style="border:1px solid #bbf7d0;background:linear-gradient(135deg,#f0fdf4,#eff6ff);border-radius:14px;padding:18px 20px;margin-bottom:18px">'+
+      box.innerHTML='<div style="border:1px solid #bbf7d0;background:linear-gradient(135deg,#f0fdf4,#fdf8ec);border-radius:14px;padding:18px 20px;margin-bottom:18px">'+
         '<div style="font-weight:800;font-size:14px;color:#15803d;margin-bottom:10px">🎁 '+_t('dash.demo_have_title','Votre licence d\'essai (3 jours)')+'</div>'+
-        '<div id="demo-key" style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:18px;font-weight:800;letter-spacing:1px;color:#1e40af;background:#fff;border:1px dashed #bfdbfe;border-radius:8px;padding:11px 12px;text-align:center;user-select:all">'+esc(d.key)+'</div>'+
+        '<div id="demo-key" style="font-family:ui-monospace,Menlo,Consolas,monospace;font-size:18px;font-weight:800;letter-spacing:1px;color:#7c5612;background:#fff;border:1px dashed #f3e2b4;border-radius:8px;padding:11px 12px;text-align:center;user-select:all">'+esc(d.key)+'</div>'+
         '<div style="font-size:12px;color:var(--slate-2);margin-top:8px">'+status+(expTxt?(' · '+_t('dash.demo_until','jusqu\'au')+' '+expTxt):'')+'</div>'+
         '<div style="margin-top:11px"><button class="btn-sm" onclick="copyDemoKey()">'+_t('dash.demo_copy','Copier la clé')+'</button></div>'+
         '<div style="font-size:11.5px;color:var(--slate-2);margin-top:11px;line-height:1.5">'+_t('dash.demo_note_have','Collez cette clé au 1er lancement de l\'application. Usage unique : activable sur un seul ordinateur.')+'</div>'+
         '</div>';
     }else{
-      box.innerHTML='<div style="border:1px solid #ddd6fe;background:linear-gradient(135deg,#faf5ff,#eff6ff);border-radius:14px;padding:18px 20px;margin-bottom:18px">'+
+      box.innerHTML='<div style="border:1px solid #ddd6fe;background:linear-gradient(135deg,#faf5ff,#fdf8ec);border-radius:14px;padding:18px 20px;margin-bottom:18px">'+
         '<div style="font-weight:800;font-size:15px;color:#5b21b6;margin-bottom:6px">🎁 '+_t('dash.demo_offer','Essayez EvoStudio gratuitement')+'</div>'+
         '<div style="font-size:13px;color:var(--slate-2);line-height:1.5;margin-bottom:13px">'+_t('dash.demo_desc','Obtenez une licence d\'essai de la Suite complète (EvoSender + EvoExtractor + EvoVerify) pendant 3 jours. 1 démo par compte, envoyée aussi par email.')+'</div>'+
         '<button class="btn-sm primary" id="demo-btn" onclick="requestDemo()">'+_t('dash.demo_get','Obtenir ma licence démo 3 jours')+'</button>'+
@@ -1365,8 +1365,8 @@ async function load(){
       return '<div class="lic-card2">'+
         '<div class="lic-prod">'+esc(PROD_LABELS_get(o.product)||o.product)+(o.quantity>1?'<span class="lic-tag">'+o.quantity+' '+_t('dash.pc','PC')+'</span>':'<span class="lic-tag">'+_t('dash.year_1','1 an')+'</span>')+'</div>'+
         '<div class="dl-row" style="grid-template-columns:1fr 1fr;gap:8px">'+
-          '<a href="'+esc(_dlWin)+'" target="_blank" rel="noopener" class="dl-btn2" style="background:#eff6ff;border-color:#bfdbfe;color:#1e40af"><svg viewBox="0 0 24 24" width="20" height="20" fill="#2563eb"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg><div><strong style="font-size:11.5px">'+_t('dash.win','Windows')+'</strong><span>x64 · .exe</span></div></a>'+
-          '<a href="'+esc(_dlMac)+'" target="_blank" rel="noopener" class="dl-btn2" style="background:#faf5ff;border-color:#ddd6fe;color:#5b21b6"><svg viewBox="0 0 24 24" width="20" height="20" fill="#7c3aed"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg><div><strong style="font-size:11.5px">'+_t('dash.mac','Mac M1/M2/M3')+'</strong><span>arm64 · .dmg</span></div></a>'+
+          '<a href="'+esc(_dlWin)+'" target="_blank" rel="noopener" class="dl-btn2" style="background:#fdf8ec;border-color:#f3e2b4;color:#7c5612"><svg viewBox="0 0 24 24" width="20" height="20" fill="#b9831f"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg><div><strong style="font-size:11.5px">'+_t('dash.win','Windows')+'</strong><span>x64 · .exe</span></div></a>'+
+          '<a href="'+esc(_dlMac)+'" target="_blank" rel="noopener" class="dl-btn2" style="background:#faf5ff;border-color:#ddd6fe;color:#5b21b6"><svg viewBox="0 0 24 24" width="20" height="20" fill="#a9781a"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg><div><strong style="font-size:11.5px">'+_t('dash.mac','Mac M1/M2/M3')+'</strong><span>arm64 · .dmg</span></div></a>'+
         '</div>'+
         '<div class="lic-row">'+
           '<div class="lic-key2">'+esc(o.license_key)+'</div>'+
@@ -1415,7 +1415,7 @@ async function load(){
             '<div class="svc-info">'+
               '<div class="svc-name">'+_t('dash.smtp_relay_name','📧 SMTP Relay — '+esc(vol)+' emails/mois').replace('{vol}',esc(vol))+'</div>'+
               '<div class="svc-meta"><span>'+_t('dash.plan','Plan')+' '+esc(s.plan)+'</span><span>'+esc(s.relay_host||_t('dash.in_preparation','En préparation…'))+'</span><span>'+_t('dash.port_tls','Port '+esc(String(s.relay_port||587))+' TLS').replace('{port}',esc(String(s.relay_port||587)))+'</span></div>'+
-              (s.stats?('<div class="svc-meta" style="margin-top:5px"><span style="color:#2563eb">📊 '+_t('dash.stat_sent',s.stats.sent+' envoyés').replace('{n}',s.stats.sent)+'</span><span style="color:'+(s.stats.bounces>0?'#dc2626':'#16a34a')+'">↩️ '+_t('dash.stat_bounces',s.stats.bounces+' bounces').replace('{n}',s.stats.bounces)+'</span><span style="color:'+(s.stats.spam>0?'#dc2626':'#16a34a')+'">🚫 '+_t('dash.stat_spam',s.stats.spam+' spam').replace('{n}',s.stats.spam)+'</span><span style="color:#64748b">'+_t('dash.stat_30d','(30 j)')+'</span></div>'):'')+
+              (s.stats?('<div class="svc-meta" style="margin-top:5px"><span style="color:#b9831f">📊 '+_t('dash.stat_sent',s.stats.sent+' envoyés').replace('{n}',s.stats.sent)+'</span><span style="color:'+(s.stats.bounces>0?'#dc2626':'#16a34a')+'">↩️ '+_t('dash.stat_bounces',s.stats.bounces+' bounces').replace('{n}',s.stats.bounces)+'</span><span style="color:'+(s.stats.spam>0?'#dc2626':'#16a34a')+'">🚫 '+_t('dash.stat_spam',s.stats.spam+' spam').replace('{n}',s.stats.spam)+'</span><span style="color:#64748b">'+_t('dash.stat_30d','(30 j)')+'</span></div>'):'')+
               expHtml+
             '</div>'+
             '<div class="svc-actions">'+
@@ -1746,7 +1746,7 @@ function renderProxyList(pxList, usageMap){
       '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap">'+
         '<div class="svc-info">'+
           '<div class="svc-name">'+_t('dash.proxy_name','🌐 Proxy résidentiel — {gb} Go').replace('{gb}',esc(String(p.gb)))+
-            (p.expires_at&&Math.ceil((p.expires_at-Date.now())/86400000)>0?'<span style="font-size:10px;font-weight:600;background:#f0fdfa;color:var(--teal);border:1px solid #99f6e4;border-radius:20px;padding:2px 8px;margin-left:8px">'+_t('dash.badge_180','180 j')+'</span>':'')+
+            (p.expires_at&&Math.ceil((p.expires_at-Date.now())/86400000)>0?'<span style="font-size:10px;font-weight:600;background:#fdf8ec;color:var(--teal);border:1px solid #99f6e4;border-radius:20px;padding:2px 8px;margin-left:8px">'+_t('dash.badge_180','180 j')+'</span>':'')+
           '</div>'+
           '<div class="svc-meta"><span>'+_t('dash.plan_word','Forfait {plan}').replace('{plan}',esc(p.plan))+'</span>'+(p.username?'<span style="font-family:monospace">'+esc(p.username)+'</span>':'')+'<span>'+esc(p.host||'')+(p.port?':'+esc(String(p.port)):'')+'</span></div>'+
           expHtml+
@@ -1864,8 +1864,8 @@ async function loadProxyChart(days){
     // Couleur dégradé teal→blue
     var ctx=canvas.getContext('2d');
     var grad=ctx.createLinearGradient(0,0,0,canvas.offsetHeight||200);
-    grad.addColorStop(0,'rgba(13,148,136,0.25)');
-    grad.addColorStop(1,'rgba(13,148,136,0.00)');
+    grad.addColorStop(0,'rgba(179,120,31,0.25)');
+    grad.addColorStop(1,'rgba(179,120,31,0.00)');
 
     if(_proxyChart){_proxyChart.destroy();_proxyChart=null;}
     _proxyChart=new Chart(ctx,{
@@ -1877,11 +1877,11 @@ async function loadProxyChart(days){
           data:displayData,
           fill:true,
           backgroundColor:grad,
-          borderColor:'#0d9488',
+          borderColor:'#b3781f',
           borderWidth:2.5,
           pointRadius:3,
           pointHoverRadius:6,
-          pointBackgroundColor:'#0d9488',
+          pointBackgroundColor:'#b3781f',
           tension:0.4,
         }]
       },
@@ -1932,9 +1932,9 @@ async function loadProxyChart(days){
     var labels=items.map(i=>fmtDateLabel(i.date));
     var dataMb=items.map(i=>i.used_mb);
     var ctx=canvas.getContext('2d');
-    var grad=ctx.createLinearGradient(0,0,0,200);grad.addColorStop(0,'rgba(13,148,136,0.2)');grad.addColorStop(1,'rgba(13,148,136,0.00)');
+    var grad=ctx.createLinearGradient(0,0,0,200);grad.addColorStop(0,'rgba(179,120,31,0.2)');grad.addColorStop(1,'rgba(179,120,31,0.00)');
     if(_proxyChart){_proxyChart.destroy();_proxyChart=null;}
-    _proxyChart=new Chart(ctx,{type:'line',data:{labels,datasets:[{label:_t('dash.chart_usage','Usage ({unit})').replace('{unit}',_t('dash.mb','Mo')),data:dataMb,fill:true,backgroundColor:grad,borderColor:'#0d9488',borderWidth:2.5,pointRadius:3,pointHoverRadius:6,pointBackgroundColor:'#0d9488',tension:0.4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+' '+_t('dash.mb','Mo')}}}}});
+    _proxyChart=new Chart(ctx,{type:'line',data:{labels,datasets:[{label:_t('dash.chart_usage','Usage ({unit})').replace('{unit}',_t('dash.mb','Mo')),data:dataMb,fill:true,backgroundColor:grad,borderColor:'#b3781f',borderWidth:2.5,pointRadius:3,pointHoverRadius:6,pointBackgroundColor:'#b3781f',tension:0.4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{callback:v=>v+' '+_t('dash.mb','Mo')}}}}});
   }
 }
 
@@ -1959,16 +1959,16 @@ function renderDemoChart(days){
   var dataMb=items.map(i=>i.used_mb);
   var ctx=canvas.getContext('2d');
   var grad=ctx.createLinearGradient(0,0,0,200);
-  grad.addColorStop(0,'rgba(13,148,136,0.2)');
-  grad.addColorStop(1,'rgba(13,148,136,0.00)');
+  grad.addColorStop(0,'rgba(179,120,31,0.2)');
+  grad.addColorStop(1,'rgba(179,120,31,0.00)');
   if(_proxyChart){_proxyChart.destroy();}
   _proxyChart=new Chart(ctx,{
     type:'line',
     data:{labels,datasets:[{
       label:_t('dash.chart_usage_demo','Utilisation (Mo) — démo'),
       data:dataMb,fill:true,backgroundColor:grad,
-      borderColor:'#0d9488',borderWidth:2.5,
-      pointRadius:3,pointHoverRadius:6,pointBackgroundColor:'#0d9488',tension:0.4
+      borderColor:'#b3781f',borderWidth:2.5,
+      pointRadius:3,pointHoverRadius:6,pointBackgroundColor:'#b3781f',tension:0.4
     }]},
     options:{
       responsive:true,

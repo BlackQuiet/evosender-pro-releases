@@ -6,13 +6,13 @@
   <title>EvoStudio — Créer un compte</title><meta name="robots" content="noindex, nofollow" /><link rel="icon" href="/logo-EvoSender.ico" type="image/x-icon" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
-    :root{--blue:#3b82f6;--blue-dark:#2563eb;--ink:#eef2fb;--slate:#9aa7c2;--line:rgba(255,255,255,.1);--purple:#a78bfa}
+    :root{--blue:#d29a2b;--blue-dark:#b9831f;--ink:#eef2fb;--slate:#9aa7c2;--line:rgba(255,255,255,.1);--purple:#dcb968}
     *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'Inter',sans-serif;color:var(--ink);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:radial-gradient(120% 80% at 15% 0%,rgba(37,99,235,.18),transparent 55%),radial-gradient(90% 70% at 100% 10%,rgba(124,58,237,.16),transparent 55%),#070a14}
-    .auth{width:100%;max-width:400px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.09);border-radius:18px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.5),0 0 50px rgba(59,130,246,.1);backdrop-filter:blur(10px)}
+    body{font-family:'Inter',sans-serif;color:var(--ink);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:radial-gradient(120% 80% at 15% 0%,rgba(185,131,31,.18),transparent 55%),radial-gradient(90% 70% at 100% 10%,rgba(169,120,26,.16),transparent 55%),#070a14}
+    .auth{width:100%;max-width:400px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.09);border-radius:18px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.5),0 0 50px rgba(224,169,60,.1);backdrop-filter:blur(10px)}
     .form{padding:14px 38px 40px;display:flex;flex-direction:column}
     @media(max-width:480px){.form{padding:12px 26px 34px}}
-    .logo-banner{position:relative;display:flex;justify-content:center;align-items:center;padding:34px 20px 26px;margin:0 -38px 30px;background:linear-gradient(180deg,rgba(59,130,246,.12),transparent);border-bottom:1px solid rgba(255,255,255,.06)}
+    .logo-banner{position:relative;display:flex;justify-content:center;align-items:center;padding:34px 20px 26px;margin:0 -38px 30px;background:linear-gradient(180deg,rgba(224,169,60,.12),transparent);border-bottom:1px solid rgba(255,255,255,.06)}
     @media(max-width:480px){.logo-banner{margin:0 -26px 26px}}
     .home-btn{position:absolute;top:16px;left:16px;display:flex;align-items:center;justify-content:center;width:34px;height:34px;background:rgba(255,255,255,.06);color:var(--slate);text-decoration:none;border-radius:10px;transition:.15s;border:1px solid rgba(255,255,255,.08)}
     .home-btn:hover{background:var(--blue);color:#fff}
@@ -28,18 +28,18 @@
     .eye:hover svg{stroke:var(--blue)}
     input{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--ink);border-radius:11px;padding:13px 14px 13px 44px;font-size:14px;outline:none;transition:.18s;font-family:inherit}
     input::placeholder{color:#6b7896}
-    input:focus{border-color:var(--blue);background:rgba(255,255,255,.06);box-shadow:0 0 0 3px rgba(59,130,246,.15)}
-    .btn{width:100%;margin-top:28px;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border:none;border-radius:11px;padding:13px;font-size:14.5px;font-weight:600;cursor:pointer;transition:.18s;font-family:inherit;box-shadow:0 8px 26px rgba(59,130,246,.35)}
+    input:focus{border-color:var(--blue);background:rgba(255,255,255,.06);box-shadow:0 0 0 3px rgba(224,169,60,.15)}
+    .btn{width:100%;margin-top:28px;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;border:none;border-radius:11px;padding:13px;font-size:14.5px;font-weight:600;cursor:pointer;transition:.18s;font-family:inherit;box-shadow:0 8px 26px rgba(224,169,60,.35)}
     .btn:hover{transform:translateY(-1px)}
     .btn:disabled{opacity:.55;cursor:not-allowed}
     .msg{font-size:13px;margin-top:14px;min-height:18px;text-align:center}
     .msg.err{color:#f87171}.msg.ok{color:#34d399}
     .footer-link{text-align:center;margin-top:22px;font-size:13.5px;color:var(--slate)}
-    .footer-link a{color:#60a5fa;text-decoration:none;font-weight:600}
+    .footer-link a{color:#e6b756;text-decoration:none;font-weight:600}
     .footer-link a:hover{text-decoration:underline}
     /* ═══ MODE CLAIR ═══ */
-    html[data-theme="light"]{--blue:#2563eb;--ink:#0f172a;--slate:#475569;--line:#e2e8f0}
-    html[data-theme="light"] body{background:radial-gradient(120% 80% at 15% 0%,rgba(37,99,235,.1),transparent 55%),radial-gradient(90% 70% at 100% 10%,rgba(124,58,237,.08),transparent 55%),#f4f7fc}
+    html[data-theme="light"]{--blue:#b9831f;--ink:#0f172a;--slate:#475569;--line:#e2e8f0}
+    html[data-theme="light"] body{background:radial-gradient(120% 80% at 15% 0%,rgba(185,131,31,.1),transparent 55%),radial-gradient(90% 70% at 100% 10%,rgba(169,120,26,.08),transparent 55%),#f4f7fc}
     html[data-theme="light"] .auth{background:#fff;border-color:#e8ecf2;box-shadow:0 18px 50px rgba(15,23,42,.08)}
     html[data-theme="light"] .logo-banner{background:linear-gradient(180deg,#fff,#f7faff);border-bottom-color:#eef2f7}
     html[data-theme="light"] .home-btn{background:#f3f5f9;border-color:#e2e8f0}
@@ -70,7 +70,7 @@
       "register.msg_pw_long":"The password is too long (max 72 characters).",
       "register.msg_pw_weak":"The password must contain at least one uppercase letter and one digit.",
       "register.msg_pw_mismatch":"The passwords do not match.",
-      "register.accept":"I accept the <a href=\"/cgu.html\" target=\"_blank\" style=\"color:#3b82f6\">Terms</a> and the <a href=\"/charte-usage-acceptable.html\" target=\"_blank\" style=\"color:#3b82f6\">Acceptable Use Policy</a>.",
+      "register.accept":"I accept the <a href=\"/cgu.html\" target=\"_blank\" style=\"color:#d29a2b\">Terms</a> and the <a href=\"/charte-usage-acceptable.html\" target=\"_blank\" style=\"color:#d29a2b\">Acceptable Use Policy</a>.",
       "register.msg_terms":"You must accept the Terms and the Acceptable Use Policy.",
       "register.msg_created":"✓ Account created! Verifying email...",
       "register.msg_error":"Error during creation.",
@@ -96,7 +96,7 @@
       "register.msg_pw_long":"Пароль слишком длинный (макс. 72 символа).",
       "register.msg_pw_weak":"Пароль должен содержать хотя бы одну заглавную букву и одну цифру.",
       "register.msg_pw_mismatch":"Пароли не совпадают.",
-      "register.accept":"Я принимаю <a href=\"/cgu.html\" target=\"_blank\" style=\"color:#3b82f6\">Условия</a> и <a href=\"/charte-usage-acceptable.html\" target=\"_blank\" style=\"color:#3b82f6\">Правила использования</a>.",
+      "register.accept":"Я принимаю <a href=\"/cgu.html\" target=\"_blank\" style=\"color:#d29a2b\">Условия</a> и <a href=\"/charte-usage-acceptable.html\" target=\"_blank\" style=\"color:#d29a2b\">Правила использования</a>.",
       "register.msg_terms":"Вы должны принять Условия и Правила использования.",
       "register.msg_created":"✓ Аккаунт создан! Подтверждение email...",
       "register.msg_error":"Ошибка при создании.",
@@ -132,7 +132,7 @@
         </div>
         <label style="display:flex;align-items:flex-start;gap:8px;font-size:12.5px;line-height:1.45;margin:4px 2px 2px;cursor:pointer">
           <input type="checkbox" id="accept-terms" style="width:16px;height:16px;flex:0 0 16px;margin-top:2px" />
-          <span data-i18n-html="register.accept">J'accepte les <a href="/cgu.html" target="_blank" style="color:#3b82f6">CGU</a> et la <a href="/charte-usage-acceptable.html" target="_blank" style="color:#3b82f6">Charte d'usage acceptable</a>.</span>
+          <span data-i18n-html="register.accept">J'accepte les <a href="/cgu.html" target="_blank" style="color:#d29a2b">CGU</a> et la <a href="/charte-usage-acceptable.html" target="_blank" style="color:#d29a2b">Charte d'usage acceptable</a>.</span>
         </label>
         <button class="btn" type="submit" id="btn" data-i18n="register.submit">Créer mon compte</button>
       </form>

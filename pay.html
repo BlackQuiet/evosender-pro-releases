@@ -10,15 +10,15 @@
        le CDN Cloudflare est lent/bloqué). -->
   <script src="/qrcode.min.js"></script>
   <style>
-    :root{--blue:#3b82f6;--blue-dark:#2563eb;--blue-50:rgba(59,130,246,.13);--blue-100:rgba(59,130,246,.28);--ink:#eef2fb;--slate:#9aa7c2;--slate-2:#6b7896;--line:rgba(255,255,255,.1);--green:#34d399;--amber:#fbbf24;--purple:#a78bfa;--field:rgba(255,255,255,.05)}
+    :root{--blue:#d29a2b;--blue-dark:#b9831f;--blue-50:rgba(224,169,60,.13);--blue-100:rgba(224,169,60,.28);--ink:#eef2fb;--slate:#9aa7c2;--slate-2:#6b7896;--line:rgba(255,255,255,.1);--green:#34d399;--amber:#fbbf24;--purple:#dcb968;--field:rgba(255,255,255,.05)}
     *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'Inter',sans-serif;color:var(--ink);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:radial-gradient(120% 80% at 15% 0%,rgba(37,99,235,.18),transparent 55%),radial-gradient(90% 70% at 100% 10%,rgba(124,58,237,.16),transparent 55%),#070a14}
-    .checkout{width:100%;max-width:440px;background:#0e1526;border:1px solid rgba(255,255,255,.09);border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 60px rgba(59,130,246,.1)}
+    body{font-family:'Inter',sans-serif;color:var(--ink);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:radial-gradient(120% 80% at 15% 0%,rgba(185,131,31,.18),transparent 55%),radial-gradient(90% 70% at 100% 10%,rgba(169,120,26,.16),transparent 55%),#070a14}
+    .checkout{width:100%;max-width:440px;background:#0e1526;border:1px solid rgba(255,255,255,.09);border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 60px rgba(224,169,60,.1)}
     /* — overrides dark des surfaces claires codées en dur — */
     .prod-btn,.pill-btn{background:rgba(255,255,255,.03)!important}
     .prod-btn:hover{background:rgba(255,255,255,.06)!important}
     .prod-ic.green{background:rgba(52,211,153,.14)!important}.prod-ic.green svg{stroke:#34d399}
-    .prod-ic.purple{background:rgba(167,139,250,.16)!important}.prod-ic.purple svg{stroke:#a78bfa}
+    .prod-ic.purple{background:rgba(220,185,104,.16)!important}.prod-ic.purple svg{stroke:#dcb968}
     .prod-ic.amber{background:rgba(251,191,36,.16)!important}.prod-ic.amber svg{stroke:#fbbf24}
     .pill-net{background:rgba(248,113,113,.16)!important;color:#fca5a5!important}
     h1,.prod-name,.qty-val{color:#fff}
@@ -34,7 +34,7 @@
     .product-list{display:grid;grid-template-columns:1fr 1fr;gap:8px}
     .prod-btn{display:flex;flex-direction:column;align-items:flex-start;gap:6px;background:#fff;border:1.5px solid var(--line);border-radius:0;padding:11px 13px;cursor:pointer;transition:.15s;min-width:0}
     .prod-btn:hover{border-color:var(--blue-100);background:#fafcff}
-    .prod-btn.active{border-color:var(--blue);background:var(--blue-50);box-shadow:0 0 0 3px rgba(37,99,235,.10)}
+    .prod-btn.active{border-color:var(--blue);background:var(--blue-50);box-shadow:0 0 0 3px rgba(185,131,31,.10)}
     .prod-left{display:flex;align-items:center;gap:8px;width:100%}
     .prod-ic{width:28px;height:28px;border-radius:0;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--blue-50)}
     .prod-ic svg{width:14px;height:14px;stroke:var(--blue);fill:none;stroke-width:1.8}
@@ -59,11 +59,11 @@
     .pill-net{font-size:9px;font-weight:700;background:#fee2e2;color:#b91c1c;padding:1px 4px;border-radius:0}
 
     #invoice-email{width:100%;background:var(--field);border:1.5px solid var(--line);color:var(--ink);border-radius:0;padding:12px 14px;font-size:14px;outline:none;font-family:inherit;transition:.2s}
-    #invoice-email:focus{border-color:var(--blue);background:#fff;box-shadow:0 0 0 4px rgba(37,99,235,.08)}
+    #invoice-email:focus{border-color:var(--blue);background:#fff;box-shadow:0 0 0 4px rgba(185,131,31,.08)}
     .total-row{display:flex;align-items:center;justify-content:space-between;border-top:1.5px dashed var(--line);margin-top:24px;padding-top:18px;font-size:14px;color:var(--slate)}
     .total-row strong{font-size:25px;color:var(--ink);font-weight:900;letter-spacing:-.5px}
 
-    .btn{width:100%;margin-top:20px;background:var(--blue);color:#fff;border:none;border-radius:0;padding:14px;font-size:15px;font-weight:700;cursor:pointer;transition:.2s;font-family:inherit;box-shadow:0 8px 22px rgba(37,99,235,.26)}
+    .btn{width:100%;margin-top:20px;background:var(--blue);color:#fff;border:none;border-radius:0;padding:14px;font-size:15px;font-weight:700;cursor:pointer;transition:.2s;font-family:inherit;box-shadow:0 8px 22px rgba(185,131,31,.26)}
     .btn:hover{background:var(--blue-dark)}
     .btn:disabled{opacity:.4;cursor:not-allowed;box-shadow:none}
     .msg{font-size:13px;margin-top:10px;text-align:center}.msg.err{color:#dc2626}
@@ -86,8 +86,8 @@
     @keyframes spin{to{transform:rotate(360deg)}}
     .lic-key{font-family:monospace;font-size:15px;font-weight:700;color:var(--green);background:#f0fdf4;border:1px solid #bbf7d0;border-radius:0;padding:10px 14px;margin-top:10px;word-break:break-all}
     /* ═══ MODE CLAIR ═══ */
-    html[data-theme="light"]{--blue:#2563eb;--blue-50:#eff6ff;--blue-100:#dbeafe;--ink:#0f172a;--slate:#475569;--slate-2:#94a3b8;--line:#eef2f7;--green:#16a34a;--amber:#b45309;--field:#f8fafc}
-    html[data-theme="light"] body{background:radial-gradient(120% 80% at 15% 0%,rgba(37,99,235,.1),transparent 55%),#eef2f7}
+    html[data-theme="light"]{--blue:#b9831f;--blue-50:#fdf8ec;--blue-100:#f8edc9;--ink:#0f172a;--slate:#475569;--slate-2:#94a3b8;--line:#eef2f7;--green:#16a34a;--amber:#b45309;--field:#f8fafc}
+    html[data-theme="light"] body{background:radial-gradient(120% 80% at 15% 0%,rgba(185,131,31,.1),transparent 55%),#eef2f7}
     html[data-theme="light"] .checkout{background:#fff;border-color:#eef2f7;box-shadow:0 30px 80px rgba(15,23,42,.14)}
     html[data-theme="light"] .prod-btn,html[data-theme="light"] .pill-btn{background:#fff!important}
     html[data-theme="light"] .prod-btn:hover{background:#fafcff!important}
@@ -264,7 +264,7 @@
   <div class="checkout">
     <main class="panel">
       <div style="display:flex;align-items:center;margin-bottom:24px">
-        <a onclick="history.back();return false" href="#" title="Retour" data-i18n-title="pay.back" style="display:flex;align-items:center;justify-content:center;width:32px;height:32px;background:#2563eb;color:#fff;text-decoration:none;flex-shrink:0;transition:.15s" onmouseover="this.style.background='#1d4ed8'" onmouseout="this.style.background='#2563eb'">
+        <a onclick="history.back();return false" href="#" title="Retour" data-i18n-title="pay.back" style="display:flex;align-items:center;justify-content:center;width:32px;height:32px;background:#b9831f;color:#fff;text-decoration:none;flex-shrink:0;transition:.15s" onmouseover="this.style.background='#a9781a'" onmouseout="this.style.background='#b9831f'">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="15 18 9 12 15 6"/></svg>
         </a>
         <div style="flex:1;text-align:center"><a href="/"><img src="/logoevostudio2.png" alt="EvoStudio" height="39" style="display:inline-block;max-width:182px;object-fit:contain" /></a></div>
@@ -297,8 +297,8 @@
             <svg class="pay-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <circle cx="17" cy="6.6" r="4" fill="#F7931A"/>
               <text x="17" y="8.7" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="5.6" font-weight="800" fill="#fff">&#8383;</text>
-              <rect x="2.5" y="7.7" width="19" height="12" rx="2.6" fill="#3b82f6"/>
-              <rect x="13.5" y="11" width="8.5" height="5" rx="2.5" fill="#1e40af"/>
+              <rect x="2.5" y="7.7" width="19" height="12" rx="2.6" fill="#d29a2b"/>
+              <rect x="13.5" y="11" width="8.5" height="5" rx="2.5" fill="#7c5612"/>
               <circle cx="17.2" cy="13.5" r="1.25" fill="#fff"/>
             </svg>
             <span data-i18n="pay.crypto">Cryptomonnaie</span>
@@ -374,7 +374,7 @@
         <div style="background:#fff;border-radius:16px;max-width:340px;width:100%;padding:24px 22px;text-align:center;position:relative;box-shadow:0 24px 70px rgba(0,0,0,.35)">
           <button onclick="closePayModal()" aria-label="Fermer" style="position:absolute;top:6px;right:12px;background:none;border:none;font-size:26px;line-height:1;cursor:pointer;color:#94a3b8">×</button>
           <div id="pay-modal-title" style="font-size:16px;font-weight:800;color:#0f172a;margin-bottom:3px">Payer</div>
-          <div id="pay-modal-amount" style="font-size:15px;font-weight:800;color:#2563eb;margin-bottom:16px"></div>
+          <div id="pay-modal-amount" style="font-size:15px;font-weight:800;color:#b9831f;margin-bottom:16px"></div>
           <div id="pay-modal-qr" style="display:flex;justify-content:center;align-items:center;min-height:172px;margin-bottom:14px"></div>
           <a id="pay-modal-link" href="#" target="_blank" rel="noopener" style="display:none;text-decoration:none;color:#fff;border-radius:10px;padding:11px;font-size:14px;font-weight:700;margin-bottom:10px"></a>
           <button id="pay-modal-paid" onclick="confirmWavePaid()" style="width:100%;background:#16a34a;color:#fff;border:none;border-radius:10px;padding:12px;font-size:14px;font-weight:800;cursor:pointer">✓ J'ai effectué le paiement</button>
@@ -587,7 +587,7 @@
             '<div class="prod-ic ' + ic.cls + '" style="flex-shrink:0">' + ic.svg + '</div>' +
             '<div style="flex:1">' +
               '<div style="font-size:15px;font-weight:800;color:var(--ink)">' + (proxy ? t('pay.proxy_res','Proxy résidentiel') + ' — ' + p.name : p.name) + '</div>' +
-              (subLabel ? '<div style="font-size:12px;color:#7c3aed;margin-top:2px">' + subLabel + '</div>' : '') +
+              (subLabel ? '<div style="font-size:12px;color:#a9781a;margin-top:2px">' + subLabel + '</div>' : '') +
             '</div>' +
             '<div style="text-align:right">' +
               '<div id="pp-' + p.id + '" style="font-size:16px;font-weight:800;color:var(--blue)">' + priceLabel(p) + '</div>' +
@@ -851,13 +851,13 @@
           '<div style="font-size:22px;margin-bottom:8px">🎉</div>' +
           '<div style="font-size:15px;font-weight:700;color:#16a34a">' + t('pay.paid_title','Paiement confirmé !') + '</div>' +
           '<div style="font-size:13px;color:#64748b;margin:10px 0 14px;line-height:1.6">' + t('pay.paid_smtp','Votre serveur SMTP est en cours de provisioning.<br>Vous recevrez vos identifiants relay par <strong>email dans les 24h</strong>.') + '</div>' +
-          '<a href="/dashboard.html" style="display:inline-block;background:#2563eb;color:#fff;border-radius:0;padding:10px 18px;font-size:13px;font-weight:700;text-decoration:none">' + t('pay.see_smtp','Voir mes serveurs SMTP →') + '</a>';
+          '<a href="/dashboard.html" style="display:inline-block;background:#b9831f;color:#fff;border-radius:0;padding:10px 18px;font-size:13px;font-weight:700;text-decoration:none">' + t('pay.see_smtp','Voir mes serveurs SMTP →') + '</a>';
       } else if (isProxyOrder) {
         box.innerHTML =
           '<div style="font-size:22px;margin-bottom:8px">🎉</div>' +
           '<div style="font-size:15px;font-weight:700;color:#16a34a">' + t('pay.paid_title','Paiement confirmé !') + '</div>' +
           '<div style="font-size:13px;color:#64748b;margin:10px 0 14px;line-height:1.6">' + t('pay.paid_proxy','Votre forfait proxy résidentiel est en cours d\'activation.<br>Vos identifiants de connexion vous seront envoyés par <strong>email</strong> et seront visibles dans votre espace client.') + '</div>' +
-          '<a href="/dashboard.html" style="display:inline-block;background:#2563eb;color:#fff;border-radius:0;padding:10px 18px;font-size:13px;font-weight:700;text-decoration:none">' + t('pay.see_proxy','Voir mes proxies →') + '</a>';
+          '<a href="/dashboard.html" style="display:inline-block;background:#b9831f;color:#fff;border-radius:0;padding:10px 18px;font-size:13px;font-weight:700;text-decoration:none">' + t('pay.see_proxy','Voir mes proxies →') + '</a>';
       } else {
         box.innerHTML =
           '<div style="font-size:22px;margin-bottom:8px">🎉</div>' +
@@ -866,7 +866,7 @@
           '<div class="lic-key">' + d.license_key + '</div>' +
           '<div style="margin-top:14px">' +
           '<button id="_lic-copy-btn" style="background:#dcfce7;border:1px solid #bbf7d0;color:#15803d;border-radius:0;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer">' + t('pay.copy_license','Copier la licence') + '</button>' +
-          '<a href="/dashboard.html" style="display:inline-block;margin-left:8px;background:#2563eb;color:#fff;border-radius:0;padding:8px 16px;font-size:12px;font-weight:700;text-decoration:none">' + t('pay.my_account','Mon espace client →') + '</a>' +
+          '<a href="/dashboard.html" style="display:inline-block;margin-left:8px;background:#b9831f;color:#fff;border-radius:0;padding:8px 16px;font-size:12px;font-weight:700;text-decoration:none">' + t('pay.my_account','Mon espace client →') + '</a>' +
           '</div>';
         const _licKey = d.license_key;
         const _cpBtn = document.getElementById('_lic-copy-btn');
