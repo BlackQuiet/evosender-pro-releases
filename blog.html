@@ -20,6 +20,24 @@
 <script>window.I18N_PAGE={
   en:{
     "blog.h1":"The EvoStudio blog",
+    "blog.tag_deliv":"Deliverability",
+    "blog.t_deliv":"Email deliverability: aiming for the inbox",
+    "blog.p_deliv":"Reputation, authentication, warm-up, list cleaning: the levers to land in the inbox and avoid spam.",
+    "blog.tag_auth":"Authentication",
+    "blog.t_auth":"SPF, DKIM, DMARC: authenticate your emails",
+    "blog.p_auth":"What SPF, DKIM and DMARC do, how to set them up in DNS, and why they are essential to deliverability.",
+    "blog.tag_warmup":"Reputation",
+    "blog.t_warmup":"IP warm-up: warming up a sending address",
+    "blog.p_warmup":"Why and how to ramp up gradually on a new IP or domain, week after week.",
+    "blog.tag_rotsmtp":"Sending",
+    "blog.t_rotsmtp":"SMTP rotation: better spread your sends",
+    "blog.p_rotsmtp":"Spread sends across several SMTP servers to reduce blocks and improve deliverability at scale.",
+    "blog.tag_proxyvs":"Proxy",
+    "blog.t_proxyvs":"Residential vs datacenter proxy: which to choose?",
+    "blog.p_proxyvs":"Real IPs vs hosting IPs, block rates, use cases and pricing: how to choose the right proxy type.",
+    "blog.tag_spam":"Anti-spam",
+    "blog.t_spam":"Avoiding spam: the complete guide",
+    "blog.p_spam":"Filters, trigger words, authentication, text/image ratio, links: best practices to stay in the inbox.",
     "blog.intro":"Practical guides on emailing, deliverability and sending infrastructure.",
     "blog.tag_sending":"Sending",
     "blog.t_mass":"Bulk email sending software: the complete guide",
@@ -37,6 +55,24 @@
   },
   ru:{
     "blog.h1":"Блог EvoStudio",
+    "blog.tag_deliv":"Доставляемость",
+    "blog.t_deliv":"Доставляемость email: цель — «Входящие»",
+    "blog.p_deliv":"Репутация, аутентификация, прогрев, очистка списков: рычаги, чтобы попадать во «Входящие» и не уходить в спам.",
+    "blog.tag_auth":"Аутентификация",
+    "blog.t_auth":"SPF, DKIM, DMARC: аутентификация писем",
+    "blog.p_auth":"Зачем нужны SPF, DKIM и DMARC, как настроить их в DNS и почему они важны для доставляемости.",
+    "blog.tag_warmup":"Репутация",
+    "blog.t_warmup":"Прогрев IP: разогрев адреса отправки",
+    "blog.p_warmup":"Зачем и как постепенно наращивать объём на новом IP или домене, неделя за неделей.",
+    "blog.tag_rotsmtp":"Отправка",
+    "blog.t_rotsmtp":"Ротация SMTP: лучше распределяйте отправку",
+    "blog.p_rotsmtp":"Распределение отправок между несколькими SMTP-серверами для снижения блокировок и роста доставляемости при больших объёмах.",
+    "blog.tag_proxyvs":"Прокси",
+    "blog.t_proxyvs":"Резидентный или датацентр-прокси: что выбрать?",
+    "blog.p_proxyvs":"Реальные IP против IP хостинга, доля блокировок, сценарии и цена: как выбрать тип прокси.",
+    "blog.tag_spam":"Антиспам",
+    "blog.t_spam":"Как не попасть в спам: полное руководство",
+    "blog.p_spam":"Фильтры, триггерные слова, аутентификация, соотношение текст/изображение, ссылки: практики, чтобы оставаться во «Входящих».",
     "blog.intro":"Практические руководства по email-рассылкам, доставляемости и инфраструктуре отправки.",
     "blog.tag_sending":"Отправка",
     "blog.t_mass":"Программа для массовой рассылки email: полное руководство",
@@ -93,6 +129,36 @@
       <div class="tag" data-i18n="blog.tag_infra">Infrastructure</div>
       <h2 data-i18n="blog.t_smtp">Serveur SMTP dédié : tout comprendre</h2>
       <p data-i18n="blog.p_smtp">SMTP dédié ou partagé, IP dédiée, réputation et délivrabilité : le guide pour bien choisir votre infrastructure d'envoi.</p>
+    </a>
+    <a class="post" href="/deliverabilite-email.html">
+      <div class="tag" data-i18n="blog.tag_deliv">Délivrabilité</div>
+      <h2 data-i18n="blog.t_deliv">Délivrabilité email : viser la boîte de réception</h2>
+      <p data-i18n="blog.p_deliv">Réputation, authentification, warm-up, nettoyage de listes : les leviers pour arriver en boîte de réception et éviter les spams.</p>
+    </a>
+    <a class="post" href="/authentification-email-spf-dkim-dmarc.html">
+      <div class="tag" data-i18n="blog.tag_auth">Authentification</div>
+      <h2 data-i18n="blog.t_auth">SPF, DKIM, DMARC : authentifier ses emails</h2>
+      <p data-i18n="blog.p_auth">À quoi servent SPF, DKIM et DMARC, comment les configurer dans le DNS et pourquoi ils sont essentiels à la délivrabilité.</p>
+    </a>
+    <a class="post" href="/warm-up-ip-email.html">
+      <div class="tag" data-i18n="blog.tag_warmup">Réputation</div>
+      <h2 data-i18n="blog.t_warmup">Warm-up IP : réchauffer une adresse d'envoi</h2>
+      <p data-i18n="blog.p_warmup">Pourquoi et comment monter en charge progressivement sur une nouvelle IP ou un nouveau domaine, semaine après semaine.</p>
+    </a>
+    <a class="post" href="/rotation-smtp.html">
+      <div class="tag" data-i18n="blog.tag_rotsmtp">Envoi</div>
+      <h2 data-i18n="blog.t_rotsmtp">Rotation SMTP : mieux répartir vos envois</h2>
+      <p data-i18n="blog.p_rotsmtp">Répartir les envois sur plusieurs serveurs SMTP pour réduire les blocages et améliorer la délivrabilité en gros volume.</p>
+    </a>
+    <a class="post" href="/proxy-residentiel-vs-datacenter.html">
+      <div class="tag" data-i18n="blog.tag_proxyvs">Proxy</div>
+      <h2 data-i18n="blog.t_proxyvs">Proxy résidentiel vs datacenter : lequel choisir ?</h2>
+      <p data-i18n="blog.p_proxyvs">IP réelles vs IP d'hébergeur, taux de blocage, cas d'usage et prix : comment choisir le bon type de proxy.</p>
+    </a>
+    <a class="post" href="/eviter-spam-email.html">
+      <div class="tag" data-i18n="blog.tag_spam">Anti-spam</div>
+      <h2 data-i18n="blog.t_spam">Éviter les spams : le guide complet</h2>
+      <p data-i18n="blog.p_spam">Filtres, mots déclencheurs, authentification, ratio texte/image, liens : les bonnes pratiques pour rester en boîte de réception.</p>
     </a>
   </div>
 </div>

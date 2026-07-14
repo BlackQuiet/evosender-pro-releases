@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SPF DKIM DMARC : authentifier ses emails | EvoStudio</title>
+<meta name="description" content="SPF DKIM DMARC : à quoi servent ces protocoles, comment les configurer dans le DNS, les erreurs fréquentes et leur impact sur la délivrabilité de vos emails." />
+<meta name="robots" content="index, follow" />
+<meta name="theme-color" content="#b9831f" />
+<link rel="canonical" href="https://evostudio.fr/authentification-email-spf-dkim-dmarc.html" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://evostudio.fr/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://evostudio.fr/blog.html"},{"@type":"ListItem","position":3,"name":"SPF, DKIM et DMARC","item":"https://evostudio.fr/authentification-email-spf-dkim-dmarc.html"}]}
+</script>
+<meta property="og:type" content="article" />
+<meta property="og:title" content="SPF, DKIM et DMARC : authentifier ses emails" />
+<meta property="og:description" content="À quoi servent SPF, DKIM et DMARC, comment les configurer dans le DNS et leur impact sur la délivrabilité." />
+<meta property="og:url" content="https://evostudio.fr/authentification-email-spf-dkim-dmarc.html" />
+<meta property="og:image" content="https://evostudio.fr/logoevostudio2.png" />
+<link rel="icon" href="/logo-EvoSender.ico" type="image/x-icon" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/article.css" />
+<script src="/theme.js"></script>
+<script>window.I18N_PAGE = {
+  en: {
+    "auth.crumb.current": "SPF, DKIM and DMARC",
+    "auth.h1": "SPF, DKIM and DMARC: authenticate your emails",
+    "auth.lead": "Authentication through <strong>SPF, DKIM and DMARC</strong> proves to mailbox providers that your emails really come from you. Without it, your campaigns land in spam — here is how to configure everything correctly.",
+    "auth.meta": "EvoStudio guide · Updated in 2026",
+    "auth.h2.why": "Why authenticate your emails?",
+    "auth.p.why": "When you send an email, nothing technically stops a third party from spoofing your domain name in the « From » field. That is exactly how phishing works. To defend against it, providers (Gmail, Outlook, Yahoo) verify the sender's identity before accepting a message. Three complementary standards handle this check: SPF, DKIM and DMARC. A properly authenticated domain earns the trust of spam filters; a domain that is not authenticated sees its messages pushed to the junk folder, or even rejected. Since 2024, Gmail and Yahoo require all three protocols from bulk senders.",
+    "auth.p.why2": "In practice, these checks happen in a fraction of a second, the moment the receiving server gets your message. The result — pass or fail — weighs directly on the spam score assigned to the email. Authenticating well therefore means stacking the odds in your favor before the content is even examined.",
+    "auth.h2.roles": "SPF, DKIM, DMARC: what each protocol does",
+    "auth.p.roles": "These three protocols do not replace one another: they complement each other. SPF validates the sending server, DKIM validates the message itself, and DMARC orchestrates the two by dictating what to do when a check fails. A truly protected domain combines all three.",
+    "auth.h3.spf": "SPF (Sender Policy Framework)",
+    "auth.p.spf": "SPF is a whitelist published in your domain's DNS. It states which servers are allowed to send emails on your behalf. On reception, the receiving server compares the sending IP address to this list: if it appears there, the message passes the SPF check; otherwise, it fails.",
+    "auth.h3.dkim": "DKIM (DomainKeys Identified Mail)",
+    "auth.p.dkim": "DKIM adds a cryptographic signature to every email. Your sending server signs the message with a private key; the recipient verifies that signature using the public key published in your DNS. If the content was altered in transit or the signature does not match, the DKIM check fails. DKIM therefore guarantees the authenticity and integrity of the message.",
+    "auth.h3.dmarc": "DMARC (Domain-based Message Authentication)",
+    "auth.p.dmarc": "DMARC builds on SPF and DKIM. It defines the policy to apply when a message fails authentication — do nothing, quarantine or reject — and requires « alignment » between the domain visible in the « From » field and the one validated by SPF or DKIM. DMARC also sends you reports so you can monitor who is sending in your name.",
+    "auth.h2.config": "How to configure SPF, DKIM and DMARC (DNS records)",
+    "auth.p.config": "All three protocols are configured entirely in your domain's DNS zone, at your host or registrar. No change to the content of your emails is required: everything happens at the level of TXT and CNAME records. Here is the procedure for each one.",
+    "auth.h3.cfgspf": "Configuring SPF",
+    "auth.p.cfgspf": "SPF is published as a TXT record on your root domain. A typical example looks like <code>v=spf1 include:_spf.your-provider.com ~all</code>. The <code>include</code> statement authorizes your sending provider's servers, and <code>~all</code> means a « soft » failure for everything else. Golden rule: only one SPF record per domain, and no more than ten DNS lookups, otherwise the whole record becomes invalid.",
+    "auth.h3.cfgdkim": "Configuring DKIM",
+    "auth.p.cfgdkim": "Your sending provider generates a key pair and gives you a record to publish, usually in the form <code>selector._domainkey.your-domain.com</code> as a TXT or CNAME record. The value contains the public key (<code>v=DKIM1; k=rsa; p=…</code>). The « selector » lets you keep several keys in parallel, which is useful for rotation. Once published, enable signing on the sending server.",
+    "auth.h3.cfgdmarc": "Configuring DMARC",
+    "auth.p.cfgdmarc": "DMARC is published as a TXT record on the subdomain <code>_dmarc.your-domain.com</code>. Always start with a monitoring policy: <code>v=DMARC1; p=none; rua=mailto:reports@your-domain.com</code>. The <code>p=none</code> mode does not affect delivery but lets you receive reports and confirm that SPF and DKIM pass. When everything is clean, tighten it gradually to <code>p=quarantine</code> and then <code>p=reject</code>.",
+    "auth.callout": "💡 <strong>Key takeaway:</strong> always deploy DMARC in <code>p=none</code> first. Jumping straight to <code>p=reject</code> on a misconfigured domain would block your own legitimate emails.",
+    "auth.h2.mistakes": "Common mistakes to avoid",
+    "auth.li.m1": "Publishing several SPF records on the same domain: only one is allowed.",
+    "auth.li.m2": "Exceeding ten DNS lookups in the SPF record, which makes it invalid (« permerror »).",
+    "auth.li.m3": "Forgetting to enable DKIM signing on the server after publishing the key.",
+    "auth.li.m4": "Moving to p=reject without first analyzing the DMARC reports.",
+    "auth.li.m5": "Using -all (hard fail) too early, before listing every legitimate sender.",
+    "auth.h2.impact": "Impact on deliverability",
+    "auth.p.impact": "Authentication is not a cosmetic option: it is the foundation of your <a href=\"/deliverabilite-email.html\">deliverability</a>. A domain whose SPF, DKIM and DMARC are aligned enjoys a better reputation, gets through filters more easily and sees its inbox placement rate climb. Conversely, an unsigned email starts with a heavy handicap. To go further, a <a href=\"/serveur-smtp-dedie.html\">dedicated SMTP server</a> gives you a clean IP and full control over these records, which is never guaranteed on a shared service.",
+    "auth.p.impact2": "Finally, strong authentication protects your brand: it stops fraudsters from spoofing your domain to send fraudulent messages in your name, which preserves your recipients' trust over the long term and prevents a third party from ruining your sender reputation.",
+    "auth.faq_h2": "Frequently asked questions",
+    "auth.faq1q": "Are SPF, DKIM and DMARC all mandatory?",
+    "auth.faq1a": "Yes for any serious sender. SPF and DKIM each authenticate one aspect (the IP and the signature), and DMARC links them together while enforcing a policy. Since 2024, Gmail and Yahoo require all three from bulk senders.",
+    "auth.faq2q": "How long before the records become active?",
+    "auth.faq2a": "DNS propagation takes from a few minutes to 48 hours depending on your host and the cache duration (TTL). Then verify with an authentication testing tool before sending.",
+    "auth.faq3q": "Which DMARC policy should I choose at the start?",
+    "auth.faq3a": "Always p=none. It lets you collect reports risk-free, then you tighten it to quarantine and reject once SPF and DKIM are confirmed.",
+    "auth.faq4q": "What does « alignment » mean in DMARC?",
+    "auth.faq4a": "The domain shown in the « From » field must match the one validated by SPF or DKIM. Without this alignment, DMARC fails even if SPF and DKIM pass individually.",
+    "auth.cta_h3": "Send with an authenticated domain",
+    "auth.cta_p": "EvoSender and its dedicated SMTP server help you configure SPF, DKIM and DMARC for maximum deliverability.",
+    "auth.cta_btn": "Discover EvoSender →",
+    "auth.rel_h2": "See also",
+    "auth.rel_1": "Email deliverability: the complete guide<span>Get through filters and reach the inbox.</span>",
+    "auth.rel_2": "Dedicated SMTP server: everything explained<span>Clean IP and full control over your DNS.</span>",
+    "auth.rel_3": "Bulk email software<span>Choose the tool that protects your reputation.</span>",
+    "foot.article": "© 2025–2026 EGSCI SARL — EvoStudio · <a href=\"/a-propos.html\">About</a> · <a href=\"/privacy.html\">Legal notice</a>"
+  },
+  ru: {
+    "auth.crumb.current": "SPF, DKIM и DMARC",
+    "auth.h1": "SPF, DKIM и DMARC: аутентификация ваших писем",
+    "auth.lead": "Аутентификация с помощью <strong>SPF, DKIM и DMARC</strong> доказывает почтовым провайдерам, что ваши письма действительно отправлены вами. Без неё ваши рассылки попадают в спам — вот как всё правильно настроить.",
+    "auth.meta": "Руководство EvoStudio · Обновлено в 2026",
+    "auth.h2.why": "Зачем аутентифицировать письма?",
+    "auth.p.why": "Когда вы отправляете письмо, технически ничто не мешает постороннему подделать ваше доменное имя в поле «От». Именно так работает фишинг. Чтобы защититься, провайдеры (Gmail, Outlook, Yahoo) проверяют личность отправителя перед приёмом сообщения. За эту проверку отвечают три взаимодополняющих стандарта: SPF, DKIM и DMARC. Правильно аутентифицированный домен вызывает доверие у спам-фильтров; неаутентифицированный домен видит, как его сообщения уходят в папку «Спам» или вовсе отклоняются. С 2024 года Gmail и Yahoo требуют все три протокола от массовых отправителей.",
+    "auth.p.why2": "На практике эти проверки происходят за доли секунды, в момент, когда сервер-адресат получает ваше сообщение. Результат — успех или отказ — напрямую влияет на спам-оценку письма. Поэтому правильная аутентификация означает, что вы повышаете свои шансы ещё до того, как будет рассмотрено содержимое.",
+    "auth.h2.roles": "SPF, DKIM, DMARC: за что отвечает каждый протокол",
+    "auth.p.roles": "Эти три протокола не заменяют, а дополняют друг друга. SPF проверяет сервер отправки, DKIM проверяет само сообщение, а DMARC связывает их, диктуя, что делать при неудачной проверке. По-настоящему защищённый домен сочетает все три.",
+    "auth.h3.spf": "SPF (Sender Policy Framework)",
+    "auth.p.spf": "SPF — это белый список, опубликованный в DNS вашего домена. Он указывает, каким серверам разрешено отправлять письма от вашего имени. При получении сервер-адресат сравнивает IP-адрес отправки с этим списком: если он в нём есть, сообщение проходит проверку SPF; иначе она не проходит.",
+    "auth.h3.dkim": "DKIM (DomainKeys Identified Mail)",
+    "auth.p.dkim": "DKIM добавляет к каждому письму криптографическую подпись. Ваш сервер отправки подписывает сообщение закрытым ключом; получатель проверяет эту подпись с помощью открытого ключа, опубликованного в вашем DNS. Если содержимое было изменено в пути или подпись не совпадает, проверка DKIM не проходит. Тем самым DKIM гарантирует подлинность и целостность сообщения.",
+    "auth.h3.dmarc": "DMARC (Domain-based Message Authentication)",
+    "auth.p.dmarc": "DMARC опирается на SPF и DKIM. Он определяет политику при неудачной аутентификации сообщения — ничего не делать, поместить в карантин или отклонить — и требует «выравнивания» между доменом в поле «От» и доменом, подтверждённым SPF или DKIM. DMARC также присылает вам отчёты, чтобы следить за тем, кто отправляет от вашего имени.",
+    "auth.h2.config": "Как настроить SPF, DKIM и DMARC (записи DNS)",
+    "auth.p.config": "Все три протокола настраиваются полностью в зоне DNS вашего домена, у хостинга или регистратора. Изменять содержимое писем не нужно: всё происходит на уровне записей TXT и CNAME. Вот порядок действий для каждого.",
+    "auth.h3.cfgspf": "Настройка SPF",
+    "auth.p.cfgspf": "SPF публикуется в виде TXT-записи на корневом домене. Типичный пример выглядит так: <code>v=spf1 include:_spf.your-provider.com ~all</code>. Директива <code>include</code> разрешает серверы вашего провайдера отправки, а <code>~all</code> означает «мягкий» отказ для всего остального. Золотое правило: только одна запись SPF на домен и не более десяти DNS-запросов, иначе вся запись становится недействительной.",
+    "auth.h3.cfgdkim": "Настройка DKIM",
+    "auth.p.cfgdkim": "Ваш провайдер отправки создаёт пару ключей и выдаёт запись для публикации, обычно в виде <code>selector._domainkey.your-domain.com</code> типа TXT или CNAME. Значение содержит открытый ключ (<code>v=DKIM1; k=rsa; p=…</code>). «Селектор» позволяет держать несколько ключей параллельно, что удобно для ротации. После публикации включите подпись на сервере отправки.",
+    "auth.h3.cfgdmarc": "Настройка DMARC",
+    "auth.p.cfgdmarc": "DMARC публикуется в виде TXT-записи на поддомене <code>_dmarc.your-domain.com</code>. Всегда начинайте с политики наблюдения: <code>v=DMARC1; p=none; rua=mailto:reports@your-domain.com</code>. Режим <code>p=none</code> не влияет на доставку, но позволяет получать отчёты и убедиться, что SPF и DKIM проходят. Когда всё чисто, постепенно ужесточайте до <code>p=quarantine</code>, а затем <code>p=reject</code>.",
+    "auth.callout": "💡 <strong>Главное:</strong> всегда сначала внедряйте DMARC в режиме <code>p=none</code>. Переход сразу к <code>p=reject</code> на плохо настроенном домене заблокирует ваши же легитимные письма.",
+    "auth.h2.mistakes": "Частые ошибки, которых стоит избегать",
+    "auth.li.m1": "Публикация нескольких записей SPF на одном домене: разрешена только одна.",
+    "auth.li.m2": "Превышение десяти DNS-запросов в SPF, что делает запись недействительной («permerror»).",
+    "auth.li.m3": "Забытое включение подписи DKIM на сервере после публикации ключа.",
+    "auth.li.m4": "Переход к p=reject без предварительного анализа отчётов DMARC.",
+    "auth.li.m5": "Слишком раннее использование -all (жёсткий отказ), до учёта всех легитимных отправителей.",
+    "auth.h2.impact": "Влияние на доставляемость",
+    "auth.p.impact": "Аутентификация — не косметическая опция, а фундамент вашей <a href=\"/deliverabilite-email.html\">доставляемости</a>. Домен, у которого SPF, DKIM и DMARC выровнены, обладает лучшей репутацией, легче проходит фильтры и повышает долю попаданий во «Входящие». И наоборот, неподписанное письмо стартует с серьёзным гандикапом. Чтобы пойти дальше, <a href=\"/serveur-smtp-dedie.html\">выделенный SMTP-сервер</a> даёт вам чистый IP и полный контроль над этими записями, чего никогда не гарантирует общий сервис.",
+    "auth.p.impact2": "Наконец, надёжная аутентификация защищает ваш бренд: она не позволяет мошенникам подделывать ваш домен для отправки поддельных сообщений от вашего имени, что сохраняет доверие получателей в долгосрочной перспективе и уберегает вашу репутацию отправителя от порчи третьими лицами.",
+    "auth.faq_h2": "Часто задаваемые вопросы",
+    "auth.faq1q": "Обязательны ли SPF, DKIM и DMARC все вместе?",
+    "auth.faq1a": "Да для любого серьёзного отправителя. SPF и DKIM аутентифицируют каждый свой аспект (IP и подпись), а DMARC связывает их, навязывая политику. С 2024 года Gmail и Yahoo требуют все три от массовых отправителей.",
+    "auth.faq2q": "Через сколько времени записи начинают действовать?",
+    "auth.faq2a": "Распространение DNS занимает от нескольких минут до 48 часов в зависимости от хостинга и времени кэширования (TTL). Затем проверьте результат инструментом теста аутентификации перед отправкой.",
+    "auth.faq3q": "Какую политику DMARC выбрать в начале?",
+    "auth.faq3a": "Всегда p=none. Она позволяет собирать отчёты без риска, затем вы ужесточаете её до quarantine и reject после подтверждения SPF и DKIM.",
+    "auth.faq4q": "Что означает «выравнивание» в DMARC?",
+    "auth.faq4a": "Домен, отображаемый в поле «От», должен совпадать с доменом, подтверждённым SPF или DKIM. Без этого выравнивания DMARC не проходит, даже если SPF и DKIM проходят по отдельности.",
+    "auth.cta_h3": "Отправляйте с аутентифицированного домена",
+    "auth.cta_p": "EvoSender и его выделенный SMTP-сервер помогают настроить SPF, DKIM и DMARC для максимальной доставляемости.",
+    "auth.cta_btn": "Узнать о EvoSender →",
+    "auth.rel_h2": "Читайте также",
+    "auth.rel_1": "Доставляемость email: полное руководство<span>Проходите фильтры и достигайте «Входящих».</span>",
+    "auth.rel_2": "Выделенный SMTP-сервер: всё, что нужно знать<span>Чистый IP и полный контроль над DNS.</span>",
+    "auth.rel_3": "Программа для массовой рассылки email<span>Выберите инструмент, который бережёт вашу репутацию.</span>",
+    "foot.article": "© 2025–2026 EGSCI SARL — EvoStudio · <a href=\"/a-propos.html\">О нас</a> · <a href=\"/privacy.html\">Правовая информация</a>"
+  }
+};</script>
+<script src="/i18n.js" defer></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","headline":"SPF, DKIM et DMARC : authentifier ses emails","description":"À quoi servent SPF, DKIM et DMARC, comment les configurer dans le DNS, les erreurs fréquentes et leur impact sur la délivrabilité.","image":"https://evostudio.fr/logoevostudio2.png","author":{"@type":"Organization","name":"EvoStudio"},"publisher":{"@type":"Organization","name":"EvoStudio","logo":{"@type":"ImageObject","url":"https://evostudio.fr/logoevostudio2.png"}},"mainEntityOfPage":"https://evostudio.fr/authentification-email-spf-dkim-dmarc.html","inLanguage":"fr-FR"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"SPF, DKIM et DMARC sont-ils tous obligatoires ?","acceptedAnswer":{"@type":"Answer","text":"Oui pour un expéditeur sérieux. SPF et DKIM authentifient chacun un aspect (l'IP et la signature), et DMARC les relie tout en imposant une politique. Depuis 2024, Gmail et Yahoo exigent les trois des expéditeurs de masse."}},{"@type":"Question","name":"Combien de temps pour que les enregistrements soient actifs ?","acceptedAnswer":{"@type":"Answer","text":"La propagation DNS prend de quelques minutes à 48 heures selon votre hébergeur et la durée de cache (TTL). Vérifiez ensuite avec un outil de test d'authentification avant d'envoyer."}},{"@type":"Question","name":"Quelle politique DMARC choisir au départ ?","acceptedAnswer":{"@type":"Answer","text":"Toujours p=none. Elle vous laisse collecter les rapports sans risque, puis vous durcissez vers quarantine et reject une fois SPF et DKIM confirmés."}},{"@type":"Question","name":"Que signifie l'« alignement » en DMARC ?","acceptedAnswer":{"@type":"Answer","text":"Le domaine affiché dans le champ « De » doit correspondre à celui validé par SPF ou DKIM. Sans cet alignement, DMARC échoue même si SPF et DKIM passent individuellement."}}]}
+</script>
+</head>
+<body>
+<header class="nav">
+  <a href="/" class="logo"><img src="/logoevostudio2.png" alt="EvoStudio" /></a>
+  <nav class="links">
+    <a href="/" data-i18n="nav.home">Accueil</a><a href="/#produits" data-i18n="nav.products">Produits</a><a href="/blog.html" data-i18n="nav.blog">Blog</a><a href="/a-propos.html" data-i18n="nav.about">À propos</a><a href="/pay.html" class="cta" data-i18n="nav.buy">Acheter</a><div id="lang-switch"></div>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="crumb"><a href="/" data-i18n="nav.home">Accueil</a> › <a href="/blog.html" data-i18n="nav.blog">Blog</a> › <span data-i18n="auth.crumb.current">SPF, DKIM et DMARC</span></div>
+  <article>
+    <h1 data-i18n="auth.h1">SPF, DKIM et DMARC : authentifier ses emails</h1>
+    <p class="lead" data-i18n-html="auth.lead">L'authentification par <strong>SPF, DKIM et DMARC</strong> prouve aux fournisseurs de messagerie que vos emails viennent bien de vous. Sans elle, vos campagnes finissent en spam — voici comment tout configurer correctement.</p>
+    <p class="meta" data-i18n="auth.meta">Guide EvoStudio · Mis à jour en 2026</p>
+
+    <h2 data-i18n="auth.h2.why">Pourquoi authentifier ses emails ?</h2>
+    <p data-i18n="auth.p.why">Quand vous envoyez un email, rien n'empêche techniquement un tiers d'usurper votre nom de domaine dans le champ « De ». C'est le principe même du phishing. Pour se défendre, les fournisseurs (Gmail, Outlook, Yahoo) vérifient l'identité de l'expéditeur avant d'accepter un message. Trois standards complémentaires servent à cette vérification : SPF, DKIM et DMARC. Un domaine correctement authentifié inspire confiance aux filtres anti-spam ; un domaine qui ne l'est pas voit ses messages relégués en courrier indésirable, voire rejetés. Depuis 2024, Gmail et Yahoo exigent les trois protocoles des expéditeurs de masse.</p>
+    <p data-i18n="auth.p.why2">Concrètement, ces contrôles se jouent en une fraction de seconde, au moment où le serveur destinataire reçoit votre message. Le résultat — réussite ou échec — pèse directement dans le score anti-spam attribué à l'email. Bien authentifier, c'est donc mettre toutes les chances de votre côté avant même que le contenu ne soit examiné.</p>
+
+    <h2 data-i18n="auth.h2.roles">SPF, DKIM, DMARC : à quoi sert chaque protocole</h2>
+    <p data-i18n="auth.p.roles">Ces trois protocoles ne se remplacent pas : ils se complètent. Le SPF valide le serveur d'envoi, le DKIM valide le message lui-même, et le DMARC orchestre les deux en dictant la conduite à tenir en cas d'échec. Un domaine réellement protégé les combine tous les trois.</p>
+    <h3 data-i18n="auth.h3.spf">SPF (Sender Policy Framework)</h3>
+    <p data-i18n="auth.p.spf">Le SPF est une liste blanche publiée dans le DNS de votre domaine. Elle indique quels serveurs sont autorisés à envoyer des emails en votre nom. À la réception, le serveur destinataire compare l'adresse IP d'envoi à cette liste : si elle y figure, le message passe le test SPF ; sinon, il échoue.</p>
+    <h3 data-i18n="auth.h3.dkim">DKIM (DomainKeys Identified Mail)</h3>
+    <p data-i18n="auth.p.dkim">Le DKIM ajoute une signature cryptographique à chaque email. Votre serveur d'envoi signe le message avec une clé privée ; le destinataire vérifie cette signature grâce à la clé publique publiée dans votre DNS. Si le contenu a été modifié en route ou si la signature ne correspond pas, le test DKIM échoue. Le DKIM garantit ainsi l'authenticité et l'intégrité du message.</p>
+    <h3 data-i18n="auth.h3.dmarc">DMARC (Domain-based Message Authentication)</h3>
+    <p data-i18n="auth.p.dmarc">Le DMARC s'appuie sur SPF et DKIM. Il définit la politique à appliquer quand un message échoue à l'authentification — ne rien faire, mettre en quarantaine ou rejeter — et exige un « alignement » entre le domaine visible dans le champ « De » et celui validé par SPF ou DKIM. Le DMARC vous envoie aussi des rapports pour surveiller qui envoie en votre nom.</p>
+
+    <h2 data-i18n="auth.h2.config">Comment configurer SPF, DKIM et DMARC (enregistrements DNS)</h2>
+    <p data-i18n="auth.p.config">Ces trois protocoles se configurent entièrement dans la zone DNS de votre domaine, chez votre hébergeur ou votre registrar. Aucune modification du contenu de vos emails n'est nécessaire : tout se joue au niveau des enregistrements TXT et CNAME. Voici la marche à suivre pour chacun.</p>
+    <h3 data-i18n="auth.h3.cfgspf">Configurer SPF</h3>
+    <p data-i18n-html="auth.p.cfgspf">Le SPF se publie sous forme d'un enregistrement TXT sur votre domaine racine. Un exemple typique ressemble à <code>v=spf1 include:_spf.votre-fournisseur.com ~all</code>. La mention <code>include</code> autorise les serveurs de votre prestataire d'envoi, et <code>~all</code> indique un échec « souple » pour tout le reste. Règle d'or : un seul enregistrement SPF par domaine, et pas plus de dix résolutions DNS, sous peine d'invalider le tout.</p>
+    <h3 data-i18n="auth.h3.cfgdkim">Configurer DKIM</h3>
+    <p data-i18n-html="auth.p.cfgdkim">Votre fournisseur d'envoi génère une paire de clés et vous fournit un enregistrement à publier, généralement sous la forme <code>selecteur._domainkey.votre-domaine.com</code> de type TXT ou CNAME. La valeur contient la clé publique (<code>v=DKIM1; k=rsa; p=…</code>). Le « sélecteur » permet d'avoir plusieurs clés en parallèle, utile pour la rotation. Une fois publiée, activez la signature côté serveur d'envoi.</p>
+    <h3 data-i18n="auth.h3.cfgdmarc">Configurer DMARC</h3>
+    <p data-i18n-html="auth.p.cfgdmarc">Le DMARC se publie en TXT sur le sous-domaine <code>_dmarc.votre-domaine.com</code>. Commencez toujours par une politique d'observation : <code>v=DMARC1; p=none; rua=mailto:rapports@votre-domaine.com</code>. Le mode <code>p=none</code> n'affecte pas la remise mais vous permet de recevoir les rapports et de vérifier que SPF et DKIM passent bien. Quand tout est propre, durcissez progressivement vers <code>p=quarantine</code> puis <code>p=reject</code>.</p>
+
+    <div class="callout" data-i18n-html="auth.callout">💡 <strong>À retenir :</strong> déployez toujours DMARC en <code>p=none</code> d'abord. Passer directement en <code>p=reject</code> sur un domaine mal configuré bloquerait vos propres emails légitimes.</div>
+
+    <h2 data-i18n="auth.h2.mistakes">Les erreurs fréquentes à éviter</h2>
+    <ul>
+      <li data-i18n="auth.li.m1">Publier plusieurs enregistrements SPF sur le même domaine : un seul est autorisé.</li>
+      <li data-i18n="auth.li.m2">Dépasser dix résolutions DNS dans le SPF, ce qui le rend invalide (« permerror »).</li>
+      <li data-i18n="auth.li.m3">Oublier d'activer la signature DKIM côté serveur après avoir publié la clé.</li>
+      <li data-i18n="auth.li.m4">Passer en p=reject sans avoir analysé les rapports DMARC au préalable.</li>
+      <li data-i18n="auth.li.m5">Utiliser -all (échec strict) trop tôt, avant d'avoir recensé tous ses expéditeurs légitimes.</li>
+    </ul>
+
+    <h2 data-i18n="auth.h2.impact">Impact sur la délivrabilité</h2>
+    <p data-i18n-html="auth.p.impact">L'authentification n'est pas une option cosmétique : c'est la fondation de votre <a href="/deliverabilite-email.html">délivrabilité</a>. Un domaine dont SPF, DKIM et DMARC sont alignés bénéficie d'une meilleure réputation, franchit plus facilement les filtres et voit son taux de placement en boîte de réception grimper. À l'inverse, un email non signé part avec un lourd handicap. Pour aller plus loin, un <a href="/serveur-smtp-dedie.html">serveur SMTP dédié</a> vous donne une IP propre et un contrôle total sur ces enregistrements, ce qui n'est jamais garanti sur un service mutualisé.</p>
+    <p data-i18n="auth.p.impact2">Enfin, une authentification solide protège votre marque : elle empêche les fraudeurs d'usurper votre domaine pour envoyer des messages frauduleux en votre nom, ce qui préserve la confiance de vos destinataires sur le long terme et vous évite de voir votre réputation d'expéditeur ruinée par un tiers.</p>
+
+    <h2 data-i18n="auth.faq_h2">Questions fréquentes</h2>
+    <h3 data-i18n="auth.faq1q">SPF, DKIM et DMARC sont-ils tous obligatoires ?</h3>
+    <p data-i18n="auth.faq1a">Oui pour un expéditeur sérieux. SPF et DKIM authentifient chacun un aspect (l'IP et la signature), et DMARC les relie tout en imposant une politique. Depuis 2024, Gmail et Yahoo exigent les trois des expéditeurs de masse.</p>
+    <h3 data-i18n="auth.faq2q">Combien de temps pour que les enregistrements soient actifs ?</h3>
+    <p data-i18n="auth.faq2a">La propagation DNS prend de quelques minutes à 48 heures selon votre hébergeur et la durée de cache (TTL). Vérifiez ensuite avec un outil de test d'authentification avant d'envoyer.</p>
+    <h3 data-i18n="auth.faq3q">Quelle politique DMARC choisir au départ ?</h3>
+    <p data-i18n="auth.faq3a">Toujours p=none. Elle vous laisse collecter les rapports sans risque, puis vous durcissez vers quarantine et reject une fois SPF et DKIM confirmés.</p>
+    <h3 data-i18n="auth.faq4q">Que signifie l'« alignement » en DMARC ?</h3>
+    <p data-i18n="auth.faq4a">Le domaine affiché dans le champ « De » doit correspondre à celui validé par SPF ou DKIM. Sans cet alignement, DMARC échoue même si SPF et DKIM passent individuellement.</p>
+
+    <div class="cta-box">
+      <h3 data-i18n="auth.cta_h3">Envoyez avec un domaine authentifié</h3>
+      <p data-i18n="auth.cta_p">EvoSender et son serveur SMTP dédié vous aident à configurer SPF, DKIM et DMARC pour une délivrabilité maximale.</p>
+      <a class="btn" href="/produit.html?id=sender" data-i18n="auth.cta_btn">Découvrir EvoSender →</a>
+    </div>
+
+    <div class="related">
+      <h2 data-i18n="auth.rel_h2">À lire aussi</h2>
+      <a href="/deliverabilite-email.html" data-i18n-html="auth.rel_1">Délivrabilité email : le guide complet<span>Passer les filtres et atteindre la boîte de réception.</span></a>
+      <a href="/serveur-smtp-dedie.html" data-i18n-html="auth.rel_2">Serveur SMTP dédié : tout comprendre<span>IP propre et contrôle total de vos DNS.</span></a>
+      <a href="/logiciel-envoi-email-masse.html" data-i18n-html="auth.rel_3">Logiciel d'envoi d'email en masse<span>Choisir l'outil qui préserve votre réputation.</span></a>
+    </div>
+  </article>
+</div>
+
+<footer class="footer" data-i18n-html="foot.article">© 2025–2026 EGSCI SARL — EvoStudio · <a href="/a-propos.html">À propos</a> · <a href="/privacy.html">Mentions légales</a></footer>
+<script src="/assistance.js" defer></script>
+</body>
+</html>

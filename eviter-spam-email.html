@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Éviter les spams : le guide complet 2026 | EvoStudio</title>
+<meta name="description" content="Éviter les spams en emailing : filtres anti-spam, mots déclencheurs, authentification SPF/DKIM, ratio texte/image et nettoyage de listes. Le guide EvoStudio." />
+<meta name="robots" content="index, follow" />
+<meta name="theme-color" content="#b9831f" />
+<link rel="canonical" href="https://evostudio.fr/eviter-spam-email.html" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://evostudio.fr/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://evostudio.fr/blog.html"},{"@type":"ListItem","position":3,"name":"Éviter les spams","item":"https://evostudio.fr/eviter-spam-email.html"}]}
+</script>
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Éviter les spams : le guide anti-spam de vos emails" />
+<meta property="og:description" content="Filtres anti-spam, mots déclencheurs, authentification, ratio texte/image et nettoyage de listes : comment éviter les spams et atterrir en boîte de réception." />
+<meta property="og:url" content="https://evostudio.fr/eviter-spam-email.html" />
+<meta property="og:image" content="https://evostudio.fr/logoevostudio2.png" />
+<link rel="icon" href="/logo-EvoSender.ico" type="image/x-icon" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/article.css" />
+<script src="/theme.js"></script>
+<script>window.I18N_PAGE = {
+  en: {
+    "spam.crumb.current": "Avoid spam",
+    "spam.h1": "Avoid spam: the anti-spam guide for your emails",
+    "spam.lead": "<strong>Avoiding spam</strong> is not a matter of luck: it is the result of solid authentication, careful content and clean lists. Here is how to get past the filters and land in the inbox.",
+    "spam.meta": "EvoStudio guide · Updated in 2026",
+    "spam.h2.filters": "How anti-spam filters work",
+    "spam.p.filters": "Every email provider (Gmail, Outlook, Yahoo…) analyzes your emails before deciding where to place them. The filter assigns a score based on dozens of signals: your authentication, your sender reputation, recipient behavior (opens, replies, spam complaints) and the content of the message. No single criterion condemns you, but a build-up of negative signals tips the message into the junk folder. Understanding these signals already means knowing how to avoid them.",
+    "spam.h2.auth": "Authentication: the foundation of trust",
+    "spam.h3.spf": "SPF, DKIM and DMARC",
+    "spam.p.spf": "These three protocols prove you really are the sender you claim to be. SPF declares which servers are allowed to send on your behalf, DKIM signs every message cryptographically, and DMARC tells providers what to do when a check fails. Without them, your emails are treated as suspicious by default. Complete authentication is the first step of any serious <a href=\"/deliverabilite-email.html\">deliverability</a> strategy.",
+    "spam.h3.reputation": "Sender reputation",
+    "spam.p.reputation": "Your domain and your IP address build up a history. Too many bounces, complaints or sends to non-existent addresses degrade this reputation, and a poor reputation sends you to spam for a long time. A new address must be « warmed up » gradually: start with small volumes to your most engaged contacts, then increase over several weeks. Consistency beats sudden spikes.",
+    "spam.callout": "💡 <strong>Key takeaway:</strong> filters do not judge a single email, but a bundle of signals. Authenticate your domain, send regularly and respect your recipients: it is the combination that keeps you out of spam.",
+    "spam.h2.content": "Content: trigger words, images and links",
+    "spam.h3.subject": "The subject line and preheader",
+    "spam.p.subject": "The subject line is the first thing both the filter and the recipient analyze. An honest subject, one that truly describes the content of the message, reduces manual spam reports, which are far more damaging than a mere technical score. Avoid misleading subjects such as « Re: » or « Fwd: » on a first contact, as well as fake « urgent » or « your invoice » mentions. Also take care of the preheader, that short text shown after the subject: it reinforces the consistency of the message and reassures the reader even before they open it.",
+    "spam.h3.words": "Words and phrasing to avoid",
+    "spam.p.words": "Modern filters no longer ban a specific word, but they spot the phrasing typical of spam. A subject line in capitals, a pile of exclamation marks or unrealistic promises raise your risk score.",
+    "spam.li.trigger1": "Subject lines in all capitals or saturated with emojis and symbols (€€€, !!!).",
+    "spam.li.trigger2": "Promises that are too good: « make money easily », « 100% free », « exceptional offer ».",
+    "spam.li.trigger3": "Artificial urgency: « act now », « last chance », countdown timers.",
+    "spam.li.trigger4": "Spelling mistakes and disguised characters (V1AGRA, ch@nce) that betray an attempt to evade filters.",
+    "spam.h3.ratio": "The text / image ratio",
+    "spam.p.ratio": "An email made of a single large image, with no real text, is a spam classic: the filter cannot read the image and grows suspicious. Aim for a good balance, with enough readable text around your visuals. Always fill in the alt attribute of your images and avoid heavy or unexpected attachments, which worry filters.",
+    "spam.h3.links": "Links and the sender",
+    "spam.p.links": "A link whose displayed text differs from its real destination, a swarm of links, or an unknown shortened domain are all warning signs. Use your own domain for your links, limit their number and always include a visible unsubscribe link: its absence is itself a reason for spam classification. Finally, send from an address consistent with your brand, never from a spoofed free mailbox.",
+    "spam.h2.lists": "Clean and maintain your lists",
+    "spam.p.lists": "A dirty list is the number-one cause of bounces and complaints. Every invalid address, every spam trap and every non-consenting contact damages your reputation. Before every major campaign, run your database through a <a href=\"/verificateur-email-masse.html\">bulk email verifier</a> to remove wrong and inactive addresses. Do not hesitate to delete contacts who have not opened for months: a small engaged list delivers far better than a large dead one.",
+    "spam.h2.practices": "Best practices when sending",
+    "spam.li.practice1": "Collect consent: only send to contacts who have explicitly authorized you (opt-in).",
+    "spam.li.practice2": "Spread your sends over time instead of blasting everything at once.",
+    "spam.li.practice3": "Personalize the message (name, context) to increase engagement, a positive signal for filters.",
+    "spam.li.practice4": "Test your email across several mailboxes before the mass send and monitor your statistics afterwards.",
+    "spam.h2.tool": "Avoiding spam with the right tools",
+    "spam.p.tool": "<strong>EvoSender</strong> builds these best practices in: multi-SMTP rotation to protect your reputation, controlled send pacing, variable-based personalization, an automatic unsubscribe link and real-time bounce tracking. Paired with a properly authenticated <a href=\"/serveur-smtp-dedie.html\">dedicated SMTP server</a>, it puts every chance on your side to stay out of spam.",
+    "spam.faq_h2": "Frequently asked questions",
+    "spam.faq1q": "Why do my emails land in spam even though the content is legitimate?",
+    "spam.faq1a": "Most of the time, the cause is not the text but missing authentication (SPF, DKIM, DMARC) or a sender reputation damaged by bounces. Check these foundations first before reworking your message.",
+    "spam.faq2q": "Which words trigger anti-spam filters the most?",
+    "spam.faq2a": "No word is banned on its own, but urgency phrasing, exaggerated financial promises, capital letters and repeated symbols raise your risk score. Write naturally, as you would to a real recipient.",
+    "spam.faq3q": "Does the text/image ratio really matter?",
+    "spam.faq3a": "Yes. An email made only of an image, with no readable text, is suspicious because the filter cannot analyze it. Keep a base of real text, an alt attribute on your images and avoid unsolicited attachments.",
+    "spam.faq4q": "Do I really need to clean my list before every send?",
+    "spam.faq4a": "Ideally yes. Invalid addresses and spam traps accumulate over time and drag down your deliverability. Running your list through an email verifier before big campaigns protects your reputation for the long term.",
+    "spam.cta_h3": "Send without ending up in spam with EvoSender",
+    "spam.cta_p": "SMTP rotation, controlled pacing, automatic unsubscribe and bounce tracking. Annual license, 100% local.",
+    "spam.cta_btn": "Discover EvoSender →",
+    "spam.rel_h2": "See also",
+    "spam.rel_1": "Email deliverability: the complete guide<span>Get your emails into the inbox.</span>",
+    "spam.rel_2": "Bulk email verifier<span>Clean your lists to reduce bounces.</span>",
+    "spam.rel_3": "Dedicated SMTP server: everything explained<span>The infrastructure that protects your reputation.</span>",
+    "foot.article": "© 2025–2026 EGSCI SARL — EvoStudio · <a href=\"/a-propos.html\">About</a> · <a href=\"/privacy.html\">Legal notice</a>"
+  },
+  ru: {
+    "spam.crumb.current": "Избежать спама",
+    "spam.h1": "Как избежать спама: руководство по защите ваших писем",
+    "spam.lead": "<strong>Избежать спама</strong> — это не вопрос удачи: это результат надёжной аутентификации, продуманного содержания и чистых списков. Вот как пройти фильтры и попасть во «Входящие».",
+    "spam.meta": "Руководство EvoStudio · Обновлено в 2026",
+    "spam.h2.filters": "Как работают спам-фильтры",
+    "spam.p.filters": "Каждый почтовый провайдер (Gmail, Outlook, Yahoo…) анализирует ваши письма, прежде чем решить, куда их поместить. Фильтр присваивает оценку на основе десятков сигналов: вашей аутентификации, репутации отправителя, поведения получателей (открытия, ответы, жалобы на спам) и содержания сообщения. Ни один отдельный критерий не приговаривает вас, но накопление негативных сигналов отправляет письмо в папку «Спам». Понять эти сигналы — уже значит знать, как их избежать.",
+    "spam.h2.auth": "Аутентификация — основа доверия",
+    "spam.h3.spf": "SPF, DKIM и DMARC",
+    "spam.p.spf": "Эти три протокола доказывают, что вы действительно тот отправитель, за которого себя выдаёте. SPF указывает, какие серверы имеют право отправлять от вашего имени, DKIM криптографически подписывает каждое сообщение, а DMARC сообщает провайдерам, что делать при неудачной проверке. Без них ваши письма по умолчанию считаются подозрительными. Полная аутентификация — это первый шаг любой серьёзной стратегии <a href=\"/deliverabilite-email.html\">доставляемости</a>.",
+    "spam.h3.reputation": "Репутация отправителя",
+    "spam.p.reputation": "Ваш домен и ваш IP-адрес накапливают историю. Слишком много отказов, жалоб или отправлений на несуществующие адреса ухудшают эту репутацию, а плохая репутация надолго отправляет вас в спам. Новый адрес нужно «прогревать» постепенно: начните с небольших объёмов для самых активных контактов, затем наращивайте в течение нескольких недель. Регулярность лучше внезапных всплесков.",
+    "spam.callout": "💡 <strong>Главное:</strong> фильтры оценивают не отдельное письмо, а совокупность сигналов. Аутентифицируйте свой домен, отправляйте регулярно и уважайте своих получателей: именно это сочетание удерживает вас вне спама.",
+    "spam.h2.content": "Содержание: триггерные слова, изображения и ссылки",
+    "spam.h3.subject": "Тема письма и прехедер",
+    "spam.p.subject": "Тема — это первое, что анализируют и фильтр, и получатель. Честная тема, которая действительно описывает содержание письма, снижает число ручных жалоб на спам, куда более губительных, чем простая техническая оценка. Избегайте вводящих в заблуждение тем вроде «Re:» или «Fwd:» при первом контакте, а также ложных пометок «срочно» или «ваш счёт». Позаботьтесь и о прехедере — коротком тексте, отображаемом после темы: он усиливает согласованность сообщения и успокаивает читателя ещё до открытия.",
+    "spam.h3.words": "Слова и формулировки, которых стоит избегать",
+    "spam.p.words": "Современные фильтры больше не блокируют конкретное слово, но они распознают характерные для спама обороты. Тема заглавными буквами, нагромождение восклицательных знаков или нереалистичные обещания повышают вашу оценку риска.",
+    "spam.li.trigger1": "Темы полностью заглавными буквами или переполненные эмодзи и символами (€€€, !!!).",
+    "spam.li.trigger2": "Слишком заманчивые обещания: «заработайте легко», «100% бесплатно», «исключительное предложение».",
+    "spam.li.trigger3": "Искусственная срочность: «действуйте сейчас», «последний шанс», обратный отсчёт.",
+    "spam.li.trigger4": "Орфографические ошибки и замаскированные символы (V1AGRA, ш@нс), выдающие попытку обойти фильтры.",
+    "spam.h3.ratio": "Соотношение текста и изображений",
+    "spam.p.ratio": "Письмо из одного большого изображения без реального текста — классика спама: фильтр не может прочитать картинку и становится подозрительным. Стремитесь к хорошему балансу, с достаточным количеством читаемого текста вокруг ваших визуалов. Всегда заполняйте атрибут alt у изображений и избегайте тяжёлых или неожиданных вложений, которые настораживают фильтры.",
+    "spam.h3.links": "Ссылки и отправитель",
+    "spam.p.links": "Ссылка, у которой отображаемый текст отличается от настоящего адреса, множество ссылок или неизвестный сокращённый домен — всё это тревожные сигналы. Используйте собственный домен для ссылок, ограничивайте их количество и всегда включайте видимую ссылку для отписки: её отсутствие само по себе является причиной попадания в спам. Наконец, отправляйте с адреса, соответствующего вашему бренду, никогда не с поддельного бесплатного ящика.",
+    "spam.h2.lists": "Очищайте и поддерживайте свои списки",
+    "spam.p.lists": "Грязный список — причина №1 отказов и жалоб. Каждый недействительный адрес, каждая спам-ловушка и каждый контакт без согласия вредят вашей репутации. Перед каждой крупной кампанией пропускайте свою базу через <a href=\"/verificateur-email-masse.html\">сервис массовой проверки email</a>, чтобы удалить ошибочные и неактивные адреса. Не колеблясь удаляйте контакты, которые месяцами не открывают письма: небольшой активный список доставляется гораздо лучше, чем большой мёртвый.",
+    "spam.h2.practices": "Лучшие практики при отправке",
+    "spam.li.practice1": "Собирайте согласие: отправляйте только тем контактам, которые явно вас авторизовали (opt-in).",
+    "spam.li.practice2": "Растягивайте отправку во времени, а не рассылайте всё сразу.",
+    "spam.li.practice3": "Персонализируйте сообщение (имя, контекст), чтобы повысить вовлечённость — положительный сигнал для фильтров.",
+    "spam.li.practice4": "Тестируйте письмо в нескольких почтовых сервисах перед массовой рассылкой и следите за статистикой после.",
+    "spam.h2.tool": "Избегать спама с правильными инструментами",
+    "spam.p.tool": "<strong>EvoSender</strong> встраивает эти лучшие практики: ротацию нескольких SMTP для защиты репутации, контролируемый темп отправки, персонализацию по переменным, автоматическую ссылку для отписки и отслеживание отказов в реальном времени. В сочетании с правильно аутентифицированным <a href=\"/serveur-smtp-dedie.html\">выделенным SMTP-сервером</a> он даёт вам все шансы остаться вне спама.",
+    "spam.faq_h2": "Частые вопросы",
+    "spam.faq1q": "Почему мои письма попадают в спам, хотя содержание законное?",
+    "spam.faq1a": "Чаще всего причина не в тексте, а в отсутствии аутентификации (SPF, DKIM, DMARC) или в репутации отправителя, испорченной отказами. Сначала проверьте эти основы, прежде чем переделывать сообщение.",
+    "spam.faq2q": "Какие слова сильнее всего срабатывают у спам-фильтров?",
+    "spam.faq2a": "Ни одно слово не блокируется само по себе, но формулировки срочности, преувеличенные финансовые обещания, заглавные буквы и повторяющиеся символы повышают вашу оценку риска. Пишите естественно, как настоящему получателю.",
+    "spam.faq3q": "Действительно ли соотношение текста и изображений имеет значение?",
+    "spam.faq3a": "Да. Письмо только из изображения, без читаемого текста, подозрительно, потому что фильтр не может его проанализировать. Сохраняйте основу из реального текста, атрибут alt у изображений и избегайте нежелательных вложений.",
+    "spam.faq4q": "Действительно ли нужно очищать список перед каждой отправкой?",
+    "spam.faq4a": "В идеале да. Недействительные адреса и спам-ловушки накапливаются со временем и снижают вашу доставляемость. Проверка списка через сервис верификации email перед крупными кампаниями надолго защищает вашу репутацию.",
+    "spam.cta_h3": "Отправляйте, не попадая в спам, с EvoSender",
+    "spam.cta_p": "Ротация SMTP, контролируемый темп, автоматическая отписка и отслеживание отказов. Годовая лицензия, 100% локально.",
+    "spam.cta_btn": "Узнать о EvoSender →",
+    "spam.rel_h2": "Читайте также",
+    "spam.rel_1": "Доставляемость email: полное руководство<span>Как довести письма до «Входящих».</span>",
+    "spam.rel_2": "Массовая проверка email<span>Очищайте списки, чтобы снизить отказы.</span>",
+    "spam.rel_3": "Выделенный SMTP-сервер: всё, что нужно знать<span>Инфраструктура, защищающая вашу репутацию.</span>",
+    "foot.article": "© 2025–2026 EGSCI SARL — EvoStudio · <a href=\"/a-propos.html\">О нас</a> · <a href=\"/privacy.html\">Правовая информация</a>"
+  }
+};</script>
+<script src="/i18n.js" defer></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","headline":"Éviter les spams : le guide anti-spam de vos emails","description":"Filtres anti-spam, mots déclencheurs, authentification, ratio texte/image et nettoyage de listes : comment éviter les spams et atterrir en boîte de réception.","image":"https://evostudio.fr/logoevostudio2.png","author":{"@type":"Organization","name":"EvoStudio"},"publisher":{"@type":"Organization","name":"EvoStudio","logo":{"@type":"ImageObject","url":"https://evostudio.fr/logoevostudio2.png"}},"mainEntityOfPage":"https://evostudio.fr/eviter-spam-email.html","inLanguage":"fr-FR"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Pourquoi mes emails arrivent-ils en spam alors que le contenu est légitime ?","acceptedAnswer":{"@type":"Answer","text":"Le plus souvent, la cause n'est pas le texte mais l'authentification manquante (SPF, DKIM, DMARC) ou une réputation d'expéditeur dégradée par des rebonds. Vérifiez d'abord ces fondations avant de retoucher votre message."}},{"@type":"Question","name":"Quels mots déclenchent le plus les filtres anti-spam ?","acceptedAnswer":{"@type":"Answer","text":"Aucun mot n'est banni à lui seul, mais les formulations d'urgence, les promesses financières exagérées, les majuscules et les symboles répétés augmentent votre score de risque. Écrivez naturellement, comme à un vrai destinataire."}},{"@type":"Question","name":"Le ratio texte/image a-t-il vraiment un impact ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Un email tout en image, sans texte lisible, est suspect car le filtre ne peut pas l'analyser. Gardez un socle de texte réel, un attribut alt sur vos images et évitez les pièces jointes non sollicitées."}},{"@type":"Question","name":"Faut-il vraiment nettoyer sa liste avant chaque envoi ?","acceptedAnswer":{"@type":"Answer","text":"Idéalement oui. Les adresses invalides et les pièges à spam s'accumulent avec le temps et font chuter votre délivrabilité. Un passage par un vérificateur d'email avant les grandes campagnes protège durablement votre réputation."}}]}
+</script>
+</head>
+<body>
+<header class="nav">
+  <a href="/" class="logo"><img src="/logoevostudio2.png" alt="EvoStudio" /></a>
+  <nav class="links">
+    <a href="/" data-i18n="nav.home">Accueil</a><a href="/#produits" data-i18n="nav.products">Produits</a><a href="/blog.html" data-i18n="nav.blog">Blog</a><a href="/a-propos.html" data-i18n="nav.about">À propos</a><a href="/pay.html" class="cta" data-i18n="nav.buy">Acheter</a><div id="lang-switch"></div>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="crumb"><a href="/" data-i18n="nav.home">Accueil</a> › <a href="/blog.html" data-i18n="nav.blog">Blog</a> › <span data-i18n="spam.crumb.current">Éviter les spams</span></div>
+  <article>
+    <h1 data-i18n="spam.h1">Éviter les spams : le guide anti-spam de vos emails</h1>
+    <p class="lead" data-i18n-html="spam.lead"><strong>Éviter les spams</strong> ne relève pas de la chance : c'est le résultat d'une bonne authentification, d'un contenu soigné et de listes propres. Voici comment franchir les filtres et atterrir en boîte de réception.</p>
+    <p class="meta" data-i18n="spam.meta">Guide EvoStudio · Mis à jour en 2026</p>
+
+    <h2 data-i18n="spam.h2.filters">Comment fonctionnent les filtres anti-spam</h2>
+    <p data-i18n="spam.p.filters">Chaque fournisseur de messagerie (Gmail, Outlook, Yahoo…) analyse vos emails avant de décider où les classer. Le filtre attribue un score à partir de dizaines de signaux : votre authentification, votre réputation d'expéditeur, le comportement des destinataires (ouvertures, réponses, mises en spam) et le contenu du message. Aucun critère isolé ne vous condamne, mais l'accumulation de signaux négatifs fait basculer le message dans le dossier indésirable. Comprendre ces signaux, c'est déjà savoir comment les éviter.</p>
+
+    <h2 data-i18n="spam.h2.auth">L'authentification : le socle de la confiance</h2>
+    <h3 data-i18n="spam.h3.spf">SPF, DKIM et DMARC</h3>
+    <p data-i18n-html="spam.p.spf">Ces trois protocoles prouvent que vous êtes bien l'expéditeur que vous prétendez être. Le SPF déclare quels serveurs ont le droit d'envoyer en votre nom, le DKIM signe chaque message de façon cryptographique, et le DMARC indique aux fournisseurs quoi faire en cas d'échec. Sans eux, vos emails sont traités comme suspects par défaut. Une authentification complète est la première étape de toute stratégie de <a href="/deliverabilite-email.html">délivrabilité</a> sérieuse.</p>
+    <h3 data-i18n="spam.h3.reputation">La réputation d'expéditeur</h3>
+    <p data-i18n="spam.p.reputation">Votre domaine et votre adresse IP accumulent un historique. Trop de rebonds, de plaintes ou d'envois vers des adresses inexistantes dégradent cette réputation, et une mauvaise réputation vous envoie durablement en spam. Une nouvelle adresse doit être « chauffée » progressivement : commencez par de petits volumes vers vos contacts les plus engagés, puis augmentez sur plusieurs semaines. La régularité vaut mieux que les pics soudains.</p>
+
+    <div class="callout" data-i18n-html="spam.callout">💡 <strong>À retenir :</strong> les filtres ne jugent pas un email isolé, mais un faisceau de signaux. Authentifiez votre domaine, envoyez régulièrement et respectez vos destinataires : c'est la combinaison qui vous garde hors des spams.</div>
+
+    <h2 data-i18n="spam.h2.content">Le contenu : mots déclencheurs, images et liens</h2>
+    <h3 data-i18n="spam.h3.subject">L'objet et le pré-en-tête</h3>
+    <p data-i18n="spam.p.subject">L'objet est la première chose que le filtre et le destinataire analysent. Un objet honnête, qui décrit réellement le contenu du message, réduit les mises en spam manuelles, bien plus pénalisantes qu'un simple score technique. Évitez les objets trompeurs du type « Re : » ou « Fwd : » sur un premier contact, ainsi que les fausses mentions « urgent » ou « votre facture ». Soignez aussi le pré-en-tête, ce court texte affiché après l'objet : il conforte la cohérence du message et rassure le lecteur avant même l'ouverture.</p>
+    <h3 data-i18n="spam.h3.words">Les mots et formulations à éviter</h3>
+    <p data-i18n="spam.p.words">Les filtres modernes ne bannissent plus un mot précis, mais ils repèrent les tournures typiques du spam. Un objet en majuscules, une accumulation de points d'exclamation ou des promesses irréalistes augmentent votre score de risque.</p>
+    <ul>
+      <li data-i18n="spam.li.trigger1">Les objets tout en majuscules ou saturés d'emojis et de symboles (€€€, !!!).</li>
+      <li data-i18n="spam.li.trigger2">Les promesses trop belles : « gagnez de l'argent facilement », « 100% gratuit », « offre exceptionnelle ».</li>
+      <li data-i18n="spam.li.trigger3">L'urgence artificielle : « agissez maintenant », « dernière chance », comptes à rebours.</li>
+      <li data-i18n="spam.li.trigger4">Les fautes d'orthographe et les caractères masqués (V1AGRA, ch@nce) qui trahissent une tentative de contournement.</li>
+    </ul>
+    <h3 data-i18n="spam.h3.ratio">Le ratio texte / image</h3>
+    <p data-i18n="spam.p.ratio">Un email composé d'une seule grande image, sans texte réel, est un classique du spam : le filtre ne peut pas lire l'image et se méfie. Visez un bon équilibre, avec suffisamment de texte lisible autour de vos visuels. Renseignez toujours l'attribut alt de vos images et évitez les pièces jointes lourdes ou inattendues, qui inquiètent les filtres.</p>
+    <h3 data-i18n="spam.h3.links">Les liens et l'expéditeur</h3>
+    <p data-i18n="spam.p.links">Un lien dont le texte affiché diffère de la vraie destination, une multitude de liens, ou un domaine raccourci inconnu sont des signaux d'alerte. Utilisez votre propre domaine pour vos liens, limitez leur nombre et incluez toujours un lien de désinscription visible : son absence est elle-même un motif de classement en spam. Enfin, envoyez depuis une adresse cohérente avec votre marque, jamais depuis une boîte gratuite usurpée.</p>
+
+    <h2 data-i18n="spam.h2.lists">Nettoyer et entretenir vos listes</h2>
+    <p data-i18n-html="spam.p.lists">Une liste sale est la cause n°1 des rebonds et des plaintes. Chaque adresse invalide, chaque piège à spam (spam trap) et chaque contact non consentant abîme votre réputation. Avant chaque grande campagne, passez votre base dans un <a href="/verificateur-email-masse.html">vérificateur d'email en masse</a> pour retirer les adresses erronées et inactives. Supprimez sans hésiter les contacts qui n'ouvrent plus depuis des mois : un petit fichier engagé délivre bien mieux qu'un gros fichier mort.</p>
+
+    <h2 data-i18n="spam.h2.practices">Les bonnes pratiques au moment d'envoyer</h2>
+    <ul>
+      <li data-i18n="spam.li.practice1">Récoltez le consentement : n'envoyez qu'à des contacts qui vous ont explicitement autorisé (opt-in).</li>
+      <li data-i18n="spam.li.practice2">Étalez vos envois dans le temps plutôt que d'expédier tout d'un coup.</li>
+      <li data-i18n="spam.li.practice3">Personnalisez le message (nom, contexte) pour augmenter l'engagement, signal positif pour les filtres.</li>
+      <li data-i18n="spam.li.practice4">Testez votre email sur plusieurs messageries avant l'envoi de masse et surveillez vos statistiques après.</li>
+    </ul>
+
+    <h2 data-i18n="spam.h2.tool">Éviter les spams avec les bons outils</h2>
+    <p data-i18n-html="spam.p.tool"><strong>EvoSender</strong> intègre ces bonnes pratiques : rotation multi-SMTP pour préserver votre réputation, cadence d'envoi maîtrisée, personnalisation par variables, lien de désinscription automatique et suivi des rebonds en temps réel. Couplé à un <a href="/serveur-smtp-dedie.html">serveur SMTP dédié</a> correctement authentifié, il met toutes les chances de votre côté pour rester hors des spams.</p>
+
+    <h2 data-i18n="spam.faq_h2">Questions fréquentes</h2>
+    <h3 data-i18n="spam.faq1q">Pourquoi mes emails arrivent-ils en spam alors que le contenu est légitime ?</h3>
+    <p data-i18n="spam.faq1a">Le plus souvent, la cause n'est pas le texte mais l'authentification manquante (SPF, DKIM, DMARC) ou une réputation d'expéditeur dégradée par des rebonds. Vérifiez d'abord ces fondations avant de retoucher votre message.</p>
+    <h3 data-i18n="spam.faq2q">Quels mots déclenchent le plus les filtres anti-spam ?</h3>
+    <p data-i18n="spam.faq2a">Aucun mot n'est banni à lui seul, mais les formulations d'urgence, les promesses financières exagérées, les majuscules et les symboles répétés augmentent votre score de risque. Écrivez naturellement, comme à un vrai destinataire.</p>
+    <h3 data-i18n="spam.faq3q">Le ratio texte/image a-t-il vraiment un impact ?</h3>
+    <p data-i18n="spam.faq3a">Oui. Un email tout en image, sans texte lisible, est suspect car le filtre ne peut pas l'analyser. Gardez un socle de texte réel, un attribut alt sur vos images et évitez les pièces jointes non sollicitées.</p>
+    <h3 data-i18n="spam.faq4q">Faut-il vraiment nettoyer sa liste avant chaque envoi ?</h3>
+    <p data-i18n="spam.faq4a">Idéalement oui. Les adresses invalides et les pièges à spam s'accumulent avec le temps et font chuter votre délivrabilité. Un passage par un vérificateur d'email avant les grandes campagnes protège durablement votre réputation.</p>
+
+    <div class="cta-box">
+      <h3 data-i18n="spam.cta_h3">Envoyez sans finir en spam avec EvoSender</h3>
+      <p data-i18n="spam.cta_p">Rotation SMTP, cadence maîtrisée, désinscription automatique et suivi des rebonds. Licence annuelle, 100% local.</p>
+      <a class="btn" href="/produit.html?id=sender" data-i18n="spam.cta_btn">Découvrir EvoSender →</a>
+    </div>
+
+    <div class="related">
+      <h2 data-i18n="spam.rel_h2">À lire aussi</h2>
+      <a href="/deliverabilite-email.html" data-i18n-html="spam.rel_1">Délivrabilité email : le guide complet<span>Faire arriver vos emails en boîte de réception.</span></a>
+      <a href="/verificateur-email-masse.html" data-i18n-html="spam.rel_2">Vérificateur d'email en masse<span>Nettoyer vos listes pour réduire les rebonds.</span></a>
+      <a href="/serveur-smtp-dedie.html" data-i18n-html="spam.rel_3">Serveur SMTP dédié : tout comprendre<span>L'infrastructure qui protège votre réputation.</span></a>
+    </div>
+  </article>
+</div>
+
+<footer class="footer" data-i18n-html="foot.article">© 2025–2026 EGSCI SARL — EvoStudio · <a href="/a-propos.html">À propos</a> · <a href="/privacy.html">Mentions légales</a></footer>
+<script src="/assistance.js" defer></script>
+</body>
+</html>

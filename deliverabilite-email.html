@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Délivrabilité email : viser la boîte de réception | EvoStudio</title>
+<meta name="description" content="Améliorer la délivrabilité email : réputation d'expéditeur, authentification SPF/DKIM/DMARC, warm-up d'IP, nettoyage de listes et contenu pour éviter le spam." />
+<meta name="robots" content="index, follow" />
+<meta name="theme-color" content="#b9831f" />
+<link rel="canonical" href="https://evostudio.fr/deliverabilite-email.html" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Accueil","item":"https://evostudio.fr/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://evostudio.fr/blog.html"},{"@type":"ListItem","position":3,"name":"Délivrabilité email","item":"https://evostudio.fr/deliverabilite-email.html"}]}
+</script>
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Délivrabilité email : viser la boîte de réception" />
+<meta property="og:description" content="Réputation, authentification SPF/DKIM/DMARC, warm-up d'IP, nettoyage de listes et contenu : les leviers pour arriver en boîte de réception." />
+<meta property="og:url" content="https://evostudio.fr/deliverabilite-email.html" />
+<meta property="og:image" content="https://evostudio.fr/logoevostudio2.png" />
+<link rel="icon" href="/logo-EvoSender.ico" type="image/x-icon" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/article.css" />
+<script src="/theme.js"></script>
+<script>window.I18N_PAGE = {
+  en: {
+    "deliv.crumb_current": "Email deliverability",
+    "deliv.h1": "Email deliverability: the guide to reaching the inbox",
+    "deliv.lead": "<strong>Email deliverability</strong> is the ability of your messages to actually reach the inbox rather than the spam folder. It is the single most decisive — and most overlooked — factor of a successful email campaign.",
+    "deliv.meta": "EvoStudio guide · Updated in 2026",
+    "deliv.h2_what": "What is email deliverability?",
+    "deliv.p_what1": "Deliverability measures the percentage of your emails that actually land in your recipients' inbox. It differs from mere « delivery »: a message can be accepted by the recipient's server (successful delivery) while still being filed in the spam folder. An unread email, however, has no commercial value.",
+    "deliv.p_what2": "Providers such as Gmail, Outlook and Yahoo decide the placement of every message in a few milliseconds, based on hundreds of signals: authentication, the reputation of your domain and IP, your recipients' engagement history, list quality and the nature of the content. Improving deliverability means acting on each of these levers.",
+    "deliv.h2_reputation": "Sender reputation, the foundation of everything",
+    "deliv.p_reputation1": "Every sending domain and IP address has a reputation, a kind of trust score built up over time. It rests on your complaint rates (« spam » flags), bounce rates, sending consistency and the engagement you generate. A good reputation opens the doors to the inbox; a bad one keeps you locked out for a long time.",
+    "deliv.p_reputation2": "Reputation deteriorates far faster than it can be rebuilt. A single mass send to a purchased or outdated list can be enough to tip a healthy domain into the filters. The golden rule: favour consistency and quality over raw volume. Monitoring your reputation with tools such as Google Postmaster Tools lets you react before the situation degrades for good.",
+    "deliv.h2_auth": "Authenticate your sends: SPF, DKIM and DMARC",
+    "deliv.p_auth": "Authentication proves to providers that you really are the legitimate sender of your messages. Without it, your emails are treated as suspicious by default. Three protocols work together:",
+    "deliv.h3_spf": "SPF",
+    "deliv.p_spf": "SPF (Sender Policy Framework) is a DNS record that lists the servers authorised to send on your behalf. The receiving server checks that the sending IP does appear in this list.",
+    "deliv.h3_dkim": "DKIM",
+    "deliv.p_dkim": "DKIM (DomainKeys Identified Mail) adds a cryptographic signature to each message. It guarantees that the content has not been altered in transit and that it genuinely comes from your domain.",
+    "deliv.h3_dmarc": "DMARC",
+    "deliv.p_dmarc": "DMARC builds on SPF and DKIM to tell providers what to do with messages that fail the checks (ignore, quarantine or reject them). It also gives you valuable reports on attempts to spoof your domain.",
+    "deliv.callout": "💡 <strong>Key takeaway:</strong> a properly authenticated domain (aligned SPF + DKIM + DMARC) is the minimum condition for good deliverability. No content optimisation can make up for missing authentication.",
+    "deliv.h2_ip": "Dedicated IP and warm-up: ramp up gradually",
+    "deliv.p_ip1": "On a brand-new IP, your reputation is blank: providers do not know you and watch your first sends with suspicion. Jumping straight to several thousand messages a day almost always triggers blocks or spam classification.",
+    "deliv.p_ip2": "The « warm-up » consists of increasing volume gradually over several weeks: a few dozen messages in the first days, then a progressive doubling as long as the indicators stay green. Start with your most engaged contacts, those who open and click, to send positive signals to the filters. A <a href=\"/serveur-smtp-dedie.html\">dedicated SMTP infrastructure</a> makes this volume control easier and isolates your reputation from that of other senders.",
+    "deliv.h2_lists": "Clean and segment your lists",
+    "deliv.p_lists": "The quality of your list weighs as much as your infrastructure. Sending to invalid or inactive addresses multiplies bounces and complaints, two signals that destroy reputation. Before every large campaign:",
+    "deliv.li_list1": "Check address validity to remove non-existent emails and reduce the bounce rate.",
+    "deliv.li_list2": "Remove contacts inactive for several months: they no longer open and drag down your average engagement.",
+    "deliv.li_list3": "Eliminate « spam traps », those trap addresses that flag a poorly maintained or purchased list.",
+    "deliv.li_list4": "Segment by engagement to tailor frequency to each profile.",
+    "deliv.p_lists2": "A <a href=\"/verificateur-email-masse.html\">bulk email verifier</a> automates this cleaning and stops you from sending to addresses that would sabotage your campaign.",
+    "deliv.h2_content": "Craft the content and encourage engagement",
+    "deliv.p_content": "Once the infrastructure is healthy, content takes over. Filters analyse the structure of the message and, above all, how your recipients react. A few principles:",
+    "deliv.li_content1": "Keep a balanced text/image ratio and avoid emails made of a single large image.",
+    "deliv.li_content2": "Banish trigger words and excessive punctuation (« FREE !!! », capitals, repeated currency symbols).",
+    "deliv.li_content3": "Always include a clear and working unsubscribe link: it reduces complaints.",
+    "deliv.li_content4": "Personalise the subject line and body to boost opens, a positive signal for filters.",
+    "deliv.p_content2": "Engagement — opens, clicks, replies — is now the deciding criterion. A message your recipients open and read strengthens your reputation with every send.",
+    "deliv.h2_evostudio": "Improve your deliverability with EvoStudio",
+    "deliv.p_evostudio": "The EvoStudio suite covers the whole deliverability chain. The <a href=\"/logiciel-envoi-email-masse.html\">bulk email software</a> EvoSender manages sending pace, multi-SMTP rotation and progressive warm-up; the <a href=\"/verificateur-email-masse.html\">email verifier</a> cleans your lists upstream; and the <a href=\"/serveur-smtp-dedie.html\">dedicated SMTP server</a> isolates your reputation with SPF, DKIM and DMARC correctly configured. Three complementary tools for one goal: the inbox.",
+    "deliv.faq_h2": "Frequently asked questions",
+    "deliv.faq1q": "How do I know if my emails are landing in spam?",
+    "deliv.faq1a": "Test your sends to several accounts (Gmail, Outlook, Yahoo) and check the placement folder. DMARC reports and EvoSender's open tracking also reveal trends: a sudden drop in open rate often signals a move to spam.",
+    "deliv.faq2q": "How long does warming up a new IP take?",
+    "deliv.faq2a": "Generally allow two to four weeks to reach a high volume, doubling sends progressively as long as bounce and complaint rates stay low. The higher your target daily volume, the more the warm-up must be spread out.",
+    "deliv.faq3q": "Are SPF, DKIM and DMARC really essential?",
+    "deliv.faq3a": "Yes. Since 2024, Gmail and Yahoo require authentication for volume senders, and an unauthenticated domain is filtered by default. These three protocols are the non-negotiable basis of good deliverability.",
+    "deliv.faq4q": "Is content enough to improve deliverability?",
+    "deliv.faq4a": "No. Content matters, but it is only part of the equation. Without a healthy reputation, correct authentication and a clean list, even the best message will end up in spam.",
+    "deliv.cta_h3": "Improve your deliverability with EvoSender",
+    "deliv.cta_p": "Controlled pace, multi-SMTP rotation, warm-up and real-time tracking. Annual license, 100% local.",
+    "deliv.cta_btn": "Discover EvoSender →",
+    "deliv.rel_h2": "See also",
+    "deliv.rel_1": "Dedicated SMTP server: everything explained<span>The infrastructure that protects your reputation.</span>",
+    "deliv.rel_2": "Bulk email verifier<span>Clean your lists to reduce bounces.</span>",
+    "deliv.rel_3": "Bulk email software<span>The complete guide to choosing your tool.</span>",
+    "foot.article": "© 2025–2026 EGSCI SARL — EvoStudio · <a href=\"/a-propos.html\">About</a> · <a href=\"/privacy.html\">Legal notice</a>"
+  },
+  ru: {
+    "deliv.crumb_current": "Доставляемость email",
+    "deliv.h1": "Доставляемость email: руководство по попаданию во «Входящие»",
+    "deliv.lead": "<strong>Доставляемость email</strong> — это способность ваших сообщений действительно попадать во «Входящие», а не в папку «Спам». Это самый решающий и при этом самый недооценённый фактор успешной email-кампании.",
+    "deliv.meta": "Руководство EvoStudio · Обновлено в 2026",
+    "deliv.h2_what": "Что такое доставляемость email?",
+    "deliv.p_what1": "Доставляемость измеряет процент ваших писем, которые действительно попадают во «Входящие» получателей. Она отличается от простой «доставки»: сообщение может быть принято сервером получателя (доставка успешна), но при этом попасть в папку «Спам». А непрочитанное письмо не имеет коммерческой ценности.",
+    "deliv.p_what2": "Провайдеры, такие как Gmail, Outlook и Yahoo, определяют размещение каждого сообщения за несколько миллисекунд на основе сотен сигналов: аутентификация, репутация вашего домена и IP, история вовлечённости получателей, качество списка и характер содержания. Улучшить доставляемость — значит воздействовать на каждый из этих рычагов.",
+    "deliv.h2_reputation": "Репутация отправителя — основа всего",
+    "deliv.p_reputation1": "У каждого отправляющего домена и IP-адреса есть репутация — своего рода оценка доверия, накопленная со временем. Она зависит от доли жалоб (пометок «спам»), процента отказов, регулярности отправки и создаваемой вовлечённости. Хорошая репутация открывает двери «Входящих»; плохая надолго закрывает к ним доступ.",
+    "deliv.p_reputation2": "Репутация ухудшается гораздо быстрее, чем восстанавливается. Одной массовой рассылки по купленному или устаревшему списку может хватить, чтобы здоровый домен ушёл под фильтры. Золотое правило: ставить постоянство и качество выше сырого объёма. Отслеживание репутации с помощью таких инструментов, как Google Postmaster Tools, позволяет реагировать до того, как ситуация ухудшится необратимо.",
+    "deliv.h2_auth": "Аутентифицируйте отправления: SPF, DKIM и DMARC",
+    "deliv.p_auth": "Аутентификация доказывает провайдерам, что вы действительно являетесь законным отправителем сообщений. Без неё ваши письма по умолчанию считаются подозрительными. Три протокола дополняют друг друга:",
+    "deliv.h3_spf": "SPF",
+    "deliv.p_spf": "SPF (Sender Policy Framework) — это DNS-запись, перечисляющая серверы, которым разрешено отправлять от вашего имени. Сервер получателя проверяет, что отправляющий IP действительно есть в этом списке.",
+    "deliv.h3_dkim": "DKIM",
+    "deliv.p_dkim": "DKIM (DomainKeys Identified Mail) добавляет к каждому сообщению криптографическую подпись. Она гарантирует, что содержание не было изменено при пересылке и что письмо действительно исходит от вашего домена.",
+    "deliv.h3_dmarc": "DMARC",
+    "deliv.p_dmarc": "DMARC опирается на SPF и DKIM, чтобы указать провайдерам, что делать с сообщениями, не прошедшими проверки (игнорировать, поместить в карантин или отклонить). Он также предоставляет ценные отчёты о попытках подделки вашего домена.",
+    "deliv.callout": "💡 <strong>Главное:</strong> правильно аутентифицированный домен (согласованные SPF + DKIM + DMARC) — минимальное условие хорошей доставляемости. Никакая оптимизация содержания не компенсирует отсутствие аутентификации.",
+    "deliv.h2_ip": "Выделенный IP и прогрев: наращивайте объём постепенно",
+    "deliv.p_ip1": "На новом IP ваша репутация чиста: провайдеры вас не знают и с подозрением следят за первыми отправлениями. Сразу перейти к нескольким тысячам сообщений в день почти всегда означает блокировки или попадание в спам.",
+    "deliv.p_ip2": "«Прогрев» заключается в постепенном увеличении объёма на протяжении нескольких недель: несколько десятков сообщений в первые дни, затем плавное удвоение, пока показатели остаются в норме. Начинайте с самых вовлечённых контактов — тех, кто открывает и кликает, — чтобы посылать фильтрам положительные сигналы. <a href=\"/serveur-smtp-dedie.html\">Выделенная SMTP-инфраструктура</a> облегчает контроль объёма и изолирует вашу репутацию от репутации других отправителей.",
+    "deliv.h2_lists": "Очищайте и сегментируйте списки",
+    "deliv.p_lists": "Качество списка весит не меньше, чем инфраструктура. Отправка на недействительные или неактивные адреса множит отказы и жалобы — два сигнала, разрушающих репутацию. Перед каждой крупной кампанией:",
+    "deliv.li_list1": "Проверяйте действительность адресов, чтобы удалить несуществующие письма и снизить процент отказов.",
+    "deliv.li_list2": "Удаляйте контакты, неактивные несколько месяцев: они больше не открывают письма и снижают среднюю вовлечённость.",
+    "deliv.li_list3": "Устраняйте «спам-ловушки» — адреса-приманки, указывающие на плохо ведущийся или купленный список.",
+    "deliv.li_list4": "Сегментируйте по вовлечённости, чтобы подстроить частоту под каждый профиль.",
+    "deliv.p_lists2": "<a href=\"/verificateur-email-masse.html\">Массовый проверщик email</a> автоматизирует эту очистку и не даёт отправлять на адреса, которые сорвали бы вашу кампанию.",
+    "deliv.h2_content": "Работайте над содержанием и поощряйте вовлечённость",
+    "deliv.p_content": "Когда инфраструктура здорова, эстафету принимает содержание. Фильтры анализируют структуру сообщения и, главное, то, как реагируют получатели. Несколько принципов:",
+    "deliv.li_content1": "Поддерживайте сбалансированное соотношение текста и изображений и избегайте писем из одной большой картинки.",
+    "deliv.li_content2": "Исключите триггерные слова и избыточную пунктуацию («БЕСПЛАТНО !!!», заглавные буквы, повторяющиеся символы валют).",
+    "deliv.li_content3": "Всегда включайте понятную и рабочую ссылку для отписки: она снижает число жалоб.",
+    "deliv.li_content4": "Персонализируйте тему и текст, чтобы повысить открытия — положительный сигнал для фильтров.",
+    "deliv.p_content2": "Вовлечённость — открытия, клики, ответы — сегодня главный критерий. Сообщение, которое получатели открывают и читают, укрепляет вашу репутацию с каждой отправкой.",
+    "deliv.h2_evostudio": "Улучшайте доставляемость с EvoStudio",
+    "deliv.p_evostudio": "Набор EvoStudio охватывает всю цепочку доставляемости. <a href=\"/logiciel-envoi-email-masse.html\">Программа для массовой рассылки email</a> EvoSender управляет темпом отправки, ротацией нескольких SMTP и постепенным прогревом; <a href=\"/verificateur-email-masse.html\">проверщик email</a> очищает списки заранее; а <a href=\"/serveur-smtp-dedie.html\">выделенный SMTP-сервер</a> изолирует вашу репутацию с правильно настроенными SPF, DKIM и DMARC. Три взаимодополняющих инструмента ради одной цели — «Входящих».",
+    "deliv.faq_h2": "Частые вопросы",
+    "deliv.faq1q": "Как узнать, попадают ли мои письма в спам?",
+    "deliv.faq1a": "Отправляйте тестовые письма на несколько аккаунтов (Gmail, Outlook, Yahoo) и проверяйте папку размещения. Отчёты DMARC и отслеживание открытий в EvoSender также показывают тенденции: резкое падение показателя открытий часто сигнализирует о переходе в спам.",
+    "deliv.faq2q": "Сколько длится прогрев нового IP?",
+    "deliv.faq2a": "Обычно закладывайте от двух до четырёх недель, чтобы выйти на большой объём, постепенно удваивая отправки, пока проценты отказов и жалоб остаются низкими. Чем выше целевой суточный объём, тем дольше должен быть прогрев.",
+    "deliv.faq3q": "Действительно ли SPF, DKIM и DMARC необходимы?",
+    "deliv.faq3a": "Да. С 2024 года Gmail и Yahoo требуют аутентификацию от отправителей объёмных рассылок, а неаутентифицированный домен фильтруется по умолчанию. Эти три протокола — неоспоримая основа хорошей доставляемости.",
+    "deliv.faq4q": "Достаточно ли содержания, чтобы улучшить доставляемость?",
+    "deliv.faq4a": "Нет. Содержание важно, но это лишь часть уравнения. Без здоровой репутации, корректной аутентификации и чистого списка даже лучшее сообщение окажется в спаме.",
+    "deliv.cta_h3": "Улучшите доставляемость с EvoSender",
+    "deliv.cta_p": "Контролируемый темп, ротация нескольких SMTP, прогрев и отслеживание в реальном времени. Годовая лицензия, 100% локально.",
+    "deliv.cta_btn": "Узнать о EvoSender →",
+    "deliv.rel_h2": "Читайте также",
+    "deliv.rel_1": "Выделенный SMTP-сервер: всё, что нужно знать<span>Инфраструктура, защищающая вашу репутацию.</span>",
+    "deliv.rel_2": "Массовая проверка email<span>Очищайте списки, чтобы снизить отказы.</span>",
+    "deliv.rel_3": "Программа для массовой рассылки email<span>Полное руководство по выбору инструмента.</span>",
+    "foot.article": "© 2025–2026 EGSCI SARL — EvoStudio · <a href=\"/a-propos.html\">О нас</a> · <a href=\"/privacy.html\">Правовая информация</a>"
+  }
+};</script>
+<script src="/i18n.js" defer></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","headline":"Délivrabilité email : viser la boîte de réception","description":"Améliorer la délivrabilité email : réputation d'expéditeur, authentification SPF/DKIM/DMARC, warm-up d'IP, nettoyage de listes et contenu.","image":"https://evostudio.fr/logoevostudio2.png","author":{"@type":"Organization","name":"EvoStudio"},"publisher":{"@type":"Organization","name":"EvoStudio","logo":{"@type":"ImageObject","url":"https://evostudio.fr/logoevostudio2.png"}},"mainEntityOfPage":"https://evostudio.fr/deliverabilite-email.html","inLanguage":"fr-FR"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Comment savoir si mes emails arrivent en spam ?","acceptedAnswer":{"@type":"Answer","text":"Testez vos envois vers plusieurs comptes (Gmail, Outlook, Yahoo) et vérifiez le dossier de placement. Les rapports DMARC et les outils de suivi des ouvertures d'EvoSender vous indiquent aussi les tendances : une chute soudaine du taux d'ouverture signale souvent un passage en spam."}},{"@type":"Question","name":"Combien de temps dure le warm-up d'une nouvelle IP ?","acceptedAnswer":{"@type":"Answer","text":"Comptez généralement deux à quatre semaines pour atteindre un volume élevé, en doublant progressivement les envois tant que les taux de rebond et de plainte restent bas. Plus vous visez un gros volume quotidien, plus le préchauffage doit être étalé."}},{"@type":"Question","name":"SPF, DKIM et DMARC sont-ils vraiment indispensables ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Depuis 2024, Gmail et Yahoo exigent l'authentification pour les expéditeurs de volume, et un domaine non authentifié est filtré par défaut. Ces trois protocoles sont la base non négociable d'une bonne délivrabilité."}},{"@type":"Question","name":"Le contenu suffit-il à améliorer la délivrabilité ?","acceptedAnswer":{"@type":"Answer","text":"Non. Le contenu compte, mais il ne représente qu'une partie de l'équation. Sans réputation saine, authentification correcte et liste propre, même le meilleur message finira en spam."}}]}
+</script>
+</head>
+<body>
+<header class="nav">
+  <a href="/" class="logo"><img src="/logoevostudio2.png" alt="EvoStudio" /></a>
+  <nav class="links">
+    <a href="/" data-i18n="nav.home">Accueil</a><a href="/#produits" data-i18n="nav.products">Produits</a><a href="/blog.html" data-i18n="nav.blog">Blog</a><a href="/a-propos.html" data-i18n="nav.about">À propos</a><a href="/pay.html" class="cta" data-i18n="nav.buy">Acheter</a><div id="lang-switch"></div>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="crumb"><a href="/" data-i18n="nav.home">Accueil</a> › <a href="/blog.html" data-i18n="nav.blog">Blog</a> › <span data-i18n="deliv.crumb_current">Délivrabilité email</span></div>
+  <article>
+    <h1 data-i18n="deliv.h1">Délivrabilité email : le guide pour arriver en boîte de réception</h1>
+    <p class="lead" data-i18n-html="deliv.lead">La <strong>délivrabilité email</strong> désigne la capacité de vos messages à atteindre réellement la boîte de réception, et non le dossier spam. C'est le facteur le plus déterminant — et le plus négligé — d'une campagne d'emailing réussie.</p>
+    <p class="meta" data-i18n="deliv.meta">Guide EvoStudio · Mis à jour en 2026</p>
+
+    <h2 data-i18n="deliv.h2_what">Qu'est-ce que la délivrabilité email ?</h2>
+    <p data-i18n="deliv.p_what1">La délivrabilité mesure le pourcentage de vos emails qui parviennent réellement dans la boîte de réception de vos destinataires. Elle se distingue de la simple « délivrance » : un message peut être accepté par le serveur du destinataire (délivrance réussie) tout en étant classé dans le dossier spam. Or un email non lu n'a aucune valeur commerciale.</p>
+    <p data-i18n="deliv.p_what2">Les fournisseurs comme Gmail, Outlook ou Yahoo décident du placement de chaque message en quelques millisecondes, à partir de centaines de signaux : authentification, réputation de votre domaine et de votre IP, historique d'engagement de vos destinataires, qualité de la liste et nature du contenu. Améliorer sa délivrabilité, c'est agir sur chacun de ces leviers.</p>
+
+    <h2 data-i18n="deliv.h2_reputation">La réputation d'expéditeur, socle de tout</h2>
+    <p data-i18n="deliv.p_reputation1">Chaque domaine et chaque adresse IP d'envoi possède une réputation, une sorte de note de confiance construite dans le temps. Elle repose sur vos taux de plaintes (marquages « spam »), vos taux de rebond, votre régularité d'envoi et l'engagement généré. Une bonne réputation ouvre les portes de la boîte de réception ; une mauvaise réputation vous en ferme durablement l'accès.</p>
+    <p data-i18n="deliv.p_reputation2">La réputation se dégrade beaucoup plus vite qu'elle ne se reconstruit. Un unique envoi massif vers une liste achetée ou périmée peut suffire à faire basculer un domaine sain vers les filtres. La règle d'or : privilégier la constance et la qualité au volume brut. Surveiller sa réputation via des outils comme Google Postmaster Tools permet de réagir avant que la situation ne se dégrade durablement.</p>
+
+    <h2 data-i18n="deliv.h2_auth">Authentifier vos envois : SPF, DKIM et DMARC</h2>
+    <p data-i18n="deliv.p_auth">L'authentification prouve aux fournisseurs que vous êtes bien l'expéditeur légitime de vos messages. Sans elle, vos emails sont considérés comme suspects par défaut. Trois protocoles se complètent :</p>
+    <h3 data-i18n="deliv.h3_spf">SPF</h3>
+    <p data-i18n="deliv.p_spf">Le SPF (Sender Policy Framework) est un enregistrement DNS qui liste les serveurs autorisés à envoyer en votre nom. Le serveur destinataire vérifie que l'IP d'envoi figure bien dans cette liste.</p>
+    <h3 data-i18n="deliv.h3_dkim">DKIM</h3>
+    <p data-i18n="deliv.p_dkim">Le DKIM (DomainKeys Identified Mail) ajoute une signature cryptographique à chaque message. Elle garantit que le contenu n'a pas été altéré en transit et qu'il provient bien de votre domaine.</p>
+    <h3 data-i18n="deliv.h3_dmarc">DMARC</h3>
+    <p data-i18n="deliv.p_dmarc">Le DMARC s'appuie sur SPF et DKIM pour indiquer aux fournisseurs quoi faire des messages qui échouent aux contrôles (les ignorer, les mettre en quarantaine ou les rejeter). Il vous fournit aussi des rapports précieux sur les tentatives d'usurpation de votre domaine.</p>
+
+    <div class="callout" data-i18n-html="deliv.callout">💡 <strong>À retenir :</strong> un domaine correctement authentifié (SPF + DKIM + DMARC aligné) est la condition minimale pour espérer une bonne délivrabilité. Aucune optimisation de contenu ne compense une authentification manquante.</div>
+
+    <h2 data-i18n="deliv.h2_ip">IP dédiée et warm-up : monter en charge progressivement</h2>
+    <p data-i18n="deliv.p_ip1">Sur une IP neuve, votre réputation est vierge : les fournisseurs ne vous connaissent pas et surveillent vos premiers envois avec méfiance. Passer d'emblée à plusieurs milliers de messages par jour déclenche presque systématiquement des blocages ou un classement en spam.</p>
+    <p data-i18n-html="deliv.p_ip2">Le « warm-up » (préchauffage) consiste à augmenter le volume graduellement sur plusieurs semaines : quelques dizaines de messages les premiers jours, puis un doublement progressif tant que les indicateurs restent au vert. On commence par ses contacts les plus engagés, ceux qui ouvrent et cliquent, afin d'envoyer des signaux positifs aux filtres. Une <a href="/serveur-smtp-dedie.html">infrastructure SMTP dédiée</a> facilite ce contrôle du volume et isole votre réputation de celle d'autres expéditeurs.</p>
+
+    <h2 data-i18n="deliv.h2_lists">Nettoyer et segmenter vos listes</h2>
+    <p data-i18n="deliv.p_lists">La qualité de votre liste pèse autant que votre infrastructure. Envoyer vers des adresses invalides ou inactives multiplie les rebonds et les plaintes, deux signaux qui détruisent la réputation. Avant chaque campagne d'envergure :</p>
+    <ul>
+      <li data-i18n="deliv.li_list1">Vérifiez la validité des adresses pour supprimer les emails inexistants et réduire le taux de rebond.</li>
+      <li data-i18n="deliv.li_list2">Retirez les contacts inactifs depuis plusieurs mois : ils n'ouvrent plus et pénalisent votre engagement moyen.</li>
+      <li data-i18n="deliv.li_list3">Éliminez les « spam traps », ces adresses pièges qui signalent une liste mal entretenue ou achetée.</li>
+      <li data-i18n="deliv.li_list4">Segmentez selon l'engagement pour adapter la fréquence à chaque profil.</li>
+    </ul>
+    <p data-i18n-html="deliv.p_lists2">Un <a href="/verificateur-email-masse.html">vérificateur d'email en masse</a> automatise ce nettoyage et vous évite d'envoyer vers des adresses qui saboteraient votre campagne.</p>
+
+    <h2 data-i18n="deliv.h2_content">Soigner le contenu et encourager l'engagement</h2>
+    <p data-i18n="deliv.p_content">Une fois l'infrastructure saine, le contenu prend le relais. Les filtres analysent la structure du message et, surtout, la manière dont vos destinataires réagissent. Quelques principes :</p>
+    <ul>
+      <li data-i18n="deliv.li_content1">Maintenez un ratio texte/image équilibré et évitez les emails composés d'une seule grande image.</li>
+      <li data-i18n="deliv.li_content2">Bannissez les mots déclencheurs et la ponctuation excessive (« GRATUIT !!! », majuscules, symboles monétaires à répétition).</li>
+      <li data-i18n="deliv.li_content3">Incluez toujours un lien de désinscription clair et fonctionnel : il réduit les plaintes.</li>
+      <li data-i18n="deliv.li_content4">Personnalisez l'objet et le corps du message pour augmenter les ouvertures, signal positif pour les filtres.</li>
+    </ul>
+    <p data-i18n="deliv.p_content2">L'engagement — ouvertures, clics, réponses — est aujourd'hui le critère roi. Un message que vos destinataires ouvrent et lisent renforce votre réputation à chaque envoi.</p>
+
+    <h2 data-i18n="deliv.h2_evostudio">Améliorer sa délivrabilité avec EvoStudio</h2>
+    <p data-i18n-html="deliv.p_evostudio">La suite EvoStudio couvre toute la chaîne de la délivrabilité. Le <a href="/logiciel-envoi-email-masse.html">logiciel d'envoi d'email en masse</a> EvoSender gère la cadence d'envoi, la rotation multi-SMTP et le warm-up progressif ; le <a href="/verificateur-email-masse.html">vérificateur d'email</a> nettoie vos listes en amont ; et le <a href="/serveur-smtp-dedie.html">serveur SMTP dédié</a> isole votre réputation avec SPF, DKIM et DMARC correctement configurés. Trois outils complémentaires pour un même objectif : la boîte de réception.</p>
+
+    <h2 data-i18n="deliv.faq_h2">Questions fréquentes</h2>
+    <h3 data-i18n="deliv.faq1q">Comment savoir si mes emails arrivent en spam ?</h3>
+    <p data-i18n="deliv.faq1a">Testez vos envois vers plusieurs comptes (Gmail, Outlook, Yahoo) et vérifiez le dossier de placement. Les rapports DMARC et les outils de suivi des ouvertures d'EvoSender vous indiquent aussi les tendances : une chute soudaine du taux d'ouverture signale souvent un passage en spam.</p>
+    <h3 data-i18n="deliv.faq2q">Combien de temps dure le warm-up d'une nouvelle IP ?</h3>
+    <p data-i18n="deliv.faq2a">Comptez généralement deux à quatre semaines pour atteindre un volume élevé, en doublant progressivement les envois tant que les taux de rebond et de plainte restent bas. Plus vous visez un gros volume quotidien, plus le préchauffage doit être étalé.</p>
+    <h3 data-i18n="deliv.faq3q">SPF, DKIM et DMARC sont-ils vraiment indispensables ?</h3>
+    <p data-i18n="deliv.faq3a">Oui. Depuis 2024, Gmail et Yahoo exigent l'authentification pour les expéditeurs de volume, et un domaine non authentifié est filtré par défaut. Ces trois protocoles sont la base non négociable d'une bonne délivrabilité.</p>
+    <h3 data-i18n="deliv.faq4q">Le contenu suffit-il à améliorer la délivrabilité ?</h3>
+    <p data-i18n="deliv.faq4a">Non. Le contenu compte, mais il ne représente qu'une partie de l'équation. Sans réputation saine, authentification correcte et liste propre, même le meilleur message finira en spam.</p>
+
+    <div class="cta-box">
+      <h3 data-i18n="deliv.cta_h3">Améliorez votre délivrabilité avec EvoSender</h3>
+      <p data-i18n="deliv.cta_p">Cadence maîtrisée, rotation multi-SMTP, warm-up et suivi en temps réel. Licence annuelle, 100% local.</p>
+      <a class="btn" href="/produit.html?id=sender" data-i18n="deliv.cta_btn">Découvrir EvoSender →</a>
+    </div>
+
+    <div class="related">
+      <h2 data-i18n="deliv.rel_h2">À lire aussi</h2>
+      <a href="/serveur-smtp-dedie.html" data-i18n-html="deliv.rel_1">Serveur SMTP dédié : tout comprendre<span>L'infrastructure qui protège votre réputation.</span></a>
+      <a href="/verificateur-email-masse.html" data-i18n-html="deliv.rel_2">Vérificateur d'email en masse<span>Nettoyer ses listes pour réduire les rebonds.</span></a>
+      <a href="/logiciel-envoi-email-masse.html" data-i18n-html="deliv.rel_3">Logiciel d'envoi d'email en masse<span>Le guide complet pour choisir son outil.</span></a>
+    </div>
+  </article>
+</div>
+
+<footer class="footer" data-i18n-html="foot.article">© 2025–2026 EGSCI SARL — EvoStudio · <a href="/a-propos.html">À propos</a> · <a href="/privacy.html">Mentions légales</a></footer>
+<script src="/assistance.js" defer></script>
+</body>
+</html>

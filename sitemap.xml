@@ -12,4 +12,10 @@
   <url><loc>https://evostudio.fr/cgu.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://evostudio.fr/charte-usage-acceptable.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://evostudio.fr/privacy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://evostudio.fr/deliverabilite-email.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://evostudio.fr/authentification-email-spf-dkim-dmarc.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://evostudio.fr/warm-up-ip-email.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://evostudio.fr/rotation-smtp.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://evostudio.fr/proxy-residentiel-vs-datacenter.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://evostudio.fr/eviter-spam-email.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 </urlset>
