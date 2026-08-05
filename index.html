@@ -45,7 +45,7 @@
   "home.dd_extractor":"Email address collection",
   "home.dd_sender":"High-deliverability bulk sending",
   "home.dd_verify":"List cleaning & validation",
-  "home.dd_suite":"All 3 tools in one license",
+  "home.dd_suite":"All 4 tools in one license",
   /* Hero */
   "home.hero_label":"Professional suite",
   "home.hero_h1":"Email, SMTP & Proxy<br><em>all-in-one</em>",
@@ -67,7 +67,7 @@
   /* Products section */
   "home.prod_label":"Software",
   "home.prod_title":"Complete emailing suite",
-  "home.prod_sub":"Three professional tools for your entire email workflow — 100% local, no data online.",
+  "home.prod_sub":"Four professional tools for your entire email workflow — 100% local, no data online.",
   /* SMTP section */
   "home.smtp_label":"Infrastructure",
   "home.smtp_title_1":"Dedicated SMTP server ",
@@ -190,7 +190,7 @@
   "home.js_per_year":"Annual license (1 year)",
   "home.js_buy_name":"Buy",
   "home.js_suite_gift":"🎁",
-  "home.js_suite_mid":" — all 3 tools for ",
+  "home.js_suite_mid":" — all 4 tools for ",
   "home.js_suite_buy":"Buy the suite →",
   "home.js_emails_month":"emails/month",
   "home.js_per_month":"per month · renewable",
@@ -212,7 +212,7 @@
   "home.dd_extractor":"Сбор адресов email",
   "home.dd_sender":"Массовая рассылка с высокой доставляемостью",
   "home.dd_verify":"Очистка и проверка списков",
-  "home.dd_suite":"3 инструмента в одной лицензии",
+  "home.dd_suite":"4 инструмента в одной лицензии",
   /* Hero */
   "home.hero_label":"Профессиональный набор",
   "home.hero_h1":"Email, SMTP и прокси<br><em>всё в одном</em>",
@@ -234,7 +234,7 @@
   /* Products section */
   "home.prod_label":"Программы",
   "home.prod_title":"Полный набор для email-рассылок",
-  "home.prod_sub":"Три профессиональных инструмента для всего вашего email-процесса — 100% локально, никаких данных в сети.",
+  "home.prod_sub":"Четыре профессиональных инструмента для всего вашего email-процесса — 100% локально, никаких данных в сети.",
   /* SMTP section */
   "home.smtp_label":"Инфраструктура",
   "home.smtp_title_1":"Выделенный SMTP-сервер ",
@@ -357,7 +357,7 @@
   "home.js_per_year":"Годовая лицензия (1 год)",
   "home.js_buy_name":"Купить",
   "home.js_suite_gift":"🎁",
-  "home.js_suite_mid":" — все 3 инструмента за ",
+  "home.js_suite_mid":" — все 4 инструмента за ",
   "home.js_suite_buy":"Купить набор →",
   "home.js_emails_month":"писем/месяц",
   "home.js_per_month":"в месяц · продлевается",
@@ -653,7 +653,7 @@ footer{background:#0f172a;border-top:1px solid #1e293b;color:var(--slate-2)}
           <a href="/produit.html?id=extractor"><b>EvoExtractor</b><span data-i18n="home.dd_extractor">Collecte d'adresses email</span></a>
           <a href="/produit.html?id=sender"><b>EvoSender</b><span data-i18n="home.dd_sender">Envoi en masse haute délivrabilité</span></a>
           <a href="/produit.html?id=verifier"><b>EvoVerify</b><span data-i18n="home.dd_verify">Nettoyage & validation de listes</span></a>
-          <a href="/produit.html?id=suite"><b>Suite EvoStudio</b><span data-i18n="home.dd_suite">Les 3 outils en une licence</span></a>
+          <a href="/produit.html?id=suite"><b>Suite EvoStudio</b><span data-i18n="home.dd_suite">Les 4 outils en une licence</span></a>
         </div>
       </div>
       <a href="#smtp" id="nav-smtp" style="display:none"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:6px"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg><span data-i18n="nav.smtp">SMTP</span></a>
@@ -891,7 +891,7 @@ footer{background:#0f172a;border-top:1px solid #1e293b;color:var(--slate-2)}
     <div class="sec-head">
       <div class="sec-label" data-i18n="home.prod_label">Logiciels</div>
       <h2 class="sec-title" data-i18n="home.prod_title">Suite complète d'emailing</h2>
-      <p class="sec-sub" data-i18n="home.prod_sub">Trois outils professionnels pour tout votre flux email — 100 % local, aucune donnée en ligne.</p>
+      <p class="sec-sub" data-i18n="home.prod_sub">Quatre outils professionnels pour tout votre flux email — 100 % local, aucune donnée en ligne.</p>
     </div>
     <div class="products-grid" id="products-grid"></div>
   </div>
@@ -1341,7 +1341,7 @@ async function loadProducts(){
         const sp=disc(suite.price_usdt);
         const db=discount>0?' <span style="background:#dc2626;color:#fff;font-size:10px;font-weight:800;padding:2px 7px;border-radius:20px">-'+esc(String(discount))+'%</span>':'';
         ctaEl.style.display='block';
-        ctaEl.innerHTML=esc(t('home.js_suite_gift','🎁'))+' <strong style="color:#5f4310">'+esc(suite.name)+'</strong>'+esc(t('home.js_suite_mid',' — les 3 outils à '))+'<strong style="color:var(--blue)">'+esc(String(sp))+' USD</strong>'+db+' · <a href="/pay.html?product=suite" style="color:var(--blue);font-weight:700">'+esc(t('home.js_suite_buy','Acheter la suite →'))+'</a>';
+        ctaEl.innerHTML=esc(t('home.js_suite_gift','🎁'))+' <strong style="color:#5f4310">'+esc(suite.name)+'</strong>'+esc(t('home.js_suite_mid',' — les 4 outils à '))+'<strong style="color:var(--blue)">'+esc(String(sp))+' USD</strong>'+db+' · <a href="/pay.html?product=suite" style="color:var(--blue);font-weight:700">'+esc(t('home.js_suite_buy','Acheter la suite →'))+'</a>';
       }
     }
 
