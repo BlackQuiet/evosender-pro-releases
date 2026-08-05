@@ -149,8 +149,9 @@ section{padding:82px 0;position:relative}
 
 /* ── CARTES GÉNÉRIQUES (produits, features, plans, prix, avis) ── */
 /* Grille produits : 3 cartes égales, alignées (hauteur identique, boutons alignés en bas) */
-.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:stretch}
-@media(max-width:860px){.products-grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}}
+.products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;align-items:stretch}
+@media(max-width:1024px){.products-grid{grid-template-columns:repeat(2,1fr);max-width:760px;margin:0 auto}}
+@media(max-width:600px){.products-grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}}
 .prod-card,.feat-cell,.plan-card,.price-card,.rev,.step,.svc-feat,.faq-item{
   background:var(--glass);border:1px solid var(--glass-brd);border-radius:var(--radius);
   backdrop-filter:blur(6px);transition:transform .16s,border-color .16s,box-shadow .16s}
@@ -225,8 +226,9 @@ section{padding:82px 0;position:relative}
 .rev-t{font-size:13px;color:var(--slate);line-height:1.6}
 
 /* ── PRICING ── */
-.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:start}
-@media(max-width:860px){.pricing-grid{grid-template-columns:1fr;max-width:400px;margin:0 auto}}
+.pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:start}
+@media(max-width:1024px){.pricing-grid{grid-template-columns:repeat(2,1fr);max-width:760px;margin:0 auto}}
+@media(max-width:600px){.pricing-grid{grid-template-columns:1fr;max-width:400px;margin:0 auto}}
 .price-card{padding:28px 22px;display:flex;flex-direction:column;position:relative}
 .price-card.featured{border-color:rgba(224,169,60,.55);box-shadow:0 0 0 1px rgba(224,169,60,.3),0 14px 46px rgba(224,169,60,.16)}
 .price-badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--blue),var(--purple-2));color:#fff;font-size:10px;font-weight:700;padding:4px 13px;border-radius:999px;white-space:nowrap;box-shadow:var(--glow-blue)}
