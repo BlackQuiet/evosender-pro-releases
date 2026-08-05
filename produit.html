@@ -160,8 +160,8 @@
 <script src="/assistance.js" defer></script>
 <script>
 const API='https://admin.evostudio.fr';
-const IMG={extractor:'/EvoExtractor.png',sender:'/EvoSender.png',verifier:'/Evoverif.png',suite:'/Hub.png'};
-const LABEL_FR={extractor:'Collecte d\'adresses email',sender:'Envoi en masse',verifier:'Vérification de listes',suite:'Suite complète'};
+const IMG={extractor:'/EvoExtractor.png',sender:'/EvoSender.png',verifier:'/Evoverif.png',sorter:'/EvoSorter.png',suite:'/Hub.png'};
+const LABEL_FR={extractor:'Collecte d\'adresses email',sender:'Envoi en masse',verifier:'Vérification de listes',sorter:'Tri par fournisseur (MX)',suite:'Suite complète'};
 function labelFor(id){return t('prod.label.'+id,LABEL_FR[id]||t('prod.label.default','Outil EvoStudio'));}
 function esc(t){return String(t==null?'':t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function qs(k){return new URLSearchParams(location.search).get(k);}
