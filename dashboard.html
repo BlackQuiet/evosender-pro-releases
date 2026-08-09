@@ -644,21 +644,21 @@ html[data-theme="light"] .btn-logout:hover{border-color:#fca5a5!important;backgr
         <!-- Outils séparés (apps autonomes v3.3.3) -->
         <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#94a3b8;margin:18px 0 8px">Ou un outil séparément — Windows (x64 &amp; ARM64)</div>
         <div class="dl-row">
-          <a class="dl-btn2" href="https://github.com/BlackQuiet/evosender-releases/releases/download/v3.3.5/EvoSender-Setup-3.3.5.exe" target="_blank" rel="noopener" style="background:#eff6ff;border-color:#bfdbfe;color:#1e40af">
+          <a class="dl-btn2" href="https://github.com/BlackQuiet/evosender-releases/releases/download/v3.4.0/EvoSender-Setup-3.4.0.exe" target="_blank" rel="noopener" style="background:#eff6ff;border-color:#bfdbfe;color:#1e40af">
             <svg viewBox="0 0 24 24" width="26" height="26" fill="#2563eb" style="flex-shrink:0"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
             <div><strong>EvoSender</strong><span>Envoi d'emails</span></div>
           </a>
-          <a class="dl-btn2" href="https://github.com/BlackQuiet/evoextractor-releases/releases/download/v3.3.4/EvoExtractor-Setup-3.3.4.exe" target="_blank" rel="noopener" style="background:#f0fdf4;border-color:#bbf7d0;color:#15803d">
+          <a class="dl-btn2" href="https://github.com/BlackQuiet/evoextractor-releases/releases/download/v3.4.0/EvoExtractor-Setup-3.4.0.exe" target="_blank" rel="noopener" style="background:#f0fdf4;border-color:#bbf7d0;color:#15803d">
             <svg viewBox="0 0 24 24" width="26" height="26" fill="#16a34a" style="flex-shrink:0"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
             <div><strong>EvoExtractor</strong><span>Extraction d'emails</span></div>
           </a>
         </div>
         <div class="dl-row" style="margin-top:10px">
-          <a class="dl-btn2" href="https://github.com/BlackQuiet/evoverify-releases/releases/download/v3.3.3/EvoVerify-Setup-3.3.3.exe" target="_blank" rel="noopener" style="background:#faf5ff;border-color:#e9d5ff;color:#6d28d9">
+          <a class="dl-btn2" href="https://github.com/BlackQuiet/evoverify-releases/releases/download/v3.4.0/EvoVerify-Setup-3.4.0.exe" target="_blank" rel="noopener" style="background:#faf5ff;border-color:#e9d5ff;color:#6d28d9">
             <svg viewBox="0 0 24 24" width="26" height="26" fill="#7c3aed" style="flex-shrink:0"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
             <div><strong>EvoVerify</strong><span>Vérification d'emails</span></div>
           </a>
-          <a class="dl-btn2" href="https://github.com/BlackQuiet/evosorter-releases/releases/download/v3.3.9/EvoSorter-Setup-3.3.9.exe" target="_blank" rel="noopener" style="background:#fffbeb;border-color:#fde68a;color:#a16207">
+          <a class="dl-btn2" href="https://github.com/BlackQuiet/evosorter-releases/releases/download/v3.4.0/EvoSorter-Setup-3.4.0.exe" target="_blank" rel="noopener" style="background:#fffbeb;border-color:#fde68a;color:#a16207">
             <svg viewBox="0 0 24 24" width="26" height="26" fill="#d69e2e" style="flex-shrink:0"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
             <div><strong>EvoSorter</strong><span>Tri par fournisseur</span></div>
           </a>
@@ -1042,6 +1042,41 @@ function logout(){localStorage.removeItem('evo_token');localStorage.removeItem('
 // Auto-inject credentials for all API calls so httpOnly cookie is sent
 (function(){const _f=window.fetch;window.fetch=function(u,o){if(typeof u==='string'&&u.startsWith(API)){o=Object.assign({credentials:'include'},o||{});}return _f.call(this,u,o);};}());
 
+// ── Appareils de licence (RDP / changement de PC) : liste + révocation depuis l'espace client ──
+async function loadLicenseDevices(){
+  const boxes=document.querySelectorAll('.lic-devices'); if(!boxes.length)return;
+  let data; try{ const r=await fetch(API+'/api/auth/license-devices',{headers:authHeaders()}); if(!r.ok)return; data=await r.json(); }catch{ return; }
+  const byKey={}; (data.licenses||[]).forEach(l=>{byKey[l.key]=l;});
+  boxes.forEach(box=>{ const lic=byKey[box.dataset.lickey]; box.innerHTML=lic?renderDevicesBlock(lic):''; });
+}
+function renderDevicesBlock(lic){
+  const title='<div style="font-size:12px;font-weight:700;color:var(--slate-2);margin-bottom:7px">'+_t('dash.dev_title','Appareils utilisant cette licence')+' <span style="font-weight:600;color:var(--slate-2)">('+lic.used+'/'+lic.maxDevices+')</span></div>';
+  if(!lic.devices||!lic.devices.length) return title+'<div style="font-size:12px;color:var(--slate-2)">'+_t('dash.dev_none','Aucun appareil actif pour le moment.')+'</div>';
+  const rows=lic.devices.map(function(d){
+    const name=d.hostname||('Appareil '+(d.machineShort||''));
+    const meta=[d.os,d.country,d.ip].filter(Boolean).join(' · ');
+    const seen=d.lastSeen?new Date(d.lastSeen).toLocaleDateString('fr-FR'):'—';
+    return '<div style="display:flex;align-items:center;gap:10px;padding:9px 11px;background:#f8fafc;border:1px solid var(--line,#e5e7eb);border-radius:8px;margin-bottom:6px">'+
+      '<div style="flex:1;min-width:0">'+
+        '<div style="font-size:12.5px;font-weight:600;word-break:break-all">🖥️ '+esc(name)+'</div>'+
+        '<div style="font-size:11px;color:var(--slate-2);margin-top:2px">'+(meta?esc(meta)+' · ':'')+_t('dash.dev_seen','vu le')+' '+seen+'</div>'+
+        '<div style="font-size:10px;color:var(--slate-2);font-family:monospace;opacity:.6;margin-top:1px">'+esc(d.machineShort||'')+'…</div>'+
+      '</div>'+
+      '<button class="btn-sm" data-key="'+esc(lic.key)+'" data-mid="'+esc(d.machineId)+'" onclick="revokeDevice(this)" style="color:#dc2626;border-color:#fca5a5;flex-shrink:0">'+_t('dash.dev_revoke','Révoquer')+'</button>'+
+    '</div>';
+  }).join('');
+  return title+rows;
+}
+async function revokeDevice(btn){
+  if(btn.dataset.armed!=='1'){ btn.dataset.armed='1'; btn.dataset.orig=btn.textContent; btn.textContent=_t('dash.dev_confirm','Confirmer ?'); setTimeout(function(){ if(btn.dataset.armed==='1'){ btn.dataset.armed='0'; btn.textContent=btn.dataset.orig; } },4000); return; }
+  btn.dataset.armed='0'; btn.disabled=true; btn.textContent='…';
+  try{
+    const r=await fetch(API+'/api/auth/license-devices/revoke',{method:'POST',headers:Object.assign({'Content-Type':'application/json'},authHeaders()),body:JSON.stringify({key:btn.dataset.key,machineId:btn.dataset.mid})});
+    const j=await r.json().catch(function(){return{};});
+    if(j.ok){ loadLicenseDevices(); } else { alert(j.error||'Échec de la révocation'); btn.disabled=false; btn.textContent=btn.dataset.orig||_t('dash.dev_revoke','Révoquer'); }
+  }catch(e){ alert('Erreur réseau'); btn.disabled=false; btn.textContent=btn.dataset.orig||_t('dash.dev_revoke','Révoquer'); }
+}
+
 // Sidebar toggle
 let _sbCollapsed=false;
 function toggleSidebar(){
@@ -1397,8 +1432,10 @@ async function load(){
         '<div class="lic-date2">'+_t('dash.bought_on','Acheté le '+new Date(o.paid_at).toLocaleDateString('fr-FR')).replace('{date}',new Date(o.paid_at).toLocaleDateString('fr-FR'))+'</div>'+
         '<div class="lic-date2" style="color:'+col+';font-weight:600">⏳ '+esc(txt)+'</div>'+
         '<a href="/pay.html?product='+esc(o.product)+'" class="btn-sm" style="margin-top:4px">↻ '+(days<=0?_t('dash.reactivate','Réactiver'):_t('dash.renew_word','Renouveler'))+'</a>'+
+        '<div class="lic-devices" data-lickey="'+esc(o.license_key)+'" style="margin-top:11px;border-top:1px solid var(--line,#e5e7eb);padding-top:11px"></div>'+
       '</div>';
     }).join('')+'</div>';
+    try{ loadLicenseDevices(); }catch(e){}
   }
 
   // ── Orders table ──
